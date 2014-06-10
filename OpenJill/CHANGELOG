@@ -1,0 +1,307 @@
+0.0.1 :
+ - start screen.
+
+0.0.2 (2013/04/03)
+ - start level support,
+ - draw static object on font and delete it (big/small text, huge letter).
+
+0.0.3 (2013/04/10)
+ - start draw control and inventory area.
+
+0.0.4 (2013/04/12)
+ - draw map/demo object,
+ - update control area on key 'T' (turtle mode),
+ - add move screen with key (for dev only),
+ - draw empty area for jill face in CGA mode,
+ - draw background of menu in CGA mode,
+ - add escape support in start screen.
+
+0.0.5 : (2013/04/23)
+ - 8 bits tile return empty picture not null picture,
+ - add primary support of update background,
+ - add primary support for special background draw,
+ - primary support for draw object.
+
+0.0.6 : (2013/05/06)
+ - add support for missing background,
+ - add exit menu to standard level,
+ - add vcl file support (only text),
+ - zoom,
+ - add instruction box in start screen.
+
+0.0.7 : (2013/05/16)
+ - background : BASECLIFF/BASESHORE support,
+ - rewrite BASExxx background special draw,
+ - better draw cursor in menu,
+ - don't hide window on close query,
+ - level exit goto start screen,
+ - ObjectEntities extends ObjectItem,
+ - support player falling,
+ - add player begin animation,
+ - add player fall support,
+ - add player move left/right,
+
+0.0.8 : (2013/05/22)
+ - fix turtule mode unworking,
+ - add player fall left/right animation support,
+ - minor refactor in PlayerManager class,
+ - better running picture support,
+ - correct flor detection,
+ - add jump support.
+ - fix issue with keyboard key released.
+
+0.0.9 : (2013/06/05)
+ - upgrade to Java 1.7 capability,
+ - jill can't jump out of map,
+ - left/right check passthru,
+ - jump check passthru,
+ - add return to std position,
+ - add wait animation (jill with arm on the hip),
+ - add up/down animation.
+
+0.0.10 : (2013/06/12)
+ - add up/down screen movement,
+ - add profil in pom of OpenJill project to create uber jar via maven-shade-plugin,
+ - fix bug with escape key in level. Don't close game but return in main menu screen,
+ - add wait animation,
+ - upgrade to Java 1.7 capability,
+ - add display text in bottom of screen (for starting level and wait animation).
+
+0.0.11 : (2013/06/18)
+ - remove const in Menu for size font,
+ - add RockKey object,
+ - add object collision detection,
+ - remove player from global object list,
+ - add primary support of inventory item (GEM),
+ - correct bug jill wait animation and wait arm when move,
+ - delete object in list (GEM).
+
+0.0.12 : (2013/06/25)
+ - Level : draw inventory item (3x4),
+ - add inventory properties file,
+ - correct Jill speed move,
+ - primary support object 15 (trigger) and 24 (door),
+ - correct screen hole between player and vertical border (5 block not 4),
+ - add Apple object,
+ - code clean.
+
+0.0.13 : (2013/07/04)
+ - correct bug out screen when jill is on bottom of possible map (1023 blocks),
+ - object : tile and tileset in config file, number tileset, cycle...,
+ - background : number tileset, cycle,
+ - correct key management (previous one GEM open all MAPDOOR),
+ - add Red Key object,
+ - add red key support,
+ - correct key fire and jump,
+ - change move process of player to allow object grap/change keyboard status.
+
+0.0.14 : (2013/07/17)
+ - move all code to manage player in AbstractPlayerManager class,
+ - rewrite object/background draw for lift support,
+ - lift object support,
+ - rewrite replace background method,
+ - Gem message and door are displayed only once,
+ - correct Mapdoor clear function.
+
+0.0.15 : (2013/07/25)
+ - add support of object 25 (Collapsing ceiling),
+ - correct bug in draw score,
+ - add primary support of object 49 (Epic)
+ - add primary cheat code support (XXX), [add new cheat code GGG for GEM, HHH for high jump]
+ - high jump support,
+ - background stair support,
+ - climb support.
+
+0.0.16 : (2013/07/31)
+ - add support of object 28 (Bonus),
+ - correct jill image down,
+ - player need first object.
+
+0.0.17 : (2013/08/29)
+ - correct climb animation,
+ - correct begin animation,
+ - jill must be first object,
+ - add pause key support (p),
+ - add support of object 26 (Wall [Floor not yet supported]),
+ - add support of object 32 (Switch),
+ - correct jump hit block with high jump.
+
+0.0.18 : (2013/09/04)
+ - Start Screen : draw object,
+ - Ordering info (missing jill),
+ - correct bug with high jump and top border screen,
+ - correct apple turn (left to right/right to left),
+ - correct apple speed,
+ - correct gem speed,
+ - correct map door speed.
+
+0.0.19 : (2013/09/09)
+ - change TOGGLE_WALL message by TRIGGER message,
+ - rename org.jill.dma to org.jill.jn for jn librairy,
+ - moving ControlArea and InventoryArea from org.jill.game.level to org.jill.game.screen package,
+ - add FileAbstractByte to prepare save/load game.
+
+0.0.20 : (2013/09/18)
+ - MessageDispatcher not yet a singleton,
+ - creating an abstract file to load/write game in file compatible with original game,
+ - correct some out screen.
+
+0.0.21 : (2013/09/23)
+ - filename to load not sensisive case,
+ - delete checkpoint juste after load level,
+ - changelevel support,
+ - map reload support,
+ - add checkpoint map reload,
+ - add some java doc.
+
+0.0.22 : (2013/09/26)
+ - read config file
+ - display in start screen high score
+ - cache system for CFG, VCL, JN.
+
+0.0.23 : (2013/10/18)
+ - add input name for high score,
+ - write config file,
+ - when leave level save hig score.
+
+0.0.24 : (2013/10/25)
+ - can draw more than one menu at one time (for visual compatibility with original game),
+ - add save game menu in game,
+ - add restore game menu in game,
+ - add restore game menu in start screen.
+
+0.0.25 : (2013/11/06)
+ - save file,
+ - create class to set config of level for simplify constructor of level,
+ - restore game,
+ - ControlArea.java : use config file,
+ - AbstractExecutingStdPlayerLevel : BEGIN_MESSAGE use config file,
+ - InventoryArea : use config file,
+ - StatusBar : use config file.
+
+0.0.26 (2013/11/20)
+ - PMD + checkstyle + findbug much as possible on :
+    abstractfile,
+    cfgfile,
+    dma,
+    jn,
+    sha,
+    vcl.
+
+0.0.27 : (2013/11/29)
+ - bug in save menu when in same level many save,
+ - keep GEM in inventory when switch level to map,
+ - keep score when switch level to map and ma to level,
+ - Ordering info -> ESC key don't display menu,
+ - add knive support (inventory, control area) but not weapon implement,
+ - style code fix.
+
+0.0.28 : (2013/11/09)
+ - EnumInventoryObject : add static method to get list by index,
+ - write new collision method with player/object,
+ - add support of object 26 (Wall [Floor supported]),
+ - replace System.out and System.err by Logger,
+ - correct bug when climb and hit a block on top,
+ - checkstyle on OpenJill.
+
+0.0.29 : (2013/12/24)
+ - correct display bug for object who have synchronized picture (appel, gem...),
+ - correct display bug for background who have synchronized picture (appel, gem...),
+ - regression fix for player head up/down,
+ - correct update background on border screen,
+ - add support of object 30 (Firebird),
+ - add support of object 65 (Spark),
+ - add support of object 48 (Gator),
+ - correct display level number bug on restore game,
+ - weapon kill firebird and gator.
+
+0.0.30 : (2014/01/05)
+ - implement kill message for object,
+ - correct screen size for update object,
+ - implement hit player by ennemy (decrease life).
+
+0.0.31 : (2014/01/13)
+ - implement kill message for background,
+ - implement die2 (die with background),
+ - implement die0 (die object),
+ - fix regression save/load game,
+ - add support of object 37 (Fire hit player).
+
+0.0.32 : (2014/01/27)
+ - add support of object 22 (Frog),
+ - object 65 (Spark) hit player and move it when player touch object,
+ - restart level when player die.
+
+0.0.33 : (2014/02/11)
+ - use zaphold to know if object touch player like original game,
+ - update position of object when collision with block (left and right),
+ - rewrite KniveManager for original compliance game,
+ - add bundle profile for tool,
+ - remove dependancy to default background class implementation.
+
+0.0.34 : (2014/02/18)
+ - add filter in to open_jill.properties,
+ - add log to display unsupported object,
+ - add possibility to override properties on commandline,
+ - load/save game correct empty game management,
+ - FrogManager user properties.
+
+0.0.35 : (2014/02/28)
+ - fix sticky key when window lost focus,
+ - raise error if object try to read unfound properties,
+ - rewrite begin state.
+
+0.0.36 : (2014/03/15)
+ - rewrite jump state,
+ - fix bug if player jump out top border,
+ - rewrite left/right move,
+ - rewrite head up/down,
+ - rewrite screen move up/down,
+ - fix restart level twice bug,
+ - fix start screen jill status.
+
+0.0.37 : (2014/03/27)
+ - fix fire on jump,
+ - change save/load inter-space between name when draw in menu,
+ - fix CollapsingCeiling save compatibility,
+ - fix draw inventory area,
+ - fix jump size issue.
+
+0.0.38 : (2014/04/02)
+ - fix Ordering Info screen (jill not move now),
+ - fix regression on stair block,
+ - split message on single queue (one queue = one object message),
+ - fix regression on save map.
+
+0.1.0 :(2014/04/25)
+ - fix basewate background NullPointerException,
+ - split in multi jar file,
+ - use a factory to create object in core,
+ - change config file to JSON format.
+
+0.2.0 : (2014/05/31)
+ - fix Ordering info screen,
+ - invetory item (jill, frog, firebird, fish) not delete when player touch it,
+ - inventory item (jill, frog, firebird, fish) appear only once in inventory area,
+ - fix FileAbstractByteImpl bug if file have no directory,
+ - rewrite apple (object 1) for better compatibility,
+ - rewrite apple (object 33) for better compatibility,
+ - fix statusbar text position,
+ - fix control area text position,
+ - fix inventory area text position,
+ - fix highscore area text position,
+ - fix load game menu text position,
+ - inventory position of item and max item,
+ - add piec of land when player hit floor,
+ - Start screen : add shortcut key support (R for restore),
+ - rewrite wait animation,
+ - rewrite control area to use fully json config file,
+ - rewrite inventory area to use fully json config file,
+ - rewrite highscore area to use fully json config file,
+ - rewrite statusbar area to use fully json config file,
+ - create pom parent,
+ - remove jill item in map level,
+ - fix display game area pixel too on bottom.
+
+0.2.1 :
+ - Gator (object 48) now stop when hit block,

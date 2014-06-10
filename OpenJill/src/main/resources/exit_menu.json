@@ -1,0 +1,23 @@
+{
+    "positionX":140,
+    "positionY":80,
+    "title" : {
+        "color":7,
+        "text":"really qui?"
+    },
+    "item":[
+        {
+            "color":4,
+            "text":"yes",
+            "value":0
+        },
+        {
+            "color":2,
+            "text":"no",
+            "value":1
+        }
+    ]
+}
+
+
+

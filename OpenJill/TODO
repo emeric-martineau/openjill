@@ -1,0 +1,76 @@
+Demo : do it
+
+Level : noise
+Level : display message box
+Level : display secret hint
+
+General : StdMenu.java -> don't use static value like 12,8... try to get image size and calculate area
+
+Sound : do it
+
+Jill : Jill fish character
+Jill : Jill frog character
+Jill : Jill firebird character
+Jill : dead animations (with water)
+
+Background : FROOF/FFLOOR support burning (3.jn2)
+Background : DOORT/DOORB support opendoor animation (MAP.JN1)
+
+Create config screen and don't use property for screen resolution
+
+Object :
+--------
+ - Apple : add text support (but how work it ? Look first ckeckpoint in map xSpeed = 344 and ySpeed = -64)
+           Exemple :
+                Object #58 (0x4708)
+                    type = 1 (Apple)
+                    x = 896
+                    y = 136
+                    width = 12
+                    height = 12
+                    xSpeed = 0
+                    ySpeed = 0
+                    state = 4
+                    subState = 0
+                    stateCount = 0
+                    counter = 0
+                    flags = 0
+                    info1 = 0
+                    pointer = 0
+
+            Display the message #3 in VLC (index 2)
+
+ - Epic object : display number 2 (object 27) when jill touch and display bullet (object 36) when delete object,
+ - object 27 : text color
+       state = number to display and number of point
+	   counter = number of item to know color diplayed (color % 4 => dark bleu(0,4,8...), dark greak, cyan, red)
+ - object 36 : bullet colored
+       state = 0 (pink), 1 (orange), 2 (blue) -> 46/(12 + state)
+	   counter = 8 (big bullet)
+
+Change needed ?
+---------------
+Add :
+ - StatusBar factory,
+ - InventoryArea factory,
+ - ControlArea factory,
+ 
+-----------------
+Creative Music CMF to Standard MIDI
+Posted by Alex on Sat, 04/24/1999 - 14:06.
+CMF2MID is great and easy to use, but if you want
+to convert 100 CMFs...
+Soundcard differences described by Adam Mirowski
+(CMF2MID author) are not so important for WaveTable,
+and general conversion scheme can be created. This
+assumes that all you need to run batch converting is
+CMF2MID + simple software that can read data from
+conversion table to create CMM files automatically
+(one need few minutes to write it) + conversion table
+itself. However, the last should have thousands of
+items (how many instruments do they use in CMF?).
+So, if you can send me your CMM files - send them!
+Please note: I don't need tons of CMFs - all I ask is
+text CMMs (if you don't know what it is - don't send
+anything).
+Thanks.

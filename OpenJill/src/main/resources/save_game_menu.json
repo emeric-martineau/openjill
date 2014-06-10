@@ -1,0 +1,57 @@
+{
+    "editmode":{
+        "backgroundColor":1,
+        "textColor":7
+    },
+    "readonlymode":{
+        "backgroundColor":1,
+        "textColor":3
+    },
+    "lines":[
+      {
+          "color":13,
+          "y":10
+      },
+      {
+          "color":13,
+          "y":62
+      }
+    ],   
+    "text":[
+        {
+            "text":"SAVE GAME",
+            "color":2,
+            "x":6,
+            "y":2
+        },
+        {
+            "text":"PRESS",
+            "color":2,
+            "x":14,
+            "y":65
+        },
+        {
+            "text":"ESCAPE",
+            "color":4,
+            "x":12,
+            "y":71
+        },
+        {
+            "text":"TO ABORT",
+            "color":2,
+            "x":7,
+            "y":77
+        }
+    ],
+    "startText":{
+            "x":8,
+            "y":5        
+    },
+    "startCursor":{
+            "x":1        
+    },
+    "startCursorEdit":{
+        "x":19
+    },
+    "emptyName":""
+}

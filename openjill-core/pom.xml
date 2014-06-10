@@ -1,0 +1,79 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.jill</groupId>
+    <artifactId>openjill-core</artifactId>
+    <version>0.0.40</version>
+    <packaging>jar</packaging>
+
+    <parent>
+        <groupId>org.jill</groupId>
+        <artifactId>jill-parent</artifactId>
+        <version>1.0.0</version>
+        <relativePath>../jill_parent/pom.xml</relativePath>
+    </parent>
+    
+    <description>Clone of original engine of Jill Trilogy write from scratch</description>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.7</maven.compiler.source>
+        <maven.compiler.target>1.7</maven.compiler.target>
+    </properties>
+
+    <dependencies>
+        <!-- Jill of the Jungle dependencies -->
+        <dependency>
+            <groupId>org.jill</groupId>
+            <artifactId>openjill-core-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.jill.jn</groupId>
+            <artifactId>jn-file-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.jill.sha</groupId>
+            <artifactId>sha-file-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.jill.dma</groupId>
+            <artifactId>dma-file-api</artifactId>
+        </dependency>       
+        <dependency>
+            <groupId>org.jill.vcl</groupId>
+            <artifactId>vcl-file-api</artifactId>
+        </dependency>    
+        <dependency>
+            <groupId>org.jill.cfg</groupId>
+            <artifactId>cfg-file-api</artifactId>
+        </dependency>          
+        <dependency>
+            <groupId>org.jill.file</groupId>
+            <artifactId>abstractfile-api</artifactId>
+        </dependency> 
+        <!-- Objects and Background -->
+        <dependency>
+            <groupId>org.jill.entities</groupId>
+            <artifactId>open-jill-object-background</artifactId>
+        </dependency>
+        <!-- Simple game layer -->
+        <dependency>
+            <groupId>org.simplegame</groupId>
+            <artifactId>simplegame</artifactId>
+        </dependency>
+        <!-- To read configuration -->
+		<dependency>
+			<groupId>org.codehaus.jackson</groupId>
+			<artifactId>jackson-mapper-asl</artifactId>
+		</dependency>        
+    </dependencies>
+
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
+    </build>
+</project>

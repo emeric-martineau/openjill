@@ -1,0 +1,33 @@
+{
+    "editmode":{
+        "backgroundColor":4,
+        "textColor":7
+    },
+    "readonlymode":{
+        "backgroundColor":8,
+        "textColor":2,
+        "numberColor":6
+    },
+    "lines":[
+      {
+          "color":13,
+          "y":10
+      }  
+    ],
+    "text":[
+        {
+            "text":"HI SCORES",
+            "color":4,
+            "x":5,
+            "y":2
+        }
+    ],
+    "startText":{
+            "x":2,
+            "y":15        
+    },
+    "startCursor":{
+            "x":3        
+    },
+    "textInterSpace":2
+}
