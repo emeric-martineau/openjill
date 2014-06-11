@@ -58,9 +58,9 @@ public final class EpicManager extends AbstractSynchronisedImageObjectEntity {
             this.messageDispatcher.sendMessage(EnumMessageType.INVENTORY_POINT,
                 this.point);
 
-            this.match--;
+            this.state++;
 
-            if (this.match <= 0) {
+            if (this.state == this.match) {
                 this.messageDispatcher.sendMessage(
                     EnumMessageType.OBJECT, this.killme);
             }
