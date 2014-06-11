@@ -29,12 +29,6 @@ public final class SparkManager extends AbstractHitPlayerObjectEntity {
     private BufferedImage[] images;
 
     /**
-     * Don't use a object field cause original game doesn't store picture index
-     * in save file.
-     */
-    private int imageIndex = 0;
-
-    /**
      * Max Y pos top.
      */
     private int maxYTop;
@@ -53,16 +47,7 @@ public final class SparkManager extends AbstractHitPlayerObjectEntity {
     public void init(final ObjectParam objectParam) {
         super.init(objectParam);
 
-        // Init list of picture
-        final int tileIndex = getConfInteger("tile");
-        final int tileSetIndex = getConfInteger("tileSet");
-        final int numberTileSet = getConfInteger("numberTileSet");
-
-        // Alloc array of picture
-        this.images = new BufferedImage[numberTileSet];
-
-        // Init Right
-        initPicture(this.images, numberTileSet, tileSetIndex, tileIndex);
+        loadPicture();
 
         // Search block
         final BackgroundEntity[][] backMap =
@@ -99,41 +84,51 @@ public final class SparkManager extends AbstractHitPlayerObjectEntity {
     }
 
     /**
-     * Init picture level.
-     *
-     * @param img picture array
-     * @param numberTileSet number
-     * @param tileSetIndex tileset
-     * @param tileIndex tile
+     * Load picture.
      */
-    private void initPicture(final BufferedImage[] img,
-        final int numberTileSet, final int tileSetIndex,
-        final int tileIndex) {
+    private void loadPicture() {
+        int tileIndex = getConfInteger("tile");
+        int tileSetIndex = getConfInteger("tileSet");
+
+        int numberTileSet = getConfInteger("numberTileSet");
+
+        // Load picture for each object. Don't use cache cause some picture
+        // change between jill episod.
+        this.images
+            = new BufferedImage[numberTileSet * 2];
+
+        int indexArray = 0;
+
         for (int index = 0; index < numberTileSet; index++) {
-            img[index] = this.pictureCache.getImage(tileSetIndex,
-                tileIndex + index);
+            this.images[indexArray]
+                = this.pictureCache.getImage(tileSetIndex, tileIndex
+                    + index);
+            this.images[indexArray + 1] = this.images[indexArray];
+
+            indexArray += 2;
         }
     }
 
     @Override
     public void msgUpdate() {
-        this.imageIndex++;
+        this.counter++;
 
-        if (this.imageIndex == this.images.length) {
-            this.imageIndex = 0;
+        if (this.counter == this.images.length) {
+            this.counter = 0;
         }
 
         if ((this.y > this.maxYTop && this.ySpeed < 0)
             || (this.y < this.maxYBottom && this.ySpeed > 0)) {
             this.y += this.ySpeed;
         } else {
+            // U turn
             this.ySpeed *= -1;
         }
     }
 
     @Override
     public BufferedImage msgDraw() {
-        return this.images[this.imageIndex];
+        return this.images[this.counter];
     }
 
     @Override
