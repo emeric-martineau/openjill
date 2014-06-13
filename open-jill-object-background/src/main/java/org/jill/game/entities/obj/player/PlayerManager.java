@@ -89,6 +89,12 @@ public final class PlayerManager extends AbstractPlayerInteractionManager {
         = new BufferedImage[PlayerDie0Const.IMAGE_NUMBER];
 
     /**
+     * Die 1.
+     */
+    private final BufferedImage[] stDie1
+        = new BufferedImage[PlayerDie1Const.IMAGE_NUMBER];
+
+    /**
      * Die 2.
      */
     private final BufferedImage[] stDie2
@@ -585,6 +591,9 @@ public final class PlayerManager extends AbstractPlayerInteractionManager {
             case PlayerState.DIE_SUB_STATE_ENNEMY:
                 msgUpdateDiedEnnemy();
                 break;
+            case PlayerState.DIE_SUB_STATE_WATER_BACK:
+                msgUpdateDiedWater();
+                break;
             case PlayerState.DIE_SUB_STATE_OTHER_BACK:
                 msgUpdateDiedOther();
                 break;
@@ -603,6 +612,27 @@ public final class PlayerManager extends AbstractPlayerInteractionManager {
             int indexPicture = this.stateCount
                 / PlayerDie0Const.STATECOUNT_STEP_TO_CHANGE_PICTURE;
             this.currentPicture = this.stDie0[indexPicture];
+
+            this.stateCount++;
+        }
+    }
+
+    /**
+     * Message update for die 0.
+     */
+    private void msgUpdateDiedWater() {
+        if (this.stateCount >= PlayerDie1Const.STATECOUNT_MAX_TO_RESTART_GAME) {
+            this.messageDispatcher.sendMessage(
+                EnumMessageType.DIE_RESTART_LEVEL, null);
+        } else {
+            if (this.stateCount == 0) {
+                this.currentPicture = this.stDie1[
+                        PlayerDie1Const.FIRST_PICTURE];
+            } else {
+                int indexPicture = this.stateCount
+                    / PlayerDie1Const.STATECOUNT_STEP_TO_CHANGE_PICTURE;
+                this.currentPicture = this.stDie1[indexPicture];
+            }
 
             this.stateCount++;
         }
@@ -691,6 +721,14 @@ public final class PlayerManager extends AbstractPlayerInteractionManager {
                             - this.stDie2[
                                     PlayerDie2Const.FIRST_PICTURE].getHeight();
                         break;
+                    case PlayerState.DIE_SUB_STATE_WATER_BACK:
+                        setySpeed(PlayerDie1Const.START_YD);
+
+                        // Align player on bottom of background
+                        this.y = senderBack.getY() * JillConst.BLOCK_SIZE
+                            - this.stDie1[
+                                    PlayerDie1Const.FIRST_PICTURE].getHeight();
+                        break;
                     case PlayerState.DIE_SUB_STATE_ENNEMY:
                         setySpeed(PlayerDie0Const.START_YD);
                     default:
@@ -742,6 +780,12 @@ public final class PlayerManager extends AbstractPlayerInteractionManager {
             this.stDie0[index] = pictureCache.getImage(
                 PlayerDie0Const.TILESET_INDEX,
                 PlayerDie0Const.TILE_INDEX + index);
+        }
+
+        for (int index = 0; index < PlayerDie1Const.IMAGE_NUMBER; index++) {
+            this.stDie1[index] = pictureCache.getImage(
+                PlayerDie1Const.TILESET_INDEX,
+                PlayerDie1Const.TILE_INDEX + index);
         }
     }
 }
