@@ -167,10 +167,6 @@ public final class PlayerManager extends AbstractPlayerInteractionManager {
 
         initDiePicture();
 
-        stateCount = 0;
-        counter = 0;
-        subState = 0;
-
         currentPicture = stStandPicture[1];
     }
 
