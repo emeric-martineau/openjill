@@ -9,17 +9,17 @@ public final class StatusBarTextMessage {
     /**
      * Message to display.
      */
-    private String message;
+    private final String message;
 
     /**
      * Time to show massage.
      */
-    private int duration;
+    private final int duration;
 
     /**
      * Time to show massage.
      */
-    private int color;
+    private final int color;
 
     /**
      * Send a message.

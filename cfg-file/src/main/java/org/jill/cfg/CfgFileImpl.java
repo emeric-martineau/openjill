@@ -455,9 +455,17 @@ public class CfgFileImpl implements CfgFile {
      */
     private void writeCommonConfigurationBlock(final FileAbstractByte cfgFile)
             throws IOException {
-        cfgFile.writeSigned16bitLE(setup ? 1 : 0);
-        cfgFile.writeSigned16bitLE(joystick ? 1 : 0);
+        if (setup) {
+            cfgFile.writeSigned16bitLE(1);
+        } else {
+            cfgFile.writeSigned16bitLE(0);
+        }
 
+        if (joystick) {
+            cfgFile.writeSigned16bitLE(1);
+        } else {
+            cfgFile.writeSigned16bitLE(0);
+        }
         cfgFile.writeSigned16bitLE(joystickLeftX);
         cfgFile.writeSigned16bitLE(joystickCenterX);
         cfgFile.writeSigned16bitLE(joystickRightX);
@@ -468,8 +476,17 @@ public class CfgFileImpl implements CfgFile {
 
         cfgFile.writeSigned16bitLE(displayMode);
 
-        cfgFile.writeSigned16bitLE(music ? 1 : 0);
-        cfgFile.writeSigned16bitLE(sound ? 1 : 0);
+        if (music) {
+            cfgFile.writeSigned16bitLE(1);
+        } else {
+            cfgFile.writeSigned16bitLE(0);
+        }
+
+        if (sound) {
+            cfgFile.writeSigned16bitLE(1);
+        } else {
+            cfgFile.writeSigned16bitLE(0);
+        }
     }
 
     /**

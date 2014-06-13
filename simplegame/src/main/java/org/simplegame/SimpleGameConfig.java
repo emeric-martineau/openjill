@@ -89,12 +89,12 @@ public class SimpleGameConfig {
     /**
      * Game start class.
      */
-    private String gameStartClass;
+    private final String gameStartClass;
 
     /**
      * Zoom screen.
      */
-    private int zoom;
+    private final int zoom;
 
     /**
      * Constructor.

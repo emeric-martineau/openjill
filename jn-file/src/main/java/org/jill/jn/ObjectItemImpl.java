@@ -112,13 +112,13 @@ public class ObjectItemImpl implements ObjectItem {
      * Constructor.
      *
      * @param jnFile file
-     * @param index index object in file
+     * @param idx index object in file
      *
      * @throws IOException si erreur
      */
-    public ObjectItemImpl(final FileAbstractByte jnFile, final int index)
+    public ObjectItemImpl(final FileAbstractByte jnFile, final int idx)
             throws IOException {
-        this.index = index;
+        this.index = idx;
         this.offset = (int) jnFile.getFilePointer();
 
         type = jnFile.read8bitLE();

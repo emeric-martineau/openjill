@@ -15,16 +15,18 @@ import org.jill.file.FileAbstractByteImpl;
 public class AppTest
     extends TestCase
 {
-    private Properties prop = new Properties();
+    private final Properties prop = new Properties();
 
-    private String homePath ;
+    private final String homePath ;
 
-    private String tempPath ;
+    private final String tempPath ;
 
     /**
      * Create the test case
      *
      * @param testName name of the test case
+     *
+     * @throws IOException if error
      */
     public AppTest( String testName ) throws IOException
     {
@@ -45,6 +47,8 @@ public class AppTest
 
     /**
      * Rigourous Test :-)
+     *
+     * @throws IOException if error
      */
     public void testFile() throws IOException
     {

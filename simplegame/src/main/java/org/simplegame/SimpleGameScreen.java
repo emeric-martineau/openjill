@@ -20,7 +20,7 @@ public class SimpleGameScreen extends JPanel {
     /**
      * Game zoom.
      */
-    private int zoom;
+    private final int zoom;
 
     /**
      * Image without resize.

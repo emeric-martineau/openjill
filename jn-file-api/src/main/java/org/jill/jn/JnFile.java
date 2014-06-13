@@ -11,8 +11,9 @@ import java.util.List;
 import org.jill.file.FileAbstractByte;
 
 /**
+ * Class to read JN file that contient map and object.
  *
- * @author emeric_martineau
+ * @author emeric martineau
  */
 public interface JnFile {
     /**

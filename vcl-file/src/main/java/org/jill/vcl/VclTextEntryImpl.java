@@ -10,12 +10,12 @@ public class VclTextEntryImpl implements VclTextEntry {
     /**
      * Name of entry.
      */
-    private String text;
+    private final String text;
 
     /**
      * Offset in file where entry can be found.
      */
-    private int offset;
+    private final int offset;
 
     /**
      * Constructor.

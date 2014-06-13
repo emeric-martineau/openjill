@@ -107,7 +107,10 @@ public enum EnumInventoryObject {
      * @return this enum list bu index
      */
     public static EnumInventoryObject[] getEnumList() {
-        return ENUM_LIST;
+        final EnumInventoryObject[] dest =
+                new EnumInventoryObject[ENUM_LIST.length];
+        System.arraycopy(ENUM_LIST, 0, dest, 0, ENUM_LIST.length);
+        return dest;
     }
 
 }

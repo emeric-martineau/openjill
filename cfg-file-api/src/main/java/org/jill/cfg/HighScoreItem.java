@@ -1,14 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package org.jill.cfg;
 
 /**
+ *Class represent high sore entry.
  *
- * @author emeric_martineau
+ * @author Emeric MARTINEAU
  */
 public interface HighScoreItem {
     /**

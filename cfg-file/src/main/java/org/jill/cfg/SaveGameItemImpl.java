@@ -24,12 +24,12 @@ public class SaveGameItemImpl implements SaveGameItem {
     /**
      * Name of save game file.
      */
-    private String saveGameFile;
+    private final String saveGameFile;
 
     /**
      * Name of save map file.
      */
-    private String saveMapFile;
+    private final String saveMapFile;
 
     /**
      * Constructor.

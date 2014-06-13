@@ -12,7 +12,7 @@ import java.awt.Color;
  *
  * @author emeric_martineau
  */
-public class VgaColorMapImpl implements ColorMap {
+public final class VgaColorMapImpl implements ColorMap {
     @Override
     public Color[] getColorMap() {
         return InternalColorMapImpl.VGA_COLOR_MAP.getColorMap();

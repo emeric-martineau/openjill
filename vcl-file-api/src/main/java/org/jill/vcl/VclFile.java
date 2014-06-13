@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package org.jill.vcl;
 
 import java.io.IOException;
@@ -11,11 +5,12 @@ import java.util.List;
 import org.jill.file.FileAbstractByte;
 
 /**
+ * Class to read VCL file who contain sound and text.
  *
- * @author emeric_martineau
+ * @author emeric martineau
  */
 public interface VclFile {
-/**
+   /**
      * Constructor of class ShaFile.
      *
      * @param vclFile file name

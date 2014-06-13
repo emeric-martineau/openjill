@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package org.jill.cfg;
 
 import java.io.IOException;
@@ -11,8 +5,9 @@ import java.util.List;
 import org.jill.file.FileAbstractByte;
 
 /**
- *
- * @author emeric_martineau
+ * Config file.
+ * 
+ * @author Emeric MARTINEAU
  */
 public interface CfgFile {
 

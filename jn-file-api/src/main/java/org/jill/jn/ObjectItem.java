@@ -4,8 +4,9 @@ import java.io.EOFException;
 import org.jill.file.FileAbstractByte;
 
 /**
+ * Object of map.
  *
- * @author emeric_martineau
+ * @author Emeric MARTINEAU
  */
 public interface ObjectItem {
     /**

@@ -18,27 +18,27 @@ public class SaveDataImpl implements SaveData {
     /**
      * Display level.
      */
-    private int level;
+    private final int level;
 
     /**
      * X-coordinate of object.
      */
-    private int health;
+    private final int health;
 
     /**
      * Y-coordinate of object.
      */
-    private int score;
+    private final int score;
 
     /**
-     * Unknown.
+     * List of inventory item (knife, gem...).
      */
-    private List<Integer> inventory;
+    private final List<Integer> inventory;
 
     /**
      * Offset in file of this record.
      */
-    private int offset;
+    private final int offset;
 
     /**
      * Constructor.

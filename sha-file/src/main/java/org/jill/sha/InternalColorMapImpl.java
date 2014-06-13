@@ -60,7 +60,8 @@ public class InternalColorMapImpl implements ColorMap {
      * @param fileName file name of color map
      */
     public InternalColorMapImpl(final String fileName) {
-        try (InputStream is = InternalColorMapImpl.class.getResourceAsStream(fileName);
+        try (InputStream is = InternalColorMapImpl.class.
+                getResourceAsStream(fileName);
                 InputStreamReader isr = new InputStreamReader(is,
                         Charset.forName("ISO-8859-1"))) {
             readFile(new BufferedReader(isr));
@@ -112,6 +113,7 @@ public class InternalColorMapImpl implements ColorMap {
      *
      * @return colorMap color map
      */
+    @Override
     public final Color[] getColorMap() {
         Color[] desArray = new Color[colorMap.length];
         System.arraycopy(colorMap, 0, desArray, 0, colorMap.length);

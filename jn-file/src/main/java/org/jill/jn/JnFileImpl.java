@@ -8,7 +8,7 @@ import org.jill.file.FileAbstractByteImpl;
 import org.jill.file.FileAbstractByte;
 
 /**
- * Class to read DMA file who contain mapping between map and picture of game.
+ * Class to read JN file that contient map and object.
  *
  * @author emeric martineau
  * @version 1.0
