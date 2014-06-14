@@ -31,3 +31,24 @@ sha-file-extractor          : tool to extract any information of sha file
 simplegame                  : simple game engine
 vcl-file                    : default implementation of vcl file
 vcl-file-api                : api of vcl file
+
+Build game project
+------------------
+
+First, goto jill_parent folder and run "mvn clean install".
+Then, goto jill_root folder, run "mvn clean install -Plib,game,bundle".
+
+In OpenJill/targuet folder, you have "openjill-bundle-x.x.x.jar" than is the OpenJill game engine with all denpendencies.
+To run it, copy jar file in original game forlder and lauchn it.
+
+If you remove "bundle" profile, you must provide all dependencies in class path.
+
+You can also add "dev" profile. In this case, game must be in "../jjungle" folder. This profile is use to develop from EDI.
+
+Build tools
+-----------
+
+To build tools, goto jill_parent folder and run "mvn clean install".
+Then, goto jill_root folder, run "mvn clean install -Plib,tools,bundle".
+
+Goto in each targuet folder tools.
