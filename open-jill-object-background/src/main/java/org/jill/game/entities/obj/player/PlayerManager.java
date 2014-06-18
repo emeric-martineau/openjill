@@ -284,6 +284,26 @@ public final class PlayerManager extends AbstractPlayerInteractionManager {
 
     @Override
     public BufferedImage msgDraw() {
+        BufferedImage currentPicture = this.currentPicture;
+
+        switch (getState()) {
+            case PlayerState.BEGIN:
+                currentPicture = msgDrawBegin();
+                break;
+            case PlayerState.JUMPING:
+                break;
+            case PlayerState.STAND:
+                break;
+            case PlayerState.CLIMBING:
+                break;
+            case PlayerState.DIE:
+                break;
+            default:
+                LOGGER.severe(
+                    String.format("The state %d is unknow for player !",
+                        getState()));
+        }
+
         return currentPicture;
     }
 
@@ -349,39 +369,39 @@ public final class PlayerManager extends AbstractPlayerInteractionManager {
      * Manage update message at begin state.
      */
     private void msgUpdateBegin() {
-        final int indexPicture;
+//        final int indexPicture;
 
         // Get good picture
         if (this.stateCount < PlayerBeginConst.PICTURE_HEAD_UP_STATECOUNT) {
-            indexPicture = PlayerBeginConst.PICTURE_HEAD_UP;
+//            indexPicture = PlayerBeginConst.PICTURE_HEAD_UP;
         } else if (this.stateCount
             < PlayerBeginConst.PICTURE_HEAD_NORMAL_STATECOUNT) {
-            indexPicture = PlayerBeginConst.PICTURE_HEAD_NORMAL;
+//            indexPicture = PlayerBeginConst.PICTURE_HEAD_NORMAL;
         } else if (this.stateCount
             < PlayerBeginConst.PICTURE_HEAD_DOWN_STATECOUNT) {
-            indexPicture = PlayerBeginConst.PICTURE_HEAD_DOWN;
+//            indexPicture = PlayerBeginConst.PICTURE_HEAD_DOWN;
         } else {
-            indexPicture = DIRECTION_IMAGE_NUMBER;
+//            indexPicture = DIRECTION_IMAGE_NUMBER;
 
             setState(PlayerState.STAND);
         }
 
-        if (indexPicture < DIRECTION_IMAGE_NUMBER) {
-            // Get image
-            final BufferedImage baseImage = this.stBegin[indexPicture];
-
-            this.currentPicture = new BufferedImage(baseImage.getWidth(),
-                baseImage.getHeight(), BufferedImage.TYPE_INT_ARGB);
-
-            final int reduction = baseImage.getHeight() - this.stateCount;
-
-            // Draw picutre
-            final Graphics2D g2 = this.currentPicture.createGraphics();
-
-            g2.drawImage(baseImage, 0, reduction, null);
-
-            g2.dispose();
-        }
+//        if (indexPicture < DIRECTION_IMAGE_NUMBER) {
+//            // Get image
+//            final BufferedImage baseImage = this.stBegin[indexPicture];
+//
+//            this.currentPicture = new BufferedImage(baseImage.getWidth(),
+//                baseImage.getHeight(), BufferedImage.TYPE_INT_ARGB);
+//
+//            final int reduction = baseImage.getHeight() - this.stateCount;
+//
+//            // Draw picutre
+//            final Graphics2D g2 = this.currentPicture.createGraphics();
+//
+//            g2.drawImage(baseImage, 0, reduction, null);
+//
+//            g2.dispose();
+//        }
     }
 
     /**
@@ -787,5 +807,47 @@ public final class PlayerManager extends AbstractPlayerInteractionManager {
                 PlayerDie1Const.TILESET_INDEX,
                 PlayerDie1Const.TILE_INDEX + index);
         }
+    }
+
+    /*
+     * Manage draw at begin state.
+     */
+    private BufferedImage msgDrawBegin() {
+        final int indexPicture;
+        BufferedImage currentPicture;
+
+        // Get good picture
+        if (this.stateCount < PlayerBeginConst.PICTURE_HEAD_UP_STATECOUNT) {
+            indexPicture = PlayerBeginConst.PICTURE_HEAD_UP;
+        } else if (this.stateCount
+            < PlayerBeginConst.PICTURE_HEAD_NORMAL_STATECOUNT) {
+            indexPicture = PlayerBeginConst.PICTURE_HEAD_NORMAL;
+        } else if (this.stateCount
+            < PlayerBeginConst.PICTURE_HEAD_DOWN_STATECOUNT) {
+            indexPicture = PlayerBeginConst.PICTURE_HEAD_DOWN;
+        } else {
+            indexPicture = DIRECTION_IMAGE_NUMBER;
+        }
+
+        if (indexPicture < DIRECTION_IMAGE_NUMBER) {
+            // Get image
+            final BufferedImage baseImage = this.stBegin[indexPicture];
+
+            currentPicture = new BufferedImage(baseImage.getWidth(),
+                baseImage.getHeight(), BufferedImage.TYPE_INT_ARGB);
+
+            final int reduction = baseImage.getHeight() - this.stateCount;
+
+            // Draw picutre
+            final Graphics2D g2 = currentPicture.createGraphics();
+
+            g2.drawImage(baseImage, 0, reduction, null);
+
+            g2.dispose();
+        } else {
+            currentPicture = null;
+        }
+
+        return currentPicture;
     }
 }
