@@ -291,6 +291,7 @@ public final class PlayerManager extends AbstractPlayerInteractionManager {
                 currentPicture = msgDrawBegin();
                 break;
             case PlayerState.JUMPING:
+                currentPicture = msgDrawJumping();
                 break;
             case PlayerState.STAND:
                 break;
@@ -338,9 +339,6 @@ public final class PlayerManager extends AbstractPlayerInteractionManager {
                 msgUpdateBegin();
                 break;
             case PlayerState.JUMPING:
-                this.stateCount++;
-                this.subState++;
-
                 msgUpdateJumping();
                 break;
             case PlayerState.STAND:
@@ -368,7 +366,7 @@ public final class PlayerManager extends AbstractPlayerInteractionManager {
      */
     private void msgUpdateBegin() {
         this.stateCount++;
-        
+
         if (this.stateCount
             >= PlayerBeginConst.PICTURE_HEAD_DOWN_STATECOUNT) {
             setState(PlayerState.STAND);
@@ -379,20 +377,8 @@ public final class PlayerManager extends AbstractPlayerInteractionManager {
      * Manage update message at begin state.
      */
     private void msgUpdateJumping() {
-        if (getSubState() >= PlayerStandConst.SUBSTATE_VALUE_TO_FALL) {
-            // Animation picture done
-            if (getySpeed() > Y_SPEED_MIDDLE) {
-                // Down
-                this.currentPicture =
-                    this.stJumpingToStandPicture[this.xSpeed + 1][0];
-            } else {
-                this.currentPicture =
-                    stJumpingPicture[this.xSpeed + 1][2];
-            }
-        } else {
-            this.currentPicture =
-                this.stJumpingPicture[this.xSpeed + 1][this.subState];
-        }
+        this.stateCount++;
+        this.subState++;
     }
 
     /**
@@ -819,6 +805,32 @@ public final class PlayerManager extends AbstractPlayerInteractionManager {
             g2.dispose();
         } else {
             currentPicture = null;
+        }
+
+        return currentPicture;
+    }
+
+    /**
+     * Manage update message at begin state.
+     *
+     * @return picture to draw
+     */
+    private BufferedImage msgDrawJumping() {
+        BufferedImage currentPicture;
+
+        if (getSubState() >= PlayerStandConst.SUBSTATE_VALUE_TO_FALL) {
+            // Animation picture done
+            if (getySpeed() > Y_SPEED_MIDDLE) {
+                // Down
+                currentPicture =
+                    this.stJumpingToStandPicture[this.xSpeed + 1][0];
+            } else {
+                currentPicture =
+                    stJumpingPicture[this.xSpeed + 1][2];
+            }
+        } else {
+            currentPicture =
+                this.stJumpingPicture[this.xSpeed + 1][this.subState];
         }
 
         return currentPicture;
