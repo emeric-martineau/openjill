@@ -2,6 +2,7 @@ package org.jill.openjill.core.api.entities;
 
 import org.jill.dma.DmaEntry;
 import org.jill.openjill.core.api.manager.TileManager;
+import org.jill.openjill.core.api.message.MessageDispatcher;
 
 /**
  * Background parameter when background is load.
@@ -15,9 +16,11 @@ public interface BackgroundParam {
      *
      * @param backgroundMap background map
      * @param pictureCacheManager picture cache
+     * @param messageDispatcherManager message dispatcher
      */
     void init(BackgroundEntity[][] backgroundMap,
-            TileManager pictureCacheManager);
+            TileManager pictureCacheManager,
+            MessageDispatcher messageDispatcherManager);
 
     /**
      * Background.
@@ -25,6 +28,13 @@ public interface BackgroundParam {
      * @return background
      */
     BackgroundEntity[][] getBackgroundObject();
+
+    /**
+     * Message dispatcher.
+     *
+     * @return  message dispatcher for interaction with game
+     */
+    MessageDispatcher getMessageDispatcher();
 
     /**
      * Dma entry.

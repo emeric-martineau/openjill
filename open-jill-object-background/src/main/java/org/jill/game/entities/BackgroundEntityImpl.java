@@ -67,57 +67,62 @@ public abstract class BackgroundEntityImpl implements BackgroundEntity {
     /**
      * Player can move on this block.
      */
-    protected boolean playerThru;
+    private boolean playerThru;
 
     /**
      * Player can stand on.
      */
-    protected boolean stair;
+    private boolean stair;
 
     /**
      * Player can climb.
      */
-    protected boolean vine;
+    private boolean vine;
+
+    /**
+     * If background is water.
+     */
+    private boolean water;
 
     /**
      * Block have special draw.
      */
-    protected boolean msgDraw;
+    private boolean msgDraw;
 
     /**
      * Block update on each cycle.
      */
-    protected boolean msgUpdate;
+    private boolean msgUpdate;
 
     /**
      * Block update on each cycle.
      */
-    protected boolean msgTouch;
+    private boolean msgTouch;
 
     /**
      * DmaEntry.
      */
-    protected DmaEntry dmaEntry;
+    private DmaEntry dmaEntry;
 
     /**
      * Cache manager.
      */
-    protected TileManager pictureCache;
+    private TileManager pictureCache;
 
     /**
      * Pos X in background map.
      */
-    protected int x;
+    private int x;
 
     /**
      * Pos Y in background map.
      */
-    protected int y;
+    private int y;
 
     /**
      * Initial config.
      */
-    protected BackgroundParam backParam;
+    private BackgroundParam backParam;
 
     /**
      * For internal use only.
@@ -140,6 +145,7 @@ public abstract class BackgroundEntityImpl implements BackgroundEntity {
         playerThru = (flag & F_PLAYERTHRU) != 0;
         stair = (flag & F_STAIR) != 0;
         vine = (flag & F_VINE) != 0;
+        water = (flag & F_WATER) != 0;
 
         msgDraw = (flag & F_MSGDRAW) != 0;
         msgUpdate = (flag & F_MSGUPDATE) != 0;
@@ -275,7 +281,32 @@ public abstract class BackgroundEntityImpl implements BackgroundEntity {
         return y;
     }
 
+    /**
+     * Return if background is water.
+     *
+     * @return if is water
+     */
+    public final boolean isWater() {
+        return water;
+    }
 
+    /**
+     * Return picture cache.
+     *
+     * @return picture cache
+     */
+    protected final TileManager getPictureCache() {
+        return pictureCache;
+    }
+
+    /**
+     * Return DMA entry.
+     *
+     * @return
+     */
+    public final DmaEntry getDmaEntry() {
+        return dmaEntry;
+    }
 
     /**
      * Player touch this background.

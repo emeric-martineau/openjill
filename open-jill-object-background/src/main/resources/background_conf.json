@@ -43,5 +43,29 @@
     {
         "cycle":"10",
         "numberTileSet":"3"
+    },
+    "LAVA1":
+    {
+        "hitObject":"37"
+    },
+    "LAVA2":
+    {
+        "hitObject":"37"
+    },
+    "LAVA3":
+    {
+        "hitObject":"37"
+    },
+    "LAVA4":
+    {
+        "hitObject":"37"
+    },
+    "LAVA5":
+    {
+        "hitObject":"37"
+    },
+    "LAVAB":
+    {
+        "hitObject":"37"
     }
 }

@@ -48,13 +48,13 @@ public abstract class AbstractBaseBackgroundEntity extends
 
         backgroundObject = backParam.getBackgroundObject();
 
-        int tileIndex = dmaEntry.getTile();
-        int tileSetIndex = dmaEntry.getTileset();
+        int tileIndex = getDmaEntry().getTile();
+        int tileSetIndex = getDmaEntry().getTileset();
 
         images = new BufferedImage[getConfInteger("numberTileSet")];
 
         for (int index = 0; index < images.length; index++) {
-            images[index] = pictureCache.getImage(tileSetIndex, tileIndex
+            images[index] = getPictureCache().getImage(tileSetIndex, tileIndex
                     + index);
         }
 
@@ -87,7 +87,7 @@ public abstract class AbstractBaseBackgroundEntity extends
      * @return true/false
      */
     protected final boolean isBaseTop() {
-        return (y == 0) || isBackBase(x, y - 1);
+        return (getY() == 0) || isBackBase(getX(), getY() - 1);
     }
 
     /**
@@ -96,7 +96,8 @@ public abstract class AbstractBaseBackgroundEntity extends
      * @return true/false
      */
     protected final boolean isBaseBottom() {
-        return (y == (backgroundObject[0].length - 1)) || isBackBase(x, y + 1);
+        return (getY() == (backgroundObject[0].length - 1))
+                || isBackBase(getX(), getY() + 1);
     }
 
     /**
@@ -105,7 +106,7 @@ public abstract class AbstractBaseBackgroundEntity extends
      * @return true/false
      */
     protected final boolean isBaseLeft() {
-        return (x == 0) || isBackBase(x - 1, y);
+        return (getX() == 0) || isBackBase(getX() - 1, getY());
     }
 
     /**
@@ -114,7 +115,8 @@ public abstract class AbstractBaseBackgroundEntity extends
      * @return true/false
      */
     protected final boolean isBaseRight() {
-        return (x == (backgroundObject.length - 1)) || isBackBase(x + 1, y);
+        return (getX() == (backgroundObject.length - 1))
+                || isBackBase(getX() + 1, getY());
     }
 
     @Override
@@ -127,15 +129,15 @@ public abstract class AbstractBaseBackgroundEntity extends
         final boolean isRight = !isBaseRight();
 
         if (isTop && isBottom && isLeft && isRight) {
-            mask = pictureCache.getImage(42, 5);
+            mask = getPictureCache().getImage(42, 5);
         } else if (isTop && isLeft) {
-            mask = pictureCache.getImage(42, 1);
+            mask = getPictureCache().getImage(42, 1);
         } else if (isTop && isRight) {
-            mask = pictureCache.getImage(42, 2);
+            mask = getPictureCache().getImage(42, 2);
         } else if (isBottom && isLeft) {
-            mask = pictureCache.getImage(42, 3);
+            mask = getPictureCache().getImage(42, 3);
         } else if (isBottom && isRight) {
-            mask = pictureCache.getImage(42, 4);
+            mask = getPictureCache().getImage(42, 4);
         }
 
         if (mask != null) {

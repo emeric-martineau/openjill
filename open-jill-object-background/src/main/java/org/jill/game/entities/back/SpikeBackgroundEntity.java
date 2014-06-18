@@ -36,15 +36,15 @@ public final class SpikeBackgroundEntity
     public void init(final BackgroundParam backParam) {
         super.init(backParam);
 
-        int tileIndex = dmaEntry.getTile();
-        int tileSetIndex = dmaEntry.getTileset();
+        int tileIndex = getDmaEntry().getTile();
+        int tileSetIndex = getDmaEntry().getTileset();
 
         int nbPicture = getConfInteger("numberTileSet");
 
         images = new BufferedImage[nbPicture];
 
         for (int index = 0; index < images.length; index++) {
-            images[index] = pictureCache.getImage(tileSetIndex, tileIndex
+            images[index] = getPictureCache().getImage(tileSetIndex, tileIndex
                     + index);
         }
 

@@ -35,10 +35,10 @@ public final class MistBackgroundEntity
     public void init(final BackgroundParam backParam) {
         super.init(backParam);
 
-        int tileIndex = dmaEntry.getTile();
-        int tileSetIndex = dmaEntry.getTileset();
+        int tileIndex = getDmaEntry().getTile();
+        int tileSetIndex = getDmaEntry().getTileset();
 
-        final Color backColor = pictureCache.getBackgroundColor();
+        final Color backColor = getPictureCache().getBackgroundColor();
         BufferedImage srcImage;
         BufferedImage destImage;
         Graphics2D g2;
@@ -46,7 +46,7 @@ public final class MistBackgroundEntity
         images = new BufferedImage[getConfInteger("numberTileSet")];
 
         for (int index = 0; index < images.length; index++) {
-            srcImage = pictureCache.getImage(tileSetIndex, tileIndex
+            srcImage = getPictureCache().getImage(tileSetIndex, tileIndex
                     + index);
 
             destImage = new BufferedImage(srcImage.getWidth(),

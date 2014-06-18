@@ -33,13 +33,13 @@ public final class MapDoorBackgroundEntity
     public void init(final BackgroundParam backParam) {
         super.init(backParam);
 
-        int tileIndex = dmaEntry.getTile();
-        int tileSetIndex = dmaEntry.getTileset();
+        int tileIndex = getDmaEntry().getTile();
+        int tileSetIndex = getDmaEntry().getTileset();
 
         images = new BufferedImage[getConfInteger("numberTileSet")];
 
         for (int index = 0; index < images.length; index++) {
-            images[index] = pictureCache.getImage(tileSetIndex, tileIndex
+            images[index] = getPictureCache().getImage(tileSetIndex, tileIndex
                     + index);
         }
 

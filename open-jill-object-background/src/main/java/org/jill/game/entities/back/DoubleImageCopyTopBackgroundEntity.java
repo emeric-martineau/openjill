@@ -43,16 +43,16 @@ public class DoubleImageCopyTopBackgroundEntity extends BackgroundEntityImpl {
     @Override
     public void msgDraw() {
         final BufferedImage thisPicture =
-                pictureCache.getBackgroundPicture(getMapCode());
+                getPictureCache().getBackgroundPicture(getMapCode());
 
-        int theY = y;
+        int theY = getY();
 
-        if (y == 0) {
+        if (theY == 0) {
             theY = 2;
         }
 
         final BufferedImage backPicture =
-                backgroundObject[x][theY - 1].getPicture();
+                backgroundObject[getX()][theY - 1].getPicture();
 
         int width = thisPicture.getWidth();
         int height = thisPicture.getHeight();

@@ -4,6 +4,7 @@ import org.jill.dma.DmaEntry;
 import org.jill.openjill.core.api.entities.BackgroundEntity;
 import org.jill.openjill.core.api.entities.BackgroundParam;
 import org.jill.openjill.core.api.manager.TileManager;
+import org.jill.openjill.core.api.message.MessageDispatcher;
 
 
 /**
@@ -22,6 +23,11 @@ public final class BackgroundParamImpl implements BackgroundParam {
      * Cache manager.
      */
     private TileManager pictureCache;
+
+    /**
+     * Message dispatcher.
+     */
+    private MessageDispatcher messageDispatcher;
 
     /**
      * Background map.
@@ -43,12 +49,15 @@ public final class BackgroundParamImpl implements BackgroundParam {
      *
      * @param backgroundMap background map
      * @param pictureCacheManager picture cache
+     * @param messageDispatcherManager message dispatcher
      */
     @Override
     public void init(final BackgroundEntity[][] backgroundMap,
-            final TileManager pictureCacheManager) {
+            final TileManager pictureCacheManager,
+            final MessageDispatcher messageDispatcherManager) {
         this.pictureCache = pictureCacheManager;
         this.backgroundObject = backgroundMap;
+        this.messageDispatcher = messageDispatcherManager;
     }
 
     /**
@@ -88,6 +97,16 @@ public final class BackgroundParamImpl implements BackgroundParam {
     @Override
     public TileManager getPictureCache() {
         return pictureCache;
+    }
+
+    /**
+     * Message dispatcher.
+     *
+     * @return  message dispatcher for interaction with game
+     */
+    @Override
+    public MessageDispatcher getMessageDispatcher() {
+        return messageDispatcher;
     }
 
     /**

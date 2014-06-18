@@ -254,7 +254,8 @@ public abstract class AbstractBackgroundJillLevel
                 }
 
                 backParam = ObjectInstanceFactory.getNewBackParam();
-                backParam.init(backgroundObject, pictureCache);
+                backParam.init(this.backgroundObject, this.pictureCache,
+                        this.messageDispatcher);
                 backParam.setDmaEntry(de);
                 backParam.setX(indexX);
                 backParam.setY(indexY);
@@ -411,7 +412,8 @@ public abstract class AbstractBackgroundJillLevel
         }
 
         backParam = ObjectInstanceFactory.getNewBackParam();
-        backParam.init(backgroundObject, pictureCache);
+        backParam.init(this.backgroundObject, this.pictureCache,
+                this.messageDispatcher);
         backParam.setDmaEntry(de);
         backParam.setX(indexX);
         backParam.setY(indexY);

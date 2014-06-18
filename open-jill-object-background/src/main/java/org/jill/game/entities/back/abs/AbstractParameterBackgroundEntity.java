@@ -64,7 +64,7 @@ public abstract class AbstractParameterBackgroundEntity extends
     public void init(final BackgroundParam backParam) {
         super.init(backParam);
 
-        dmaName = dmaEntry.getName();
+        dmaName = getDmaEntry().getName();
     }
 
     /**

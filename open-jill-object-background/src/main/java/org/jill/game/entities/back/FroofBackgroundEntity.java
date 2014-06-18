@@ -36,13 +36,13 @@ public final class FroofBackgroundEntity
     public void init(final BackgroundParam backParam) {
         super.init(backParam);
 
-        int tileIndex = dmaEntry.getTile() - 2;
-        int tileSetIndex = dmaEntry.getTileset();
+        int tileIndex = getDmaEntry().getTile() - 2;
+        int tileSetIndex = getDmaEntry().getTileset();
 
         images = new BufferedImage[getConfInteger("numberTileSet")];
 
         for (int index = 0; index < images.length; index++) {
-            images[index] = pictureCache.getImage(tileSetIndex, tileIndex
+            images[index] = getPictureCache().getImage(tileSetIndex, tileIndex
                     + index);
         }
 
