@@ -294,6 +294,7 @@ public final class PlayerManager extends AbstractPlayerInteractionManager {
                 currentPicture = msgDrawJumping();
                 break;
             case PlayerState.STAND:
+                currentPicture = msgDrawStand();
                 break;
             case PlayerState.CLIMBING:
                 break;
@@ -316,6 +317,7 @@ public final class PlayerManager extends AbstractPlayerInteractionManager {
 //        }
         switch(state) {
             case PlayerState.STAND:
+                setSubState(0);
                 break;
             case PlayerState.BEGIN:
                 setSubState(PlayerState.BEGIN_SUB_STATE);
@@ -342,8 +344,6 @@ public final class PlayerManager extends AbstractPlayerInteractionManager {
                 msgUpdateJumping();
                 break;
             case PlayerState.STAND:
-                this.stateCount++;
-
                 msgUpdateStand();
                 break;
             case PlayerState.CLIMBING:
@@ -393,36 +393,14 @@ public final class PlayerManager extends AbstractPlayerInteractionManager {
      * Player stand.
      */
     private void msgUpdateStand() {
+        this.stateCount++;
         // Down
         if (this.stateCount
                 > PlayerStandConst.HIT_FLOOR_ANIMATION_STATECOUNT) {
             msgUpdateStandHitFloorAnimation();
-        } else {
-            if (this.xSpeed == X_SPEED_MIDDLE) {
-                if (this.ySpeed < Y_SPEED_MIDDLE) {
-                    // Head up
-                    this.currentPicture
-                            = stBegin[PlayerBeginConst.PICTURE_HEAD_UP];
-                } else if (this.ySpeed >= PlayerStandConst.Y_SPEED_SQUAT_DOWN) {
-                    // Jill squat
-                    this.currentPicture = stStandJillSquat;
-                } else if (this.ySpeed > Y_SPEED_MIDDLE) {
-                    // Head down
-                    this.currentPicture
-                            = stBegin[PlayerBeginConst.PICTURE_HEAD_DOWN];
-                } else {
-                    msgUpdateStandWait();
-                }
-            } else {
-                if (this.xSpeed < X_SPEED_MIDDLE) {
-                    // Player running.
-                    this.currentPicture
-                            = this.stStandLeftRunning[this.subState];
-                } else {
-                    this.currentPicture
-                            = this.stStandRightRunning[this.subState];
-                }
-            }
+        } else if (this.xSpeed == X_SPEED_MIDDLE
+                && this.ySpeed == Y_SPEED_MIDDLE) {
+            msgUpdateStandWait();
         }
     }
 
@@ -430,79 +408,13 @@ public final class PlayerManager extends AbstractPlayerInteractionManager {
      * Player no move.
      */
     private void msgUpdateStandWait() {
-        if (this.info1 != X_SPEED_MIDDLE
-                && this.stateCount
-                >= PlayerStandConst.STATECOUNT_LEFT_RIGHT_TO_FACE
-                && this.stateCount
-                < PlayerStandConst.STATECOUNT_WAIT_ARM) {
-            //this.info1 = X_SPEED_MIDDLE;
-            this.currentPicture = this.stStandPicture[1];
-        } else if (this.stateCount
-                >= PlayerStandConst.STATECOUNT_WAIT_ARM
-                && this.stateCount
-                < PlayerStandConst.STATECOUNT_WAIT_MSG) {
-            this.currentPicture = this.stStandJillWaitWithArm;
-        } else if (this.stateCount
+        if (this.stateCount
                 == PlayerStandConst.STATECOUNT_WAIT_MSG) {
             msgUpdateStandWatDisplayMessage();
-        } else if (this.stateCount
-                >= PlayerStandConst.STATECOUNT_WAIT_MSG
-                && this.stateCount
-                < PlayerStandConst.STATECOUNT_WAIT_ANIMATION) {
-            this.currentPicture = this.stStandJillWaitWithArm;
-        } else if (this.stateCount
-                >= PlayerStandConst.STATECOUNT_WAIT_ANIMATION
-                && this.stateCount
-                < PlayerStandConst.STATECOUNT_WAIT_END) {
-            msgUpdateStandWaitDisplayAnimation();
         } else if (this.stateCount
                 >= PlayerStandConst.STATECOUNT_WAIT_END) {
             // Reinit
             setStateCount(0);
-        } else {
-            this.currentPicture = this.stStandPicture[this.info1 + 1];
-        }
-    }
-
-    /**
-     * Display wait animation.
-     */
-    private void msgUpdateStandWaitDisplayAnimation() {
-        switch(this.waitAnimationIndex - 1) {
-            case PlayerWaitConst.HAVE_YOU_SEEN_JILL_ANYWHERE:
-                int reste = (int) Math.IEEEremainder(this.stateCount
-                        - PlayerStandConst.STATECOUNT_WAIT_ANIMATION,
-                        PlayerWaitConst.HAVE_YOU_SEEN_JILL_ANYWHERE_DIV);
-                switch (reste) {
-                    case 0:
-                    case 1:
-                        this.currentPicture
-                            = stBegin[PlayerBeginConst.PICTURE_HEAD_UP];
-                        break;
-                    case 2:
-                    case 3:
-                        this.currentPicture
-                            = stBegin[PlayerBeginConst.PICTURE_HEAD_NORMAL];
-                        break;
-                    default:
-                        this.currentPicture
-                            = stBegin[PlayerBeginConst.PICTURE_HEAD_DOWN];
-                }
-                break;
-            case PlayerWaitConst.LOOK_AN_AIREPLANE:
-                this.currentPicture
-                        = stBegin[PlayerBeginConst.PICTURE_HEAD_UP];
-                break;
-            case PlayerWaitConst.HEY_YOUR_SHOES_ARE_UNTIED:
-                this.currentPicture
-                        = stBegin[PlayerBeginConst.PICTURE_HEAD_DOWN];
-                break;
-            case PlayerWaitConst.ARE_YOU_JUST_GONNA_SIT_THERE:
-                this.currentPicture = stStandJillWaitWithArm;
-                break;
-            default:
-                // From restore game
-                this.currentPicture = this.stStandPicture[1];
         }
     }
 
@@ -510,8 +422,6 @@ public final class PlayerManager extends AbstractPlayerInteractionManager {
      * Display message and set index of wait animation.
      */
     private void msgUpdateStandWatDisplayMessage() {
-        this.currentPicture = this.stStandJillWaitWithArm;
-
         // Generate wait animation index
         final int max = PlayerWaitConst.WAIT_MESSAGES.length;
         // 0 value is reserved when reload game
@@ -523,7 +433,7 @@ public final class PlayerManager extends AbstractPlayerInteractionManager {
     }
 
     /**
-     * Stand hit florr animation.
+     * Stand hit floor animation.
      */
     private void msgUpdateStandHitFloorAnimation() {
         // Hit floor animation
@@ -541,20 +451,6 @@ public final class PlayerManager extends AbstractPlayerInteractionManager {
             }
 
             setStateCount(1);
-        } else {
-            // Hit floor animation
-            int indexPicture = this.stateCount
-                    - PlayerStandConst.HIT_FLOOR_ANIMATION_STATECOUNT - 1;
-
-            if (indexPicture
-                    >= this.stJumpingToStandPicture[
-                    this.xSpeed + 1].length) {
-                indexPicture = 0;
-            }
-
-            this.currentPicture =
-                    this.stJumpingToStandPicture[
-                    this.xSpeed + 1][indexPicture];
         }
 
         this.counter--;
@@ -831,6 +727,160 @@ public final class PlayerManager extends AbstractPlayerInteractionManager {
         } else {
             currentPicture =
                 this.stJumpingPicture[this.xSpeed + 1][this.subState];
+        }
+
+        return currentPicture;
+    }
+
+    /**
+     * Player stand.
+     *
+     * @return picture to draw
+     */
+    private BufferedImage msgDrawStand() {
+        BufferedImage currentPicture;
+
+        // Down
+        if (this.stateCount
+                > PlayerStandConst.HIT_FLOOR_ANIMATION_STATECOUNT) {
+            currentPicture = msgDrawStandHitFloorAnimation();
+        } else {
+            if (this.xSpeed == X_SPEED_MIDDLE) {
+                if (this.ySpeed < Y_SPEED_MIDDLE) {
+                    // Head up
+                    currentPicture
+                            = stBegin[PlayerBeginConst.PICTURE_HEAD_UP];
+                } else if (this.ySpeed >= PlayerStandConst.Y_SPEED_SQUAT_DOWN) {
+                    // Jill squat
+                    currentPicture = stStandJillSquat;
+                } else if (this.ySpeed > Y_SPEED_MIDDLE) {
+                    // Head down
+                    currentPicture
+                            = stBegin[PlayerBeginConst.PICTURE_HEAD_DOWN];
+                } else {
+                    currentPicture = msgDrawStandWait();
+                }
+            } else {
+                if (this.xSpeed < X_SPEED_MIDDLE) {
+                    // Player running.
+                    currentPicture
+                            = this.stStandLeftRunning[this.subState];
+                } else {
+                    currentPicture
+                            = this.stStandRightRunning[this.subState];
+                }
+            }
+        }
+
+        return currentPicture;
+    }
+
+    /**
+     * Stand hit floor animation.
+     *
+     * @return picture to draw
+     */
+    private BufferedImage msgDrawStandHitFloorAnimation() {
+        BufferedImage currentPicture;
+
+        // Hit floor animation
+        int indexPicture = this.stateCount
+                - PlayerStandConst.HIT_FLOOR_ANIMATION_STATECOUNT - 1;
+
+        if (indexPicture
+                >= this.stJumpingToStandPicture[
+                this.xSpeed + 1].length) {
+            indexPicture = 0;
+        }
+
+        currentPicture =
+                this.stJumpingToStandPicture[
+                this.xSpeed + 1][indexPicture];
+
+        return currentPicture;
+    }
+
+    /**
+     * Player no move.
+     *
+     * @return picture to draw
+     */
+    private BufferedImage msgDrawStandWait() {
+        BufferedImage currentPicture;
+
+        if (this.info1 != X_SPEED_MIDDLE
+                && this.stateCount
+                >= PlayerStandConst.STATECOUNT_LEFT_RIGHT_TO_FACE
+                && this.stateCount
+                < PlayerStandConst.STATECOUNT_WAIT_ARM) {
+            currentPicture = this.stStandPicture[1];
+        } else if (this.stateCount
+                >= PlayerStandConst.STATECOUNT_WAIT_ARM
+                && this.stateCount
+                < PlayerStandConst.STATECOUNT_WAIT_MSG) {
+            currentPicture = this.stStandJillWaitWithArm;
+        } else if (this.stateCount
+                == PlayerStandConst.STATECOUNT_WAIT_MSG) {
+            currentPicture = this.stStandJillWaitWithArm;
+        } else if (this.stateCount
+                >= PlayerStandConst.STATECOUNT_WAIT_MSG
+                && this.stateCount
+                < PlayerStandConst.STATECOUNT_WAIT_ANIMATION) {
+            currentPicture = this.stStandJillWaitWithArm;
+        } else if (this.stateCount
+                >= PlayerStandConst.STATECOUNT_WAIT_ANIMATION
+                && this.stateCount
+                < PlayerStandConst.STATECOUNT_WAIT_END) {
+            currentPicture = msgDrawStandWaitDisplayAnimation();
+        } else {
+            currentPicture = this.stStandPicture[this.info1 + 1];
+        }
+
+        return currentPicture;
+    }
+
+    /**
+     * Display wait animation.
+     * @return picture to draw
+     */
+    private BufferedImage msgDrawStandWaitDisplayAnimation() {
+        BufferedImage currentPicture;
+
+        switch(this.waitAnimationIndex - 1) {
+            case PlayerWaitConst.HAVE_YOU_SEEN_JILL_ANYWHERE:
+                int reste = (int) Math.IEEEremainder(this.stateCount
+                        - PlayerStandConst.STATECOUNT_WAIT_ANIMATION,
+                        PlayerWaitConst.HAVE_YOU_SEEN_JILL_ANYWHERE_DIV);
+                switch (reste) {
+                    case 0:
+                    case 1:
+                        currentPicture
+                            = stBegin[PlayerBeginConst.PICTURE_HEAD_UP];
+                        break;
+                    case 2:
+                    case 3:
+                        currentPicture
+                            = stBegin[PlayerBeginConst.PICTURE_HEAD_NORMAL];
+                        break;
+                    default:
+                        currentPicture
+                            = stBegin[PlayerBeginConst.PICTURE_HEAD_DOWN];
+                }
+                break;
+            case PlayerWaitConst.LOOK_AN_AIREPLANE:
+                currentPicture
+                        = stBegin[PlayerBeginConst.PICTURE_HEAD_UP];
+                break;
+            case PlayerWaitConst.HEY_YOUR_SHOES_ARE_UNTIED:
+                currentPicture
+                        = stBegin[PlayerBeginConst.PICTURE_HEAD_DOWN];
+                break;
+            case PlayerWaitConst.ARE_YOU_JUST_GONNA_SIT_THERE:
+                currentPicture = stStandJillWaitWithArm;
+                break;
+            default:
+                // From restore game
+                currentPicture = this.stStandPicture[1];
         }
 
         return currentPicture;
