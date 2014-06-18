@@ -335,8 +335,6 @@ public final class PlayerManager extends AbstractPlayerInteractionManager {
     public void msgUpdate() {
         switch (getState()) {
             case PlayerState.BEGIN:
-                this.stateCount++;
-
                 msgUpdateBegin();
                 break;
             case PlayerState.JUMPING:
@@ -369,39 +367,12 @@ public final class PlayerManager extends AbstractPlayerInteractionManager {
      * Manage update message at begin state.
      */
     private void msgUpdateBegin() {
-//        final int indexPicture;
-
-        // Get good picture
-        if (this.stateCount < PlayerBeginConst.PICTURE_HEAD_UP_STATECOUNT) {
-//            indexPicture = PlayerBeginConst.PICTURE_HEAD_UP;
-        } else if (this.stateCount
-            < PlayerBeginConst.PICTURE_HEAD_NORMAL_STATECOUNT) {
-//            indexPicture = PlayerBeginConst.PICTURE_HEAD_NORMAL;
-        } else if (this.stateCount
-            < PlayerBeginConst.PICTURE_HEAD_DOWN_STATECOUNT) {
-//            indexPicture = PlayerBeginConst.PICTURE_HEAD_DOWN;
-        } else {
-//            indexPicture = DIRECTION_IMAGE_NUMBER;
-
+        this.stateCount++;
+        
+        if (this.stateCount
+            >= PlayerBeginConst.PICTURE_HEAD_DOWN_STATECOUNT) {
             setState(PlayerState.STAND);
         }
-
-//        if (indexPicture < DIRECTION_IMAGE_NUMBER) {
-//            // Get image
-//            final BufferedImage baseImage = this.stBegin[indexPicture];
-//
-//            this.currentPicture = new BufferedImage(baseImage.getWidth(),
-//                baseImage.getHeight(), BufferedImage.TYPE_INT_ARGB);
-//
-//            final int reduction = baseImage.getHeight() - this.stateCount;
-//
-//            // Draw picutre
-//            final Graphics2D g2 = this.currentPicture.createGraphics();
-//
-//            g2.drawImage(baseImage, 0, reduction, null);
-//
-//            g2.dispose();
-//        }
     }
 
     /**
@@ -809,8 +780,10 @@ public final class PlayerManager extends AbstractPlayerInteractionManager {
         }
     }
 
-    /*
+    /**
      * Manage draw at begin state.
+     *
+     * @return picture to draw
      */
     private BufferedImage msgDrawBegin() {
         final int indexPicture;
