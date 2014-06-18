@@ -305,3 +305,7 @@
 
 0.2.1 :
  - Gator (object 48) now stop when hit block,
+ - kill water/lava support,
+ - Spark, Gem, Red key rewrite for better compatibility,
+ - remove bad initialisation in player,
+ - PMD + checkstyle + findbug much as possible,
