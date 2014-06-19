@@ -85,25 +85,25 @@ public final class PlayerManager extends AbstractPlayerInteractionManager {
     /**
      * Die 0.
      */
-    private final BufferedImage[] stDie0
+    private final BufferedImage[] stDie0Enemy
         = new BufferedImage[PlayerDie0Const.IMAGE_NUMBER];
 
     /**
      * Die 1.
      */
-    private final BufferedImage[] stDie1
+    private final BufferedImage[] stDie1Water
         = new BufferedImage[PlayerDie1Const.IMAGE_NUMBER];
 
     /**
      * Die 2.
      */
-    private final BufferedImage[] stDie2
+    private final BufferedImage[] stDie2Other
         = new BufferedImage[PlayerDie2Const.IMAGE_NUMBER];
 
     /**
      * Current picture to display.
      */
-    private BufferedImage currentPicture;
+    private BufferedImage currentPlayerPicture;
 
     /**
      * Current picture to display.
@@ -173,7 +173,7 @@ public final class PlayerManager extends AbstractPlayerInteractionManager {
 
         initDiePicture();
 
-        currentPicture = stStandPicture[1];
+        this.currentPlayerPicture = this.stStandPicture[1];
     }
 
     /**
@@ -284,7 +284,7 @@ public final class PlayerManager extends AbstractPlayerInteractionManager {
 
     @Override
     public BufferedImage msgDraw() {
-        BufferedImage currentPicture = this.currentPicture;
+        BufferedImage currentPicture;
 
         switch (getState()) {
             case PlayerState.BEGIN:
@@ -300,12 +300,16 @@ public final class PlayerManager extends AbstractPlayerInteractionManager {
                 currentPicture = msgDrawClimb();
                 break;
             case PlayerState.DIE:
+                currentPicture = msgDrawDied();
                 break;
             default:
+                currentPicture = null;
                 LOGGER.severe(
                     String.format("The state %d is unknow for player !",
                         getState()));
         }
+
+        this.currentPlayerPicture = currentPicture;
 
         return currentPicture;
     }
@@ -480,31 +484,18 @@ public final class PlayerManager extends AbstractPlayerInteractionManager {
             this.messageDispatcher.sendMessage(
                 EnumMessageType.DIE_RESTART_LEVEL, null);
         } else {
-            int indexPicture = this.stateCount
-                / PlayerDie0Const.STATECOUNT_STEP_TO_CHANGE_PICTURE;
-            this.currentPicture = this.stDie0[indexPicture];
-
             this.stateCount++;
         }
     }
 
     /**
-     * Message update for die 0.
+     * Message update for die .
      */
     private void msgUpdateDiedWater() {
         if (this.stateCount >= PlayerDie1Const.STATECOUNT_MAX_TO_RESTART_GAME) {
             this.messageDispatcher.sendMessage(
                 EnumMessageType.DIE_RESTART_LEVEL, null);
         } else {
-            if (this.stateCount == 0) {
-                this.currentPicture = this.stDie1[
-                        PlayerDie1Const.FIRST_PICTURE];
-            } else {
-                int indexPicture = this.stateCount
-                    / PlayerDie1Const.STATECOUNT_STEP_TO_CHANGE_PICTURE;
-                this.currentPicture = this.stDie1[indexPicture];
-            }
-
             this.stateCount++;
         }
     }
@@ -515,29 +506,25 @@ public final class PlayerManager extends AbstractPlayerInteractionManager {
     private void msgUpdateDiedOther() {
         if (this.ySpeed > PlayerDie2Const.YD_MAX_TO_CHANGE) {
             if (this.stateCount
-                < PlayerDie2Const.STATECOUNT_MAX_TO_FIRST_ANIMATION) {
-                this.currentPicture = this.stDie2[(this.stateCount % 2) + 1];
-            } else if (this.stateCount
-                < PlayerDie2Const.STATECOUNT_MAX_TO_RESTART_GAME) {
-                this.currentPicture
-                    = this.stDie2[PlayerDie2Const.LAST_PICTURE];
-            } else {
+                > PlayerDie2Const.STATECOUNT_MAX_TO_RESTART_GAME) {
                 this.messageDispatcher.sendMessage(
                     EnumMessageType.DIE_RESTART_LEVEL, null);
             }
 
             // Realign player on background
             if (this.stateCount == 0) {
+                final BufferedImage currentPicture = getDieOtherPicture();
+
                 // Align on block under kill background.
                 this.y = (((this.y / JillConst.BLOCK_SIZE))
                     * JillConst.BLOCK_SIZE) + JillConst.BLOCK_SIZE
-                    + this.currentPicture.getHeight();
+                    + currentPicture.getHeight();
 
                 // If player out of screen
-                if ((this.y + this.currentPicture.getHeight())
+                if ((this.y + currentPicture.getHeight())
                     > JillConst.MAX_HEIGHT) {
                     this.y = JillConst.MAX_HEIGHT
-                        - this.currentPicture.getHeight();
+                        - currentPicture.getHeight();
                 }
             }
 
@@ -546,7 +533,7 @@ public final class PlayerManager extends AbstractPlayerInteractionManager {
             this.y += this.ySpeed;
             this.ySpeed += 2;
 
-            this.currentPicture = this.stDie2[PlayerDie2Const.FIRST_PICTURE];
+//            this.currentPicture = this.stDie2[PlayerDie2Const.FIRST_PICTURE];
         }
     }
 
@@ -589,7 +576,7 @@ public final class PlayerManager extends AbstractPlayerInteractionManager {
 
                         // Align player on bottom of background
                         this.y = (senderBack.getY() + 1) * JillConst.BLOCK_SIZE
-                            - this.stDie2[
+                            - this.stDie2Other[
                                     PlayerDie2Const.FIRST_PICTURE].getHeight();
                         break;
                     case PlayerState.DIE_SUB_STATE_WATER_BACK:
@@ -597,7 +584,7 @@ public final class PlayerManager extends AbstractPlayerInteractionManager {
 
                         // Align player on bottom of background
                         this.y = senderBack.getY() * JillConst.BLOCK_SIZE
-                            - this.stDie1[
+                            - this.stDie1Water[
                                     PlayerDie1Const.FIRST_PICTURE].getHeight();
                         break;
                     case PlayerState.DIE_SUB_STATE_ENNEMY:
@@ -624,12 +611,20 @@ public final class PlayerManager extends AbstractPlayerInteractionManager {
 
     @Override
     public int getWidth() {
-        return this.currentPicture.getWidth();
+        if (this.currentPlayerPicture == null) {
+            this.currentPlayerPicture = msgDraw();
+        }
+
+        return this.currentPlayerPicture.getWidth();
     }
 
     @Override
     public int getHeight() {
-        return this.currentPicture.getHeight();
+        if (this.currentPlayerPicture == null) {
+            this.currentPlayerPicture = msgDraw();
+        }
+
+        return this.currentPlayerPicture.getHeight();
     }
 
     /**
@@ -638,23 +633,23 @@ public final class PlayerManager extends AbstractPlayerInteractionManager {
     private void initDiePicture() {
         // Just for checkstyle, sorry
         int i = 0;
-        stDie2[i++] = pictureCache.getImage(PlayerDie2Const.TILESET_INDEX,
+        stDie2Other[i++] = pictureCache.getImage(PlayerDie2Const.TILESET_INDEX,
                 PlayerDie2Const.TILE0);
-        stDie2[i++] = pictureCache.getImage(PlayerDie2Const.TILESET_INDEX,
+        stDie2Other[i++] = pictureCache.getImage(PlayerDie2Const.TILESET_INDEX,
                 PlayerDie2Const.TILE1);
-        stDie2[i++] = pictureCache.getImage(PlayerDie2Const.TILESET_INDEX,
+        stDie2Other[i++] = pictureCache.getImage(PlayerDie2Const.TILESET_INDEX,
                 PlayerDie2Const.TILE2);
-        stDie2[i++] = pictureCache.getImage(PlayerDie2Const.TILESET_INDEX,
+        stDie2Other[i++] = pictureCache.getImage(PlayerDie2Const.TILESET_INDEX,
                 PlayerDie2Const.TILE3);
 
         for (int index = 0; index < PlayerDie0Const.IMAGE_NUMBER; index++) {
-            this.stDie0[index] = pictureCache.getImage(
+            this.stDie0Enemy[index] = pictureCache.getImage(
                 PlayerDie0Const.TILESET_INDEX,
                 PlayerDie0Const.TILE_INDEX + index);
         }
 
         for (int index = 0; index < PlayerDie1Const.IMAGE_NUMBER; index++) {
-            this.stDie1[index] = pictureCache.getImage(
+            this.stDie1Water[index] = pictureCache.getImage(
                 PlayerDie1Const.TILESET_INDEX,
                 PlayerDie1Const.TILE_INDEX + index);
         }
@@ -888,11 +883,113 @@ public final class PlayerManager extends AbstractPlayerInteractionManager {
     /**
      * Display climb picture.
      *
-     * BufferedImage
+     * @return picture to draw
      */
     private BufferedImage msgDrawClimb() {
         // subState update in AbstractPlayerManager.moveStdPlayerUpClimb()
         return stClimbPicture[subState];
     }
 
+    /**
+     * Message draw for die.
+     *
+     * @return picture to draw
+     */
+    private BufferedImage msgDrawDied() {
+        BufferedImage currentPicture;
+
+        switch (this.subState) {
+            case PlayerState.DIE_SUB_STATE_ENNEMY:
+                currentPicture = msgDrawDiedEnnemy();
+                break;
+            case PlayerState.DIE_SUB_STATE_WATER_BACK:
+                currentPicture = msgDrawDiedWater();
+                break;
+            case PlayerState.DIE_SUB_STATE_OTHER_BACK:
+                currentPicture = msgDrawDiedOther();
+                break;
+            default:
+                currentPicture = null;
+        }
+
+        return currentPicture;
+    }
+
+    /**
+     * Message draw for die 0.
+     *
+     * @return picture to draw
+     */
+    private BufferedImage msgDrawDiedEnnemy() {
+        final int indexPicture = this.stateCount
+                / PlayerDie0Const.STATECOUNT_STEP_TO_CHANGE_PICTURE;
+        return this.stDie0Enemy[indexPicture];
+    }
+
+    /**
+     * Message draw for die 1.
+     *
+     * @return picture to draw
+     */
+    private BufferedImage msgDrawDiedWater() {
+        BufferedImage currentPicture;
+
+        if (this.stateCount == 0) {
+            currentPicture = this.stDie1Water[
+                    PlayerDie1Const.FIRST_PICTURE];
+        } else {
+            int indexPicture = this.stateCount
+                / PlayerDie1Const.STATECOUNT_STEP_TO_CHANGE_PICTURE;
+
+            if (indexPicture < this.stDie1Water.length) {
+                currentPicture = this.stDie1Water[indexPicture];
+            } else {
+                currentPicture = null;
+            }
+        }
+
+        return currentPicture;
+    }
+
+    /**
+     * Message update for die 2.
+     *
+     * @return picture to draw
+     */
+    private BufferedImage msgDrawDiedOther() {
+        BufferedImage currentPicture;
+
+        if (this.ySpeed > PlayerDie2Const.YD_MAX_TO_CHANGE) {
+            currentPicture = getDieOtherPicture();
+        } else {
+            this.y += this.ySpeed;
+            this.ySpeed += 2;
+
+            currentPicture = this.stDie2Other[PlayerDie2Const.FIRST_PICTURE];
+        }
+
+        return currentPicture;
+    }
+
+    /**
+     * Return pictue of die other. Call to update object and draw object.
+     *
+     * @return picture
+     */
+    private BufferedImage getDieOtherPicture() {
+        BufferedImage currentPicture;
+        if (this.stateCount
+                < PlayerDie2Const.STATECOUNT_MAX_TO_FIRST_ANIMATION) {
+            currentPicture = this.stDie2Other[(this.stateCount % 2) + 1];
+//            } else if (this.stateCount
+//                < PlayerDie2Const.STATECOUNT_MAX_TO_RESTART_GAME) {
+//                currentPicture
+//                    = this.stDie2[PlayerDie2Const.LAST_PICTURE];
+        } else {
+            currentPicture
+                    = this.stDie2Other[PlayerDie2Const.LAST_PICTURE];
+        }
+
+        return currentPicture;
+    }
 }

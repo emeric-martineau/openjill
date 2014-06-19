@@ -9,7 +9,7 @@ public interface PlayerDie0Const {
     /**
      * Number of image die 2.
      */
-    int IMAGE_NUMBER = 5;
+    int IMAGE_NUMBER = 6;
 
     /**
      * Statecount to restart game.
