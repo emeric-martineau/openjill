@@ -297,6 +297,7 @@ public final class PlayerManager extends AbstractPlayerInteractionManager {
                 currentPicture = msgDrawStand();
                 break;
             case PlayerState.CLIMBING:
+                currentPicture = msgDrawClimb();
                 break;
             case PlayerState.DIE:
                 break;
@@ -347,8 +348,6 @@ public final class PlayerManager extends AbstractPlayerInteractionManager {
                 msgUpdateStand();
                 break;
             case PlayerState.CLIMBING:
-                this.stateCount++;
-
                 msgUpdateClimb();
                 break;
             case PlayerState.DIE:
@@ -385,8 +384,7 @@ public final class PlayerManager extends AbstractPlayerInteractionManager {
      * Display climb picture.
      */
     private void msgUpdateClimb() {
-        // subState update in AbstractPlayerManager.moveStdPlayerUpClimb()
-        currentPicture = stClimbPicture[subState];
+        this.stateCount++;
     }
 
     /**
@@ -841,6 +839,7 @@ public final class PlayerManager extends AbstractPlayerInteractionManager {
 
     /**
      * Display wait animation.
+     *
      * @return picture to draw
      */
     private BufferedImage msgDrawStandWaitDisplayAnimation() {
@@ -885,4 +884,15 @@ public final class PlayerManager extends AbstractPlayerInteractionManager {
 
         return currentPicture;
     }
+
+    /**
+     * Display climb picture.
+     *
+     * BufferedImage
+     */
+    private BufferedImage msgDrawClimb() {
+        // subState update in AbstractPlayerManager.moveStdPlayerUpClimb()
+        return stClimbPicture[subState];
+    }
+
 }
