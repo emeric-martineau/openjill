@@ -44,6 +44,9 @@ public class OrderingInfoScreenJill1Handler
         screens[1] = newScreen(0, 35);
         screens[2] = newScreen(36, 15);
         screens[3] = newScreen(20, 35);
+
+        // Must set offsetX and offsetY before select object to display.
+        centerScreen();
     }
 
     /**
@@ -103,7 +106,7 @@ public class OrderingInfoScreenJill1Handler
             currentDisplayScreen = drawingScreen;
             // Display only at first time
             doRunNext();
-            doRunNext();
+            //doRunNext();
             this.runGame = false;
         }
     }
