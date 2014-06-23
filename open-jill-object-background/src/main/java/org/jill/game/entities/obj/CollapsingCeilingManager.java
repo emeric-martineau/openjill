@@ -71,7 +71,7 @@ public final class CollapsingCeilingManager
 
         this.backgroundObject = objectParam.getBackgroundObject();
 
-        this.speedFall = getConfInteger("tile");
+        this.speedFall = getConfInteger("speedFall");
 
         final int tileIndex = getConfInteger("tile");
         final int tileSetIndex = getConfInteger("tileSet");
