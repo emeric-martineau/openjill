@@ -3,6 +3,7 @@ package org.jill.game.entities.obj;
 import java.awt.image.BufferedImage;
 import org.jill.openjill.core.api.entities.ObjectEntity;
 import org.jill.game.entities.obj.abs.AbstractHitPlayerObjectEntity;
+import org.jill.game.entities.obj.util.UtilityObjectEntity;
 import org.jill.openjill.core.api.entities.ObjectParam;
 import org.jill.openjill.core.api.message.EnumMessageType;
 import org.jill.openjill.core.api.message.object.CreateObjectMessage;
@@ -10,7 +11,6 @@ import org.jill.openjill.core.api.message.object.ObjectListMessage;
 import org.jill.openjill.core.api.message.statusbar.inventory.
         InventoryPointMessage;
 import org.jill.openjill.core.api.entities.BackgroundEntity;
-import org.jill.openjill.core.api.jill.JillConst;
 
 /**
  * Firebird.
@@ -40,16 +40,6 @@ public final class FirebirdManager extends AbstractHitPlayerObjectEntity {
     private BufferedImage[] rightImages;
 
     /**
-     * Max X pos left.
-     */
-    private int maxXLeft;
-
-    /**
-     * Max X pos right.
-     */
-    private int maxXRight;
-
-    /**
      * Index of turn picture.
      */
     private int turnIndexPicture;
@@ -73,6 +63,11 @@ public final class FirebirdManager extends AbstractHitPlayerObjectEntity {
      * Point message.
      */
     private InventoryPointMessage pointMsg;
+
+    /**
+     * Background map.
+     */
+    private BackgroundEntity[][] backgroundObject;
 
     /**
      * Default constructor.
@@ -121,33 +116,7 @@ public final class FirebirdManager extends AbstractHitPlayerObjectEntity {
                 tileSetIndex, tileTurnIndex + turnTileNumber);
 
         // Search block
-        final BackgroundEntity[][] backMap =
-                objectParam.getBackgroundObject();
-
-        final int blockX = this.x / JillConst.BLOCK_SIZE;
-        final int blockY = this.y / JillConst.BLOCK_SIZE;
-
-        int startX = 0;
-        int stopX = backMap.length - 1;
-
-        // Search on right
-        for (int indexX = blockX; indexX < backMap.length; indexX++) {
-            if (!backMap[indexX][blockY].isPlayerThru()) {
-                stopX = indexX;
-                break;
-            }
-        }
-
-        // Search on right
-        for (int indexX = blockX; indexX > -1; indexX--) {
-            if (!backMap[indexX][blockY].isPlayerThru()) {
-                startX = indexX + 1;
-                break;
-            }
-        }
-
-        this.maxXLeft = startX * JillConst.BLOCK_SIZE;
-        this.maxXRight = (stopX * JillConst.BLOCK_SIZE) - this.width;
+        this.backgroundObject = objectParam.getBackgroundObject();
 
         setKillabgeObject(true);
 
@@ -201,20 +170,30 @@ public final class FirebirdManager extends AbstractHitPlayerObjectEntity {
 
     @Override
     public void msgUpdate() {
-        if ((this.x > this.maxXLeft && this.xSpeed < 0)
-            || (this.x < this.maxXRight && this.xSpeed > 0)) {
-            this.x += this.xSpeed;
-
-            this.counter++;
-
-            if (this.counter == this.turnIndexPicture) {
-                this.counter = 0;
-            }
-        } else if (this.counter == this.turnIndexPicture) {
+        if (this.counter == this.turnIndexPicture) {
+            // Actually picture turn, change way
             this.xSpeed *= -1;
             this.counter = 0;
         } else {
-            this.counter = this.turnIndexPicture;
+            // Go to left
+            this.counter++;
+
+            // Turn picture, but we want continue to move.
+            if (this.counter == this.turnIndexPicture) {
+                this.counter = 0;
+            }
+
+            if ((this.xSpeed < ObjectEntity.X_SPEED_MIDDLE)
+                    && !UtilityObjectEntity.moveObjectLeft(this, this.xSpeed,
+                    this.backgroundObject)) {
+                // Turn
+                this.counter = this.turnIndexPicture;
+            } else if ((this.xSpeed > ObjectEntity.X_SPEED_MIDDLE)
+                    && !UtilityObjectEntity.moveObjectRight(this, this.xSpeed,
+                    this.backgroundObject)) {
+                // Turn
+                this.counter = this.turnIndexPicture;
+            }
         }
     }
 
