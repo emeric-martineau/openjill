@@ -95,5 +95,9 @@
     {
         "type":67,
         "implementationClass":"org.jill.game.entities.obj.DemoMapManager"
+    },
+    {
+        "type":38,
+        "implementationClass":"org.jill.game.entities.obj.FallingSpikeManager"
     }
 ]

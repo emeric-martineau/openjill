@@ -163,5 +163,12 @@
         "ySpeedMax":"12",
         "xSpeedMax":"4",
         "counterBeforeJump":"17"
+    },
+    "FallingSpikeManager": {
+        "tile":"33",
+        "tileSet":"14",
+        "killForce":"-1",
+        "fallingSpeed":"2",
+        "fallingSpeedMax":"16"
     }
 }
