@@ -4,6 +4,7 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import org.jill.openjill.core.api.entities.ObjectEntity;
 import org.jill.game.entities.obj.abs.AbstractHitPlayerObjectEntity;
+import org.jill.game.entities.obj.util.UtilityObjectEntity;
 import org.jill.openjill.core.api.entities.ObjectParam;
 import org.jill.openjill.core.api.message.EnumMessageType;
 import org.jill.openjill.core.api.message.object.ObjectListMessage;
@@ -48,6 +49,11 @@ public final class GatorManager extends AbstractHitPlayerObjectEntity {
      * Point message.
      */
     private InventoryPointMessage pointMsg;
+
+    /**
+     * Background map.
+     */
+    private BackgroundEntity[][] backgroundObject;
 
     /**
      * Default constructor.
@@ -126,6 +132,8 @@ public final class GatorManager extends AbstractHitPlayerObjectEntity {
 
         this.killme = new ObjectListMessage(this, false);
         this.pointMsg = new InventoryPointMessage(point, true);
+
+        this.backgroundObject = objectParam.getBackgroundObject();
     }
 
     /**
@@ -172,8 +180,12 @@ public final class GatorManager extends AbstractHitPlayerObjectEntity {
 
     @Override
     public void msgUpdate() {
-        if ((this.x > this.maxXLeft && this.xSpeed < 0)
-            || (this.x < this.maxXRight && this.xSpeed > 0)) {
+        if ((this.xSpeed < ObjectEntity.X_SPEED_MIDDLE)
+                && UtilityObjectEntity.moveObjectLeftOnFloor(this, this.xSpeed,
+                this.backgroundObject)
+                || (this.xSpeed > ObjectEntity.X_SPEED_MIDDLE)
+                && UtilityObjectEntity.moveObjectRightOnFloor(this, this.xSpeed,
+                this.backgroundObject)) {
             this.x += this.xSpeed;
 
             this.counter++;
@@ -182,6 +194,7 @@ public final class GatorManager extends AbstractHitPlayerObjectEntity {
                 this.counter = 0;
             }
         } else {
+            // Actually picture turn, change way
             this.xSpeed *= -1;
             this.counter = 0;
         }
