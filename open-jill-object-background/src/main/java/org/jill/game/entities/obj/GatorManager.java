@@ -11,7 +11,6 @@ import org.jill.openjill.core.api.message.object.ObjectListMessage;
 import org.jill.openjill.core.api.message.statusbar.inventory.
         InventoryPointMessage;
 import org.jill.openjill.core.api.entities.BackgroundEntity;
-import org.jill.openjill.core.api.jill.JillConst;
 
 /**
  * Firebird.
@@ -29,16 +28,6 @@ public final class GatorManager extends AbstractHitPlayerObjectEntity {
      * Picture array.
      */
     private BufferedImage[] rightImages;
-
-    /**
-     * Max X pos left.
-     */
-    private int maxXLeft;
-
-    /**
-     * Max X pos right.
-     */
-    private int maxXRight;
 
     /**
      * Kill message.
@@ -88,47 +77,6 @@ public final class GatorManager extends AbstractHitPlayerObjectEntity {
         // Init Left
         initPicture(this.leftImages, numberTileSet, tileSetIndex,
                 leftTileHead, leftTileTail);
-
-        // Search block
-        final BackgroundEntity[][] backMap =
-                objectParam.getBackgroundObject();
-
-        final int blockX = this.x / JillConst.BLOCK_SIZE;
-        final int blockYunder = (this.y / JillConst.BLOCK_SIZE) + 1;
-        final int blockY = (this.y / JillConst.BLOCK_SIZE);
-
-        int startX = 0;
-        int stopX = backMap.length - 1;
-
-        // Search on right
-        for (int indexX = blockX; indexX < backMap.length; indexX++) {
-            if (backMap[indexX][blockYunder].isPlayerThru()
-                    && !backMap[indexX][blockYunder].isStair()) {
-                // Search if block under gator
-                stopX = indexX;
-                break;
-            } else if (!backMap[indexX][blockY].isPlayerThru()) {
-                // Search if block on same Y
-                stopX = indexX;
-                break;
-            }
-        }
-
-        // Search on right
-        for (int indexX = blockX; indexX > -1; indexX--) {
-            if (backMap[indexX][blockYunder].isPlayerThru()
-                    && !backMap[indexX][blockYunder].isStair()) {
-                startX = indexX + 1;
-                break;
-            } else if (!backMap[indexX][blockY].isPlayerThru()) {
-                // Search if block on same Y
-                startX = indexX + 1;
-                break;
-            }
-        }
-
-        this.maxXLeft = startX * JillConst.BLOCK_SIZE;
-        this.maxXRight = (stopX * JillConst.BLOCK_SIZE) - this.width;
 
         this.killme = new ObjectListMessage(this, false);
         this.pointMsg = new InventoryPointMessage(point, true);
