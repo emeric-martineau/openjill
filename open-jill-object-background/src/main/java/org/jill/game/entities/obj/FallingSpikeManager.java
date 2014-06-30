@@ -2,13 +2,16 @@ package org.jill.game.entities.obj;
 
 import java.awt.image.BufferedImage;
 import org.jill.game.entities.obj.abs.AbstractHitPlayerObjectEntity;
+import org.jill.game.entities.obj.player.PlayerState;
 import org.jill.game.entities.obj.util.UtilityObjectEntity;
 import org.jill.openjill.core.api.entities.BackgroundEntity;
 import org.jill.openjill.core.api.entities.ObjectEntity;
 import org.jill.openjill.core.api.entities.ObjectParam;
+import org.jill.openjill.core.api.jill.JillConst;
 import org.jill.openjill.core.api.message.EnumMessageType;
 import org.jill.openjill.core.api.message.InterfaceMessageGameHandler;
 import org.jill.openjill.core.api.message.object.ObjectListMessage;
+import org.jill.openjill.core.api.message.statusbar.inventory.InventoryLifeMessage;
 
 /**
  * Bonus item manager.
@@ -76,8 +79,18 @@ public final class FallingSpikeManager extends AbstractHitPlayerObjectEntity
     @Override
     public void msgTouch(final ObjectEntity obj) {
         if (obj.isPlayer()) {
-            hitPlayer(obj);
 
+            if (this.ySpeed != 0) {
+                // Spike fall
+                hitPlayer(obj);
+            } else {
+                // Spike don't move, kill player.
+                obj.msgKill(
+                        this.backgroundObject[this.x / JillConst.BLOCK_SIZE]
+                                [this.y / JillConst.BLOCK_SIZE],
+                        InventoryLifeMessage.DEAD_MESSAGE,
+                        PlayerState.DIE_SUB_STATE_OTHER_BACK);
+            }
             this.messageDispatcher.sendMessage(EnumMessageType.OBJECT,
                     this.killme);
         }

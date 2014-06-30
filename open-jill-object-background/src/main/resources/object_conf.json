@@ -167,7 +167,7 @@
     "FallingSpikeManager": {
         "tile":"33",
         "tileSet":"14",
-        "killForce":"-1",
+        "killForce":"-4",
         "fallingSpeed":"2",
         "fallingSpeedMax":"16"
     }
