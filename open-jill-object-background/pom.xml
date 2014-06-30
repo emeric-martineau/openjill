@@ -3,13 +3,13 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.jill.entities</groupId>
     <artifactId>open-jill-object-background</artifactId>
-    <version>0.0.41</version>
+    <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
     
     <parent>
         <groupId>org.jill</groupId>
         <artifactId>jill-parent</artifactId>
-        <version>1.0.1</version>
+        <version>1.0-SNAPSHOT</version>
         <relativePath>../jill_parent/pom.xml</relativePath>
     </parent>
     
@@ -40,10 +40,14 @@
             <artifactId>abstractfile-api</artifactId>
         </dependency>
         <!-- To read configuration -->
-		<dependency>
-			<groupId>org.codehaus.jackson</groupId>
-			<artifactId>jackson-mapper-asl</artifactId>
-		</dependency>  
+        <dependency>
+          <groupId>com.fasterxml.jackson.core</groupId>
+          <artifactId>jackson-core</artifactId>
+        </dependency>
+        <dependency>
+          <groupId>com.fasterxml.jackson.core</groupId>
+          <artifactId>jackson-databind</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

@@ -1,5 +1,6 @@
 package org.jill.game.gui.menu;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.image.BufferedImage;
@@ -10,7 +11,6 @@ import java.util.List;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.codehaus.jackson.map.ObjectMapper;
 import org.jill.game.gui.menu.conf.MenuConf;
 import org.jill.openjill.core.api.manager.TextManager;
 import org.jill.openjill.core.api.manager.TileManager;

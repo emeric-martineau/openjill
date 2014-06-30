@@ -1,5 +1,6 @@
 package org.jill.game.gui.menu;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
@@ -9,7 +10,6 @@ import java.io.InputStream;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.codehaus.jackson.map.ObjectMapper;
 import org.jill.cfg.HighScoreItem;
 import org.jill.game.gui.menu.conf.HighScoreMenuConf;
 import org.jill.game.gui.tools.LimitedString;

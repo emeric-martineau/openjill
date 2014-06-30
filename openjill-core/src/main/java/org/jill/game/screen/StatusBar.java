@@ -1,5 +1,6 @@
 package org.jill.game.screen;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
@@ -7,7 +8,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.codehaus.jackson.map.ObjectMapper;
 import org.jill.game.screen.conf.ImagesConf;
 import org.jill.game.screen.conf.RectangleConf;
 import org.jill.game.screen.conf.StatusBarConf;

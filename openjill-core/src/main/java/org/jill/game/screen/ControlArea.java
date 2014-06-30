@@ -1,5 +1,6 @@
 package org.jill.game.screen;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
@@ -7,18 +8,17 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.codehaus.jackson.map.ObjectMapper;
 import org.jill.game.screen.conf.ControlAreaConf;
 import org.jill.game.screen.conf.LineToDraw;
 import org.jill.game.screen.conf.TextToDraw;
-import org.jill.openjill.core.api.manager.TextManager;
+import org.jill.openjill.core.api.manager.
+        TextManager;
 import org.jill.openjill.core.api.manager.
         TileManager;
+import org.jill.openjill.core.api.message.EnumMessageType;
 import org.jill.openjill.core.api.message.
-        EnumMessageType;
-import org.jill.openjill.core.api.message.InterfaceMessageGameHandler;
-import org.jill.openjill.core.api.message.statusbar.inventory.
-        InventoryItemMessage;
+        InterfaceMessageGameHandler;
+import org.jill.openjill.core.api.message.statusbar.inventory.InventoryItemMessage;
 
 /**
  * Control area on screen and manage state.

@@ -1,5 +1,6 @@
 package org.jill.game.screen;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
@@ -11,7 +12,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.codehaus.jackson.map.ObjectMapper;
 import org.jill.game.screen.conf.InventoryAreaConf;
 import org.jill.game.screen.conf.ItemConf;
 import org.jill.game.screen.conf.PictureConf;
@@ -20,7 +20,8 @@ import org.jill.jn.SaveData;
 import org.jill.openjill.core.api.entities.ObjectEntity;
 import org.jill.openjill.core.api.jill.JillConst;
 import org.jill.openjill.core.api.manager.TextManager;
-import org.jill.openjill.core.api.manager.TileManager;
+import org.jill.openjill.core.api.manager.
+        TileManager;
 import org.jill.openjill.core.api.message.
         EnumMessageType;
 import org.jill.openjill.core.api.message.
@@ -33,8 +34,7 @@ import org.jill.openjill.core.api.message.statusbar.inventory.
         InventoryItemMessage;
 import org.jill.openjill.core.api.message.statusbar.inventory.
         InventoryLifeMessage;
-import org.jill.openjill.core.api.message.statusbar.inventory.
-        InventoryPointMessage;
+import org.jill.openjill.core.api.message.statusbar.inventory.InventoryPointMessage;
 
 /**
  * Control area on screen and manage state.
