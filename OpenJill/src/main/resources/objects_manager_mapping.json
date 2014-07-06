@@ -45,6 +45,10 @@
         "implementationClass":"org.jill.game.entities.obj.ToggleWallManager"
     },
     {
+        "type":29,
+        "implementationClass":"org.jill.game.entities.obj.GiantAntManager"
+    },
+    {
         "type":30,
         "implementationClass":"org.jill.game.entities.obj.FirebirdManager"
     },

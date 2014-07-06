@@ -170,5 +170,14 @@
         "killForce":"-4",
         "fallingSpeed":"2",
         "fallingSpeedMax":"16"
+    },
+    "GiantAntManager": {
+        "tile":"0",
+        "tileSet":"10",
+        "numberTileSet":"10",
+        "point":"6",
+        "killForce":"-1",
+        "stateMove":0,
+        "stateTurn":2
     }
 }
