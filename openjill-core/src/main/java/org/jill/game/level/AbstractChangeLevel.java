@@ -203,7 +203,7 @@ public abstract class AbstractChangeLevel extends
                 this.levelConfiguration.getCfgFileName(),
                 this.levelConfiguration.getCfgSavePrefixe(),
                 this.levelConfiguration.getStartScreen(),
-                this.newLevelNumber, null, this.mapLevel,
+                this.inventoryArea.getLevel(), null, this.mapLevel,
                 this.inventoryArea.getScore(),
                 getCurrentGemCount());
 
@@ -225,6 +225,9 @@ public abstract class AbstractChangeLevel extends
      */
     private void loadNewLevelFromMap() {
         try {
+            // store new level number in map
+            this.inventoryArea.setLevel(this.newLevelNumber);
+
             // Create virtual file
             final FileAbstractByte jnData = putCurrentLevelInFileMemory();
             jnData.seek(0);
@@ -675,7 +678,8 @@ public abstract class AbstractChangeLevel extends
      * @return boolean
      */
     protected boolean isCurrentLevelMap() {
-        return this.inventoryArea.getLevel() == SaveData.MAP_LEVEL;
+        return this.inventoryArea.getLevel() == SaveData.MAP_LEVEL
+                || this.mapLevel == null;
     }
 
     /**

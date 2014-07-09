@@ -26,6 +26,11 @@ public final class CheckPointManager extends ObjectEntityImpl {
     private boolean isLoadPreviousMap = false;
 
     /**
+     * To delete when map reload.
+     */
+    private boolean isToDelete = false;
+
+    /**
      * To know if grap msgTouch (for example, if level load, check point with
      * counter = level, don't grap message).
      */
@@ -69,7 +74,10 @@ public final class CheckPointManager extends ObjectEntityImpl {
                     grapMsgTouch = true;
                     break;
                 default :
-                    isChangingLevel = true;
+                    // Special case. Checkpoint at map level delete whe
+                    this.isToDelete = objectParam.getLevel()
+                            == this.getCounter();
+                    this.isChangingLevel = !this.isToDelete;
             }
         }
 
@@ -83,11 +91,17 @@ public final class CheckPointManager extends ObjectEntityImpl {
     }
 
     @Override
+    public void msgUpdate() {
+        if (this.isToDelete) {
+            this.messageDispatcher.sendMessage(
+                EnumMessageType.OBJECT, this.killme);
+        }
+    }
+
+    @Override
     public void msgTouch(final ObjectEntity obj) {
         if (obj.isPlayer() && this.grapMsgTouch) {
             if (this.isChangingLevel) {
-                this.messageDispatcher.sendMessage(
-                        EnumMessageType.OBJECT, this.killme);
                 this.messageDispatcher.sendMessage(
                         EnumMessageType.CHECK_POINT_CHANGING_LEVEL, this);
             } else if (isLoadPreviousMap) {
