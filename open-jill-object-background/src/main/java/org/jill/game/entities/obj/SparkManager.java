@@ -54,15 +54,17 @@ public final class SparkManager extends AbstractHitPlayerObjectEntity {
                 objectParam.getBackgroundObject();
 
         final int blockX = this.x / JillConst.BLOCK_SIZE;
-        final int blockY = this.y / JillConst.BLOCK_SIZE;
+        final int blockYTop = this.y / JillConst.BLOCK_SIZE;
+        final int blockYBottom = (this.y + this.height) / JillConst.BLOCK_SIZE;
+
         final int endBlockY = backMap[0].length;
 
         int startY = 0;
         int stopY = backMap[0].length - 1;
 
         // Search on bottom
-        for (int indexY = blockY; indexY < endBlockY; indexY++) {
-            if (!backMap[blockX][indexY].isPlayerThru()) {
+        for (int indexY = blockYBottom; indexY < endBlockY; indexY++) {
+            if (!backMap[blockX][indexY].isVine()) {
                 //stopY = indexY - 1;
                 stopY = indexY;
                 break;
@@ -70,8 +72,8 @@ public final class SparkManager extends AbstractHitPlayerObjectEntity {
         }
 
         // Search on top
-        for (int indexY = blockY; indexY > -1; indexY--) {
-            if (!backMap[blockX][indexY].isPlayerThru()) {
+        for (int indexY = blockYTop; indexY > -1; indexY--) {
+            if (!backMap[blockX][indexY].isVine()) {
                 startY = indexY + 1;
                 break;
             }
@@ -79,8 +81,13 @@ public final class SparkManager extends AbstractHitPlayerObjectEntity {
 
         final int halfObject = this.height / 2;
 
-        this.maxYTop = startY * JillConst.BLOCK_SIZE - halfObject;
-        this.maxYBottom = stopY * JillConst.BLOCK_SIZE - halfObject;
+        if (startY < stopY) {
+            this.maxYTop = startY * JillConst.BLOCK_SIZE - halfObject;
+            this.maxYBottom = stopY * JillConst.BLOCK_SIZE - halfObject;
+        } else {
+            this.maxYTop = startY * JillConst.BLOCK_SIZE - halfObject;
+            this.maxYBottom = stopY * JillConst.BLOCK_SIZE - halfObject;
+        }
     }
 
     /**
@@ -117,8 +124,8 @@ public final class SparkManager extends AbstractHitPlayerObjectEntity {
             this.counter = 0;
         }
 
-        if ((this.y > this.maxYTop && this.ySpeed < 0)
-            || (this.y < this.maxYBottom && this.ySpeed > 0)) {
+        if ((this.y > this.maxYTop && this.ySpeed < Y_SPEED_MIDDLE)
+            || (this.y < this.maxYBottom && this.ySpeed > Y_SPEED_MIDDLE)) {
             this.y += this.ySpeed;
         } else {
             // U turn
