@@ -224,6 +224,7 @@ public final class KniveManager extends AbstractParameterObjectEntity {
         } else if (obj.isKillableObject()
             && this.stateCount != this.statecountNoMoveNoHit) {
             obj.msgKill(this, 0, 0);
+            setStateCount(this.statecountLaunchEnd + 1);
         }
     }
 
@@ -247,9 +248,6 @@ public final class KniveManager extends AbstractParameterObjectEntity {
      */
     private void moveUpDown() {
         if (this.ySpeed > X_SPEED_MIDDLE) {
-//            this.y += this.ySpeed;
-//            UtilityObjectEntity.checkIfObjectHitFloor(this,
-//                this.backgroundObject);
             UtilityObjectEntity.moveObjectDown(this, this.ySpeed,
                 this.backgroundObject);
         } else {
@@ -262,13 +260,6 @@ public final class KniveManager extends AbstractParameterObjectEntity {
      * Move knif down.
      */
     private void moveDown() {
-//        this.y += this.moveDown;
-//
-//        if (UtilityObjectEntity.checkIfObjectHitFloor(this,
-//            this.backgroundObject)) {
-//            // Stop down
-//            this.stateCount = 0;
-//        }
         this.ySpeed = this.moveDown;
 
         if (!UtilityObjectEntity.moveObjectDown(this, this.ySpeed,
