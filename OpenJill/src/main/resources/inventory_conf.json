@@ -97,5 +97,6 @@
         "nbCol":4
     },
     "defaultLife":6,
-    "maxLife":7
+    "maxLife":7,
+    "typeObjectPoint":27
 }

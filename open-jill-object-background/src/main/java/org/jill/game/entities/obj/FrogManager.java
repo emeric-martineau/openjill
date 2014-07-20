@@ -71,11 +71,6 @@ public final class FrogManager extends AbstractHitPlayerObjectEntity {
     private ObjectListMessage killme;
 
     /**
-     * Point message.
-     */
-    private InventoryPointMessage pointMsg;
-
-    /**
      * To get player position.
      */
     private int indexEtat = 0;
@@ -93,7 +88,6 @@ public final class FrogManager extends AbstractHitPlayerObjectEntity {
     @Override
     public void init(final ObjectParam objectParam) {
         super.init(objectParam);
-        final int point = getConfInteger("point");
 
         // Init list of picture
         final int tileIndex = getConfInteger("tile");
@@ -124,9 +118,8 @@ public final class FrogManager extends AbstractHitPlayerObjectEntity {
         }
 
         this.killme = new ObjectListMessage(this, false);
-        this.pointMsg = new InventoryPointMessage(point, true);
 
-        backgroundObject = objectParam.getBackgroundObject();
+        this.backgroundObject = objectParam.getBackgroundObject();
 
         setKillabgeObject(true);
     }
@@ -227,7 +220,8 @@ public final class FrogManager extends AbstractHitPlayerObjectEntity {
     public void msgKill(final ObjectEntity sender,
         final int nbLife, final int typeOfDeath) {
         this.messageDispatcher.sendMessage(EnumMessageType.INVENTORY_POINT,
-            this.pointMsg);
+            new InventoryPointMessage(getConfInteger("point"), true,
+                    this, sender));
         this.messageDispatcher.sendMessage(EnumMessageType.OBJECT,
             this.killme);
     }

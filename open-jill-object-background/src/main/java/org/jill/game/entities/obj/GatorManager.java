@@ -35,11 +35,6 @@ public final class GatorManager extends AbstractHitPlayerObjectEntity {
     private ObjectListMessage killme;
 
     /**
-     * Point message.
-     */
-    private InventoryPointMessage pointMsg;
-
-    /**
      * Background map.
      */
     private BackgroundEntity[][] backgroundObject;
@@ -54,8 +49,6 @@ public final class GatorManager extends AbstractHitPlayerObjectEntity {
         super.init(objectParam);
 
         setKillabgeObject(true);
-
-        final int point = getConfInteger("point");
 
         // Init list of picture
         final int tileSetIndex = getConfInteger("tileSet");
@@ -79,7 +72,6 @@ public final class GatorManager extends AbstractHitPlayerObjectEntity {
                 leftTileHead, leftTileTail);
 
         this.killme = new ObjectListMessage(this, false);
-        this.pointMsg = new InventoryPointMessage(point, true);
 
         this.backgroundObject = objectParam.getBackgroundObject();
     }
@@ -174,7 +166,8 @@ public final class GatorManager extends AbstractHitPlayerObjectEntity {
     public void msgKill(final ObjectEntity sender,
         final int nbLife, final int typeOfDeath) {
         this.messageDispatcher.sendMessage(EnumMessageType.INVENTORY_POINT,
-            this.pointMsg);
+            new InventoryPointMessage(getConfInteger("point"), true,
+                    this, sender));
         this.messageDispatcher.sendMessage(EnumMessageType.OBJECT,
             this.killme);
     }

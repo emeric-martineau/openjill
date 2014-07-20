@@ -19,7 +19,8 @@ import org.jill.game.screen.conf.TextToDraw;
 import org.jill.jn.SaveData;
 import org.jill.openjill.core.api.entities.ObjectEntity;
 import org.jill.openjill.core.api.jill.JillConst;
-import org.jill.openjill.core.api.manager.TextManager;
+import org.jill.openjill.core.api.manager.
+        TextManager;
 import org.jill.openjill.core.api.manager.
         TileManager;
 import org.jill.openjill.core.api.message.
@@ -28,6 +29,9 @@ import org.jill.openjill.core.api.message.
         InterfaceMessageGameHandler;
 import org.jill.openjill.core.api.message.
         MessageDispatcher;
+import org.jill.openjill.core.api.message.object.CreateObjectMessage;
+import org.jill.openjill.core.api.message.object.
+        ObjectListMessage;
 import org.jill.openjill.core.api.message.statusbar.inventory.
         EnumInventoryObject;
 import org.jill.openjill.core.api.message.statusbar.inventory.
@@ -120,6 +124,11 @@ public final class InventoryArea implements InterfaceMessageGameHandler {
     private boolean needRedraw = false;
 
     /**
+     * To dispatch message for any object in game.
+     */
+    private final MessageDispatcher messageDispatcher;
+
+    /**
      * Constructor.
      *
      * @param pictureCacheManager picture cache
@@ -140,6 +149,8 @@ public final class InventoryArea implements InterfaceMessageGameHandler {
         this.g2Inventory = inventoryPicture.createGraphics();
 
         this.currentBackIndexColor = this.conf.getBackgroundColor();
+
+        this.messageDispatcher = msgDispatcher;
 
         initListItem();
     }
@@ -403,6 +414,26 @@ public final class InventoryArea implements InterfaceMessageGameHandler {
      */
     private void messagePoint(final InventoryPointMessage msg) {
         if (msg.isAddObject()) {
+            // Create point object
+            CreateObjectMessage com = new CreateObjectMessage(
+                    this.conf.getTypeObjectPoint());
+
+            this.messageDispatcher.sendMessage(EnumMessageType.CREATE_OBJECT,
+                com);
+
+            ObjectEntity obj = com.getObject();
+
+            obj.setState(msg.getPoint());
+
+            obj.setX(msg.getObjToKill().getX());
+            obj.setY(msg.getObjToKill().getY());
+
+            // Set yd et xd
+            obj.setxSpeed(msg.getObjWhoKill().getxSpeed());
+
+            this.messageDispatcher.sendMessage(EnumMessageType.OBJECT,
+                    new ObjectListMessage(obj, true));
+
             this.score += msg.getPoint();
         } else {
             this.score -= msg.getPoint();

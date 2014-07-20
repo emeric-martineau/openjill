@@ -177,7 +177,12 @@
         "numberTileSet":"10",
         "point":"6",
         "killForce":"-1",
-        "stateMove":0,
-        "stateTurn":2
+        "stateMove":"0",
+        "stateTurn":"2"
+    },
+    "PointManager": {
+        "counter":"16",
+        "yd":"3",
+        "xd":"3"
     }
 }

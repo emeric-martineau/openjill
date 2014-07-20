@@ -54,6 +54,11 @@ public final class InventoryAreaConf extends AbstractLineTextConf {
     private int maxLife;
 
     /**
+     * Object point to create.
+     */
+    private int typeObjectPoint;
+
+    /**
      * Life picture start.
      *
      * @return the lifebarPictureStart
@@ -214,4 +219,24 @@ public final class InventoryAreaConf extends AbstractLineTextConf {
     public void setMaxLife(final int ml) {
         this.maxLife = ml;
     }
+
+    /**
+     * Object point to create.
+     *
+     * @return id.
+     */
+    public int getTypeObjectPoint() {
+        return typeObjectPoint;
+    }
+
+    /**
+     * Object point to create.
+     *
+     * @param typePoint id
+     */
+    public void setTypeObjectPoint(final int typePoint) {
+        this.typeObjectPoint = typePoint;
+    }
+
+
 }

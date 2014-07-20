@@ -34,11 +34,6 @@ public final class GiantAntManager extends AbstractHitPlayerObjectEntity {
     private ObjectListMessage killme;
 
     /**
-     * Point message.
-     */
-    private InventoryPointMessage pointMsg;
-
-    /**
      * Background map.
      */
     private BackgroundEntity[][] backgroundObject;
@@ -69,7 +64,6 @@ public final class GiantAntManager extends AbstractHitPlayerObjectEntity {
 
         setKillabgeObject(true);
 
-        final int point = getConfInteger("point");
         this.stateMove = getConfInteger("stateMove");
         this.stateTurn = getConfInteger("stateTurn");
 
@@ -95,7 +89,6 @@ public final class GiantAntManager extends AbstractHitPlayerObjectEntity {
                 nbImagePerSide);
 
         this.killme = new ObjectListMessage(this, false);
-        this.pointMsg = new InventoryPointMessage(point, true);
 
         this.backgroundObject = objectParam.getBackgroundObject();
     }
@@ -169,7 +162,7 @@ public final class GiantAntManager extends AbstractHitPlayerObjectEntity {
 
         BufferedImage img;
 
-        if (this.state == 0) {
+        if (this.state == this.stateMove) {
             img = currentPictureArray[this.counter];
         } else {
             // Turn picture is last picture
@@ -190,7 +183,8 @@ public final class GiantAntManager extends AbstractHitPlayerObjectEntity {
     public void msgKill(final ObjectEntity sender,
         final int nbLife, final int typeOfDeath) {
         this.messageDispatcher.sendMessage(EnumMessageType.INVENTORY_POINT,
-            this.pointMsg);
+            new InventoryPointMessage(getConfInteger("point"), true,
+                    this, sender));
         this.messageDispatcher.sendMessage(EnumMessageType.OBJECT,
             this.killme);
     }

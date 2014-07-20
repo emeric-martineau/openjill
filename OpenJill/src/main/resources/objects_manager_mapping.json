@@ -45,6 +45,10 @@
         "implementationClass":"org.jill.game.entities.obj.ToggleWallManager"
     },
     {
+        "type":27,
+        "implementationClass":"org.jill.game.entities.obj.PointManager"
+    },
+    {
         "type":29,
         "implementationClass":"org.jill.game.entities.obj.GiantAntManager"
     },

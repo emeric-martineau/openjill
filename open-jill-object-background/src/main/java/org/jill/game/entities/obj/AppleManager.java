@@ -17,11 +17,6 @@ import org.jill.openjill.core.api.message.EnumMessageType;
 public final class AppleManager extends AbstractParameterObjectEntity {
 
     /**
-     * Inventory object to add.
-     */
-    private InventoryPointMessage point;
-
-    /**
      * To remove this object from object lis.
      */
     private ObjectListMessage killme;
@@ -62,19 +57,16 @@ public final class AppleManager extends AbstractParameterObjectEntity {
         }
 
         // Remove me from list of object (= kill me)
-        killme = new ObjectListMessage(this, false);
-
-        // Point
-        point = new InventoryPointMessage(
-                getConfInteger("point"), true);
+        this.killme = new ObjectListMessage(this, false);
     }
 
     @Override
     public void msgTouch(final ObjectEntity obj) {
         if (obj.isPlayer()) {
-            messageDispatcher.sendMessage(EnumMessageType.INVENTORY_POINT,
-                    point);
-            messageDispatcher.sendMessage(EnumMessageType.OBJECT, killme);
+            this.messageDispatcher.sendMessage(EnumMessageType.INVENTORY_POINT,
+                    new InventoryPointMessage(getConfInteger("point"), true,
+                    this, obj));
+            this.messageDispatcher.sendMessage(EnumMessageType.OBJECT, killme);
         }
     }
 

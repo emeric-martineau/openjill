@@ -31,11 +31,6 @@ public abstract class AbstractKeyManager
     private InventoryItemMessage inventory;
 
     /**
-     * Point.
-     */
-    private InventoryPointMessage point;
-
-    /**
      * To remove this object from object list.
      */
     private ObjectListMessage killme;
@@ -65,10 +60,6 @@ public abstract class AbstractKeyManager
 
         // Remove me from list of object (= kill me)
         this.killme = new ObjectListMessage(this, false);
-
-        // Point
-        this.point = new InventoryPointMessage(
-                getConfInteger("point"), true);
 
         loadPicture();
     }
@@ -105,7 +96,8 @@ public abstract class AbstractKeyManager
             this.messageDispatcher.sendMessage(EnumMessageType.INVENTORY_ITEM,
                 this.inventory);
             this.messageDispatcher.sendMessage(EnumMessageType.INVENTORY_POINT,
-                this.point);
+                new InventoryPointMessage(
+                    getConfInteger("point"), true, this, obj));
 
             if (getDisplayMessage()) {
                 this.messageDispatcher.sendMessage(

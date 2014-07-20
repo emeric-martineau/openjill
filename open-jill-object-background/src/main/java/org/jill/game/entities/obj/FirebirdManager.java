@@ -60,11 +60,6 @@ public final class FirebirdManager extends AbstractHitPlayerObjectEntity {
     private ObjectEntity deadObject;
 
     /**
-     * Point message.
-     */
-    private InventoryPointMessage pointMsg;
-
-    /**
      * Background map.
      */
     private BackgroundEntity[][] backgroundObject;
@@ -86,8 +81,6 @@ public final class FirebirdManager extends AbstractHitPlayerObjectEntity {
 
         final int baseTileNumber = getConfInteger("baseTileNumber");
         final int turnTileNumber = getConfInteger("turnTileNumber");
-
-        final int point = getConfInteger("point");
 
         // Number picture for one side
         final int numberPicturePerSide = (baseTileNumber * NUMBER_OF_SIDE)
@@ -121,7 +114,6 @@ public final class FirebirdManager extends AbstractHitPlayerObjectEntity {
         setKillabgeObject(true);
 
         this.killme = new ObjectListMessage(this, false);
-        this.pointMsg = new InventoryPointMessage(point, true);
 
         // Create dead object
         createDeadObject(getConfInteger("hitObject"));
@@ -232,7 +224,8 @@ public final class FirebirdManager extends AbstractHitPlayerObjectEntity {
     public void msgKill(final ObjectEntity sender,
         final int nbLife, final int typeOfDeath) {
         this.messageDispatcher.sendMessage(EnumMessageType.INVENTORY_POINT,
-            this.pointMsg);
+            new InventoryPointMessage(getConfInteger("point"), true,
+                    this, sender));
         this.messageDispatcher.sendMessage(EnumMessageType.OBJECT,
             this.killme);
     }

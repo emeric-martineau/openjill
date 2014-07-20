@@ -19,11 +19,6 @@ import org.jill.openjill.core.api.message.statusbar.inventory.
 public final class EpicManager extends AbstractSynchronisedImageObjectEntity {
 
     /**
-     * Inventory object to add.
-     */
-    private InventoryPointMessage point;
-
-    /**
      * To remove this object from object list.
      */
     private ObjectListMessage killme;
@@ -46,17 +41,14 @@ public final class EpicManager extends AbstractSynchronisedImageObjectEntity {
 
         // Remove me from list of object (= kill me)
         this.killme = new ObjectListMessage(this, false);
-
-        // Point
-        this.point = new InventoryPointMessage(
-                getConfInteger("point"), true);
     }
 
     @Override
     public void msgTouch(final ObjectEntity obj) {
         if (obj.isPlayer()) {
             this.messageDispatcher.sendMessage(EnumMessageType.INVENTORY_POINT,
-                this.point);
+                new InventoryPointMessage(getConfInteger("point"), true,
+                    this, obj));
 
             this.state++;
 
