@@ -260,6 +260,10 @@ public class CfgFileImpl implements CfgFile {
 
                 if (c > ASCII_START && c < ASCII_END) {
                     sb.append(c);
+                } else {
+                    // -1 cause current byte is already read
+                    cfgFile.skipBytes(LEN_SAVE_NAME - indexChar - 1);
+                    break;
                 }
             }
 
