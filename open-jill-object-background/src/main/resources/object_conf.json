@@ -184,5 +184,12 @@
         "counter":"16",
         "yd":"3",
         "xd":"3"
+    },
+    "HiveManager": {
+        "tile":"0",
+        "tileSet":"37",
+        "numberTileSet":"4",
+        "point":"11",
+        "counterCreateBees":"2"
     }
 }
