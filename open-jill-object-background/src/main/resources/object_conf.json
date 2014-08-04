@@ -190,6 +190,8 @@
         "tileSet":"37",
         "numberTileSet":"4",
         "point":"11",
-        "counterCreateBees":"2"
+        "counterCreateBees":"2",
+        "maxRandomValue":"20",
+        "beesObject":"46"
     }
 }

@@ -29,6 +29,14 @@
         "implementationClass":"org.jill.game.entities.obj.TouchTriggerManager"
     },
     {
+        "type":20,
+        "implementationClass":"org.jill.game.entities.obj.TextTileManager"
+    },
+    {
+        "type":21,
+        "implementationClass":"org.jill.game.entities.obj.TextTileManager"
+    },
+    {
         "type":22,
         "implementationClass":"org.jill.game.entities.obj.FrogManager"
     },
@@ -47,6 +55,10 @@
     {
         "type":27,
         "implementationClass":"org.jill.game.entities.obj.PointManager"
+    },
+    {
+        "type":28,
+        "implementationClass":"org.jill.game.entities.obj.BonusManager"
     },
     {
         "type":29,
@@ -69,24 +81,16 @@
         "implementationClass":"org.jill.game.entities.obj.HitFireManager"
     },
     {
-        "type":20,
-        "implementationClass":"org.jill.game.entities.obj.TextTileManager"
-    },
-    {
-        "type":21,
-        "implementationClass":"org.jill.game.entities.obj.TextTileManager"
-    },
-    {
-        "type":28,
-        "implementationClass":"org.jill.game.entities.obj.BonusManager"
-    },
-    {
         "type":42,
         "implementationClass":"org.jill.game.entities.obj.HugeLetterTileManager"
     },
     {
         "type":45,
         "implementationClass":"org.jill.game.entities.obj.HiveManager"
+    },
+    {
+        "type":46,
+        "implementationClass":"org.jill.game.entities.obj.BeesManager"
     },
     {
         "type":48,
