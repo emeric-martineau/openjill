@@ -1,5 +1,7 @@
 package org.jill.game.entities.back;
 
+import java.awt.Color;
+import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import org.jill.game.entities.back.abs.
         AbstractSynchronisedImageBackgroundEntity;
@@ -43,9 +45,26 @@ public final class SpikeBackgroundEntity
 
         images = new BufferedImage[nbPicture];
 
+        final Color backColor = getPictureCache().getBackgroundColor();
+        BufferedImage srcImage;
+        BufferedImage destImage;
+        Graphics2D g2;
+
         for (int index = 0; index < images.length; index++) {
-            images[index] = getPictureCache().getImage(tileSetIndex, tileIndex
+            srcImage = getPictureCache().getImage(tileSetIndex, tileIndex
                     + index);
+
+            destImage = new BufferedImage(srcImage.getWidth(),
+                    srcImage.getHeight(),
+                    BufferedImage.TYPE_INT_ARGB);
+            g2 = destImage.createGraphics();
+            g2.setColor(backColor);
+            g2.fillRect(0, 0, srcImage.getWidth(), srcImage.getHeight());
+            g2.drawImage(srcImage, 0, 0, null);
+
+            g2.dispose();
+
+            images[index] = destImage;
         }
 
         if (getPictureSync(this.getClass()) == null) {

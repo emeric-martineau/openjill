@@ -16,8 +16,8 @@
     },
     "SPIKE":
     {
-        "cycle":"10",
-        "numberTileSet":"3"
+        "cycle":"3",
+        "numberTileSet":"4"
     },
 	"BASECLIFF":
     {
