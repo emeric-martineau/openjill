@@ -192,6 +192,16 @@
         "point":"11",
         "counterCreateBees":"2",
         "maxRandomValue":"20",
+        "counterMaxWait":"3",
         "beesObject":"46"
+    },
+    "BeesManager": {
+        "tile":"4",
+        "tileSet":"37",
+        "numberTileSet":"6",
+        "stateDie":"160",
+        "killForce":"-1",
+        "moveX":"4:1#11:0#15:1#32:2-4",
+        "moveY":"4:0-3#11:0-4#15:0-3#27:0#31:0-1#32:0-2"
     }
 }
