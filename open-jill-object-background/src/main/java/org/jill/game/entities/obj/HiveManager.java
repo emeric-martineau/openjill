@@ -52,6 +52,16 @@ public final class HiveManager extends AbstractParameterObjectEntity {
     private int maxRandomValue;
 
     /**
+     * Current counter.
+     */
+    private int counterWait;
+
+    /**
+     * Value max wai for one value of counter.
+     */
+    private int counterMaxWait;
+
+    /**
      * Default constructor.
      *
      * @param objectParam object parameter
@@ -64,6 +74,8 @@ public final class HiveManager extends AbstractParameterObjectEntity {
 
         this.counterCreateBees = getConfInteger("counterCreateBees");
         this.maxRandomValue = getConfInteger("maxRandomValue");
+        this.counterMaxWait = getConfInteger("counterMaxWait");
+        this.counterWait = 0;
 
         int tileIndex = getConfInteger("tile");
         int tileSetIndex = getConfInteger("tileSet");
@@ -136,13 +148,19 @@ public final class HiveManager extends AbstractParameterObjectEntity {
                 setCounter(1);
             }
         } else {
-            setCounter(getCounter() + 1);
+            if (this.counterWait < this.counterMaxWait) {
+                this.counterWait++;
+            } else {
+                setCounter(getCounter() + 1);
 
-            if (getCounter() > this.counterCreateBees) {
-                // Add bees
-                setCounter(0);
+                if (getCounter() > this.counterCreateBees) {
+                    // Add bees
+                    setCounter(0);
 
-                createBeesObject();
+                    createBeesObject();
+                }
+
+                this.counterWait = 0;
             }
         }
 
