@@ -4,7 +4,7 @@
     <groupId>org.jill.file</groupId>
     <artifactId>abstractfile-api</artifactId>
     <packaging>jar</packaging>
-    <version>1.0-SNAPSHOT</version>
+    <version>0.2.1</version>
     <name>abstractfile-api</name>
   
     <description>Abstract file layer to load/write a file in memory or in physical support.</description>

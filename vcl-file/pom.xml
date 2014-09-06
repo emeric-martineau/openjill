@@ -4,13 +4,13 @@
     <groupId>org.jill.vcl</groupId>
     <artifactId>vcl-file</artifactId>
     <packaging>jar</packaging>
-    <version>1.0-SNAPSHOT</version>
+    <version>0.2.1</version>
     <name>vcl-file</name>
 
     <parent>
         <groupId>org.jill</groupId>
         <artifactId>jill-parent</artifactId>
-        <version>1.0-SNAPSHOT</version>
+        <version>0.2.1</version>
         <relativePath>../jill_parent/pom.xml</relativePath>
     </parent>
     

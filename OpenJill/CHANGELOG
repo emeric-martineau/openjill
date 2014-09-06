@@ -303,9 +303,15 @@
  - remove jill item in map level,
  - fix display game area pixel too on bottom.
 
-0.2.1 :
+0.2.1 : (2014/09/06)
  - Gator (object 48) now stop when hit block,
  - kill water/lava support,
  - Spark, Gem, Red key rewrite for better compatibility,
  - remove bad initialisation in player,
  - PMD + checkstyle + findbug much as possible,
+ - Change field to know if Epic object must be kill (better compatibility with original game),
+ - Player image not selected in update message but in draw message for state jumping,
+ - Clean code after change draw picture begin state,
+ - Player image not selected in update message but in draw message for state begin,
+ - Add FireHit object create when player hit lava background,
+ - Remove initialisation. Object must be initialised by content of map file..
