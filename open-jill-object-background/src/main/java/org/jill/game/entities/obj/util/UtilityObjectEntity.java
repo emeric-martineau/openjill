@@ -147,7 +147,7 @@ public final class UtilityObjectEntity {
      */
     public static boolean checkIfFloorUnderObject(final ObjectEntity obj,
         final BackgroundEntity[][] backgroundObject) {
-        return !moveObjectDown(obj, 1, backgroundObject, false);
+        return !moveObjectDown(obj, 1, backgroundObject, false, false);
     }
 
     /**
@@ -161,7 +161,21 @@ public final class UtilityObjectEntity {
      */
     public static boolean moveObjectDown(final ObjectEntity obj,
         final int mvtSize, final BackgroundEntity[][] backgroundObject) {
-        return moveObjectDown(obj, mvtSize, backgroundObject, true);
+        return moveObjectDown(obj, mvtSize, backgroundObject, true, false);
+    }
+
+    /**
+     * Move object down.
+     *
+     * @param obj object
+     * @param mvtSize movement size
+     * @param backgroundObject background map
+     *
+     * @return true if can move
+     */
+    public static boolean moveObjectDownWithIgnoreStair(final ObjectEntity obj,
+        final int mvtSize, final BackgroundEntity[][] backgroundObject) {
+        return moveObjectDown(obj, mvtSize, backgroundObject, true, true);
     }
 
     /**
@@ -171,12 +185,13 @@ public final class UtilityObjectEntity {
      * @param mvtSize movement size
      * @param backgroundObject background map
      * @param updateObj update object position ?
+     * @param ignoreStair if ignore stair
      *
      * @return true if can move
      */
     private static boolean moveObjectDown(final ObjectEntity obj,
         final int mvtSize, final BackgroundEntity[][] backgroundObject,
-        final boolean updateObj) {
+        final boolean updateObj, final boolean ignoreStair) {
         boolean canMove;
 
         BackgroundEntity block = isBlockOrStairAtThisPosition(obj.getX(),
@@ -190,7 +205,7 @@ public final class UtilityObjectEntity {
 
             int bottomObject = obj.getY() + obj.getHeight();
 
-            if (bottomObject > topOnBlockStair) {
+            if (ignoreStair || bottomObject > topOnBlockStair) {
                 block = null;
             }
         }

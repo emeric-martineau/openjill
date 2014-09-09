@@ -262,7 +262,7 @@ public final class BeesManager extends AbstractHitPlayerObjectEntity {
             UtilityObjectEntity.moveObjectUp(this, yd,
                     this.backgroundObject);
         } else {
-            UtilityObjectEntity.moveObjectDown(this, yd,
+            UtilityObjectEntity.moveObjectDownWithIgnoreStair(this, yd,
                     this.backgroundObject);
         }
 
