@@ -179,9 +179,21 @@ public final class UtilityObjectEntity {
         final boolean updateObj) {
         boolean canMove;
 
-        final BackgroundEntity block = isBlockOrStairAtThisPosition(obj.getX(),
+        BackgroundEntity block = isBlockOrStairAtThisPosition(obj.getX(),
                 obj.getY(), obj.getWidth(), obj.getHeight(), mvtSize,
                 backgroundObject);
+
+        // Check if block is stair
+        if (block != null && block.isStair()) {
+            // If stair, object can down if object not upper that block
+            int topOnBlockStair = block.getY() * JillConst.BLOCK_SIZE;
+
+            int bottomObject = obj.getY() + obj.getHeight();
+
+            if (bottomObject > topOnBlockStair) {
+                block = null;
+            }
+        }
 
         if (block == null) {
             if (updateObj) {
@@ -204,7 +216,7 @@ public final class UtilityObjectEntity {
     }
 
     /**
-     * Chech is block or stair
+     * Chech is block or stair.
      *
      * @param objX objec tx
      * @param objY object y
@@ -223,7 +235,7 @@ public final class UtilityObjectEntity {
         final int endBlockX = (objX
                 + objWidth - 1) / JillConst.BLOCK_SIZE;
         // Object is jumping
-        int newPosY = objY+ objHeight + mvtSize;
+        int newPosY = objY + objHeight + mvtSize;
         if (newPosY > JillConst.MAX_HEIGHT) {
             // Hit top border of screen
             newPosY = JillConst.MAX_HEIGHT - objHeight;
