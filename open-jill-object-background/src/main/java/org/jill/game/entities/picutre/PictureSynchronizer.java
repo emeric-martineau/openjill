@@ -31,12 +31,22 @@ public final class PictureSynchronizer {
     /**
      * Array of picture.
      *
-
      * @param maxCounter maximum display counter
      */
     public PictureSynchronizer(
             final int maxCounter) {
         this.maxDisplayCounter = maxCounter;
+    }
+
+    /**
+     * Array of picture.
+     *
+     * @param maxCounter maximum display counter
+     * @param idxPicture index to start picture
+     */
+    public PictureSynchronizer(final int maxCounter, final int idxPicture) {
+        this(maxCounter);
+        this.indexPicture = idxPicture;
     }
 
     /**

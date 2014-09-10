@@ -46,22 +46,37 @@
     },
     "LAVA1":
     {
-        "hitObject":"37"
+        "cycle":"1",
+        "hitObject":"37",
+        "tileStart":"0",
+        "numberTileSet":"5"
     },
     "LAVA2":
     {
-        "hitObject":"37"
+        "cycle":"1",
+        "hitObject":"37",
+        "tileStart":"0",
+        "numberTileSet":"5"
     },
     "LAVA3":
     {
-        "hitObject":"37"
+        "cycle":"1",
+        "hitObject":"37",
+        "tileStart":"0",
+        "numberTileSet":"5"
     },
     "LAVA4":
     {
-        "hitObject":"37"
+        "cycle":"1",
+        "hitObject":"37",
+        "tileStart":"0",
+        "numberTileSet":"5"
     },
     "LAVA5":
     {
-        "hitObject":"37"
+        "cycle":"1",
+        "hitObject":"37",
+        "tileStart":"0",
+        "numberTileSet":"5"
     }
 }

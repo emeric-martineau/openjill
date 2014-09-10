@@ -15,7 +15,7 @@ public abstract class AbstractSynchronisedImageBackgroundEntity
     /**
      * Map of picture.
      */
-    private static final Map<Class, PictureSynchronizer> MAP_PICUTRE =
+    private static final Map<String, PictureSynchronizer> MAP_PICUTRE =
             new HashMap<>();
 
     /**
@@ -37,7 +37,17 @@ public abstract class AbstractSynchronisedImageBackgroundEntity
      * @return picture synchronizer
      */
     protected final PictureSynchronizer getPictureSync(final Class clazz) {
-        ps = MAP_PICUTRE.get(clazz);
+        return getPictureSync(clazz.toString());
+    }
+
+    /**
+     * Return picture object.
+     *
+     * @param name name
+     * @return picture synchronizer
+     */
+    protected final PictureSynchronizer getPictureSync(final String name) {
+        ps = MAP_PICUTRE.get(name);
 
         return ps;
     }
@@ -59,8 +69,19 @@ public abstract class AbstractSynchronisedImageBackgroundEntity
      */
     protected final void addPictureSync(final Class clazz,
             final PictureSynchronizer picture) {
+        addPictureSync(clazz.toString(), picture);
+    }
+
+    /**
+     * Add picture synchronizer.
+     *
+     * @param name class
+     * @param picture picture synchronizer
+     */
+    protected final void addPictureSync(final String name,
+            final PictureSynchronizer picture) {
         ps = picture;
 
-        MAP_PICUTRE.put(clazz, picture);
+        MAP_PICUTRE.put(name, picture);
     }
 }
