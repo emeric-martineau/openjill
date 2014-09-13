@@ -200,25 +200,6 @@ public final class InventoryArea implements InterfaceMessageGameHandler {
         this.g2Inventory.fillRect(0, 0, this.inventoryPicture.getWidth(),
                 this.inventoryPicture.getHeight());
 
-        // Draw live status bar
-        int indexLife = this.life;
-        int offsetX = this.conf.getLifebar().getX();
-        BufferedImage currentBar;
-
-        while (indexLife > 0) {
-            if (indexLife == 1) {
-                currentBar = this.lifebarEnd;
-            } else {
-                currentBar = this.lifebar;
-            }
-
-            this.g2Inventory.drawImage(currentBar, offsetX,
-                        this.conf.getLifebar().getY(), null);
-
-            offsetX += currentBar.getWidth() - 1;
-            indexLife--;
-        }
-
         String text;
 
         for (TextToDraw ttd : this.conf.getText()) {
@@ -240,7 +221,7 @@ public final class InventoryArea implements InterfaceMessageGameHandler {
                 this.conf.getScore().getColor(),
                 TextManager.BACKGROUND_COLOR_NONE);
 
-        offsetX = this.conf.getScore().getX();
+        int offsetX = this.conf.getScore().getX();
 
         for (int indexScore = scoreLetter.length - 1; indexScore >= 0;
                 indexScore--) {
@@ -260,7 +241,33 @@ public final class InventoryArea implements InterfaceMessageGameHandler {
             this.needRedraw = false;
         }
 
+        drawLifeBar();
+
         return this.inventoryPicture;
+    }
+
+    /**
+     * Draw lifebar.
+     */
+    private void drawLifeBar() {
+        // Draw live status bar
+        int indexLife = this.life - 1;
+        int offsetX = this.conf.getLifebar().getX();
+        int sizeBar = this.conf.getLifeBarStepSize();
+
+        while (indexLife > 0) {
+            this.g2Inventory.drawImage(this.lifebar, offsetX,
+                    this.conf.getLifebar().getY(), null);
+
+            offsetX += sizeBar;
+            indexLife--;
+        }
+
+        offsetX = this.conf.getLifebarEnd().getX()
+                + ((this.life - 1) * sizeBar);
+
+        this.g2Inventory.drawImage(this.lifebarEnd, offsetX,
+                this.conf.getLifebarEnd().getY(), null);
     }
 
     /**

@@ -90,13 +90,18 @@
         "x":42,
         "y":2
     },
+    "lifebarEnd":{
+        "x":40,
+        "y":2
+    },    
     "itemConf":{
         "x":2,
         "y":27,
         "nbRow":3,
         "nbCol":4
     },
+    "lifeBarStepSize":3,
     "defaultLife":6,
-    "maxLife":7,
+    "maxLife":8,
     "typeObjectPoint":27
 }

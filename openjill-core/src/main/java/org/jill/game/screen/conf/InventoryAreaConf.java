@@ -34,6 +34,11 @@ public final class InventoryAreaConf extends AbstractLineTextConf {
     private TextToDraw lifebar;
 
     /**
+     * Position life bar end to draw.
+     */
+    private TextToDraw lifebarEnd;
+
+    /**
      * Inventory item per picture.
      */
     private Map<String, PictureConf> items;
@@ -57,6 +62,11 @@ public final class InventoryAreaConf extends AbstractLineTextConf {
      * Object point to create.
      */
     private int typeObjectPoint;
+
+    /**
+     * Life bar size of step
+     */
+    private int lifeBarStepSize;
 
     /**
      * Life picture start.
@@ -236,6 +246,42 @@ public final class InventoryAreaConf extends AbstractLineTextConf {
      */
     public void setTypeObjectPoint(final int typePoint) {
         this.typeObjectPoint = typePoint;
+    }
+
+    /**
+     * Position to lifebar score.
+     *
+     * @return position to draw lifebar
+     */
+    public TextToDraw getLifebarEnd() {
+        return lifebarEnd;
+    }
+
+    /**
+     * Positions to draw lifebar.
+     *
+     * @param l position
+     */
+    public void setLifebarEnd(final TextToDraw l) {
+        this.lifebarEnd = l;
+    }
+
+    /**
+     * Lifebar size for step.
+     *
+     * @return size
+     */
+    public int getLifeBarStepSize() {
+        return lifeBarStepSize;
+    }
+
+    /**
+     * Lifebar size for step.
+     *
+     * @param lStepSize  size
+     */
+    public void setLifeBarStepSize(final int lStepSize) {
+        this.lifeBarStepSize = lStepSize;
     }
 
 
