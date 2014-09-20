@@ -216,7 +216,8 @@ public final class FirebirdManager extends AbstractHitPlayerObjectEntity {
             this.messageDispatcher.sendMessage(EnumMessageType.OBJECT,
                 this.deadMessage);
 
-            msgKill(this, 0, 0);
+        this.messageDispatcher.sendMessage(EnumMessageType.OBJECT,
+            this.killme);
         }
     }
 
