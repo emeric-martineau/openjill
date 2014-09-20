@@ -29,7 +29,8 @@
         "point":"12",
         "tile":"0",
         "tileSet":"9",
-        "numberTileSet":"4"
+        "numberTileSet":"4",
+        "life":"1"
     },
     "RedKeyManager":
     {

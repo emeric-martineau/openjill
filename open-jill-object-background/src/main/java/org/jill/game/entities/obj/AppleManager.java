@@ -8,6 +8,7 @@ import org.jill.openjill.core.api.message.statusbar.inventory.
 import org.jill.openjill.core.api.entities.ObjectEntity;
 import org.jill.openjill.core.api.entities.ObjectParam;
 import org.jill.openjill.core.api.message.EnumMessageType;
+import org.jill.openjill.core.api.message.statusbar.inventory.InventoryLifeMessage;
 
 /**
  * Apple object.
@@ -63,10 +64,18 @@ public final class AppleManager extends AbstractParameterObjectEntity {
     @Override
     public void msgTouch(final ObjectEntity obj) {
         if (obj.isPlayer()) {
-            this.messageDispatcher.sendMessage(EnumMessageType.INVENTORY_POINT,
+            this.messageDispatcher.sendMessage(EnumMessageType.OBJECT, killme);
+
+            if (this.getState() == 0) {
+                this.messageDispatcher.sendMessage(
+                        EnumMessageType.INVENTORY_POINT,
                     new InventoryPointMessage(getConfInteger("point"), true,
                     this, obj));
-            this.messageDispatcher.sendMessage(EnumMessageType.OBJECT, killme);
+
+                this.messageDispatcher.sendMessage(
+                        EnumMessageType.INVENTORY_LIFE,
+                        new InventoryLifeMessage(getConfInteger("life")));
+            }
         }
     }
 
