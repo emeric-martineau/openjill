@@ -16,6 +16,10 @@ import org.jill.openjill.core.api.message.statusbar.inventory.InventoryLifeMessa
  * @author Emeric MARTINEAU
  */
 public final class AppleManager extends AbstractParameterObjectEntity {
+    /**
+     * To know if message must be display.
+     */
+    private static boolean messageDisplayAppleMessage = true;
 
     /**
      * To remove this object from object lis.
@@ -75,6 +79,11 @@ public final class AppleManager extends AbstractParameterObjectEntity {
                 this.messageDispatcher.sendMessage(
                         EnumMessageType.INVENTORY_LIFE,
                         new InventoryLifeMessage(getConfInteger("life")));
+
+                if (messageDisplayAppleMessage) {
+                    sendMessage();
+                    messageDisplayAppleMessage = false;
+                }
             }
         }
     }

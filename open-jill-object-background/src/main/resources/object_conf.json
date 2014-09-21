@@ -30,7 +30,10 @@
         "tile":"0",
         "tileSet":"9",
         "numberTileSet":"4",
-        "life":"1"
+        "life":"1",
+        "msg":"APPLES GIVE YOU HEALTH",
+        "msgTime":"20",
+        "msgColor":"2"
     },
     "RedKeyManager":
     {
