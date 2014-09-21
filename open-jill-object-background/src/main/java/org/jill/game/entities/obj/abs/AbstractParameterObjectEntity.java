@@ -8,6 +8,8 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.jill.game.entities.ObjectEntityImpl;
+import org.jill.openjill.core.api.message.EnumMessageType;
+import org.jill.openjill.core.api.message.statusbar.StatusBarTextMessage;
 
 
 /**
@@ -96,5 +98,20 @@ public abstract class AbstractParameterObjectEntity extends ObjectEntityImpl {
      */
     protected final int getConfInteger(final String properties) {
         return Integer.valueOf(getConfString(properties));
+    }
+
+    /**
+     * Send default message.
+     */
+    protected final void sendMessage() {
+        final String textMsg = getConfString("msg");
+        final int textColor = getConfInteger("msgColor");
+        final int textTime = getConfInteger("msgTime");
+
+        final StatusBarTextMessage msg = new StatusBarTextMessage(textMsg,
+                textTime, textColor);
+
+        this.messageDispatcher.sendMessage(
+                    EnumMessageType.MESSAGE_STATUS_BAR, msg);
     }
 }

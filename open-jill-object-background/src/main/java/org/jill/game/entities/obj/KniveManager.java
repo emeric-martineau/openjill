@@ -8,7 +8,6 @@ import org.jill.game.entities.obj.util.UtilityObjectEntity;
 import org.jill.openjill.core.api.entities.ObjectParam;
 import org.jill.openjill.core.api.message.EnumMessageType;
 import org.jill.openjill.core.api.message.object.ObjectListMessage;
-import org.jill.openjill.core.api.message.statusbar.StatusBarTextMessage;
 import org.jill.openjill.core.api.message.statusbar.inventory.
         EnumInventoryObject;
 import org.jill.openjill.core.api.message.statusbar.inventory.
@@ -94,11 +93,6 @@ public final class KniveManager extends AbstractParameterObjectEntity {
     private int statecountFollowPlayerMax;
 
     /**
-     * Close mesage.
-     */
-    private StatusBarTextMessage msg;
-
-    /**
      * Picture array.
      */
     private BufferedImage images;
@@ -155,13 +149,6 @@ public final class KniveManager extends AbstractParameterObjectEntity {
         // Remove me from list of object (= kill me)
         this.killme = new ObjectListMessage(this, false);
 
-        // Message
-        String textMsg = getConfString("msg");
-        int textColor = getConfInteger("msgColor");
-        int textTime = getConfInteger("msgTime");
-
-        this.msg = new StatusBarTextMessage(textMsg, textTime, textColor);
-
         // Knife can be create by player, check width height
         if (this.width == 0 || this.height == 0) {
             this.width = this.images.getWidth();
@@ -211,8 +198,7 @@ public final class KniveManager extends AbstractParameterObjectEntity {
         if (obj.isPlayer() && !(this.stateCount >= this.statecountLaunchStart
             && this.stateCount <= this.statecountLaunchEnd)) {
             if (messageDisplaySwitchMessage) {
-                this.messageDispatcher.sendMessage(
-                    EnumMessageType.MESSAGE_STATUS_BAR, this.msg);
+                sendMessage();
 
                 messageDisplaySwitchMessage = false;
             }

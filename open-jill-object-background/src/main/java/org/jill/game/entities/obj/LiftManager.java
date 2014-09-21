@@ -5,7 +5,6 @@ import org.jill.game.entities.obj.abs.AbstractParameterObjectEntity;
 import org.jill.game.entities.obj.player.PlayerState;
 import org.jill.openjill.core.api.message.background.BackgroundMessage;
 import org.jill.openjill.core.api.message.player.MovePlayerMessage;
-import org.jill.openjill.core.api.message.statusbar.StatusBarTextMessage;
 import org.jill.openjill.core.api.entities.BackgroundEntity;
 import org.jill.openjill.core.api.entities.ObjectEntity;
 import org.jill.openjill.core.api.entities.ObjectParam;
@@ -31,11 +30,6 @@ public final class LiftManager extends AbstractParameterObjectEntity {
      * To know if message must be display.
      */
     private static boolean messageDisplayLiftMessage = true;
-
-    /**
-     * Open mesage.
-     */
-    private static StatusBarTextMessage liftMessage;
 
     /**
      * Name of block to move on.
@@ -68,16 +62,7 @@ public final class LiftManager extends AbstractParameterObjectEntity {
 
         // Init once
         if (nameBlockNonBlock == null) {
-            getConfString("noStopBlockName");
-        }
-
-        if (liftMessage == null) {
-            final int textColor = getConfInteger("msgColor");
-            final int textTime = getConfInteger("msgTime");
-            final String text = getConfString("msg");
-
-            liftMessage = new StatusBarTextMessage(text, textTime,
-                    textColor);
+            nameBlockNonBlock = getConfString("noStopBlockName");
         }
 
         this.backgroundObject = objectParam.getBackgroundObject();
@@ -108,8 +93,7 @@ public final class LiftManager extends AbstractParameterObjectEntity {
         if (obj.isPlayer()) {
             if (messageDisplayLiftMessage) {
                 // Display open message
-                this.messageDispatcher.sendMessage(
-                    EnumMessageType.MESSAGE_STATUS_BAR, liftMessage);
+                sendMessage();
 
                 messageDisplayLiftMessage = false;
             }

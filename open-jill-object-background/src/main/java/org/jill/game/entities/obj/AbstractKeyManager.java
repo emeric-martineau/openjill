@@ -6,7 +6,6 @@ import org.jill.openjill.core.api.entities.ObjectEntity;
 import org.jill.openjill.core.api.entities.ObjectParam;
 import org.jill.openjill.core.api.message.EnumMessageType;
 import org.jill.openjill.core.api.message.object.ObjectListMessage;
-import org.jill.openjill.core.api.message.statusbar.StatusBarTextMessage;
 import org.jill.openjill.core.api.message.statusbar.inventory.
         InventoryItemMessage;
 import org.jill.openjill.core.api.message.statusbar.inventory.
@@ -19,11 +18,6 @@ import org.jill.openjill.core.api.message.statusbar.inventory.
  */
 public abstract class AbstractKeyManager
     extends AbstractParameterObjectEntity {
-
-    /**
-     * Message to display in bottom of screen.
-     */
-    private StatusBarTextMessage msg;
 
     /**
      * Inventory object to add.
@@ -48,12 +42,6 @@ public abstract class AbstractKeyManager
     @Override
     public final void init(final ObjectParam objectParam) {
         super.init(objectParam);
-
-        String textMsg = getConfString("msg");
-        int textColor = getConfInteger("msgColor");
-        int textTime = getConfInteger("msgTime");
-
-        this.msg = new StatusBarTextMessage(textMsg, textTime, textColor);
 
         this.inventory = new InventoryItemMessage(
                 getConfString("inventory"), true);
@@ -100,8 +88,7 @@ public abstract class AbstractKeyManager
                     getConfInteger("point"), true, this, obj));
 
             if (getDisplayMessage()) {
-                this.messageDispatcher.sendMessage(
-                    EnumMessageType.MESSAGE_STATUS_BAR, this.msg);
+                sendMessage();
             }
 
             messageDispatcher.sendMessage(EnumMessageType.OBJECT, this.killme);

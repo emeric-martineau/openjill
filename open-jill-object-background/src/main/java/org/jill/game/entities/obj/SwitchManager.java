@@ -6,7 +6,6 @@ import org.jill.openjill.core.api.entities.ObjectEntity;
 import org.jill.openjill.core.api.entities.ObjectParam;
 import org.jill.openjill.core.api.message.EnumMessageType;
 
-import org.jill.openjill.core.api.message.statusbar.StatusBarTextMessage;
 import org.jill.openjill.core.api.keyboard.KeyboardLayout;
 
 /**
@@ -32,11 +31,6 @@ public final class SwitchManager extends AbstractParameterObjectEntity {
     private static boolean messageDisplaySwitchMessage = true;
 
     /**
-     * Close mesage.
-     */
-    private StatusBarTextMessage msg;
-
-    /**
      * Picture array.
      */
     private BufferedImage[] images;
@@ -60,13 +54,6 @@ public final class SwitchManager extends AbstractParameterObjectEntity {
             this.images[index] = this.pictureCache.getImage(tileSetIndex,
                     tileIndex + index);
         }
-
-        // Message
-        String textMsg = getConfString("msg");
-        int textColor = getConfInteger("msgColor");
-        int textTime = getConfInteger("msgTime");
-
-        this.msg = new StatusBarTextMessage(textMsg, textTime, textColor);
     }
 
     @Override
@@ -78,8 +65,7 @@ public final class SwitchManager extends AbstractParameterObjectEntity {
     public void msgTouch(final ObjectEntity obj) {
         if (obj.isPlayer()) {
             if (messageDisplaySwitchMessage) {
-                messageDispatcher.sendMessage(
-                    EnumMessageType.MESSAGE_STATUS_BAR, this.msg);
+                sendMessage();
 
                 messageDisplaySwitchMessage = false;
             }
