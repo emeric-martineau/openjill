@@ -558,8 +558,20 @@ public final class PlayerManager extends AbstractPlayerInteractionManager {
         // senderObj was null when background
         if (!PalyerActionPerState.canDo(this.state,
             PlayerAction.INVINCIBLE)) {
+            BackgroundEntity senderBack2 = senderBack;
+
             InventoryLifeMessage.STD_MESSAGE.setLife(nbLife);
-            InventoryLifeMessage.STD_MESSAGE.setSender(senderObj);
+
+            // In special case if sender is not null and typeOfDeath is other
+            // force hit player
+            if (senderObj != null &&
+                    typeOfDeath == PlayerState.DIE_SUB_STATE_OTHER_BACK) {
+                senderBack2 = getBackgroundObject()[
+                        this.getX() / JillConst.BLOCK_SIZE][
+                        this.getY() / JillConst.BLOCK_SIZE];
+            } else {
+                InventoryLifeMessage.STD_MESSAGE.setSender(senderObj);
+            }
 
             // Send message to inventory to know if player dead
             this.messageDispatcher.sendMessage(EnumMessageType.INVENTORY_LIFE,
@@ -575,7 +587,7 @@ public final class PlayerManager extends AbstractPlayerInteractionManager {
                         setySpeed(PlayerDie2Const.START_YD);
 
                         // Align player on bottom of background
-                        this.y = (senderBack.getY() + 1) * JillConst.BLOCK_SIZE
+                        this.y = (senderBack2.getY() + 1) * JillConst.BLOCK_SIZE
                             - this.stDie2Other[
                                     PlayerDie2Const.FIRST_PICTURE].getHeight();
                         break;
@@ -583,7 +595,7 @@ public final class PlayerManager extends AbstractPlayerInteractionManager {
                         setySpeed(PlayerDie1Const.START_YD);
 
                         // Align player on bottom of background
-                        this.y = senderBack.getY() * JillConst.BLOCK_SIZE
+                        this.y = senderBack2.getY() * JillConst.BLOCK_SIZE
                             - this.stDie1Water[
                                     PlayerDie1Const.FIRST_PICTURE].getHeight();
                         break;

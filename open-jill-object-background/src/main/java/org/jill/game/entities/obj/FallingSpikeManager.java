@@ -82,7 +82,7 @@ public final class FallingSpikeManager extends AbstractHitPlayerObjectEntity
 
             if (this.ySpeed != 0) {
                 // Spike fall
-                hitPlayer(obj);
+                hitPlayerRock(obj);
             } else {
                 // Spike don't move, kill player.
                 obj.msgKill(

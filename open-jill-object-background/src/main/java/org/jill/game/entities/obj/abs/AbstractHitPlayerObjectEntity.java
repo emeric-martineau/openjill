@@ -38,4 +38,14 @@ public abstract class AbstractHitPlayerObjectEntity
         playerObj.msgKill(this, this.killForce,
             PlayerState.DIE_SUB_STATE_ENNEMY);
     }
+
+    /**
+     * Hit player.
+     *
+     * @param playerObj player object
+     */
+    protected final void hitPlayerRock(final ObjectEntity playerObj) {
+        playerObj.msgKill(this, this.killForce,
+            PlayerState.DIE_SUB_STATE_OTHER_BACK);
+    }
 }
