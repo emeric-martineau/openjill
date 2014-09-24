@@ -55,7 +55,7 @@ public class LoadNewLevelHandler extends AbstractChangeLevel {
 
             this.inventoryArea.setScore(saveData.getScore());
 
-            this.inventoryArea.setLife(saveData.getHealth());
+            //this.inventoryArea.setLife(saveData.getHealth());
         } else {
             // New level.
             // In start of map level, don't search check point
@@ -105,6 +105,9 @@ public class LoadNewLevelHandler extends AbstractChangeLevel {
             this.messageDispatcher.sendMessage(EnumMessageType.INVENTORY_ITEM,
                 inventory);
         }
+
+        // always restore life.
+        this.inventoryArea.setLife(this.inventoryArea.getDefaultLife());
     }
 
     /**

@@ -24,7 +24,6 @@ Background
 Object :
 --------
  - Checkpoint : add text support. Look first ckeckpoint in map xSpeed = 344 and ySpeed = -64
- - Falling spike : hit player when fall -> don't care Invicibility
  - Apple : add text support see state
            Exemple :
                 Object #58 (0x4708)

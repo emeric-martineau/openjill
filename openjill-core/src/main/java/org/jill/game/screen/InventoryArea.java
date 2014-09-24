@@ -527,4 +527,13 @@ public final class InventoryArea implements InterfaceMessageGameHandler {
     public boolean isNeedRedraw() {
         return this.needRedraw;
     }
+
+    /**
+     * Return default value of life.
+     *
+     * @return default value of life
+     */
+    public int getDefaultLife() {
+        return this.conf.getDefaultLife();
+    }
 }
