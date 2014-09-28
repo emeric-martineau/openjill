@@ -103,6 +103,10 @@ public final class FallingSpikeManager extends AbstractHitPlayerObjectEntity
             case TRIGGER:
                 final ObjectEntity switchObj = (ObjectEntity) msg;
                 if (switchObj.getCounter() == this.counter) {
+                    // Kill touch trigger
+                    this.messageDispatcher.sendMessage(EnumMessageType.OBJECT,
+                        new ObjectListMessage(switchObj, false));
+
                     // Start fall
                     this.ySpeed = this.fallingSpeed;
                 }
