@@ -21,7 +21,12 @@
         "inventory_MAPDOOR":"GEM",
         "inventory_DOORT":"RED_KEY",
         "msgTime":"20",
-        "msgColor":"1"
+        "msgColor":"1",
+        "DOORT_tile":"11",
+        "DOORT_tileset":"20",
+        "DOORB_tile":"12",
+        "DOORB_tileset":"20",
+        "doorBackStartName":"DOOR"
     },
     "AppleManager":
     {
