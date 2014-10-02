@@ -140,6 +140,13 @@ public abstract class AbstractExecutingStdLevel extends AbstractMenuJillLevel {
         super(cfgLevel);
 
         constructor();
+
+        // To preserve add 2 invincibility after load game
+        for (EnumInventoryObject item : this.inventoryArea.getObjects()) {
+            if (item == EnumInventoryObject.INVINCIBILITY) {
+                this.invincibility = true;
+            }
+        }
     }
 
     /**
