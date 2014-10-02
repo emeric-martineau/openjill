@@ -139,14 +139,12 @@ public final class CollapsingCeilingManager
      */
     private void triggerMessage(final EnumMessageType type,
         final Object msg) {
-        final ObjectEntity source = (ObjectEntity) msg;
+        if (this.state == SWITCH_OFF) {
+            final ObjectEntity source = (ObjectEntity) msg;
 
-        if (source.getCounter() == this.counter) {
-            // Remove object source
-            this.messageDispatcher.sendMessage(EnumMessageType.OBJECT,
-                new ObjectListMessage(source, false));
-
-            this.state = SWITCH_ON;
+            if (source.getCounter() == this.counter) {
+                this.state = SWITCH_ON;
+            }
         }
     }
 }

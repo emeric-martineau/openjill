@@ -11,6 +11,7 @@ import org.jill.openjill.core.api.message.background.BackgroundMessage;
 import org.jill.openjill.core.api.entities.BackgroundEntity;
 import org.jill.openjill.core.api.jill.JillConst;
 import org.jill.openjill.core.api.message.InterfaceMessageGameHandler;
+import org.jill.openjill.core.api.message.object.ObjectListMessage;
 
 /**
  * Wall.
@@ -191,11 +192,9 @@ public final class ToggleWallManager extends AbstractParameterObjectEntity
     /**
      * Manage TAGGLE_WALL message.
      *
-     * @param type type of mssage
      * @param msg message
      */
-    private void toggleWallMessage(final EnumMessageType type,
-        final Object msg) {
+    private void toggleWallMessage(final Object msg) {
         final ObjectEntity switchObj = (ObjectEntity) msg;
 
         if (switchObj.getCounter() == this.counter) {
@@ -209,13 +208,17 @@ public final class ToggleWallManager extends AbstractParameterObjectEntity
                 this.messageDispatcher.sendMessage(EnumMessageType.BACKGROUND,
                     this.listBackgroundBlock);
             }
+
+            // In case of toggle wall, remove source message
+            this.messageDispatcher.sendMessage(EnumMessageType.OBJECT,
+                    new ObjectListMessage(switchObj, false));
         }
     }
 
     @Override
     public void recieveMessage(final EnumMessageType type, final Object msg) {
         if (type == EnumMessageType.TRIGGER) {
-            toggleWallMessage(type, msg);
+            toggleWallMessage(msg);
         }
     }
 }

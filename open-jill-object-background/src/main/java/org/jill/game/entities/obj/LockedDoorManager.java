@@ -290,29 +290,29 @@ public final class LockedDoorManager extends AbstractParameterObjectEntity
      * @param msg message
      */
     private void triggerMessage(final Object msg) {
-        final ObjectEntity source = (ObjectEntity) msg;
+        if (getState() == 0) {
+            final ObjectEntity source = (ObjectEntity) msg;
 
-        // If object receive message, 2 possibility ;
-        // - mapdoor and object are not delete (open map door)
-        // - door and object are not open or open animation (state = 0)
-        if (source.getCounter() == counter && getState() == 0) {
-            if (numberOfKey > 0) {
-                // Remove object that send message (objec 15: trigger touch)
-//                messageDispatcher.sendMessage(EnumMessageType.OBJECT,
-//                        new ObjectListMessage(source, false));
-                // Remove key from inventory
-                messageDispatcher.sendMessage(EnumMessageType.INVENTORY_ITEM,
-                        removeInventoryMessage);
+            // If object receive message, 2 possibility ;
+            // - mapdoor and object are not delete (open map door)
+            // - door and object are not open or open animation (state = 0)
+            if (source.getCounter() == counter) {
+                if (numberOfKey > 0) {
+                    // Remove key from inventory
+                    messageDispatcher.sendMessage(
+                            EnumMessageType.INVENTORY_ITEM,
+                            removeInventoryMessage);
 
-                // Replace background
-                replaceBackground();
-            } else if (currentConfig.isMessageDisplayCloseMessage()) {
-                // Display close message
-                messageDispatcher.sendMessage(
-                        EnumMessageType.MESSAGE_STATUS_BAR,
-                        closeMessage);
+                    // Replace background
+                    replaceBackground();
+                } else if (currentConfig.isMessageDisplayCloseMessage()) {
+                    // Display close message
+                    messageDispatcher.sendMessage(
+                            EnumMessageType.MESSAGE_STATUS_BAR,
+                            closeMessage);
 
-                currentConfig.setMessageDisplayCloseMessage(false);
+                    currentConfig.setMessageDisplayCloseMessage(false);
+                }
             }
         }
     }
