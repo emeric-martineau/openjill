@@ -371,9 +371,10 @@ public final class LockedDoorManager extends AbstractParameterObjectEntity
         messageDispatcher.sendMessage(EnumMessageType.BACKGROUND,
                 listBackMsg);
 
-        if (isDoor) {
-            setState(1);
-        } else {
+        // To preserve twice call
+        setState(1);
+
+        if (!isDoor) {
             // Remove object source and this
             messageDispatcher.sendMessage(
                 EnumMessageType.OBJECT, killme);
