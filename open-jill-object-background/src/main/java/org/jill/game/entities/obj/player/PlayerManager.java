@@ -340,7 +340,9 @@ public final class PlayerManager extends AbstractPlayerInteractionManager {
     }
 
     @Override
-    public void msgUpdate() {
+    public void msgUpdate(final KeyboardLayout keyboardLayout) {
+        move(keyboardLayout);
+
         switch (getState()) {
             case PlayerState.BEGIN:
                 msgUpdateBegin();
@@ -535,13 +537,6 @@ public final class PlayerManager extends AbstractPlayerInteractionManager {
 
 //            this.currentPicture = this.stDie2[PlayerDie2Const.FIRST_PICTURE];
         }
-    }
-
-
-    @Override
-    public void msgKeyboard(final ObjectEntity obj,
-        final KeyboardLayout keyboardLayout) {
-        move(keyboardLayout);
     }
 
     /**

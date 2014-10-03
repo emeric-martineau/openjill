@@ -8,6 +8,11 @@ package org.jill.game.entities.obj.player;
 public interface PlayerState {
 
     /**
+     * Only use to move player and nothing change state.
+     */
+    int NOTHING_CHANGE = -1;
+
+    /**
      * Stand.
      */
     int STAND = 0;

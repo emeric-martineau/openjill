@@ -21,6 +21,7 @@ import org.jill.openjill.core.api.entities.BackgroundEntity;
 import org.jill.openjill.core.api.entities.ObjectEntity;
 import org.jill.openjill.core.api.entities.ObjectParam;
 import org.jill.openjill.core.api.jill.JillConst;
+import org.jill.openjill.core.api.keyboard.KeyboardLayout;
 import org.jill.openjill.core.api.message.EnumMessageType;
 import org.jill.openjill.core.api.message.InterfaceMessageGameHandler;
 
@@ -258,7 +259,7 @@ public final class LockedDoorManager extends AbstractParameterObjectEntity
     }
 
     @Override
-    public void msgUpdate() {
+    public void msgUpdate(KeyboardLayout keyboardLayout) {
         if (getState() > 0) {
             setState(getState() + 1);
 

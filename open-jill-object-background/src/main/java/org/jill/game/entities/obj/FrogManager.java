@@ -10,6 +10,7 @@ import org.jill.openjill.core.api.message.statusbar.inventory.
 import org.jill.openjill.core.api.entities.BackgroundEntity;
 import org.jill.openjill.core.api.entities.ObjectEntity;
 import org.jill.openjill.core.api.entities.ObjectParam;
+import org.jill.openjill.core.api.keyboard.KeyboardLayout;
 import org.jill.openjill.core.api.message.EnumMessageType;
 
 /**
@@ -125,7 +126,7 @@ public final class FrogManager extends AbstractHitPlayerObjectEntity {
     }
 
     @Override
-    public void msgUpdate() {
+    public void msgUpdate(final KeyboardLayout keyboardLayout) {
         if (this.state == this.stateOnFloor) {
             // Wait to jump
             this.counter++;
@@ -210,7 +211,8 @@ public final class FrogManager extends AbstractHitPlayerObjectEntity {
     }
 
     @Override
-    public void msgTouch(final ObjectEntity obj) {
+    public void msgTouch(final ObjectEntity obj,
+            final KeyboardLayout keyboardLayout) {
         if (obj.isPlayer()) {
             hitPlayer(obj);
         }

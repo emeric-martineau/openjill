@@ -157,7 +157,7 @@ public abstract class ObjectEntityImpl extends ObjectItemImpl
      * Call to update.
      */
     @Override
-    public void msgUpdate() {
+    public void msgUpdate(KeyboardLayout keyboardLayout) {
         // Nothing
     }
 
@@ -166,19 +166,9 @@ public abstract class ObjectEntityImpl extends ObjectItemImpl
      *
      * @param obj object
      */
-    public void msgTouch(final ObjectEntity obj) {
+    @Override
+    public void msgTouch(final ObjectEntity obj, KeyboardLayout keyboardLayout) {
         // Nothing
-    }
-
-    /**
-     * Call when collision with player to grap keyboard key (e.g. for lift).
-     *
-     * @param obj object
-     * @param keyboardLayout keyboard object
-     */
-    public void msgKeyboard(final ObjectEntity obj,
-            final KeyboardLayout keyboardLayout) {
-        // Nothing. Need to implement by concret object
     }
 
     /**
@@ -188,6 +178,7 @@ public abstract class ObjectEntityImpl extends ObjectItemImpl
      * @param nbLife number life to decrease
      * @param typeOfDeath tyep of death (for player)
      */
+    @Override
     public void msgKill(final ObjectEntity sender,
             final int nbLife, final int typeOfDeath) {
         // nothing
@@ -200,6 +191,7 @@ public abstract class ObjectEntityImpl extends ObjectItemImpl
      * @param nbLife number life to decrease
      * @param typeOfDeath tyep of death (for player)
      */
+    @Override
     public void msgKill(final BackgroundEntity sender,
             final int nbLife, final int typeOfDeath) {
         // nothing

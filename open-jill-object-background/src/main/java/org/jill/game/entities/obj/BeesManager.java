@@ -10,6 +10,7 @@ import org.jill.game.entities.obj.util.UtilityObjectEntity;
 import org.jill.openjill.core.api.entities.BackgroundEntity;
 import org.jill.openjill.core.api.entities.ObjectEntity;
 import org.jill.openjill.core.api.entities.ObjectParam;
+import org.jill.openjill.core.api.keyboard.KeyboardLayout;
 import org.jill.openjill.core.api.message.EnumMessageType;
 import org.jill.openjill.core.api.message.object.ObjectListMessage;
 
@@ -140,7 +141,7 @@ public final class BeesManager extends AbstractHitPlayerObjectEntity {
      * Call to update.
      */
     @Override
-    public void msgUpdate() {
+    public void msgUpdate(final KeyboardLayout keyboardLayout) {
         int newState = getState() + 1;
 
         if (newState == this.stateDie) {
@@ -306,7 +307,8 @@ public final class BeesManager extends AbstractHitPlayerObjectEntity {
     }
 
     @Override
-    public void msgTouch(final ObjectEntity obj) {
+    public void msgTouch(final ObjectEntity obj,
+            final KeyboardLayout keyboardLayout) {
         if (obj.isPlayer()) {
             hitPlayer(obj);
         }

@@ -13,6 +13,7 @@ import org.jill.openjill.core.api.message.statusbar.inventory.
 import org.jill.openjill.core.api.message.statusbar.inventory.
         InventoryItemMessage;
 import org.jill.openjill.core.api.entities.BackgroundEntity;
+import org.jill.openjill.core.api.keyboard.KeyboardLayout;
 
 /**
  * Knive item manager.
@@ -168,7 +169,7 @@ public final class KniveManager extends AbstractParameterObjectEntity {
     }
 
     @Override
-    public void msgUpdate() {
+    public void msgUpdate(final KeyboardLayout keyboardLayout) {
         if (this.stateCount >= this.statecountLaunchStart
             && this.stateCount <= this.statecountLaunchEnd) {
             // Knife launch
@@ -194,7 +195,8 @@ public final class KniveManager extends AbstractParameterObjectEntity {
     }
 
     @Override
-    public void msgTouch(final ObjectEntity obj) {
+    public void msgTouch(final ObjectEntity obj,
+            final KeyboardLayout keyboardLayout) {
         if (obj.isPlayer() && !(this.stateCount >= this.statecountLaunchStart
             && this.stateCount <= this.statecountLaunchEnd)) {
             if (messageDisplaySwitchMessage) {

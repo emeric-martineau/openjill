@@ -69,6 +69,11 @@ public abstract class AbstractPlayerInteractionManager
         if (playerMoving) {
             setxSpeed(0);
         }
+
+        if (mpm.getState() != PlayerState.NOTHING_CHANGE) {
+            setState(mpm.getState());
+            setySpeed(0);
+        }
     }
 
     /**

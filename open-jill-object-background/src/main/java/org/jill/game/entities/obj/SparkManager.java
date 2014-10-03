@@ -8,6 +8,7 @@ import org.jill.openjill.core.api.entities.BackgroundEntity;
 import org.jill.openjill.core.api.entities.ObjectEntity;
 import org.jill.openjill.core.api.entities.ObjectParam;
 import org.jill.openjill.core.api.jill.JillConst;
+import org.jill.openjill.core.api.keyboard.KeyboardLayout;
 import org.jill.openjill.core.api.message.EnumMessageType;
 
 /**
@@ -117,7 +118,7 @@ public final class SparkManager extends AbstractHitPlayerObjectEntity {
     }
 
     @Override
-    public void msgUpdate() {
+    public void msgUpdate(KeyboardLayout keyboardLayout) {
         this.counter++;
 
         if (this.counter == this.images.length) {
@@ -139,7 +140,8 @@ public final class SparkManager extends AbstractHitPlayerObjectEntity {
     }
 
     @Override
-    public void msgTouch(final ObjectEntity obj) {
+    public void msgTouch(final ObjectEntity obj,
+            KeyboardLayout keyboardLayout) {
         if (obj.isPlayer()) {
             // Move player to right
             MOVE_PLAYER_OBJECT.setOffsetX(-JillConst.BLOCK_SIZE);

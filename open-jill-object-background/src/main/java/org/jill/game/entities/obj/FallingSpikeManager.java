@@ -8,6 +8,7 @@ import org.jill.openjill.core.api.entities.BackgroundEntity;
 import org.jill.openjill.core.api.entities.ObjectEntity;
 import org.jill.openjill.core.api.entities.ObjectParam;
 import org.jill.openjill.core.api.jill.JillConst;
+import org.jill.openjill.core.api.keyboard.KeyboardLayout;
 import org.jill.openjill.core.api.message.EnumMessageType;
 import org.jill.openjill.core.api.message.InterfaceMessageGameHandler;
 import org.jill.openjill.core.api.message.object.ObjectListMessage;
@@ -77,7 +78,8 @@ public final class FallingSpikeManager extends AbstractHitPlayerObjectEntity
     }
 
     @Override
-    public void msgTouch(final ObjectEntity obj) {
+    public void msgTouch(final ObjectEntity obj,
+            final KeyboardLayout keyboardLayout) {
         if (obj.isPlayer()) {
 
             if (this.ySpeed != 0) {
@@ -114,7 +116,7 @@ public final class FallingSpikeManager extends AbstractHitPlayerObjectEntity
     }
 
     @Override
-    public void msgUpdate() {
+    public void msgUpdate(final KeyboardLayout keyboardLayout) {
         if (this.ySpeed > 0) {
 
             if (UtilityObjectEntity.moveObjectDown(this, this.ySpeed,

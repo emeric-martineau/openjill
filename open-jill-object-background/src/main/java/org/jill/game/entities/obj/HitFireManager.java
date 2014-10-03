@@ -3,6 +3,7 @@ package org.jill.game.entities.obj;
 import org.jill.game.entities.obj.abs.AbstractParameterObjectEntity;
 import java.awt.image.BufferedImage;
 import org.jill.openjill.core.api.entities.ObjectParam;
+import org.jill.openjill.core.api.keyboard.KeyboardLayout;
 import org.jill.openjill.core.api.message.EnumMessageType;
 import org.jill.openjill.core.api.message.object.ObjectListMessage;
 
@@ -69,7 +70,7 @@ public final class HitFireManager extends AbstractParameterObjectEntity {
     }
 
     @Override
-    public void msgUpdate() {
+    public void msgUpdate(final KeyboardLayout keyboardLayout) {
         this.counter++;
 
         if (this.counter == this.images.length) {

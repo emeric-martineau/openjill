@@ -6,6 +6,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.ListIterator;
 import org.jill.game.gui.menu.ClassicMenu;
 import org.jill.game.gui.menu.MenuInterface;
 import org.jill.game.level.cfg.LevelConfiguration;
@@ -398,6 +399,8 @@ public abstract class AbstractExecutingStdLevel extends AbstractMenuJillLevel {
         playerRect.setBounds(player.getX(), player.getY(), player.getWidth(),
                 player.getHeight());
 
+        listObjectCurrentlyDisplayedOnScreen.add(player);
+
         // Grap list of object on screen
         for (ObjectEntity obj : listObject) {
             objRect.setBounds(obj.getX(), obj.getY(), obj.getWidth(),
@@ -407,8 +410,6 @@ public abstract class AbstractExecutingStdLevel extends AbstractMenuJillLevel {
                 listObjectCurrentlyDisplayedOnScreen.add(obj);
             }
         }
-
-        listObjectCurrentlyDisplayedOnScreen.add(player);
 
         int zaphold;
 
@@ -424,7 +425,7 @@ public abstract class AbstractExecutingStdLevel extends AbstractMenuJillLevel {
                 obj1.setZapHold(zaphold - 1);
             }
 
-            obj1.msgUpdate();
+            obj1.msgUpdate(this.keyboardLayout);
 
             listObjectToDraw.add(obj1);
 
@@ -437,10 +438,9 @@ public abstract class AbstractExecutingStdLevel extends AbstractMenuJillLevel {
                 // Skip if obj1 is player because, msgKeyboard call after and
                 // if don't skip when object collision state of player update
                 // twice
-                if (obj1 != obj2 && obj1 != player
+                if (obj1 != obj2
                         && playerRect.intersects(objRect)) {
-                    obj1.msgKeyboard(obj2, keyboardLayout);
-                    obj1.msgTouch(obj2);
+                    obj1.msgTouch(obj2, this.keyboardLayout);
                 }
             }
         }
@@ -451,12 +451,10 @@ public abstract class AbstractExecutingStdLevel extends AbstractMenuJillLevel {
 
         listObjectCurrentlyDisplayedOnScreen.clear();
 
-        // Call manually to update
-        player.msgKeyboard(player, keyboardLayout);
-
         // Remove object from list
         for (ObjectEntity obj : listObjectToRemove) {
             listObject.remove(obj);
+            listObjectToDraw.remove(obj);
         }
 
         listObjectToRemove.clear();
@@ -501,7 +499,8 @@ public abstract class AbstractExecutingStdLevel extends AbstractMenuJillLevel {
     }
 
     /**
-     * Draw objet always on screen.
+     * Draw objet on screen.
+     * Start draw by last object.
      */
     private void drawObject() {
         for (ObjectEntity currentObject : listObjectAlwaysOnScreen) {
@@ -509,7 +508,13 @@ public abstract class AbstractExecutingStdLevel extends AbstractMenuJillLevel {
                     currentObject.getX(), currentObject.getY(), null);
         }
 
-        for (ObjectEntity currentObject : listObjectToDraw) {
+        ListIterator<ObjectEntity> itDraw
+                = listObjectToDraw.listIterator(listObjectToDraw.size());
+        ObjectEntity currentObject;
+
+        while (itDraw.hasPrevious()) {
+            currentObject = itDraw.previous();
+
             g2DrawingScreen.drawImage(currentObject.msgDraw(),
                     currentObject.getX() + offsetX,
                     currentObject.getY() + offsetY, null);

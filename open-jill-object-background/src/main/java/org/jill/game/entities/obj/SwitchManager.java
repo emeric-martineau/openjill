@@ -62,36 +62,35 @@ public final class SwitchManager extends AbstractParameterObjectEntity {
     }
 
     @Override
-    public void msgTouch(final ObjectEntity obj) {
+    public void msgTouch(final ObjectEntity obj,
+            KeyboardLayout keyboardLayout) {
         if (obj.isPlayer()) {
             if (messageDisplaySwitchMessage) {
                 sendMessage();
 
                 messageDisplaySwitchMessage = false;
             }
+
+            msgKeyboard(keyboardLayout);
         }
     }
 
-    @Override
-    public void msgKeyboard(final ObjectEntity obj,
-        final KeyboardLayout keyboardLayout) {
-        if (obj.isPlayer()) {
-            if (keyboardLayout.isUp() && this.state != SWITCH_OFF) {
-                // Original game don't grap keyboard key for switch
-                //keyboardLayout.setUp(false);
+    public void msgKeyboard(final KeyboardLayout keyboardLayout) {
+        if (keyboardLayout.isUp() && this.state != SWITCH_OFF) {
+            // Original game don't grap keyboard key for switch
+            //keyboardLayout.setUp(false);
 
-                this.state = SWITCH_OFF;
+            this.state = SWITCH_OFF;
 
-                this.messageDispatcher.sendMessage(EnumMessageType.TRIGGER,
-                    this);
-            } else if (keyboardLayout.isDown() && state != SWITCH_ON) {
-                //keyboardLayout.setDown(false);
+            this.messageDispatcher.sendMessage(EnumMessageType.TRIGGER,
+                this);
+        } else if (keyboardLayout.isDown() && state != SWITCH_ON) {
+            //keyboardLayout.setDown(false);
 
-                this.state = SWITCH_ON;
+            this.state = SWITCH_ON;
 
-                messageDispatcher.sendMessage(EnumMessageType.TRIGGER,
-                    this);
-            }
+            messageDispatcher.sendMessage(EnumMessageType.TRIGGER,
+                this);
         }
     }
 }

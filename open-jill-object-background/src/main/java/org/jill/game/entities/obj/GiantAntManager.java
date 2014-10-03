@@ -10,6 +10,7 @@ import org.jill.openjill.core.api.message.object.ObjectListMessage;
 import org.jill.openjill.core.api.message.statusbar.inventory.
         InventoryPointMessage;
 import org.jill.openjill.core.api.entities.BackgroundEntity;
+import org.jill.openjill.core.api.keyboard.KeyboardLayout;
 
 /**
  * Firebird.
@@ -113,7 +114,7 @@ public final class GiantAntManager extends AbstractHitPlayerObjectEntity {
     }
 
     @Override
-    public void msgUpdate() {
+    public void msgUpdate(final KeyboardLayout keyboardLayout) {
         // State = 0 -> move
         if (this.state == 0) {
             moveAnt();
@@ -173,7 +174,8 @@ public final class GiantAntManager extends AbstractHitPlayerObjectEntity {
     }
 
     @Override
-    public void msgTouch(final ObjectEntity obj) {
+    public void msgTouch(final ObjectEntity obj,
+            final KeyboardLayout keyboardLayout) {
         if (obj.isPlayer()) {
             hitPlayer(obj);
         }

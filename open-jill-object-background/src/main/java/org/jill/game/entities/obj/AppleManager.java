@@ -7,6 +7,7 @@ import org.jill.openjill.core.api.message.statusbar.inventory.
         InventoryPointMessage;
 import org.jill.openjill.core.api.entities.ObjectEntity;
 import org.jill.openjill.core.api.entities.ObjectParam;
+import org.jill.openjill.core.api.keyboard.KeyboardLayout;
 import org.jill.openjill.core.api.message.EnumMessageType;
 import org.jill.openjill.core.api.message.statusbar.inventory.InventoryLifeMessage;
 
@@ -66,7 +67,8 @@ public final class AppleManager extends AbstractParameterObjectEntity {
     }
 
     @Override
-    public void msgTouch(final ObjectEntity obj) {
+    public void msgTouch(final ObjectEntity obj,
+            final KeyboardLayout keyboardLayout) {
         if (obj.isPlayer()) {
             this.messageDispatcher.sendMessage(EnumMessageType.OBJECT, killme);
 
@@ -97,7 +99,7 @@ public final class AppleManager extends AbstractParameterObjectEntity {
      * Call to update.
      */
     @Override
-    public void msgUpdate() {
+    public void msgUpdate(final KeyboardLayout keyboardLayout) {
         this.counter++;
 
         if (this.counter >= this.images.length) {

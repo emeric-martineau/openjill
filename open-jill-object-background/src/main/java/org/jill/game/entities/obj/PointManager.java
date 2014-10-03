@@ -3,6 +3,7 @@ package org.jill.game.entities.obj;
 import java.awt.image.BufferedImage;
 import org.jill.game.entities.obj.abs.AbstractParameterObjectEntity;
 import org.jill.openjill.core.api.entities.ObjectParam;
+import org.jill.openjill.core.api.keyboard.KeyboardLayout;
 import org.jill.openjill.core.api.manager.TextManager;
 import org.jill.openjill.core.api.message.EnumMessageType;
 import org.jill.openjill.core.api.message.object.ObjectListMessage;
@@ -42,7 +43,7 @@ public class PointManager extends AbstractParameterObjectEntity {
     }
 
     @Override
-    public void msgUpdate() {
+    public void msgUpdate(KeyboardLayout keyboardLayout) {
         setCounter(getCounter() - 1);
 
         if (getCounter() <= 0) {

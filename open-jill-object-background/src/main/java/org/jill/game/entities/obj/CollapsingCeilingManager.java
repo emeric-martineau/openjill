@@ -9,6 +9,7 @@ import org.jill.openjill.core.api.message.background.BackgroundMessage;
 import org.jill.openjill.core.api.message.object.ObjectListMessage;
 import org.jill.openjill.core.api.entities.BackgroundEntity;
 import org.jill.openjill.core.api.jill.JillConst;
+import org.jill.openjill.core.api.keyboard.KeyboardLayout;
 import org.jill.openjill.core.api.message.InterfaceMessageGameHandler;
 
 /**
@@ -99,7 +100,7 @@ public final class CollapsingCeilingManager
     }
 
     @Override
-    public void msgUpdate() {
+    public void msgUpdate(final KeyboardLayout keyboardLayout) {
         if (this.state != SWITCH_OFF) {
             // Replace at current position background by new background
             final int backY = this.y / JillConst.BLOCK_SIZE;

@@ -7,6 +7,7 @@ import org.jill.game.entities.ObjectEntityImpl;
 import org.jill.openjill.core.api.message.object.ObjectListMessage;
 import org.jill.openjill.core.api.entities.ObjectEntity;
 import org.jill.openjill.core.api.entities.ObjectParam;
+import org.jill.openjill.core.api.keyboard.KeyboardLayout;
 import org.jill.openjill.core.api.message.EnumMessageType;
 
 /**
@@ -91,7 +92,7 @@ public final class CheckPointManager extends ObjectEntityImpl {
     }
 
     @Override
-    public void msgUpdate() {
+    public void msgUpdate(final KeyboardLayout keyboardLayout) {
         if (this.isToDelete) {
             this.messageDispatcher.sendMessage(
                 EnumMessageType.OBJECT, this.killme);
@@ -99,7 +100,8 @@ public final class CheckPointManager extends ObjectEntityImpl {
     }
 
     @Override
-    public void msgTouch(final ObjectEntity obj) {
+    public void msgTouch(final ObjectEntity obj,
+            final KeyboardLayout keyboardLayout) {
         if (obj.isPlayer() && this.grapMsgTouch) {
             if (this.isChangingLevel) {
                 this.messageDispatcher.sendMessage(

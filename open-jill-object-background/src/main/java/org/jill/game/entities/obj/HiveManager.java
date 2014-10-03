@@ -6,6 +6,7 @@ import org.jill.game.entities.obj.player.PlayerPositionSynchronizer;
 import org.jill.openjill.core.api.entities.ObjectEntity;
 import org.jill.openjill.core.api.message.object.ObjectListMessage;
 import org.jill.openjill.core.api.entities.ObjectParam;
+import org.jill.openjill.core.api.keyboard.KeyboardLayout;
 import org.jill.openjill.core.api.message.EnumMessageType;
 import org.jill.openjill.core.api.message.object.CreateObjectMessage;
 import org.jill.openjill.core.api.message.statusbar.inventory.
@@ -138,7 +139,7 @@ public final class HiveManager extends AbstractParameterObjectEntity {
      * Call to update.
      */
     @Override
-    public void msgUpdate() {
+    public void msgUpdate(final KeyboardLayout keyboardLayout) {
 
         if (getCounter() == 0) {
             // Random

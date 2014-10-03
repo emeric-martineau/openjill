@@ -79,7 +79,7 @@ public final class LiftManager extends AbstractParameterObjectEntity {
     }
 
     @Override
-    public void msgUpdate() {
+    public void msgUpdate(final KeyboardLayout keyboardLayout) {
         if (this.playerIsOnLift) {
             this.playerIsOnLift = false;
         } else if (this.counter != MAX_INT_VALUE) {
@@ -89,7 +89,8 @@ public final class LiftManager extends AbstractParameterObjectEntity {
     }
 
     @Override
-    public void msgTouch(final ObjectEntity obj) {
+    public void msgTouch(final ObjectEntity obj,
+            final KeyboardLayout keyboardLayout) {
         if (obj.isPlayer()) {
             if (messageDisplayLiftMessage) {
                 // Display open message
@@ -97,63 +98,63 @@ public final class LiftManager extends AbstractParameterObjectEntity {
 
                 messageDisplayLiftMessage = false;
             }
+
+            msgKeyboard(keyboardLayout);
+
             this.playerIsOnLift = true;
         }
     }
 
-    @Override
-    public void msgKeyboard(final ObjectEntity obj,
-        final KeyboardLayout keyboardLayout) {
-        if (obj.isPlayer()) {
-            if (keyboardLayout.isUp()) {
-                keyboardLayout.setUp(false);
+    public void msgKeyboard(final KeyboardLayout keyboardLayout) {
 
+        if (keyboardLayout.isUp()) {
+            //keyboardLayout.setUp(false);
+
+            MOVE_PLAYER_OBJECT.setOffsetX(0);
+            MOVE_PLAYER_OBJECT.setOffsetY(-JillConst.BLOCK_SIZE);
+
+            MOVE_PLAYER_OBJECT.setState(PlayerState.STAND);
+
+            MOVE_PLAYER_OBJECT.setUp(true);
+
+            this.messageDispatcher.sendMessage(
+                EnumMessageType.PLAYER_MOVE, MOVE_PLAYER_OBJECT);
+
+            if (MOVE_PLAYER_OBJECT.isCanDoMove()) {
+                final int backX = this.x / JillConst.BLOCK_SIZE;
+                final int backY = this.y / JillConst.BLOCK_SIZE;
+
+                final BackgroundMessage backMsg
+                    = new BackgroundMessage(backX, backY,
+                        nameBlockNonBlock);
+
+                this.messageDispatcher.sendMessage(
+                        EnumMessageType.BACKGROUND, backMsg);
+
+                this.y -= JillConst.BLOCK_SIZE;
+            }
+
+            MOVE_PLAYER_OBJECT.setUp(false);
+        } else if (keyboardLayout.isDown()) {
+            //keyboardLayout.setDown(false);
+
+            if (clearBlock()) {
                 MOVE_PLAYER_OBJECT.setOffsetX(0);
-                MOVE_PLAYER_OBJECT.setOffsetY(-JillConst.BLOCK_SIZE);
+                MOVE_PLAYER_OBJECT.setOffsetY(JillConst.BLOCK_SIZE);
 
                 MOVE_PLAYER_OBJECT.setState(PlayerState.STAND);
 
-                MOVE_PLAYER_OBJECT.setUp(true);
+                MOVE_PLAYER_OBJECT.setDown(true);
 
                 this.messageDispatcher.sendMessage(
                     EnumMessageType.PLAYER_MOVE, MOVE_PLAYER_OBJECT);
 
-                if (MOVE_PLAYER_OBJECT.isCanDoMove()) {
-                    final int backX = this.x / JillConst.BLOCK_SIZE;
-                    final int backY = this.y / JillConst.BLOCK_SIZE;
+                MOVE_PLAYER_OBJECT.setDown(false);
 
-                    final BackgroundMessage backMsg
-                        = new BackgroundMessage(backX, backY,
-                            nameBlockNonBlock);
-
-                    this.messageDispatcher.sendMessage(
-                            EnumMessageType.BACKGROUND, backMsg);
-
-                    this.y -= JillConst.BLOCK_SIZE;
-                }
-
-                MOVE_PLAYER_OBJECT.setUp(false);
-            } else if (keyboardLayout.isDown()) {
-                keyboardLayout.setDown(false);
-
-                if (clearBlock()) {
-                    MOVE_PLAYER_OBJECT.setOffsetX(0);
-                    MOVE_PLAYER_OBJECT.setOffsetY(JillConst.BLOCK_SIZE);
-
-                    MOVE_PLAYER_OBJECT.setState(PlayerState.STAND);
-
-                    MOVE_PLAYER_OBJECT.setDown(true);
-
-                    this.messageDispatcher.sendMessage(
-                        EnumMessageType.PLAYER_MOVE, MOVE_PLAYER_OBJECT);
-
-                    MOVE_PLAYER_OBJECT.setDown(false);
-
-                }
-
-                // if ELEVMID -> continue and replace by current graph
-                // if ELEVBOT -> stop
             }
+
+            // if ELEVMID -> continue and replace by current graph
+            // if ELEVBOT -> stop
         }
     }
 

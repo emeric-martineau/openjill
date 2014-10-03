@@ -89,12 +89,12 @@ public interface ObjectEntity extends ObjectItem {
     BufferedImage msgDraw();
 
     /**
-     * Call when collision with player to grap keyboard key (e.g. for lift).
+     * Call when player touch object. (e.g. for lift).
      *
      * @param obj object
      * @param keyboardLayout keyboard object
      */
-    void msgKeyboard(ObjectEntity obj, KeyboardLayout keyboardLayout);
+    void msgTouch(ObjectEntity obj, KeyboardLayout keyboardLayout);
 
     /**
      * When weapon kill object or ennemy kill player.
@@ -115,14 +115,9 @@ public interface ObjectEntity extends ObjectItem {
     void msgKill(BackgroundEntity sender, int nbLife, int typeOfDeath);
 
     /**
-     * Call when player touche object.
-     *
-     * @param obj object
-     */
-    void msgTouch(ObjectEntity obj);
-
-    /**
      * Call to update.
+     *
+     * @param keyboardLayout keyboard object
      */
-    void msgUpdate();
+    void msgUpdate(KeyboardLayout keyboardLayout);
 }

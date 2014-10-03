@@ -4,6 +4,7 @@ import java.awt.image.BufferedImage;
 import org.jill.game.entities.obj.abs.AbstractParameterObjectEntity;
 import org.jill.openjill.core.api.entities.ObjectEntity;
 import org.jill.openjill.core.api.entities.ObjectParam;
+import org.jill.openjill.core.api.keyboard.KeyboardLayout;
 import org.jill.openjill.core.api.message.EnumMessageType;
 import org.jill.openjill.core.api.message.object.ObjectListMessage;
 import org.jill.openjill.core.api.message.statusbar.inventory.
@@ -79,7 +80,8 @@ public abstract class AbstractKeyManager
     }
 
     @Override
-    public final void msgTouch(final ObjectEntity obj) {
+    public final void msgTouch(final ObjectEntity obj,
+            final KeyboardLayout keyboardLayout) {
         if (obj.isPlayer()) {
             this.messageDispatcher.sendMessage(EnumMessageType.INVENTORY_ITEM,
                 this.inventory);
@@ -104,7 +106,7 @@ public abstract class AbstractKeyManager
      * Call to update.
      */
     @Override
-    public final void msgUpdate() {
+    public final void msgUpdate(final KeyboardLayout keyboardLayout) {
         this.counter++;
 
         if (this.counter >= this.images.length) {

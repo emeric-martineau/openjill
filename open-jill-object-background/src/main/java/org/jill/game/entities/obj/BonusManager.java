@@ -4,6 +4,7 @@ import org.jill.game.entities.obj.abs.AbstractParameterObjectEntity;
 import java.awt.image.BufferedImage;
 import org.jill.openjill.core.api.entities.ObjectEntity;
 import org.jill.openjill.core.api.entities.ObjectParam;
+import org.jill.openjill.core.api.keyboard.KeyboardLayout;
 import org.jill.openjill.core.api.message.EnumMessageType;
 import org.jill.openjill.core.api.message.object.ObjectListMessage;
 import org.jill.openjill.core.api.message.statusbar.inventory.
@@ -75,7 +76,8 @@ public final class BonusManager extends AbstractParameterObjectEntity {
     }
 
     @Override
-    public void msgTouch(final ObjectEntity obj) {
+    public void msgTouch(final ObjectEntity obj,
+            final KeyboardLayout keyboardLayout) {
         if (obj.isPlayer()) {
             sendItem();
 
