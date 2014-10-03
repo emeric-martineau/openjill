@@ -148,10 +148,10 @@ public abstract class AbstractChangeLevel extends
         // If in map level, store map level to object
         if (this.newLevelNumber == RESTART_LEVEL_NUMBER) {
             loadRestartLevel();
-        } else if (isCurrentLevelMap()) {
-            loadNewLevelFromMap();
         } else if (this.newLevelNumber == SaveData.MAP_LEVEL) {
             loadMapFromLevel();
+        } else {
+            loadNewLevelFromMap();
         }
     }
 
