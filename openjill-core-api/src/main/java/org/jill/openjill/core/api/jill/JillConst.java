@@ -24,11 +24,6 @@ public interface JillConst {
     int MAX_HEIGHT = BackgroundLayer.MAP_HEIGHT * JillConst.BLOCK_SIZE;
 
     /**
-     * Number cycle before start wait animation.
-     */
-    int PLAYER_WAIT_TIME_BEFORE_START_ANIMATION = 72;
-
-    /**
      * Border to update object.
      */
     int X_UPDATE_SCREEN_BORDER = 6 * JillConst.BLOCK_SIZE;
