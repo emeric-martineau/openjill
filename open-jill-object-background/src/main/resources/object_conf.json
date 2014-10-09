@@ -212,5 +212,15 @@
         "killForce":"-1",
         "moveX":"4:1#11:0#15:1#32:2-4",
         "moveY":"4:0-3#11:0-4#15:0-3#27:0#31:0-1#32:0-2"
+    },
+    "BulletManager": {
+        "width":"16",
+        "height":"32",
+        "tile":"0",
+        "tileSet":"46",
+        "numberTileSet":"15",
+        "tileByState":"8:12#16:9#24:6#32:3#40:0",
+        "counterDie":"40",
+        "ySpeedMax":"12"
     }
 }

@@ -212,7 +212,7 @@ public final class UtilityObjectEntity {
 
         if (block == null) {
             if (updateObj) {
-                obj.setY(obj.getY() + mvtSize);
+                forceMoveUpDown(obj, mvtSize);
             }
 
             canMove = true;
@@ -228,6 +228,28 @@ public final class UtilityObjectEntity {
         }
 
         return canMove;
+    }
+
+    /**
+     * Move down object. Don't care backgrond.
+     *
+     * @param obj object
+     * @param mvtSize size of movment
+     */
+    public static void forceMoveUpDown(final ObjectEntity obj,
+            final int mvtSize) {
+        int newY = obj.getY() + mvtSize;
+
+        int maxY = JillConst.MAX_HEIGHT - obj.getHeight();
+
+        // Object cannot go out of map.
+        if (newY < 0) {
+            obj.setY(0);
+        } else if (newY < maxY) {
+            obj.setY(newY);
+        } else {
+            obj.setY(maxY);
+        }
     }
 
     /**
