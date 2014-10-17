@@ -120,4 +120,11 @@ public interface ObjectEntity extends ObjectItem {
      * @param keyboardLayout keyboard object
      */
     void msgUpdate(KeyboardLayout keyboardLayout);
+
+    /**
+     * Remove object if out of visible screen.
+     *
+     * @return true -> remove it
+     */
+    boolean isRemoveOutOfVisibleScreen();
 }

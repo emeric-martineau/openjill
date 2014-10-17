@@ -5,6 +5,7 @@ import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 import org.jill.game.gui.menu.ClassicMenu;
@@ -67,7 +68,13 @@ public abstract class AbstractExecutingStdLevel extends AbstractMenuJillLevel {
     /**
      * Screen rectangle.
      */
-    protected Rectangle screenRect;
+    protected Rectangle updateObjectScreenRect;
+
+    /**
+     * Visible screen rectangle.
+     */
+    protected Rectangle visibleScreenRect;
+
 
     /**
      * Object rectangle (only for optimization).
@@ -77,7 +84,7 @@ public abstract class AbstractExecutingStdLevel extends AbstractMenuJillLevel {
     /**
      * Player rectangle (only for optimization).
      */
-    protected Rectangle playerRect = new Rectangle();
+    protected Rectangle obj2Rect = new Rectangle();
 
     /**
      * If need update inventory screen.
@@ -198,12 +205,16 @@ public abstract class AbstractExecutingStdLevel extends AbstractMenuJillLevel {
 
         runGame = true;
 
-        // TODO explain why '* 2' ????
-        screenRect = new Rectangle(0, 0,
+        // '* 2' because two border
+        updateObjectScreenRect = new Rectangle(0, 0,
             this.statusBar.getGameAreaConf().getWidth()
                     + JillConst.X_UPDATE_SCREEN_BORDER * 2,
             this.statusBar.getGameAreaConf().getHeight()
                     + JillConst.Y_UPDATE_SCREEN_BORDER * 2);
+
+        visibleScreenRect = new Rectangle(0, 0,
+            this.statusBar.getGameAreaConf().getWidth(),
+            this.statusBar.getGameAreaConf().getHeight());
     }
 
     /**
@@ -392,56 +403,49 @@ public abstract class AbstractExecutingStdLevel extends AbstractMenuJillLevel {
         int lOffsetX = Math.abs(offsetX);
         int lOffsetY = Math.abs(offsetY);
 
-        screenRect.setLocation(lOffsetX - JillConst.X_UPDATE_SCREEN_BORDER,
+        updateObjectScreenRect.setLocation(lOffsetX
+                - JillConst.X_UPDATE_SCREEN_BORDER,
                 lOffsetY - JillConst.Y_UPDATE_SCREEN_BORDER);
 
+        visibleScreenRect.setLocation(lOffsetX, lOffsetY);
+
         // Set player bounds
-        playerRect.setBounds(player.getX(), player.getY(), player.getWidth(),
+        obj2Rect.setBounds(player.getX(), player.getY(), player.getWidth(),
                 player.getHeight());
 
         listObjectCurrentlyDisplayedOnScreen.add(player);
 
         // Grap list of object on screen
-        for (ObjectEntity obj : listObject) {
+        Iterator<ObjectEntity> itObj = this.listObject.iterator();
+        ObjectEntity obj;
+
+        while (itObj.hasNext()) {
+            obj = itObj.next();
+
             objRect.setBounds(obj.getX(), obj.getY(), obj.getWidth(),
                     obj.getHeight());
 
-            if (screenRect.intersects(objRect)) {
+            if (updateObjectScreenRect.intersects(objRect)) {
                 listObjectCurrentlyDisplayedOnScreen.add(obj);
             }
         }
 
-        int zaphold;
-
         // Update and object touch
-        for (ObjectEntity obj1 : listObjectCurrentlyDisplayedOnScreen) {
-            objRect.setBounds(obj1.getX(), obj1.getY(), obj1.getWidth(),
-                    obj1.getHeight());
+        itObj = listObjectCurrentlyDisplayedOnScreen.iterator();
 
-            // Decreate touch player flag
-            zaphold = obj1.getZapHold();
+        while (itObj.hasNext()) {
+            obj = itObj.next();
 
-            if (zaphold > 0) {
-                obj1.setZapHold(zaphold - 1);
-            }
+            objRect.setBounds(obj.getX(), obj.getY(), obj.getWidth(),
+                    obj.getHeight());
 
-            obj1.msgUpdate(this.keyboardLayout);
+            if (obj.isRemoveOutOfVisibleScreen()
+                    && !visibleScreenRect.intersects(objRect)) {
+                listObjectToRemove.add(obj);
 
-            listObjectToDraw.add(obj1);
-
-            for (ObjectEntity obj2 : listObjectCurrentlyDisplayedOnScreen) {
-                playerRect.setBounds(obj2.getX(), obj2.getY(),
-                    obj2.getWidth(), obj2.getHeight());
-
-                // Check object collision.
-                // Skip if same object
-                // Skip if obj1 is player because, msgKeyboard call after and
-                // if don't skip when object collision state of player update
-                // twice
-                if (obj1 != obj2
-                        && playerRect.intersects(objRect)) {
-                    obj1.msgTouch(obj2, this.keyboardLayout);
-                }
+                itObj.remove();
+            } else {
+                checkUpdatedObjecCollision(obj);
             }
         }
 
@@ -452,19 +456,49 @@ public abstract class AbstractExecutingStdLevel extends AbstractMenuJillLevel {
         listObjectCurrentlyDisplayedOnScreen.clear();
 
         // Remove object from list
-        for (ObjectEntity obj : listObjectToRemove) {
-            listObject.remove(obj);
-            listObjectToDraw.remove(obj);
+        for (ObjectEntity obj1 : listObjectToRemove) {
+            listObject.remove(obj1);
+            listObjectToDraw.remove(obj1);
         }
 
         listObjectToRemove.clear();
 
         // Add object from list
-        for (ObjectEntity obj : listObjectToAdd) {
-            listObject.add(obj);
+        for (ObjectEntity obj1 : listObjectToAdd) {
+            listObject.add(obj1);
         }
 
         listObjectToAdd.clear();
+    }
+
+    /**
+     * Check update object collision.
+     *
+     * @param obj current object
+     */
+    private void checkUpdatedObjecCollision(final ObjectEntity obj) {
+        int zaphold;
+        // Decreate touch player flag
+        zaphold = obj.getZapHold();
+        if (zaphold > 0) {
+            obj.setZapHold(zaphold - 1);
+        }
+        obj.msgUpdate(this.keyboardLayout);
+        listObjectToDraw.add(obj);
+        for (ObjectEntity obj2 : listObjectCurrentlyDisplayedOnScreen) {
+            obj2Rect.setBounds(obj2.getX(), obj2.getY(),
+                    obj2.getWidth(), obj2.getHeight());
+
+            // Check object collision.
+            // Skip if same object
+            // Skip if obj1 is player because, msgKeyboard call after and
+            // if don't skip when object collision state of player update
+            // twice
+            if (obj != obj2
+                    && obj2Rect.intersects(objRect)) {
+                obj.msgTouch(obj2, this.keyboardLayout);
+            }
+        }
     }
 
     /**

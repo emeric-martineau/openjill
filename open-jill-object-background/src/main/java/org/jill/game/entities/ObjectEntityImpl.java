@@ -90,6 +90,11 @@ public abstract class ObjectEntityImpl extends ObjectItemImpl
     protected MessageDispatcher messageDispatcher;
 
     /**
+     * Remove object out of screen.
+     */
+    private boolean removeOutOfVisibleScreen = false;
+
+    /**
      * True if player object.
      */
     protected boolean playerObject = false;
@@ -243,5 +248,19 @@ public abstract class ObjectEntityImpl extends ObjectItemImpl
      */
     protected final void setKillabgeObject(final boolean killabge) {
         this.killabgeObject = killabge;
+    }
+
+    /**
+     * Remove object out of screen.
+     *
+     * @param remove true to remove
+     */
+    protected final void setRemoveOutOfVisibleScreen(final boolean remove) {
+        this.removeOutOfVisibleScreen = remove;
+    }
+
+    @Override
+    public boolean isRemoveOutOfVisibleScreen() {
+        return this.removeOutOfVisibleScreen;
     }
 }

@@ -52,6 +52,8 @@ public final class BulletManager extends AbstractParameterObjectEntity {
     public void init(final ObjectParam objectParam) {
         super.init(objectParam);
 
+        setRemoveOutOfVisibleScreen(true);
+
         int tileIndex = getConfInteger("tile");
         int tileSetIndex = getConfInteger("tileSet");
 
@@ -68,8 +70,10 @@ public final class BulletManager extends AbstractParameterObjectEntity {
                     + index);
         }
 
-        setWidth(getConfInteger("width"));
-        setHeight(getConfInteger("height"));
+        if (getWidth() == 0 || getHeight() == 0) {
+            setWidth(getConfInteger("width"));
+            setHeight(getConfInteger("height"));
+        }
 
         this.tileByState = populateMove("tileByState");
 

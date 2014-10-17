@@ -33,6 +33,8 @@ public class PointManager extends AbstractParameterObjectEntity {
     public void init(final ObjectParam objectParam) {
         super.init(objectParam);
 
+        setRemoveOutOfVisibleScreen(true);
+
         this.textManager = objectParam.getPictureCache().getTextManager();
 
         setCounter(getConfInteger("counter"));
