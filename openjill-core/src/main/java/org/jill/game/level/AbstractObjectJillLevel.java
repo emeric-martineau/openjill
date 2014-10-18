@@ -246,10 +246,21 @@ public abstract class AbstractObjectJillLevel
      * @param olm message
      */
     private void recieveMessageListObject(final ObjectListMessage olm) {
+        final ObjectEntity obj = olm.getObject();
+
         if (olm.isAdd()) {
-            listObjectToAdd.add(olm.getObject());
+            if (obj == null) {
+                this.listObjectToAdd.addAll(olm.getListObject());
+            } else {
+                this.listObjectToAdd.add(obj);
+            }
         } else {
-            listObjectToRemove.add(olm.getObject());
+            if (obj == null) {
+                this.listObjectToRemove.addAll(olm.getListObject());
+            } else {
+                this.listObjectToRemove.add(obj);
+            }
+
         }
     }
 

@@ -19,7 +19,6 @@ Background
 ----------
  - FROOF/FFLOOR support burning (3.jn2)
  - WOODTORCH  support burning (3.jn1)
- - DOORT/DOORB support opendoor animation (MAP.JN1)
 
 Object :
 --------
@@ -43,11 +42,6 @@ Object :
                     pointer = 0
 
             Display the message #3 in VLC (index 2)
-
- - Epic object : display bullet (object 36) when delete object,
- - object 36 : bullet colored
-       state = 0 (pink), 1 (orange), 2 (blue) -> 46/(12 + state)
-	   counter = 8 (big bullet)
 
 Change needed ?
 ---------------

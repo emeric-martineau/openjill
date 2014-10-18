@@ -3,6 +3,7 @@ package org.jill.game.entities.obj.player;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.logging.Logger;
+import org.jill.game.entities.obj.bullet.BulletObjectFactory;
 import org.jill.openjill.core.api.message.statusbar.StatusBarTextMessage;
 import org.jill.openjill.core.api.message.statusbar.inventory.
         InventoryLifeMessage;
@@ -16,9 +17,6 @@ import org.jill.openjill.core.api.message.EnumMessageType;
 
 /**
  * Final player class.
- *
- * TODO object 36 : bullet colored when player die.
- * TODO for better compatibility. msgUpdate don't set picture. It's msgDraw.
  *
  * @author Emeric MARTINEAU
  */
@@ -600,6 +598,9 @@ public final class PlayerManager extends AbstractPlayerInteractionManager {
                     // ennemy death
                 }
 
+                BulletObjectFactory.explode(this,
+                        PlayerDie0Const.NB_COLORED_BULLET,
+                        this.messageDispatcher);
             }
         }
     }

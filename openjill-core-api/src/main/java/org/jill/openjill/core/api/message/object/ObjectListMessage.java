@@ -1,5 +1,6 @@
 package org.jill.openjill.core.api.message.object;
 
+import java.util.List;
 import org.jill.openjill.core.api.entities.ObjectEntity;
 
 /**
@@ -19,6 +20,11 @@ public final class ObjectListMessage {
     private final ObjectEntity object;
 
     /**
+     * List object to add.
+     */
+    private final List<ObjectEntity> listObject;
+
+    /**
      * Constructor.
      *
      * @param obj object
@@ -27,6 +33,20 @@ public final class ObjectListMessage {
     public ObjectListMessage(final ObjectEntity obj, final boolean addObject) {
         this.object = obj;
         this.add = addObject;
+        this.listObject = null;
+    }
+
+    /**
+     * Constructor.
+     *
+     * @param listObj object
+     * @param addObject add object
+     */
+    public ObjectListMessage(final List<ObjectEntity> listObj,
+            final boolean addObject) {
+        this.object = null;
+        this.add = addObject;
+        this.listObject = listObj;
     }
 
     /**
@@ -45,5 +65,14 @@ public final class ObjectListMessage {
      */
     public ObjectEntity getObject() {
         return object;
+    }
+
+    /**
+     * Object to add.
+     *
+     * @return  object
+     */
+    public List<ObjectEntity> getListObject() {
+        return listObject;
     }
 }

@@ -74,7 +74,8 @@
         "pointMatch":"11",
         "tile":"0",
         "tileSet":"40",
-        "numberTileSet":"8"
+        "numberTileSet":"8",
+        "nbColoredBullet":"5"
     },
     "BonusManager":
     {
@@ -133,7 +134,8 @@
         "turnTileNumber":"1",
         "point":"4",
         "killForce":"-1",
-        "hitObject":"37"
+        "hitObject":"37",
+        "nbColoredBullet":"5"
     },
     "SparkManager":
     {
@@ -202,7 +204,8 @@
         "counterCreateBees":"2",
         "maxRandomValue":"20",
         "counterMaxWait":"3",
-        "beesObject":"46"
+        "beesObject":"46",
+        "nbColoredBullet":"10"
     },
     "BeesManager": {
         "tile":"4",

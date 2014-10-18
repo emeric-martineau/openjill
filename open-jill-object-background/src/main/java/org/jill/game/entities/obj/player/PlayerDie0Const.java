@@ -37,6 +37,11 @@ public interface PlayerDie0Const {
     int TILESET_INDEX = 8;
 
     /**
+     * Colored buld when die.
+     */
+    int NB_COLORED_BULLET = 10;
+
+    /**
      * Just for checkstyle and PMD.
      */
     void nothing();

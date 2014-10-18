@@ -2,6 +2,7 @@ package org.jill.game.entities.obj;
 
 import java.awt.image.BufferedImage;
 import org.jill.game.entities.obj.abs.AbstractParameterObjectEntity;
+import org.jill.game.entities.obj.bullet.BulletObjectFactory;
 import org.jill.game.entities.obj.player.PlayerPositionSynchronizer;
 import org.jill.openjill.core.api.entities.ObjectEntity;
 import org.jill.openjill.core.api.message.object.ObjectListMessage;
@@ -14,8 +15,6 @@ import org.jill.openjill.core.api.message.statusbar.inventory.
 
 /**
  * Hive object.
- *
- * TODO when die, add bullet (object 36)
  *
  * @author Emeric MARTINEAU
  */
@@ -63,6 +62,11 @@ public final class HiveManager extends AbstractParameterObjectEntity {
     private int counterMaxWait;
 
     /**
+     * Colored bullet when player hit firebird.
+     */
+    private int nbColoredBullet;
+
+    /**
      * Default constructor.
      *
      * @param objectParam object parameter
@@ -96,6 +100,8 @@ public final class HiveManager extends AbstractParameterObjectEntity {
 
         // Remove me from list of object (= kill me)
         this.killme = new ObjectListMessage(this, false);
+
+        this.nbColoredBullet = getConfInteger("nbColoredBullet");
     }
 
     /**
@@ -198,5 +204,8 @@ public final class HiveManager extends AbstractParameterObjectEntity {
                     this, sender));
         this.messageDispatcher.sendMessage(EnumMessageType.OBJECT,
             this.killme);
+
+        BulletObjectFactory.explode(this, this.nbColoredBullet,
+                    this.messageDispatcher);
     }
 }

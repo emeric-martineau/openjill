@@ -3,6 +3,7 @@ package org.jill.game.entities.obj;
 import java.awt.image.BufferedImage;
 import org.jill.openjill.core.api.entities.ObjectEntity;
 import org.jill.game.entities.obj.abs.AbstractHitPlayerObjectEntity;
+import org.jill.game.entities.obj.bullet.BulletObjectFactory;
 import org.jill.game.entities.obj.util.UtilityObjectEntity;
 import org.jill.openjill.core.api.entities.ObjectParam;
 import org.jill.openjill.core.api.message.EnumMessageType;
@@ -66,6 +67,11 @@ public final class FirebirdManager extends AbstractHitPlayerObjectEntity {
     private BackgroundEntity[][] backgroundObject;
 
     /**
+     * Colored bullet when player hit firebird.
+     */
+    private int nbColoredBullet;
+
+    /**
      * Default constructor.
      *
      * @param objectParam object paramter
@@ -118,6 +124,8 @@ public final class FirebirdManager extends AbstractHitPlayerObjectEntity {
 
         // Create dead object
         createDeadObject(getConfInteger("hitObject"));
+
+        this.nbColoredBullet = getConfInteger("nbColoredBullet");
     }
 
     /**
@@ -218,8 +226,11 @@ public final class FirebirdManager extends AbstractHitPlayerObjectEntity {
             this.messageDispatcher.sendMessage(EnumMessageType.OBJECT,
                 this.deadMessage);
 
-        this.messageDispatcher.sendMessage(EnumMessageType.OBJECT,
-            this.killme);
+            this.messageDispatcher.sendMessage(EnumMessageType.OBJECT,
+                this.killme);
+
+            BulletObjectFactory.explode(this, this.nbColoredBullet,
+                    this.messageDispatcher);
         }
     }
 

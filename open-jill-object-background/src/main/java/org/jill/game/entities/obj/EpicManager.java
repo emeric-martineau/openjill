@@ -1,6 +1,7 @@
 package org.jill.game.entities.obj;
 
 import org.jill.game.entities.obj.abs.AbstractSynchronisedImageObjectEntity;
+import org.jill.game.entities.obj.bullet.BulletObjectFactory;
 import org.jill.openjill.core.api.entities.ObjectEntity;
 import org.jill.openjill.core.api.entities.ObjectParam;
 import org.jill.openjill.core.api.keyboard.KeyboardLayout;
@@ -11,9 +12,6 @@ import org.jill.openjill.core.api.message.statusbar.inventory.
 
 /**
  * Epic bonus.
- *
- * TODO display number 2 (object 27) and object 36 : bullet colored when remove
- * object
  *
  * @author Emeric MARTINEAU
  */
@@ -30,6 +28,11 @@ public final class EpicManager extends AbstractSynchronisedImageObjectEntity {
     private int match;
 
     /**
+     * Colored bullet when player hit firebird.
+     */
+    private int nbColoredBullet;
+
+    /**
      * Default constructor.
      *
      * @param objectParam object parameter
@@ -42,6 +45,8 @@ public final class EpicManager extends AbstractSynchronisedImageObjectEntity {
 
         // Remove me from list of object (= kill me)
         this.killme = new ObjectListMessage(this, false);
+
+        this.nbColoredBullet = getConfInteger("nbColoredBullet");
     }
 
     @Override
@@ -57,6 +62,9 @@ public final class EpicManager extends AbstractSynchronisedImageObjectEntity {
             if (this.state == this.match) {
                 this.messageDispatcher.sendMessage(
                     EnumMessageType.OBJECT, this.killme);
+
+                BulletObjectFactory.explode(this, this.nbColoredBullet,
+                    this.messageDispatcher);
             }
         }
     }
