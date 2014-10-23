@@ -2,7 +2,11 @@ package org.jill.game.gui;
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.jill.game.gui.menu.SubMenu;
 import org.jill.openjill.core.api.manager.TextManager;
 import org.jill.openjill.core.api.manager.TileManager;
@@ -114,12 +118,41 @@ public final class InformationBox {
     private BufferedImage bottomBorder;
 
     /**
+     * Position of box.
+     */
+    private int x;
+
+    /**
+     * Position of box.
+     */
+    private int y;
+
+    /**
      * Constructor for dialog box 190x130 size.
      *
      * @param pctCache cache picture manager
      */
     public InformationBox(final TileManager pctCache) {
-        this(190, 130, pctCache);
+        Properties bulletProperties = new Properties();
+
+        try {
+            bulletProperties.load(this.getClass().getClassLoader().
+                    getResourceAsStream("information_box.properties"));
+
+            final int wd = Integer.valueOf(
+                    bulletProperties.getProperty("width"));
+            final int hd = Integer.valueOf(
+                    bulletProperties.getProperty("height"));
+            final int xpos = Integer.valueOf(
+                    bulletProperties.getProperty("x"));
+            final int ypos = Integer.valueOf(
+                    bulletProperties.getProperty("y"));
+
+            constructor(pctCache, wd, hd, xpos, ypos);
+        } catch (final IOException ex) {
+            Logger.getLogger(this.getClass().getName()).log(
+                    Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -127,13 +160,31 @@ public final class InformationBox {
      *
      * @param wd size of window
      * @param hg size of window
+     * @param xpos x position
+     * @param ypos y position
      * @param pctCache cache picture manager
      */
-    public InformationBox(final int wd, final int hg,
-            final TileManager pctCache) {
+    public InformationBox(final int wd, final int hg, final int xpos,
+            final int ypos, final TileManager pctCache) {
+        constructor(pctCache, wd, hg, xpos, ypos);
+    }
+
+    /**
+     * Construct object.
+     *
+     * @param pctCache picture cache manage
+     * @param wd width
+     * @param hg height
+     * @param xpos x position
+     * @param ypos y position
+     */
+    private void constructor(final TileManager pctCache, final int wd,
+            final int hg, final int xpos, final int ypos) {
         this.pictureCache = pctCache;
         this.width = wd;
         this.height = hg;
+        this.x = xpos;
+        this.y = ypos;
 
         initPicture();
 
@@ -306,8 +357,8 @@ public final class InformationBox {
         }
 
         // Now draw title
-        pictureCache.getTextManager().drawSmallText(g2BoxPicture,
-                8, 6, title.getText(), title.getColor(),
+        pictureCache.getTextManager().drawBigText(g2BoxPicture,
+               -8, 4, title.getText(), title.getColor(),
                 TextManager.BACKGROUND_COLOR_NONE);
     }
 
@@ -349,7 +400,7 @@ public final class InformationBox {
             }
 
             if (colorChar >= '0' && colorChar <= '9') {
-                color = Integer.valueOf(colorChar) - 48;
+                color = colorChar - 48;
                 text = currentLine.substring(1);
             } else {
                 color = TextManager.COLOR_WHITE;
@@ -403,4 +454,24 @@ public final class InformationBox {
     public void setEnable(boolean enable) {
         this.enable = enable;
     }
+
+    /**
+     * Position of box.
+     *
+     * @return X
+     */
+    public int getX() {
+        return x;
+    }
+
+    /**
+     * Position of box.
+     *
+     * @return Y
+     */
+    public int getY() {
+        return y;
+    }
+
+
 }

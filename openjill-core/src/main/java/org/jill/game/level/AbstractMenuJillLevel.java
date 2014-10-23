@@ -7,7 +7,6 @@ import java.io.IOException;
 import org.jill.game.gui.InformationBox;
 import org.jill.game.gui.menu.MenuInterface;
 import org.jill.game.level.cfg.LevelConfiguration;
-import org.simplegame.SimpleGameConfig;
 
 /**
  * This class manage display menu.
@@ -35,16 +34,6 @@ public abstract class AbstractMenuJillLevel extends AbstractObjectJillLevel {
      *
      */
     protected InformationBox infoBox;
-
-    /**
-     * Box position.
-     */
-    protected int boxPosX;
-
-    /**
-     * Box position.
-     */
-    protected int boxPosY;
 
     /**
      * Current display screen.
@@ -75,13 +64,7 @@ public abstract class AbstractMenuJillLevel extends AbstractObjectJillLevel {
     private void constructor() {
         initMenu();
 
-        this.infoBox = new InformationBox(INFO_BOX_WIDTH, INFO_BOX_HEIGHT,
-            this.pictureCache);
-
-        this.boxPosX = (SimpleGameConfig.getInstance().getGameWidth()
-            - INFO_BOX_WIDTH) / 2;
-        this.boxPosY = (SimpleGameConfig.getInstance().getGameHeight()
-            - INFO_BOX_HEIGHT) / 2;
+        this.infoBox = new InformationBox(this.pictureCache);
     }
 
     @Override
@@ -132,8 +115,8 @@ public abstract class AbstractMenuJillLevel extends AbstractObjectJillLevel {
         }
 
         if (this.infoBox.isEnable()) {
-            g.drawImage(this.infoBox.getBox(), this.boxPosX,
-                this.boxPosY, null);
+            g.drawImage(this.infoBox.getBox(), this.infoBox.getX(),
+                this.infoBox.getY(), null);
         }
     }
 
