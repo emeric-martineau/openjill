@@ -19,7 +19,7 @@ public class OrderingInfoScreenJill1Handler
     /**
      * List of screens.
      */
-    private Point[] screens = new Point[4];
+    private final Point[] screens = new Point[4];
 
     /**
      * Current screen position.
@@ -47,6 +47,8 @@ public class OrderingInfoScreenJill1Handler
 
         // Must set offsetX and offsetY before select object to display.
         centerScreen();
+
+        setUpdateObject(false);
     }
 
     /**

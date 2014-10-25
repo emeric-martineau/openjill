@@ -133,6 +133,11 @@ public abstract class AbstractExecutingStdLevel extends AbstractMenuJillLevel {
             new ArrayList<>();
 
     /**
+     * By default, send update message t object on visible screen.
+     */
+    private boolean updateObject = true;
+
+    /**
      * Level configuration.
      *
      * @param cfgLevel  configuration of level
@@ -413,8 +418,6 @@ public abstract class AbstractExecutingStdLevel extends AbstractMenuJillLevel {
         obj2Rect.setBounds(player.getX(), player.getY(), player.getWidth(),
                 player.getHeight());
 
-        listObjectCurrentlyDisplayedOnScreen.add(player);
-
         // Grap list of object on screen
         Iterator<ObjectEntity> itObj = this.listObject.iterator();
         ObjectEntity obj;
@@ -445,7 +448,7 @@ public abstract class AbstractExecutingStdLevel extends AbstractMenuJillLevel {
 
                 itObj.remove();
             } else {
-                checkUpdatedObjecCollision(obj);
+                checkUpdatedObjectCollision(obj);
             }
         }
 
@@ -476,15 +479,20 @@ public abstract class AbstractExecutingStdLevel extends AbstractMenuJillLevel {
      *
      * @param obj current object
      */
-    private void checkUpdatedObjecCollision(final ObjectEntity obj) {
+    private void checkUpdatedObjectCollision(final ObjectEntity obj) {
         int zaphold;
         // Decreate touch player flag
         zaphold = obj.getZapHold();
         if (zaphold > 0) {
             obj.setZapHold(zaphold - 1);
         }
-        obj.msgUpdate(this.keyboardLayout);
+
+        if (this.updateObject) {
+            obj.msgUpdate(this.keyboardLayout);
+        }
+
         listObjectToDraw.add(obj);
+
         for (ObjectEntity obj2 : listObjectCurrentlyDisplayedOnScreen) {
             obj2Rect.setBounds(obj2.getX(), obj2.getY(),
                     obj2.getWidth(), obj2.getHeight());
@@ -629,4 +637,13 @@ public abstract class AbstractExecutingStdLevel extends AbstractMenuJillLevel {
      * Player fire.
      */
     protected abstract void doPlayerFire();
+
+    /**
+     * Set to send or not update message to object on visible screen.
+     *
+     * @param upObj tre/false
+     */
+    protected void setUpdateObject(final boolean upObj) {
+        this.updateObject = upObj;
+    }
 }

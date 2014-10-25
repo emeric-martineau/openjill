@@ -94,6 +94,8 @@ public class StartMenuJill1Handler extends AbstractChangeLevel {
         statusBar.drawInventory(inventory);
 
         statusBar.drawControl(createHigScore());
+
+        centerScreen();
     }
 
     /**

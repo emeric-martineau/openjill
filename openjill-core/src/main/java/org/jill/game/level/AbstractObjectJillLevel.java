@@ -178,9 +178,9 @@ public abstract class AbstractObjectJillLevel
                     && player == null) {
                     // Player
                     player = obj;
-                } else {
-                    listObject.add(obj);
                 }
+
+                listObject.add(obj);
             }
         }
 
