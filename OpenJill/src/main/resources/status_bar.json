@@ -11,7 +11,9 @@
             "color":1,
             "x":13,
             "y":179
-        },
+        }
+    ],
+    "bigtext":[
         {
             "text":"Open Jill : Jungle",
             "color":1,

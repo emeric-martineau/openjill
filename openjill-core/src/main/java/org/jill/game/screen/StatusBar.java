@@ -71,23 +71,6 @@ public final class StatusBar implements InterfaceMessageGameHandler {
      */
     private final StatusBarConf conf;
 
-//    static {
-//        try {
-//            Properties conf = new Properties();
-//            conf.load(
-//                    StatusBar.class.
-//                    getClassLoader().
-//                    getResourceAsStream("status_bar.properties"));
-//
-//            controlText = conf.getProperty(CONTROL_KEY);
-//            inventoryText = conf.getProperty(INVENTORY_KEY);
-//            titleText = conf.getProperty(TITLE_KEY);
-//        } catch (final IOException ex) {
-//            LOGGER.log(Level.SEVERE,
-//                "Can't load inventory config file !", ex);
-//        }
-//    }
-
     /**
      * Create status bar.
      *
@@ -150,18 +133,6 @@ public final class StatusBar implements InterfaceMessageGameHandler {
         // Graphic
         this.graphic2d = this.statusBar.createGraphics();
 
-        //drawStatusBarUpperHorizontalBar(graphic2d);
-
-        //drawStatusBarMiddleHorizontalBar(graphic2d);
-
-        //drawStatusBarLowerHorizontalBar(graphic2d);
-
-        //drawStatusBarRightVerticalBar(graphic2d);
-
-        //drawStatusBarMiddleVerticalBar(graphic2d);
-
-        //drawStatusBarLeftVerticalBar(graphic2d);
-
         for (ImagesConf ic : this.conf.getImages()) {
             drawOneTile(ic.getTileset(), ic.getTile(), ic.getX(), ic.getY(),
                     this.graphic2d);
@@ -169,24 +140,19 @@ public final class StatusBar implements InterfaceMessageGameHandler {
 
         drawMessageBar(this.graphic2d, null, 0);
 
-        // Write CONTROLS
-//        TextManager textManager = pictureCache.getTextManager();
-//        textManager.drawSmallText(graphic2d, 16, 5, controlText,
-//                TextManager.COLOR_DARK_BLUE,
-//                TextManager.BACKGROUND_COLOR_NONE);
-//        textManager.drawSmallText(graphic2d, 13, 179, inventoryText,
-//                TextManager.COLOR_DARK_BLUE,
-//                TextManager.BACKGROUND_COLOR_NONE);
-//        textManager.drawBigText(graphic2d, 150, 4, titleText,
-//                TextManager.COLOR_DARK_BLUE,
-//                TextManager.BACKGROUND_COLOR_NONE);
-
         // Draw text
         for (TextToDraw ttd : this.conf.getText()) {
             this.pictureCache.getTextManager().drawSmallText(this.graphic2d,
                     ttd.getX(), ttd.getY(), ttd.getText(), ttd.getColor(),
                 TextManager.BACKGROUND_COLOR_NONE);
         }
+
+        for (TextToDraw ttd : this.conf.getBigtext()) {
+            this.pictureCache.getTextManager().drawBigText(this.graphic2d,
+                    ttd.getX(), ttd.getY(), ttd.getText(), ttd.getColor(),
+                TextManager.BACKGROUND_COLOR_NONE);
+        }
+
     }
 
     /**
@@ -218,134 +184,6 @@ public final class StatusBar implements InterfaceMessageGameHandler {
             g2.drawImage(bi, x, y, null);
         }
     }
-
-    /**
-     * Draw upper horizontal bar.
-     *
-     * @param g2 graphic 2d
-     */
-    private void drawStatusBarUpperHorizontalBar(final Graphics2D g2) {
-        //-[ Draw upper horizontal bar ]---------------------------------------
-        // Left upper corner
-        //drawOneTile(3, 2, 0, 0, g2);
-
-        // Draw top bar
-//        BufferedImage tilePicture = pictureCache.getImage(3, 4);
-//
-//        for (int index = 8; index < 320; index += tilePicture.getWidth()) {
-//            System.out.println("x:"+index);
-//            g2.drawImage(tilePicture, index, 0, null);
-//        }
-//
-        drawOneTile(3, 3, 312, 0, g2);
-//
-        drawOneTile(3, 10, 72, 0, g2);
-    }
-
-    /**
-     * Draw middle horizontal bar.
-     *
-     * @param g2 graphic 2d
-     */
-    private void drawStatusBarMiddleHorizontalBar(final Graphics2D g2) {
-        //-[ Draw middle horizontal bar ]--------------------------------------
-        BufferedImage tilePicture = pictureCache.getImage(3, 12);
-
-        for(int index = 8; index < 72; index += tilePicture.getWidth()) {
-            g2.drawImage(tilePicture, index, 96, null);
-        }
-    }
-
-    /**
-     * Draw lower horizontal bar.
-     *
-     * @param g2 graphic 2d
-     */
-    private void drawStatusBarLowerHorizontalBar(final Graphics2D g2) {
-        //-[ Draw lower horizontal bar ]---------------------------------------
-        drawOneTile(3, 5, 0, 176, g2);
-
-        BufferedImage tilePicture = pictureCache.getImage(3, 6);
-
-        for(int index = 8; index < 312; index += tilePicture.getWidth()) {
-            g2.drawImage(tilePicture, index, 176, null);
-        }
-    }
-
-    /**
-     * Draw right vertical bar.
-     *
-     * @param g2 graphic 2d
-     */
-    private void drawStatusBarRightVerticalBar(final Graphics2D g2) {
-        //-[ Draw right vertical bar ]-----------------------------------------
-        // Draw jonction
-        BufferedImage tilePicture = pictureCache.getImage(3, 9);
-
-        for(int index = 16; index < 176; index += tilePicture.getHeight()) {
-            g2.drawImage(tilePicture, 0, index, null);
-        }
-
-        drawOneTile(3, 13, 0, 96, g2);
-    }
-
-    /**
-     * Draw middle vertical bar.
-     *
-     * @param g2 graphic 2d
-     */
-    private void drawStatusBarMiddleVerticalBar(final Graphics2D g2) {
-        BufferedImage tilePicture = pictureCache.getImage(3, 9);
-
-        //-[ Draw middle vertical bar ]----------------------------------------
-        for(int index = 16; index < 176; index += tilePicture.getHeight()) {
-System.out.println("        {");
-System.out.println("            \"tileset\":3,");
-System.out.println("            \"tile\":9,");
-System.out.println("            \"x\":72,");
-System.out.println("            \"y\":" + index);
-System.out.println("        },");
-            g2.drawImage(tilePicture, 72, index, null);
-        }
-
-        // Draw jonction
-        drawOneTile(3, 11, 72, 96, g2);
-
-        // Draw lower jonction
-        drawOneTile(3, 8, 72, 176, g2);
-    }
-
-    /**
-     * Draw left vertical bar.
-     *
-     * @param g2 graphic 2d
-     */
-    private void drawStatusBarLeftVerticalBar(final Graphics2D g2) {
-        //-[ Draw left vertical bar ]------------------------------------------
-        // Draw left bar
-        drawOneTile(3, 1, 312, 16, g2);
-
-        // Draw upper arrow left
-        drawOneTile(3, 14, 312, 32, g2);
-
-        // Draw left bar
-        drawOneTile(3, 0, 312, 48, g2);
-        drawOneTile(3, 1, 312, 64, g2);
-        drawOneTile(3, 0, 312, 80, g2);
-        drawOneTile(3, 1, 312, 96, g2);
-        drawOneTile(3, 0, 312, 112, g2);
-        drawOneTile(3, 1, 312, 128, g2);
-
-        // Draw down arrow left
-        drawOneTile(3, 15, 312, 144, g2);
-
-        // Draw left bar
-        drawOneTile(3, 0, 312, 160, g2);
-
-        // Draw lower left corner
-        drawOneTile(3, 7, 312, 176, g2);
-    }
-
 
     /**
      * Draw one tile on picture.

@@ -14,6 +14,11 @@ public final class StatusBarConf {
     private List<TextToDraw> text;
 
     /**
+     * Text to draw.
+     */
+    private List<TextToDraw> bigtext;
+
+    /**
      * Message bar.
      */
     private RectangleConf messageBar;
@@ -146,5 +151,22 @@ public final class StatusBarConf {
         this.images = imgs;
     }
 
+    /**
+     * Text to draw.
+     *
+     * @return list of text to draw.
+     */
+    public List<TextToDraw> getBigtext() {
+        return bigtext;
+    }
+
+    /**
+     * Text to draw.
+     *
+     * @param t text
+     */
+    public void setBigtext(final List<TextToDraw> t) {
+        this.bigtext = t;
+    }
 
 }
