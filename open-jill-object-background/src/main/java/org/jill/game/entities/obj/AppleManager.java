@@ -86,6 +86,11 @@ public final class AppleManager extends AbstractParameterObjectEntity {
                     sendMessage();
                     messageDisplayAppleMessage = false;
                 }
+            } else {
+                Integer msgId = (getState() + getConfInteger("boxMsgOffset"))
+                                & getConfInteger("boxMsgMask") ;
+                this.messageDispatcher.sendMessage(
+                        EnumMessageType.MESSAGE_BOX, msgId);
             }
         }
     }

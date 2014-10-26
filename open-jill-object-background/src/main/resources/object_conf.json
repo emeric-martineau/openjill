@@ -38,7 +38,9 @@
         "life":"1",
         "msg":"APPLES GIVE YOU HEALTH",
         "msgTime":"20",
-        "msgColor":"2"
+        "msgColor":"2",
+        "boxMsgOffset":"-2",
+        "boxMsgMask":"15"
     },
     "RedKeyManager":
     {

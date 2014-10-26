@@ -14,17 +14,6 @@ import org.jill.game.level.cfg.LevelConfiguration;
  * @author Emeric MARTINEAU
  */
 public abstract class AbstractMenuJillLevel extends AbstractObjectJillLevel {
-
-    /**
-     * Info box width.
-     */
-    private static final int INFO_BOX_WIDTH = 190;
-
-    /**
-     * Info box height.
-     */
-    private static final int INFO_BOX_HEIGHT = 130;
-
     /**
      * Menu to display.
      */

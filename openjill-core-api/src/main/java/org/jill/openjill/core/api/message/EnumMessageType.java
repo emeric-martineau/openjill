@@ -69,5 +69,10 @@ public enum EnumMessageType {
     /**
      * Restart level after player death.
      */
-    DIE_RESTART_LEVEL;
+    DIE_RESTART_LEVEL,
+
+    /**
+     * Display message in box on screen.
+     */
+    MESSAGE_BOX;
 }

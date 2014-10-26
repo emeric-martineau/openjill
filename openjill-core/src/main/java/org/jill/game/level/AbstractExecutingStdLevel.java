@@ -21,6 +21,7 @@ import org.jill.openjill.core.api.entities.ObjectEntity;
 import org.jill.openjill.core.api.jill.JillConst;
 import org.jill.openjill.core.api.keyboard.KeyboardLayout;
 import org.jill.openjill.core.api.message.EnumMessageType;
+import org.jill.vcl.VclTextEntry;
 import org.simplegame.InterfaceSimpleGameHandleInterface;
 
 /**
@@ -185,6 +186,8 @@ public abstract class AbstractExecutingStdLevel extends AbstractMenuJillLevel {
 
         messageDispatcher.addHandler(EnumMessageType.INVENTORY_ITEM,
                 controlArea);
+
+        messageDispatcher.addHandler(EnumMessageType.MESSAGE_BOX, this);
 
         offsetX = 0;
         offsetY = 0;
@@ -609,11 +612,20 @@ public abstract class AbstractExecutingStdLevel extends AbstractMenuJillLevel {
     public void recieveMessage(final EnumMessageType type, final Object msg) {
         super.recieveMessage(type, msg);
 
-//        if (type == EnumMessageType.INVENTORY) {
-//            // Catch call to know if need update inventory screen
-//            // Use boolean to ensure that all add/remove item are passed
-//            updateInventoryScreen = true;
-//        }
+        if (type == EnumMessageType.MESSAGE_BOX) {
+            int msgId = (Integer) msg;
+
+            if (msgId >= 0) {
+                final List<VclTextEntry> messages = vclFile.getVclText();
+
+                if (msgId > messages.size() - 1) {
+                    msgId = (msgId % messages.size()) - 1;
+                }
+
+                this.infoBox.setContent(messages.get(msgId).getText());
+                this.infoBox.setEnable(true);
+            }
+        }
     }
 
     /**
