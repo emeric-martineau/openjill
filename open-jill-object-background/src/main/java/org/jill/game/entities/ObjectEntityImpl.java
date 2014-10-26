@@ -75,11 +75,6 @@ public abstract class ObjectEntityImpl extends ObjectItemImpl
     protected TileManager pictureCache;
 
     /**
-     * Object.
-     */
-    protected ObjectItem object;
-
-    /**
      * If object must be always on screen (like MAP/DEMO).
      */
     protected boolean alwaysOnScreen = false;
@@ -116,8 +111,9 @@ public abstract class ObjectEntityImpl extends ObjectItemImpl
      */
     public void init(final ObjectParam objectParam) {
         this.pictureCache = objectParam.getPictureCache();
-        this.object = objectParam.getObject();
         this.messageDispatcher = objectParam.getMessageDispatcher();
+
+        final ObjectItem object = objectParam.getObject();
 
         type = object.getType();
         x = object.getX();

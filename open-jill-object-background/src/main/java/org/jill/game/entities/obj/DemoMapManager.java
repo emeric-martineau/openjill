@@ -59,7 +59,7 @@ public final class DemoMapManager extends ObjectEntityImpl {
        int start;
        int end;
 
-       if (object.getxSpeed() > 0) {
+       if (getxSpeed() > 0) {
            // MAP
            start = MAP_START_LETTER;
            end = MAP_END_LETTER;

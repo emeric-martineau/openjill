@@ -37,8 +37,8 @@ public final class TextTileManager extends ObjectEntityImpl {
     @Override
     public BufferedImage msgDraw() {
         // Create picture
-        int widthObj = object.getWidth();
-        int heightObj = object.getHeight();
+        int widthObj = getWidth();
+        int heightObj = getHeight();
 
         // Some text are empty, width or height = 0. But BufferedImage want > 0
         if (widthObj <= 0) {
@@ -56,14 +56,14 @@ public final class TextTileManager extends ObjectEntityImpl {
         // Graphic
         final Graphics2D g2 = image.createGraphics();
 
-        if (object.getType() == SMALL_TEXT) {
+        if (getType() == SMALL_TEXT) {
             pictureCache.getTextManager().drawSmallText(g2, 0, 0,
-                    object.getStringStackEntry().getValue(),
-                    object.getxSpeed(), object.getySpeed());
-        } else if (object.getType() == BIG_TEXT) {
+                    getStringStackEntry().getValue(),
+                    getxSpeed(), getySpeed());
+        } else if (getType() == BIG_TEXT) {
             pictureCache.getTextManager().drawBigText(g2, 0, 0,
-                    object.getStringStackEntry().getValue(),
-                    object.getxSpeed(), object.getySpeed());
+                    getStringStackEntry().getValue(),
+                    getxSpeed(), getySpeed());
         }
 
         return image;
