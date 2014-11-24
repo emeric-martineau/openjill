@@ -184,6 +184,7 @@ public abstract class AbstractPlayerManager extends ObjectEntityImpl {
      */
     private void moveStdPlayerUpDownJumping() {
         boolean playerMove;
+        boolean playerCanUpDown = true;
 
         if (this.ySpeed > Y_SPEED_MIDDLE) {
             playerMove = UtilityObjectEntity.moveObjectDown(this, this.ySpeed,
@@ -196,10 +197,16 @@ public abstract class AbstractPlayerManager extends ObjectEntityImpl {
                 setStateCount(
                         PlayerStandConst.HIT_FLOOR_ANIMATION_STATECOUNT);
                 setCounter(PlayerStandConst.HIT_FLOOR_ANIMATION_COUNT_END);
+
+                // Block or floor hit
                 setySpeed(Y_SPEED_MIDDLE);
+
+                playerCanUpDown = false;
             }
         } else if (this.ySpeed < Y_SPEED_MIDDLE
                 && getSubState() >= PlayerStandConst.SUBSTATE_VALUE_TO_FALL) {
+            final int previousY = getY();
+
             playerMove = UtilityObjectEntity.moveObjectUp(this, this.ySpeed
                     + PlayerJumpingConst.JUMP_INCREMENT_VALUE,
                     this.backgroundObject);
@@ -207,8 +214,12 @@ public abstract class AbstractPlayerManager extends ObjectEntityImpl {
             // above -1 cause skip a ySpeed due to previous update
             // Up
             if (!playerMove) {
-                // Block or floor hit
-                setySpeed(Y_SPEED_MIDDLE);
+                // Set 0 only if player have same position (play have been moved
+                // but not totaly).
+                if (previousY == getY()) {
+                    setySpeed(Y_SPEED_MIDDLE);
+                    playerCanUpDown = false;
+                }
             }
         } else {
             playerMove = false;
@@ -221,7 +232,8 @@ public abstract class AbstractPlayerManager extends ObjectEntityImpl {
         }
 
         // Player fall but with speed limit
-        if (getSubState() >= PlayerStandConst.SUBSTATE_VALUE_TO_FALL
+        if (playerCanUpDown
+                && getSubState() >= PlayerStandConst.SUBSTATE_VALUE_TO_FALL
                 && this.ySpeed < PlayerJumpingConst.JUMP_FALLING_SPEED_LIMIT) {
             this.ySpeed += PlayerJumpingConst.JUMP_INCREMENT_VALUE;
         }
