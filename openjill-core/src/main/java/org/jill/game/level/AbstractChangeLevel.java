@@ -58,11 +58,6 @@ public abstract class AbstractChangeLevel extends
     /**
      * Next level to load.
      */
-    protected boolean isChangeLevel = false;
-
-    /**
-     * Next level to load.
-     */
     protected boolean isRestoreLevel = false;
 
     /**
@@ -118,7 +113,17 @@ public abstract class AbstractChangeLevel extends
         final int levelNumber) {
         this.newLevelFileName = levelFileName;
         this.newLevelNumber = levelNumber;
-        this.isChangeLevel = true;
+
+        if (levelNumber == SaveData.MAP_LEVEL) {
+            this.levelMessageBox.setLevel(0);
+            this.levelMessageBox.setEnable(true);
+        } else if (levelNumber == RESTART_LEVEL_NUMBER) {
+            this.levelMessageBox.setCanchange(true);
+            //this.levelMessageBox.setLevel(levelNumber);
+        } else {
+            this.levelMessageBox.setLevel(levelNumber);
+            this.levelMessageBox.setEnable(true);
+        }
     }
 
     /**
@@ -144,6 +149,7 @@ public abstract class AbstractChangeLevel extends
     private void createAndLoadNewLevel() {
         // Stop game
         this.runGame = false;
+        this.levelMessageBox.setCanchange(false);
 
         // If in map level, store map level to object
         if (this.newLevelNumber == RESTART_LEVEL_NUMBER) {
@@ -483,7 +489,7 @@ public abstract class AbstractChangeLevel extends
 
     @Override
     public void run() {
-        if (this.isChangeLevel) {
+        if (this.levelMessageBox.isCanchange()) {
             // Do it here to let all data delete
             createAndLoadNewLevel();
         } else if (this.isRestoreLevel) {

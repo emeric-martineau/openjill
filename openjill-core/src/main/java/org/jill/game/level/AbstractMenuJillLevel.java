@@ -5,6 +5,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 import org.jill.game.gui.InformationBox;
+import org.jill.game.gui.LevelMessageBox;
 import org.jill.game.gui.menu.MenuInterface;
 import org.jill.game.level.cfg.LevelConfiguration;
 
@@ -20,14 +21,24 @@ public abstract class AbstractMenuJillLevel extends AbstractObjectJillLevel {
     protected MenuInterface menu;
 
     /**
-     *
+     * Display information, hint...
      */
     protected InformationBox infoBox;
+
+    /**
+     * Box to display message when level change.
+     */
+    protected LevelMessageBox levelMessageBox;
 
     /**
      * Current display screen.
      */
     protected BufferedImage currentDisplayScreen;
+
+    /**
+     * To know if key is always pressed.
+     */
+    private boolean keyReleased = false;
 
     /**
      * Level configuration.
@@ -44,21 +55,30 @@ public abstract class AbstractMenuJillLevel extends AbstractObjectJillLevel {
         ClassNotFoundException {
         super(cfgLevel);
 
-        constructor();
+        constructor(cfgLevel);
     }
 
     /**
      * Construct object.
      */
-    private void constructor() {
+    private void constructor(final LevelConfiguration cfgLevel) {
         initMenu();
 
         this.infoBox = new InformationBox(this.pictureCache);
+
+        this.levelMessageBox = new LevelMessageBox(this.pictureCache,
+                cfgLevel.getCfgSavePrefixe(), this.screenType);
     }
 
     @Override
     public void run() {
-        if (this.infoBox.isEnable()) {
+        if (this.levelMessageBox.isEnable()) {
+            if (this.keyReleased) {
+                this.levelMessageBox.setCanchange(this.keyboard.isKeyPressed());
+            } else {
+                this.keyReleased = !this.keyboard.isKeyPressed();
+            }
+        } else if (this.infoBox.isEnable()) {
             if (this.keyboard.isUp()) {
                 this.infoBox.up();
             } else if (this.keyboard.isDown()) {
@@ -107,6 +127,12 @@ public abstract class AbstractMenuJillLevel extends AbstractObjectJillLevel {
             g.drawImage(this.infoBox.getBox(), this.infoBox.getX(),
                 this.infoBox.getY(), null);
         }
+
+        if (this.levelMessageBox.isEnable()) {
+            g.drawImage(this.levelMessageBox.getBox(),
+                    this.levelMessageBox.getX(), this.levelMessageBox.getY(),
+                    null);
+        }
     }
 
     /**
@@ -128,6 +154,8 @@ public abstract class AbstractMenuJillLevel extends AbstractObjectJillLevel {
 
     /**
      * Default handler void.
+     *
+     * @param key kay of keyboard
      */
     protected void menuOtherKeyHandler(final char key) {
         this.menu.keyEvent(key);
