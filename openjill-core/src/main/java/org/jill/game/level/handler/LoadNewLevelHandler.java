@@ -35,7 +35,7 @@ public class LoadNewLevelHandler extends AbstractChangeLevel {
         constructor(cfgLevel);
 
         // Store map level
-        mapLevel = cfgLevel.getLevelMapData();
+        this.mapLevel = cfgLevel.getLevelMapData();
     }
 
     /**
@@ -61,12 +61,15 @@ public class LoadNewLevelHandler extends AbstractChangeLevel {
             // In start of map level, don't search check point
             if (level != SaveData.MAP_LEVEL) {
                 // Search checkpoint to move player on only on new map
-                player.setState(PlayerState.BEGIN);
+                this.player.setState(PlayerState.BEGIN);
 
                 final ObjectEntity checkPoint = findCheckPoint(level);
 
-                player.setX(checkPoint.getX());
-                player.setY(checkPoint.getY() - checkPoint.getHeight());
+                if (checkPoint != null) {
+                    this.player.setX(checkPoint.getX());
+                    this.player.setY(
+                            checkPoint.getY() - checkPoint.getHeight());
+                }
             }
 
             // Keep score
@@ -118,7 +121,7 @@ public class LoadNewLevelHandler extends AbstractChangeLevel {
      * @return checkpoint or null
      */
     private ObjectEntity findCheckPoint(final int level) {
-        for (ObjectEntity obj : listObject) {
+        for (ObjectEntity obj : this.listObject) {
             if (obj.isCheckPoint() && obj.getCounter() == level) {
                 return obj;
             }
@@ -129,6 +132,6 @@ public class LoadNewLevelHandler extends AbstractChangeLevel {
 
     @Override
     protected boolean isCurrentLevelMap() {
-        return inventoryArea.getLevel() == SaveData.MAP_LEVEL;
+        return this.inventoryArea.getLevel() == SaveData.MAP_LEVEL;
     }
 }
