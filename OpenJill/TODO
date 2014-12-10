@@ -1,10 +1,19 @@
 Demo : do it
 
 Level : noise
-Level : display message box
-Level : display secret hint
 
 General : StdMenu.java -> don't use static value like 12,8... try to get image size and calculate area
+General : StatusBar use properties file like LevelMessage (vga/not vga) to remove jill face draw from code
+General : Start screen draw jill face by file like LeveMessage
+General : If checkpoint not found when load level, display message not NullPointer
+General : InfoBox, LevelMessageBox -> add timeout
+General : InfoBox -> use json file and file IndexOutOfBoundsException
+
+Object : MAP/DEMO obj, update always x/y
+
+Load menu : support of left/right key
+Load/save menu : support of number keys
+Menu : support of short cut
 
 Sound : do it
 
@@ -22,27 +31,7 @@ Background
 
 Object :
 --------
- - Checkpoint : add text support. Look first ckeckpoint in map xSpeed = 344 and ySpeed = -64
- - Apple : add text support see state
-           Exemple :
-                Object #58 (0x4708)
-                    type = 1 (Apple)
-                    x = 896
-                    y = 136
-                    width = 12
-                    height = 12
-                    xSpeed = 0
-                    ySpeed = 0
-                    state = 4
-                    subState = 0
-                    stateCount = 0
-                    counter = 0
-                    flags = 0
-                    info1 = 0
-                    pointer = 0
-
-            Display the message #3 in VLC (index 2)
-
+ 
 Change needed ?
 ---------------
 Add :
