@@ -364,9 +364,6 @@ public abstract class AbstractChangeLevel extends
             + this.listObjectDrawOnBackground.size()
             + this.listObjectAlwaysOnScreen.size());
 
-        // Add player a the top !
-        this.player.writeToFile(fab);
-
         // Running object
         for (ObjectItem obj : this.listObject) {
             obj.writeToFile(fab);
