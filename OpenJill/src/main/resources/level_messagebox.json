@@ -1,184 +1,46 @@
 {
-    "x":94,
+    "x":104,
     "y":48,
-    "width":192,
+    "width":144,
     "height":92,
     "textColor":7,
     "textarea":{
-        "width":105,
-        "height":64,
-        "x":79,
-        "y":16,
-        "color":1
-    },
-    "picturearea":{
-        "width":64,
+        "width":128,
         "height":64,
         "x":8,
         "y":16,
-        "color":0
+        "color":1
     },
     "images":[
-{
-            "comment":"Jill face : line 1",
-            "tileset":24,
-            "tile":0,
-            "x":8,
-            "y":16
-        },
-        {
-            "tileset":24,
-            "tile":1,
-            "x":24,
-            "y":16
-        },
-        {
-            "tileset":24,
-            "tile":2,
-            "x":40,
-            "y":16
-        },
-        {
-            "tileset":24,
-            "tile":3,
-            "x":56,
-            "y":16
-        },
-        {
-            "comment":"Jill face : line 2",
-            "tileset":24,
-            "tile":4,
-            "x":8,
-            "y":32
-        },
-        {
-            "tileset":24,
-            "tile":5,
-            "x":24,
-            "y":32
-        },
-        {
-            "tileset":24,
-            "tile":6,
-            "x":40,
-            "y":32
-        },
-        {
-            "tileset":24,
-            "tile":7,
-            "x":56,
-            "y":32
-        },
-        {
-            "comment":"Jill face : line 3",
-            "tileset":24,
-            "tile":8,
-            "x":8,
-            "y":48
-        },
-        {
-            "tileset":24,
-            "tile":9,
-            "x":24,
-            "y":48
-        },
-        {
-            "tileset":24,
-            "tile":10,
-            "x":40,
-            "y":48
-        },
-        {
-            "tileset":24,
-            "tile":11,
-            "x":56,
-            "y":48
-        },
-        {
-            "comment":"Jill face : line 4",
-            "tileset":24,
-            "tile":12,
-            "x":8,
-            "y":62
-        },
-        {
-            "tileset":24,
-            "tile":13,
-            "x":24,
-            "y":62
-        },
-        {
-            "tileset":24,
-            "tile":14,
-            "x":40,
-            "y":62
-        },
-        {
-            "tileset":24,
-            "tile":15,
-            "x":56,
-            "y":62
-        },        
         {
             "comment":"drawRightVerticalBar",
             "tileset":3,
             "tile":0,
-            "x":184,
+            "x":136,
             "y":16
         },
         {
             "tileset":3,
             "tile":0,
-            "x":184,
+            "x":136,
             "y":32
         },
         {
             "tileset":3,
             "tile":0,
-            "x":184,
+            "x":136,
             "y":48
         },
         {
             "tileset":3,
             "tile":0,
-            "x":184,
+            "x":136,
             "y":64
         },
         {
             "tileset":3,
             "tile":0,
-            "x":184,
-            "y":80
-        },
-        {
-            "comment":"drawMiddleVerticalBar",
-            "tileset":3,
-            "tile":9,
-            "x":72,
-            "y":16
-        },
-        {
-            "tileset":3,
-            "tile":9,
-            "x":72,
-            "y":32
-        },
-        {
-            "tileset":3,
-            "tile":9,
-            "x":72,
-            "y":48
-        },
-        {
-            "tileset":3,
-            "tile":9,
-            "x":72,
-            "y":64
-        },
-        {
-            "tileset":3,
-            "tile":9,
-            "x":72,
+            "x":136,
             "y":80
         },
         {
@@ -269,32 +131,8 @@
         },
         {
             "tileset":3,
-            "tile":4,
-            "x":136,
-            "y":0
-        },
-        {
-            "tileset":3,
-            "tile":4,
-            "x":152,
-            "y":0
-        },
-        {
-            "tileset":3,
-            "tile":4,
-            "x":168,
-            "y":0
-        },
-        {
-            "tileset":3,
             "tile":3,
-            "x":184,
-            "y":0
-        },
-        {
-            "tileset":3,
-            "tile":10,
-            "x":72,
+            "x":136,
             "y":0
         },
         {
@@ -338,7 +176,7 @@
             "tileset":3,
             "tile":6,
             "x":88,
-            "y":84
+            "y":80
         },
         {
             "tileset":3,
@@ -354,33 +192,8 @@
         },
         {
             "tileset":3,
-            "tile":6,
-            "x":136,
-            "y":80
-        },
-        {
-            "tileset":3,
-            "tile":6,
-            "x":152,
-            "y":80
-        },
-        {
-            "tileset":3,
-            "tile":6,
-            "x":168,
-            "y":80
-        },
-        {
-            "tileset":3,
             "tile":7,
-            "x":184,
-            "y":80
-        },
-        {
-            "comment":"drawMiddleVerticalBar : Draw lower jonction",
-            "tileset":3,
-            "tile":8,
-            "x":72,
+            "x":136,
             "y":80
         }
     ],

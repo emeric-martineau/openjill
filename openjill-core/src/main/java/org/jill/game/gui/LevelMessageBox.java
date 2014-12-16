@@ -107,13 +107,16 @@ public final class LevelMessageBox {
      */
     private void drawArea(final RectangleConf textArea)
             throws NumberFormatException {
-        final Color baseColor = this.pictureCache.getColorMap()[
-                Integer.valueOf(textArea.getColor())];
-        // Draw background text area
-        this.g2BoxPicture.setColor(new Color(baseColor.getRGB()));
 
-        this.g2BoxPicture.fillRect(textArea.getX(), textArea.getY(),
-                textArea.getWidth(), textArea.getHeight());
+        if (textArea != null) {
+            final Color baseColor = this.pictureCache.getColorMap()[
+                    Integer.valueOf(textArea.getColor())];
+            // Draw background text area
+            this.g2BoxPicture.setColor(new Color(baseColor.getRGB()));
+
+            this.g2BoxPicture.fillRect(textArea.getX(), textArea.getY(),
+                    textArea.getWidth(), textArea.getHeight());
+        }
     }
 
     /**
