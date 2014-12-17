@@ -329,6 +329,8 @@ public final class InformationBox {
      * Draw text
      */
     private void drawTextArea() {
+        SubMenu line;
+
         // Draw background text
         g2BoxPicture.setColor(pictureCache.getColorMap()[
                 TextManager.COLOR_DARK_BLUE]);
@@ -340,11 +342,24 @@ public final class InformationBox {
                 height - rightBottomCorner.getHeight()
                     - leftTopCorner.getHeight());
 
-        final int end = currentMenuPos + numberLinePerScreen;
+        int end = currentMenuPos + numberLinePerScreen;
+
+        if (listText.size() < numberLinePerScreen) {
+            // Add blank line to center
+            int nbLineToAdd = (numberLinePerScreen - listText.size()) / 2;
+
+            line = new SubMenu(0, " ");
+
+            for (int index = 0; index < nbLineToAdd; index++) {
+                listText.add(index, line);
+            }
+        }
+
+        if (end > listText.size()) {
+            end = listText.size();
+        }
 
         int yText = 16;
-
-        SubMenu line;
 
         // Draw text
         for(int index = currentMenuPos; index < end; index++) {
@@ -410,11 +425,12 @@ public final class InformationBox {
             listText.add(new SubMenu(color, addSpace(text)));
         }
 
+        // First is title
         title = listText.get(0);
         listText.remove(0);
 
         // Calculate the last first line to display
-        endMenuPos = lines.length - numberLinePerScreen - 1;
+        endMenuPos = listText.size() - numberLinePerScreen - 1;
 
         drawTextArea();
     }
