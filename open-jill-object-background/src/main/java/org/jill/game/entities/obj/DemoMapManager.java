@@ -87,4 +87,14 @@ public final class DemoMapManager extends ObjectEntityImpl {
     public BufferedImage msgDraw() {
         return image;
     }
+
+    @Override
+    public int getX() {
+        return 16;
+    }
+
+    @Override
+    public int getY() {
+        return 4;
+    }
 }
