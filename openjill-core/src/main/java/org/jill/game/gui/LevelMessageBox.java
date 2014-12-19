@@ -245,7 +245,7 @@ public final class LevelMessageBox {
         // Text is splited by \n.
         List<String> listMessage = this.conf.getMessages().get(keyOfMessage);
 
-        if (level > 0 && level < listMessage.size()) {
+        if (level >= 0 && level < listMessage.size()) {
             // Get message for this level
             String textRaw = listMessage.get(level);
 
