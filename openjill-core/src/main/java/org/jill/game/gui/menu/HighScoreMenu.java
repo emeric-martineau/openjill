@@ -432,4 +432,14 @@ public final class HighScoreMenu extends AbstractMenu implements MenuInterface {
             previousMenu.draw(g2);
         }
     }
+
+    @Override
+    public void left() {
+        up();
+    }
+
+    @Override
+    public void right() {
+        down();
+    }
 }

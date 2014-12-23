@@ -33,6 +33,16 @@ public interface MenuInterface {
     void down();
 
     /**
+     * Left cursor.
+     */
+    void left();
+
+    /**
+     * Down cursor.
+     */
+    void right();
+
+    /**
      * Return value of current cursor.
      *
      * @return cursor position

@@ -373,4 +373,14 @@ public class StdMenu extends AbstractMenu implements MenuInterface {
     public void keyEvent(char consumeOtherKey) {
         // Nothing
     }
+
+    @Override
+    public void left() {
+        up();
+    }
+
+    @Override
+    public void right() {
+        down();
+    }
 }

@@ -93,6 +93,10 @@ public abstract class AbstractMenuJillLevel extends AbstractObjectJillLevel {
                 this.menu.up();
             } else if (this.keyboard.isDown()) {
                 this.menu.down();
+            } else if (this.keyboard.isLeft()) {
+                this.menu.left();
+            } else if (this.keyboard.isRight()) {
+                this.menu.right();
             } else if (this.keyboard.isEnter()) {
                 // Clear key before switch
                 this.keyboard.clear();

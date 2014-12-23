@@ -7,7 +7,6 @@ General : StatusBar use properties file like LevelMessage (vga/not vga) to remov
 General : Start screen draw jill face by file like LeveMessage
 General : InfoBox, LevelMessageBox -> add timeout
 
-Load menu : support of left/right key
 Load/save menu : support of number keys
 Menu : support of short cut
 

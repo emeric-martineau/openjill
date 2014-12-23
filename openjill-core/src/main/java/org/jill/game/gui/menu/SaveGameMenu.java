@@ -186,4 +186,18 @@ public final class SaveGameMenu extends AbstractLoadGameMenu {
     public final String getNameSave() {
         return this.nameSave.toString();
     }
+
+    @Override
+    public void left() {
+        if (getEditMode()) {
+            keyEvent('\b');
+        } else {
+            up();
+        }
+    }
+
+    @Override
+    public void right() {
+        down();
+    }
 }

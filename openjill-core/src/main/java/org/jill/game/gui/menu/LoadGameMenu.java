@@ -59,4 +59,14 @@ public final class LoadGameMenu extends AbstractLoadGameMenu {
     protected String getConfigFileName() {
         return "load_game_menu.json";
     }
+
+    @Override
+    public void left() {
+        up();
+    }
+
+    @Override
+    public void right() {
+        down();
+    }
 }
