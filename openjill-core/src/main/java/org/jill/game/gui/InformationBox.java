@@ -1,13 +1,17 @@
 package org.jill.game.gui;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
-import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.jill.game.gui.conf.InformationBoxConf;
 import org.jill.game.gui.menu.SubMenu;
+import org.jill.game.screen.conf.ImagesConf;
+import org.jill.game.screen.conf.RectangleConf;
 import org.jill.openjill.core.api.manager.TextManager;
 import org.jill.openjill.core.api.manager.TileManager;
 
@@ -16,7 +20,13 @@ import org.jill.openjill.core.api.manager.TileManager;
  *
  * @author Emeric MARINEAU
  */
-public final class InformationBox {
+public final class InformationBox extends AbstractMessageBox {
+    /**
+     * Logger.
+     */
+    private static final Logger LOGGER = Logger.getLogger(
+                    InformationBox.class.getName());
+
     /**
      * Length of line in box.
      */
@@ -43,19 +53,9 @@ public final class InformationBox {
     private TileManager pictureCache;
 
     /**
-     * Size.
-     */
-    private int width;
-
-    /**
-     * Size.
-     */
-    private int height;
-
-    /**
      *  List of text.
      */
-    private ArrayList<SubMenu> listText = new ArrayList<>();
+    private final ArrayList<SubMenu> listText = new ArrayList<>();
 
     /**
      * Title of dialog box.
@@ -78,54 +78,14 @@ public final class InformationBox {
     private boolean enable = false;
 
     /**
-     * Picture.
+     * Configuration.
      */
-    private BufferedImage leftTopCorner;
+    private InformationBoxConf conf;
 
     /**
-     * Picture.
+     * Size of letter.
      */
-    private BufferedImage rightTopCorner;
-
-    /**
-     * Picture.
-     */
-    private BufferedImage leftBottomCorner;
-
-    /**
-     * Picture.
-     */
-    private BufferedImage rightBottomCorner;
-
-    /**
-     * Picture.
-     */
-    private BufferedImage rightBorder;
-
-    /**
-     * Picture.
-     */
-    private BufferedImage leftBorder;
-
-    /**
-     * Picture.
-     */
-    private BufferedImage topBorder;
-
-    /**
-     * Picture.
-     */
-    private BufferedImage bottomBorder;
-
-    /**
-     * Position of box.
-     */
-    private int x;
-
-    /**
-     * Position of box.
-     */
-    private int y;
+    private int sizeOfLetter;
 
     /**
      * Constructor for dialog box 190x130 size.
@@ -133,40 +93,38 @@ public final class InformationBox {
      * @param pctCache cache picture manager
      */
     public InformationBox(final TileManager pctCache) {
-        Properties bulletProperties = new Properties();
-
-        try {
-            bulletProperties.load(this.getClass().getClassLoader().
-                    getResourceAsStream("information_box.properties"));
-
-            final int wd = Integer.valueOf(
-                    bulletProperties.getProperty("width"));
-            final int hd = Integer.valueOf(
-                    bulletProperties.getProperty("height"));
-            final int xpos = Integer.valueOf(
-                    bulletProperties.getProperty("x"));
-            final int ypos = Integer.valueOf(
-                    bulletProperties.getProperty("y"));
-
-            constructor(pctCache, wd, hd, xpos, ypos);
-        } catch (final IOException ex) {
-            Logger.getLogger(this.getClass().getName()).log(
-                    Level.SEVERE, null, ex);
-        }
+        constructor(pctCache);
     }
 
     /**
-     * Constructor for dialog box with personnal size.
+     * Read config file.
      *
-     * @param wd size of window
-     * @param hg size of window
-     * @param xpos x position
-     * @param ypos y position
-     * @param pctCache cache picture manager
+     * @param filename final name of config file
+     *
+     * @return properties file
      */
-    public InformationBox(final int wd, final int hg, final int xpos,
-            final int ypos, final TileManager pctCache) {
-        constructor(pctCache, wd, hg, xpos, ypos);
+    private static InformationBoxConf readConf(final String filename) {
+
+        final ObjectMapper mapper = new ObjectMapper();
+        final InputStream is =
+                LevelMessageBox.class.getClassLoader().
+                        getResourceAsStream(filename);
+
+        InformationBoxConf mc;
+
+        // Load menu
+        try {
+            mc = mapper.readValue(is, InformationBoxConf.class);
+        } catch (IOException ex) {
+            LOGGER.log(Level.SEVERE,
+                String.format("Unable to load config for message level '%s'",
+                        filename),
+                ex);
+
+            mc = null;
+        }
+
+        return mc;
     }
 
     /**
@@ -178,125 +136,37 @@ public final class InformationBox {
      * @param xpos x position
      * @param ypos y position
      */
-    private void constructor(final TileManager pctCache, final int wd,
-            final int hg, final int xpos, final int ypos) {
+    private void constructor(final TileManager pctCache) {
         this.pictureCache = pctCache;
-        this.width = wd;
-        this.height = hg;
-        this.x = xpos;
-        this.y = ypos;
 
-        initPicture();
+        this.sizeOfLetter = pctCache.getTextManager().
+                createSmallText(" ", 0, 0).getWidth();
 
-        createStatusBar(wd, hg);
+        this.conf = readConf("information_box.json");
 
-        lineLength = (wd - 16) / 6;
-        numberLinePerScreen = (hg - (16 + 12)) / 6;
-    }
-
-    /**
-     * Ini picture.
-     */
-    private void initPicture() {
-        leftTopCorner = pictureCache.getImage(3, 2);
-        rightTopCorner = pictureCache.getImage(3, 3);
-        leftBottomCorner = pictureCache.getImage(3, 5);
-        rightBottomCorner = pictureCache.getImage(3, 7);
-        leftBorder = pictureCache.getImage(3, 9);
-        rightBorder = pictureCache.getImage(3, 1);
-        topBorder = pictureCache.getImage(3, 4);
-        bottomBorder = pictureCache.getImage(3, 6);
-    }
-
-    /**
-     * Create status bar with inventory.
-     */
-    private void createStatusBar(final int width, final int height) {
         // Buffer image
-        boxPicture =
-            new BufferedImage(width, height,
+        this.boxPicture =
+            new BufferedImage(conf.getWidth(), conf.getHeight(),
                     BufferedImage.TYPE_INT_ARGB);
+
         // Graphic
-        g2BoxPicture = boxPicture.createGraphics();
+        this.g2BoxPicture = this.boxPicture.createGraphics();
 
-        drawStatusBarRightVerticalBar(g2BoxPicture);
+        RectangleConf textArea = this.conf.getTextarea();
 
-        drawStatusBarLeftVerticalBar(g2BoxPicture);
+        drawArea(this.g2BoxPicture, pctCache, textArea);
 
-        drawStatusBarUpperHorizontalBar(g2BoxPicture);
-
-        drawStatusBarLowerHorizontalBar(g2BoxPicture);
-    }
-
-    private void drawStatusBarUpperHorizontalBar(final Graphics2D g2) {
-        //-[ Draw upper horizontal bar ]---------------------------------------
-        // Left upper corner
-        g2.drawImage(leftTopCorner, 0, 0, null);
-
-        // Height to draw
-        final int widthtToDraw = width - leftTopCorner.getWidth() - rightBorder.getWidth();
-        // Number to picture to draw
-        final int number = (widthtToDraw / topBorder.getHeight()) + 1;
-
-        int x = leftTopCorner.getWidth();
-
-        for(int index = 0; index < number; index++) {
-            g2.drawImage(topBorder, x, 0, null);
-
-            x += topBorder.getWidth();
+        // Draw picture
+        for (ImagesConf ic : this.conf.getImages()) {
+            drawOneTile(pctCache, ic.getTileset(), ic.getTile(), ic.getX(),
+                    ic.getY(), this.g2BoxPicture);
         }
 
-        g2.drawImage(rightTopCorner, width - rightBorder.getWidth(), 0, null);
-    }
-
-    private void drawStatusBarLowerHorizontalBar(final Graphics2D g2) {
-        //-[ Draw lower horizontal bar ]---------------------------------------
-        final int y = height - bottomBorder.getHeight();
-
-        g2.drawImage(leftBottomCorner, 0, y, null);
-
-        final int widthBottomBorder = bottomBorder.getWidth();
-
-        for(int index = leftBottomCorner.getWidth(); index < width; index += widthBottomBorder) {
-            g2.drawImage(bottomBorder, index, y, null);
-        }
-
-        g2.drawImage(rightBottomCorner, width - rightBottomCorner.getWidth(), y, null);
-    }
-
-    private void drawStatusBarRightVerticalBar(final Graphics2D g2) {
-        //-[ Draw right vertical bar ]-----------------------------------------
-        // Height to draw
-        final int heightToDraw = height - topBorder.getHeight() - bottomBorder.getHeight();
-        // Number to picture to draw
-        final int number = (heightToDraw / rightBorder.getHeight()) + 1;
-
-        int y = topBorder.getHeight();
-
-        for(int index = 0; index < number; index++) {
-            g2.drawImage(rightBorder, 0, y, null);
-
-            y += rightBorder.getHeight();
-        }
-    }
-
-    private void drawStatusBarLeftVerticalBar(final Graphics2D g2) {
-        //-[ Draw right vertical bar ]-----------------------------------------
-
-        // Height to draw
-        final int heightToDraw = height - topBorder.getHeight() - bottomBorder.getHeight();
-        // Number to picture to draw
-        final int number = (heightToDraw / rightBorder.getHeight()) + 1;
-        // X to draw
-        final int x = width - rightBorder.getWidth();
-
-        int y = topBorder.getHeight();
-
-        for(int index = 0; index < number; index++) {
-            g2.drawImage(leftBorder, x, y, null);
-
-            y += leftBorder.getHeight();
-        }
+        lineLength = (this.conf.getWidth() - this.conf.getBorderWith() * 2)
+                / this.sizeOfLetter;
+        numberLinePerScreen = (this.conf.getHeight()
+                - (this.conf.getBorderHeight()
+                + this.conf.getNbLineDraw())) / this.sizeOfLetter;
     }
 
     /**
@@ -331,16 +201,9 @@ public final class InformationBox {
     private void drawTextArea() {
         SubMenu line;
 
-        // Draw background text
-        g2BoxPicture.setColor(pictureCache.getColorMap()[
-                TextManager.COLOR_DARK_BLUE]);
-        g2BoxPicture.fillRect(
-                leftTopCorner.getWidth(),
-                leftTopCorner.getHeight(),
-                width - rightBottomCorner.getWidth()
-                    - leftTopCorner.getWidth(),
-                height - rightBottomCorner.getHeight()
-                    - leftTopCorner.getHeight());
+        RectangleConf textArea = this.conf.getTextarea();
+
+        drawArea(this.g2BoxPicture, this.pictureCache, textArea);
 
         int end = currentMenuPos + numberLinePerScreen;
 
@@ -359,21 +222,26 @@ public final class InformationBox {
             end = listText.size();
         }
 
-        int yText = 16;
+        int yText = this.conf.getBorderHeight();
+
+        int offsetTextX = this.conf.getOffsetTextDrawX();
 
         // Draw text
         for(int index = currentMenuPos; index < end; index++) {
             line = listText.get(index);
             pictureCache.getTextManager().drawSmallText(g2BoxPicture,
-                    8, yText, line.getText(), line.getColor(),
+                    offsetTextX, yText, line.getText(), line.getColor(),
                     TextManager.BACKGROUND_COLOR_NONE);
 
-            yText += 6;
+            yText += this.sizeOfLetter;
         }
+
+        int offsetTitleX = this.conf.getOffsetTitleDrawX();
+        int offsetTitleY = this.conf.getOffsetTitleDrawY();
 
         // Now draw title
         pictureCache.getTextManager().drawBigText(g2BoxPicture,
-               -8, 4, title.getText(), title.getColor(),
+               offsetTitleX, offsetTitleY, title.getText(), title.getColor(),
                 TextManager.BACKGROUND_COLOR_NONE);
     }
 
@@ -477,7 +345,7 @@ public final class InformationBox {
      * @return X
      */
     public int getX() {
-        return x;
+        return this.conf.getX();
     }
 
     /**
@@ -486,7 +354,7 @@ public final class InformationBox {
      * @return Y
      */
     public int getY() {
-        return y;
+        return this.conf.getY();
     }
 
 

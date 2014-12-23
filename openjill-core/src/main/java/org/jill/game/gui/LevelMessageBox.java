@@ -1,7 +1,6 @@
 package org.jill.game.gui;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -21,7 +20,7 @@ import org.jill.openjill.core.api.screen.EnumScreenType;
  *
  * @author Emeric MARTINEAU
  */
-public final class LevelMessageBox {
+public final class LevelMessageBox extends AbstractMessageBox {
     /**
      * Logger.
      */
@@ -84,57 +83,21 @@ public final class LevelMessageBox {
 
         RectangleConf textArea = this.conf.getTextarea();
 
-        drawArea(textArea);
+        drawArea(this.g2BoxPicture, pctCache, textArea);
 
         textArea = this.conf.getPicturearea();
 
-        drawArea(textArea);
+        drawArea(this.g2BoxPicture, pctCache, textArea);
 
         // Draw picture
         for (ImagesConf ic : this.conf.getImages()) {
-            drawOneTile(ic.getTileset(), ic.getTile(), ic.getX(), ic.getY(),
-                    this.g2BoxPicture);
+            drawOneTile(pctCache, ic.getTileset(), ic.getTile(), ic.getX(),
+                    ic.getY(), this.g2BoxPicture);
         }
 
         this.keyOfMessage = saveExtension;
     }
 
-    /**
-     * Draw area.
-     *
-     * @param textArea aera
-     * @throws NumberFormatException
-     */
-    private void drawArea(final RectangleConf textArea)
-            throws NumberFormatException {
-
-        if (textArea != null) {
-            final Color baseColor = this.pictureCache.getColorMap()[
-                    Integer.valueOf(textArea.getColor())];
-            // Draw background text area
-            this.g2BoxPicture.setColor(new Color(baseColor.getRGB()));
-
-            this.g2BoxPicture.fillRect(textArea.getX(), textArea.getY(),
-                    textArea.getWidth(), textArea.getHeight());
-        }
-    }
-
-    /**
-     * Draw one tile on picture.
-     *
-     * @param tileSetIndex tileset index
-     * @param tileIndex tile index
-     * @param x x
-     * @param y y
-     * @param g2 graphic 2d
-     */
-    private void drawOneTile(final int tileSetIndex, final int tileIndex,
-            final int x, final int y, final Graphics2D g2) {
-        // Left upper corner
-        final BufferedImage tilePicture = pictureCache.getImage(
-                tileSetIndex,tileIndex);
-        g2.drawImage(tilePicture, x, y, null);
-    }
 
     /**
      * Read config file.
@@ -239,7 +202,7 @@ public final class LevelMessageBox {
         RectangleConf textAreaConf = this.conf.getTextarea();
 
         // Clear text area
-        drawArea(textAreaConf);
+        drawArea(this.g2BoxPicture, this.pictureCache, textAreaConf);
 
         // Compute size of text.
         // Text is splited by \n.

@@ -6,7 +6,6 @@ General : StdMenu.java -> don't use static value like 12,8... try to get image s
 General : StatusBar use properties file like LevelMessage (vga/not vga) to remove jill face draw from code
 General : Start screen draw jill face by file like LeveMessage
 General : InfoBox, LevelMessageBox -> add timeout
-General : InfoBox -> use json file
 
 Load menu : support of left/right key
 Load/save menu : support of number keys
