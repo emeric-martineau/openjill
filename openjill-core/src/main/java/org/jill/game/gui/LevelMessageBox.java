@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.jill.game.gui.conf.LevelMessageConf;
-import org.jill.game.screen.conf.ImagesConf;
 import org.jill.game.screen.conf.RectangleConf;
 import org.jill.openjill.core.api.manager.TextManager;
 import org.jill.openjill.core.api.manager.TileManager;
@@ -90,10 +89,7 @@ public final class LevelMessageBox extends AbstractMessageBox {
         drawArea(this.g2BoxPicture, pctCache, textArea);
 
         // Draw picture
-        for (ImagesConf ic : this.conf.getImages()) {
-            drawOneTile(pctCache, ic.getTileset(), ic.getTile(), ic.getX(),
-                    ic.getY(), this.g2BoxPicture);
-        }
+        drawAllPicture(this.g2BoxPicture, this.pictureCache, this.conf);
 
         this.keyOfMessage = saveExtension;
     }

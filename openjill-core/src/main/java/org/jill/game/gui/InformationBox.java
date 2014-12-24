@@ -10,7 +10,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.jill.game.gui.conf.InformationBoxConf;
 import org.jill.game.gui.menu.SubMenu;
-import org.jill.game.screen.conf.ImagesConf;
 import org.jill.game.screen.conf.RectangleConf;
 import org.jill.openjill.core.api.manager.TextManager;
 import org.jill.openjill.core.api.manager.TileManager;
@@ -156,15 +155,11 @@ public final class InformationBox extends AbstractMessageBox {
 
         drawArea(this.g2BoxPicture, pctCache, textArea);
 
-        // Draw picture
-        for (ImagesConf ic : this.conf.getImages()) {
-            drawOneTile(pctCache, ic.getTileset(), ic.getTile(), ic.getX(),
-                    ic.getY(), this.g2BoxPicture);
-        }
+        drawAllPicture(this.g2BoxPicture, this.pictureCache, this.conf);
 
-        lineLength = (this.conf.getWidth() - this.conf.getBorderWith() * 2)
+        this.lineLength = (this.conf.getWidth() - this.conf.getBorderWith() * 2)
                 / this.sizeOfLetter;
-        numberLinePerScreen = (this.conf.getHeight()
+        this.numberLinePerScreen = (this.conf.getHeight()
                 - (this.conf.getBorderHeight()
                 + this.conf.getNbLineDraw())) / this.sizeOfLetter;
     }

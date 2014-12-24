@@ -3,6 +3,8 @@ package org.jill.game.gui;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import org.jill.game.gui.conf.MessageConf;
+import org.jill.game.screen.conf.ImagesConf;
 import org.jill.game.screen.conf.RectangleConf;
 import org.jill.openjill.core.api.manager.TileManager;
 
@@ -12,6 +14,23 @@ import org.jill.openjill.core.api.manager.TileManager;
  * @author Emric MARTINEAU
  */
 public class AbstractMessageBox {
+
+    /**
+     * Draw all picture in configuration.
+     *
+     * @param g2BoxPicture Graphic 2D
+     * @param pictureCache picture cache
+     * @param conf current config
+     */
+    protected void drawAllPicture(final Graphics2D g2BoxPicture,
+            final TileManager pictureCache, final MessageConf conf) {
+                // Draw picture
+        for (ImagesConf ic : conf.getImages()) {
+            drawOneTile(pictureCache, ic.getTileset(), ic.getTile(), ic.getX(),
+                    ic.getY(), g2BoxPicture);
+        }
+    }
+
     /**
      * Draw area.
      *
