@@ -150,8 +150,8 @@ public final class LockedDoorManager extends AbstractParameterObjectEntity
 
         // Get background to know config to get
         final BackgroundEntity back =
-                backgroundObject[x / JillConst.BLOCK_SIZE]
-                    [y / JillConst.BLOCK_SIZE];
+                backgroundObject[x / JillConst.getBlockSize()]
+                    [y / JillConst.getBlockSize()];
 
         currentConfig = listBackground.get(back.getName());
 
@@ -175,9 +175,9 @@ public final class LockedDoorManager extends AbstractParameterObjectEntity
         killme = new ObjectListMessage(this, false);
 
         // Compute current position for background
-        int xBack = this.x / JillConst.BLOCK_SIZE;
-        int yBack = this.y / JillConst.BLOCK_SIZE;
-        int yBackEnd = ((this.y + this.height) / JillConst.BLOCK_SIZE) + 1;
+        int xBack = this.x / JillConst.getBlockSize();
+        int yBack = this.y / JillConst.getBlockSize();
+        int yBackEnd = ((this.y + this.height) / JillConst.getBlockSize()) + 1;
 
         backgroundToRemove = new ArrayList<>(yBackEnd - yBack);
 
@@ -263,7 +263,7 @@ public final class LockedDoorManager extends AbstractParameterObjectEntity
         if (getState() > 0) {
             setState(getState() + 1);
 
-            if (getState() >= JillConst.BLOCK_SIZE) {
+            if (getState() >= JillConst.getBlockSize()) {
                 // Remove object source and this
                 messageDispatcher.sendMessage(
                     EnumMessageType.OBJECT, killme);

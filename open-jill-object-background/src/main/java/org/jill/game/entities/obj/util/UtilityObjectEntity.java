@@ -201,7 +201,7 @@ public final class UtilityObjectEntity {
         // Check if block is stair
         if (block != null && block.isStair()) {
             // If stair, object can down if object not upper that block
-            int topOnBlockStair = block.getY() * JillConst.BLOCK_SIZE;
+            int topOnBlockStair = block.getY() * JillConst.getBlockSize();
 
             int bottomObject = obj.getY() + obj.getHeight();
 
@@ -220,7 +220,7 @@ public final class UtilityObjectEntity {
             if (updateObj) {
                 // Jump size are to big and object hit a block
                 // Set Y to the below block
-                obj.setY((block.getY() * JillConst.BLOCK_SIZE)
+                obj.setY((block.getY() * JillConst.getBlockSize())
                         - obj.getHeight());
             }
 
@@ -240,7 +240,7 @@ public final class UtilityObjectEntity {
             final int mvtSize) {
         int newY = obj.getY() + mvtSize;
 
-        int maxY = JillConst.MAX_HEIGHT - obj.getHeight();
+        int maxY = JillConst.getMaxHeight() - obj.getHeight();
 
         // Object cannot go out of map.
         if (newY < 0) {
@@ -268,19 +268,19 @@ public final class UtilityObjectEntity {
             final int objY, final int objWidth, final int objHeight,
             final int mvtSize, final BackgroundEntity[][] backgroundObject) {
         // Calculate number of case X
-        final int startBlockX = objX / JillConst.BLOCK_SIZE;
+        final int startBlockX = objX / JillConst.getBlockSize();
         final int endBlockX = (objX
-                + objWidth - 1) / JillConst.BLOCK_SIZE;
+                + objWidth - 1) / JillConst.getBlockSize();
         // Object is jumping
         int newPosY = objY + objHeight + mvtSize;
-        if (newPosY > JillConst.MAX_HEIGHT) {
+        if (newPosY > JillConst.getMaxHeight()) {
             // Hit top border of screen
-            newPosY = JillConst.MAX_HEIGHT - objHeight;
+            newPosY = JillConst.getMaxHeight() - objHeight;
         }
         //final int objPosY = obj.getY() + obj.getHeight();
         final int newStartY = (objY + objHeight)
-                / JillConst.BLOCK_SIZE;
-        final int newEndY = newPosY / JillConst.BLOCK_SIZE;
+                / JillConst.getBlockSize();
+        final int newEndY = newPosY / JillConst.getBlockSize();
         final BackgroundEntity block = checkObjectHitFloor(
                 startBlockX, endBlockX, newStartY, newEndY, backgroundObject);
 
@@ -301,13 +301,13 @@ public final class UtilityObjectEntity {
         boolean canMove;
 
         // Calculate number of case Y
-        final int startBlockY = obj.getY() / JillConst.BLOCK_SIZE;
+        final int startBlockY = obj.getY() / JillConst.getBlockSize();
         final int endBlockY = (obj.getY()
-            + obj.getHeight() - 1) / JillConst.BLOCK_SIZE;
+            + obj.getHeight() - 1) / JillConst.getBlockSize();
 
         // Calculate X
         int newPosX = obj.getX() + obj.getWidth() + mvtSize;
-        int endBlockX = (newPosX - 1) / JillConst.BLOCK_SIZE;
+        int endBlockX = (newPosX - 1) / JillConst.getBlockSize();
 
         // Check if can move
         final BackgroundEntity back = checkObjectHitBlock(endBlockX, endBlockX,
@@ -317,11 +317,11 @@ public final class UtilityObjectEntity {
             // Object can't out of map
             obj.setX(
                 Math.min(obj.getX() + mvtSize,
-                    JillConst.MAX_WIDTH - obj.getWidth()));
+                    JillConst.getMaxWidth() - obj.getWidth()));
 
             canMove = true;
         } else {
-            obj.setX((back.getX() * JillConst.BLOCK_SIZE) - obj.getWidth());
+            obj.setX((back.getX() * JillConst.getBlockSize()) - obj.getWidth());
 
             canMove = false;
         }
@@ -343,13 +343,13 @@ public final class UtilityObjectEntity {
         boolean canMove;
 
         // Calculate number of case Y
-        final int startBlockY = obj.getY() / JillConst.BLOCK_SIZE;
+        final int startBlockY = obj.getY() / JillConst.getBlockSize();
         final int endBlockY = (obj.getY()
-            + obj.getHeight() - 1) / JillConst.BLOCK_SIZE;
+            + obj.getHeight() - 1) / JillConst.getBlockSize();
 
         // Calculate number of case X
         int newPosX = obj.getX() + mvtSize;
-        int startBlockX = newPosX / JillConst.BLOCK_SIZE;
+        int startBlockX = newPosX / JillConst.getBlockSize();
 
         // Check if can move
         final BackgroundEntity back = checkObjectHitBlock(startBlockX,
@@ -362,7 +362,7 @@ public final class UtilityObjectEntity {
 
             canMove = true;
         } else {
-            obj.setX((back.getX() + 1) * JillConst.BLOCK_SIZE);
+            obj.setX((back.getX() + 1) * JillConst.getBlockSize());
 
             canMove = false;
         }
@@ -385,9 +385,9 @@ public final class UtilityObjectEntity {
         boolean hitBorder = false;
 
         // Calculate number of case X
-        final int startBlockX = obj.getX() / JillConst.BLOCK_SIZE;
+        final int startBlockX = obj.getX() / JillConst.getBlockSize();
         final int endBlockX = (obj.getX()
-            + obj.getWidth() - 1) / JillConst.BLOCK_SIZE;
+            + obj.getWidth() - 1) / JillConst.getBlockSize();
 
         // Object is jumping
         int newPosY = obj.getY() + mvtSize;
@@ -398,8 +398,8 @@ public final class UtilityObjectEntity {
             hitBorder = true;
         }
 
-        final int newStartY = newPosY / JillConst.BLOCK_SIZE;
-        final int newEndY = obj.getY() / JillConst.BLOCK_SIZE;
+        final int newStartY = newPosY / JillConst.getBlockSize();
+        final int newEndY = obj.getY() / JillConst.getBlockSize();
 
         final BackgroundEntity block = checkObjectHitBlock(
             startBlockX, endBlockX, newStartY, newEndY, backgroundObject);
@@ -411,7 +411,7 @@ public final class UtilityObjectEntity {
         } else {
             // Jump size are to big and object hit a block
             // Set Y to the below block
-            obj.setY((block.getY() + 1) * JillConst.BLOCK_SIZE);
+            obj.setY((block.getY() + 1) * JillConst.getBlockSize());
 
             canMove = false;
         }
@@ -433,17 +433,17 @@ public final class UtilityObjectEntity {
         final BackgroundEntity block;
 
         // Now check player is on same position that block
-        final int modX = obj.getX() % JillConst.BLOCK_SIZE;
+        final int modX = obj.getX() % JillConst.getBlockSize();
 
         if (modX == 0) {
             // Calculate number of case X
-            final int startBlockX = obj.getX() / JillConst.BLOCK_SIZE;
+            final int startBlockX = obj.getX() / JillConst.getBlockSize();
             final int endBlockX = (obj.getX()
-                + obj.getWidth() - 1) / JillConst.BLOCK_SIZE;
+                + obj.getWidth() - 1) / JillConst.getBlockSize();
 
-            final int newStartY = obj.getY() / JillConst.BLOCK_SIZE;
+            final int newStartY = obj.getY() / JillConst.getBlockSize();
             final int newEndY = (obj.getY() + obj.getHeight() - 1)
-                    / JillConst.BLOCK_SIZE;
+                    / JillConst.getBlockSize();
 
             block = checkObjectHitVine(
                 startBlockX, endBlockX, newStartY, newEndY, backgroundObject);
@@ -468,13 +468,13 @@ public final class UtilityObjectEntity {
         boolean canMove;
 
         // Calculate number of case Y
-        final int startBlockY = obj.getY() / JillConst.BLOCK_SIZE;
+        final int startBlockY = obj.getY() / JillConst.getBlockSize();
         final int endBlockY = (obj.getY()
-            + obj.getHeight() - 1) / JillConst.BLOCK_SIZE;
+            + obj.getHeight() - 1) / JillConst.getBlockSize();
 
         // Calculate number of case X
         int newPosX = obj.getX() + mvtSize;
-        int startBlockX = newPosX / JillConst.BLOCK_SIZE;
+        int startBlockX = newPosX / JillConst.getBlockSize();
 
         // Check if can move
         final BackgroundEntity back = checkObjectHitBlock(startBlockX,
@@ -495,7 +495,7 @@ public final class UtilityObjectEntity {
                 obj.setX(newX);
             }
         } else {
-            obj.setX((back.getX() + 1) * JillConst.BLOCK_SIZE);
+            obj.setX((back.getX() + 1) * JillConst.getBlockSize());
 
             canMove = false;
         }
@@ -517,13 +517,13 @@ public final class UtilityObjectEntity {
         boolean canMove;
 
         // Calculate number of case Y
-        final int startBlockY = obj.getY() / JillConst.BLOCK_SIZE;
+        final int startBlockY = obj.getY() / JillConst.getBlockSize();
         final int endBlockY = (obj.getY()
-            + obj.getHeight() - 1) / JillConst.BLOCK_SIZE;
+            + obj.getHeight() - 1) / JillConst.getBlockSize();
 
         // Calculate X
         int newPosX = obj.getX() + obj.getWidth() + mvtSize;
-        int endBlockX = (newPosX - 1) / JillConst.BLOCK_SIZE;
+        int endBlockX = (newPosX - 1) / JillConst.getBlockSize();
 
         // Check if can move
         final BackgroundEntity back = checkObjectHitBlock(endBlockX, endBlockX,
@@ -532,7 +532,7 @@ public final class UtilityObjectEntity {
         if (back == null) {
             // Object can't out of map
             final int newX = Math.min(obj.getX() + mvtSize,
-                    JillConst.MAX_WIDTH - obj.getWidth());
+                    JillConst.getMaxWidth() - obj.getWidth());
 
             // Now check if floor at new position
             BackgroundEntity block = isBlockOrStairAtThisPosition(
@@ -547,7 +547,7 @@ public final class UtilityObjectEntity {
             }
 
         } else {
-            obj.setX((back.getX() * JillConst.BLOCK_SIZE) - obj.getWidth());
+            obj.setX((back.getX() * JillConst.getBlockSize()) - obj.getWidth());
 
             canMove = false;
         }

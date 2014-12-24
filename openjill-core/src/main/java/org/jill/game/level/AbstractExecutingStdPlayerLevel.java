@@ -48,12 +48,14 @@ public abstract class AbstractExecutingStdPlayerLevel
     /**
      * Minimum size between player and border.
      */
-    private static final int BORDER_SCREEN_PLAYER_X = 5 * JillConst.BLOCK_SIZE;
+    private static final int BORDER_SCREEN_PLAYER_X = 5
+            * JillConst.getBlockSize();
 
     /**
      * Minimum size between player and border.
      */
-    private static final int BORDER_SCREEN_PLAYER_Y = 3 * JillConst.BLOCK_SIZE;
+    private static final int BORDER_SCREEN_PLAYER_Y = 3
+            * JillConst.getBlockSize();
 
     /**
      * Special screen offset for up/down jill.
@@ -176,12 +178,13 @@ public abstract class AbstractExecutingStdPlayerLevel
         final int playerY = this.player.getY();
         final int playerWidth = this.player.getWidth();
         final int playerHeight = this.player.getHeight();
+        final int blockSize = JillConst.getBlockSize();
 
-        final int startBlockX = playerX / JillConst.BLOCK_SIZE;
-        final int endBlockX = (playerX + playerWidth) / JillConst.BLOCK_SIZE;
+        final int startBlockX = playerX / blockSize;
+        final int endBlockX = (playerX + playerWidth) / blockSize;
 
-        final int startBlockY = playerY / JillConst.BLOCK_SIZE;
-        final int endBlockY = (playerY + playerHeight) / JillConst.BLOCK_SIZE;
+        final int startBlockY = playerY / blockSize;
+        final int endBlockY = (playerY + playerHeight) / blockSize;
 
         for (int indexX = startBlockX; indexX < endBlockX; indexX++) {
             for (int indexY = startBlockY; indexY < endBlockY; indexY++) {
@@ -229,7 +232,7 @@ public abstract class AbstractExecutingStdPlayerLevel
             offsetX = -1 * Math.min(
                     playerXRight + BORDER_SCREEN_PLAYER_X
                     - this.gameWidth,
-                    JillConst.MAX_WIDTH - this.gameWidth);
+                    JillConst.getMaxWidth() - this.gameWidth);
         }
 
         final int playerYTop = player.getY();
@@ -246,7 +249,7 @@ public abstract class AbstractExecutingStdPlayerLevel
             offsetY = -1 * Math.min(
                     playerYBottom + BORDER_SCREEN_PLAYER_Y
                     - this.gameHeight + specialScreenOffset,
-                    JillConst.MAX_HEIGHT - this.gameHeight);
+                    JillConst.getMaxHeight() - this.gameHeight);
         }
     }
 

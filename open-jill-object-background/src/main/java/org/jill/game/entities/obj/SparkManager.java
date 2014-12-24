@@ -54,9 +54,9 @@ public final class SparkManager extends AbstractHitPlayerObjectEntity {
         final BackgroundEntity[][] backMap =
                 objectParam.getBackgroundObject();
 
-        final int blockX = this.x / JillConst.BLOCK_SIZE;
-        final int blockYTop = this.y / JillConst.BLOCK_SIZE;
-        final int blockYBottom = (this.y + this.height) / JillConst.BLOCK_SIZE;
+        final int blockX = this.x / JillConst.getBlockSize();
+        final int blockYTop = this.y / JillConst.getBlockSize();
+        final int blockYBottom = (this.y + this.height) / JillConst.getBlockSize();
 
         final int endBlockY = backMap[0].length;
 
@@ -83,11 +83,11 @@ public final class SparkManager extends AbstractHitPlayerObjectEntity {
         final int halfObject = this.height / 2;
 
         if (startY < stopY) {
-            this.maxYTop = startY * JillConst.BLOCK_SIZE - halfObject;
-            this.maxYBottom = stopY * JillConst.BLOCK_SIZE - halfObject;
+            this.maxYTop = startY * JillConst.getBlockSize() - halfObject;
+            this.maxYBottom = stopY * JillConst.getBlockSize() - halfObject;
         } else {
-            this.maxYTop = startY * JillConst.BLOCK_SIZE - halfObject;
-            this.maxYBottom = stopY * JillConst.BLOCK_SIZE - halfObject;
+            this.maxYTop = startY * JillConst.getBlockSize() - halfObject;
+            this.maxYBottom = stopY * JillConst.getBlockSize() - halfObject;
         }
     }
 
@@ -144,7 +144,7 @@ public final class SparkManager extends AbstractHitPlayerObjectEntity {
             KeyboardLayout keyboardLayout) {
         if (obj.isPlayer()) {
             // Move player to right
-            MOVE_PLAYER_OBJECT.setOffsetX(-JillConst.BLOCK_SIZE);
+            MOVE_PLAYER_OBJECT.setOffsetX(-JillConst.getBlockSize());
             MOVE_PLAYER_OBJECT.setOffsetY(0);
 
             MOVE_PLAYER_OBJECT.setState(PlayerState.STAND);

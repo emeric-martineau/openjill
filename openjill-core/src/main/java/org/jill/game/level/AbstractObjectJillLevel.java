@@ -196,10 +196,12 @@ public abstract class AbstractObjectJillLevel
      */
     protected final boolean checkIfNotUpdatableBackground(
         final ObjectEntity obj) {
-        final int startX = obj.getX() / JillConst.BLOCK_SIZE;
-        final int endX = (obj.getX() + obj.getWidth()) / JillConst.BLOCK_SIZE;
-        final int startY = obj.getY() / JillConst.BLOCK_SIZE;
-        final int endY = (obj.getY() + obj.getHeight()) / JillConst.BLOCK_SIZE;
+        final int blockSize = JillConst.getBlockSize();
+
+        final int startX = obj.getX() / blockSize;
+        final int endX = (obj.getX() + obj.getWidth()) / blockSize;
+        final int startY = obj.getY() / blockSize;
+        final int endY = (obj.getY() + obj.getHeight()) / blockSize;
 
         for (int indexX = startX; indexX <= endX; indexX++) {
             for (int indexY = startY; indexY <= endY; indexY++) {

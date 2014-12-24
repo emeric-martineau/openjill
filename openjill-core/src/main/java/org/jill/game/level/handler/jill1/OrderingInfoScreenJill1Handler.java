@@ -60,7 +60,8 @@ public class OrderingInfoScreenJill1Handler
      * @return a point converting in pixel size
      */
     private static Point newScreen(final int x, final int y) {
-        return new Point(x * -JillConst.BLOCK_SIZE, y * -JillConst.BLOCK_SIZE);
+        return new Point(x * -JillConst.getBlockSize(),
+                y * -JillConst.getBlockSize());
     }
 
     /**

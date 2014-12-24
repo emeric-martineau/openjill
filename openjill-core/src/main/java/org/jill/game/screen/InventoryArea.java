@@ -486,7 +486,7 @@ public final class InventoryArea implements InterfaceMessageGameHandler {
         }
 
         if (sender != null) {
-            sender.setZapHold(JillConst.ZAPHOLD_VALUE_AFTER_TOUCH_PLAYER);
+            sender.setZapHold(JillConst.getZapholdValueAfterTouchPlayer());
         }
     }
 

@@ -88,8 +88,8 @@ public final class FallingSpikeManager extends AbstractHitPlayerObjectEntity
             } else {
                 // Spike don't move, kill player.
                 obj.msgKill(
-                        this.backgroundObject[this.x / JillConst.BLOCK_SIZE]
-                                [this.y / JillConst.BLOCK_SIZE],
+                        this.backgroundObject[this.x / JillConst.getBlockSize()]
+                                [this.y / JillConst.getBlockSize()],
                         InventoryLifeMessage.DEAD_MESSAGE,
                         PlayerState.DIE_SUB_STATE_OTHER_BACK);
             }

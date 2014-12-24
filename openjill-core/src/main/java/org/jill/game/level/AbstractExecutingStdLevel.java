@@ -216,9 +216,9 @@ public abstract class AbstractExecutingStdLevel extends AbstractMenuJillLevel {
         // '* 2' because two border
         updateObjectScreenRect = new Rectangle(0, 0,
             this.statusBar.getGameAreaConf().getWidth()
-                    + JillConst.X_UPDATE_SCREEN_BORDER * 2,
+                    + JillConst.getxUpdateScreenBorder() * 2,
             this.statusBar.getGameAreaConf().getHeight()
-                    + JillConst.Y_UPDATE_SCREEN_BORDER * 2);
+                    + JillConst.getyUpdateScreenBorder() * 2);
 
         visibleScreenRect = new Rectangle(0, 0,
             this.statusBar.getGameAreaConf().getWidth(),
@@ -412,8 +412,8 @@ public abstract class AbstractExecutingStdLevel extends AbstractMenuJillLevel {
         int lOffsetY = Math.abs(offsetY);
 
         updateObjectScreenRect.setLocation(lOffsetX
-                - JillConst.X_UPDATE_SCREEN_BORDER,
-                lOffsetY - JillConst.Y_UPDATE_SCREEN_BORDER);
+                - JillConst.getxUpdateScreenBorder(),
+                lOffsetY - JillConst.getyUpdateScreenBorder());
 
         visibleScreenRect.setLocation(lOffsetX, lOffsetY);
 
@@ -516,8 +516,10 @@ public abstract class AbstractExecutingStdLevel extends AbstractMenuJillLevel {
      * Update background.
      */
     private void updateBackground() {
-        final int startX = Math.abs(offsetX) / JillConst.BLOCK_SIZE;
-        final int startY = Math.abs(offsetY) / JillConst.BLOCK_SIZE;
+        final int blockSize = JillConst.getBlockSize();
+
+        final int startX = Math.abs(offsetX) / blockSize;
+        final int startY = Math.abs(offsetY) / blockSize;
         final int endX = Math.min(startX + screenWidthBlock,
                 BackgroundLayer.MAP_WIDTH);
         final int endY = Math.min(startY + screenHeightBlock,
@@ -536,8 +538,8 @@ public abstract class AbstractExecutingStdLevel extends AbstractMenuJillLevel {
                     tilePicture = back.getPicture();
 
                     g2Background.drawImage(tilePicture,
-                            indexBackX * JillConst.BLOCK_SIZE,
-                            indexBackY * JillConst.BLOCK_SIZE, null);
+                            indexBackX * blockSize,
+                            indexBackY * blockSize, null);
                 }
             }
         }

@@ -1,5 +1,10 @@
 package org.jill.openjill.core.api.jill;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import org.jill.jn.BackgroundLayer;
 
 /**
@@ -7,39 +12,114 @@ import org.jill.jn.BackgroundLayer;
  *
  * @author Emeric MARTINEAU
  */
-public interface JillConst {
+public class JillConst {
     /**
      * Size (width/height) for a block.
      */
-    int BLOCK_SIZE = 16;
+    private static int blockSize = 16;
 
     /**
      * Maximum value of screen.
      */
-    int MAX_WIDTH = BackgroundLayer.MAP_WIDTH * JillConst.BLOCK_SIZE;
+    private static final int MAX_WIDTH = BackgroundLayer.MAP_WIDTH * blockSize;
 
     /**
      * Maximum value of screen.
      */
-    int MAX_HEIGHT = BackgroundLayer.MAP_HEIGHT * JillConst.BLOCK_SIZE;
+    private static final int MAX_HEIGHT =
+            BackgroundLayer.MAP_HEIGHT * blockSize;
 
     /**
      * Border to update object.
      */
-    int X_UPDATE_SCREEN_BORDER = 6 * JillConst.BLOCK_SIZE;
+    private static int xUpdateScreenBorder;
 
     /**
      * Border to update object.
      */
-    int Y_UPDATE_SCREEN_BORDER = 3 * JillConst.BLOCK_SIZE;
+    private static int yUpdateScreenBorder;
 
     /**
      * Zapholder vlue of object when touch player.
      */
-    int ZAPHOLD_VALUE_AFTER_TOUCH_PLAYER = 3;
+    private static int zapholdValueAfterTouchPlayer;
+
+    static {
+        loadFromClasspath("jill_const.properties");
+    }
+
+    public static void loadFromClasspath(String fileName) {
+        final Properties prop = new Properties();
+        final InputStream is = JillConst.class.getClassLoader().
+                    getResourceAsStream("jill_const.properties");
+
+        try {
+            prop.load(is);
+
+            blockSize = Integer.valueOf(prop.getProperty("blockSize"));
+            xUpdateScreenBorder = Integer.valueOf(
+                    prop.getProperty("xUpdateScreenBorder"));
+            yUpdateScreenBorder = Integer.valueOf(
+                    prop.getProperty("yUpdateScreenBorder"));
+            zapholdValueAfterTouchPlayer = Integer.valueOf(
+                    prop.getProperty("zapholdValueAfterTouchPlayer"));
+        } catch (IOException ex) {
+            Logger.getLogger(JillConst.class.getName()).log(
+                    Level.SEVERE, null, ex);
+        }
+    }
 
     /**
-     * Dummy method for checkstyle.
+     * Return size in pixel of block in game.
+     *
+     * @return
      */
-    void nothing();
+    public static int getBlockSize() {
+        return blockSize;
+    }
+
+    /**
+     * Return maximum size of map in pixel.
+     *
+     * @return
+     */
+    public static int getMaxWidth() {
+        return MAX_WIDTH;
+    }
+
+    /**
+     * Return maximum size of map in pixel.
+     *
+     * @return
+     */
+    public static int getMaxHeight() {
+        return MAX_HEIGHT;
+    }
+
+    /**
+     * Return size in pixel to update object.
+     *
+     * @return
+     */
+    public static int getxUpdateScreenBorder() {
+        return xUpdateScreenBorder;
+    }
+
+    /**
+     * Return size in pixel to update object.
+     *
+     * @return
+     */
+    public static int getyUpdateScreenBorder() {
+        return yUpdateScreenBorder;
+    }
+
+    /**
+     * Return value of zaphold field to put in object when it touch player.
+     *
+     * @return
+     */
+    public static int getZapholdValueAfterTouchPlayer() {
+        return zapholdValueAfterTouchPlayer;
+    }
 }

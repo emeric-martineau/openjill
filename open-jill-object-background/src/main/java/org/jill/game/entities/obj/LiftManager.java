@@ -111,7 +111,7 @@ public final class LiftManager extends AbstractParameterObjectEntity {
             //keyboardLayout.setUp(false);
 
             MOVE_PLAYER_OBJECT.setOffsetX(0);
-            MOVE_PLAYER_OBJECT.setOffsetY(-JillConst.BLOCK_SIZE);
+            MOVE_PLAYER_OBJECT.setOffsetY(-JillConst.getBlockSize());
 
             MOVE_PLAYER_OBJECT.setState(PlayerState.STAND);
 
@@ -121,8 +121,8 @@ public final class LiftManager extends AbstractParameterObjectEntity {
                 EnumMessageType.PLAYER_MOVE, MOVE_PLAYER_OBJECT);
 
             if (MOVE_PLAYER_OBJECT.isCanDoMove()) {
-                final int backX = this.x / JillConst.BLOCK_SIZE;
-                final int backY = this.y / JillConst.BLOCK_SIZE;
+                final int backX = this.x / JillConst.getBlockSize();
+                final int backY = this.y / JillConst.getBlockSize();
 
                 final BackgroundMessage backMsg
                     = new BackgroundMessage(backX, backY,
@@ -131,7 +131,7 @@ public final class LiftManager extends AbstractParameterObjectEntity {
                 this.messageDispatcher.sendMessage(
                         EnumMessageType.BACKGROUND, backMsg);
 
-                this.y -= JillConst.BLOCK_SIZE;
+                this.y -= JillConst.getBlockSize();
             }
 
             MOVE_PLAYER_OBJECT.setUp(false);
@@ -140,7 +140,7 @@ public final class LiftManager extends AbstractParameterObjectEntity {
 
             if (clearBlock()) {
                 MOVE_PLAYER_OBJECT.setOffsetX(0);
-                MOVE_PLAYER_OBJECT.setOffsetY(JillConst.BLOCK_SIZE);
+                MOVE_PLAYER_OBJECT.setOffsetY(JillConst.getBlockSize());
 
                 MOVE_PLAYER_OBJECT.setState(PlayerState.STAND);
 
@@ -166,8 +166,8 @@ public final class LiftManager extends AbstractParameterObjectEntity {
     private boolean clearBlock() {
         // Down picture
         // Check if
-        final int backX = this.x / JillConst.BLOCK_SIZE;
-        int backY = this.y / JillConst.BLOCK_SIZE;
+        final int backX = this.x / JillConst.getBlockSize();
+        int backY = this.y / JillConst.getBlockSize();
 
         // Get current back to duplicate
         final BackgroundEntity beToClone = this.backgroundObject[backX][backY];
@@ -186,7 +186,7 @@ public final class LiftManager extends AbstractParameterObjectEntity {
 
         if (result) {
             // Decrease position
-            this.y += JillConst.BLOCK_SIZE;
+            this.y += JillConst.getBlockSize();
 
             backMsg
                 = new BackgroundMessage(backX, backY,

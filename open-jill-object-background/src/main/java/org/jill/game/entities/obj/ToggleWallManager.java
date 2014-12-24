@@ -72,9 +72,9 @@ public final class ToggleWallManager extends AbstractParameterObjectEntity
      */
     private void initWall() {
         // X col to scan
-        this.xBlock = this.x / JillConst.BLOCK_SIZE;
+        this.xBlock = this.x / JillConst.getBlockSize();
         // Y col to scan
-        this.yBlock = this.y / JillConst.BLOCK_SIZE;
+        this.yBlock = this.y / JillConst.getBlockSize();
         int yScanEnd = this.yBlock;
 
         // Name of back to be wall. If object is restore (by save game),
@@ -131,9 +131,9 @@ public final class ToggleWallManager extends AbstractParameterObjectEntity
      */
     private void initFloor() {
         // X col to scan
-        this.xBlock = this.x / JillConst.BLOCK_SIZE;
+        this.xBlock = this.x / JillConst.getBlockSize();
         // Y col to scan
-        this.yBlock = this.y / JillConst.BLOCK_SIZE;
+        this.yBlock = this.y / JillConst.getBlockSize();
         int xScanEnd = this.xBlock;
 
         // Name of back to be wall. If object is restore (by save game),

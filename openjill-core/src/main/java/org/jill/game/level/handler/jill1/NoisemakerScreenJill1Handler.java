@@ -26,8 +26,8 @@ public class NoisemakerScreenJill1Handler extends AbstractObjectJillLevel {
             IllegalAccessException, InstantiationException {
         super(new JillLevelConfiguration("JILL1.SHA", "INTRO.JN1", "JILL1.VCL",
                 "JILL1.CFG", "JN1"));
-        offsetX = - 62 * JillConst.BLOCK_SIZE;
-        offsetY = - 0 * JillConst.BLOCK_SIZE;
+        offsetX = - 62 * JillConst.getBlockSize();
+        offsetY = - 0 * JillConst.getBlockSize();
     }
 
     /**

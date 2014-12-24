@@ -85,8 +85,8 @@ public final class CollapsingCeilingManager
         this.killme = new ObjectListMessage(this, false);
 
         // Grap background to clone
-        final int backX = x / JillConst.BLOCK_SIZE;
-        final int backY = y / JillConst.BLOCK_SIZE;
+        final int backX = x / JillConst.getBlockSize();
+        final int backY = y / JillConst.getBlockSize();
 
         this.backToClone = this.backgroundObject[backX][backY - 1];
         this.backMsg.setMapCode(this.backToClone.getMapCode());
@@ -103,7 +103,7 @@ public final class CollapsingCeilingManager
     public void msgUpdate(final KeyboardLayout keyboardLayout) {
         if (this.state != SWITCH_OFF) {
             // Replace at current position background by new background
-            final int backY = this.y / JillConst.BLOCK_SIZE;
+            final int backY = this.y / JillConst.getBlockSize();
 
             this.backMsg.setY(backY);
 

@@ -121,10 +121,10 @@ public abstract class AbstractBackgroundJillLevel
 
         screenWidthBlock =
                 (this.statusBar.getGameAreaConf().getWidth()
-                / JillConst.BLOCK_SIZE) + 1;
+                / JillConst.getBlockSize()) + 1;
         screenHeightBlock =
                 (this.statusBar.getGameAreaConf().getHeight()
-                / JillConst.BLOCK_SIZE) + 1;
+                / JillConst.getBlockSize()) + 1;
 
         messageDispatcher.addHandler(EnumMessageType.BACKGROUND,
                 this);
@@ -196,8 +196,9 @@ public abstract class AbstractBackgroundJillLevel
     protected final void createBackgound() {
         // Buffer image
         background =
-            new BufferedImage(BackgroundLayer.MAP_WIDTH * JillConst.BLOCK_SIZE,
-                BackgroundLayer.MAP_HEIGHT * JillConst.BLOCK_SIZE,
+            new BufferedImage(
+                    BackgroundLayer.MAP_WIDTH * JillConst.getBlockSize(),
+                BackgroundLayer.MAP_HEIGHT * JillConst.getBlockSize(),
                 BufferedImage.TYPE_INT_ARGB);
         // Graphic
         g2Background = background.createGraphics();
@@ -290,8 +291,8 @@ public abstract class AbstractBackgroundJillLevel
                 tilePicture = backObj.getPicture();
 
                 g2Background.drawImage(tilePicture,
-                        indexX * JillConst.BLOCK_SIZE,
-                        indexY * JillConst.BLOCK_SIZE, null);
+                        indexX * JillConst.getBlockSize(),
+                        indexY * JillConst.getBlockSize(), null);
             }
         }
     }
@@ -425,8 +426,8 @@ public abstract class AbstractBackgroundJillLevel
         tilePicture = backObj.getPicture();
 
         // Position of block in background picture
-        final int absoluteX = indexX * JillConst.BLOCK_SIZE;
-        final int absoluteY = indexY * JillConst.BLOCK_SIZE;
+        final int absoluteX = indexX * JillConst.getBlockSize();
+        final int absoluteY = indexY * JillConst.getBlockSize();
 
         // Fill screen to black
         final Rectangle rect = new Rectangle(absoluteX, absoluteY,

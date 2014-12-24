@@ -28,8 +28,8 @@ public class StoryScreenJill1Handler extends AbstractObjectJillLevel {
                 "JILL1.CFG", "JN1"));
 
 
-        offsetX = - 36 * JillConst.BLOCK_SIZE;
-        offsetY = - 2 * JillConst.BLOCK_SIZE;
+        offsetX = - 36 * JillConst.getBlockSize();
+        offsetY = - 2 * JillConst.getBlockSize();
     }
 
     /**

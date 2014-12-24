@@ -516,14 +516,14 @@ public final class PlayerManager extends AbstractPlayerInteractionManager {
                 final BufferedImage currentPicture = getDieOtherPicture();
 
                 // Align on block under kill background.
-                this.y = (((this.y / JillConst.BLOCK_SIZE))
-                    * JillConst.BLOCK_SIZE) + JillConst.BLOCK_SIZE
+                this.y = (((this.y / JillConst.getBlockSize()))
+                    * JillConst.getBlockSize()) + JillConst.getBlockSize()
                     + currentPicture.getHeight();
 
                 // If player out of screen
                 if ((this.y + currentPicture.getHeight())
-                    > JillConst.MAX_HEIGHT) {
-                    this.y = JillConst.MAX_HEIGHT
+                    > JillConst.getMaxHeight()) {
+                    this.y = JillConst.getMaxHeight()
                         - currentPicture.getHeight();
                 }
             }
@@ -560,8 +560,8 @@ public final class PlayerManager extends AbstractPlayerInteractionManager {
             if (senderObj != null &&
                     typeOfDeath == PlayerState.DIE_SUB_STATE_OTHER_BACK) {
                 senderBack2 = getBackgroundObject()[
-                        this.getX() / JillConst.BLOCK_SIZE][
-                        this.getY() / JillConst.BLOCK_SIZE];
+                        this.getX() / JillConst.getBlockSize()][
+                        this.getY() / JillConst.getBlockSize()];
             } else {
                 InventoryLifeMessage.STD_MESSAGE.setSender(senderObj);
             }
@@ -580,7 +580,7 @@ public final class PlayerManager extends AbstractPlayerInteractionManager {
                         setySpeed(PlayerDie2Const.START_YD);
 
                         // Align player on bottom of background
-                        this.y = (senderBack2.getY() + 1) * JillConst.BLOCK_SIZE
+                        this.y = (senderBack2.getY() + 1) * JillConst.getBlockSize()
                             - this.stDie2Other[
                                     PlayerDie2Const.FIRST_PICTURE].getHeight();
                         break;
@@ -588,7 +588,7 @@ public final class PlayerManager extends AbstractPlayerInteractionManager {
                         setySpeed(PlayerDie1Const.START_YD);
 
                         // Align player on bottom of background
-                        this.y = senderBack2.getY() * JillConst.BLOCK_SIZE
+                        this.y = senderBack2.getY() * JillConst.getBlockSize()
                             - this.stDie1Water[
                                     PlayerDie1Const.FIRST_PICTURE].getHeight();
                         break;
