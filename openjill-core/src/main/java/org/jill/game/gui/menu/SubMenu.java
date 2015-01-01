@@ -22,6 +22,11 @@ public final class SubMenu {
     private int value;
 
     /**
+     * Short cut.
+     */
+    private char shortCut = '\0';
+
+    /**
      * Default constructor.
      */
     public SubMenu() {
@@ -37,6 +42,7 @@ public final class SubMenu {
     public SubMenu(final int clr, final String txt) {
         this.color = clr;
         this.text = txt;
+        this.shortCut = Character.toUpperCase(txt.charAt(0));
     }
 
     /**
@@ -93,4 +99,26 @@ public final class SubMenu {
     public void setValue(final int index) {
         this.value = index;
     }
+
+    /**
+     * Short cut of this entry.
+     *
+     * @return a char
+     */
+    public char getShortCut() {
+        if (this.shortCut == '\0') {
+            this.shortCut = Character.toUpperCase(this.text.charAt(0));
+        }
+        return shortCut;
+    }
+
+    /**
+     * Short cut of this entry.
+     * @param shortCut a char
+     */
+    public void setShortCut(final char shortCut) {
+        this.shortCut = shortCut;
+    }
+
+
 }

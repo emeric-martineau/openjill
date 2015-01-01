@@ -76,15 +76,6 @@ public class StartMenuJill1Handler extends AbstractChangeLevel {
         }
     }
 
-    @Override
-    protected void menuOtherKeyHandler(final char key) {
-        if (key == 'R' || key == 'r') {
-            menuEntryValidate(1);
-        } else {
-            super.menuOtherKeyHandler(key);
-        }
-    }
-
     /**
      * Display home page.
      */

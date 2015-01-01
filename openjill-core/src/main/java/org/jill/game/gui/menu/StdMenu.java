@@ -370,8 +370,21 @@ public class StdMenu extends AbstractMenu implements MenuInterface {
     }
 
     @Override
-    public void keyEvent(char consumeOtherKey) {
-        // Nothing
+    public boolean keyEvent(char consumeOtherKey) {
+        char key = Character.toUpperCase(consumeOtherKey);
+        int menuPos = 0;
+
+        for (SubMenu sm : this.items) {
+            if (key == sm.getShortCut()) {
+                this.currentMenuPos = menuPos;
+
+                return true;
+            }
+
+            menuPos++;
+        }
+
+        return false;
     }
 
     @Override

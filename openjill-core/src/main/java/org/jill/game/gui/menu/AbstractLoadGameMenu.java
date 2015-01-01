@@ -361,8 +361,18 @@ public abstract class AbstractLoadGameMenu extends AbstractMenu
     }
 
     @Override
-    public void keyEvent(final char consumeOtherKey) {
-        // Nothing
+    public boolean keyEvent(final char consumeOtherKey) {
+        if (this.editMode) {
+            return false;
+        } else {
+            if (consumeOtherKey >= '0' && '6' <= consumeOtherKey) {
+                this.currentMenuPos = consumeOtherKey - '0' - 1;
+
+                return true;
+            } else {
+                return false;
+            }
+        }
     }
 
     /**

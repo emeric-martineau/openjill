@@ -168,14 +168,13 @@ public final class SaveGameMenu extends AbstractLoadGameMenu {
         return basicPicture;
     }
 
-    /**
-     * Grap key event.
-     *
-     * @param consumeOtherKey key
-     */
     @Override
-    public void keyEvent(final char consumeOtherKey) {
-        this.nameSave.add(consumeOtherKey);
+    public boolean keyEvent(final char consumeOtherKey) {
+        if (this.getEditMode()) {
+            this.nameSave.add(consumeOtherKey);
+        }
+
+        return super.keyEvent(consumeOtherKey);
     }
 
     /**

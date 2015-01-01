@@ -98,10 +98,7 @@ public abstract class AbstractMenuJillLevel extends AbstractObjectJillLevel {
             } else if (this.keyboard.isRight()) {
                 this.menu.right();
             } else if (this.keyboard.isEnter()) {
-                // Clear key before switch
-                this.keyboard.clear();
-
-                menuEntryValidate(this.menu.getCursorValue());
+                validateMenu();
             } else if (this.keyboard.isEscape()) {
                 doEscape();
             } else if (this.keyboard.isOtherKey()) {
@@ -112,6 +109,16 @@ public abstract class AbstractMenuJillLevel extends AbstractObjectJillLevel {
         } else {
             doRun();
         }
+    }
+
+    /**
+     * Validate menu.
+     */
+    private void validateMenu() {
+        // Clear key before switch
+        this.keyboard.clear();
+
+        menuEntryValidate(this.menu.getCursorValue());
     }
 
     /**
@@ -161,7 +168,9 @@ public abstract class AbstractMenuJillLevel extends AbstractObjectJillLevel {
      *
      * @param key kay of keyboard
      */
-    protected void menuOtherKeyHandler(final char key) {
-        this.menu.keyEvent(key);
+    private void menuOtherKeyHandler(final char key) {
+        if (this.menu.keyEvent(key)) {
+            validateMenu();
+        }
     }
 }

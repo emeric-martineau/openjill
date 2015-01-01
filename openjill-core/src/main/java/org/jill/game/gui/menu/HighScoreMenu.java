@@ -401,10 +401,12 @@ public final class HighScoreMenu extends AbstractMenu implements MenuInterface {
     }
 
     @Override
-    public void keyEvent(final char consumeOtherKey) {
+    public boolean keyEvent(final char consumeOtherKey) {
         nameHighScore.add(consumeOtherKey);
 
         updateNameHighScore = true;
+
+        return false;
     }
 
     /**
