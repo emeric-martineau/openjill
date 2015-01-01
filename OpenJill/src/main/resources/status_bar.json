@@ -26,7 +26,7 @@
         "y":188,
         "width":320,
         "height":12,
-        "color":"000000"
+        "color":0
     },
     "controlArea":{
         "x":8,
@@ -38,7 +38,8 @@
         "x":8,
         "y":107,
         "width":64,
-        "height":69
+        "height":69,
+        "color":8
     },
     "gameArea":{
         "x":80,
@@ -549,5 +550,7 @@
             "x":312,
             "y":144
         }
+    ],
+    "imagesInvenroy":[
     ]
 }

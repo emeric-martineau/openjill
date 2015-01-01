@@ -114,7 +114,7 @@ public abstract class AbstractBackgroundJillLevel
      * Create status bar with inventory.
      */
     protected final void createStatusBar() {
-        statusBar = new StatusBar(pictureCache);
+        this.statusBar = new StatusBar(this.pictureCache, this.screenType);
 
         messageDispatcher.addHandler(EnumMessageType.MESSAGE_STATUS_BAR,
                 statusBar);
@@ -321,46 +321,6 @@ public abstract class AbstractBackgroundJillLevel
         final BufferedImage tilePicture = pictureCache.getImage(
                 tileSetIndex, tileIndex);
         g2.drawImage(tilePicture, x, y, null);
-    }
-
-    /**
-     * Draw Jill face.
-     *
-     * @return picture
-     */
-    protected final BufferedImage createJillFace() {
-        // Jill has same width/height that inventory status bar area
-        final BufferedImage inventory = statusBar.createInventoryArea();
-
-        // Draw space
-        final Graphics2D g2 = inventory.createGraphics();
-        g2.setColor(pictureCache.getBackgroundColor());
-        g2.fillRect(0, 0, inventory.getWidth(), inventory.getHeight());
-
-        int tile = 0;
-        BufferedImage tilePicture = null;
-
-        int posX;
-        int posY = 0;
-
-        for (int nbY = 0; nbY < 4; nbY++) {
-            posX = 0;
-
-            for (int nbX = 0; nbX < 4; nbX++) {
-                tilePicture = pictureCache.getImage(24, tile);
-                g2.drawImage(tilePicture, posX, posY, null);
-                tile++;
-                posX += tilePicture.getWidth();
-            }
-
-            if (tilePicture != null) {
-                posY += tilePicture.getHeight();
-            }
-        }
-
-        g2.dispose();
-
-        return inventory;
     }
 
     @Override

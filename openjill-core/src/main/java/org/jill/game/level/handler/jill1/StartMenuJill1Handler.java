@@ -90,10 +90,9 @@ public class StartMenuJill1Handler extends AbstractChangeLevel {
      */
     private void displayHome() {
         // Draw jill face
-        final BufferedImage inventory = createJillFace();
-        statusBar.drawInventory(inventory);
+        this.statusBar.drawInventory(this.statusBar.createInventoryArea());
 
-        statusBar.drawControl(createHigScore());
+        this.statusBar.drawControl(createHigScore());
 
         centerScreen();
     }

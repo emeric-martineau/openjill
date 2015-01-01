@@ -34,6 +34,9 @@ public final class JillGameConfig extends SimpleGameConfig {
     public static final String JILL_SCREENMOVE_DOWN
             = "jill.screenmove.player.yd.down";
 
+    public static final String JILL_DEFAULT_SCREEN_TYPE
+            = "jill.screen.type.default";
+
     /**
      * File path of jill data.
      */
@@ -57,7 +60,7 @@ public final class JillGameConfig extends SimpleGameConfig {
     /**
      * Screen config.
      */
-    private EnumScreenType typeScreen = EnumScreenType.VGA;
+    private EnumScreenType typeScreen;
 
     /**
      * Constructor.
@@ -86,6 +89,14 @@ public final class JillGameConfig extends SimpleGameConfig {
         value = properties.getProperty(JILL_SCREENMOVE_DOWN);
 
         this.jillDown = Integer.valueOf(value);
+
+        value = properties.getProperty(JILL_DEFAULT_SCREEN_TYPE);
+
+        if (value != null) {
+            this.typeScreen = EnumScreenType.valueOf(value.toUpperCase());
+        } else {
+            this.typeScreen = EnumScreenType.VGA;
+        }
     }
 
     /**

@@ -44,6 +44,11 @@ public final class StatusBarConf {
     private List<ImagesConf> images;
 
     /**
+     * Images to draw in inventory bar.
+     */
+    private List<ImagesConf> imagesInvenroy;
+
+    /**
      * Text to draw.
      *
      * @return list of text to draw.
@@ -168,5 +173,24 @@ public final class StatusBarConf {
     public void setBigtext(final List<TextToDraw> t) {
         this.bigtext = t;
     }
+
+    /**
+     * Image to draw by default in inventory area.
+     *
+     * @return
+     */
+    public List<ImagesConf> getImagesInvenroy() {
+        return imagesInvenroy;
+    }
+
+    /**
+     * Image to draw by default in inventory area.
+     * 
+     * @param imagesInvenroy
+     */
+    public void setImagesInvenroy(final List<ImagesConf> imagesInvenroy) {
+        this.imagesInvenroy = imagesInvenroy;
+    }
+
 
 }

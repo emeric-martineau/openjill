@@ -6,6 +6,7 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.jill.game.screen.conf.ImagesConf;
@@ -17,6 +18,7 @@ import org.jill.openjill.core.api.manager.TileManager;
 import org.jill.openjill.core.api.message.EnumMessageType;
 import org.jill.openjill.core.api.message.InterfaceMessageGameHandler;
 import org.jill.openjill.core.api.message.statusbar.StatusBarTextMessage;
+import org.jill.openjill.core.api.screen.EnumScreenType;
 import org.simplegame.SimpleGameConfig;
 
 /**
@@ -75,11 +77,17 @@ public final class StatusBar implements InterfaceMessageGameHandler {
      * Create status bar.
      *
      * @param pictureCacheManager cache manager
+     * @param screen screen type
      */
-    public StatusBar(final TileManager pictureCacheManager) {
+    public StatusBar(final TileManager pictureCacheManager,
+            final EnumScreenType screen) {
         this.pictureCache = pictureCacheManager;
 
-        this.conf = readConf("status_bar.json");
+        if (screen == EnumScreenType.VGA) {
+            this.conf = readConf("status_bar_vga.json");
+        } else {
+            this.conf = readConf("status_bar.json");
+        }
 
         createStatusBar();
 
@@ -165,9 +173,9 @@ public final class StatusBar implements InterfaceMessageGameHandler {
     private void drawMessageBar(final Graphics2D g2, final String msg,
             final int color) {
         final RectangleConf mb = this.conf.getMessageBar();
-        final Color bgcolor = new Color(
-                            Integer.parseInt(mb.getColor(), HEXA_BASE));
-        g2.setColor(bgcolor);
+        final Color bgcolor = pictureCache.getColorMap()[
+                    Integer.valueOf(mb.getColor())];
+        g2.setColor(new Color(bgcolor.getRGB()));
 
         g2.fillRect(mb.getX(), mb.getY(), mb.getWidth(), mb.getHeight());
 
@@ -225,9 +233,32 @@ public final class StatusBar implements InterfaceMessageGameHandler {
      * @return picture
      */
     public BufferedImage createInventoryArea() {
-        return new BufferedImage(this.conf.getInventoryArea().getWidth(),
-                this.conf.getInventoryArea().getHeight(),
+        RectangleConf invArea = this.conf.getInventoryArea();
+
+        BufferedImage bf = new BufferedImage(invArea.getWidth(),
+                invArea.getHeight(),
                 BufferedImage.TYPE_INT_ARGB);
+
+        final Color baseColor = pictureCache.getColorMap()[
+                    Integer.valueOf(invArea.getColor())];
+
+        Graphics2D g2BoxPicture = bf.createGraphics();
+
+        g2BoxPicture.setColor(new Color(baseColor.getRGB()));
+
+        g2BoxPicture.fillRect(0, 0,
+                    invArea.getWidth(), invArea.getHeight());
+
+        List<ImagesConf> imagesInvenroy = this.conf.getImagesInvenroy();
+
+        if (imagesInvenroy != null) {
+            for (ImagesConf ic : imagesInvenroy) {
+            drawOneTile(ic.getTileset(), ic.getTile(), ic.getX(), ic.getY(),
+                    g2BoxPicture);
+            }
+        }
+
+        return bf;
     }
 
     /**
