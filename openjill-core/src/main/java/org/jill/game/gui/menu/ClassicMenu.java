@@ -1,6 +1,8 @@
 package org.jill.game.gui.menu;
 
+import java.awt.image.BufferedImage;
 import org.jill.game.gui.menu.conf.MenuConf;
+import org.jill.game.screen.conf.PictureConf;
 import org.jill.openjill.core.api.manager.TileManager;
 
 /**
@@ -8,7 +10,7 @@ import org.jill.openjill.core.api.manager.TileManager;
  *
  * @author Emeric Martineau
  */
-public final class ClassicMenu extends StdMenu {
+public final class ClassicMenu extends AbstractStdMenu {
     /**
      * Constructor.
      *
@@ -25,8 +27,41 @@ public final class ClassicMenu extends StdMenu {
         setTitle(conf.getTitle());
         createMenuItem(conf);
 
-        this.positionToDrawMenuX = conf.getPositionX();
-        this.positionToDrawMenuY = conf.getPositionY();
+        setPositionToDrawMenuX(conf.getX());
+        setPositionToDrawMenuY(conf.getY());
+        setTextX(conf.getTextX());
+        setTextY(conf.getTextY());
+
+        setNbSpaceBefore(conf.getNbSpaceBefore());
+
+        setRightUpperCorner(getImage(pictureCache, conf.getRightUpperCorner()));
+        setLeftUpperCorner(getImage(pictureCache, conf.getLeftUpperCorner()));
+
+        setRightLowerCorner(getImage(pictureCache, conf.getRightLowerCorner()));
+        setLeftLowerCorner(getImage(pictureCache, conf.getLeftLowerCorner()));
+
+        setUpperBar(getImage(pictureCache, conf.getUpperBar()));
+        setLowerBar(getImage(pictureCache, conf.getLowerBar()));
+
+        setLeftBar(getImage(pictureCache, conf.getLeftBar()));
+        setRightBar(getImage(pictureCache, conf.getRightBar()));
+
+        setBackImage(getImage(pictureCache, conf.getBackImage()));
+
+        createBackground(pictureCache);
+    }
+
+    /**
+     * Get image.
+     *
+     * @param pictureCache cache manager
+     * @param conf configuration
+     *
+     * @return picture
+     */
+    private BufferedImage getImage(final TileManager pictureCache,
+            final PictureConf conf) {
+        return pictureCache.getImage(conf.getTileset(), conf.getTile());
     }
 
     /**

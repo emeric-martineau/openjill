@@ -61,12 +61,12 @@ public class AbstractMenu {
     /**
      * Position to draw menu.
      */
-    protected int positionToDrawMenuX;
+    private int positionToDrawMenuX;
 
     /**
      * Position to draw menu.
      */
-    protected int positionToDrawMenuY;
+    private int positionToDrawMenuY;
 
     /**
      * Next menu to draw.
@@ -100,6 +100,8 @@ public class AbstractMenu {
 
     /**
      * Erase cursor.
+     *
+     * @param menuPicture pictur of menu
      */
     protected final void eraseCursor(final BufferedImage menuPicture) {
         final Point cursorPos = cursorPositionBySubMenuIndex.get(
@@ -257,5 +259,41 @@ public class AbstractMenu {
      */
     public final void setPreviousMenu(final MenuInterface prevMenu) {
         this.previousMenu = prevMenu;
+    }
+
+    /**
+     * Give text position to draw menu x.
+     *
+     * @return x
+     */
+    protected int getPositionToDrawMenuX() {
+        return positionToDrawMenuX;
+    }
+
+    /**
+     * Set text position to draw menu x.
+     *
+     * @param x x
+     */
+    protected void setPositionToDrawMenuX(final int x) {
+        this.positionToDrawMenuX = x;
+    }
+
+    /**
+     * Give text position to draw menu y.
+     *
+     * @return y
+     */
+    protected int getPositionToDrawMenuY() {
+        return positionToDrawMenuY;
+    }
+
+    /**
+     * Set text position to draw menu y.
+     *
+     * @param y x
+     */
+    protected void setPositionToDrawMenuY(final int y) {
+        this.positionToDrawMenuY = y;
     }
 }

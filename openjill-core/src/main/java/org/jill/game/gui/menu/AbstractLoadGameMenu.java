@@ -126,8 +126,8 @@ public abstract class AbstractLoadGameMenu extends AbstractMenu
         this.currentMenuPos = 0;
         this.needToDrawPicture = true;
 
-        this.positionToDrawMenuX = positionToDrawMenuX;
-        this.positionToDrawMenuY = positionToDrawMenuY;
+        setPositionToDrawMenuX(positionToDrawMenuX);
+        setPositionToDrawMenuY(positionToDrawMenuY);
 
         drawPicture();
     }
@@ -350,8 +350,8 @@ public abstract class AbstractLoadGameMenu extends AbstractMenu
 
     @Override
     public void draw(final Graphics g2) {
-        g2.drawImage(getPicture(), this.positionToDrawMenuX,
-            this.positionToDrawMenuY, null);
+        g2.drawImage(getPicture(), getPositionToDrawMenuX(),
+            getPositionToDrawMenuY(), null);
 
         final MenuInterface previousMenu = this.getPreviousMenu();
 

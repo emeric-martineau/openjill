@@ -14,27 +14,28 @@ import org.jill.openjill.core.api.manager.TileManager;
  *
  * @author Emeric MARTINEAU
  */
-public class StdMenu extends AbstractMenu implements MenuInterface {
-
-    /**
-     * Start position of text in menu.
-     */
-    private static final int MENU_TEXT_START_X = 13;
-
-    /**
-     * Start position of text in menu.
-     */
-    private static final int MENU_TEXT_START_Y = 16;
-
-    /**
-     * Nb space before.
-     */
-    private static final int NB_SPACE_BEFORE = 4;
+public abstract class AbstractStdMenu extends AbstractMenu
+    implements MenuInterface {
 
     /**
      * Number of space for boder.
      */
     private static final int NB_BORDER = 5;
+
+    /**
+     * Empty space before text.
+     */
+    private int nbSpaceBefore;
+
+    /**
+     * Start text position x.
+     */
+    private int textX;
+
+    /**
+     * Start text position y.
+     */
+    private int textY;
 
     /**
      * Name of menu.
@@ -74,47 +75,52 @@ public class StdMenu extends AbstractMenu implements MenuInterface {
     /**
      * Picutre.
      */
-    private final BufferedImage rightUpperCorner;
+    private BufferedImage rightUpperCorner;
 
     /**
      * Picutre.
      */
-    private final BufferedImage leftUpperCorner;
+    private BufferedImage leftUpperCorner;
 
     /**
      * Picutre.
      */
-    private final BufferedImage rightLowerCorner;
+    private BufferedImage rightLowerCorner;
 
     /**
      * Picutre.
      */
-    private final BufferedImage leftLowerCorner;
+    private BufferedImage leftLowerCorner;
 
     /**
      * Picutre.
      */
-    private final BufferedImage upperBar;
+    private BufferedImage upperBar;
 
     /**
      * Picutre.
      */
-    private final BufferedImage lowerBar;
+    private BufferedImage lowerBar;
 
     /**
      * Picutre.
      */
-    private final BufferedImage rightBar;
+    private BufferedImage rightBar;
 
     /**
      * Picutre.
      */
-    private final BufferedImage leftBar;
+    private BufferedImage leftBar;
 
     /**
      * Picutre.
      */
-    private final BufferedImage background;
+    private BufferedImage backImage;
+
+    /**
+     * Picutre.
+     */
+    private BufferedImage background;
 
     /**
      * Current menu image.
@@ -131,7 +137,7 @@ public class StdMenu extends AbstractMenu implements MenuInterface {
      *
      * @param pictureCacheManager picture cache
      */
-    public StdMenu(final TileManager pictureCacheManager) {
+    public AbstractStdMenu(final TileManager pictureCacheManager) {
         super(pictureCacheManager, null);
 
         // Calculate font size
@@ -143,22 +149,19 @@ public class StdMenu extends AbstractMenu implements MenuInterface {
 
         this.pictureCache = pictureCacheManager;
 
-        rightUpperCorner = pictureCacheManager.getImage(7, 1);
-        leftUpperCorner = pictureCacheManager.getImage(7, 3);
-        rightLowerCorner = pictureCacheManager.getImage(7, 6);
-        leftLowerCorner = pictureCacheManager.getImage(7, 8);
-        upperBar = pictureCacheManager.getImage(7, 2);
-        lowerBar = pictureCacheManager.getImage(7, 7);
-        rightBar = pictureCacheManager.getImage(7, 4);
-        leftBar = pictureCacheManager.getImage(7, 5);
+        needToDrawPicture = true;
+    }
 
-        // Get image of background
-        final BufferedImage backImage = pictureCacheManager.getImage(7, 9);
-
+    /**
+     * Create background.
+     *
+     * @param pictureCacheManager picture cache
+     */
+    protected void createBackground(final TileManager pictureCacheManager) {
         // Create background image
         background = new BufferedImage(backImage.getWidth(),
-            backImage.getHeight(),
-            BufferedImage.TYPE_INT_ARGB);
+                backImage.getHeight(),
+                BufferedImage.TYPE_INT_ARGB);
 
         final Graphics2D g2 = background.createGraphics();
 
@@ -170,8 +173,6 @@ public class StdMenu extends AbstractMenu implements MenuInterface {
         g2.drawImage(backImage, 0, 0, null);
 
         g2.dispose();
-
-        needToDrawPicture = true;
     }
 
     @Override
@@ -193,7 +194,7 @@ public class StdMenu extends AbstractMenu implements MenuInterface {
 
         for (SubMenu sub : items) {
             // 4 space before
-            currentsize = sub.getText().length() + NB_SPACE_BEFORE;
+            currentsize = sub.getText().length() + this.nbSpaceBefore;
 
             if (currentsize > maximum) {
                 maximum = currentsize;
@@ -261,13 +262,13 @@ public class StdMenu extends AbstractMenu implements MenuInterface {
         }
 
         // Draw title
-        pictureCache.getTextManager().drawSmallText(g2, MENU_TEXT_START_X,
-            MENU_TEXT_START_Y, title.getText(), title.getColor(),
+        pictureCache.getTextManager().drawSmallText(g2, this.textX,
+            this.textY, title.getText(), title.getColor(),
             TextManager.BACKGROUND_COLOR_NONE);
 
-        final int posCursorX = MENU_TEXT_START_X + fontSize;
-        final int posTextX = MENU_TEXT_START_X + (NB_SPACE_BEFORE * fontSize);
-        int posTextY = MENU_TEXT_START_Y + fontSizeSpace;
+        final int posCursorX = this.textX + fontSize;
+        final int posTextX = this.textX + (this.nbSpaceBefore * fontSize);
+        int posTextY = this.textY + fontSizeSpace;
 
         cursorPositionBySubMenuIndex.clear();
 
@@ -332,8 +333,255 @@ public class StdMenu extends AbstractMenu implements MenuInterface {
         return name;
     }
 
+    /**
+     * Set name.
+     *
+     * @param nm name
+     */
     public final void setName(final String nm) {
         this.name = nm;
+    }
+
+    /**
+     * Get position text X.
+     *
+     * @return x
+     */
+    protected int getTextX() {
+        return textX;
+    }
+
+    /**
+     * Set position text X.
+     *
+     * @param x x
+     */
+    protected void setTextX(final int x) {
+        this.textX = x;
+    }
+
+    /**
+     * Get position text Y.
+     *
+     * @return y
+     */
+    protected int getTextY() {
+        return textY;
+    }
+
+    /**
+     * Set position text Y.
+     *
+     * @param y y
+     */
+    protected void setTextY(final int y) {
+        this.textY = y;
+    }
+
+    /**
+     * Space before text.
+     *
+     * @return nb space
+     */
+    public int getNbSpaceBefore() {
+        return nbSpaceBefore;
+    }
+
+    /**
+     * Space before text.
+     *
+     * @param nb nb space.
+     */
+    public void setNbSpaceBefore(final int nb) {
+        this.nbSpaceBefore = nb;
+    }
+
+    /**
+     * Corner.
+     *
+     * @return corner
+     */
+    public BufferedImage getRightUpperCorner() {
+        return rightUpperCorner;
+    }
+
+    /**
+     * Corner.
+     *
+     * @param right picture
+     */
+    public void setRightUpperCorner(final BufferedImage right) {
+        this.rightUpperCorner = right;
+    }
+
+    /**
+     * Corner.
+     *
+     * @return corner
+     */
+    public BufferedImage getLeftUpperCorner() {
+        return leftUpperCorner;
+    }
+
+    /**
+     * Corner.
+     *
+     * @param left picture
+     */
+    public void setLeftUpperCorner(final BufferedImage left) {
+        this.leftUpperCorner = left;
+    }
+
+    /**
+     * Corner.
+     *
+     * @return corner
+     */
+    public BufferedImage getRightLowerCorner() {
+        return rightLowerCorner;
+    }
+
+    /**
+     * Corner.
+     *
+     * @param right picture
+     */
+    public void setRightLowerCorner(final BufferedImage right) {
+        this.rightLowerCorner = right;
+    }
+
+    /**
+     * Corner.
+     *
+     * @return corner
+     */
+    public BufferedImage getLeftLowerCorner() {
+        return leftLowerCorner;
+    }
+
+    /**
+     * Corner.
+     *
+     * @param left picture
+     */
+    public void setLeftLowerCorner(final BufferedImage left) {
+        this.leftLowerCorner = left;
+    }
+
+    /**
+     * Bar.
+     *
+     * @return bar
+     */
+    public BufferedImage getUpperBar() {
+        return upperBar;
+    }
+
+    /**
+     * Bar.
+     *
+     * @param upper picture
+     */
+    public void setUpperBar(final BufferedImage upper) {
+        this.upperBar = upper;
+    }
+
+    /**
+     * Bar.
+     *
+     * @return bar
+     */
+    public BufferedImage getLowerBar() {
+        return lowerBar;
+    }
+
+    /**
+     * Bar.
+     *
+     * @param lower picture
+     */
+    public void setLowerBar(final BufferedImage lower) {
+        this.lowerBar = lower;
+    }
+
+    /**
+     * Bar.
+     *
+     * @return bar
+     */
+    public BufferedImage getRightBar() {
+        return rightBar;
+    }
+
+    /**
+     * Bar.
+     *
+     * @param right picture
+     */
+    public void setRightBar(final BufferedImage right) {
+        this.rightBar = right;
+    }
+
+    /**
+     * Bar.
+     *
+     * @return bar
+     */
+    public BufferedImage getLeftBar() {
+        return leftBar;
+    }
+
+    /**
+     * Bar.
+     *
+     * @param left picture
+     */
+    public void setLeftBar(final BufferedImage left) {
+        this.leftBar = left;
+    }
+
+    /**
+     * Background image.
+     *
+     * @return image
+     */
+    public BufferedImage getBackImage() {
+        return backImage;
+    }
+
+    /**
+     * Set back picture.
+     *
+     * @param back picture
+     */
+    public void setBackImage(final BufferedImage back) {
+        this.backImage = back;
+    }
+
+    /**
+     * Return menu picture.
+     *
+     * @return picture
+     */
+    public BufferedImage getMenuPicture() {
+        return menuPicture;
+    }
+
+    /**
+     * Set menu picture.
+     *
+     * @param menu picture
+     */
+    public void setMenuPicture(final BufferedImage menu) {
+        this.menuPicture = menu;
+    }
+
+    public boolean isNeedToDrawPicture() {
+        return needToDrawPicture;
+    }
+
+    public void setNeedToDrawPicture(boolean needToDrawPicture) {
+        this.needToDrawPicture = needToDrawPicture;
     }
 
     @Override
@@ -365,8 +613,8 @@ public class StdMenu extends AbstractMenu implements MenuInterface {
 
     @Override
     public void draw(final Graphics g2) {
-        g2.drawImage(getPicture(), this.positionToDrawMenuX,
-            this.positionToDrawMenuY, null);
+        g2.drawImage(getPicture(), getPositionToDrawMenuX(),
+            getPositionToDrawMenuY(), null);
     }
 
     @Override
