@@ -3,10 +3,6 @@ Demo : do it
 Level : noise
 
 General : StdMenu.java -> don't use static value like 12,8... try to get image size and calculate area
-General : InfoBox, LevelMessageBox -> add timeout
-
-Load/save menu : support of number keys
-Menu : support of short cut
 
 Sound : do it
 

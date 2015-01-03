@@ -34,8 +34,17 @@ public final class JillGameConfig extends SimpleGameConfig {
     public static final String JILL_SCREENMOVE_DOWN
             = "jill.screenmove.player.yd.down";
 
+    /**
+     * Screen type by default.
+     */
     public static final String JILL_DEFAULT_SCREEN_TYPE
             = "jill.screen.type.default";
+
+    /**
+     * Timeout of display level message.
+     */
+    public static final String JILL_LEVEL_MESSAGE_TIMEOUT
+            = "jill.levelmessage.timeout";
 
     /**
      * File path of jill data.
@@ -60,7 +69,12 @@ public final class JillGameConfig extends SimpleGameConfig {
     /**
      * Screen config.
      */
-    private EnumScreenType typeScreen;
+    private final EnumScreenType typeScreen;
+
+    /**
+     * Level message timeout.
+     */
+    private final int levelMessageTimeout;
 
     /**
      * Constructor.
@@ -97,6 +111,10 @@ public final class JillGameConfig extends SimpleGameConfig {
         } else {
             this.typeScreen = EnumScreenType.VGA;
         }
+
+        value = properties.getProperty(JILL_LEVEL_MESSAGE_TIMEOUT);
+
+        this.levelMessageTimeout = Integer.valueOf(value);
     }
 
     /**
@@ -106,15 +124,6 @@ public final class JillGameConfig extends SimpleGameConfig {
      */
     public String getFilePath() {
         return this.filePath;
-    }
-
-    /**
-     * Set type screen.
-     *
-     * @param tpScreen type of screen
-     */
-    public void setTypeScreen(final EnumScreenType tpScreen) {
-        this.typeScreen = tpScreen;
     }
 
     /**
@@ -152,4 +161,15 @@ public final class JillGameConfig extends SimpleGameConfig {
     public int getPlayerMoveScreenYdDown() {
         return this.jillDown;
     }
+
+    /**
+     * Level message timeout.
+     *
+     * @return time in millisecond
+     */
+    public int getLevelMessageTimeout() {
+        return levelMessageTimeout;
+    }
+
+
 }

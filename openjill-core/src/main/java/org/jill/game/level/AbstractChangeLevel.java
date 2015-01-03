@@ -86,6 +86,11 @@ public abstract class AbstractChangeLevel extends
     protected LoadGameMenu menuLoadGame;
 
     /**
+     * levelMessageWait cycle
+     */
+    protected int levelMessageWait;
+
+    /**
      * Level configuration.
      *
      * @param cfgLevel configuration of level
@@ -119,11 +124,16 @@ public abstract class AbstractChangeLevel extends
             this.levelMessageBox.setEnable(true);
         } else if (levelNumber == RESTART_LEVEL_NUMBER) {
             this.levelMessageBox.setCanchange(true);
-            //this.levelMessageBox.setLevel(levelNumber);
         } else {
             this.levelMessageBox.setLevel(levelNumber);
             this.levelMessageBox.setEnable(true);
         }
+
+        JillGameConfig jillCfg =
+                (JillGameConfig) SimpleGameConfig.getInstance();
+
+        this.levelMessageWait =
+                jillCfg.getLevelMessageTimeout() / jillCfg.getGameTimerDelay();
     }
 
     /**
@@ -236,7 +246,7 @@ public abstract class AbstractChangeLevel extends
 
             // Create virtual file
             final FileAbstractByte jnData = putCurrentLevelInFileMemory();
-            jnData.seek(0);
+            //jnData.seek(0);
 
             LevelConfiguration cfgNewLevel = new JillLevelConfiguration(
                 this.levelConfiguration.getShaFileName(),
@@ -280,7 +290,7 @@ public abstract class AbstractChangeLevel extends
 
             writeStringObjectInFile(fab);
         } catch (final EOFException ex) {
-            LOGGER.log(Level.SEVERE, "Can't save file in memory !", ex);
+            throw new RuntimeException(ex);
         }
 
         return fab;
@@ -307,7 +317,7 @@ public abstract class AbstractChangeLevel extends
         int fileSize = BackgroundLayer.SIZE_IN_FILE;
 
         // Size of object
-        int objectSize = 2 + ObjectEntity.SIZE_IN_FILE /* player */;
+        int objectSize = 2; // 2 -> two byte to store number of object
 
         // Running object
         for (ObjectItem obj : this.listObject) {
@@ -360,7 +370,7 @@ public abstract class AbstractChangeLevel extends
     private void writeObjectInFile(final FileAbstractByte fab)
         throws EOFException {
         // Calculate object number
-        fab.write16bitLE(1 /* player */ + this.listObject.size()
+        fab.write16bitLE(this.listObject.size()
             + this.listObjectDrawOnBackground.size()
             + this.listObjectAlwaysOnScreen.size());
 
@@ -486,7 +496,11 @@ public abstract class AbstractChangeLevel extends
 
     @Override
     public void run() {
-        if (this.levelMessageBox.isCanchange()) {
+        this.levelMessageWait--;
+
+        if (this.levelMessageBox.isCanchange()
+                || (this.levelMessageBox.isEnable()
+                && this.levelMessageWait <= 0)) {
             // Do it here to let all data delete
             createAndLoadNewLevel();
         } else if (this.isRestoreLevel) {
