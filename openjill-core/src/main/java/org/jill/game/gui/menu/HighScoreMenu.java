@@ -141,8 +141,8 @@ public final class HighScoreMenu extends AbstractMenu implements MenuInterface {
         this.currentMenuPos = 0;
         this.cursorPositionBySubMenuIndex.add(new Point(0, 0));
 
-        setPositionToDrawMenuX(positionToDrawMenuX);
-        setPositionToDrawMenuY(positionToDrawMenuY);
+        setX(positionToDrawMenuX);
+        setY(positionToDrawMenuY);
 
         drawPicture();
     }
@@ -425,8 +425,8 @@ public final class HighScoreMenu extends AbstractMenu implements MenuInterface {
      */
     @Override
     public void draw(final Graphics g2) {
-        g2.drawImage(getPicture(), getPositionToDrawMenuX(),
-            getPositionToDrawMenuY(), null);
+        g2.drawImage(getPicture(), getX(),
+            getY(), null);
 
         final MenuInterface previousMenu = this.getPreviousMenu();
 

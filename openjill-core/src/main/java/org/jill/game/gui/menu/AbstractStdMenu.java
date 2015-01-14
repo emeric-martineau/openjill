@@ -141,15 +141,15 @@ public abstract class AbstractStdMenu extends AbstractMenu
         super(pictureCacheManager, null);
 
         // Calculate font size
-        fontSize = pictureCacheManager.getTextManager().createSmallText(" ",
+        this.fontSize = pictureCacheManager.getTextManager().createSmallText(" ",
             TextManager.COLOR_BLUE,
             TextManager.COLOR_BLUE).getHeight();
 
-        fontSizeSpace = fontSize + 2;
+        this.fontSizeSpace = this.fontSize + 2;
 
         this.pictureCache = pictureCacheManager;
 
-        needToDrawPicture = true;
+        this.needToDrawPicture = true;
     }
 
     /**
@@ -159,26 +159,27 @@ public abstract class AbstractStdMenu extends AbstractMenu
      */
     protected void createBackground(final TileManager pictureCacheManager) {
         // Create background image
-        background = new BufferedImage(backImage.getWidth(),
-                backImage.getHeight(),
+        this.background = new BufferedImage(this.backImage.getWidth(),
+                this.backImage.getHeight(),
                 BufferedImage.TYPE_INT_ARGB);
 
-        final Graphics2D g2 = background.createGraphics();
+        final Graphics2D g2 = this.background.createGraphics();
 
         // Fill background cause in CGA mode, background picture can be empty
         g2.setColor(pictureCacheManager.getBackgroundColor());
-        g2.fillRect(0, 0, background.getWidth(), background.getWidth());
+        g2.fillRect(0, 0, this.background.getWidth(),
+                this.background.getWidth());
 
         // Now, draw back picture
-        g2.drawImage(backImage, 0, 0, null);
+        g2.drawImage(this.backImage, 0, 0, null);
 
         g2.dispose();
     }
 
     @Override
     public void clearAllItems() {
-        needToDrawPicture = true;
-        items.clear();
+        this.needToDrawPicture = true;
+        this.items.clear();
     }
 
     /**
@@ -188,11 +189,11 @@ public abstract class AbstractStdMenu extends AbstractMenu
      */
     private int calculateWidthMinimum() {
         // length title is tile
-        int maximum = title.getText().length();
+        int maximum = this.title.getText().length();
 
         int currentsize;
 
-        for (SubMenu sub : items) {
+        for (SubMenu sub : this.items) {
             // 4 space before
             currentsize = sub.getText().length() + this.nbSpaceBefore;
 
@@ -209,78 +210,81 @@ public abstract class AbstractStdMenu extends AbstractMenu
      */
     private void drawPicture() {
         // 1 line at top, 1 line bottom, 1 line for title, + 2 border
-        final int height = NB_BORDER + items.size();
+        final int height = NB_BORDER + this.items.size();
         // + 1 for border
         final int width = calculateWidthMinimum() + 1;
         // Picture size
-        final int pictureWidth = width * fontSizeSpace;
-        final int pictureHeight = height * fontSizeSpace;
+        final int pictureWidth = width * this.fontSizeSpace;
+        final int pictureHeight = height * this.fontSizeSpace;
 
-        menuPicture = new BufferedImage(pictureWidth, pictureHeight,
+        this.menuPicture = new BufferedImage(pictureWidth, pictureHeight,
             BufferedImage.TYPE_INT_ARGB);
-        final Graphics2D g2 = menuPicture.createGraphics();
+        final Graphics2D g2 = this.menuPicture.createGraphics();
 
         // Fill background
         final int widthBack = width - 1;
         final int heightBack = height - 1;
         for (int x = 1; x < widthBack; x++) {
             for (int y = 1; y < heightBack; y++) {
-                g2.drawImage(background, x * fontSizeSpace,
-                    y * fontSizeSpace, null);
+                g2.drawImage(this.background, x * this.fontSizeSpace,
+                    y * this.fontSizeSpace, null);
             }
         }
 
         // Draw corner
-        g2.drawImage(rightUpperCorner, 0, 0, null);
-        g2.drawImage(leftUpperCorner, widthBack * fontSizeSpace, 0, null);
-        g2.drawImage(rightLowerCorner, 0, heightBack * fontSizeSpace, null);
-        g2.drawImage(leftLowerCorner, widthBack * fontSizeSpace,
-            heightBack * fontSizeSpace, null);
+        g2.drawImage(this.rightUpperCorner, 0, 0, null);
+        g2.drawImage(this.leftUpperCorner, widthBack * this.fontSizeSpace,
+                0, null);
+        g2.drawImage(this.rightLowerCorner, 0, heightBack * this.fontSizeSpace,
+                null);
+        g2.drawImage(this.leftLowerCorner, widthBack * this.fontSizeSpace,
+            heightBack * this.fontSizeSpace, null);
 
         // Draw upper border
         for (int x = 1; x < widthBack; x++) {
-            g2.drawImage(upperBar, x * fontSizeSpace, 0, null);
+            g2.drawImage(this.upperBar, x * this.fontSizeSpace, 0, null);
         }
 
         // Draw lower border
-        final int yPos = heightBack * fontSizeSpace;
+        final int yPos = heightBack * this.fontSizeSpace;
 
         for (int x = 1; x < widthBack; x++) {
-            g2.drawImage(lowerBar, x * fontSizeSpace, yPos, null);
+            g2.drawImage(this.lowerBar, x * this.fontSizeSpace, yPos, null);
         }
 
         // Draw right border
         for (int y = 1; y < heightBack; y++) {
-            g2.drawImage(rightBar, 0, y * fontSizeSpace, null);
+            g2.drawImage(this.rightBar, 0, y * this.fontSizeSpace, null);
         }
 
         // Draw left border
-        final int xPos = widthBack * fontSizeSpace;
+        final int xPos = widthBack * this.fontSizeSpace;
 
         for (int y = 1; y < heightBack; y++) {
-            g2.drawImage(leftBar, xPos, y * fontSizeSpace, null);
+            g2.drawImage(this.leftBar, xPos, y * this.fontSizeSpace, null);
         }
 
         // Draw title
-        pictureCache.getTextManager().drawSmallText(g2, this.textX,
-            this.textY, title.getText(), title.getColor(),
+        this.pictureCache.getTextManager().drawSmallText(g2, this.textX,
+            this.textY, this.title.getText(), this.title.getColor(),
             TextManager.BACKGROUND_COLOR_NONE);
 
-        final int posCursorX = this.textX + fontSize;
-        final int posTextX = this.textX + (this.nbSpaceBefore * fontSize);
-        int posTextY = this.textY + fontSizeSpace;
+        final int posCursorX = this.textX + this.fontSize;
+        final int posTextX = this.textX + (this.nbSpaceBefore * this.fontSize);
+        int posTextY = this.textY + this.fontSizeSpace;
 
-        cursorPositionBySubMenuIndex.clear();
+        this.cursorPositionBySubMenuIndex.clear();
 
         for (SubMenu entry : items) {
-            pictureCache.getTextManager().drawSmallText(g2, posTextX, posTextY,
-                entry.getText(), entry.getColor(),
+            this.pictureCache.getTextManager().drawSmallText(g2, posTextX,
+                    posTextY, entry.getText(), entry.getColor(),
                 TextManager.BACKGROUND_COLOR_NONE);
 
             // Calculate cursor position
-            cursorPositionBySubMenuIndex.add(new Point(posCursorX, posTextY));
+            this.cursorPositionBySubMenuIndex.add(new Point(posCursorX,
+                    posTextY));
 
-            posTextY += fontSizeSpace;
+            posTextY += this.fontSizeSpace;
         }
 
         g2.dispose();
@@ -288,49 +292,50 @@ public abstract class AbstractStdMenu extends AbstractMenu
 
     @Override
     public BufferedImage getPicture() {
-        if (needToDrawPicture) {
+        if (this.needToDrawPicture) {
             drawPicture();
-            copyBackgroundCursor(menuPicture);
-            needToDrawPicture = false;
+            copyBackgroundCursor(this.menuPicture);
+            this.needToDrawPicture = false;
         }
 
-        drawCursor(menuPicture);
+        drawCursor(this.menuPicture);
 
-        return menuPicture;
+        return this.menuPicture;
     }
 
     @Override
     public void up() {
-        if (currentMenuPos > 0) {
-            eraseCursor(menuPicture);
+        if (this.currentMenuPos > 0) {
+            //eraseCursor(menuPicture);
 
-            currentMenuPos--;
+            this.currentMenuPos--;
+            this.needToDrawPicture = true;
 
-            copyBackgroundCursor(menuPicture);
+            //copyBackgroundCursor(menuPicture);
         }
     }
 
     @Override
     public void down() {
-        if (currentMenuPos < (items.size() - 1)) {
-            eraseCursor(menuPicture);
+        if (this.currentMenuPos < (this.items.size() - 1)) {
+            //eraseCursor(menuPicture);
 
-            currentMenuPos++;
-
-            copyBackgroundCursor(menuPicture);
+            this.currentMenuPos++;
+            this.needToDrawPicture = true;
+            //copyBackgroundCursor(menuPicture);
         }
     }
 
     @Override
     public int getCursorValue() {
-        return items.get(currentMenuPos).getValue();
+        return this.items.get(this.currentMenuPos).getValue();
     }
 
     /**
      * @return name
      */
     public final String getName() {
-        return name;
+        return this.name;
     }
 
     /**
@@ -348,7 +353,7 @@ public abstract class AbstractStdMenu extends AbstractMenu
      * @return x
      */
     protected int getTextX() {
-        return textX;
+        return this.textX;
     }
 
     /**
@@ -366,7 +371,7 @@ public abstract class AbstractStdMenu extends AbstractMenu
      * @return y
      */
     protected int getTextY() {
-        return textY;
+        return this.textY;
     }
 
     /**
@@ -384,7 +389,7 @@ public abstract class AbstractStdMenu extends AbstractMenu
      * @return nb space
      */
     public int getNbSpaceBefore() {
-        return nbSpaceBefore;
+        return this.nbSpaceBefore;
     }
 
     /**
@@ -402,7 +407,7 @@ public abstract class AbstractStdMenu extends AbstractMenu
      * @return corner
      */
     public BufferedImage getRightUpperCorner() {
-        return rightUpperCorner;
+        return this.rightUpperCorner;
     }
 
     /**
@@ -420,7 +425,7 @@ public abstract class AbstractStdMenu extends AbstractMenu
      * @return corner
      */
     public BufferedImage getLeftUpperCorner() {
-        return leftUpperCorner;
+        return this.leftUpperCorner;
     }
 
     /**
@@ -438,7 +443,7 @@ public abstract class AbstractStdMenu extends AbstractMenu
      * @return corner
      */
     public BufferedImage getRightLowerCorner() {
-        return rightLowerCorner;
+        return this.rightLowerCorner;
     }
 
     /**
@@ -564,7 +569,7 @@ public abstract class AbstractStdMenu extends AbstractMenu
      * @return picture
      */
     public BufferedImage getMenuPicture() {
-        return menuPicture;
+        return this.menuPicture;
     }
 
     /**
@@ -577,7 +582,7 @@ public abstract class AbstractStdMenu extends AbstractMenu
     }
 
     public boolean isNeedToDrawPicture() {
-        return needToDrawPicture;
+        return this.needToDrawPicture;
     }
 
     public void setNeedToDrawPicture(boolean needToDrawPicture) {
@@ -586,19 +591,19 @@ public abstract class AbstractStdMenu extends AbstractMenu
 
     @Override
     public SubMenu getTitle() {
-        return title;
+        return this.title;
     }
 
     @Override
     public void setTitle(SubMenu ttl) {
         this.title = ttl;
-        needToDrawPicture = true;
+        this.needToDrawPicture = true;
     }
 
     @Override
     public void addItem(final SubMenu it) {
         this.items.add(it);
-        needToDrawPicture = true;
+        this.needToDrawPicture = true;
     }
 
     @Override
@@ -613,8 +618,8 @@ public abstract class AbstractStdMenu extends AbstractMenu
 
     @Override
     public void draw(final Graphics g2) {
-        g2.drawImage(getPicture(), getPositionToDrawMenuX(),
-            getPositionToDrawMenuY(), null);
+        g2.drawImage(getPicture(), getX(),
+            getY(), null);
     }
 
     @Override
@@ -625,6 +630,8 @@ public abstract class AbstractStdMenu extends AbstractMenu
         for (SubMenu sm : this.items) {
             if (key == sm.getShortCut()) {
                 this.currentMenuPos = menuPos;
+
+                this.needToDrawPicture = true;
 
                 return true;
             }

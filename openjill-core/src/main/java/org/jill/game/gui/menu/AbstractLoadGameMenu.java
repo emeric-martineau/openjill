@@ -76,6 +76,11 @@ public abstract class AbstractLoadGameMenu extends AbstractMenu
     private LoadSaveGameMenuConf conf;
 
     /**
+     * Previous menu picture.
+     */
+    private BufferedImage previousMenuPicture;
+
+    /**
      * Constructor.
      *
      * @param menuScreen object to draw high score
@@ -119,15 +124,13 @@ public abstract class AbstractLoadGameMenu extends AbstractMenu
         this.pictureCache = pictureCacheManager;
         this.listSaveGame = saveGameList;
 
-        final TextToDraw titleConf = this.conf.getText().get(0);
-
         this.backgroundColor = this.conf.getReadonlymode().getBackgroundColor();
 
         this.currentMenuPos = 0;
         this.needToDrawPicture = true;
 
-        setPositionToDrawMenuX(positionToDrawMenuX);
-        setPositionToDrawMenuY(positionToDrawMenuY);
+        setX(positionToDrawMenuX);
+        setY(positionToDrawMenuY);
 
         drawPicture();
     }
@@ -204,6 +207,11 @@ public abstract class AbstractLoadGameMenu extends AbstractMenu
 
     @Override
     public final void setEnable(final boolean en) {
+        // If parent, take picture
+        if (getPreviousMenu() != null) {
+            this.previousMenuPicture = getPreviousMenu().getPicture();
+        }
+
         this.enable = en;
     }
 
@@ -219,29 +227,6 @@ public abstract class AbstractLoadGameMenu extends AbstractMenu
     @Override
     public void addItem(final SubMenu it) {
         // Nothing
-    }
-
-    /**
-     * Draw footer of menu.
-     *
-     * @param g2 graphic2d object
-     * @param text text to display
-     * @param color color
-     * @param widthArea size of area
-     * @param yFooter y position
-     *
-     * @return new yFooter
-     */
-    private int drawFooter(final Graphics2D g2, final String text,
-        final int color, final int widthArea, final int yFooter) {
-        final BufferedImage footerImage
-            = pictureCache.getTextManager().createSmallText(text, color,
-                TextManager.BACKGROUND_COLOR_NONE);
-
-        g2.drawImage(footerImage, null,
-            (widthArea - footerImage.getWidth()) / 2, yFooter);
-
-        return yFooter + footerImage.getHeight();
     }
 
     /**
@@ -350,13 +335,12 @@ public abstract class AbstractLoadGameMenu extends AbstractMenu
 
     @Override
     public void draw(final Graphics g2) {
-        g2.drawImage(getPicture(), getPositionToDrawMenuX(),
-            getPositionToDrawMenuY(), null);
+        g2.drawImage(getPicture(), getX(),
+            getY(), null);
 
-        final MenuInterface previousMenu = this.getPreviousMenu();
-
-        if (previousMenu != null) {
-            previousMenu.draw(g2);
+        if (this.previousMenuPicture != null) {
+            g2.drawImage(this.previousMenuPicture, getPreviousMenu().getX(),
+                    getPreviousMenu().getY(), null);
         }
     }
 
@@ -365,13 +349,33 @@ public abstract class AbstractLoadGameMenu extends AbstractMenu
         if (this.editMode) {
             return false;
         } else {
-            if (consumeOtherKey >= '0' && '6' <= consumeOtherKey) {
-                this.currentMenuPos = consumeOtherKey - '0' - 1;
-
-                return true;
-            } else {
-                return false;
+            switch(consumeOtherKey) {
+                case '0':
+                    this.currentMenuPos = 0;
+                    break;
+                case '1':
+                    this.currentMenuPos = 1;
+                    break;
+                case '2':
+                    this.currentMenuPos = 2;
+                    break;
+                case '3':
+                    this.currentMenuPos = 3;
+                    break;
+                case '4':
+                    this.currentMenuPos = 4;
+                    break;
+                case '5':
+                    this.currentMenuPos = 5;
+                    break;
+                case '6':
+                    this.currentMenuPos = 6;
+                    break;
+                default:
+                    return false;
             }
+
+            return true;
         }
     }
 

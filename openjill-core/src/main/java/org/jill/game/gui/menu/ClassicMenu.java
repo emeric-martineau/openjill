@@ -27,8 +27,8 @@ public final class ClassicMenu extends AbstractStdMenu {
         setTitle(conf.getTitle());
         createMenuItem(conf);
 
-        setPositionToDrawMenuX(conf.getX());
-        setPositionToDrawMenuY(conf.getY());
+        setX(conf.getX());
+        setY(conf.getY());
         setTextX(conf.getTextX());
         setTextY(conf.getTextY());
 

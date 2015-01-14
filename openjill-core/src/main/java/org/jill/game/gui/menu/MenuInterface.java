@@ -106,4 +106,32 @@ public interface MenuInterface {
      * @return previous menu
      */
     MenuInterface getPreviousMenu();
+
+    /**
+     * Give text position to draw menu x.
+     *
+     * @return x
+     */
+    int getX();
+
+    /**
+     * Set text position to draw menu x.
+     *
+     * @param x x
+     */
+    void setX(int x);
+
+    /**
+     * Give text position to draw menu y.
+     *
+     * @return y
+     */
+    int getY();
+
+    /**
+     * Set text position to draw menu y.
+     *
+     * @param y x
+     */
+    void setY(int y);
 }

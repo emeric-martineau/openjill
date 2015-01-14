@@ -90,11 +90,12 @@ public class AbstractMenu {
             sb.append((char) indexImage);
         }
 
-        cursors = pictureCache.getTextManager().grapSmallLetter(sb.toString(),
+        this.cursors = pictureCache.getTextManager().grapSmallLetter(
+                sb.toString(),
             TextManager.COLOR_WHITE, TextManager.BACKGROUND_COLOR_NONE);
 
-        oldCursorBackground = new BufferedImage(cursors[0].getWidth(),
-            cursors[0].getHeight(),
+        this.oldCursorBackground = new BufferedImage(this.cursors[0].getWidth(),
+            this.cursors[0].getHeight(),
             BufferedImage.TYPE_INT_ARGB);
     }
 
@@ -104,8 +105,8 @@ public class AbstractMenu {
      * @param menuPicture pictur of menu
      */
     protected final void eraseCursor(final BufferedImage menuPicture) {
-        final Point cursorPos = cursorPositionBySubMenuIndex.get(
-            currentMenuPos);
+        final Point cursorPos = this.cursorPositionBySubMenuIndex.get(
+            this.currentMenuPos);
 
         eraseCursor(cursorPos, menuPicture);
     }
@@ -122,7 +123,7 @@ public class AbstractMenu {
         final Graphics2D g2 = menuPicture.createGraphics();
 
         // Clear old picture
-        g2.drawImage(oldCursorBackground, cursorPos.x, cursorPos.y, null);
+        g2.drawImage(this.oldCursorBackground, cursorPos.x, cursorPos.y, null);
 
         g2.dispose();
     }
@@ -133,11 +134,11 @@ public class AbstractMenu {
      * @param menuPicture picture of menu
      */
     protected final void copyBackgroundCursor(final BufferedImage menuPicture) {
-        final Graphics2D g2Old = oldCursorBackground.createGraphics();
+        final Graphics2D g2Old = this.oldCursorBackground.createGraphics();
         final Graphics2D g2 = menuPicture.createGraphics();
 
-        final Point cursorPos = cursorPositionBySubMenuIndex.get(
-            currentMenuPos);
+        final Point cursorPos = this.cursorPositionBySubMenuIndex.get(
+            this.currentMenuPos);
 
         g2Old.drawImage(menuPicture, -1 * cursorPos.x, -1 * cursorPos.y, null);
 
@@ -153,8 +154,8 @@ public class AbstractMenu {
     protected final void drawCursor(final BufferedImage menuPicture) {
         // Draw new cursor position
         final Graphics2D g2 = menuPicture.createGraphics();
-        final Point cursorPos = cursorPositionBySubMenuIndex.get(
-            currentMenuPos);
+        final Point cursorPos = this.cursorPositionBySubMenuIndex.get(
+            this.currentMenuPos);
 
         drawCursor(g2, cursorPos, menuPicture);
     }
@@ -169,13 +170,14 @@ public class AbstractMenu {
     protected final void drawCursor(final Graphics2D g2, final Point cursorPos,
         final BufferedImage menuPicture) {
         // Clear old picture
-        g2.drawImage(oldCursorBackground, cursorPos.x, cursorPos.y, null);
+        g2.drawImage(this.oldCursorBackground, cursorPos.x, cursorPos.y, null);
 
-        g2.drawImage(cursors[cursorIndex], cursorPos.x, cursorPos.y, null);
-        cursorIndex++;
+        g2.drawImage(this.cursors[this.cursorIndex], cursorPos.x,
+                cursorPos.y, null);
+        this.cursorIndex++;
 
-        if (cursorIndex >= cursors.length) {
-            cursorIndex = 0;
+        if (this.cursorIndex >= this.cursors.length) {
+            this.cursorIndex = 0;
         }
     }
 
@@ -266,7 +268,7 @@ public class AbstractMenu {
      *
      * @return x
      */
-    protected int getPositionToDrawMenuX() {
+    public int getX() {
         return positionToDrawMenuX;
     }
 
@@ -275,7 +277,7 @@ public class AbstractMenu {
      *
      * @param x x
      */
-    protected void setPositionToDrawMenuX(final int x) {
+    public void setX(final int x) {
         this.positionToDrawMenuX = x;
     }
 
@@ -284,7 +286,7 @@ public class AbstractMenu {
      *
      * @return y
      */
-    protected int getPositionToDrawMenuY() {
+    public int getY() {
         return positionToDrawMenuY;
     }
 
@@ -293,7 +295,7 @@ public class AbstractMenu {
      *
      * @param y x
      */
-    protected void setPositionToDrawMenuY(final int y) {
+    public void setY(final int y) {
         this.positionToDrawMenuY = y;
     }
 }
