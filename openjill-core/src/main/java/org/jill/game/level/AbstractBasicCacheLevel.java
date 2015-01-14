@@ -99,6 +99,12 @@ public class AbstractBasicCacheLevel {
         return jnFileCache;
     }
 
+    protected final void clearJnCache(final String baseFileName) {
+        if (baseFileName.equalsIgnoreCase(jnFileNameCache)) {
+            jnFileNameCache = null;
+        }
+    }
+
     /**
      * Return Vcl file if cached.
      *
