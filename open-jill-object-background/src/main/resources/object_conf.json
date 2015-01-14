@@ -144,7 +144,7 @@
         "tile":"0",
         "tileSet":"61",
         "numberTileSet":"4",
-        "killForce":"1"
+        "killForce":"-1"
     },
     "GatorManager":
     {
