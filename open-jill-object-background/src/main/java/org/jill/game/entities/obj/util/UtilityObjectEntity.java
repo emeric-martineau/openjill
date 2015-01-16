@@ -34,7 +34,7 @@ public final class UtilityObjectEntity {
         final int endX, final int startY, final int endY,
         final BackgroundEntity[][] backgroundObject) {
         return checkObjectHitBlockOrStair(startX, endX, startY, endY,
-            backgroundObject, true);
+            backgroundObject, true, false, true);
     }
 
     /**
@@ -48,11 +48,47 @@ public final class UtilityObjectEntity {
      *
      * @return true if object can move
      */
-    private static BackgroundEntity checkObjectHitBlock(final int startX,
+    private static BackgroundEntity checkObjectHitBlockUp(final int startX,
+        final int endX, final int startY, final int endY,
+        final BackgroundEntity[][] backgroundObject) {
+        return checkObjectHitBlockOrStair(startX, endX, endY, startY,
+            backgroundObject, false, true, false);
+    }
+
+    /**
+     * Check if object can goto this/there block(s).
+     *
+     * @param startX block x start
+     * @param endX block x end
+     * @param startY block y start
+     * @param endY block end y end
+     * @param backgroundObject background map
+     *
+     * @return true if object can move
+     */
+    private static BackgroundEntity checkObjectHitBlockLeft(final int startX,
+        final int endX, final int startY, final int endY,
+        final BackgroundEntity[][] backgroundObject) {
+        return checkObjectHitBlockOrStair(endX, startX, startY, endY,
+            backgroundObject, false, false, false);
+    }
+
+    /**
+     * Check if object can goto this/there block(s).
+     *
+     * @param startX block x start
+     * @param endX block x end
+     * @param startY block y start
+     * @param endY block end y end
+     * @param backgroundObject background map
+     *
+     * @return true if object can move
+     */
+    private static BackgroundEntity checkObjectHitBlockRight(final int startX,
         final int endX, final int startY, final int endY,
         final BackgroundEntity[][] backgroundObject) {
         return checkObjectHitBlockOrStair(startX, endX, startY, endY,
-            backgroundObject, false);
+            backgroundObject, false, false, true);
     }
 
     /**
@@ -64,12 +100,15 @@ public final class UtilityObjectEntity {
      * @param endY block end y end
      * @param backgroundObject background map
      * @param checkStair check also stair
+     * @param up true if search is up, else search is down
+     * @param right true if search is right, else search is lieft
      *
      * @return true if object can move
      */
     private static BackgroundEntity checkObjectHitBlockOrStair(final int startX,
         final int endX, final int startY, final int endY,
-        final BackgroundEntity[][] backgroundObject, final boolean checkStair) {
+        final BackgroundEntity[][] backgroundObject, final boolean checkStair,
+        final boolean up, final boolean right) {
         boolean objectCanMove;
 
         // Index of background for check move
@@ -80,8 +119,8 @@ public final class UtilityObjectEntity {
         final int lEndY = Math.min(endY, BackgroundLayer.MAP_HEIGHT - 1);
 
         // Check if floor
-        for (indexBackX = startX; indexBackX <= lEndX; indexBackX++) {
-            for (indexBackY = startY; indexBackY <= lEndY; indexBackY++) {
+        for (indexBackX = startX; ;) {
+            for (indexBackY = startY; ;) {
                 objectCanMove
                     = backgroundObject[indexBackX][indexBackY].isPlayerThru();
 
@@ -92,6 +131,34 @@ public final class UtilityObjectEntity {
 
                 if (!objectCanMove) {
                     return backgroundObject[indexBackX][indexBackY];
+                }
+
+                if (up) {
+                    indexBackY--;
+
+                    if (indexBackY < lEndY) {
+                        break;
+                    }
+                } else {
+                    indexBackY++;
+
+                    if (indexBackY > lEndY) {
+                        break;
+                    }
+                }
+            }
+
+            if (right) {
+                indexBackX++;
+
+                if (indexBackX > lEndX) {
+                    break;
+                }
+            } else {
+                indexBackX--;
+
+                if (indexBackX < lEndX) {
+                    break;
                 }
             }
         }
@@ -310,8 +377,8 @@ public final class UtilityObjectEntity {
         int endBlockX = (newPosX - 1) / JillConst.getBlockSize();
 
         // Check if can move
-        final BackgroundEntity back = checkObjectHitBlock(endBlockX, endBlockX,
-            startBlockY, endBlockY, backgroundObject);
+        final BackgroundEntity back = checkObjectHitBlockRight(endBlockX,
+             endBlockX, startBlockY, endBlockY, backgroundObject);
 
         if (back == null) {
             // Object can't out of map
@@ -352,7 +419,7 @@ public final class UtilityObjectEntity {
         int startBlockX = newPosX / JillConst.getBlockSize();
 
         // Check if can move
-        final BackgroundEntity back = checkObjectHitBlock(startBlockX,
+        final BackgroundEntity back = checkObjectHitBlockLeft(startBlockX,
             startBlockX, startBlockY, endBlockY, backgroundObject);
 
         if (back == null) {
@@ -401,7 +468,7 @@ public final class UtilityObjectEntity {
         final int newStartY = newPosY / JillConst.getBlockSize();
         final int newEndY = obj.getY() / JillConst.getBlockSize();
 
-        final BackgroundEntity block = checkObjectHitBlock(
+        final BackgroundEntity block = checkObjectHitBlockUp(
             startBlockX, endBlockX, newStartY, newEndY, backgroundObject);
 
         if (block == null) {
@@ -477,7 +544,7 @@ public final class UtilityObjectEntity {
         int startBlockX = newPosX / JillConst.getBlockSize();
 
         // Check if can move
-        final BackgroundEntity back = checkObjectHitBlock(startBlockX,
+        final BackgroundEntity back = checkObjectHitBlockLeft(startBlockX,
             startBlockX, startBlockY, endBlockY, backgroundObject);
 
         if (back == null) {
@@ -526,8 +593,8 @@ public final class UtilityObjectEntity {
         int endBlockX = (newPosX - 1) / JillConst.getBlockSize();
 
         // Check if can move
-        final BackgroundEntity back = checkObjectHitBlock(endBlockX, endBlockX,
-            startBlockY, endBlockY, backgroundObject);
+        final BackgroundEntity back = checkObjectHitBlockRight(endBlockX,
+                endBlockX, startBlockY, endBlockY, backgroundObject);
 
         if (back == null) {
             // Object can't out of map
