@@ -315,3 +315,20 @@
  - Player image not selected in update message but in draw message for state begin,
  - Add FireHit object create when player hit lava background,
  - Remove initialisation. Object must be initialised by content of map file..
+
+0.2.2 : (2014/01/17)
+ - Add background lava animation,
+ - Fix bees movement,
+ - Fix draw barlife for better compatibility,
+ - Fix firebird hit,
+ - Add support apple health,
+ - Better falling spike support,
+ - Add door animation support,
+ - Fix regression of save game,
+ - Colored bullet (object 36) support,
+ - Add level message,
+ - Add hint message,
+ - Add shortcut support for menu,
+ - Fix player jump,
+ - Better implemetation of block hit detection,
+ - Various bugfix.
