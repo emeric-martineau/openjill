@@ -227,5 +227,17 @@
         "tileByState":"8:12#16:9#24:6#32:3#40:0",
         "counterDie":"40",
         "ySpeedMax":"12"
+    },
+    "SnakeManager":
+    {
+        "tileSet":"15",
+        "rightTileHead":"0,1,0,2",
+        "rightTileTail":"7,7,8,8",
+        "leftTileHead":"9,10,9,11",
+        "leftTileTail":"12,12,13,13",
+        "middleTile":"3,4,5,6",
+        "point":"35",
+        "killForce":"-1",
+        "stateWhenTouch":"16"
     }
 }

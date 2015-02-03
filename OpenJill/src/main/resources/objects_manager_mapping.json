@@ -85,6 +85,10 @@
         "implementationClass":"org.jill.game.entities.obj.HitFireManager"
     },
     {
+        "type":39,
+        "implementationClass":"org.jill.game.entities.obj.SnakeManager"
+    },
+    {
         "type":42,
         "implementationClass":"org.jill.game.entities.obj.HugeLetterTileManager"
     },
