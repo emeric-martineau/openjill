@@ -133,8 +133,6 @@ public final class GiantAntManager extends AbstractHitPlayerObjectEntity {
                 || (this.xSpeed > ObjectEntity.X_SPEED_MIDDLE)
                 && UtilityObjectEntity.moveObjectRightOnFloor(this, this.xSpeed,
                         this.backgroundObject)) {
-            this.x += this.xSpeed;
-
             this.counter++;
 
             if (this.counter == this.nbImagePerSideToDisplay) {
