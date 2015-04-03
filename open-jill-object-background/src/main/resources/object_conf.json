@@ -239,5 +239,17 @@
         "point":"35",
         "killForce":"-1",
         "stateWhenTouch":"16"
+    },
+    "RollingRockManager":{
+        "tileSet":14,
+        "numberTileSet":4,
+        "tile":24,
+        "counterFall":0,
+        "ySpeedFall":2,
+        "ySpeedMax":12,
+        "counterMoveMax":3,
+        "counterMoveValue":1,
+        "xSpeedFall":4,
+        "killForce":-1
     }
 }

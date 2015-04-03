@@ -77,6 +77,10 @@
         "implementationClass":"org.jill.game.entities.obj.RockKeyManager"
     },
     {
+        "type":35,
+        "implementationClass":"org.jill.game.entities.obj.RollingRockManager"
+    },
+    {
         "type":36,
         "implementationClass":"org.jill.game.entities.obj.bullet.BulletManager"
     },
