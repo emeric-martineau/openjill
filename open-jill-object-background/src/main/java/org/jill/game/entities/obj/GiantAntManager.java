@@ -13,7 +13,7 @@ import org.jill.openjill.core.api.entities.BackgroundEntity;
 import org.jill.openjill.core.api.keyboard.KeyboardLayout;
 
 /**
- * Firebird.
+ * Giant ant.
  *
  * @author Emeric MARTINEAU
  */
