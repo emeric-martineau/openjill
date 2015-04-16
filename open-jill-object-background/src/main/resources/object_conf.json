@@ -251,5 +251,13 @@
         "counterMoveValue":1,
         "xSpeedFall":4,
         "killForce":-1
+    },
+    "FlameManager":
+    {
+        "tile":"0",
+        "tileSet":"12",
+        "killForce":"-4",
+        "hitObject":"37",
+        "numberTileSet":"6"
     }
 }

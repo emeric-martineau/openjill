@@ -69,6 +69,10 @@
         "implementationClass":"org.jill.game.entities.obj.FirebirdManager"
     },
     {
+        "type":31,
+        "implementationClass":"org.jill.game.entities.obj.FlameManager"
+    },
+    {
         "type":32,
         "implementationClass":"org.jill.game.entities.obj.SwitchManager"
     },
