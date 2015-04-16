@@ -2,13 +2,11 @@ package org.jill.game.entities.obj;
 
 import java.awt.image.BufferedImage;
 import org.jill.openjill.core.api.entities.ObjectEntity;
-import org.jill.game.entities.obj.abs.AbstractHitPlayerObjectEntity;
+import org.jill.game.entities.obj.abs.AbstractFireHitPlayerObject;
 import org.jill.game.entities.obj.bullet.BulletObjectFactory;
 import org.jill.game.entities.obj.util.UtilityObjectEntity;
 import org.jill.openjill.core.api.entities.ObjectParam;
 import org.jill.openjill.core.api.message.EnumMessageType;
-import org.jill.openjill.core.api.message.object.CreateObjectMessage;
-import org.jill.openjill.core.api.message.object.ObjectListMessage;
 import org.jill.openjill.core.api.message.statusbar.inventory.
         InventoryPointMessage;
 import org.jill.openjill.core.api.entities.BackgroundEntity;
@@ -19,7 +17,7 @@ import org.jill.openjill.core.api.keyboard.KeyboardLayout;
  *
  * @author Emeric MARTINEAU
  */
-public final class FirebirdManager extends AbstractHitPlayerObjectEntity {
+public final class FirebirdManager extends AbstractFireHitPlayerObject {
 
     /**
      * Number of picture to remove from left/right.
@@ -45,21 +43,6 @@ public final class FirebirdManager extends AbstractHitPlayerObjectEntity {
      * Index of turn picture.
      */
     private int turnIndexPicture;
-
-    /**
-     * Kill message.
-     */
-    private ObjectListMessage killme;
-
-    /**
-     * Dead object.
-     */
-    private ObjectListMessage deadMessage;
-
-    /**
-     * Dead object.
-     */
-    private ObjectEntity deadObject;
 
     /**
      * Background map.
@@ -120,29 +103,10 @@ public final class FirebirdManager extends AbstractHitPlayerObjectEntity {
 
         setKillabgeObject(true);
 
-        this.killme = new ObjectListMessage(this, false);
-
-        // Create dead object
-        createDeadObject(getConfInteger("hitObject"));
-
         this.nbColoredBullet = getConfInteger("nbColoredBullet");
     }
 
-    /**
-     * Create object.
-     *
-     * @param typeHit type of hit (37)
-     */
-    private void createDeadObject(final int typeHit) {
-        final CreateObjectMessage com = new CreateObjectMessage(typeHit);
 
-        this.messageDispatcher.sendMessage(EnumMessageType.CREATE_OBJECT,
-            com);
-
-        this.deadObject = com.getObject();
-
-        this.deadMessage = new ObjectListMessage(this.deadObject, true);
-    }
 
     /**
      * Init picture level.
@@ -214,24 +178,12 @@ public final class FirebirdManager extends AbstractHitPlayerObjectEntity {
     }
 
     @Override
-    public void msgTouch(final ObjectEntity obj,
+    public void touchPlayer(final ObjectEntity obj,
             final KeyboardLayout keyboardLayout) {
-        if (obj.isPlayer()) {
-            hitPlayer(obj);
-
-            // Dead object have same position that player
-            this.deadObject.setX(obj.getX());
-            this.deadObject.setY(obj.getY());
-
-            this.messageDispatcher.sendMessage(EnumMessageType.OBJECT,
-                this.deadMessage);
-
-            this.messageDispatcher.sendMessage(EnumMessageType.OBJECT,
-                this.killme);
-
-            BulletObjectFactory.explode(this, this.nbColoredBullet,
-                    this.messageDispatcher);
-        }
+        killMe();
+        
+        BulletObjectFactory.explode(this, this.nbColoredBullet,
+                this.messageDispatcher);
     }
 
     @Override
@@ -240,7 +192,6 @@ public final class FirebirdManager extends AbstractHitPlayerObjectEntity {
         this.messageDispatcher.sendMessage(EnumMessageType.INVENTORY_POINT,
             new InventoryPointMessage(getConfInteger("point"), true,
                     this, sender));
-        this.messageDispatcher.sendMessage(EnumMessageType.OBJECT,
-            this.killme);
+        killMe();
     }
 }
