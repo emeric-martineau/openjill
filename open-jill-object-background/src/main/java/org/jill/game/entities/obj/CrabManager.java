@@ -73,6 +73,8 @@ public final class CrabManager extends AbstractHitPlayerObjectEntity {
         this.killme = new ObjectListMessage(this, false);
 
         this.backgroundObject = objectParam.getBackgroundObject();
+
+        setKillabgeObject(true);
     }
 
     /**

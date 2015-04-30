@@ -267,6 +267,7 @@
         "killForce":"-1",
         "numberTileSet":"4",
         "stateUpDown":"1",
-        "downUpMvtSize":"2"
+        "downUpMvtSize":"2",
+        "point":"2"
     }
 }
