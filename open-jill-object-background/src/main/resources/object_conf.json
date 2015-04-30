@@ -259,5 +259,14 @@
         "killForce":"-4",
         "hitObject":"37",
         "numberTileSet":"6"
+    },
+    "CrabManager":
+    {
+        "tile":"0",
+        "tileSet":"38",
+        "killForce":"-1",
+        "numberTileSet":"4",
+        "stateUpDown":"1",
+        "downUpMvtSize":"2"
     }
 }

@@ -109,6 +109,10 @@
         "implementationClass":"org.jill.game.entities.obj.BeesManager"
     },
     {
+        "type":47,
+        "implementationClass":"org.jill.game.entities.obj.CrabManager"
+    },
+    {
         "type":48,
         "implementationClass":"org.jill.game.entities.obj.GatorManager"
     },
