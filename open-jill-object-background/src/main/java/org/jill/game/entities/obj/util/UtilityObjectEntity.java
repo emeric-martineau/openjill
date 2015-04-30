@@ -603,7 +603,7 @@ public final class UtilityObjectEntity {
 
             // Now check if floor at new position
             BackgroundEntity block = isBlockOrStairAtThisPosition(
-                    newX + obj.getWidth(), obj.getY(), 1, obj.getHeight(),
+                    newX + obj.getWidth() - 1, obj.getY(), 1, obj.getHeight(),
                     1, backgroundObject);
 
             canMove = block != null;
