@@ -43,21 +43,22 @@ public abstract class AbstractPlayerInteractionManager
 
         boolean playerMoving = true;
 
-        if (mpm.isRight()) {
+        int offsetX = mpm.getOffsetX();
+        int offsetY = mpm.getOffsetY();
+
+        if (offsetX > X_SPEED_MIDDLE) {
             playerMoving = UtilityObjectEntity.moveObjectRight(this,
-                    mpm.getOffsetX(),
-                    getBackgroundObject());
-        } else if (mpm.isLeft()) {
+                    offsetX, getBackgroundObject());
+        } else if (offsetX < X_SPEED_MIDDLE) {
             playerMoving = UtilityObjectEntity.moveObjectLeft(this,
-                    mpm.getOffsetX(),
-                    getBackgroundObject());
+                    offsetX, getBackgroundObject());
         }
 
-        if (mpm.isUp()) {
+        if (offsetY < Y_SPEED_MIDDLE) {
             playerMoving = UtilityObjectEntity.moveObjectUp(this,
                     mpm.getOffsetY(),
                     getBackgroundObject());
-        } else if (mpm.isDown()) {
+        } else if (offsetY > Y_SPEED_MIDDLE) {
             //playerMoving = true;
             playerMoving = UtilityObjectEntity.moveObjectDown(this,
                     mpm.getOffsetY(),

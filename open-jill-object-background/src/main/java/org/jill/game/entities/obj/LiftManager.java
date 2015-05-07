@@ -115,8 +115,6 @@ public final class LiftManager extends AbstractParameterObjectEntity {
 
             MOVE_PLAYER_OBJECT.setState(PlayerState.STAND);
 
-            MOVE_PLAYER_OBJECT.setUp(true);
-
             this.messageDispatcher.sendMessage(
                 EnumMessageType.PLAYER_MOVE, MOVE_PLAYER_OBJECT);
 
@@ -133,8 +131,6 @@ public final class LiftManager extends AbstractParameterObjectEntity {
 
                 this.y -= JillConst.getBlockSize();
             }
-
-            MOVE_PLAYER_OBJECT.setUp(false);
         } else if (keyboardLayout.isDown()) {
             //keyboardLayout.setDown(false);
 
@@ -144,13 +140,8 @@ public final class LiftManager extends AbstractParameterObjectEntity {
 
                 MOVE_PLAYER_OBJECT.setState(PlayerState.STAND);
 
-                MOVE_PLAYER_OBJECT.setDown(true);
-
                 this.messageDispatcher.sendMessage(
                     EnumMessageType.PLAYER_MOVE, MOVE_PLAYER_OBJECT);
-
-                MOVE_PLAYER_OBJECT.setDown(false);
-
             }
 
             // if ELEVMID -> continue and replace by current graph

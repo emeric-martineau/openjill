@@ -149,8 +149,6 @@ public final class SparkManager extends AbstractHitPlayerObjectEntity {
 
             MOVE_PLAYER_OBJECT.setState(PlayerState.STAND);
 
-            MOVE_PLAYER_OBJECT.setRight(true);
-
             this.messageDispatcher.sendMessage(
                 EnumMessageType.PLAYER_MOVE, MOVE_PLAYER_OBJECT);
 

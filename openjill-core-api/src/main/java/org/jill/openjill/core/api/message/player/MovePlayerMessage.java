@@ -27,26 +27,6 @@ public final class MovePlayerMessage {
     private boolean canDoMove;
 
     /**
-     * Move up.
-     */
-    private boolean up;
-
-    /**
-     * Move down.
-     */
-    private boolean down;
-
-    /**
-     * Move left.
-     */
-    private boolean left;
-
-    /**
-     * Move right.
-     */
-    private boolean right;
-
-    /**
      * Constructor.
      */
     public MovePlayerMessage() {
@@ -121,77 +101,5 @@ public final class MovePlayerMessage {
      */
     public void setCanDoMove(final boolean move) {
         this.canDoMove = move;
-    }
-
-    /**
-     * Move up.
-     *
-     * @return move
-     */
-    public boolean isUp() {
-        return up;
-    }
-
-    /**
-     * Move up player.
-     *
-     * @param upPlayer if move up
-     */
-    public void setUp(final boolean upPlayer) {
-        this.up = upPlayer;
-    }
-
-    /**
-     * If player down.
-     *
-     * @return true/false
-     */
-    public boolean isDown() {
-        return down;
-    }
-
-    /**
-     * Move down player.
-     *
-     * @param downPlayer if move down
-     */
-    public void setDown(final boolean downPlayer) {
-        this.down = downPlayer;
-    }
-
-    /**
-     * If player move left.
-     *
-     * @return  true/false
-     */
-    public boolean isLeft() {
-        return left;
-    }
-
-    /**
-     * Move left player.
-     *
-     * @param leftPlayer if move left
-     */
-    public void setLeft(final boolean leftPlayer) {
-        this.left = leftPlayer;
-    }
-
-    /**
-     * If player move right.
-     *
-     * @return true/false
-     */
-    public boolean isRight() {
-        return right;
-    }
-
-    /**
-     * Move right player.
-     *
-     * @param rightPlayer if move right
-     */
-    public void setRight(final boolean rightPlayer) {
-        this.right = rightPlayer;
     }
 }
