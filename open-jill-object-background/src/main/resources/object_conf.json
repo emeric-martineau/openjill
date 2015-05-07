@@ -269,5 +269,9 @@
         "stateUpDown":"1",
         "downUpMvtSize":"2",
         "point":"2"
+    },
+    "CheckPointManager":
+    {
+        "stateSameLevel":"1"
     }
 }
