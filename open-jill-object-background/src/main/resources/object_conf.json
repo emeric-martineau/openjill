@@ -273,5 +273,12 @@
     "CheckPointManager":
     {
         "stateSameLevel":"1"
+    },
+    "GhostManager":
+    {
+        "tile":"0",
+        "tileSet":"50",
+        "killForce":"-1",
+        "numberTileSet":"4"
     }
 }
