@@ -58,11 +58,6 @@ public final class TileManagerImpl implements TileManager {
     private Map<Integer, BufferedImage> mapBackgroundPicture;
 
     /**
-     * Map of picture.
-     */
-    private Map<String, BufferedImage> mapPicture;
-
-    /**
      * Type opf screen.
      */
     private EnumScreenType typeScreen;
@@ -150,8 +145,6 @@ public final class TileManagerImpl implements TileManager {
         this.shaFile = shaFileContent;
         this.dmaFile = dmaFileContent;
         this.typeScreen = tpScreen;
-
-        mapPicture = new HashMap<>();
 
         // Init map sprite
         mapOfTile = initMapSprite(shaFileContent);
@@ -259,9 +252,6 @@ public final class TileManagerImpl implements TileManager {
                         tilePicture = tile.getPictureVga();
                     }
 
-                    mapPicture.put(String.format("%d_%d",
-                            tile.getTitleSetIndex(), tile.getImageIndex()),
-                            tilePicture);
                     localMapBackgroundPicture.put(mapCode, tilePicture);
                 }
             }
@@ -293,25 +283,20 @@ public final class TileManagerImpl implements TileManager {
     @Override
     public BufferedImage getImage(final int tileSetIndex,
             final int tileIndex) {
-        final String key = String.format("%d_%d", tileSetIndex, tileIndex);
-        BufferedImage image = mapPicture.get(key);
+        BufferedImage image = null;
 
-        if (image == null) {
-            // Array of tile
-            ShaTile[] tileArray = mapOfTile.get(tileSetIndex);
+        // Array of tile
+        ShaTile[] tileArray = mapOfTile.get(tileSetIndex);
 
-            if (tileArray != null && (tileIndex < tileArray.length)) {
-                ShaTile tile = tileArray[tileIndex];
+        if (tileArray != null && (tileIndex < tileArray.length)) {
+            ShaTile tile = tileArray[tileIndex];
 
-                if (typeScreen == EnumScreenType.CGA) {
-                    image = tile.getPictureCga();
-                } else if (typeScreen == EnumScreenType.EGA) {
-                    image = tile.getPictureEga();
-                } else {
-                    image = tile.getPictureVga();
-                }
-
-                mapPicture.put(key, image);
+            if (typeScreen == EnumScreenType.CGA) {
+                image = tile.getPictureCga();
+            } else if (typeScreen == EnumScreenType.EGA) {
+                image = tile.getPictureEga();
+            } else {
+                image = tile.getPictureVga();
             }
         }
 
