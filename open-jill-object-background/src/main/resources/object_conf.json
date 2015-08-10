@@ -280,5 +280,22 @@
         "tileSet":"50",
         "killForce":"-1",
         "numberTileSet":"4"
+    },
+    "SkullManager":
+    {
+        "tile":"0",
+        "tileSet":"47",
+        "numberTileSet":"4",
+        "skullMax":"2",
+        "eyeMinTile":"3",
+        "eyeMaxTile":"7",
+        "eyeLeftStart":"3",
+        "eyeRightStart":"7",
+        "eyeLeftX":"0",
+        "eyeLeftY":"5",
+        "eyeRightX":"10",
+        "eyeRightY":"6",
+        "fixedTile":"0",
+        "fixedTileSet":"47"
     }
 }
