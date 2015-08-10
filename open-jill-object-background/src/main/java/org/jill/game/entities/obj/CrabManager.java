@@ -44,6 +44,8 @@ public final class CrabManager extends AbstractHitPlayerObjectEntity {
      */
     private int downUpMvtSize;
 
+    private int defaultMvtSize;
+
     /**
      * Default constructor.
      *
@@ -55,6 +57,7 @@ public final class CrabManager extends AbstractHitPlayerObjectEntity {
 
         setKillabgeObject(true);
 
+        this.defaultMvtSize = getConfInteger("defaultMvtSize");
         this.stateUpDown = getConfInteger("stateUpDown");
         this.downUpMvtSize = getConfInteger("downUpMvtSize");
 
@@ -130,7 +133,12 @@ public final class CrabManager extends AbstractHitPlayerObjectEntity {
                 && UtilityObjectEntity.moveObjectRightOnFloor(this, this.xSpeed,
                         this.backgroundObject))) {
             // Change way
-            this.xSpeed *= -1;
+            if (this.xSpeed == 0) {
+                this.xSpeed = this.defaultMvtSize;
+            } else {
+                this.xSpeed *= -1;
+            }
+            
             this.counter = 0;
         }
     }

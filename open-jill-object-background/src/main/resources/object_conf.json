@@ -268,7 +268,8 @@
         "numberTileSet":"4",
         "stateUpDown":"1",
         "downUpMvtSize":"2",
-        "point":"2"
+        "point":"2",
+        "defaultMvtSize":"2"
     },
     "CheckPointManager":
     {
