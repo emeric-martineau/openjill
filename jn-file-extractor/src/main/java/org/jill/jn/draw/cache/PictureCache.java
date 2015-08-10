@@ -30,22 +30,22 @@ public class PictureCache
     /**
      * Map of tile
      */
-    private Map<Integer, ShaTile[]> mapOfTile ;
+    private final Map<Integer, ShaTile[]> mapOfTile ;
 
     /**
      * Map of background tile
      */
-    private Map<Integer, BufferedImage> mapBackgroundPicture ;
+    private final Map<Integer, BufferedImage> mapBackgroundPicture ;
 
     /**
      * Type opf screen
      */
-    private ScreenType typeScreen ;
+    private final ScreenType typeScreen ;
 
     /**
      * Map of object tile
      */
-    private Map<String, AbstractTileManager> mapObjectPicture ;
+    private final Map<String, AbstractTileManager> mapObjectPicture ;
 
     public PictureCache(final ShaFile shaFile, final DmaFile dmaFile,
             final ScreenType typeScreen)
