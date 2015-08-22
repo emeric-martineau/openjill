@@ -4,13 +4,13 @@
     <groupId>org.jill.cfg</groupId>
     <artifactId>cfg-file-api</artifactId>
     <packaging>jar</packaging>
-    <version>0.2.3-SNAPSHOT</version>
+    <version>0.2.3</version>
     <name>cfg-file-api</name>
     
     <parent>
         <groupId>org.jill</groupId>
         <artifactId>jill-parent</artifactId>
-        <version>0.2.3-SNAPSHOT</version>
+        <version>0.2.3</version>
         <relativePath>../jill_parent/pom.xml</relativePath>
     </parent>    
     
