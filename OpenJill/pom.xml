@@ -3,13 +3,13 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.jill</groupId>
     <artifactId>openjill</artifactId>
-    <version>0.2.4-SNAPSHOT</version>
+    <version>0.2.4</version>
     <packaging>jar</packaging>
 
     <parent>
         <groupId>org.jill</groupId>
         <artifactId>jill-parent</artifactId>
-        <version>0.2.4-SNAPSHOT</version>
+        <version>0.2.4</version>
         <relativePath>../jill_parent/pom.xml</relativePath>
     </parent>
     

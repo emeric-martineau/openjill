@@ -4,13 +4,13 @@
     <groupId>org.jill.dma</groupId>
     <artifactId>dma-file</artifactId>
     <packaging>jar</packaging>
-    <version>0.2.4-SNAPSHOT</version>
+    <version>0.2.4</version>
     <name>dma-file</name>
     
     <parent>
         <groupId>org.jill</groupId>
         <artifactId>jill-parent</artifactId>
-        <version>0.2.4-SNAPSHOT</version>
+        <version>0.2.4</version>
         <relativePath>../jill_parent/pom.xml</relativePath>
     </parent>
     
