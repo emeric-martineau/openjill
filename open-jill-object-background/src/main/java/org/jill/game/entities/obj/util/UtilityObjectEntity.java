@@ -347,10 +347,21 @@ public final class UtilityObjectEntity {
         //final int objPosY = obj.getY() + obj.getHeight();
         final int newStartY = (objY + objHeight)
                 / JillConst.getBlockSize();
+        
         final int newEndY = newPosY / JillConst.getBlockSize();
-        final BackgroundEntity block = checkObjectHitFloor(
-                startBlockX, endBlockX, newStartY, newEndY, backgroundObject);
+        
+        BackgroundEntity block = null;
 
+        // for stair, we need check all block
+        for (int testY = newStartY; testY <= newEndY; testY++) {
+            block = checkObjectHitFloor(
+                startBlockX, endBlockX, testY, testY, backgroundObject);
+            
+            if (block != null && !block.isStair()) {
+                break;
+            }
+        }
+        
         return block;
     }
 
