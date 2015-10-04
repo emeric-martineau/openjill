@@ -52,7 +52,7 @@ public final class UtilityObjectEntity {
         final int endX, final int startY, final int endY,
         final BackgroundEntity[][] backgroundObject) {
         return checkObjectHitBlockOrStair(startX, endX, endY, startY,
-            backgroundObject, false, true, false);
+            backgroundObject, false, true, true);
     }
 
     /**

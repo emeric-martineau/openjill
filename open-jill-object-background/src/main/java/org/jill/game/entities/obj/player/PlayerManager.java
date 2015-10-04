@@ -989,10 +989,6 @@ public final class PlayerManager extends AbstractPlayerInteractionManager {
         if (this.stateCount
                 < PlayerDie2Const.STATECOUNT_MAX_TO_FIRST_ANIMATION) {
             currentPicture = this.stDie2Other[(this.stateCount % 2) + 1];
-//            } else if (this.stateCount
-//                < PlayerDie2Const.STATECOUNT_MAX_TO_RESTART_GAME) {
-//                currentPicture
-//                    = this.stDie2[PlayerDie2Const.LAST_PICTURE];
         } else {
             currentPicture
                     = this.stDie2Other[PlayerDie2Const.LAST_PICTURE];
