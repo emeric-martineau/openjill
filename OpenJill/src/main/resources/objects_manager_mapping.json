@@ -120,6 +120,10 @@
         "type":49,
         "implementationClass":"org.jill.game.entities.obj.EpicManager"
     },
+        {
+        "type":50,
+        "implementationClass":"org.jill.game.entities.obj.BladeManager"
+    },
     {
         "type":51,
         "implementationClass":"org.jill.game.entities.obj.SkullManager"

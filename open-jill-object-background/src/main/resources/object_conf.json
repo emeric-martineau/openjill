@@ -298,5 +298,15 @@
         "eyeRightY":"6",
         "fixedTile":"0",
         "fixedTileSet":"47"
+    },
+    "BladeManager":
+    {
+        "tile":"0",
+        "tileSet":"45",
+        "numberTileSet":"4",
+        "msg":"YOU FOUND A SPINNING BLADE",
+        "msgTime":"20",
+        "msgColor":"2",
+        "subStateToRemoveMe":63
     }
 }
