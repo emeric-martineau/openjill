@@ -89,10 +89,12 @@
         "FIREBIRD":"14,15",
         "BAG_OF_COIN":"14,18",
         "FISH":"14,20",
-        "BLADE":"14,35",
+        "BLADE":"14,35,YOU FOUND A SPINNING BLADE",
         "HIGH_JUMP":"14,36",
         "INVINCIBILITY":"14,37",
-        "dontRemove":"JILL,FROG,FIREBIRD,FISH"
+        "dontRemove":"JILL,FROG,FIREBIRD,FISH",
+        "msgTime":"20",
+        "msgColor":"7"
     },
     "SwitchManager":
     {
@@ -304,9 +306,6 @@
         "tile":"0",
         "tileSet":"45",
         "numberTileSet":"4",
-        "msg":"YOU FOUND A SPINNING BLADE",
-        "msgTime":"20",
-        "msgColor":"2",
-        "subStateToRemoveMe":63
+        "subStateToRemoveMe":"63"
     }
 }

@@ -114,4 +114,20 @@ public abstract class AbstractParameterObjectEntity extends ObjectEntityImpl {
         this.messageDispatcher.sendMessage(
                     EnumMessageType.MESSAGE_STATUS_BAR, msg);
     }
+    
+    /**
+     * Send default message.
+     * 
+     * @param textMsg message to display.
+     */
+    protected final void sendMessage(final String textMsg) {
+        final int textColor = getConfInteger("msgColor");
+        final int textTime = getConfInteger("msgTime");
+
+        final StatusBarTextMessage msg = new StatusBarTextMessage(textMsg,
+                textTime, textColor);
+
+        this.messageDispatcher.sendMessage(
+                    EnumMessageType.MESSAGE_STATUS_BAR, msg);
+    }
 }

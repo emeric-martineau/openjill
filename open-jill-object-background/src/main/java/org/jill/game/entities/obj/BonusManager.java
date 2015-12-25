@@ -18,7 +18,11 @@ import org.jill.openjill.core.api.message.statusbar.inventory.
  * @author Emeric MARTINEAU
  */
 public final class BonusManager extends AbstractParameterObjectEntity {
-
+    /**
+     * Array to know if message is already send.
+     */
+    private static boolean[] msgAlreadySendArray = null;
+    
     /**
      * Picture array.
      */
@@ -33,7 +37,12 @@ public final class BonusManager extends AbstractParameterObjectEntity {
      * To remove this object from object list.
      */
     private ObjectListMessage killme;
-
+    
+    /**
+     * Message to display.
+     */
+    private String msg;
+    
     /**
      * Default constructor.
      *
@@ -45,11 +54,15 @@ public final class BonusManager extends AbstractParameterObjectEntity {
 
         final EnumInventoryObject[] enumList
                 = EnumInventoryObject.getEnumList();
-
+       
         final String nameOfInventoryItem = enumList[counter].toString();
 
         final String key = getConfString(nameOfInventoryItem);
         final String[] keySplit = key.split(",");
+        
+        if (keySplit.length > 2) {
+            this.msg = keySplit[2];
+        }
 
         // Init list of picture
         final int tileIndex = Integer.valueOf(keySplit[1]);
@@ -67,6 +80,11 @@ public final class BonusManager extends AbstractParameterObjectEntity {
                 true);
             // Remove me from list of object (= kill me)
             this.killme = new ObjectListMessage(this, false);
+        }
+        
+        // If array of message is not create, create it
+        if (msgAlreadySendArray == null) {
+            msgAlreadySendArray = new boolean[enumList.length];
         }
     }
 
@@ -98,6 +116,13 @@ public final class BonusManager extends AbstractParameterObjectEntity {
             // TODO how manage it ?
 
         } else {
+            if (!msgAlreadySendArray[getCounter()]) {
+                // Disable message
+                msgAlreadySendArray[getCounter()] = true;
+                // Send message
+                sendMessage(this.msg);
+            }
+            
             this.messageDispatcher.sendMessage(EnumMessageType.OBJECT,
                     this.killme);
         }
