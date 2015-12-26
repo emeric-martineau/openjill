@@ -21,7 +21,7 @@ public final class BonusManager extends AbstractParameterObjectEntity {
     /**
      * Array to know if message is already send.
      */
-    private static boolean[] msgAlreadySendArray = null;
+    private static boolean[] displayMessage = null;
     
     /**
      * Picture array.
@@ -51,9 +51,18 @@ public final class BonusManager extends AbstractParameterObjectEntity {
     @Override
     public void init(final ObjectParam objectParam) {
         super.init(objectParam);
-
+        
         final EnumInventoryObject[] enumList
                 = EnumInventoryObject.getEnumList();
+        
+        // If array of message is not create, create it
+        if (displayMessage == null) {
+            displayMessage = new boolean[enumList.length];
+            
+            for (int index = 0; index < displayMessage.length; index++) {
+                displayMessage[index] = true;
+            }
+        }
        
         final String nameOfInventoryItem = enumList[counter].toString();
 
@@ -62,6 +71,9 @@ public final class BonusManager extends AbstractParameterObjectEntity {
         
         if (keySplit.length > 2) {
             this.msg = keySplit[2];
+        } else {
+            // Disable message when bonus havn't message
+            displayMessage[counter] = false;
         }
 
         // Init list of picture
@@ -80,11 +92,6 @@ public final class BonusManager extends AbstractParameterObjectEntity {
                 true);
             // Remove me from list of object (= kill me)
             this.killme = new ObjectListMessage(this, false);
-        }
-        
-        // If array of message is not create, create it
-        if (msgAlreadySendArray == null) {
-            msgAlreadySendArray = new boolean[enumList.length];
         }
     }
 
@@ -116,9 +123,9 @@ public final class BonusManager extends AbstractParameterObjectEntity {
             // TODO how manage it ?
 
         } else {
-            if (!msgAlreadySendArray[getCounter()]) {
+            if (displayMessage[getCounter()]) {
                 // Disable message
-                msgAlreadySendArray[getCounter()] = true;
+                displayMessage[getCounter()] = false;
                 // Send message
                 sendMessage(this.msg);
             }
