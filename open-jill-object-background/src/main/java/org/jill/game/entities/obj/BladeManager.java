@@ -2,6 +2,8 @@ package org.jill.game.entities.obj;
 
 import java.awt.image.BufferedImage;
 import org.jill.game.entities.obj.abs.AbstractParameterObjectEntity;
+import org.jill.game.entities.obj.util.UtilityObjectEntity;
+import org.jill.openjill.core.api.entities.BackgroundEntity;
 import org.jill.openjill.core.api.message.object.ObjectListMessage;
 import org.jill.openjill.core.api.message.statusbar.inventory.
         InventoryPointMessage;
@@ -18,11 +20,6 @@ import org.jill.openjill.core.api.message.statusbar.inventory.InventoryLifeMessa
  */
 public final class BladeManager extends AbstractParameterObjectEntity {
     /**
-     * To know if message must be display.
-     */
-    private static boolean messageDisplayAppleMessage = true;
-
-    /**
      * To remove this object from object lis.
      */
     private ObjectListMessage killme;
@@ -36,6 +33,11 @@ public final class BladeManager extends AbstractParameterObjectEntity {
      * SubState value to remove blade.
      */
     private int subStateToRemoveMe;
+    
+    /**
+     * Background map.
+     */
+    private BackgroundEntity[][] backgroundObject;
 
     /**
      * Default constructor.
@@ -64,6 +66,8 @@ public final class BladeManager extends AbstractParameterObjectEntity {
                     + index);
         }
 
+        this.backgroundObject = objectParam.getBackgroundObject();
+        
         // Remove me from list of object (= kill me)
         this.killme = new ObjectListMessage(this, false);
     }
@@ -118,6 +122,56 @@ public final class BladeManager extends AbstractParameterObjectEntity {
         // Remove blade
         if (getSubState() >= this.subStateToRemoveMe) {
             this.messageDispatcher.sendMessage(EnumMessageType.OBJECT, killme);
+        }
+        
+        moveUpDown();
+        
+        moveLeftRight();
+        
+        System.out.println("----------");
+        System.out.println("x = " + getX());
+        System.out.println("y = " + getY());
+        System.out.println("xSpeed = " + getxSpeed());
+        System.out.println("ySpeed = " + getySpeed());
+        System.out.println("subState = " + getSubState());
+        System.out.println("counter = " + getCounter());
+    }
+
+    /**
+     * Move blade up or down.
+     */
+    private void moveUpDown() {
+        final int oldY = getY();
+        
+        setySpeed(getySpeed() + 1);
+        
+        // Move blade
+        if (getySpeed() > Y_SPEED_MIDDLE) {
+            // Move down
+            if (!UtilityObjectEntity.moveObjectDown(this, getySpeed(),
+                    backgroundObject) && oldY == getY()) {
+                setySpeed(getySpeed() * -1);
+            }
+        } else {
+            // Move up
+            if (!UtilityObjectEntity.moveObjectUp(this, getySpeed(),
+                    backgroundObject) && oldY == getY()) {
+                setySpeed(getySpeed() * -1);
+            }
+        }
+    }
+
+    /**
+     * Move blade left or right.
+     */
+    private void moveLeftRight() {
+        if ((getxSpeed() > X_SPEED_MIDDLE
+                && !UtilityObjectEntity.moveObjectRight(this, getxSpeed(),
+                    backgroundObject))
+                || (getxSpeed() < X_SPEED_MIDDLE
+                && !UtilityObjectEntity.moveObjectLeft(this, getxSpeed(),
+                        backgroundObject))) {
+                setxSpeed(getxSpeed() * -1);
         }
     }
 }
