@@ -5,13 +5,10 @@ import org.jill.game.entities.obj.abs.AbstractParameterObjectEntity;
 import org.jill.game.entities.obj.util.UtilityObjectEntity;
 import org.jill.openjill.core.api.entities.BackgroundEntity;
 import org.jill.openjill.core.api.message.object.ObjectListMessage;
-import org.jill.openjill.core.api.message.statusbar.inventory.
-        InventoryPointMessage;
 import org.jill.openjill.core.api.entities.ObjectEntity;
 import org.jill.openjill.core.api.entities.ObjectParam;
 import org.jill.openjill.core.api.keyboard.KeyboardLayout;
 import org.jill.openjill.core.api.message.EnumMessageType;
-import org.jill.openjill.core.api.message.statusbar.inventory.InventoryLifeMessage;
 
 /**
  * Apple object.
@@ -70,37 +67,20 @@ public final class BladeManager extends AbstractParameterObjectEntity {
         
         // Remove me from list of object (= kill me)
         this.killme = new ObjectListMessage(this, false);
+        
+        setRemoveOutOfVisibleScreen(true);
     }
 
-    /*
+    
     @Override
     public void msgTouch(final ObjectEntity obj,
             final KeyboardLayout keyboardLayout) {
         if (obj.isPlayer()) {
             this.messageDispatcher.sendMessage(EnumMessageType.OBJECT, killme);
-
-            if (this.getState() == 0) {
-                this.messageDispatcher.sendMessage(
-                        EnumMessageType.INVENTORY_POINT,
-                    new InventoryPointMessage(getConfInteger("point"), true,
-                    this, obj));
-
-                this.messageDispatcher.sendMessage(
-                        EnumMessageType.INVENTORY_LIFE,
-                        new InventoryLifeMessage(getConfInteger("life")));
-
-                if (messageDisplayAppleMessage) {
-                    sendMessage();
-                    messageDisplayAppleMessage = false;
-                }
-            } else {
-                Integer msgId = (getState() + getConfInteger("boxMsgOffset"))
-                                & getConfInteger("boxMsgMask") ;
-                this.messageDispatcher.sendMessage(
-                        EnumMessageType.MESSAGE_BOX, msgId);
-            }
+        } else if (obj.isKillableObject()) {
+            obj.msgKill(this, 0, 0);
         }
-    }*/
+    }
 
     @Override
     public BufferedImage msgDraw() {
@@ -112,11 +92,11 @@ public final class BladeManager extends AbstractParameterObjectEntity {
      */
     @Override
     public void msgUpdate(final KeyboardLayout keyboardLayout) {
-        setCounter(getCounter() + 1);
+        setCounter(getCounter() - 1);
         setSubState(getSubState() + 1);
 
-        if (getCounter() >= this.images.length) {
-            setCounter(0);
+        if (getCounter() == -1) {
+            setCounter(this.images.length - 1);
         }
      
         // Remove blade
@@ -124,23 +104,17 @@ public final class BladeManager extends AbstractParameterObjectEntity {
             this.messageDispatcher.sendMessage(EnumMessageType.OBJECT, killme);
         }
         
-        moveUpDown();
-        
         moveLeftRight();
-        
-        System.out.println("----------");
-        System.out.println("x = " + getX());
-        System.out.println("y = " + getY());
-        System.out.println("xSpeed = " + getxSpeed());
-        System.out.println("ySpeed = " + getySpeed());
-        System.out.println("subState = " + getSubState());
-        System.out.println("counter = " + getCounter());
+                
+        moveUpDown();
     }
 
     /**
      * Move blade up or down.
      */
     private void moveUpDown() {
+        // If blade can't move fully, way not change.
+        // Way change only when blade don't move.
         final int oldY = getY();
         
         setySpeed(getySpeed() + 1);
@@ -165,12 +139,16 @@ public final class BladeManager extends AbstractParameterObjectEntity {
      * Move blade left or right.
      */
     private void moveLeftRight() {
-        if ((getxSpeed() > X_SPEED_MIDDLE
+        // If blade can't move fully, way not change.
+        // Way change only when blade don't move.
+        final int oldX = getX();
+        
+        if (((getxSpeed() > X_SPEED_MIDDLE
                 && !UtilityObjectEntity.moveObjectRight(this, getxSpeed(),
                     backgroundObject))
                 || (getxSpeed() < X_SPEED_MIDDLE
                 && !UtilityObjectEntity.moveObjectLeft(this, getxSpeed(),
-                        backgroundObject))) {
+                        backgroundObject))) && oldX == getX()) {
                 setxSpeed(getxSpeed() * -1);
         }
     }
