@@ -284,14 +284,15 @@ public final class UtilityObjectEntity {
 
             canMove = true;
         } else {
+            final int newY = (block.getY() * JillConst.getBlockSize())
+                        - obj.getHeight();
             if (updateObj) {
                 // Jump size are to big and object hit a block
                 // Set Y to the below block
-                obj.setY((block.getY() * JillConst.getBlockSize())
-                        - obj.getHeight());
+                obj.setY(newY);
             }
 
-            canMove = false;
+            canMove = newY != obj.getY();
         }
 
         return canMove;
@@ -399,9 +400,12 @@ public final class UtilityObjectEntity {
 
             canMove = true;
         } else {
-            obj.setX((back.getX() * JillConst.getBlockSize()) - obj.getWidth());
-
-            canMove = false;
+            final int newX = (back.getX() * JillConst.getBlockSize())
+                    - obj.getWidth();
+            
+            canMove = newX != obj.getX();
+            
+            obj.setX(newX);
         }
 
         return canMove;
@@ -440,9 +444,11 @@ public final class UtilityObjectEntity {
 
             canMove = true;
         } else {
-            obj.setX((back.getX() + 1) * JillConst.getBlockSize());
-
-            canMove = false;
+            final int newX = (back.getX() + 1) * JillConst.getBlockSize();
+            
+            canMove = newX != obj.getX();
+            
+            obj.setX(newX);
         }
 
         return canMove;
@@ -489,9 +495,11 @@ public final class UtilityObjectEntity {
         } else {
             // Jump size are to big and object hit a block
             // Set Y to the below block
-            obj.setY((block.getY() + 1) * JillConst.getBlockSize());
-
-            canMove = false;
+            final int newY = (block.getY() + 1) * JillConst.getBlockSize();
+            
+            canMove = newY != obj.getY();
+            
+            obj.setY(newY);
         }
 
         return canMove;
@@ -573,9 +581,11 @@ public final class UtilityObjectEntity {
                 obj.setX(newX);
             }
         } else {
-            obj.setX((back.getX() + 1) * JillConst.getBlockSize());
-
-            canMove = false;
+            final int newX = (back.getX() + 1) * JillConst.getBlockSize();
+            
+            canMove = newX != obj.getX();
+            
+            obj.setX(newX);
         }
 
         return canMove;
@@ -625,9 +635,12 @@ public final class UtilityObjectEntity {
             }
 
         } else {
-            obj.setX((back.getX() * JillConst.getBlockSize()) - obj.getWidth());
-
-            canMove = false;
+            final int newX = (back.getX() * JillConst.getBlockSize())
+                    - obj.getWidth();
+            
+            canMove = obj.getX() != newX;
+            
+            obj.setX(newX);
         }
 
         return canMove;

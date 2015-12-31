@@ -115,21 +115,19 @@ public final class BladeManager extends AbstractParameterObjectEntity {
     private void moveUpDown() {
         // If blade can't move fully, way not change.
         // Way change only when blade don't move.
-        final int oldY = getY();
-        
         setySpeed(getySpeed() + 1);
         
         // Move blade
         if (getySpeed() > Y_SPEED_MIDDLE) {
             // Move down
             if (!UtilityObjectEntity.moveObjectDown(this, getySpeed(),
-                    backgroundObject) && oldY == getY()) {
+                    backgroundObject)) {
                 setySpeed(getySpeed() * -1);
             }
         } else {
             // Move up
             if (!UtilityObjectEntity.moveObjectUp(this, getySpeed(),
-                    backgroundObject) && oldY == getY()) {
+                    backgroundObject)) {
                 setySpeed(getySpeed() * -1);
             }
         }
@@ -141,14 +139,12 @@ public final class BladeManager extends AbstractParameterObjectEntity {
     private void moveLeftRight() {
         // If blade can't move fully, way not change.
         // Way change only when blade don't move.
-        final int oldX = getX();
-        
-        if (((getxSpeed() > X_SPEED_MIDDLE
+        if ((getxSpeed() > X_SPEED_MIDDLE
                 && !UtilityObjectEntity.moveObjectRight(this, getxSpeed(),
                     backgroundObject))
                 || (getxSpeed() < X_SPEED_MIDDLE
                 && !UtilityObjectEntity.moveObjectLeft(this, getxSpeed(),
-                        backgroundObject))) && oldX == getX()) {
+                        backgroundObject))) {
                 setxSpeed(getxSpeed() * -1);
         }
     }
