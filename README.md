@@ -10,31 +10,31 @@ Google+ community : https://plus.google.com/u/0/communities/10139447828899573352
 
 Sources organization
 --------------------
-abstractfile                : default implementation of abstract file file
-abstractfile-api            : api of abstract file
-cfg-file                    : default implementation of cfg file
-cfg-file-api                : api of cfg file
-dma-file                    : default implementation of dma file
-dma-file-api                : api of dma file
-dma-file-extractor          : tool to extract any information about of DMA file
-jill_parent                 : jill pom parent file
-jill_root                   : jill root with pom include all module
-jn-file                     : default implementation of jn file
-jn-file-api                 : api of jn file
-jn-file-extractor           : tool to extract any information of JN or save file
-LICENSE                     : license file
-open-jill-object-background : object and background of game
-OpenJill                    : project include all dependencies and all properties file to create game
-openjill-core               : default implementation of core game
-openjill-core-api           : api of core game
-README                      : this file
-sha-file                    : default implementation of sha file
-sha-file-api                : api of sha file
-sha-file-edit               : deprecated
-sha-file-extractor          : tool to extract any information of sha file
-simplegame                  : simple game engine
-vcl-file                    : default implementation of vcl file
-vcl-file-api                : api of vcl file
+* abstractfile                : default implementation of abstract file file
+* abstractfile-api            : api of abstract file
+* cfg-file                    : default implementation of cfg file
+* cfg-file-api                : api of cfg file
+* dma-file                    : default implementation of dma file
+* dma-file-api                : api of dma file
+* dma-file-extractor          : tool to extract any information about of DMA file
+* jill_parent                 : jill pom parent file
+* jill_root                   : jill root with pom include all module
+* jn-file                     : default implementation of jn file
+* jn-file-api                 : api of jn file
+* jn-file-extractor           : tool to extract any information of JN or save file
+* LICENSE                     : license file
+* open-jill-object-background : object and background of game
+* OpenJill                    : project include all dependencies and all properties file to create game
+* openjill-core               : default implementation of core game
+* openjill-core-api           : api of core game
+* README.md                   : this file
+* sha-file                    : default implementation of sha file
+* sha-file-api                : api of sha file
+* sha-file-edit               : deprecated
+* sha-file-extractor          : tool to extract any information of sha file
+* simplegame                  : simple game engine
+* vcl-file                    : default implementation of vcl file
+* vcl-file-api                : api of vcl file
 
 Build game project
 ------------------
