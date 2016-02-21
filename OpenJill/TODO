@@ -7,7 +7,6 @@ Sound : do it
 Jill : Jill fish character
 Jill : Jill frog character
 Jill : Jill firebird character
-Jill : dead animations (with water)
 
 Create config screen and don't use property for screen resolution
 
@@ -18,19 +17,8 @@ Background
 Object :
 --------
  - weapon : 
-     In "objects_manager_mapping.json" file, replace field "weapon":"KNIVE" by
-     an more complex object that contain :
-       {
-         "order":1,        // order of check weapon. I.e. in inventory if blade
-                           // and knive are present, create blade, then if
-                           // player fire again, create knive.
-         "inventoryKey":"KNIVE",
-         "removeInInventory":true,    // For knive, remove entry in inventory
-         "numberItemPerInventory":1   // How many object can be create by item
-       }
-    
     In "AbstractExecutingStdPlayerLevel" class, method "doPlayerFire" check if
-    player can fire. Method "checkKnive" check if player can be fire knive.
+    player can fire. Method "checkWeapon" check if player can be fire knive.
     Must make a generic method.
  
     Example for knive : must remove key entry in inventory and remove ALT text.

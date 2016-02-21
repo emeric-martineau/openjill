@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.jill.game.manager.object.weapon.ObjectMappingWeapon;
 import org.jill.openjill.core.api.entities.ObjectEntity;
 import org.jill.openjill.core.api.entities.ObjectParam;
 
@@ -44,8 +45,8 @@ public final class ObjectManager {
     /**
      * Map between name of inventory and id of object.
      */
-    private Map<String, Integer> mapInventoryWeapon;
-
+    private ObjectMappingWeapon[] listWeapon;
+    
     /**
      * Return this instance of object.
      *
@@ -107,19 +108,15 @@ public final class ObjectManager {
             InstantiationException {
         // Load mapping
         final List<ObjectMapping> mapObjectTile = loadObjectTitle();
-        // Get keys
-//        final Enumeration<?> e = mapObjectTile.propertyNames();
+
         // Map between key and manager
         final Map<String, Class<ObjectEntity>> mapObjectNamePicture =
                 new HashMap<>();
 
-        this.mapInventoryWeapon = new HashMap<>();
+        final Map<String, ObjectMappingWeapon> mapInventoryWeapon = new HashMap<>();
 
         String key;
-        String value;
-
-        String[] classInv;
-
+        ObjectMappingWeapon currentWeapon;
         Class<ObjectEntity> c;
 
         for (ObjectMapping om : mapObjectTile) {
@@ -131,29 +128,22 @@ public final class ObjectManager {
             mapObjectNamePicture.put(key, c);
 
             if (om.getWeapon() != null) {
-                this.mapInventoryWeapon.put(om.getWeapon(), om.getType());
+                currentWeapon = om.getWeapon();
+                currentWeapon.setType(om.getType());
+                
+                mapInventoryWeapon.put(currentWeapon.getInventoryKey(),
+                        currentWeapon);
             }
         }
 
-//        while (e.hasMoreElements()) {
-//            key = (String) e.nextElement();
-//
-//            value = mapObjectTile.getProperty(key);
-//
-//            if (value.contains(",")) {
-//                // Check if inventory object
-//                classInv = value.split(",");
-//
-//                this.mapInventoryWeapon.put(classInv[1], Integer.valueOf(key));
-//
-//                value = classInv[0];
-//            }
-//
-//            c = (Class<ObjectEntity>) Class.forName(value);
-//
-//            mapObjectNamePicture.put(key, c);
-//        }
-
+        this.listWeapon = new ObjectMappingWeapon[mapInventoryWeapon.size()];
+        
+        for (String weaponKey : mapInventoryWeapon.keySet()) {
+            currentWeapon = mapInventoryWeapon.get(weaponKey);
+            
+            this.listWeapon[currentWeapon.getOrder() - 1] = currentWeapon;
+        }
+        
         return mapObjectNamePicture;
     }
 
@@ -208,12 +198,10 @@ public final class ObjectManager {
 
     /**
      * Return id of type.
-     *
-     * @param invName name of inventory
-     *
-     * @return inter for type
+     * 
+     * @return list of weapon
      */
-    public Integer getTypeOfInventoryWeapon(final String invName) {
-        return this.mapInventoryWeapon.get(invName);
+    public ObjectMappingWeapon[] getTypeOfInventoryWeapon() {
+        return this.listWeapon;
     }
 }

@@ -1,5 +1,7 @@
 package org.jill.game.manager.object;
 
+import org.jill.game.manager.object.weapon.ObjectMappingWeapon;
+
 /**
  * Class to manager Object by type and weapon.
  *
@@ -19,7 +21,7 @@ public final class ObjectMapping {
     /**
      * Weapon name (Inventory) if class is Weapon.
      */
-    private String weapon;
+    private ObjectMappingWeapon weapon;
 
     /**
      * Type of object.
@@ -62,7 +64,7 @@ public final class ObjectMapping {
      *
      * @return the weapon
      */
-    public String getWeapon() {
+    public ObjectMappingWeapon getWeapon() {
         return weapon;
     }
 
@@ -71,7 +73,7 @@ public final class ObjectMapping {
      *
      * @param weap the weapon to set
      */
-    public void setWeapon(final String weap) {
+    public void setWeapon(final ObjectMappingWeapon weap) {
         this.weapon = weap;
     }
 }

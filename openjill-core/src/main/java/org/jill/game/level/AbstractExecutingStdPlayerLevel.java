@@ -13,6 +13,7 @@ import org.jill.game.entities.obj.player.AbstractPlayerManager;
 import org.jill.game.entities.obj.player.PalyerActionPerState;
 import org.jill.game.entities.obj.player.PlayerAction;
 import org.jill.game.level.cfg.LevelConfiguration;
+import org.jill.game.manager.object.weapon.ObjectMappingWeapon;
 import org.jill.openjill.core.api.message.statusbar.StatusBarTextMessage;
 import org.jill.openjill.core.api.message.statusbar.inventory.
         EnumInventoryObject;
@@ -261,13 +262,37 @@ public abstract class AbstractExecutingStdPlayerLevel
         if (PalyerActionPerState.canDo(this.player.getState(),
                 PlayerAction.CANFIRE)) {
 
+            // Get inventory
             final List<EnumInventoryObject> listInv =
                     this.inventoryArea.getObjects();
 
-            EnumInventoryObject weaponType = checkKnive(listInv);
-
-            if (weaponType != null) {
-                createWeapon(weaponType);
+            // Get weapon
+            final ObjectMappingWeapon[] weaponsList =
+                    this.objectCache.getTypeOfInventoryWeapon();
+            
+            // Current weapon
+            ObjectMappingWeapon currentWeapon;
+            // Current inventory
+            EnumInventoryObject currentInventory;
+            
+            // Search weapon from end to start
+            for (int indexWeapon = weaponsList.length - 1; indexWeapon >= 0;
+                    indexWeapon--) {
+                currentWeapon = weaponsList[indexWeapon];
+                
+                currentInventory = EnumInventoryObject.valueOf(
+                        currentWeapon.getInventoryKey());
+                
+                // Check if weapon found in inventory
+                if (listInv.contains(currentInventory)) {
+                    // Weapon is in inventory
+                    // Cheack if can fire with this weapon
+                    if (checkWeapon(listInv, currentInventory)) {
+                        createWeapon(currentWeapon.getType());
+                        
+                        break;
+                    }
+                }
             }
         }
     }
@@ -276,38 +301,42 @@ public abstract class AbstractExecutingStdPlayerLevel
      * Check if weapon knife.
      *
      * @param listInv list of inventory
+     * @param currentInventory weapon inventory
      *
-     * @return weapon or null
+     * @return true if can create weapon
      */
-    private EnumInventoryObject checkKnive(
-            final List<EnumInventoryObject> listInv) {
+    private boolean checkWeapon(
+            final List<EnumInventoryObject> listInv,
+            final EnumInventoryObject currentInventory) {
 
-        EnumInventoryObject weaponType = null;
+        boolean canFireThisWeapon;
 
-        if (listInv.contains(EnumInventoryObject.KNIVE)) {
-            weaponType = EnumInventoryObject.KNIVE;
+        if (this.player.getInfo1()
+                == AbstractPlayerManager.X_SPEED_MIDDLE) {
+            canFireThisWeapon = false;
+        } else {
+            canFireThisWeapon = true;
+            
+            // Check if last objet to clear ALT text
+            final int nbWeapon = Collections.frequency(listInv,
+                    currentInventory);
 
-            if (this.player.getInfo1()
-                    == AbstractPlayerManager.X_SPEED_MIDDLE) {
-                weaponType = null;
-            } else {
-                // Check if last objet to clear ALT text
-                final int nbWeapon = Collections.frequency(listInv, weaponType);
-
-                // Remove object in inventory list
-                this.messageDispatcher.sendMessage(
-                        EnumMessageType.INVENTORY_ITEM,
-                        new InventoryItemMessage(weaponType, false,
-                        nbWeapon == 1, false));
-            }
+            // Remove object in inventory list
+            this.messageDispatcher.sendMessage(
+                    EnumMessageType.INVENTORY_ITEM,
+                    new InventoryItemMessage(currentInventory, false,
+                    nbWeapon == 1, false));
         }
-        return weaponType;
+        
+        return canFireThisWeapon;
     }
 
     /**
      * Create weapon.
+     * 
+     * @param typeWeapon weapon object type
      */
-    private void createWeapon(final EnumInventoryObject weaponType) {
+    private void createWeapon(final int typeWeapon) {
         // Object parameter
         final ObjectParam objParam = ObjectInstanceFactory.getNewObjParam();
         objParam.init(this.backgroundObject,
@@ -316,9 +345,6 @@ public abstract class AbstractExecutingStdPlayerLevel
 
         final ObjectItem weapon = ObjectInstanceFactory.getNewObjectItem();
 
-        // Get objet link with inventory
-        final Integer typeWeapon = this.objectCache.getTypeOfInventoryWeapon(
-                weaponType.name());
         weapon.setType(typeWeapon);
 
         objParam.setObject(weapon);

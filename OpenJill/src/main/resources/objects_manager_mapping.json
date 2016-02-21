@@ -14,7 +14,12 @@
     {
         "type":2,
         "implementationClass":"org.jill.game.entities.obj.KniveManager",
-        "weapon":"KNIVE"
+        "weapon": {
+            "order":1,
+            "inventoryKey":"KNIVE",
+            "removeInInventory":true,
+            "numberItemPerInventory":1
+        }
     },
     {
         "type":12,
