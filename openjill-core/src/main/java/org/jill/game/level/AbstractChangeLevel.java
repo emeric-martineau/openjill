@@ -621,8 +621,6 @@ public abstract class AbstractChangeLevel extends
                         ObjectInstanceFactory.getNewFileByte();
                 mapData.load(saveFileMap);
 
-                clearJnCache(currentSaveGame.getSaveGameFile());
-
                 final LevelConfiguration cfgNewLevel
                     = new JillLevelConfiguration(
                         this.levelConfiguration.getShaFileName(),

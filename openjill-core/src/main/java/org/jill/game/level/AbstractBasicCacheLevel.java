@@ -20,33 +20,8 @@ public class AbstractBasicCacheLevel {
     /**
      * Name of file JN.
      */
-    private static String jnFileNameCache;
-
-    /**
-     * Name of file VCL.
-     */
-    private static String vclFileNameCache;
-
-    /**
-     * Name of file CFG.
-     */
-    private static String cfgFileNameCache;
-
-    /**
-     * Level file.
-     */
-    private static JnFile jnFileCache;
-
-    /**
-     * Level file.
-     */
-    private static VclFile vclFileCache;
-
-    /**
-     * Config file.
-     */
-    private static CfgFile cfgFileCache;
-
+    private String jnFileNameCache;
+    
     /**
      * Current level configuration.
      */
@@ -89,20 +64,14 @@ public class AbstractBasicCacheLevel {
      */
     protected final JnFile getJnFile(final String baseFileName,
             final String filePath) throws IOException {
-        if (!baseFileName.equalsIgnoreCase(jnFileNameCache)) {
-            jnFileNameCache = baseFileName;
-            jnFileCache = ObjectInstanceFactory.getNewJn();
-            jnFileCache.load(new File(filePath,
-                    baseFileName).getAbsolutePath());
-        }
+        final JnFile jnFileCache;
+        
+        this.jnFileNameCache = baseFileName;
+        jnFileCache = ObjectInstanceFactory.getNewJn();
+        jnFileCache.load(new File(filePath,
+                baseFileName).getAbsolutePath());
 
         return jnFileCache;
-    }
-
-    protected final void clearJnCache(final String baseFileName) {
-        if (baseFileName.equalsIgnoreCase(jnFileNameCache)) {
-            jnFileNameCache = null;
-        }
     }
 
     /**
@@ -117,12 +86,11 @@ public class AbstractBasicCacheLevel {
      */
     protected final VclFile getVclFile(final String baseFileName,
             final String filePath) throws IOException {
-        if (!baseFileName.equalsIgnoreCase(vclFileNameCache)) {
-            vclFileNameCache = baseFileName;
-            vclFileCache = ObjectInstanceFactory.getNewVcl();
-            vclFileCache.load(new File(filePath,
-                    baseFileName).getAbsolutePath());
-        }
+        final VclFile vclFileCache;
+        
+        vclFileCache = ObjectInstanceFactory.getNewVcl();
+        vclFileCache.load(new File(filePath,
+                baseFileName).getAbsolutePath());
 
         return vclFileCache;
     }
@@ -140,13 +108,12 @@ public class AbstractBasicCacheLevel {
      */
     protected final CfgFile getCfgFile(final String baseFileName,
             final String filePath, final String cfgPrefixe) throws IOException {
-        if (!baseFileName.equalsIgnoreCase(cfgFileNameCache)) {
-            cfgFileNameCache = baseFileName;
-            cfgFileCache = ObjectInstanceFactory.getNewCfg();
-            cfgFileCache.load(
-                    new File(filePath, baseFileName).getAbsolutePath(),
-                    cfgPrefixe);
-        }
+        final CfgFile cfgFileCache;
+        
+        cfgFileCache = ObjectInstanceFactory.getNewCfg();
+        cfgFileCache.load(
+                new File(filePath, baseFileName).getAbsolutePath(),
+                cfgPrefixe);
 
         return cfgFileCache;
     }
@@ -156,7 +123,7 @@ public class AbstractBasicCacheLevel {
      *
      * @return filename
      */
-    protected static final String getCurrentJnFileName() {
+    protected final String getCurrentJnFileName() {
         return jnFileNameCache;
     }
 }
