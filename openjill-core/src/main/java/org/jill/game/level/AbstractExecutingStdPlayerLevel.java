@@ -287,8 +287,9 @@ public abstract class AbstractExecutingStdPlayerLevel
                 if (listInv.contains(currentInventory)) {
                     // Weapon is in inventory
                     // Cheack if can fire with this weapon
-                    if (checkWeapon(listInv, currentInventory)) {
-                        createWeapon(currentWeapon.getType());
+                    if (checkWeapon(listInv, currentInventory, currentWeapon)) {
+                        createWeapon(currentWeapon.getType(),
+                                currentInventory, currentWeapon);
                         
                         break;
                     }
@@ -302,12 +303,14 @@ public abstract class AbstractExecutingStdPlayerLevel
      *
      * @param listInv list of inventory
      * @param currentInventory weapon inventory
+     * @param currentWeapon current setup of weapon
      *
      * @return true if can create weapon
      */
     private boolean checkWeapon(
             final List<EnumInventoryObject> listInv,
-            final EnumInventoryObject currentInventory) {
+            final EnumInventoryObject currentInventory,
+            final ObjectMappingWeapon currentWeapon) {
 
         boolean canFireThisWeapon;
 
@@ -315,17 +318,26 @@ public abstract class AbstractExecutingStdPlayerLevel
                 == AbstractPlayerManager.X_SPEED_MIDDLE) {
             canFireThisWeapon = false;
         } else {
-            canFireThisWeapon = true;
-            
             // Check if last objet to clear ALT text
-            final int nbWeapon = Collections.frequency(listInv,
+            final int nbInvWeaponIteam = Collections.frequency(listInv,
                     currentInventory);
-
-            // Remove object in inventory list
-            this.messageDispatcher.sendMessage(
-                    EnumMessageType.INVENTORY_ITEM,
-                    new InventoryItemMessage(currentInventory, false,
-                    nbWeapon == 1, false));
+            // Nb object match for weapon item
+            int nbObjWeaponItem = 0;
+            
+            // If remove inventory, don't compute
+            if (!currentWeapon.isRemoveInInventory()) {
+                for (ObjectEntity currentObj : this.listObject) {
+                    if (currentObj.getType() == currentWeapon.getType()) {
+                        nbObjWeaponItem++;
+                    }
+                }                
+            }
+            
+            final int nbMaxObj = nbInvWeaponIteam
+                    * currentWeapon.getNumberItemPerInventory();
+            
+            canFireThisWeapon = (currentWeapon.isRemoveInInventory()
+                    || nbMaxObj > nbObjWeaponItem);
         }
         
         return canFireThisWeapon;
@@ -335,8 +347,22 @@ public abstract class AbstractExecutingStdPlayerLevel
      * Create weapon.
      * 
      * @param typeWeapon weapon object type
+     * @param currentInventory weapon inventory
+     * @param currentWeapon current setup of weapon
      */
-    private void createWeapon(final int typeWeapon) {
+    private void createWeapon(final int typeWeapon,
+            final EnumInventoryObject currentInventory,
+            final ObjectMappingWeapon currentWeapon) {
+        
+        // TODO Alt key text need update by inventory cause, if blade remove,
+        // next weapon is display.
+        
+        // Remove object in inventory list
+        this.messageDispatcher.sendMessage(
+                EnumMessageType.INVENTORY_ITEM,
+                new InventoryItemMessage(currentInventory, false,
+                currentWeapon.isRemoveInInventory(), false));
+
         // Object parameter
         final ObjectParam objParam = ObjectInstanceFactory.getNewObjParam();
         objParam.init(this.backgroundObject,
