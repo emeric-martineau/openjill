@@ -357,11 +357,13 @@ public abstract class AbstractExecutingStdPlayerLevel
         // TODO Alt key text need update by inventory cause, if blade remove,
         // next weapon is display.
         
-        // Remove object in inventory list
-        this.messageDispatcher.sendMessage(
+        if (currentWeapon.isRemoveInInventory()) {
+            // Remove object in inventory list
+            this.messageDispatcher.sendMessage(
                 EnumMessageType.INVENTORY_ITEM,
                 new InventoryItemMessage(currentInventory, false,
-                currentWeapon.isRemoveInInventory(), false));
+                currentWeapon.isRemoveInInventory(), false));    
+        }
 
         // Object parameter
         final ObjectParam objParam = ObjectInstanceFactory.getNewObjParam();

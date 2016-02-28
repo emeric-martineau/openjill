@@ -32,6 +32,26 @@ public final class BladeManager extends AbstractParameterObjectEntity {
     private int subStateToRemoveMe;
     
     /**
+     * Initiali Y offset.
+     */
+    private int initY;
+
+    /**
+     * Statecount to start launch.
+     */
+    private int subStateLaunchStart;
+
+    /**
+     * Statecount to end launch.
+     */
+    private int subStateLaunchEnd;
+    
+    /**
+     * XD init value.
+     */
+    private int initXD;
+    
+    /**
      * Background map.
      */
     private BackgroundEntity[][] backgroundObject;
@@ -51,6 +71,9 @@ public final class BladeManager extends AbstractParameterObjectEntity {
         int numberTileSet = getConfInteger("numberTileSet");
         
         this.subStateToRemoveMe = getConfInteger("subStateToRemoveMe");
+        this.subStateLaunchStart = getConfInteger("subStateLaunchStart");
+        this.subStateLaunchEnd = getConfInteger("subStateLaunchEnd");
+        this.initXD = getConfInteger("initXD");
 
         // Load picture for each object. Don't use cache cause some picture
         // change between jill episod.
@@ -69,13 +92,30 @@ public final class BladeManager extends AbstractParameterObjectEntity {
         this.killme = new ObjectListMessage(this, false);
         
         setRemoveOutOfVisibleScreen(true);
+        
+                // Knife can be create by player, check width height
+        if (this.width == 0 || this.height == 0) {
+            this.width = this.images[0].getWidth();
+            this.height = this.images[0].getHeight();
+
+            // Blade have not same y tha player
+            this.y += this.initY;
+            this.x += 8 * this.info1;
+            // Statecount to launch knife
+            //this.stateCount = this.statecountLaunchStart;
+            // this.xSpeed is -1 or 1 to know way to go
+            this.xSpeed = this.initXD * this.info1;
+
+            setInfo1(0);
+        }
     }
 
     
     @Override
     public void msgTouch(final ObjectEntity obj,
             final KeyboardLayout keyboardLayout) {
-        if (obj.isPlayer()) {
+        if (obj.isPlayer() && !(getSubState() >= this.subStateLaunchStart
+            && getSubState() <= this.subStateLaunchEnd)) {
             this.messageDispatcher.sendMessage(EnumMessageType.OBJECT, killme);
         } else if (obj.isKillableObject()) {
             obj.msgKill(this, 0, 0);

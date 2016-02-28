@@ -127,7 +127,13 @@
     },
         {
         "type":50,
-        "implementationClass":"org.jill.game.entities.obj.BladeManager"
+        "implementationClass":"org.jill.game.entities.obj.BladeManager",
+        "weapon": {
+            "order":2,
+            "inventoryKey":"BLADE",
+            "removeInInventory":false,
+            "numberItemPerInventory":1
+        }
     },
     {
         "type":51,

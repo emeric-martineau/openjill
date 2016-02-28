@@ -306,6 +306,10 @@
         "tile":"0",
         "tileSet":"45",
         "numberTileSet":"4",
-        "subStateToRemoveMe":"63"
+        "subStateToRemoveMe":"63",
+        "initY":"2",
+        "initXD":"6",
+        "subStateLaunchStart":"0",
+        "subStateLaunchEnd":"7"
     }
 }
