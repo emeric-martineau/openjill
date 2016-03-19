@@ -160,7 +160,7 @@ public final class BladeManager extends AbstractParameterObjectEntity {
         // Move blade
         if (getySpeed() > Y_SPEED_MIDDLE) {
             // Move down
-            if (!UtilityObjectEntity.moveObjectDown(this, getySpeed(),
+            if (!UtilityObjectEntity.moveObjectDownWithIgnoreStair(this, getySpeed(),
                     backgroundObject)) {
                 setySpeed(getySpeed() * -1);
             }
