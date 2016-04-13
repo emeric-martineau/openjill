@@ -311,5 +311,17 @@
         "initXD":"6",
         "subStateLaunchStart":"0",
         "subStateLaunchEnd":"7"
+    },
+    "EyesManager":
+    {
+        "tileSet":"62",
+        "eyesTile":"0",
+        "lensTile":"1",
+        "lensOriginX":"5",
+        "lensOriginY":"4",
+        "raySize":"4",
+        "maxMoveY":"1",
+        "maxMoveXleft":"3",
+        "maxMoveXright":"2"
     }
 }
