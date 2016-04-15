@@ -8,7 +8,7 @@ import org.jill.openjill.core.api.entities.ObjectParam;
 import org.jill.openjill.core.api.keyboard.KeyboardLayout;
 
 /**
- * Apple object.
+ * Eyes object.
  *
  * @author Emeric MARTINEAU
  */

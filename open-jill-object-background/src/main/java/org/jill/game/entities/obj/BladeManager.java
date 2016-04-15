@@ -11,7 +11,7 @@ import org.jill.openjill.core.api.keyboard.KeyboardLayout;
 import org.jill.openjill.core.api.message.EnumMessageType;
 
 /**
- * Apple object.
+ * Blade object.
  *
  * @author Emeric MARTINEAU
  */
@@ -32,9 +32,14 @@ public final class BladeManager extends AbstractParameterObjectEntity {
     private int subStateToRemoveMe;
     
     /**
-     * Initiali Y offset.
+     * Initial Y offset.
      */
     private int initY;
+    
+    /**
+     * Initial X offset.
+     */
+    private int initX;
 
     /**
      * Statecount to start launch.
@@ -74,6 +79,8 @@ public final class BladeManager extends AbstractParameterObjectEntity {
         this.subStateLaunchStart = getConfInteger("subStateLaunchStart");
         this.subStateLaunchEnd = getConfInteger("subStateLaunchEnd");
         this.initXD = getConfInteger("initXD");
+        this.initY = getConfInteger("initY");
+        this.initX = getConfInteger("initX");
 
         // Load picture for each object. Don't use cache cause some picture
         // change between jill episod.
@@ -93,14 +100,14 @@ public final class BladeManager extends AbstractParameterObjectEntity {
         
         setRemoveOutOfVisibleScreen(true);
         
-                // Knife can be create by player, check width height
+        // Blade can be create by player, check width height
         if (this.width == 0 || this.height == 0) {
             this.width = this.images[0].getWidth();
             this.height = this.images[0].getHeight();
 
             // Blade have not same y tha player
             this.y += this.initY;
-            this.x += 8 * this.info1;
+            this.x += this.initX * this.info1;
             // Statecount to launch knife
             //this.stateCount = this.statecountLaunchStart;
             // this.xSpeed is -1 or 1 to know way to go
@@ -147,6 +154,9 @@ public final class BladeManager extends AbstractParameterObjectEntity {
         moveLeftRight();
                 
         moveUpDown();
+        
+        System.out.println(String.format("X = %d Y = %d ss = %d xd = %d yd = %d",
+                getX(), getY(), getSubState(), getxSpeed(), getySpeed()));
     }
 
     /**
@@ -154,22 +164,24 @@ public final class BladeManager extends AbstractParameterObjectEntity {
      */
     private void moveUpDown() {
         // If blade can't move fully, way not change.
-        // Way change only when blade don't move.
         setySpeed(getySpeed() + 1);
+        
+        final int oldY = getY();
         
         // Move blade
         if (getySpeed() > Y_SPEED_MIDDLE) {
             // Move down
-            if (!UtilityObjectEntity.moveObjectDownWithIgnoreStair(this, getySpeed(),
-                    backgroundObject)) {
-                setySpeed(getySpeed() * -1);
-            }
+            UtilityObjectEntity.moveObjectDownWithIgnoreStair(this, getySpeed(),
+                    backgroundObject);
         } else {
             // Move up
-            if (!UtilityObjectEntity.moveObjectUp(this, getySpeed(),
-                    backgroundObject)) {
-                setySpeed(getySpeed() * -1);
-            }
+            UtilityObjectEntity.moveObjectUp(this, getySpeed(),
+                    backgroundObject);
+        }
+        
+        // Way change only when blade don't move.
+        if (oldY == getY()) {
+            setySpeed(getySpeed() * -1);
         }
     }
 
