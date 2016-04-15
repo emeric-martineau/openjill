@@ -154,9 +154,6 @@ public final class BladeManager extends AbstractParameterObjectEntity {
         moveLeftRight();
                 
         moveUpDown();
-        
-        System.out.println(String.format("X = %d Y = %d ss = %d xd = %d yd = %d",
-                getX(), getY(), getSubState(), getxSpeed(), getySpeed()));
     }
 
     /**
