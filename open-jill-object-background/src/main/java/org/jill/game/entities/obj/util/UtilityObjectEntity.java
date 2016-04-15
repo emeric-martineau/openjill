@@ -286,13 +286,16 @@ public final class UtilityObjectEntity {
         } else {
             final int newY = (block.getY() * JillConst.getBlockSize())
                         - obj.getHeight();
-            if (updateObj) {
+            if (updateObj) {                
+                canMove = newY != obj.getY();
+                
                 // Jump size are to big and object hit a block
                 // Set Y to the below block
                 obj.setY(newY);
+            } else {
+                canMove = newY != obj.getY();
             }
-
-            canMove = newY != obj.getY();
+            
         }
 
         return canMove;

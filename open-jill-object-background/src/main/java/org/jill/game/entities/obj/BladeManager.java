@@ -166,22 +166,19 @@ public final class BladeManager extends AbstractParameterObjectEntity {
         // If blade can't move fully, way not change.
         setySpeed(getySpeed() + 1);
         
-        final int oldY = getY();
-        
         // Move blade
         if (getySpeed() > Y_SPEED_MIDDLE) {
             // Move down
-            UtilityObjectEntity.moveObjectDownWithIgnoreStair(this, getySpeed(),
-                    backgroundObject);
+            if (!UtilityObjectEntity.moveObjectDownWithIgnoreStair(this, getySpeed(),
+                    backgroundObject)) {
+                setySpeed(getySpeed() * -1);
+            }
         } else {
             // Move up
-            UtilityObjectEntity.moveObjectUp(this, getySpeed(),
-                    backgroundObject);
-        }
-        
-        // Way change only when blade don't move.
-        if (oldY == getY()) {
-            setySpeed(getySpeed() * -1);
+            if (!UtilityObjectEntity.moveObjectUp(this, getySpeed(),
+                    backgroundObject)) {
+                setySpeed(getySpeed() * -1);
+            }
         }
     }
 
