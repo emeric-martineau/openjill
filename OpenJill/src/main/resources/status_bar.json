@@ -45,7 +45,11 @@
         "x":80,
         "y":16,
         "width":232,
-        "height":160
+        "height":160,
+        "levelStart": {
+            "x":120,
+            "y":72
+        }
     },
     "images":[
         {

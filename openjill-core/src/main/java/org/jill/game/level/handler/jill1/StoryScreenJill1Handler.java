@@ -5,6 +5,7 @@ import java.io.IOException;
 
 import org.jill.game.level.AbstractObjectJillLevel;
 import org.jill.game.level.cfg.JillLevelConfiguration;
+import org.jill.game.screen.conf.RectangleConf;
 import org.jill.openjill.core.api.jill.JillConst;
 
 /**
@@ -27,10 +28,12 @@ public class StoryScreenJill1Handler extends AbstractObjectJillLevel {
         super(new JillLevelConfiguration("JILL1.SHA", "INTRO.JN1", "JILL1.VCL",
                 "JILL1.CFG", "JN1"));
 
+        final RectangleConf offset
+                    = this.statusBar.getGameAreaConf().getOffset();
 
-        this.statusBar.getGameAreaConf().setOffsetX(
+        offset.setX(
                 - 36 * JillConst.getBlockSize());
-        this.statusBar.getGameAreaConf().setOffsetY(
+        offset.setY(
                 - 2 * JillConst.getBlockSize());
     }
 
@@ -50,7 +53,10 @@ public class StoryScreenJill1Handler extends AbstractObjectJillLevel {
      */
     @Override
     public void paint(Graphics g) {
-        g.drawImage(background, this.statusBar.getGameAreaConf().getOffsetX(),
-                this.statusBar.getGameAreaConf().getOffsetY(), null);
+        final RectangleConf offset
+                    = this.statusBar.getGameAreaConf().getOffset();
+
+        g.drawImage(background, offset.getX(),
+                offset.getY(), null);
     }
 }

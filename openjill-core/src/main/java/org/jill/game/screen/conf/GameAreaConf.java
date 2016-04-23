@@ -7,49 +7,48 @@ package org.jill.game.screen.conf;
  */
 public class GameAreaConf extends RectangleConf {
     /**
-     * The X coordinate of the upper-left corner of the <code>Rectangle</code>.
+     * The coordinate offset screen.
      */
-    private int offsetX;
-
-    /**
-     * The Y coordinate of the upper-left corner of the <code>Rectangle</code>.
-     */
-    private int offsetY;
+    private RectangleConf offset = new RectangleConf();
     
-        /**
-     * The X coordinate of the upper-left corner of the <code>Rectangle</code>.
+    /**
+     * The coordinate of player when level load.
+     */
+    private RectangleConf levelStart;
+    
+    /**
+     * The coordinate offset screen.
      *
      * @return x
      */
-    public int getOffsetX() {
-        return offsetX;
+    public RectangleConf getOffset() {
+        return offset;
     }
 
     /**
-     * The X coordinate of the upper-left corner of the <code>Rectangle</code>.
+     * The coordinate offset screen.
      *
      * @param x1 x
      */
-    public void setOffsetX(final int x1) {
-        this.offsetX = x1;
+    public void setOffsetX(final RectangleConf x1) {
+        this.offset = x1;
     }
 
     /**
-     * The Y coordinate of the upper-left corner of the <code>Rectangle</code>.
-     *
-     * @return y
+     * The coordinate when level load.
+     * 
+     * @return conf
      */
-    public int getOffsetY() {
-        return offsetY;
+    public RectangleConf getLevelStart() {
+        return levelStart;
     }
-
+    
     /**
-     * The Y coordinate of the upper-left corner of the <code>Rectangle</code>.
-     *
-     * @param y1 y
+     * The coordinate when level load.
+     * 
+     * @param levelStart1 conf
      */
-    public void setOffsetY(final int y1) {
-        this.offsetY = y1;
+    public void setLevelStart(final RectangleConf levelStart1) {
+        levelStart = levelStart1;
     }
-
 }

@@ -6,6 +6,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import org.jill.game.level.AbstractExecutingStdPlayerLevel;
 import org.jill.game.level.cfg.JillLevelConfiguration;
+import org.jill.game.screen.conf.RectangleConf;
 import org.jill.openjill.core.api.jill.JillConst;
 import org.simplegame.SimpleGameConfig;
 
@@ -83,9 +84,12 @@ public class OrderingInfoScreenJill1Handler
      */
     @Override
     protected void centerScreen() {
-        this.statusBar.getGameAreaConf().setOffsetX(
+        final RectangleConf offset
+                = this.statusBar.getGameAreaConf().getOffset();
+        
+        offset.setX(
                 screens[currentScreen].x);
-        this.statusBar.getGameAreaConf().setOffsetY(
+        offset.setY(
                 screens[currentScreen].y);
     }
 
@@ -102,9 +106,12 @@ public class OrderingInfoScreenJill1Handler
             if (currentScreen >= screens.length) {
                 changeScreenManager(StartMenuJill1Handler.class);
             } else {
-                this.statusBar.getGameAreaConf().setOffsetX(
+               final RectangleConf offset
+                    = this.statusBar.getGameAreaConf().getOffset();
+               
+                offset.setX(
                         screens[currentScreen].x);
-                this.statusBar.getGameAreaConf().setOffsetY(
+                offset.setY(
                         screens[currentScreen].y);
             }
 

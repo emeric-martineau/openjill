@@ -15,6 +15,7 @@ import org.jill.openjill.core.api.message.statusbar.inventory.EnumInventoryObjec
 import org.jill.openjill.core.api.message.statusbar.inventory.InventoryItemMessage;
 import org.jill.game.screen.ControlArea;
 import org.jill.game.screen.InventoryArea;
+import org.jill.game.screen.conf.RectangleConf;
 import org.jill.jn.BackgroundLayer;
 import org.jill.openjill.core.api.entities.BackgroundEntity;
 import org.jill.openjill.core.api.entities.ObjectEntity;
@@ -189,8 +190,11 @@ public abstract class AbstractExecutingStdLevel extends AbstractMenuJillLevel {
 
         messageDispatcher.addHandler(EnumMessageType.MESSAGE_BOX, this);
 
-        this.statusBar.getGameAreaConf().setOffsetX(0);
-        this.statusBar.getGameAreaConf().setOffsetY(0);
+        final RectangleConf offset
+                    = this.statusBar.getGameAreaConf().getOffset();
+
+        offset.setX(0);
+        offset.setY(0);
 
         drawingScreen = createGameScreen();
 
@@ -390,11 +394,14 @@ public abstract class AbstractExecutingStdLevel extends AbstractMenuJillLevel {
             if (updateInventoryScreen) {
                 drawInventory();
             }
+            
+            final RectangleConf offset
+                    = this.statusBar.getGameAreaConf().getOffset();
 
             // Copy background screen on
             g2DrawingScreen.drawImage(background,
-                    this.statusBar.getGameAreaConf().getOffsetX(),
-                    this.statusBar.getGameAreaConf().getOffsetY(),
+                    offset.getX(),
+                    offset.getY(),
                     null);
 
             // Draw object
@@ -411,8 +418,11 @@ public abstract class AbstractExecutingStdLevel extends AbstractMenuJillLevel {
      * Draw object if displayed.
      */
     private void updateObject() {
-        int lOffsetX = Math.abs(this.statusBar.getGameAreaConf().getOffsetX());
-        int lOffsetY = Math.abs(this.statusBar.getGameAreaConf().getOffsetY());
+        final RectangleConf offset
+                    = this.statusBar.getGameAreaConf().getOffset();
+
+        int lOffsetX = Math.abs(offset.getX());
+        int lOffsetY = Math.abs(offset.getY());
 
         updateObjectScreenRect.setLocation(lOffsetX
                 - JillConst.getxUpdateScreenBorder(),
@@ -520,12 +530,14 @@ public abstract class AbstractExecutingStdLevel extends AbstractMenuJillLevel {
      */
     private void updateBackground() {
         final int blockSize = JillConst.getBlockSize();
+        final RectangleConf offset
+                    = this.statusBar.getGameAreaConf().getOffset();
 
         final int startX =
-                Math.abs(this.statusBar.getGameAreaConf().getOffsetX())
+                Math.abs(offset.getX())
                 / blockSize;
         final int startY =
-                Math.abs(this.statusBar.getGameAreaConf().getOffsetY())
+                Math.abs(offset.getY())
                 / blockSize;
         final int endX = Math.min(startX + screenWidthBlock,
                 BackgroundLayer.MAP_WIDTH);
@@ -566,14 +578,17 @@ public abstract class AbstractExecutingStdLevel extends AbstractMenuJillLevel {
                 = listObjectToDraw.listIterator(listObjectToDraw.size());
         ObjectEntity currentObject;
 
+        final RectangleConf offset
+                    = this.statusBar.getGameAreaConf().getOffset();        
+        
         while (itDraw.hasPrevious()) {
             currentObject = itDraw.previous();
 
             g2DrawingScreen.drawImage(currentObject.msgDraw(),
                     currentObject.getX()
-                            + this.statusBar.getGameAreaConf().getOffsetX(),
+                            + offset.getX(),
                     currentObject.getY()
-                            + this.statusBar.getGameAreaConf().getOffsetY(),
+                            + offset.getY(),
                     null);
         }
 

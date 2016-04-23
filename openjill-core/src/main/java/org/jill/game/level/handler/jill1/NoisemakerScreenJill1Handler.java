@@ -5,6 +5,7 @@ import java.io.IOException;
 
 import org.jill.game.level.AbstractObjectJillLevel;
 import org.jill.game.level.cfg.JillLevelConfiguration;
+import org.jill.game.screen.conf.RectangleConf;
 import org.jill.openjill.core.api.jill.JillConst;
 
 /**
@@ -26,9 +27,12 @@ public class NoisemakerScreenJill1Handler extends AbstractObjectJillLevel {
             IllegalAccessException, InstantiationException {
         super(new JillLevelConfiguration("JILL1.SHA", "INTRO.JN1", "JILL1.VCL",
                 "JILL1.CFG", "JN1"));
-        this.statusBar.getGameAreaConf().setOffsetX(
+        final RectangleConf offset
+                = this.statusBar.getGameAreaConf().getOffset();
+        
+        offset.setX(
                 - 62 * JillConst.getBlockSize());
-        this.statusBar.getGameAreaConf().setOffsetY(
+        offset.setY(
                 - 0 * JillConst.getBlockSize());
     }
 
@@ -47,7 +51,10 @@ public class NoisemakerScreenJill1Handler extends AbstractObjectJillLevel {
      */
     @Override
     public void paint(Graphics g) {
-        g.drawImage(background, this.statusBar.getGameAreaConf().getOffsetX(),
-                this.statusBar.getGameAreaConf().getOffsetY(), null);
+        final RectangleConf offset
+                = this.statusBar.getGameAreaConf().getOffset();
+        
+        g.drawImage(background, offset.getX(),
+                offset.getY(), null);
     }
 }
