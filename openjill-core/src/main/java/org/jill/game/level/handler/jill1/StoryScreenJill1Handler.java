@@ -28,8 +28,10 @@ public class StoryScreenJill1Handler extends AbstractObjectJillLevel {
                 "JILL1.CFG", "JN1"));
 
 
-        offsetX = - 36 * JillConst.getBlockSize();
-        offsetY = - 2 * JillConst.getBlockSize();
+        this.statusBar.getGameAreaConf().setOffsetX(
+                - 36 * JillConst.getBlockSize());
+        this.statusBar.getGameAreaConf().setOffsetY(
+                - 2 * JillConst.getBlockSize());
     }
 
     /**
@@ -48,6 +50,7 @@ public class StoryScreenJill1Handler extends AbstractObjectJillLevel {
      */
     @Override
     public void paint(Graphics g) {
-        g.drawImage(background, offsetX, offsetY, null);
+        g.drawImage(background, this.statusBar.getGameAreaConf().getOffsetX(),
+                this.statusBar.getGameAreaConf().getOffsetY(), null);
     }
 }

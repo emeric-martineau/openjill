@@ -5,7 +5,7 @@ package org.jill.game.screen.conf;
  *
  * @author emeric MARTINEAU
  */
-public final class RectangleConf {
+public class RectangleConf {
     /**
      * The X coordinate of the upper-left corner of the <code>Rectangle</code>.
      */
@@ -120,6 +120,4 @@ public final class RectangleConf {
     public void setColor(final String c) {
         this.color = c;
     }
-
-
 }

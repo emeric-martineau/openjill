@@ -79,16 +79,6 @@ public abstract class AbstractExecutingStdPlayerLevel
     private final int playerYdDownMoveScreen;
 
     /**
-     * Game width.
-     */
-    private final int gameWidth;
-
-    /**
-     * Game height.
-     */
-    private final int gameHeight;
-
-    /**
      * Create message for status bar.
      *
      * @param prop propertoies
@@ -118,9 +108,6 @@ public abstract class AbstractExecutingStdPlayerLevel
             throws IOException, ClassNotFoundException, IllegalAccessException,
             InstantiationException {
         super(cfgLevel);
-
-        this.gameWidth = this.statusBar.getGameAreaConf().getWidth();
-        this.gameHeight = this.statusBar.getGameAreaConf().getHeight();
 
         if (cfgLevel.getDisplayBeginMessage()) {
             beginMessage();
@@ -221,6 +208,12 @@ public abstract class AbstractExecutingStdPlayerLevel
     protected void centerScreen() {
         final int playerXLeft = player.getX();
         final int playerXRight = playerXLeft + player.getWidth();
+        
+        final int gameWidth = this.statusBar.getGameAreaConf().getWidth();
+        final int gameHeight = this.statusBar.getGameAreaConf().getHeight();
+        
+        int offsetX = this.statusBar.getGameAreaConf().getOffsetX();
+        int offsetY = this.statusBar.getGameAreaConf().getOffsetY();
 
         // Move screen to X to let at right or left 4 case
         if (offsetX + BORDER_SCREEN_PLAYER_X > playerXLeft) {
@@ -229,11 +222,11 @@ public abstract class AbstractExecutingStdPlayerLevel
                     // To don't have negative value
                     0);
         } else if (offsetX - BORDER_SCREEN_PLAYER_X
-                + this.gameWidth < playerXRight) {
+                + gameWidth < playerXRight) {
             offsetX = -1 * Math.min(
                     playerXRight + BORDER_SCREEN_PLAYER_X
-                    - this.gameWidth,
-                    JillConst.getMaxWidth() - this.gameWidth);
+                    - gameWidth,
+                    JillConst.getMaxWidth() - gameWidth);
         }
 
         final int playerYTop = player.getY();
@@ -246,12 +239,15 @@ public abstract class AbstractExecutingStdPlayerLevel
                     // To don't have negative value
                     0);
         } else if (offsetY - BORDER_SCREEN_PLAYER_Y
-                + this.gameHeight < playerYBottom) {
+                + gameHeight < playerYBottom) {
             offsetY = -1 * Math.min(
                     playerYBottom + BORDER_SCREEN_PLAYER_Y
-                    - this.gameHeight + specialScreenOffset,
-                    JillConst.getMaxHeight() - this.gameHeight);
+                    - gameHeight + specialScreenOffset,
+                    JillConst.getMaxHeight() - gameHeight);
         }
+        
+        this.statusBar.getGameAreaConf().setOffsetX(offsetX);
+        this.statusBar.getGameAreaConf().setOffsetY(offsetY);
     }
 
 

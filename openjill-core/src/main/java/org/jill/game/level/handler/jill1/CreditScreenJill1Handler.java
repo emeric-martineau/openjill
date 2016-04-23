@@ -26,8 +26,10 @@ public class CreditScreenJill1Handler extends AbstractObjectJillLevel {
             IllegalAccessException, InstantiationException {
         super(new JillLevelConfiguration("JILL1.SHA", "INTRO.JN1", "JILL1.VCL",
                 "JILL1.CFG", "JN1"));
-        offsetX = - 15 * JillConst.getBlockSize();
-        offsetY = - 0 * JillConst.getBlockSize();
+        this.statusBar.getGameAreaConf().setOffsetX(
+                - 15 * JillConst.getBlockSize());
+        this.statusBar.getGameAreaConf().setOffsetY(
+                - 0 * JillConst.getBlockSize());
     }
 
     /**
@@ -46,6 +48,7 @@ public class CreditScreenJill1Handler extends AbstractObjectJillLevel {
      */
     @Override
     public void paint(Graphics g) {
-        g.drawImage(background, offsetX, offsetY, null);
+        g.drawImage(background, this.statusBar.getGameAreaConf().getOffsetX(),
+                this.statusBar.getGameAreaConf().getOffsetY(), null);
     }
 }

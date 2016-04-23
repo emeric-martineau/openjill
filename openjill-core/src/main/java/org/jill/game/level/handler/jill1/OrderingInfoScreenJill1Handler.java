@@ -83,8 +83,10 @@ public class OrderingInfoScreenJill1Handler
      */
     @Override
     protected void centerScreen() {
-        offsetX = screens[currentScreen].x;
-        offsetY = screens[currentScreen].y;
+        this.statusBar.getGameAreaConf().setOffsetX(
+                screens[currentScreen].x);
+        this.statusBar.getGameAreaConf().setOffsetY(
+                screens[currentScreen].y);
     }
 
     /**
@@ -100,8 +102,10 @@ public class OrderingInfoScreenJill1Handler
             if (currentScreen >= screens.length) {
                 changeScreenManager(StartMenuJill1Handler.class);
             } else {
-                offsetX = screens[currentScreen].x;
-                offsetY = screens[currentScreen].y;
+                this.statusBar.getGameAreaConf().setOffsetX(
+                        screens[currentScreen].x);
+                this.statusBar.getGameAreaConf().setOffsetY(
+                        screens[currentScreen].y);
             }
 
             this.runGame = true;

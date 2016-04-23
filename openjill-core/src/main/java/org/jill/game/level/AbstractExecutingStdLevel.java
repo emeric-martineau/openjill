@@ -137,7 +137,7 @@ public abstract class AbstractExecutingStdLevel extends AbstractMenuJillLevel {
      * By default, send update message t object on visible screen.
      */
     private boolean updateObject = true;
-
+    
     /**
      * Level configuration.
      *
@@ -189,8 +189,8 @@ public abstract class AbstractExecutingStdLevel extends AbstractMenuJillLevel {
 
         messageDispatcher.addHandler(EnumMessageType.MESSAGE_BOX, this);
 
-        offsetX = 0;
-        offsetY = 0;
+        this.statusBar.getGameAreaConf().setOffsetX(0);
+        this.statusBar.getGameAreaConf().setOffsetY(0);
 
         drawingScreen = createGameScreen();
 
@@ -392,7 +392,10 @@ public abstract class AbstractExecutingStdLevel extends AbstractMenuJillLevel {
             }
 
             // Copy background screen on
-            g2DrawingScreen.drawImage(background, offsetX, offsetY, null);
+            g2DrawingScreen.drawImage(background,
+                    this.statusBar.getGameAreaConf().getOffsetX(),
+                    this.statusBar.getGameAreaConf().getOffsetY(),
+                    null);
 
             // Draw object
             drawObject();
@@ -408,8 +411,8 @@ public abstract class AbstractExecutingStdLevel extends AbstractMenuJillLevel {
      * Draw object if displayed.
      */
     private void updateObject() {
-        int lOffsetX = Math.abs(offsetX);
-        int lOffsetY = Math.abs(offsetY);
+        int lOffsetX = Math.abs(this.statusBar.getGameAreaConf().getOffsetX());
+        int lOffsetY = Math.abs(this.statusBar.getGameAreaConf().getOffsetY());
 
         updateObjectScreenRect.setLocation(lOffsetX
                 - JillConst.getxUpdateScreenBorder(),
@@ -518,8 +521,12 @@ public abstract class AbstractExecutingStdLevel extends AbstractMenuJillLevel {
     private void updateBackground() {
         final int blockSize = JillConst.getBlockSize();
 
-        final int startX = Math.abs(offsetX) / blockSize;
-        final int startY = Math.abs(offsetY) / blockSize;
+        final int startX =
+                Math.abs(this.statusBar.getGameAreaConf().getOffsetX())
+                / blockSize;
+        final int startY =
+                Math.abs(this.statusBar.getGameAreaConf().getOffsetY())
+                / blockSize;
         final int endX = Math.min(startX + screenWidthBlock,
                 BackgroundLayer.MAP_WIDTH);
         final int endY = Math.min(startY + screenHeightBlock,
@@ -563,8 +570,11 @@ public abstract class AbstractExecutingStdLevel extends AbstractMenuJillLevel {
             currentObject = itDraw.previous();
 
             g2DrawingScreen.drawImage(currentObject.msgDraw(),
-                    currentObject.getX() + offsetX,
-                    currentObject.getY() + offsetY, null);
+                    currentObject.getX()
+                            + this.statusBar.getGameAreaConf().getOffsetX(),
+                    currentObject.getY()
+                            + this.statusBar.getGameAreaConf().getOffsetY(),
+                    null);
         }
 
         // NOTE : Disable in 0.0.28 cause, new collision method do this

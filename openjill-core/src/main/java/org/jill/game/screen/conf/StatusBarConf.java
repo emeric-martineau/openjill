@@ -36,7 +36,7 @@ public final class StatusBarConf {
     /**
      * Game area.
      */
-    private RectangleConf gameArea;
+    private GameAreaConf gameArea;
 
     /**
      * Images to draw.
@@ -125,7 +125,7 @@ public final class StatusBarConf {
      *
      * @return  control area config
      */
-    public RectangleConf getGameArea() {
+    public GameAreaConf getGameArea() {
         return gameArea;
     }
 
@@ -134,7 +134,7 @@ public final class StatusBarConf {
      *
      * @param ca control area config
      */
-    public void setGameArea(final RectangleConf ca) {
+    public void setGameArea(final GameAreaConf ca) {
         this.gameArea = ca;
     }
 

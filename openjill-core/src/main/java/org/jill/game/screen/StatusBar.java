@@ -9,6 +9,7 @@ import java.io.InputStream;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.jill.game.screen.conf.GameAreaConf;
 import org.jill.game.screen.conf.ImagesConf;
 import org.jill.game.screen.conf.RectangleConf;
 import org.jill.game.screen.conf.StatusBarConf;
@@ -32,11 +33,6 @@ public final class StatusBar implements InterfaceMessageGameHandler {
      */
     private static final Logger LOGGER = Logger.getLogger(
                     StatusBar.class.getName());
-
-    /**
-     * Hexa base.
-     */
-    private static final int HEXA_BASE = 16;
 
     /**
      * Picture cache.
@@ -359,7 +355,7 @@ public final class StatusBar implements InterfaceMessageGameHandler {
      *
      * @return configuration
      */
-    public RectangleConf getGameAreaConf() {
+    public GameAreaConf getGameAreaConf() {
         return this.conf.getGameArea();
     }
 }

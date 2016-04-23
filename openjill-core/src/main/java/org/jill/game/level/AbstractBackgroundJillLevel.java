@@ -60,16 +60,6 @@ public abstract class AbstractBackgroundJillLevel
     protected BackgroundEntity[][] backgroundObject;
 
     /**
-     * Screen offset to display.
-     */
-    protected int offsetX;
-
-    /**
-     * Screen offset to display.
-     */
-    protected int offsetY;
-
-    /**
      * Status bar.
      */
     protected StatusBar statusBar;

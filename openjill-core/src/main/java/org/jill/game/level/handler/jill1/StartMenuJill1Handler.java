@@ -112,8 +112,10 @@ public class StartMenuJill1Handler extends AbstractChangeLevel {
         final int blocOffsetY = 53;
 
         // Picture offset
-        offsetX = -(blocOffsetX + 1) * JillConst.getBlockSize();
-        offsetY = -(blocOffsetY + 1) * JillConst.getBlockSize();
+        this.statusBar.getGameAreaConf().setOffsetX(
+                -(blocOffsetX + 1) * JillConst.getBlockSize());
+        this.statusBar.getGameAreaConf().setOffsetY(
+                -(blocOffsetY + 1) * JillConst.getBlockSize());
     }
 
     @Override
