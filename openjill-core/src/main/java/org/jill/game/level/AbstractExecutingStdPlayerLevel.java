@@ -14,6 +14,8 @@ import org.jill.game.entities.obj.player.PalyerActionPerState;
 import org.jill.game.entities.obj.player.PlayerAction;
 import org.jill.game.level.cfg.LevelConfiguration;
 import org.jill.game.manager.object.weapon.ObjectMappingWeapon;
+import org.jill.game.screen.conf.GameAreaBorderConf;
+import org.jill.game.screen.conf.GameAreaConf;
 import org.jill.game.screen.conf.RectangleConf;
 import org.jill.openjill.core.api.message.statusbar.StatusBarTextMessage;
 import org.jill.openjill.core.api.message.statusbar.inventory.
@@ -46,12 +48,6 @@ public abstract class AbstractExecutingStdPlayerLevel
      * Begin level message.
      */
     private StatusBarTextMessage beginMessage;
-
-    /**
-     * Minimum size between player and border.
-     */
-    private static final int BORDER_SCREEN_PLAYER_X = (int) 5.5
-            * JillConst.getBlockSize();
 
     /**
      * Minimum size between player and border.
@@ -133,14 +129,15 @@ public abstract class AbstractExecutingStdPlayerLevel
      * Init center of screen at load.
      */
     protected void initCenterScreen() {
+        final GameAreaConf gameScreen = this.statusBar.getGameAreaConf();
         final RectangleConf offset
-                    = this.statusBar.getGameAreaConf().getOffset();
-        final RectangleConf gameScreen = this.statusBar.getGameAreaConf();
-
+                    = gameScreen.getOffset();
+        final RectangleConf gameLevelStart = gameScreen.getLevelStart();
+        
         // init center screen
         int offsetX = Math.max(
                 player.getX()
-                        - this.statusBar.getGameAreaConf().getLevelStart().getX(),
+                        - gameLevelStart.getX(),
                 // To don't have negative value
                 0);
         
@@ -151,7 +148,7 @@ public abstract class AbstractExecutingStdPlayerLevel
         
         int offsetY = Math.max(
                 player.getY()
-                        - this.statusBar.getGameAreaConf().getLevelStart().getY(),
+                        - gameLevelStart.getY(),
                 // To don't have negative value
                 0);
         
@@ -241,6 +238,27 @@ public abstract class AbstractExecutingStdPlayerLevel
      * Center screen with player position.
      */
     protected void centerScreen() {
+        final GameAreaConf gameScreen = this.statusBar.getGameAreaConf();
+        final GameAreaBorderConf border = gameScreen.getBorder();
+        final RectangleConf offset
+                    = gameScreen.getOffset();
+        
+        // If player is below limit right
+        final int playerX = player.getX();
+        final int rightOffset = playerX + offset.getX();
+        final int gameWidth = gameScreen.getWidth();
+        
+        if (rightOffset < border.getRight()) {
+            final int newRightOffset = Math.max(playerX - border.getRight(), 0);
+            offset.setX(-1 * newRightOffset);
+        } else if (rightOffset > (gameWidth - border.getLeft())) {
+            final int newRightOffset = Math.min(
+                    playerX - gameWidth + border.getLeft(),
+                    JillConst.getMaxWidth() - gameWidth);
+            offset.setX(-1 * newRightOffset);
+        }
+        
+        /*
         final int playerXLeft = player.getX();
         final int playerXRight = playerXLeft + player.getWidth();
         
@@ -283,7 +301,7 @@ public abstract class AbstractExecutingStdPlayerLevel
                     - gameHeight + specialScreenOffset,
                     JillConst.getMaxHeight() - gameHeight);
         }
-        
+        */
         //this.statusBar.getGameAreaConf().setOffsetX(offsetX);
         //this.statusBar.getGameAreaConf().setOffsetY(offsetY);
     }

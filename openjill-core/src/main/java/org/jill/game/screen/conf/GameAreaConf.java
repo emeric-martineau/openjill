@@ -17,6 +17,11 @@ public class GameAreaConf extends RectangleConf {
     private RectangleConf levelStart;
     
     /**
+     * Game border (space between player and screen border).
+     */
+    private GameAreaBorderConf border;
+    
+    /**
      * The coordinate offset screen.
      *
      * @return x
@@ -50,5 +55,23 @@ public class GameAreaConf extends RectangleConf {
      */
     public void setLevelStart(final RectangleConf levelStart1) {
         levelStart = levelStart1;
+    }
+    
+    /**
+     * Game border (space between player and screen border).
+     * 
+     * @return border
+     */
+    public GameAreaBorderConf getBorder() {
+        return border;
+    }
+    
+    /**
+     * Game border (space between player and screen border).
+     * 
+     * @param b border
+     */
+    public void setBorder(final GameAreaBorderConf b) {
+        border = b;
     }
 }

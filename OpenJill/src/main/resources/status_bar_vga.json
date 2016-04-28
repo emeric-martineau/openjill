@@ -49,6 +49,10 @@
         "levelStart": {
             "x":120,
             "y":72
+        },
+        "border":{
+            "right":88,
+            "left":96
         }
     },
     "images":[
