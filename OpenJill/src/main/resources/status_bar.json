@@ -52,7 +52,9 @@
         },
         "border":{
             "right":88,
-            "left":96
+            "left":96,
+            "top":32,
+            "bottom":80
         }
     },
     "images":[

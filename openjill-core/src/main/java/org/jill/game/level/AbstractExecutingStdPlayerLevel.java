@@ -258,6 +258,20 @@ public abstract class AbstractExecutingStdPlayerLevel
             offset.setX(-1 * newRightOffset);
         }
         
+        
+        final int playerY = player.getY();
+        final int topOffset = playerY + offset.getY();
+        final int gameHeight = gameScreen.getHeight();
+        
+        if (topOffset < border.getTop()) {
+            final int newTopOffset = Math.max(playerY - border.getTop(), 0);
+            offset.setY(-1 * newTopOffset);
+        } else if (topOffset > (gameHeight - border.getBottom())) {
+            final int newTopOffset = Math.min(
+                    playerY - gameHeight + border.getBottom(),
+                    JillConst.getMaxHeight() - gameHeight);
+            offset.setY(-1 * newTopOffset);
+        }
         /*
         final int playerXLeft = player.getX();
         final int playerXRight = playerXLeft + player.getWidth();
