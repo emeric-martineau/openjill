@@ -60,13 +60,17 @@ public final class ToggleWallManager extends AbstractParameterObjectEntity
 
         this.background = objectParam.getBackgroundObject();
 
-        if (this.ySpeed == 1) {
+        if (isWall()) {
             initWall();
         } else {
             initFloor();
         }
     }
 
+    private boolean isWall() {
+        return this.ySpeed == 1;
+    }
+    
     /**
      * Init wall config.
      */
@@ -198,8 +202,21 @@ public final class ToggleWallManager extends AbstractParameterObjectEntity
         final ObjectEntity switchObj = (ObjectEntity) msg;
 
         if (switchObj.getCounter() == this.counter) {
+            // Tacke first replace block to check if is on or off
+            final int blockX = this.listBackgroundPassthru.get(0).getX();
+            final int blockY = this.listBackgroundPassthru.get(0).getY();
+            
+            final String nameOfBackgroundBlockWall
+                = getConfString("wallBackgroundName");
+            final String nameOfBackgroundBlockFloor = getConfString(
+                "floorBackgroundName");
+            
+            final String currentBackgroundName
+                    = this.background[blockX][blockY].getName();
+            
             // If switch.state = 1 wall is off (player can be passthru)
-            if (switchObj.getState() == 1) {
+            if (currentBackgroundName.equals(nameOfBackgroundBlockFloor)
+                    || currentBackgroundName.equals(nameOfBackgroundBlockWall)) {
                 // Clear wall
                 this.messageDispatcher.sendMessage(EnumMessageType.BACKGROUND,
                     this.listBackgroundPassthru);
@@ -208,10 +225,6 @@ public final class ToggleWallManager extends AbstractParameterObjectEntity
                 this.messageDispatcher.sendMessage(EnumMessageType.BACKGROUND,
                     this.listBackgroundBlock);
             }
-
-            // In case of toggle wall, remove source message
-            this.messageDispatcher.sendMessage(EnumMessageType.OBJECT,
-                    new ObjectListMessage(switchObj, false));
         }
     }
 
