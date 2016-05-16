@@ -53,16 +53,26 @@ public abstract class AbstractPlayerManager extends ObjectEntityImpl {
 
         switch (getState()) {
             case PlayerState.STAND:
-                moveStdPlayerLeftRightStand(keyboardLayout);
                 moveStdPlayerUpDownStand(keyboardLayout);
                 break;
             case PlayerState.JUMPING:
-                moveStdPlayerLeftRightJumping(keyboardLayout);
                 moveStdPlayerUpDownJumping();
                 break;
             case PlayerState.CLIMBING:
-                moveStdPlayerLeftRightClimbing(keyboardLayout);
                 moveStdPlayerUpDownClimbing(keyboardLayout);
+                break;
+            default:
+        }
+        
+        switch (getState()) {
+            case PlayerState.STAND:
+                moveStdPlayerLeftRightStand(keyboardLayout);
+                break;
+            case PlayerState.JUMPING:
+                moveStdPlayerLeftRightJumping(keyboardLayout);
+                break;
+            case PlayerState.CLIMBING:
+                moveStdPlayerLeftRightClimbing(keyboardLayout);
                 break;
             default:
         }
