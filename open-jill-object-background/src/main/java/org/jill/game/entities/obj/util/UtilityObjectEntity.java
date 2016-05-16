@@ -268,12 +268,15 @@ public final class UtilityObjectEntity {
         // Check if block is stair
         if (block != null && block.isStair()) {
             // If stair, object can down if object not upper that block
-            int topOnBlockStair = block.getY() * JillConst.getBlockSize();
+            final int topOnBlockStair = block.getY() * JillConst.getBlockSize();
 
-            int bottomObject = obj.getY() + obj.getHeight();
-
+            // If before move, bottom object is under stair, ignore staire.
+            final int bottomObject = obj.getY() + obj.getHeight();
+            
             if (ignoreStair || bottomObject > topOnBlockStair) {
                 block = null;
+            } else {
+                
             }
         }
 
@@ -355,15 +358,23 @@ public final class UtilityObjectEntity {
         final int newEndY = newPosY / JillConst.getBlockSize();
         
         BackgroundEntity block = null;
+        BackgroundEntity blockStair = null;
 
         // for stair, we need check all block
         for (int testY = newStartY; testY <= newEndY; testY++) {
             block = checkObjectHitFloor(
                 startBlockX, endBlockX, testY, testY, backgroundObject);
             
-            if (block != null && !block.isStair()) {
+            // In case of stair, we take last stair
+            if (block != null && block.isStair()) {
+                blockStair = block;
+            } else if (block != null && !block.isStair()) {
                 break;
             }
+        }
+        
+        if (block == null) {
+            block = blockStair;
         }
         
         return block;
