@@ -35,16 +35,6 @@ public abstract class AbstractObjectJillLevel
         AbstractObjectJillLevel.class.getName());
 
     /**
-     * Jill object normal.
-     */
-    private static final int JILL_PLAYER_NORMAL = 0;
-
-    /**
-     * Jill object tiny.
-     */
-    private static final int JILL_PLAYER_TINY = 23;
-
-    /**
      * Keyboard.
      */
     protected SimpleGameKeyHandler keyboard;
@@ -173,8 +163,7 @@ public abstract class AbstractObjectJillLevel
                 // In original game engine, player is the first object
                 // Level can contain more than one player but only first is
                 // playable.
-                if ((obj.getType() == JILL_PLAYER_NORMAL
-                    || obj.getType() == JILL_PLAYER_TINY)
+                if (obj.isPlayer()
                     && player == null) {
                     // Player
                     player = obj;
