@@ -109,6 +109,7 @@ public abstract class ObjectEntityImpl extends ObjectItemImpl
      *
      * @param objectParam object parameter
      */
+    @Override
     public void init(final ObjectParam objectParam) {
         this.pictureCache = objectParam.getPictureCache();
         this.messageDispatcher = objectParam.getMessageDispatcher();

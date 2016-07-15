@@ -135,7 +135,7 @@ public final class FirebirdManager extends AbstractFireHitPlayerObject {
 
     @Override
     public void msgUpdate(final KeyboardLayout keyboardLayout) {
-        if (this.counter == this.turnIndexPicture) {
+        if (this.counter >= this.turnIndexPicture) {
             // Actually picture turn, change way
             this.xSpeed *= -1;
             this.counter = 0;
@@ -144,7 +144,7 @@ public final class FirebirdManager extends AbstractFireHitPlayerObject {
             this.counter++;
 
             // Turn picture, but we want continue to move.
-            if (this.counter == this.turnIndexPicture) {
+            if (this.counter >= this.turnIndexPicture) {
                 this.counter = 0;
             }
 
@@ -166,12 +166,12 @@ public final class FirebirdManager extends AbstractFireHitPlayerObject {
     public BufferedImage msgDraw() {
         BufferedImage[] currentPictureArray;
 
-        if (this.xSpeed > 0) {
+        if (this.xSpeed < 0) {
             // Right
-            currentPictureArray = this.rightImages;
+            currentPictureArray = this.leftImages;
         } else {
             // Left
-            currentPictureArray = this.leftImages;
+            currentPictureArray = this.rightImages;
         }
 
         return currentPictureArray[this.counter];
