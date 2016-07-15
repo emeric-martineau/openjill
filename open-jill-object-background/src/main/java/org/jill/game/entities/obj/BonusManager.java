@@ -22,7 +22,7 @@ public final class BonusManager extends AbstractParameterObjectEntity {
      * Array to know if message is already send.
      */
     private static boolean[] displayMessage = null;
-    
+
     /**
      * Picture array.
      */
@@ -37,12 +37,12 @@ public final class BonusManager extends AbstractParameterObjectEntity {
      * To remove this object from object list.
      */
     private ObjectListMessage killme;
-    
+
     /**
      * Message to display.
      */
     private String msg;
-    
+
     /**
      * Default constructor.
      *
@@ -51,24 +51,24 @@ public final class BonusManager extends AbstractParameterObjectEntity {
     @Override
     public void init(final ObjectParam objectParam) {
         super.init(objectParam);
-        
+
         final EnumInventoryObject[] enumList
                 = EnumInventoryObject.getEnumList();
-        
+
         // If array of message is not create, create it
         if (displayMessage == null) {
             displayMessage = new boolean[enumList.length];
-            
+
             for (int index = 0; index < displayMessage.length; index++) {
                 displayMessage[index] = true;
             }
         }
-       
+
         final String nameOfInventoryItem = enumList[counter].toString();
 
         final String key = getConfString(nameOfInventoryItem);
         final String[] keySplit = key.split(",");
-        
+
         if (keySplit.length > 2) {
             this.msg = keySplit[2];
         } else {
@@ -116,6 +116,13 @@ public final class BonusManager extends AbstractParameterObjectEntity {
      * Send item.
      */
     private void sendItem() {
+        if (displayMessage[getCounter()]) {
+            // Disable message
+            displayMessage[getCounter()] = false;
+            // Send message
+            sendMessage(this.msg);
+        }
+
         // If don't remove, don't send it.
         if (this.killme == null) {
             // Special case.
@@ -123,13 +130,6 @@ public final class BonusManager extends AbstractParameterObjectEntity {
             // TODO how manage it ?
 
         } else {
-            if (displayMessage[getCounter()]) {
-                // Disable message
-                displayMessage[getCounter()] = false;
-                // Send message
-                sendMessage(this.msg);
-            }
-            
             this.messageDispatcher.sendMessage(EnumMessageType.OBJECT,
                     this.killme);
         }

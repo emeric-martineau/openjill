@@ -86,7 +86,7 @@
         "KNIVE":"14,13",
         "GEM":"14,11",
         "FROG":"14,14",
-        "FIREBIRD":"14,15",
+        "FIREBIRD":"14,15,ZZZZZZZT!",
         "BAG_OF_COIN":"14,18",
         "FISH":"14,20",
         "BLADE":"14,35,YOU FOUND A SPINNING BLADE",
@@ -324,5 +324,12 @@
         "maxMoveY":"1",
         "maxMoveXleft":"3",
         "maxMoveXright":"2"
+    },
+    "FirebirdPlayerManager":
+    {
+        "tile":"0",
+        "tileSet":"11",
+        "baseTileNumber":"4",
+        "maxYSpeed":"8"
     }
 }

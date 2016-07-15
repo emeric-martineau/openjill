@@ -148,6 +148,10 @@
         "implementationClass":"org.jill.game.entities.obj.GhostManager"
     },
     {
+        "type":56,
+        "implementationClass":"org.jill.game.entities.obj.player.firebird.FirebirdPlayerManager"
+    },
+    {
         "type":61,
         "implementationClass":"org.jill.game.entities.obj.LiftManager"
     },
