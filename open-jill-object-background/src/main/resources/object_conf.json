@@ -330,6 +330,8 @@
         "tile":"0",
         "tileSet":"11",
         "baseTileNumber":"4",
-        "maxYSpeed":"8"
+        "maxYSpeed":"8",
+        "minXSpeed":"4",
+        "maxXSpeed":"8"
     }
 }
