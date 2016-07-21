@@ -4,7 +4,6 @@ import java.awt.image.BufferedImage;
 import org.jill.game.entities.obj.abs.AbstractParameterObjectEntity;
 import org.jill.game.entities.obj.player.PalyerActionPerState;
 import org.jill.game.entities.obj.player.PlayerAction;
-import org.jill.game.entities.obj.player.PlayerState;
 import org.jill.game.entities.obj.util.UtilityObjectEntity;
 import org.jill.openjill.core.api.entities.ObjectParam;
 import org.jill.openjill.core.api.entities.BackgroundEntity;
@@ -19,13 +18,13 @@ import org.jill.openjill.core.api.keyboard.KeyboardLayout;
  * @todo do fire
  * @todo jn-extractor add object 56
  * mvt x (+/-4 first, then +/-8 px)
- * @todo mvt y (-11 first time, then yd = -5 px)
+ * @todo mvt y (yd = -6 px)
  * @todo when firebird touch water (all sprite) die
  * @todo when firebird die, restore player to die
  * subState = 4/8 (right), -8/-4 (left), 0 first when change way => last yd
  * info1 = -/+ 1 (always depend from previous value)
  * @todo test with lift
- * @todo test with spark
+ * @todo test with spark (same as standard player)
  *
  * @author Emeric MARTINEAU
  */
@@ -72,6 +71,11 @@ public final class FirebirdPlayerManager extends AbstractParameterObjectEntity {
     private int maxXSpeed;
 
     /**
+     * Init value of YD when jump.
+     */
+    private int jumpInitSpeed;
+
+    /**
      * Default constructor.
      *
      * @param objectParam object paramter
@@ -113,6 +117,8 @@ public final class FirebirdPlayerManager extends AbstractParameterObjectEntity {
 
         this.maxXSpeed = getConfInteger("maxXSpeed");
 
+        this.jumpInitSpeed = getConfInteger("jumpInitSpeed");
+
     }
 
 
@@ -153,14 +159,6 @@ public final class FirebirdPlayerManager extends AbstractParameterObjectEntity {
         if (this.counter == this.leftImages.length) {
             this.counter = 0;
         }
-
-        int newYSpeed = getySpeed() + 1;
-
-        if (newYSpeed > this.maxYSpeed) {
-            newYSpeed = this.maxYSpeed;
-        }
-
-        setySpeed(newYSpeed);
     }
 
     @Override
@@ -190,33 +188,15 @@ public final class FirebirdPlayerManager extends AbstractParameterObjectEntity {
             return;
         }
 
-        switch (getState()) {
-            case PlayerState.STAND:
-                //moveStdPlayerUpDownStand(keyboardLayout);
-                break;
-            case PlayerState.JUMPING:
-                //moveStdPlayerUpDownJumping();
-                break;
-            case PlayerState.CLIMBING:
-                //moveStdPlayerUpDownClimbing(keyboardLayout);
-                break;
-            default:
-        }
-
-        switch (getState()) {
-            case PlayerState.STAND:
-                movePlayerLeftRightStand(keyboardLayout);
-                break;
-            case PlayerState.JUMPING:
-                //moveStdPlayerLeftRightJumping(keyboardLayout);
-                break;
-            case PlayerState.CLIMBING:
-                //moveStdPlayerLeftRightClimbing(keyboardLayout);
-                break;
-            default:
-        }
+        movePlayerUpDownStand(keyboardLayout);
+        movePlayerLeftRightStand(keyboardLayout);
     }
 
+    /**
+     * Move player to left or right.
+     *
+     * @param keyboardLayout keyboard
+     */
     private void movePlayerLeftRightStand(final KeyboardLayout keyboardLayout) {
         if (keyboardLayout.isRight() && getSubState() > X_SPEED_MIDDLE) {
             // If go right and substate positiv
@@ -245,6 +225,36 @@ public final class FirebirdPlayerManager extends AbstractParameterObjectEntity {
         } else if (this.xSpeed > ObjectEntity.X_SPEED_MIDDLE) {
             UtilityObjectEntity.moveObjectRight(this, getxSpeed(),
                 this.backgroundObject);
+        }
+    }
+
+    /**
+     * Move player to up and down.
+     *
+     * @param keyboardLayout keyboard
+     */
+    private void movePlayerUpDownStand(final KeyboardLayout keyboardLayout) {
+        System.out.println("YD = " + getySpeed());
+        if (getySpeed() < Y_SPEED_MIDDLE) {
+            // Go up
+            UtilityObjectEntity.moveObjectUp(this, getySpeed(),
+                    this.backgroundObject);
+        } else {
+            // Go down
+            UtilityObjectEntity.moveObjectDownWithIgnoreStair(this, getySpeed(),
+                    this.backgroundObject);
+        }
+
+        int newYSpeed = getySpeed() + 1;
+
+        if (newYSpeed > this.maxYSpeed) {
+            newYSpeed = this.maxYSpeed;
+        }
+
+        setySpeed(newYSpeed);
+
+        if (keyboardLayout.isJump()) {
+            setySpeed(this.jumpInitSpeed);
         }
     }
 }

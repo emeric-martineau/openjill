@@ -332,6 +332,7 @@
         "baseTileNumber":"4",
         "maxYSpeed":"8",
         "minXSpeed":"4",
-        "maxXSpeed":"8"
+        "maxXSpeed":"8",
+        "jumpInitSpeed":"-6"
     }
 }
