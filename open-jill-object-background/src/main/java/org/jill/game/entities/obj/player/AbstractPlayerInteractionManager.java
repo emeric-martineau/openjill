@@ -1,6 +1,8 @@
 package org.jill.game.entities.obj.player;
 
+import org.jill.game.entities.obj.abs.AbstractParameterObjectEntity;
 import org.jill.game.entities.obj.util.UtilityObjectEntity;
+import org.jill.openjill.core.api.entities.BackgroundEntity;
 import org.jill.openjill.core.api.message.player.GetPlayerPositionMessage;
 import org.jill.openjill.core.api.message.player.MovePlayerMessage;
 import org.jill.openjill.core.api.message.statusbar.inventory.
@@ -17,7 +19,11 @@ import org.jill.openjill.core.api.message.InterfaceMessageGameHandler;
  * @author Emeric MARTINEAU
  */
 public abstract class AbstractPlayerInteractionManager
-    extends AbstractPlayerManager implements InterfaceMessageGameHandler {
+    extends AbstractParameterObjectEntity implements InterfaceMessageGameHandler {
+
+    protected abstract BackgroundEntity[][] getBackgroundObject();
+
+    protected abstract void addHighJump(final int value);
 
     /**
      * Default constructor.

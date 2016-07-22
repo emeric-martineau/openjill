@@ -20,7 +20,7 @@ import org.jill.openjill.core.api.message.EnumMessageType;
  *
  * @author Emeric MARTINEAU
  */
-public final class PlayerManager extends AbstractPlayerInteractionManager {
+public final class PlayerManager extends AbstractPlayerManager {
 
     /**
      * Logger.

@@ -1,7 +1,7 @@
 package org.jill.game.entities.obj.player.firebird;
 
 import java.awt.image.BufferedImage;
-import org.jill.game.entities.obj.abs.AbstractParameterObjectEntity;
+import org.jill.game.entities.obj.player.AbstractPlayerInteractionManager;
 import org.jill.game.entities.obj.player.PalyerActionPerState;
 import org.jill.game.entities.obj.player.PlayerAction;
 import org.jill.game.entities.obj.util.UtilityObjectEntity;
@@ -18,17 +18,17 @@ import org.jill.openjill.core.api.keyboard.KeyboardLayout;
  * @todo do fire
  * @todo jn-extractor add object 56
  * mvt x (+/-4 first, then +/-8 px)
- * @todo mvt y (yd = -6 px)
+ * mvt y (yd = -6 px)
  * @todo when firebird touch water (all sprite) die
  * @todo when firebird die, restore player to die
  * subState = 4/8 (right), -8/-4 (left), 0 first when change way => last yd
  * info1 = -/+ 1 (always depend from previous value)
- * @todo test with lift
- * @todo test with spark (same as standard player)
+ * @todo test with lift (firebird cannot take lift)
+ * test with spark (same as standard player)
  *
  * @author Emeric MARTINEAU
  */
-public final class FirebirdPlayerManager extends AbstractParameterObjectEntity {
+public final class FirebirdPlayerManager extends AbstractPlayerInteractionManager {
 
     /**
      * Number of picture to remove from left/right.
@@ -206,11 +206,11 @@ public final class FirebirdPlayerManager extends AbstractParameterObjectEntity {
             // If go left and substate negativ
             setxSpeed(this.maxXSpeed * X_SPEED_LEFT);
             setSubState(this.maxXSpeed * X_SPEED_LEFT);
-        } else if (keyboardLayout.isRight() && getSubState() < X_SPEED_MIDDLE) {
+        } else if (keyboardLayout.isRight() && getSubState() <= X_SPEED_MIDDLE) {
             // If go right and substate negativ
             setxSpeed(this.minXSpeed);
             setSubState(this.minXSpeed);
-        } else if (keyboardLayout.isLeft() && getSubState() > X_SPEED_MIDDLE) {
+        } else if (keyboardLayout.isLeft() && getSubState() >= X_SPEED_MIDDLE) {
             // If go left and substate positiv
              setxSpeed(this.minXSpeed * X_SPEED_LEFT);
             setSubState(this.minXSpeed* X_SPEED_LEFT);
@@ -234,7 +234,6 @@ public final class FirebirdPlayerManager extends AbstractParameterObjectEntity {
      * @param keyboardLayout keyboard
      */
     private void movePlayerUpDownStand(final KeyboardLayout keyboardLayout) {
-        System.out.println("YD = " + getySpeed());
         if (getySpeed() < Y_SPEED_MIDDLE) {
             // Go up
             UtilityObjectEntity.moveObjectUp(this, getySpeed(),
@@ -256,5 +255,15 @@ public final class FirebirdPlayerManager extends AbstractParameterObjectEntity {
         if (keyboardLayout.isJump()) {
             setySpeed(this.jumpInitSpeed);
         }
+    }
+
+    @Override
+    protected BackgroundEntity[][] getBackgroundObject() {
+        return this.backgroundObject;
+    }
+
+    @Override
+    protected void addHighJump(final int value) {
+        // Nothing
     }
 }

@@ -2,7 +2,6 @@ package org.jill.game.entities.obj.player;
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
-import org.jill.game.entities.ObjectEntityImpl;
 import org.jill.game.entities.obj.util.UtilityObjectEntity;
 import org.jill.openjill.core.api.entities.BackgroundEntity;
 import org.jill.openjill.core.api.entities.ObjectParam;
@@ -13,7 +12,8 @@ import org.jill.openjill.core.api.keyboard.KeyboardLayout;
  *
  * @author Emeric MARTINEAU
  */
-public abstract class AbstractPlayerManager extends ObjectEntityImpl {
+public abstract class AbstractPlayerManager
+    extends AbstractPlayerInteractionManager {
 
     /**
      * Background object.
@@ -63,7 +63,7 @@ public abstract class AbstractPlayerManager extends ObjectEntityImpl {
                 break;
             default:
         }
-        
+
         switch (getState()) {
             case PlayerState.STAND:
                 moveStdPlayerLeftRightStand(keyboardLayout);
@@ -83,6 +83,7 @@ public abstract class AbstractPlayerManager extends ObjectEntityImpl {
      *
      * @param value value
      */
+    @Override
     protected final void addHighJump(final int value) {
         this.highJumpSize += value;
     }
@@ -383,6 +384,7 @@ public abstract class AbstractPlayerManager extends ObjectEntityImpl {
      *
      * @return background
      */
+    @Override
     protected final BackgroundEntity[][] getBackgroundObject() {
         return backgroundObject;
     }
