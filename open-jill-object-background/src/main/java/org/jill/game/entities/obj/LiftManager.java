@@ -1,6 +1,9 @@
 package org.jill.game.entities.obj;
 
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import org.jill.game.entities.obj.abs.AbstractParameterObjectEntity;
 import org.jill.game.entities.obj.player.PlayerState;
 import org.jill.openjill.core.api.message.background.BackgroundMessage;
@@ -52,6 +55,11 @@ public final class LiftManager extends AbstractParameterObjectEntity {
     private boolean playerIsOnLift = false;
 
     /**
+     * Use lift only for player...
+     */
+    private List<String> onlyFor;
+
+    /**
      * Default constructor.
      *
      * @param objectParam object parameter
@@ -71,6 +79,10 @@ public final class LiftManager extends AbstractParameterObjectEntity {
         final int tileSetIndex = getConfInteger("tileSet");
 
         this.image = this.pictureCache.getImage(tileSetIndex, tileIndex);
+
+        String[] className = getConfString("onlyForObject").split(",");
+
+        this.onlyFor = new ArrayList<>(Arrays.asList(className));
     }
 
     @Override
@@ -91,7 +103,8 @@ public final class LiftManager extends AbstractParameterObjectEntity {
     @Override
     public void msgTouch(final ObjectEntity obj,
             final KeyboardLayout keyboardLayout) {
-        if (obj.isPlayer()) {
+        if (obj.isPlayer()
+                && this.onlyFor.contains(obj.getClass().getSimpleName())) {
             if (messageDisplayLiftMessage) {
                 // Display open message
                 sendMessage();

@@ -23,7 +23,7 @@ import org.jill.openjill.core.api.keyboard.KeyboardLayout;
  * @todo when firebird die, restore player to die
  * subState = 4/8 (right), -8/-4 (left), 0 first when change way => last yd
  * info1 = -/+ 1 (always depend from previous value)
- * @todo test with lift (firebird cannot take lift)
+ * test with lift (firebird cannot take lift)
  * test with spark (same as standard player)
  *
  * @author Emeric MARTINEAU

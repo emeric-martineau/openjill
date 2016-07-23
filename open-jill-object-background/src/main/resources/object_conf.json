@@ -61,7 +61,8 @@
         "noStopBlockName":"ELEVMID",
         "msg":"Press UP/DOWN to use elevator",
         "msgTime":"20",
-        "msgColor":"2"
+        "msgColor":"2",
+        "onlyForObject":"PlayerManager"
     },
     "CollapsingCeilingManager":
     {
