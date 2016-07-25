@@ -3,7 +3,7 @@ package org.jill.openjill.core.api.message.object;
 import org.jill.openjill.core.api.entities.ObjectEntity;
 
 /**
- * Class permit display text in bottom of statusbar.
+ * Class to create object.
  *
  * @author Emeric MARTINEAU
  */

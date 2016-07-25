@@ -16,6 +16,7 @@ import org.jill.openjill.core.api.entities.ObjectEntity;
 import org.jill.openjill.core.api.entities.ObjectParam;
 import org.jill.openjill.core.api.jill.JillConst;
 import org.jill.openjill.core.api.message.EnumMessageType;
+import org.jill.openjill.core.api.message.object.ReplaceObjectMessage;
 import org.simplegame.InterfaceSimpleGameHandleInterface;
 import org.simplegame.SimpleGameHandler;
 import org.simplegame.SimpleGameKeyHandler;
@@ -105,6 +106,7 @@ public abstract class AbstractObjectJillLevel
         InstantiationException {
         messageDispatcher.addHandler(EnumMessageType.OBJECT, this);
         messageDispatcher.addHandler(EnumMessageType.CREATE_OBJECT, this);
+        messageDispatcher.addHandler(EnumMessageType.REPLACE_OBJECT, this);
 
         loadLevel();
         createBackgound();
@@ -224,10 +226,25 @@ public abstract class AbstractObjectJillLevel
             case OBJECT:
                 recieveMessageListObject((ObjectListMessage) msg);
                 break;
+            case REPLACE_OBJECT:
+                receiveMessageReplaceObject((ReplaceObjectMessage) msg);
+                break;
             case CREATE_OBJECT:
                 receiveMessageCreateObject((CreateObjectMessage) msg);
                 break;
             default:
+        }
+    }
+
+
+    private void receiveMessageReplaceObject(
+            final ReplaceObjectMessage replaceObjectMessage) {
+        final int indexObject = this.listObject.indexOf(
+                replaceObjectMessage.getObjectOrigin());
+
+        if (indexObject >= 0) {
+            this.listObject.set(indexObject,
+                    replaceObjectMessage.getObjectNew());
         }
     }
 

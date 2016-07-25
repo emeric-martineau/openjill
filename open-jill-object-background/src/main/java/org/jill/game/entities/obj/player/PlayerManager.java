@@ -5,10 +5,7 @@ import java.awt.image.BufferedImage;
 import java.util.logging.Logger;
 import org.jill.game.entities.obj.bullet.BulletObjectFactory;
 import org.jill.openjill.core.api.message.statusbar.StatusBarTextMessage;
-import org.jill.openjill.core.api.message.statusbar.inventory.
-        InventoryLifeMessage;
 import org.jill.openjill.core.api.entities.BackgroundEntity;
-import org.jill.openjill.core.api.entities.ObjectEntity;
 import org.jill.openjill.core.api.entities.ObjectParam;
 import org.jill.openjill.core.api.jill.JillConst;
 import org.jill.openjill.core.api.keyboard.KeyboardLayout;
@@ -537,84 +534,39 @@ public final class PlayerManager extends AbstractPlayerManager {
         }
     }
 
-    /**
-     * Kill player.
-     *
-     * @param senderObj object kill player (or hit)
-     * @param senderBack background kill player
-     * @param nbLife number life
-     * @param typeOfDeath type of death
-     */
-    private void msgKill(final ObjectEntity senderObj,
-        final BackgroundEntity senderBack,
-        final int nbLife, final int typeOfDeath) {
-        // senderObj was null when background
-        if (!PalyerActionPerState.canDo(this.state,
-            PlayerAction.INVINCIBLE)) {
-            BackgroundEntity senderBack2 = senderBack;
+    @Override
+    protected void killPlayer(final int typeOfDeath,
+            final BackgroundEntity senderBack) {
+        setState(PlayerState.DIE);
+        setSubState(typeOfDeath);
+        setStateCount(0);
 
-            InventoryLifeMessage.STD_MESSAGE.setLife(nbLife);
+        switch (typeOfDeath) {
+            case PlayerState.DIE_SUB_STATE_OTHER_BACK:
+                setySpeed(PlayerDie2Const.START_YD);
 
-            // In special case if sender is not null and typeOfDeath is other
-            // force hit player
-            if (senderObj != null &&
-                    typeOfDeath == PlayerState.DIE_SUB_STATE_OTHER_BACK) {
-                senderBack2 = getBackgroundObject()[
-                        this.getX() / JillConst.getBlockSize()][
-                        this.getY() / JillConst.getBlockSize()];
-            } else {
-                InventoryLifeMessage.STD_MESSAGE.setSender(senderObj);
-            }
+                // Align player on bottom of background
+                this.y = (senderBack.getY() + 1) * JillConst.getBlockSize()
+                    - this.stDie2Other[
+                            PlayerDie2Const.FIRST_PICTURE].getHeight();
+                break;
+            case PlayerState.DIE_SUB_STATE_WATER_BACK:
+                setySpeed(PlayerDie1Const.START_YD);
 
-            // Send message to inventory to know if player dead
-            this.messageDispatcher.sendMessage(EnumMessageType.INVENTORY_LIFE,
-                InventoryLifeMessage.STD_MESSAGE);
-
-            if (InventoryLifeMessage.STD_MESSAGE.isPlayerDead()) {
-                setState(PlayerState.DIE);
-                setSubState(typeOfDeath);
-                setStateCount(0);
-
-                switch (typeOfDeath) {
-                    case PlayerState.DIE_SUB_STATE_OTHER_BACK:
-                        setySpeed(PlayerDie2Const.START_YD);
-
-                        // Align player on bottom of background
-                        this.y = (senderBack2.getY() + 1) * JillConst.getBlockSize()
-                            - this.stDie2Other[
-                                    PlayerDie2Const.FIRST_PICTURE].getHeight();
-                        break;
-                    case PlayerState.DIE_SUB_STATE_WATER_BACK:
-                        setySpeed(PlayerDie1Const.START_YD);
-
-                        // Align player on bottom of background
-                        this.y = senderBack2.getY() * JillConst.getBlockSize()
-                            - this.stDie1Water[
-                                    PlayerDie1Const.FIRST_PICTURE].getHeight();
-                        break;
-                    case PlayerState.DIE_SUB_STATE_ENNEMY:
-                        setySpeed(PlayerDie0Const.START_YD);
-                    default:
-                    // ennemy death
-                }
-
-                BulletObjectFactory.explode(this,
-                        PlayerDie0Const.NB_COLORED_BULLET,
-                        this.messageDispatcher);
-            }
+                // Align player on bottom of background
+                this.y = senderBack.getY() * JillConst.getBlockSize()
+                    - this.stDie1Water[
+                            PlayerDie1Const.FIRST_PICTURE].getHeight();
+                break;
+            case PlayerState.DIE_SUB_STATE_ENNEMY:
+                setySpeed(PlayerDie0Const.START_YD);
+            default:
+            // ennemy death
         }
-    }
 
-    @Override
-    public void msgKill(final ObjectEntity sender, final int nbLife,
-        final int typeOfDeath) {
-        msgKill(sender, null, nbLife, typeOfDeath);
-    }
-
-    @Override
-    public void msgKill(final BackgroundEntity sender,
-        final int nbLife, final int typeOfDeath) {
-        msgKill(null, sender, nbLife, typeOfDeath);
+        BulletObjectFactory.explode(this,
+                PlayerDie0Const.NB_COLORED_BULLET,
+                this.messageDispatcher);
     }
 
     @Override

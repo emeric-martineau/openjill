@@ -4,7 +4,7 @@ import java.util.List;
 import org.jill.openjill.core.api.entities.ObjectEntity;
 
 /**
- * Class permit display text in bottom of statusbar.
+ * Class add/remove object.
  *
  * @author Emeric MARTINEAU
  */

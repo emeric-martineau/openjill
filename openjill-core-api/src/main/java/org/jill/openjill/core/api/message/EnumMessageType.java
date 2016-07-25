@@ -42,6 +42,11 @@ public enum EnumMessageType {
     OBJECT,
 
     /**
+     * Replace oject.
+     */
+    REPLACE_OBJECT,
+
+    /**
      * To create object.
      */
     CREATE_OBJECT,

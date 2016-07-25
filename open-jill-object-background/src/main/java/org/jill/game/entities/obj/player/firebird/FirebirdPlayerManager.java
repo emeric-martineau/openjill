@@ -9,6 +9,8 @@ import org.jill.openjill.core.api.entities.ObjectParam;
 import org.jill.openjill.core.api.entities.BackgroundEntity;
 import org.jill.openjill.core.api.entities.ObjectEntity;
 import org.jill.openjill.core.api.keyboard.KeyboardLayout;
+import org.jill.openjill.core.api.message.EnumMessageType;
+import org.jill.openjill.core.api.message.object.ReplaceObjectMessage;
 
 /**
  * Firebird for player.
@@ -265,5 +267,14 @@ public final class FirebirdPlayerManager extends AbstractPlayerInteractionManage
     @Override
     protected void addHighJump(final int value) {
         // Nothing
+    }
+
+    @Override
+    protected void killPlayer(final int typeOfDeath,
+            final BackgroundEntity senderBack) {
+        // TODO create std player and call msgKill
+        final ReplaceObjectMessage rom = new ReplaceObjectMessage(this, this);
+
+        this.messageDispatcher.sendMessage(EnumMessageType.REPLACE_OBJECT, rom);
     }
 }
