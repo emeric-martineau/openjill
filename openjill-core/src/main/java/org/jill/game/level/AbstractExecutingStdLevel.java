@@ -138,7 +138,7 @@ public abstract class AbstractExecutingStdLevel extends AbstractMenuJillLevel {
      * By default, send update message t object on visible screen.
      */
     private boolean updateObject = true;
-    
+
     /**
      * Level configuration.
      *
@@ -394,7 +394,7 @@ public abstract class AbstractExecutingStdLevel extends AbstractMenuJillLevel {
             if (updateInventoryScreen) {
                 drawInventory();
             }
-            
+
             final RectangleConf offset
                     = this.statusBar.getGameAreaConf().getOffset();
 
@@ -429,6 +429,8 @@ public abstract class AbstractExecutingStdLevel extends AbstractMenuJillLevel {
                 lOffsetY - JillConst.getyUpdateScreenBorder());
 
         visibleScreenRect.setLocation(lOffsetX, lOffsetY);
+
+        final ObjectEntity player = getPlayer();
 
         // Set player bounds
         obj2Rect.setBounds(player.getX(), player.getY(), player.getWidth(),
@@ -579,8 +581,8 @@ public abstract class AbstractExecutingStdLevel extends AbstractMenuJillLevel {
         ObjectEntity currentObject;
 
         final RectangleConf offset
-                    = this.statusBar.getGameAreaConf().getOffset();        
-        
+                    = this.statusBar.getGameAreaConf().getOffset();
+
         while (itDraw.hasPrevious()) {
             currentObject = itDraw.previous();
 

@@ -169,6 +169,15 @@ public final class PlayerManager extends AbstractPlayerManager {
         initDiePicture();
 
         this.currentPlayerPicture = this.stStandPicture[1];
+
+        if (getWidth() == 0) {
+            // Player created manually
+            final BufferedImage img
+                    = stBegin[PlayerBeginConst.PICTURE_HEAD_NORMAL];
+
+            setWidth(img.getWidth());
+            setHeight(img.getHeight());
+        }
     }
 
     /**

@@ -121,7 +121,7 @@ public abstract class AbstractExecutingStdPlayerLevel
         this.playerYdDownMoveScreen
             = ((JillGameConfig) SimpleGameConfig.getInstance()).
                     getPlayerMoveScreenYdDown();
-                
+
         initCenterScreen();
     }
 
@@ -133,28 +133,30 @@ public abstract class AbstractExecutingStdPlayerLevel
         final RectangleConf offset
                     = gameScreen.getOffset();
         final RectangleConf gameLevelStart = gameScreen.getLevelStart();
-        
+
+        final ObjectEntity player = getPlayer();
+
         // init center screen
         int offsetX = Math.max(
                 player.getX()
                         - gameLevelStart.getX(),
                 // To don't have negative value
                 0);
-        
+
         offsetX = Math.min(offsetX, JillConst.getMaxWidth()
                 - gameScreen.getWidth());
-        
+
         offset.setX(-1 * offsetX);
-        
+
         int offsetY = Math.max(
                 player.getY()
                         - gameLevelStart.getY(),
                 // To don't have negative value
                 0);
-        
+
         offsetY = Math.min(offsetY, JillConst.getMaxHeight()
                 - gameScreen.getHeight());
-        
+
         offset.setY(-1 * offsetY);
     }
 
@@ -193,11 +195,13 @@ public abstract class AbstractExecutingStdPlayerLevel
 
         keyboardLayout.clear();
 
+        final ObjectEntity player = getPlayer();
+
         // Send msgTouch to background
-        final int playerX = this.player.getX();
-        final int playerY = this.player.getY();
-        final int playerWidth = this.player.getWidth();
-        final int playerHeight = this.player.getHeight();
+        final int playerX = player.getX();
+        final int playerY = player.getY();
+        final int playerWidth = player.getWidth();
+        final int playerHeight = player.getHeight();
         final int blockSize = JillConst.getBlockSize();
 
         final int startBlockX = playerX / blockSize;
@@ -208,7 +212,7 @@ public abstract class AbstractExecutingStdPlayerLevel
 
         for (int indexX = startBlockX; indexX < endBlockX; indexX++) {
             for (int indexY = startBlockY; indexY < endBlockY; indexY++) {
-                this.backgroundObject[indexX][indexY].msgTouch(this.player);
+                this.backgroundObject[indexX][indexY].msgTouch(player);
             }
         }
 
@@ -218,10 +222,12 @@ public abstract class AbstractExecutingStdPlayerLevel
      * Compute the special offset of screen when player no move and up/down.
      */
     private void computeMoveScreen() {
-        int ySpeed = this.player.getySpeed();
+        final ObjectEntity player = getPlayer();
+
+        int ySpeed = player.getySpeed();
 
         // Player is Stand and not move, and plalyer in down or head up
-        if (this.player.getState() == this.playerStateMoveScreen
+        if (player.getState() == this.playerStateMoveScreen
                 && ySpeed != 0) {
             if (ySpeed >= this.playerYdDownMoveScreen
                     && this.specialScreenOffset < BORDER_SCREEN_PLAYER_Y) {
@@ -238,16 +244,18 @@ public abstract class AbstractExecutingStdPlayerLevel
      * Center screen with player position.
      */
     protected void centerScreen() {
+        final ObjectEntity player = getPlayer();
+
         final GameAreaConf gameScreen = this.statusBar.getGameAreaConf();
         final GameAreaBorderConf border = gameScreen.getBorder();
         final RectangleConf offset
                     = gameScreen.getOffset();
-        
+
         // If player is below limit right
         final int playerX = player.getX();
         final int rightOffset = playerX + offset.getX();
         final int gameWidth = gameScreen.getWidth();
-        
+
         if (rightOffset < border.getRight()) {
             final int newRightOffset = Math.max(playerX - border.getRight(), 0);
             offset.setX(-1 * newRightOffset);
@@ -257,12 +265,12 @@ public abstract class AbstractExecutingStdPlayerLevel
                     JillConst.getMaxWidth() - gameWidth);
             offset.setX(-1 * newRightOffset);
         }
-        
-        
+
+
         final int playerY = player.getY();
         final int topOffset = playerY + offset.getY();
         final int gameHeight = gameScreen.getHeight();
-        
+
         if (topOffset < border.getTop()) {
             final int newTopOffset = Math.max(playerY - border.getTop(), 0);
             offset.setY(-1 * newTopOffset);
@@ -272,52 +280,6 @@ public abstract class AbstractExecutingStdPlayerLevel
                     JillConst.getMaxHeight() - gameHeight);
             offset.setY(-1 * newTopOffset);
         }
-        /*
-        final int playerXLeft = player.getX();
-        final int playerXRight = playerXLeft + player.getWidth();
-        
-        final int gameWidth = this.statusBar.getGameAreaConf().getWidth();
-        final int gameHeight = this.statusBar.getGameAreaConf().getHeight();
-        
-        final RectangleConf offset
-                    = this.statusBar.getGameAreaConf().getOffset();
-
-        int offsetX = offset.getX();
-        int offsetY = offset.getY();
-
-        // Move screen to X to let at right or left 4 case
-        if (offsetX + BORDER_SCREEN_PLAYER_X > playerXLeft) {
-            offsetX = -1 * Math.max(
-                    playerXLeft - BORDER_SCREEN_PLAYER_X,
-                    // To don't have negative value
-                    0);
-        } else if (offsetX - BORDER_SCREEN_PLAYER_X
-                + gameWidth < playerXRight) {
-            offsetX = -1 * Math.min(
-                    playerXRight + BORDER_SCREEN_PLAYER_X
-                    - gameWidth,
-                    JillConst.getMaxWidth() - gameWidth);
-        }
-
-        final int playerYTop = player.getY();
-        final int playerYBottom = playerYTop + player.getHeight();
-
-        // Move screen to Y to let at up/down 2 case
-        if (offsetY + BORDER_SCREEN_PLAYER_Y > playerYTop) {
-            offsetY = -1 * Math.max(
-                    playerYTop - BORDER_SCREEN_PLAYER_Y - specialScreenOffset,
-                    // To don't have negative value
-                    0);
-        } else if (offsetY - BORDER_SCREEN_PLAYER_Y
-                + gameHeight < playerYBottom) {
-            offsetY = -1 * Math.min(
-                    playerYBottom + BORDER_SCREEN_PLAYER_Y
-                    - gameHeight + specialScreenOffset,
-                    JillConst.getMaxHeight() - gameHeight);
-        }
-        */
-        //this.statusBar.getGameAreaConf().setOffsetX(offsetX);
-        //this.statusBar.getGameAreaConf().setOffsetY(offsetY);
     }
 
 
@@ -325,7 +287,7 @@ public abstract class AbstractExecutingStdPlayerLevel
     @Override
     protected final void doPlayerFire() {
         // Check if player can fire !
-        if (PalyerActionPerState.canDo(this.player.getState(),
+        if (PalyerActionPerState.canDo(getPlayer().getState(),
                 PlayerAction.CANFIRE)) {
 
             // Get inventory
@@ -335,20 +297,20 @@ public abstract class AbstractExecutingStdPlayerLevel
             // Get weapon
             final ObjectMappingWeapon[] weaponsList =
                     this.objectCache.getTypeOfInventoryWeapon();
-            
+
             // Current weapon
             ObjectMappingWeapon currentWeapon;
             // Current inventory
             EnumInventoryObject currentInventory;
-            
+
             // Search weapon from end to start
             for (int indexWeapon = weaponsList.length - 1; indexWeapon >= 0;
                     indexWeapon--) {
                 currentWeapon = weaponsList[indexWeapon];
-                
+
                 currentInventory = EnumInventoryObject.valueOf(
                         currentWeapon.getInventoryKey());
-                
+
                 // Check if weapon found in inventory
                 if (listInv.contains(currentInventory)) {
                     // Weapon is in inventory
@@ -356,7 +318,7 @@ public abstract class AbstractExecutingStdPlayerLevel
                     if (checkWeapon(listInv, currentInventory, currentWeapon)) {
                         createWeapon(currentWeapon.getType(),
                                 currentInventory, currentWeapon);
-                        
+
                         break;
                     }
                 }
@@ -380,7 +342,7 @@ public abstract class AbstractExecutingStdPlayerLevel
 
         boolean canFireThisWeapon;
 
-        if (this.player.getInfo1()
+        if (getPlayer().getInfo1()
                 == AbstractPlayerManager.X_SPEED_MIDDLE) {
             canFireThisWeapon = false;
         } else {
@@ -389,29 +351,29 @@ public abstract class AbstractExecutingStdPlayerLevel
                     currentInventory);
             // Nb object match for weapon item
             int nbObjWeaponItem = 0;
-            
+
             // If remove inventory, don't compute
             if (!currentWeapon.isRemoveInInventory()) {
                 for (ObjectEntity currentObj : this.listObject) {
                     if (currentObj.getType() == currentWeapon.getType()) {
                         nbObjWeaponItem++;
                     }
-                }                
+                }
             }
-            
+
             final int nbMaxObj = nbInvWeaponIteam
                     * currentWeapon.getNumberItemPerInventory();
-            
+
             canFireThisWeapon = (currentWeapon.isRemoveInInventory()
                     || nbMaxObj > nbObjWeaponItem);
         }
-        
+
         return canFireThisWeapon;
     }
 
     /**
      * Create weapon.
-     * 
+     *
      * @param typeWeapon weapon object type
      * @param currentInventory weapon inventory
      * @param currentWeapon current setup of weapon
@@ -419,16 +381,16 @@ public abstract class AbstractExecutingStdPlayerLevel
     private void createWeapon(final int typeWeapon,
             final EnumInventoryObject currentInventory,
             final ObjectMappingWeapon currentWeapon) {
-        
+
         // TODO Alt key text need update by inventory cause, if blade remove,
         // next weapon is display.
-        
+
         if (currentWeapon.isRemoveInInventory()) {
             // Remove object in inventory list
             this.messageDispatcher.sendMessage(
                 EnumMessageType.INVENTORY_ITEM,
                 new InventoryItemMessage(currentInventory, false,
-                currentWeapon.isRemoveInInventory(), false));    
+                currentWeapon.isRemoveInInventory(), false));
         }
 
         // Object parameter
@@ -442,6 +404,8 @@ public abstract class AbstractExecutingStdPlayerLevel
         weapon.setType(typeWeapon);
 
         objParam.setObject(weapon);
+
+        final ObjectEntity player = getPlayer();
 
         weapon.setxSpeed(player.getxSpeed());
 

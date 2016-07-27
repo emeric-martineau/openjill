@@ -71,11 +71,6 @@ public abstract class AbstractObjectJillLevel
     protected List<ObjectEntity> listObjectDrawOnBackground = new ArrayList<>();
 
     /**
-     * Player.
-     */
-    protected ObjectEntity player;
-
-    /**
      * Level configuration.
      *
      * @param cfgLevel configuration of level
@@ -135,7 +130,6 @@ public abstract class AbstractObjectJillLevel
 
         // Current object
         ObjectEntity obj;
-        player = null;
 
         for (ObjectItem currentObject : listObjectItem) {
 
@@ -165,12 +159,6 @@ public abstract class AbstractObjectJillLevel
                 // In original game engine, player is the first object
                 // Level can contain more than one player but only first is
                 // playable.
-                if (obj.isPlayer()
-                    && player == null) {
-                    // Player
-                    player = obj;
-                }
-
                 listObject.add(obj);
             }
         }
@@ -299,5 +287,14 @@ public abstract class AbstractObjectJillLevel
         } else {
             com.setObject(obj);
         }
+    }
+
+    /**
+     * Player.
+     *
+     * @return the player
+     */
+    protected ObjectEntity getPlayer() {
+        return this.listObject.get(0);
     }
 }

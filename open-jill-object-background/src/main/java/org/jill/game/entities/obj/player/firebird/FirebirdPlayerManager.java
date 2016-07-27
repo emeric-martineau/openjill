@@ -10,6 +10,7 @@ import org.jill.openjill.core.api.entities.BackgroundEntity;
 import org.jill.openjill.core.api.entities.ObjectEntity;
 import org.jill.openjill.core.api.keyboard.KeyboardLayout;
 import org.jill.openjill.core.api.message.EnumMessageType;
+import org.jill.openjill.core.api.message.object.CreateObjectMessage;
 import org.jill.openjill.core.api.message.object.ReplaceObjectMessage;
 
 /**
@@ -22,7 +23,8 @@ import org.jill.openjill.core.api.message.object.ReplaceObjectMessage;
  * mvt x (+/-4 first, then +/-8 px)
  * mvt y (yd = -6 px)
  * @todo when firebird touch water (all sprite) die
- * @todo when firebird die, restore player to die
+ * @todo when restart level after die, restore std player.
+ * when firebird die, restore player to die
  * subState = 4/8 (right), -8/-4 (left), 0 first when change way => last yd
  * info1 = -/+ 1 (always depend from previous value)
  * test with lift (firebird cannot take lift)
@@ -272,9 +274,21 @@ public final class FirebirdPlayerManager extends AbstractPlayerInteractionManage
     @Override
     protected void killPlayer(final int typeOfDeath,
             final BackgroundEntity senderBack) {
+        final CreateObjectMessage com = new CreateObjectMessage(0);
+
+        this.messageDispatcher.sendMessage(EnumMessageType.CREATE_OBJECT, com);
+
+        final ObjectEntity obj = com.getObject();
+
+        obj.setX(getX());
+        obj.setY(getY());
+
         // TODO create std player and call msgKill
-        final ReplaceObjectMessage rom = new ReplaceObjectMessage(this, this);
+        final ReplaceObjectMessage rom = new ReplaceObjectMessage(this, obj);
 
         this.messageDispatcher.sendMessage(EnumMessageType.REPLACE_OBJECT, rom);
+
+        // Simulate kill message
+        obj.msgKill(senderBack, 0, typeOfDeath);
     }
 }

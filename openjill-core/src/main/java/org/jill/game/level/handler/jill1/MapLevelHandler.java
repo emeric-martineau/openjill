@@ -33,7 +33,7 @@ public class MapLevelHandler extends LoadNewLevelHandler {
                 "JILL1.CFG", "JN1", StartMenuJill1Handler.class,
                 SaveData.MAP_LEVEL));
 
-        this.player.setState(PlayerState.BEGIN);
+        getPlayer().setState(PlayerState.BEGIN);
 
         this.messageDispatcher.sendMessage(EnumMessageType.INVENTORY_ITEM,
                 new InventoryItemMessage(
