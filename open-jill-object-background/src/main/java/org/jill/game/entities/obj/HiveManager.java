@@ -108,8 +108,8 @@ public final class HiveManager extends AbstractParameterObjectEntity {
      * Create object.
      */
     private void createBeesObject() {
-        final CreateObjectMessage com = new CreateObjectMessage(
-                getConfInteger("beesObject"));
+        final CreateObjectMessage com = CreateObjectMessage.buildFromClassName(
+                getConfString("beesObject"));
 
         this.messageDispatcher.sendMessage(EnumMessageType.CREATE_OBJECT,
             com);

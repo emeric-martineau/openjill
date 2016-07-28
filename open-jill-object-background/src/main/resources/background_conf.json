@@ -47,41 +47,41 @@
     "LAVA1":
     {
         "cycle":"1",
-        "hitObject":"37",
+        "hitObject":"org.jill.game.entities.obj.HitFireManager",
         "tileStart":"0",
         "numberTileSet":"5"
     },
     "LAVA2":
     {
         "cycle":"1",
-        "hitObject":"37",
+        "hitObject":"org.jill.game.entities.obj.HitFireManager",
         "tileStart":"0",
         "numberTileSet":"5"
     },
     "LAVA3":
     {
         "cycle":"1",
-        "hitObject":"37",
+        "hitObject":"org.jill.game.entities.obj.HitFireManager",
         "tileStart":"0",
         "numberTileSet":"5"
     },
     "LAVA4":
     {
         "cycle":"1",
-        "hitObject":"37",
+        "hitObject":"org.jill.game.entities.obj.HitFireManager",
         "tileStart":"0",
         "numberTileSet":"5"
     },
     "LAVA5":
     {
         "cycle":"1",
-        "hitObject":"37",
+        "hitObject":"org.jill.game.entities.obj.HitFireManager",
         "tileStart":"0",
         "numberTileSet":"5"
     },
     "WOODTORCH":
     {
         "maxCounter":44,
-        "objectId":31
+        "object":"org.jill.game.entities.obj.FlameManager"
     }
 }

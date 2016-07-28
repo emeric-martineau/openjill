@@ -46,7 +46,7 @@ public final class ObjectManager {
      * Map between name of inventory and id of object.
      */
     private ObjectMappingWeapon[] listWeapon;
-    
+
     /**
      * Return this instance of object.
      *
@@ -130,20 +130,20 @@ public final class ObjectManager {
             if (om.getWeapon() != null) {
                 currentWeapon = om.getWeapon();
                 currentWeapon.setType(om.getType());
-                
+
                 mapInventoryWeapon.put(currentWeapon.getInventoryKey(),
                         currentWeapon);
             }
         }
 
         this.listWeapon = new ObjectMappingWeapon[mapInventoryWeapon.size()];
-        
+
         for (String weaponKey : mapInventoryWeapon.keySet()) {
             currentWeapon = mapInventoryWeapon.get(weaponKey);
-            
+
             this.listWeapon[currentWeapon.getOrder() - 1] = currentWeapon;
         }
-        
+
         return mapObjectNamePicture;
     }
 
@@ -197,8 +197,25 @@ public final class ObjectManager {
     }
 
     /**
+     * Find type by implementation class.
+     *
+     * @param className classe name
+     *
+     * @return type
+     */
+    public int findTypeByImplementationClassName(final String className) {
+        for (Map.Entry<String, Class<ObjectEntity>> entry : mapObjectClass.entrySet()) {
+            if (entry.getValue().getName().equals(className)) {
+                return Integer.valueOf(entry.getKey());
+            }
+        }
+
+        return -1;
+    }
+
+    /**
      * Return id of type.
-     * 
+     *
      * @return list of weapon
      */
     public ObjectMappingWeapon[] getTypeOfInventoryWeapon() {

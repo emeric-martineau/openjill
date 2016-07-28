@@ -31,7 +31,7 @@ public class WoodTorchBackgroundEntity
     /**
      * Object id of fire.
      */
-    private int objectId;
+    private String object;
 
     /**
      * To dispatch message for any object in game.
@@ -44,7 +44,7 @@ public class WoodTorchBackgroundEntity
 
         OS.setMaxCounter(getConfInteger("maxCounter"));
 
-        this.objectId = getConfInteger("objectId");
+        this.object = getConfString("object");
 
         this.messageDispatcher = backParam.getMessageDispatcher();
     }
@@ -55,8 +55,8 @@ public class WoodTorchBackgroundEntity
 
         if (OS.isCreateObject(getX())) {
             // Create point object
-            CreateObjectMessage com = new CreateObjectMessage(
-                    this.objectId);
+            CreateObjectMessage com = CreateObjectMessage.buildFromClassName(
+                    this.object);
 
             this.messageDispatcher.sendMessage(EnumMessageType.CREATE_OBJECT,
                 com);

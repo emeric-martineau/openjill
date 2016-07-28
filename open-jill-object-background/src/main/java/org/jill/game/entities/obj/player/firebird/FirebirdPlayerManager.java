@@ -274,7 +274,7 @@ public final class FirebirdPlayerManager extends AbstractPlayerInteractionManage
     @Override
     protected void killPlayer(final int typeOfDeath,
             final BackgroundEntity senderBack) {
-        final CreateObjectMessage com = new CreateObjectMessage(0);
+        final CreateObjectMessage com = CreateObjectMessage.buildFromObjectType(0);
 
         this.messageDispatcher.sendMessage(EnumMessageType.CREATE_OBJECT, com);
 

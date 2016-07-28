@@ -139,7 +139,7 @@
         "turnTileNumber":"1",
         "point":"4",
         "killForce":"-1",
-        "hitObject":"37",
+        "hitObject":"org.jill.game.entities.obj.HitFireManager",
         "nbColoredBullet":"5"
     },
     "SparkManager":
@@ -209,7 +209,7 @@
         "counterCreateBees":"2",
         "maxRandomValue":"20",
         "counterMaxWait":"3",
-        "beesObject":"46",
+        "beesObject":"org.jill.game.entities.obj.BeesManager",
         "nbColoredBullet":"10"
     },
     "BeesManager": {

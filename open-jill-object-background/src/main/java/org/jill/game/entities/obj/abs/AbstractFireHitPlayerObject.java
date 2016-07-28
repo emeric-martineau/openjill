@@ -39,7 +39,7 @@ public abstract class AbstractFireHitPlayerObject
         super.init(objectParam);
 
         // Create dead object
-        createDeadObject(getConfInteger("hitObject"));
+        createDeadObject(getConfString("hitObject"));
 
         this.killme = new ObjectListMessage(this, false);
     }
@@ -49,8 +49,9 @@ public abstract class AbstractFireHitPlayerObject
      *
      * @param typeHit type of hit (37)
      */
-    private void createDeadObject(final int typeHit) {
-        final CreateObjectMessage com = new CreateObjectMessage(typeHit);
+    private void createDeadObject(final String typeHit) {
+        final CreateObjectMessage com
+                = CreateObjectMessage.buildFromClassName(typeHit);
 
         this.messageDispatcher.sendMessage(EnumMessageType.CREATE_OBJECT,
             com);

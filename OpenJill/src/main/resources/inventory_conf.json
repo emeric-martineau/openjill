@@ -103,5 +103,5 @@
     "lifeBarStepSize":3,
     "defaultLife":6,
     "maxLife":8,
-    "typeObjectPoint":27
+    "objectPoint":"org.jill.game.entities.obj.PointManager"
 }

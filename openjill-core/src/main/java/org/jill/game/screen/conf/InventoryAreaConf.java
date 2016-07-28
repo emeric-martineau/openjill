@@ -61,7 +61,7 @@ public final class InventoryAreaConf extends AbstractLineTextConf {
     /**
      * Object point to create.
      */
-    private int typeObjectPoint;
+    private String objectPoint;
 
     /**
      * Life bar size of step
@@ -235,8 +235,8 @@ public final class InventoryAreaConf extends AbstractLineTextConf {
      *
      * @return id.
      */
-    public int getTypeObjectPoint() {
-        return typeObjectPoint;
+    public String getObjectPoint() {
+        return objectPoint;
     }
 
     /**
@@ -244,8 +244,8 @@ public final class InventoryAreaConf extends AbstractLineTextConf {
      *
      * @param typePoint id
      */
-    public void setTypeObjectPoint(final int typePoint) {
-        this.typeObjectPoint = typePoint;
+    public void setObjectPoint(final String typePoint) {
+        this.objectPoint = typePoint;
     }
 
     /**

@@ -422,8 +422,9 @@ public final class InventoryArea implements InterfaceMessageGameHandler {
     private void messagePoint(final InventoryPointMessage msg) {
         if (msg.isAddObject()) {
             // Create point object
-            CreateObjectMessage com = new CreateObjectMessage(
-                    this.conf.getTypeObjectPoint());
+            final CreateObjectMessage com
+                    = CreateObjectMessage.buildFromClassName(
+                        this.conf.getObjectPoint());
 
             this.messageDispatcher.sendMessage(EnumMessageType.CREATE_OBJECT,
                 com);

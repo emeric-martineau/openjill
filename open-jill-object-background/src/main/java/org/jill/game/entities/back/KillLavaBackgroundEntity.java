@@ -94,7 +94,7 @@ public final class KillLavaBackgroundEntity extends
         // Create dead object.
         // Create here, cause object manager is not avaible when background
         // is created
-        createDeadObject(getConfInteger("hitObject"));
+        createDeadObject(getConfString("hitObject"));
 
         // Dead object have same position that player.
         // Player move when receive kill message. Now player have good position.
@@ -110,8 +110,9 @@ public final class KillLavaBackgroundEntity extends
      *
      * @param typeHit type of hit (37)
      */
-    private void createDeadObject(final int typeHit) {
-        final CreateObjectMessage com = new CreateObjectMessage(typeHit);
+    private void createDeadObject(final String typeHit) {
+        final CreateObjectMessage com
+                = CreateObjectMessage.buildFromClassName(typeHit);
 
         this.messageDispatcher.sendMessage(EnumMessageType.CREATE_OBJECT,
             com);

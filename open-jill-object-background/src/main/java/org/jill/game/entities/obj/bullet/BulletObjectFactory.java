@@ -21,7 +21,7 @@ public final class BulletObjectFactory {
     /**
      * Object type of bullet.
      */
-    private static int objectType;
+    private static String bulletObject;
 
     /**
      * State range.
@@ -55,8 +55,8 @@ public final class BulletObjectFactory {
             bulletProperties.load(BulletObjectFactory.class.getClassLoader().
                     getResourceAsStream("bullet_factory.properties"));
 
-            objectType = Integer.valueOf(
-                    bulletProperties.getProperty("objectType"));
+            bulletObject =
+                    bulletProperties.getProperty("bulletObject");
             stateRange = Integer.valueOf(
                     bulletProperties.getProperty("stateRange"));
             xdRange = Integer.valueOf(
@@ -80,7 +80,8 @@ public final class BulletObjectFactory {
 
         ObjectEntity obj;
 
-        final CreateObjectMessage com = new CreateObjectMessage(objectType);
+        final CreateObjectMessage com
+                = CreateObjectMessage.buildFromClassName(bulletObject);
 
         for (int index = 0; index < nbBullet; index++) {
             messageDispatcher.sendMessage(EnumMessageType.CREATE_OBJECT, com);

@@ -267,7 +267,17 @@ public abstract class AbstractObjectJillLevel
      */
     private void receiveMessageCreateObject(final CreateObjectMessage com) {
         final ObjectItem oe = ObjectInstanceFactory.getNewObjectItem();
-        oe.setType(com.getType());
+
+        int type;
+
+        if (com.getType() == CreateObjectMessage.CreateObjectType.CREATE_BY_CLASS_NAME) {
+            type = this.objectCache
+                    .findTypeByImplementationClassName(com.getClassName());
+        } else {
+            type = com.getObjectType();
+        }
+
+        oe.setType(type);
 
         // Object parameter
         final ObjectParam objParam = ObjectInstanceFactory.getNewObjParam();
