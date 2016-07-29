@@ -1,7 +1,8 @@
 [
     {
         "type":0,
-        "implementationClass":"org.jill.game.entities.obj.player.PlayerManager"
+        "implementationClass":"org.jill.game.entities.obj.player.PlayerManager",
+        "startLevelObject":true
     },
     {
         "type":23,

@@ -305,6 +305,16 @@ public abstract class AbstractObjectJillLevel
      * @return the player
      */
     protected ObjectEntity getPlayer() {
-        return this.listObject.get(0);
+        ObjectEntity oe = null;
+
+        for (ObjectEntity currentObject : this.listObject) {
+            if (currentObject.isPlayer()) {
+                oe = currentObject;
+
+                break;
+            }
+        }
+
+        return oe;
     }
 }

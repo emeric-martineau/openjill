@@ -48,6 +48,11 @@ public final class ObjectManager {
     private ObjectMappingWeapon[] listWeapon;
 
     /**
+     * If this object must be use when load level or restart level (after die).
+     */
+    private int startLevelObject;
+
+    /**
      * Return this instance of object.
      *
      * @return instance
@@ -133,6 +138,10 @@ public final class ObjectManager {
 
                 mapInventoryWeapon.put(currentWeapon.getInventoryKey(),
                         currentWeapon);
+            }
+
+            if (om.isStartLevelObject()) {
+                this.startLevelObject = om.getType();
             }
         }
 
@@ -221,4 +230,15 @@ public final class ObjectManager {
     public ObjectMappingWeapon[] getTypeOfInventoryWeapon() {
         return this.listWeapon;
     }
+
+    /**
+     * If this object must be use when load level or restart level (after die).
+     *
+     * @return object type
+     */
+    public int getStartLevelObject() {
+        return startLevelObject;
+    }
+
+
 }

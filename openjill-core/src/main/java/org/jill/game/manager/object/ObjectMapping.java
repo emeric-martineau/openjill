@@ -24,6 +24,11 @@ public final class ObjectMapping {
     private ObjectMappingWeapon weapon;
 
     /**
+     * If this object must be use when load level or restart level (after die).
+     */
+    private boolean startLevelObject;
+
+    /**
      * Type of object.
      *
      * @return the type
@@ -75,5 +80,23 @@ public final class ObjectMapping {
      */
     public void setWeapon(final ObjectMappingWeapon weap) {
         this.weapon = weap;
+    }
+
+    /**
+     * If this object must be use when load level or restart level (after die).
+     *
+     * @return true/false
+     */
+    public boolean isStartLevelObject() {
+        return startLevelObject;
+    }
+
+    /**
+     * If this object must be use when load level or restart level (after die).
+     *
+     * @param startLevelObject
+     */
+    public void setStartLevelObject(final boolean startLevelObject) {
+        this.startLevelObject = startLevelObject;
     }
 }

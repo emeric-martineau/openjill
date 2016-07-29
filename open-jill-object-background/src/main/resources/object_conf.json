@@ -87,7 +87,7 @@
         "KNIVE":"14,13",
         "GEM":"14,11",
         "FROG":"14,14",
-        "FIREBIRD":"14,15,ZZZZZZZT!",
+        "FIREBIRD":"14,15,ZZZZZZZT!,org.jill.game.entities.obj.player.firebird.FirebirdPlayerManager",
         "BAG_OF_COIN":"14,18",
         "FISH":"14,20",
         "BLADE":"14,35,YOU FOUND A SPINNING BLADE",

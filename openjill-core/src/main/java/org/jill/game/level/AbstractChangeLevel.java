@@ -119,14 +119,18 @@ public abstract class AbstractChangeLevel extends
         this.newLevelFileName = levelFileName;
         this.newLevelNumber = levelNumber;
 
-        if (levelNumber == SaveData.MAP_LEVEL) {
-            this.levelMessageBox.setLevel(0);
-            this.levelMessageBox.setEnable(true);
-        } else if (levelNumber == RESTART_LEVEL_NUMBER) {
-            this.levelMessageBox.setCanchange(true);
-        } else {
-            this.levelMessageBox.setLevel(levelNumber);
-            this.levelMessageBox.setEnable(true);
+        switch (levelNumber) {
+            case SaveData.MAP_LEVEL:
+                this.levelMessageBox.setLevel(0);
+                this.levelMessageBox.setEnable(true);
+                break;
+            case RESTART_LEVEL_NUMBER:
+                this.levelMessageBox.setCanchange(true);
+                break;
+            default:
+                this.levelMessageBox.setLevel(levelNumber);
+                this.levelMessageBox.setEnable(true);
+                break;
         }
 
         JillGameConfig jillCfg =
@@ -162,12 +166,16 @@ public abstract class AbstractChangeLevel extends
         this.levelMessageBox.setCanchange(false);
 
         // If in map level, store map level to object
-        if (this.newLevelNumber == RESTART_LEVEL_NUMBER) {
-            loadRestartLevel();
-        } else if (this.newLevelNumber == SaveData.MAP_LEVEL) {
-            loadMapFromLevel();
-        } else {
-            loadNewLevelFromMap();
+        switch (this.newLevelNumber) {
+            case RESTART_LEVEL_NUMBER:
+                loadRestartLevel();
+                break;
+            case SaveData.MAP_LEVEL:
+                loadMapFromLevel();
+                break;
+            default:
+                loadNewLevelFromMap();
+                break;
         }
     }
 

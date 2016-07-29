@@ -4,6 +4,7 @@ import java.awt.image.BufferedImage;
 import org.jill.game.entities.obj.player.AbstractPlayerInteractionManager;
 import org.jill.game.entities.obj.player.PalyerActionPerState;
 import org.jill.game.entities.obj.player.PlayerAction;
+import org.jill.game.entities.obj.player.PlayerManager;
 import org.jill.game.entities.obj.util.UtilityObjectEntity;
 import org.jill.openjill.core.api.entities.ObjectParam;
 import org.jill.openjill.core.api.entities.BackgroundEntity;
@@ -23,7 +24,8 @@ import org.jill.openjill.core.api.message.object.ReplaceObjectMessage;
  * mvt x (+/-4 first, then +/-8 px)
  * mvt y (yd = -6 px)
  * @todo when firebird touch water (all sprite) die
- * @todo when restart level after die, restore std player.
+ * @todo why when die, we see little freeze
+ * when restart level after die, restore std player.
  * when firebird die, restore player to die
  * subState = 4/8 (right), -8/-4 (left), 0 first when change way => last yd
  * info1 = -/+ 1 (always depend from previous value)
@@ -123,6 +125,10 @@ public final class FirebirdPlayerManager extends AbstractPlayerInteractionManage
 
         this.jumpInitSpeed = getConfInteger("jumpInitSpeed");
 
+        if (getWidth() == 0) {
+            setWidth(this.leftImages[0].getWidth());
+            setHeight(this.leftImages[0].getHeight());
+        }
     }
 
 
@@ -160,7 +166,8 @@ public final class FirebirdPlayerManager extends AbstractPlayerInteractionManage
         this.counter++;
 
         // Turn picture, but we want continue to move.
-        if (this.counter == this.leftImages.length) {
+        if (this.counter ==
+                this.leftImages.length) {
             this.counter = 0;
         }
     }
@@ -216,7 +223,7 @@ public final class FirebirdPlayerManager extends AbstractPlayerInteractionManage
             setSubState(this.minXSpeed);
         } else if (keyboardLayout.isLeft() && getSubState() >= X_SPEED_MIDDLE) {
             // If go left and substate positiv
-             setxSpeed(this.minXSpeed * X_SPEED_LEFT);
+            setxSpeed(this.minXSpeed * X_SPEED_LEFT);
             setSubState(this.minXSpeed* X_SPEED_LEFT);
         } else {
             // No key pressed
@@ -274,7 +281,8 @@ public final class FirebirdPlayerManager extends AbstractPlayerInteractionManage
     @Override
     protected void killPlayer(final int typeOfDeath,
             final BackgroundEntity senderBack) {
-        final CreateObjectMessage com = CreateObjectMessage.buildFromObjectType(0);
+        final CreateObjectMessage com = CreateObjectMessage.buildFromClassName(
+                PlayerManager.class.getName());
 
         this.messageDispatcher.sendMessage(EnumMessageType.CREATE_OBJECT, com);
 
@@ -283,7 +291,7 @@ public final class FirebirdPlayerManager extends AbstractPlayerInteractionManage
         obj.setX(getX());
         obj.setY(getY());
 
-        // TODO create std player and call msgKill
+        // Create std player and call msgKill
         final ReplaceObjectMessage rom = new ReplaceObjectMessage(this, obj);
 
         this.messageDispatcher.sendMessage(EnumMessageType.REPLACE_OBJECT, rom);

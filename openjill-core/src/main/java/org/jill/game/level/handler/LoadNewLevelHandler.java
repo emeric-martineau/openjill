@@ -2,14 +2,18 @@ package org.jill.game.level.handler;
 
 import java.io.IOException;
 import java.util.List;
+import org.jill.game.config.ObjectInstanceFactory;
 import org.jill.game.entities.obj.player.PlayerState;
 import org.jill.game.level.AbstractChangeLevel;
 import org.jill.game.level.cfg.LevelConfiguration;
+import org.jill.jn.ObjectItem;
 import org.jill.openjill.core.api.message.statusbar.inventory.EnumInventoryObject;
 import org.jill.openjill.core.api.message.statusbar.inventory.InventoryItemMessage;
 import org.jill.jn.SaveData;
 import org.jill.openjill.core.api.entities.ObjectEntity;
+import org.jill.openjill.core.api.entities.ObjectParam;
 import org.jill.openjill.core.api.message.EnumMessageType;
+import org.jill.openjill.core.api.message.object.ReplaceObjectMessage;
 
 /**
  * Class to load a nex level (from map) or restore map.
@@ -57,11 +61,18 @@ public class LoadNewLevelHandler extends AbstractChangeLevel {
 
             //this.inventoryArea.setLife(saveData.getHealth());
         } else {
-            final ObjectEntity player = getPlayer();
+            ObjectEntity player = getPlayer();
 
             // New level.
             // In start of map level, don't search check point
             if (level != SaveData.MAP_LEVEL) {
+                final int startObject = this.objectCache.getStartLevelObject();
+
+                if (player.getType() != startObject) {
+                    player = restoreStdPlayerForRestartLevel(startObject,
+                            player);
+                }
+
                 // Search checkpoint to move player on only on new map
                 player.setState(PlayerState.BEGIN);
 
@@ -90,6 +101,25 @@ public class LoadNewLevelHandler extends AbstractChangeLevel {
         restoreInventory();
 
         drawInventory();
+    }
+
+    protected ObjectEntity restoreStdPlayerForRestartLevel(final int startObject, ObjectEntity player) {
+        // Object parameter
+        final ObjectParam objParam
+                = ObjectInstanceFactory.getNewObjParam();
+        objParam.init(this.backgroundObject,
+                this.pictureCache, this.messageDispatcher,
+                this.levelConfiguration.getLevelNumber());
+        final ObjectItem tmpPlayer
+                = ObjectInstanceFactory.getNewObjectItem();
+        tmpPlayer.setType(startObject);
+        objParam.setObject(tmpPlayer);
+        final ObjectEntity newPlayer
+                = this.objectCache.getNewObject(objParam);
+        recieveMessage(EnumMessageType.REPLACE_OBJECT,
+                new ReplaceObjectMessage(player, newPlayer));
+        player = newPlayer;
+        return player;
     }
 
     /**

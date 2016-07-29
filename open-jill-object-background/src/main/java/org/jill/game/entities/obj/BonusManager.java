@@ -6,7 +6,9 @@ import org.jill.openjill.core.api.entities.ObjectEntity;
 import org.jill.openjill.core.api.entities.ObjectParam;
 import org.jill.openjill.core.api.keyboard.KeyboardLayout;
 import org.jill.openjill.core.api.message.EnumMessageType;
+import org.jill.openjill.core.api.message.object.CreateObjectMessage;
 import org.jill.openjill.core.api.message.object.ObjectListMessage;
+import org.jill.openjill.core.api.message.object.ReplaceObjectMessage;
 import org.jill.openjill.core.api.message.statusbar.inventory.
         EnumInventoryObject;
 import org.jill.openjill.core.api.message.statusbar.inventory.
@@ -44,6 +46,11 @@ public final class BonusManager extends AbstractParameterObjectEntity {
     private String msg;
 
     /**
+     * Classname of object to replace
+     */
+    private String classnameOfNewPlayer;
+
+    /**
      * Default constructor.
      *
      * @param objectParam object paramter
@@ -76,6 +83,12 @@ public final class BonusManager extends AbstractParameterObjectEntity {
             displayMessage[counter] = false;
         }
 
+        if (keySplit.length > 3) {
+            this.classnameOfNewPlayer = keySplit[3];
+        } else {
+            this.classnameOfNewPlayer = null;
+        }
+
         // Init list of picture
         final int tileIndex = Integer.valueOf(keySplit[1]);
         final int tileSetIndex = Integer.valueOf(keySplit[0]);
@@ -106,9 +119,40 @@ public final class BonusManager extends AbstractParameterObjectEntity {
         if (obj.isPlayer()) {
             sendItem();
 
-            this.messageDispatcher.sendMessage(
-                EnumMessageType.INVENTORY_ITEM,
-                this.inventory);
+            if (this.classnameOfNewPlayer != null) {
+                replacePlayer(obj);
+            } else {
+                this.messageDispatcher.sendMessage(
+                    EnumMessageType.INVENTORY_ITEM,
+                    this.inventory);
+            }
+        }
+    }
+
+    /**
+     *
+     * @param obj
+     */
+    private void replacePlayer(final ObjectEntity obj) {
+        if (!obj.getClass().getName().equals(this.classnameOfNewPlayer)) {
+            final CreateObjectMessage com = CreateObjectMessage
+                    .buildFromClassName(this.classnameOfNewPlayer);
+
+            this.messageDispatcher.sendMessage(EnumMessageType.CREATE_OBJECT,
+                    com);
+
+            final ObjectEntity newPlayer = com.getObject();
+
+            newPlayer.setX(obj.getX());
+            newPlayer.setY(obj.getY());
+            newPlayer.setInfo1(obj.getInfo1());
+
+            // Create std player and call msgKill
+            final ReplaceObjectMessage rom = new ReplaceObjectMessage(obj,
+                    newPlayer);
+
+            this.messageDispatcher.sendMessage(EnumMessageType.REPLACE_OBJECT,
+                    rom);
         }
     }
 
