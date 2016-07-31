@@ -2,6 +2,7 @@ package org.jill.game.entities.obj;
 
 import org.jill.game.entities.obj.abs.AbstractParameterObjectEntity;
 import java.awt.image.BufferedImage;
+import org.jill.game.entities.obj.bullet.BulletObjectFactory;
 import org.jill.openjill.core.api.entities.ObjectEntity;
 import org.jill.openjill.core.api.entities.ObjectParam;
 import org.jill.openjill.core.api.keyboard.KeyboardLayout;
@@ -51,6 +52,11 @@ public final class BonusManager extends AbstractParameterObjectEntity {
     private String classnameOfNewPlayer;
 
     /**
+     * Nb bullet when player change.
+     */
+    private int nbColoredBullet;
+
+    /**
      * Default constructor.
      *
      * @param objectParam object paramter
@@ -85,6 +91,7 @@ public final class BonusManager extends AbstractParameterObjectEntity {
 
         if (keySplit.length > 3) {
             this.classnameOfNewPlayer = keySplit[3];
+            this.nbColoredBullet = getConfInteger("nbColoredBullet");
         } else {
             this.classnameOfNewPlayer = null;
         }
@@ -144,7 +151,8 @@ public final class BonusManager extends AbstractParameterObjectEntity {
             final ObjectEntity newPlayer = com.getObject();
 
             newPlayer.setX(obj.getX());
-            newPlayer.setY(obj.getY());
+            newPlayer.setY(obj.getY()
+                    + (obj.getHeight() - newPlayer.getHeight()));
             newPlayer.setInfo1(obj.getInfo1());
 
             // Create std player and call msgKill
@@ -153,6 +161,9 @@ public final class BonusManager extends AbstractParameterObjectEntity {
 
             this.messageDispatcher.sendMessage(EnumMessageType.REPLACE_OBJECT,
                     rom);
+
+            BulletObjectFactory.explode(newPlayer, this.nbColoredBullet,
+                    messageDispatcher);
         }
     }
 

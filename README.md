@@ -7,6 +7,7 @@ It's release under Mozilla Public License (see LICENSE file).
 Official website : http://www.openjill.org
 Last download : http://www.openjill.org/openjill/wiki/doku.php?id=openjill:download
 Google+ community : https://plus.google.com/u/0/communities/101394478288995733520
+Twitter : https://twitter.com/hashtag/OpenJill?src=hash
 
 Sources organization
 --------------------

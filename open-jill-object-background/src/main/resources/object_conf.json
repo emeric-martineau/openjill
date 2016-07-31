@@ -82,7 +82,7 @@
     },
     "BonusManager":
     {
-        "JILL":"14,38",
+        "JILL":"14,38,FOOF!,org.jill.game.entities.obj.player.PlayerManager",
         "RED_KEY":"14,12",
         "KNIVE":"14,13",
         "GEM":"14,11",
@@ -95,7 +95,8 @@
         "INVINCIBILITY":"14,37",
         "dontRemove":"JILL,FROG,FIREBIRD,FISH",
         "msgTime":"20",
-        "msgColor":"7"
+        "msgColor":"7",
+        "nbColoredBullet":"10"
     },
     "SwitchManager":
     {
