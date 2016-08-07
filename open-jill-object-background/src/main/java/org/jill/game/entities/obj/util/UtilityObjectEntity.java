@@ -272,11 +272,11 @@ public final class UtilityObjectEntity {
 
             // If before move, bottom object is under stair, ignore staire.
             final int bottomObject = obj.getY() + obj.getHeight();
-            
+
             if (ignoreStair || bottomObject > topOnBlockStair) {
                 block = null;
             } else {
-                
+
             }
         }
 
@@ -289,16 +289,16 @@ public final class UtilityObjectEntity {
         } else {
             final int newY = (block.getY() * JillConst.getBlockSize())
                         - obj.getHeight();
-            if (updateObj) {                
+            if (updateObj) {
                 canMove = newY != obj.getY();
-                
+
                 // Jump size are to big and object hit a block
                 // Set Y to the below block
                 obj.setY(newY);
             } else {
                 canMove = newY != obj.getY();
             }
-            
+
         }
 
         return canMove;
@@ -354,9 +354,9 @@ public final class UtilityObjectEntity {
         //final int objPosY = obj.getY() + obj.getHeight();
         final int newStartY = (objY + objHeight)
                 / JillConst.getBlockSize();
-        
+
         final int newEndY = newPosY / JillConst.getBlockSize();
-        
+
         BackgroundEntity block = null;
         BackgroundEntity blockStair = null;
 
@@ -364,7 +364,7 @@ public final class UtilityObjectEntity {
         for (int testY = newStartY; testY <= newEndY; testY++) {
             block = checkObjectHitFloor(
                 startBlockX, endBlockX, testY, testY, backgroundObject);
-            
+
             // In case of stair, we take last stair
             if (block != null && block.isStair()) {
                 blockStair = block;
@@ -372,11 +372,11 @@ public final class UtilityObjectEntity {
                 break;
             }
         }
-        
+
         if (block == null) {
             block = blockStair;
         }
-        
+
         return block;
     }
 
@@ -416,9 +416,9 @@ public final class UtilityObjectEntity {
         } else {
             final int newX = (back.getX() * JillConst.getBlockSize())
                     - obj.getWidth();
-            
+
             canMove = newX != obj.getX();
-            
+
             obj.setX(newX);
         }
 
@@ -445,7 +445,7 @@ public final class UtilityObjectEntity {
 
         // Calculate number of case X
         int newPosX = obj.getX() + mvtSize;
-        int startBlockX = newPosX / JillConst.getBlockSize();
+        int startBlockX = Math.max(0, newPosX / JillConst.getBlockSize());
 
         // Check if can move
         final BackgroundEntity back = checkObjectHitBlockLeft(startBlockX,
@@ -459,9 +459,9 @@ public final class UtilityObjectEntity {
             canMove = true;
         } else {
             final int newX = (back.getX() + 1) * JillConst.getBlockSize();
-            
+
             canMove = newX != obj.getX();
-            
+
             obj.setX(newX);
         }
 
@@ -510,9 +510,9 @@ public final class UtilityObjectEntity {
             // Jump size are to big and object hit a block
             // Set Y to the below block
             final int newY = (block.getY() + 1) * JillConst.getBlockSize();
-            
+
             canMove = newY != obj.getY();
-            
+
             obj.setY(newY);
         }
 
@@ -596,9 +596,9 @@ public final class UtilityObjectEntity {
             }
         } else {
             final int newX = (back.getX() + 1) * JillConst.getBlockSize();
-            
+
             canMove = newX != obj.getX();
-            
+
             obj.setX(newX);
         }
 
@@ -651,9 +651,9 @@ public final class UtilityObjectEntity {
         } else {
             final int newX = (back.getX() * JillConst.getBlockSize())
                     - obj.getWidth();
-            
+
             canMove = obj.getX() != newX;
-            
+
             obj.setX(newX);
         }
 
