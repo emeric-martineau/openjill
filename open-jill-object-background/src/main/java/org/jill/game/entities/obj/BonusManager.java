@@ -47,9 +47,9 @@ public final class BonusManager extends AbstractParameterObjectEntity {
     private String msg;
 
     /**
-     * Classname of object to replace
+     * New player.
      */
-    private String classnameOfNewPlayer;
+    private ObjectEntity newPlayer;
 
     /**
      * Nb bullet when player change.
@@ -90,10 +90,10 @@ public final class BonusManager extends AbstractParameterObjectEntity {
         }
 
         if (keySplit.length > 3) {
-            this.classnameOfNewPlayer = keySplit[3];
+            this.newPlayer = createPlayer(keySplit[3]);
             this.nbColoredBullet = getConfInteger("nbColoredBullet");
         } else {
-            this.classnameOfNewPlayer = null;
+            this.newPlayer = null;
         }
 
         // Init list of picture
@@ -126,7 +126,7 @@ public final class BonusManager extends AbstractParameterObjectEntity {
         if (obj.isPlayer()) {
             sendItem();
 
-            if (this.classnameOfNewPlayer != null) {
+            if (this.newPlayer != null) {
                 replacePlayer(obj);
             } else {
                 this.messageDispatcher.sendMessage(
@@ -137,32 +137,42 @@ public final class BonusManager extends AbstractParameterObjectEntity {
     }
 
     /**
+     * Create player.
+     *
+     * @param className class name of player
+     *
+     * @return player object
+     */
+    private ObjectEntity createPlayer(final String className) {
+        final CreateObjectMessage com = CreateObjectMessage
+                    .buildFromClassName(className);
+
+        this.messageDispatcher.sendMessage(EnumMessageType.CREATE_OBJECT,
+                com);
+
+        return com.getObject();
+    }
+
+    /**
      *
      * @param obj
      */
     private void replacePlayer(final ObjectEntity obj) {
-        if (!obj.getClass().getName().equals(this.classnameOfNewPlayer)) {
-            final CreateObjectMessage com = CreateObjectMessage
-                    .buildFromClassName(this.classnameOfNewPlayer);
-
-            this.messageDispatcher.sendMessage(EnumMessageType.CREATE_OBJECT,
-                    com);
-
-            final ObjectEntity newPlayer = com.getObject();
-
-            newPlayer.setX(obj.getX());
-            newPlayer.setY(obj.getY()
-                    + (obj.getHeight() - newPlayer.getHeight()));
-            newPlayer.setInfo1(obj.getInfo1());
+        if (!obj.getClass().getName().equals(
+                this.newPlayer.getClass().getName())) {
+            this.newPlayer.setX(obj.getX());
+            this.newPlayer.setY(obj.getY()
+                    + (obj.getHeight() - this.newPlayer.getHeight()));
+            this.newPlayer.setInfo1(obj.getInfo1());
 
             // Create std player and call msgKill
             final ReplaceObjectMessage rom = new ReplaceObjectMessage(obj,
-                    newPlayer);
+                    this.newPlayer);
 
             this.messageDispatcher.sendMessage(EnumMessageType.REPLACE_OBJECT,
                     rom);
 
-            BulletObjectFactory.explode(newPlayer, this.nbColoredBullet,
+            BulletObjectFactory.explode(this.newPlayer, this.nbColoredBullet,
                     messageDispatcher);
         }
     }
