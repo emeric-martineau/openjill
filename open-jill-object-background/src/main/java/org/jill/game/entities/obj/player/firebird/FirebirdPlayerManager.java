@@ -20,7 +20,7 @@ import org.jill.openjill.core.api.message.object.ReplaceObjectMessage;
  * @todo SHIFT = FLAP (blink)
  * @todo ALT = FIRE (blink)
  * @todo do fire
- * @todo jn-extractor add object 56
+ * 
  * mvt x (+/-4 first, then +/-8 px)
  * mvt y (yd = -6 px)
  * when firebird touch water (all sprite) die
