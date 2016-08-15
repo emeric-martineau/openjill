@@ -1,0 +1,31 @@
+{
+    "PlayerManager": {
+        "WATERTL": true,
+        "WATERTL2": true,
+        "WATERTL3": true,
+        "WATERTL4": true,
+        "WATERTR": true,
+        "WATERTR2": true,
+        "WATERTR3": true,
+        "WATERTR4": true
+    },
+    "FirebirdPlayerManager": {
+        "WATERTL": true,
+        "WATERTL2": true,
+        "WATERTL3": true,
+        "WATERTL4": true,
+        "WATERTR": true,
+        "WATERTR2": true,
+        "WATERTR3": true,
+        "WATERTR4": true,
+        
+        "WATERRD": true,
+        "WATERRD2": true,
+        "WATERRD3": true,
+        "WATERRD4": true,
+        "WATERLD": true,
+        "WATERLD2": true,
+        "WATERLD3": true,
+        "WATERLD4": true
+    }
+}

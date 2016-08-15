@@ -23,7 +23,7 @@ import org.jill.openjill.core.api.message.object.ReplaceObjectMessage;
  * @todo jn-extractor add object 56
  * mvt x (+/-4 first, then +/-8 px)
  * mvt y (yd = -6 px)
- * @todo when firebird touch water (all sprite) die
+ * when firebird touch water (all sprite) die
  * when restart level after die, restore std player.
  * when firebird die, restore player to die
  * subState = 4/8 (right), -8/-4 (left), 0 first when change way => last yd
