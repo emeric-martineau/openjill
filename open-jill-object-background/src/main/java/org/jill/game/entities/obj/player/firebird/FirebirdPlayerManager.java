@@ -81,6 +81,11 @@ public final class FirebirdPlayerManager extends AbstractPlayerInteractionManage
     private int jumpInitSpeed;
 
     /**
+     * Standard player when die or return to jill form.
+     */
+    private ObjectEntity stdPlayer;
+
+    /**
      * Default constructor.
      *
      * @param objectParam object paramter
@@ -125,8 +130,12 @@ public final class FirebirdPlayerManager extends AbstractPlayerInteractionManage
         this.jumpInitSpeed = getConfInteger("jumpInitSpeed");
 
         if (getWidth() == 0) {
+            // Object create during game
             setWidth(this.leftImages[0].getWidth());
             setHeight(this.leftImages[0].getHeight());
+        } else {
+            // Object load from level
+            this.stdPlayer = createPlayer();
         }
     }
 
@@ -280,22 +289,36 @@ public final class FirebirdPlayerManager extends AbstractPlayerInteractionManage
     @Override
     protected void killPlayer(final int typeOfDeath,
             final BackgroundEntity senderBack) {
-        final CreateObjectMessage com = CreateObjectMessage.buildFromClassName(
-                PlayerManager.class.getName());
 
-        this.messageDispatcher.sendMessage(EnumMessageType.CREATE_OBJECT, com);
+        // If FirePlayerManage is create during game. stdPlayer is not set to
+        // prevent hang game cause standard player is long to load.
+        if (this.stdPlayer == null) {
+            this.stdPlayer = createPlayer();
+        }
 
-        final ObjectEntity obj = com.getObject();
-
-        obj.setX(getX());
-        obj.setY(getY());
+        this.stdPlayer.setX(getX());
+        this.stdPlayer.setY(getY());
 
         // Create std player and call msgKill
-        final ReplaceObjectMessage rom = new ReplaceObjectMessage(this, obj);
+        final ReplaceObjectMessage rom = new ReplaceObjectMessage(this,
+                this.stdPlayer);
 
         this.messageDispatcher.sendMessage(EnumMessageType.REPLACE_OBJECT, rom);
 
         // Simulate kill message
-        obj.msgKill(senderBack, 0, typeOfDeath);
+        this.stdPlayer.msgKill(senderBack, 0, typeOfDeath);
+    }
+
+    /**
+     * Create standard player to return jil form or when die.
+     *
+     * @return jill std player object
+     */
+    private ObjectEntity createPlayer() {
+        final CreateObjectMessage com = CreateObjectMessage.buildFromClassName(
+                PlayerManager.class.getName());
+        this.messageDispatcher.sendMessage(EnumMessageType.CREATE_OBJECT, com);
+
+        return com.getObject();
     }
 }
