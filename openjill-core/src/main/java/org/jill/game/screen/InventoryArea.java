@@ -13,6 +13,7 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.jill.game.screen.conf.InventoryAreaConf;
+import org.jill.game.screen.conf.InventoryItemConf;
 import org.jill.game.screen.conf.ItemConf;
 import org.jill.game.screen.conf.PictureConf;
 import org.jill.game.screen.conf.TextToDraw;
@@ -285,14 +286,16 @@ public final class InventoryArea implements InterfaceMessageGameHandler {
      * Init list item map.
      */
     private void initListItem() {
-        Map<String, PictureConf> listItems = this.conf.getItems();
-        PictureConf pic;
+        final Map<String, InventoryItemConf> listItems = this.conf.getItems();
+        InventoryItemConf pic;
 
         // Init map item
         for (EnumInventoryObject io : EnumInventoryObject.values()) {
             pic = listItems.get(io.toString());
 
-            this.listItem.put(io, getImageByConfig(pic));
+            if (pic.isDisplay()) {
+                this.listItem.put(io, getImageByConfig(pic));
+            }
         }
     }
 
@@ -517,6 +520,31 @@ public final class InventoryArea implements InterfaceMessageGameHandler {
      * @return inventory
      */
     public List<EnumInventoryObject> getObjects() {
+        final List<EnumInventoryObject> newObjectsList
+                = new ArrayList<>(this.objects.size());
+
+        final Map<String, InventoryItemConf> listItemProperties
+                = this.conf.getItems();
+
+        InventoryItemConf currentItemConf;
+
+        for (EnumInventoryObject item : this.objects) {
+            currentItemConf = listItemProperties.get(item.toString());
+
+            if (currentItemConf.isDisplay()) {
+                newObjectsList.add(item);
+            }
+        }
+
+        return newObjectsList;
+    }
+
+    /**
+     * Inventory object not filtered by visibility.
+     *
+     * @return inventory
+     */
+    public List<EnumInventoryObject> getAllObjects() {
         return this.objects;
     }
 

@@ -13,14 +13,16 @@ import org.jill.openjill.core.api.keyboard.KeyboardLayout;
 import org.jill.openjill.core.api.message.EnumMessageType;
 import org.jill.openjill.core.api.message.object.CreateObjectMessage;
 import org.jill.openjill.core.api.message.object.ReplaceObjectMessage;
+import org.jill.openjill.core.api.message.statusbar.inventory.EnumInventoryObject;
+import org.jill.openjill.core.api.message.statusbar.inventory.InventoryItemMessage;
 
 /**
  * Firebird for player.
  *
  * @todo SHIFT = FLAP (blink)
  * @todo ALT = FIRE (blink)
- * @todo do fire
- * 
+ * @todo do fire (objec 62)
+ *
  * mvt x (+/-4 first, then +/-8 px)
  * mvt y (yd = -6 px)
  * when firebird touch water (all sprite) die
@@ -136,6 +138,12 @@ public final class FirebirdPlayerManager extends AbstractPlayerInteractionManage
         } else {
             // Object load from level
             this.stdPlayer = createPlayer();
+
+            final InventoryItemMessage inventory = new InventoryItemMessage(
+                    EnumInventoryObject.FIREBIRD, true);
+
+            this.messageDispatcher.sendMessage(
+                EnumMessageType.INVENTORY_ITEM, inventory);
         }
     }
 
@@ -207,8 +215,15 @@ public final class FirebirdPlayerManager extends AbstractPlayerInteractionManage
             return;
         }
 
+
+
         movePlayerUpDownStand(keyboardLayout);
         movePlayerLeftRightStand(keyboardLayout);
+
+        // When firebird fire, it's also jump. Jump only if not jumping.
+        if (keyboardLayout.isFire() && !keyboardLayout.isJump()) {
+            jump();
+        }
     }
 
     /**
@@ -272,8 +287,12 @@ public final class FirebirdPlayerManager extends AbstractPlayerInteractionManage
         setySpeed(newYSpeed);
 
         if (keyboardLayout.isJump()) {
-            setySpeed(this.jumpInitSpeed);
+            jump();
         }
+    }
+
+    private void jump() {
+        setySpeed(this.jumpInitSpeed);
     }
 
     @Override

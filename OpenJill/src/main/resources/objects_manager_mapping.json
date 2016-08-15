@@ -167,5 +167,15 @@
     {
         "type":67,
         "implementationClass":"org.jill.game.entities.obj.DemoMapManager"
+    },
+    {
+        "type":62,
+        "implementationClass":"org.jill.game.entities.obj.KniveManager",
+        "weapon": {
+            "order":3,
+            "inventoryKey":"FIREBIRD",
+            "removeInInventory":false,
+            "numberItemPerInventory":-1
+        }
     }
 ]

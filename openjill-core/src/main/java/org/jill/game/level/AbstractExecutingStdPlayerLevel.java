@@ -292,7 +292,7 @@ public abstract class AbstractExecutingStdPlayerLevel
 
             // Get inventory
             final List<EnumInventoryObject> listInv =
-                    this.inventoryArea.getObjects();
+                    this.inventoryArea.getAllObjects();
 
             // Get weapon
             final ObjectMappingWeapon[] weaponsList =

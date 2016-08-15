@@ -128,11 +128,14 @@ public final class BonusManager extends AbstractParameterObjectEntity {
 
             if (this.newPlayer != null) {
                 replacePlayer(obj);
-            } else {
-                this.messageDispatcher.sendMessage(
-                    EnumMessageType.INVENTORY_ITEM,
-                    this.inventory);
             }
+
+            // Put always in inventory list.
+            // This game engine store in inventory list item to know weapon to
+            // need create when game press fire key.
+            this.messageDispatcher.sendMessage(
+                EnumMessageType.INVENTORY_ITEM,
+                this.inventory);
         }
     }
 
