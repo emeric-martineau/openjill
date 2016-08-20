@@ -25,17 +25,17 @@ public final class BladeManager extends AbstractParameterObjectEntity {
      * Picture array.
      */
     private BufferedImage[] images;
-    
+
     /**
      * SubState value to remove blade.
      */
     private int subStateToRemoveMe;
-    
+
     /**
      * Initial Y offset.
      */
     private int initY;
-    
+
     /**
      * Initial X offset.
      */
@@ -50,12 +50,12 @@ public final class BladeManager extends AbstractParameterObjectEntity {
      * Statecount to end launch.
      */
     private int subStateLaunchEnd;
-    
+
     /**
      * XD init value.
      */
     private int initXD;
-    
+
     /**
      * Background map.
      */
@@ -74,7 +74,7 @@ public final class BladeManager extends AbstractParameterObjectEntity {
         int tileSetIndex = getConfInteger("tileSet");
 
         int numberTileSet = getConfInteger("numberTileSet");
-        
+
         this.subStateToRemoveMe = getConfInteger("subStateToRemoveMe");
         this.subStateLaunchStart = getConfInteger("subStateLaunchStart");
         this.subStateLaunchEnd = getConfInteger("subStateLaunchEnd");
@@ -94,30 +94,29 @@ public final class BladeManager extends AbstractParameterObjectEntity {
         }
 
         this.backgroundObject = objectParam.getBackgroundObject();
-        
+
         // Remove me from list of object (= kill me)
         this.killme = new ObjectListMessage(this, false);
-        
+
         setRemoveOutOfVisibleScreen(true);
-        
+
         // Blade can be create by player, check width height
-        if (this.width == 0 || this.height == 0) {
-            this.width = this.images[0].getWidth();
-            this.height = this.images[0].getHeight();
+        if (getWidth() == 0 || getHeight() == 0) {
+            this.setWidth(this.images[0].getWidth());
+            this.setHeight(this.images[0].getHeight());
 
             // Blade have not same y tha player
             this.y += this.initY;
             this.x += this.initX * this.info1;
-            // Statecount to launch knife
-            //this.stateCount = this.statecountLaunchStart;
+
             // this.xSpeed is -1 or 1 to know way to go
-            this.xSpeed = this.initXD * this.info1;
+            setxSpeed(this.initXD * this.info1);
 
             setInfo1(0);
         }
     }
 
-    
+
     @Override
     public void msgTouch(final ObjectEntity obj,
             final KeyboardLayout keyboardLayout) {
@@ -145,14 +144,14 @@ public final class BladeManager extends AbstractParameterObjectEntity {
         if (getCounter() == -1) {
             setCounter(this.images.length - 1);
         }
-     
+
         // Remove blade
         if (getSubState() >= this.subStateToRemoveMe) {
             this.messageDispatcher.sendMessage(EnumMessageType.OBJECT, killme);
         }
-        
+
         moveLeftRight();
-                
+
         moveUpDown();
     }
 
@@ -162,7 +161,7 @@ public final class BladeManager extends AbstractParameterObjectEntity {
     private void moveUpDown() {
         // If blade can't move fully, way not change.
         setySpeed(getySpeed() + 1);
-        
+
         // Move blade
         if (getySpeed() > Y_SPEED_MIDDLE) {
             // Move down

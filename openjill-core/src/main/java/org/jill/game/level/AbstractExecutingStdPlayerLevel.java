@@ -349,23 +349,29 @@ public abstract class AbstractExecutingStdPlayerLevel
             // Check if last objet to clear ALT text
             final int nbInvWeaponIteam = Collections.frequency(listInv,
                     currentInventory);
-            // Nb object match for weapon item
-            int nbObjWeaponItem = 0;
+            final int nbItemPetInv = currentWeapon.getNumberItemPerInventory();
 
-            // If remove inventory, don't compute
-            if (!currentWeapon.isRemoveInInventory()) {
-                for (ObjectEntity currentObj : this.listObject) {
-                    if (currentObj.getType() == currentWeapon.getType()) {
-                        nbObjWeaponItem++;
+            if (nbItemPetInv == -1) {
+                canFireThisWeapon = true;
+            } else {
+                // Nb object match for weapon item
+                int nbObjWeaponItem = 0;
+
+                // If remove inventory, don't compute
+                if (!currentWeapon.isRemoveInInventory()) {
+                    for (ObjectEntity currentObj : this.listObject) {
+                        if (currentObj.getType() == currentWeapon.getType()) {
+                            nbObjWeaponItem++;
+                        }
                     }
                 }
+
+                final int nbMaxObj = nbInvWeaponIteam
+                        * nbItemPetInv;
+
+                canFireThisWeapon = (currentWeapon.isRemoveInInventory()
+                        || nbMaxObj > nbObjWeaponItem);
             }
-
-            final int nbMaxObj = nbInvWeaponIteam
-                    * currentWeapon.getNumberItemPerInventory();
-
-            canFireThisWeapon = (currentWeapon.isRemoveInInventory()
-                    || nbMaxObj > nbObjWeaponItem);
         }
 
         return canFireThisWeapon;

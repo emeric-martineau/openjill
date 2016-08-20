@@ -170,7 +170,7 @@
     },
     {
         "type":62,
-        "implementationClass":"org.jill.game.entities.obj.KniveManager",
+        "implementationClass":"org.jill.game.entities.obj.FirebirdWeaponManager",
         "weapon": {
             "order":3,
             "inventoryKey":"FIREBIRD",

@@ -88,6 +88,11 @@ public final class FirebirdPlayerManager extends AbstractPlayerInteractionManage
     private ObjectEntity stdPlayer;
 
     /**
+     * Initialize inventory.
+     */
+    private boolean initInventory = true;
+
+    /**
      * Default constructor.
      *
      * @param objectParam object paramter
@@ -138,12 +143,6 @@ public final class FirebirdPlayerManager extends AbstractPlayerInteractionManage
         } else {
             // Object load from level
             this.stdPlayer = createPlayer();
-
-            final InventoryItemMessage inventory = new InventoryItemMessage(
-                    EnumInventoryObject.FIREBIRD, true);
-
-            this.messageDispatcher.sendMessage(
-                EnumMessageType.INVENTORY_ITEM, inventory);
         }
     }
 
@@ -176,6 +175,16 @@ public final class FirebirdPlayerManager extends AbstractPlayerInteractionManage
 
     @Override
     public void msgUpdate(final KeyboardLayout keyboardLayout) {
+        if (this.initInventory) {
+            this.initInventory = false;
+
+            final InventoryItemMessage inventory = new InventoryItemMessage(
+                    EnumInventoryObject.FIREBIRD, true);
+
+            this.messageDispatcher.sendMessage(
+                EnumMessageType.INVENTORY_ITEM, inventory);
+        }
+
         move(keyboardLayout);
 
         // Go to left
@@ -236,18 +245,22 @@ public final class FirebirdPlayerManager extends AbstractPlayerInteractionManage
             // If go right and substate positiv
             setxSpeed(this.maxXSpeed);
             setSubState(this.maxXSpeed);
+            setInfo1(X_SPEED_RIGHT);
         } else if (keyboardLayout.isLeft() && getSubState() < X_SPEED_MIDDLE) {
             // If go left and substate negativ
             setxSpeed(this.maxXSpeed * X_SPEED_LEFT);
             setSubState(this.maxXSpeed * X_SPEED_LEFT);
+            setInfo1(X_SPEED_LEFT);
         } else if (keyboardLayout.isRight() && getSubState() <= X_SPEED_MIDDLE) {
             // If go right and substate negativ
             setxSpeed(this.minXSpeed);
             setSubState(this.minXSpeed);
+            setInfo1(X_SPEED_RIGHT);
         } else if (keyboardLayout.isLeft() && getSubState() >= X_SPEED_MIDDLE) {
             // If go left and substate positiv
             setxSpeed(this.minXSpeed * X_SPEED_LEFT);
             setSubState(this.minXSpeed* X_SPEED_LEFT);
+            setInfo1(X_SPEED_LEFT);
         } else {
             // No key pressed
             setxSpeed(X_SPEED_MIDDLE);

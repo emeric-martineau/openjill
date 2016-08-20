@@ -336,5 +336,12 @@
         "minXSpeed":"4",
         "maxXSpeed":"8",
         "jumpInitSpeed":"-6"
+    },
+    "FirebirdWeaponManager":
+    {
+        "tile":"0",
+        "tileSet":"26",
+        "numberTileSet":"4",
+        "initXD":"8"
     }
 }
