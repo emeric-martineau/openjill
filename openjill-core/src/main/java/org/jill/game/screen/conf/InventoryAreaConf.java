@@ -41,7 +41,7 @@ public final class InventoryAreaConf extends AbstractLineTextConf {
     /**
      * Inventory item per picture.
      */
-    private Map<String, InventoryItemConf> items;
+    private Map<String, PictureConf> items;
 
     /**
      * Item configuration.
@@ -127,7 +127,7 @@ public final class InventoryAreaConf extends AbstractLineTextConf {
      *
      * @return the items
      */
-    public Map<String, InventoryItemConf> getItems() {
+    public Map<String, PictureConf> getItems() {
         return items;
     }
 
@@ -136,7 +136,7 @@ public final class InventoryAreaConf extends AbstractLineTextConf {
      *
      * @param map the items to set
      */
-    public void setItems(final Map<String, InventoryItemConf> map) {
+    public void setItems(final Map<String, PictureConf> map) {
         this.items = map;
     }
 

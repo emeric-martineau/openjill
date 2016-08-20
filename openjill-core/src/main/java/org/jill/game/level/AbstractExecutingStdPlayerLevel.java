@@ -10,8 +10,6 @@ import java.util.logging.Logger;
 import org.jill.game.config.JillGameConfig;
 import org.jill.game.config.ObjectInstanceFactory;
 import org.jill.game.entities.obj.player.AbstractPlayerManager;
-import org.jill.game.entities.obj.player.PalyerActionPerState;
-import org.jill.game.entities.obj.player.PlayerAction;
 import org.jill.game.level.cfg.LevelConfiguration;
 import org.jill.game.manager.object.weapon.ObjectMappingWeapon;
 import org.jill.game.screen.conf.GameAreaBorderConf;
@@ -286,13 +284,13 @@ public abstract class AbstractExecutingStdPlayerLevel
 
     @Override
     protected final void doPlayerFire() {
-        // Check if player can fire !
-        if (PalyerActionPerState.canDo(getPlayer().getState(),
-                PlayerAction.CANFIRE)) {
+        final ObjectEntity player = getPlayer();
 
+        // Check if player can fire !
+        if (player.canFire()) {
             // Get inventory
             final List<EnumInventoryObject> listInv =
-                    this.inventoryArea.getAllObjects();
+                    this.inventoryArea.getObjects();
 
             // Get weapon
             final ObjectMappingWeapon[] weaponsList =

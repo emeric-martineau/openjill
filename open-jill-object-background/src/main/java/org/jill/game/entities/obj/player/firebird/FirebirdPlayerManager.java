@@ -13,8 +13,6 @@ import org.jill.openjill.core.api.keyboard.KeyboardLayout;
 import org.jill.openjill.core.api.message.EnumMessageType;
 import org.jill.openjill.core.api.message.object.CreateObjectMessage;
 import org.jill.openjill.core.api.message.object.ReplaceObjectMessage;
-import org.jill.openjill.core.api.message.statusbar.inventory.EnumInventoryObject;
-import org.jill.openjill.core.api.message.statusbar.inventory.InventoryItemMessage;
 
 /**
  * Firebird for player.
@@ -35,7 +33,8 @@ import org.jill.openjill.core.api.message.statusbar.inventory.InventoryItemMessa
  *
  * @author Emeric MARTINEAU
  */
-public final class FirebirdPlayerManager extends AbstractPlayerInteractionManager {
+public final class FirebirdPlayerManager
+        extends AbstractPlayerInteractionManager {
 
     /**
      * Number of picture to remove from left/right.
@@ -86,11 +85,6 @@ public final class FirebirdPlayerManager extends AbstractPlayerInteractionManage
      * Standard player when die or return to jill form.
      */
     private ObjectEntity stdPlayer;
-
-    /**
-     * Initialize inventory.
-     */
-    private boolean initInventory = true;
 
     /**
      * Default constructor.
@@ -175,16 +169,6 @@ public final class FirebirdPlayerManager extends AbstractPlayerInteractionManage
 
     @Override
     public void msgUpdate(final KeyboardLayout keyboardLayout) {
-        if (this.initInventory) {
-            this.initInventory = false;
-
-            final InventoryItemMessage inventory = new InventoryItemMessage(
-                    EnumInventoryObject.FIREBIRD, true);
-
-            this.messageDispatcher.sendMessage(
-                EnumMessageType.INVENTORY_ITEM, inventory);
-        }
-
         move(keyboardLayout);
 
         // Go to left
@@ -352,5 +336,10 @@ public final class FirebirdPlayerManager extends AbstractPlayerInteractionManage
         this.messageDispatcher.sendMessage(EnumMessageType.CREATE_OBJECT, com);
 
         return com.getObject();
+    }
+
+    @Override
+    public boolean canFire() {
+        return false;
     }
 }

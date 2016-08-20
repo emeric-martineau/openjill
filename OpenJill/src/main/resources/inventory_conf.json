@@ -56,11 +56,6 @@
             "tileset":14,
             "tile":14
         },
-        "FIREBIRD":{
-            "tileset":14,
-            "tile":15,
-            "display": false
-        },
         "BAG_OF_COIN":{
             "tileset":14,
             "tile":18

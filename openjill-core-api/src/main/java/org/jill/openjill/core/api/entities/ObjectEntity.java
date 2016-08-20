@@ -75,6 +75,13 @@ public interface ObjectEntity extends ObjectItem {
     boolean isPlayer();
 
     /**
+     * If player can fire (with standard method).
+     * 
+     * @return
+     */
+    boolean canFire();
+
+    /**
      * Write on background.
      *
      * @return writeOnBackGround

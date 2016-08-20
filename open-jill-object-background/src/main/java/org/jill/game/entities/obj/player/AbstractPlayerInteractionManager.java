@@ -22,7 +22,8 @@ import org.jill.openjill.core.api.message.statusbar.inventory.InventoryLifeMessa
  * @author Emeric MARTINEAU
  */
 public abstract class AbstractPlayerInteractionManager
-    extends AbstractParameterObjectEntity implements InterfaceMessageGameHandler {
+    extends AbstractParameterObjectEntity
+        implements InterfaceMessageGameHandler {
 
     protected abstract BackgroundEntity[][] getBackgroundObject();
 

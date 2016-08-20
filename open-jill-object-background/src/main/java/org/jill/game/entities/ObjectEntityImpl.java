@@ -1,5 +1,7 @@
 package org.jill.game.entities;
 
+import org.jill.game.entities.obj.player.PalyerActionPerState;
+import org.jill.game.entities.obj.player.PlayerAction;
 import org.jill.jn.ObjectItem;
 import org.jill.jn.ObjectItemImpl;
 import org.jill.openjill.core.api.entities.BackgroundEntity;
@@ -259,5 +261,16 @@ public abstract class ObjectEntityImpl extends ObjectItemImpl
     @Override
     public boolean isRemoveOutOfVisibleScreen() {
         return this.removeOutOfVisibleScreen;
+    }
+
+        /**
+     * If player can fire (with standard method).
+     *
+     * @return
+     */
+    @Override
+    public boolean canFire() {
+        return PalyerActionPerState.canDo(getState(),
+                PlayerAction.CANFIRE);
     }
 }

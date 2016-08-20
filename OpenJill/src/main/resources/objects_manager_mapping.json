@@ -170,12 +170,6 @@
     },
     {
         "type":62,
-        "implementationClass":"org.jill.game.entities.obj.FirebirdWeaponManager",
-        "weapon": {
-            "order":3,
-            "inventoryKey":"FIREBIRD",
-            "removeInInventory":false,
-            "numberItemPerInventory":-1
-        }
+        "implementationClass":"org.jill.game.entities.obj.FirebirdWeaponManager"
     }
 ]
