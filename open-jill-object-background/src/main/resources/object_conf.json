@@ -335,7 +335,9 @@
         "maxYSpeed":"8",
         "minXSpeed":"4",
         "maxXSpeed":"8",
-        "jumpInitSpeed":"-6"
+        "jumpInitSpeed":"-6",
+        "fireObject": "org.jill.game.entities.obj.FirebirdWeaponManager",
+        "fireObjectOffsetX":"24"
     },
     "FirebirdWeaponManager":
     {
@@ -343,6 +345,6 @@
         "tileSet":"26",
         "numberTileSet":"4",
         "initXD":"8",
-        "fireObject": "org.jill.game.entities.obj.FirebirdWeaponManager"
+        "offsetX":"24"
     }
 }

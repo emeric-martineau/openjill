@@ -37,11 +37,6 @@ public final class FirebirdWeaponManager extends AbstractParameterObjectEntity {
     private BufferedImage[] images;
 
     /**
-     * XD init value.
-     */
-    private int initXD;
-
-    /**
      * Default constructor.
      *
      * @param objectParam object parameter
@@ -71,14 +66,9 @@ public final class FirebirdWeaponManager extends AbstractParameterObjectEntity {
 
         this.backgroundObject = objectParam.getBackgroundObject();
 
-        this.initXD = getConfInteger("initXD");
-
         if (getWidth() == 0 || getHeight() == 0) {
             setWidth(this.images[0].getWidth());
             setHeight(this.images[0].getHeight());
-
-            // this.xSpeed is -1 or 1 to know way to go
-            setxSpeed(this.initXD * this.info1);
         }
     }
 
@@ -116,5 +106,18 @@ public final class FirebirdWeaponManager extends AbstractParameterObjectEntity {
                         backgroundObject)))) {
             this.messageDispatcher.sendMessage(EnumMessageType.OBJECT, killme);
         }
+    }
+
+    @Override
+    public void setInfo1(final int info1) {
+        final int initXD = getConfInteger("initXD");
+        final int offsetX = getConfInteger("offsetX");
+
+        // this.xSpeed is -1 or 1 to know way to go
+        setxSpeed(initXD * info1);
+
+        setX(getX() + (offsetX * info1));
+
+        this.info1 = 0;
     }
 }

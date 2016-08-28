@@ -12,6 +12,7 @@ import org.jill.openjill.core.api.entities.ObjectEntity;
 import org.jill.openjill.core.api.keyboard.KeyboardLayout;
 import org.jill.openjill.core.api.message.EnumMessageType;
 import org.jill.openjill.core.api.message.object.CreateObjectMessage;
+import org.jill.openjill.core.api.message.object.ObjectListMessage;
 import org.jill.openjill.core.api.message.object.ReplaceObjectMessage;
 
 /**
@@ -87,6 +88,11 @@ public final class FirebirdPlayerManager
     private ObjectEntity stdPlayer;
 
     /**
+     * Object when fire.
+     */
+    private String fireObject;
+
+    /**
      * Default constructor.
      *
      * @param objectParam object paramter
@@ -129,6 +135,8 @@ public final class FirebirdPlayerManager
         this.maxXSpeed = getConfInteger("maxXSpeed");
 
         this.jumpInitSpeed = getConfInteger("jumpInitSpeed");
+
+        this.fireObject = getConfString("fireObject");
 
         if (getWidth() == 0) {
             // Object create during game
@@ -208,14 +216,16 @@ public final class FirebirdPlayerManager
             return;
         }
 
-
-
         movePlayerUpDownStand(keyboardLayout);
         movePlayerLeftRightStand(keyboardLayout);
 
         // When firebird fire, it's also jump. Jump only if not jumping.
-        if (keyboardLayout.isFire() && !keyboardLayout.isJump()) {
-            jump();
+        if (keyboardLayout.isFire()) {
+            if (!keyboardLayout.isJump()) {
+                jump();
+            }
+
+            createWeapon();
         }
     }
 
@@ -341,5 +351,31 @@ public final class FirebirdPlayerManager
     @Override
     public boolean canFire() {
         return false;
+    }
+
+    private void createWeapon() {
+        ObjectEntity weapon;
+
+        final CreateObjectMessage com
+                = CreateObjectMessage.buildFromClassName(this.fireObject);
+
+        this.messageDispatcher.sendMessage(EnumMessageType.CREATE_OBJECT, com);
+
+        int weaponInfo1;
+
+        if (getSubState() >= X_SPEED_MIDDLE) {
+            weaponInfo1 = X_SPEED_RIGHT;
+        } else {
+            weaponInfo1 = X_SPEED_LEFT;
+        }
+
+        weapon = com.getObject();
+
+        weapon.setX(getX());
+        weapon.setY(getY());
+        weapon.setInfo1(weaponInfo1);
+
+        this.messageDispatcher.sendMessage(EnumMessageType.OBJECT,
+                new ObjectListMessage(weapon, true)) ;
     }
 }

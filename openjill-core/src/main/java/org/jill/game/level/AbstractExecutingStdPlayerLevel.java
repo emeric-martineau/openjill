@@ -411,8 +411,6 @@ public abstract class AbstractExecutingStdPlayerLevel
 
         final ObjectEntity player = getPlayer();
 
-        weapon.setxSpeed(player.getxSpeed());
-
         weapon.setX(player.getX());
         weapon.setY(player.getY());
         weapon.setInfo1(player.getInfo1());
