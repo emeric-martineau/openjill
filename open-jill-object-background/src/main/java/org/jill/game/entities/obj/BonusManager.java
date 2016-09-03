@@ -49,7 +49,7 @@ public final class BonusManager extends AbstractParameterObjectEntity {
     /**
      * New player.
      */
-    private ObjectEntity newPlayer;
+    private String newPlacerClass;
 
     /**
      * Nb bullet when player change.
@@ -90,10 +90,10 @@ public final class BonusManager extends AbstractParameterObjectEntity {
         }
 
         if (keySplit.length > 3) {
-            this.newPlayer = createPlayer(keySplit[3]);
+            this.newPlacerClass = keySplit[3];
             this.nbColoredBullet = getConfInteger("nbColoredBullet");
         } else {
-            this.newPlayer = null;
+            this.newPlacerClass = null;
         }
 
         // Init list of picture
@@ -126,16 +126,13 @@ public final class BonusManager extends AbstractParameterObjectEntity {
         if (obj.isPlayer()) {
             sendItem();
 
-            if (this.newPlayer != null) {
+            if (this.newPlacerClass != null) {
                 replacePlayer(obj);
+            } else {
+                this.messageDispatcher.sendMessage(
+                    EnumMessageType.INVENTORY_ITEM,
+                    this.inventory);
             }
-
-            // Put always in inventory list.
-            // This game engine store in inventory list item to know weapon to
-            // need create when game press fire key.
-            this.messageDispatcher.sendMessage(
-                EnumMessageType.INVENTORY_ITEM,
-                this.inventory);
         }
     }
 
@@ -161,21 +158,22 @@ public final class BonusManager extends AbstractParameterObjectEntity {
      * @param obj
      */
     private void replacePlayer(final ObjectEntity obj) {
-        if (!obj.getClass().getName().equals(
-                this.newPlayer.getClass().getName())) {
-            this.newPlayer.setX(obj.getX());
-            this.newPlayer.setY(obj.getY()
-                    + (obj.getHeight() - this.newPlayer.getHeight()));
-            this.newPlayer.setInfo1(obj.getInfo1());
+        if (!obj.getClass().getName().equals(this.newPlacerClass)) {
+            final ObjectEntity player = createPlayer(this.newPlacerClass);
+
+            player.setX(obj.getX());
+            player.setY(obj.getY()
+                    + (obj.getHeight() - player.getHeight()));
+            player.setInfo1(obj.getInfo1());
 
             // Create std player and call msgKill
             final ReplaceObjectMessage rom = new ReplaceObjectMessage(obj,
-                    this.newPlayer);
+                    player);
 
             this.messageDispatcher.sendMessage(EnumMessageType.REPLACE_OBJECT,
                     rom);
 
-            BulletObjectFactory.explode(this.newPlayer, this.nbColoredBullet,
+            BulletObjectFactory.explode(player, this.nbColoredBullet,
                     messageDispatcher);
         }
     }

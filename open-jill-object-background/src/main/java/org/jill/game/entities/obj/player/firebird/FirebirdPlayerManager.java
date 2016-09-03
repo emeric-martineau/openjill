@@ -83,11 +83,6 @@ public final class FirebirdPlayerManager
     private int jumpInitSpeed;
 
     /**
-     * Standard player when die or return to jill form.
-     */
-    private ObjectEntity stdPlayer;
-
-    /**
      * Object when fire.
      */
     private String fireObject;
@@ -142,9 +137,6 @@ public final class FirebirdPlayerManager
             // Object create during game
             setWidth(this.leftImages[0].getWidth());
             setHeight(this.leftImages[0].getHeight());
-        } else {
-            // Object load from level
-            this.stdPlayer = createPlayer();
         }
     }
 
@@ -315,24 +307,19 @@ public final class FirebirdPlayerManager
     @Override
     protected void killPlayer(final int typeOfDeath,
             final BackgroundEntity senderBack) {
+        final ObjectEntity stdPlayer = createPlayer();
 
-        // If FirePlayerManage is create during game. stdPlayer is not set to
-        // prevent hang game cause standard player is long to load.
-        if (this.stdPlayer == null) {
-            this.stdPlayer = createPlayer();
-        }
-
-        this.stdPlayer.setX(getX());
-        this.stdPlayer.setY(getY());
+        stdPlayer.setX(getX());
+        stdPlayer.setY(getY());
 
         // Create std player and call msgKill
         final ReplaceObjectMessage rom = new ReplaceObjectMessage(this,
-                this.stdPlayer);
+                stdPlayer);
 
         this.messageDispatcher.sendMessage(EnumMessageType.REPLACE_OBJECT, rom);
 
         // Simulate kill message
-        this.stdPlayer.msgKill(senderBack, 0, typeOfDeath);
+        stdPlayer.msgKill(senderBack, 0, typeOfDeath);
     }
 
     /**

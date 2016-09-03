@@ -87,6 +87,7 @@ public final class TileManagerImpl implements TileManager {
      */
     private Color[] colorMap;
 
+    private Map<String, BufferedImage> imageCache = new HashMap<>();
 
     /**
      * Return an instance of TileManagerImpl.
@@ -105,26 +106,14 @@ public final class TileManagerImpl implements TileManager {
             final File dmaFileName, final EnumScreenType typeScreen)
             throws IOException, ClassNotFoundException, IllegalAccessException,
             InstantiationException {
-//        final String key = String.format("%s:%s:%s", shaFileName.getName(),
-//                dmaFileName.getName(), typeScreen.toString());
-//
-//        TileManager pc;
 
-//        if (INSTANCES.containsKey(key)) {
-//            pc = INSTANCES.get(key);
-//        } else {
-            final ShaFile shaFile = ObjectInstanceFactory.getNewSha();
-            shaFile.load(shaFileName.getAbsolutePath());
+            final ShaFile currentShaFile = ObjectInstanceFactory.getNewSha();
+            currentShaFile.load(shaFileName.getAbsolutePath());
 
-            final DmaFile dmaFile = ObjectInstanceFactory.getNewDma();
-            dmaFile.load(dmaFileName.getAbsolutePath());
+            final DmaFile currentDmaFile = ObjectInstanceFactory.getNewDma();
+            currentDmaFile.load(dmaFileName.getAbsolutePath());
 
-            init(shaFile, dmaFile, typeScreen);
-
-//            INSTANCES.put(key, pc);
-//        }
-//
-//        return pc;
+            init(currentShaFile, currentDmaFile, typeScreen);
     }
 
     /**
@@ -152,12 +141,16 @@ public final class TileManagerImpl implements TileManager {
         // Init background picture
         mapBackgroundPicture = initMapOfBackgroundSprite(dmaFileContent);
 
-        if (EnumScreenType.CGA == tpScreen) {
-            colorMap = CGA_COLOR_MAP.getColorMap();
-        } else if (EnumScreenType.EGA == tpScreen) {
-            colorMap = EGA_COLOR_MAP.getColorMap();
-        } else {
-            colorMap = VGA_COLOR_MAP.getColorMap();
+        switch (tpScreen) {
+            case CGA:
+                colorMap = CGA_COLOR_MAP.getColorMap();
+                break;
+            case EGA:
+                colorMap = EGA_COLOR_MAP.getColorMap();
+                break;
+            default:
+                colorMap = VGA_COLOR_MAP.getColorMap();
+                break;
         }
 
         // Recreate color but without alpha chanel
@@ -187,16 +180,11 @@ public final class TileManagerImpl implements TileManager {
         ShaTileSet tileSet;
 
         // Init map of tileset
-        for (int indexTileSet = 0; indexTileSet < tileSetArray.length;
-                indexTileSet++) {
-            tileSet = tileSetArray[indexTileSet];
+        for (ShaTileSet tileSetArray1 : tileSetArray) {
+            tileSet = tileSetArray1;
 
-//           if ((tileSet.getBitColor() != 8) || (typeScreen == ScreenType.VGA))
-//            {
-                tileSetIndex = Integer.valueOf(tileSet.getTitleSetIndex());
-
-                localMapOfTile.put(tileSetIndex, tileSet.getShaTile());
-//            }
+            tileSetIndex = tileSet.getTitleSetIndex();
+            localMapOfTile.put(tileSetIndex, tileSet.getShaTile());
         }
 
         return localMapOfTile;
@@ -244,12 +232,16 @@ public final class TileManagerImpl implements TileManager {
                         && (dmaEntry.getTile() < tileArray.length)) {
                     tile = tileArray[dmaEntry.getTile()];
 
-                    if (typeScreen == EnumScreenType.CGA) {
-                        tilePicture = tile.getPictureCga();
-                    } else if (typeScreen == EnumScreenType.EGA) {
-                        tilePicture = tile.getPictureEga();
-                    } else {
-                        tilePicture = tile.getPictureVga();
+                    switch (this.typeScreen) {
+                        case CGA:
+                            tilePicture = tile.getPictureCga();
+                            break;
+                        case EGA:
+                            tilePicture = tile.getPictureEga();
+                            break;
+                        default:
+                            tilePicture = tile.getPictureVga();
+                            break;
                     }
 
                     localMapBackgroundPicture.put(mapCode, tilePicture);
@@ -269,7 +261,7 @@ public final class TileManagerImpl implements TileManager {
      */
     @Override
     public BufferedImage getBackgroundPicture(final int mapCode) {
-        return mapBackgroundPicture.get(Integer.valueOf(mapCode));
+        return mapBackgroundPicture.get(mapCode);
     }
 
     /**
@@ -285,19 +277,32 @@ public final class TileManagerImpl implements TileManager {
             final int tileIndex) {
         BufferedImage image = null;
 
-        // Array of tile
-        ShaTile[] tileArray = mapOfTile.get(tileSetIndex);
+        final String cacheKey = String.format("%d-%d", tileSetIndex, tileIndex);
 
-        if (tileArray != null && (tileIndex < tileArray.length)) {
-            ShaTile tile = tileArray[tileIndex];
+        if (imageCache.containsKey(cacheKey)) {
+            image = imageCache.get(cacheKey);
+        } else {
 
-            if (typeScreen == EnumScreenType.CGA) {
-                image = tile.getPictureCga();
-            } else if (typeScreen == EnumScreenType.EGA) {
-                image = tile.getPictureEga();
-            } else {
-                image = tile.getPictureVga();
+            // Array of tile
+            ShaTile[] tileArray = mapOfTile.get(tileSetIndex);
+
+            if (tileArray != null && (tileIndex < tileArray.length)) {
+                ShaTile tile = tileArray[tileIndex];
+
+                switch (typeScreen) {
+                    case CGA:
+                        image = tile.getPictureCga();
+                        break;
+                    case EGA:
+                        image = tile.getPictureEga();
+                        break;
+                    default:
+                        image = tile.getPictureVga();
+                        break;
+                }
             }
+
+            imageCache.put(cacheKey, image);
         }
 
         return image;
