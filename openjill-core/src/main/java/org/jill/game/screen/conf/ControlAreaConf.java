@@ -31,12 +31,17 @@ public final class ControlAreaConf extends AbstractLineTextConf {
     private Map<String, String> altKeyText;
 
     /**
+     * Ctrl key text by inventory.
+     */
+    private Map<String, String> ctrlKeyText;
+
+    /**
      * Special key.
      *
      * @return special key
      */
     public List<TextToDraw> getSpecialKey() {
-        return specialKey;
+        return this.specialKey;
     }
 
     /**
@@ -54,7 +59,7 @@ public final class ControlAreaConf extends AbstractLineTextConf {
      * @return bullet
      */
     public TextToDraw getTurtleBullet() {
-        return turtleBullet;
+        return this.turtleBullet;
     }
 
     /**
@@ -72,7 +77,7 @@ public final class ControlAreaConf extends AbstractLineTextConf {
      * @return bullet
      */
     public TextToDraw getNoiseBullet() {
-        return noiseBullet;
+        return this.noiseBullet;
     }
 
     /**
@@ -90,7 +95,7 @@ public final class ControlAreaConf extends AbstractLineTextConf {
      * @return alt text
      */
     public Map<String, String> getAltKeyText() {
-        return altKeyText;
+        return this.altKeyText;
     }
 
     /**
@@ -100,5 +105,23 @@ public final class ControlAreaConf extends AbstractLineTextConf {
      */
     public void setAltKeyText(final Map<String, String> altText) {
         this.altKeyText = altText;
+    }
+
+    /**
+     * Ctrl text.
+     *
+     * @return alt text
+     */
+    public Map<String, String> getCtrlKeyText() {
+        return this.ctrlKeyText;
+    }
+
+    /**
+     * Ctrl text.
+     *
+     * @param ctrlText alt text
+     */
+    public void setCtrlKeyText(final Map<String, String> ctrlText) {
+        this.ctrlKeyText = ctrlText;
     }
 }

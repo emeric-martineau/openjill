@@ -404,7 +404,8 @@ public final class InventoryArea implements InterfaceMessageGameHandler {
                 || (msg.isAlone() && !this.objects.contains(obj)));
 
         if (msg.isAddObject()) {
-            if (add) {
+            // Add item only if we have picture.
+            if (add && this.listItem.containsKey(obj)) {
                 this.objects.add(obj);
             }
 
@@ -413,6 +414,8 @@ public final class InventoryArea implements InterfaceMessageGameHandler {
             }
         } else {
             this.objects.remove(obj);
+
+            // TODO if remove FIREBIRD, change ControlArea text
         }
     }
 

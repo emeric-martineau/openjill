@@ -6,6 +6,7 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.jill.game.screen.conf.ControlAreaConf;
@@ -41,6 +42,16 @@ public class ControlArea implements InterfaceMessageGameHandler {
      * To find alt key text.
      */
     private static final String ALT_TEXT_KEY = "-alt-";
+
+    /**
+     * Key for empty string.
+     */
+    private static final String EMPTY_CTRL_TEXT = "empty";
+
+    /**
+     * To find ctrl key text.
+     */
+    private static final String CTRL_TEXT_KEY = "-ctrl-";
 
     /**
      * Shift.
@@ -91,6 +102,11 @@ public class ControlArea implements InterfaceMessageGameHandler {
      * Alt key text.
      */
     private final TextToDraw altKey;
+
+    /**
+     * Alt key text.
+     */
+    private final TextToDraw ctrlKey;
 
     /**
      * Turtle mode.
@@ -173,6 +189,16 @@ public class ControlArea implements InterfaceMessageGameHandler {
         }
 
         this.altKey = lAltKey;
+
+        for (TextToDraw ttd : this.conf.getText()) {
+            if (CTRL_TEXT_KEY.equals(ttd.getText())) {
+                lAltKey = ttd;
+                ttd.setText(this.conf.getCtrlKeyText().get(EMPTY_CTRL_TEXT));
+                break;
+            }
+        }
+
+        this.ctrlKey = lAltKey;
 
         controlPicture = statusBar.createControlArea();
         g2Control = controlPicture.createGraphics();
@@ -304,19 +330,37 @@ public class ControlArea implements InterfaceMessageGameHandler {
                     // clear text when not more item in list
                     this.altKey.setText(
                             this.conf.getAltKeyText().get(EMPTY_ALT_TEXT));
-                } else {
-                    final String txt = this.conf.getAltKeyText().get(
-                            iim.getObj().toString());
 
-                    if (txt != null) {
-                        // If text found
-                        this.altKey.setText(txt);
-                    }
+                    this.ctrlKey.setText(
+                            this.conf.getCtrlKeyText().get(EMPTY_CTRL_TEXT));
+                } else {
+                    configureTextElement(iim, this.conf.getAltKeyText(),
+                            this.altKey);
+                    configureTextElement(iim, this.conf.getCtrlKeyText(),
+                            this.ctrlKey);
                 }
 
                 break;
             default:
                 // Nothing
+        }
+    }
+
+    /**
+     * Configure text element.
+     *
+     * @param iim inventory message
+     * @param texts map of text
+     * @param textDestination text to draw
+     */
+    private void configureTextElement(final InventoryItemMessage iim,
+            final Map<String, String> texts, final TextToDraw textDestination) {
+        final String txt = texts.get(
+                iim.getObj().toString());
+
+        if (txt != null) {
+            // If text found
+            textDestination.setText(txt);
         }
     }
 }
