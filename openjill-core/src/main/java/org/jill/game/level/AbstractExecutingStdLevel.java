@@ -11,6 +11,7 @@ import java.util.ListIterator;
 import org.jill.game.gui.menu.ClassicMenu;
 import org.jill.game.gui.menu.MenuInterface;
 import org.jill.game.level.cfg.LevelConfiguration;
+import org.jill.game.manager.object.weapon.ObjectMappingWeapon;
 import org.jill.openjill.core.api.message.statusbar.inventory.EnumInventoryObject;
 import org.jill.openjill.core.api.message.statusbar.inventory.InventoryItemMessage;
 import org.jill.game.screen.ControlArea;
@@ -184,11 +185,17 @@ public abstract class AbstractExecutingStdLevel extends AbstractMenuJillLevel {
                 inventoryArea);
         messageDispatcher.addHandler(EnumMessageType.INVENTORY_POINT,
                 inventoryArea);
+        messageDispatcher.addHandler(EnumMessageType.CHANGE_PLAYER_CHARACTER,
+                inventoryArea);
 
         messageDispatcher.addHandler(EnumMessageType.INVENTORY_ITEM,
                 controlArea);
+        messageDispatcher.addHandler(EnumMessageType.CHANGE_PLAYER_CHARACTER,
+                controlArea);
 
         messageDispatcher.addHandler(EnumMessageType.MESSAGE_BOX, this);
+        messageDispatcher.addHandler(EnumMessageType.CHANGE_PLAYER_CHARACTER,
+                this);
 
         final RectangleConf offset
                     = this.statusBar.getGameAreaConf().getOffset();
@@ -641,19 +648,31 @@ public abstract class AbstractExecutingStdLevel extends AbstractMenuJillLevel {
     public void recieveMessage(final EnumMessageType type, final Object msg) {
         super.recieveMessage(type, msg);
 
-        if (type == EnumMessageType.MESSAGE_BOX) {
-            int msgId = (Integer) msg;
+        switch (type) {
+            case MESSAGE_BOX:
+                int msgId = (Integer) msg;
 
-            if (msgId >= 0) {
-                final List<VclTextEntry> messages = vclFile.getVclText();
+                if (msgId >= 0) {
+                    final List<VclTextEntry> messages = vclFile.getVclText();
 
-                if (msgId > messages.size() - 1) {
-                    msgId = (msgId % messages.size()) - 1;
+                    if (msgId > messages.size() - 1) {
+                        msgId = (msgId % messages.size()) - 1;
+                    }
+
+                    this.infoBox.setContent(messages.get(msgId).getText());
+                    this.infoBox.setEnable(true);
                 }
 
-                this.infoBox.setContent(messages.get(msgId).getText());
-                this.infoBox.setEnable(true);
-            }
+                break;
+            case CHANGE_PLAYER_CHARACTER:
+                // Get weapon
+                final ObjectMappingWeapon[] weaponsList =
+                    this.objectCache.getTypeOfInventoryWeapon();
+
+                // TODO find last weapon in inventory and update ControlArea
+
+                this.updateInventoryScreen = true;
+                break;
         }
     }
 

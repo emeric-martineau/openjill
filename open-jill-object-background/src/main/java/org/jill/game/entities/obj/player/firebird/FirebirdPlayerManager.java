@@ -14,6 +14,7 @@ import org.jill.openjill.core.api.message.EnumMessageType;
 import org.jill.openjill.core.api.message.object.CreateObjectMessage;
 import org.jill.openjill.core.api.message.object.ObjectListMessage;
 import org.jill.openjill.core.api.message.object.ReplaceObjectMessage;
+import org.jill.openjill.core.api.message.statusbar.inventory.EnumInventoryObject;
 
 /**
  * Firebird for player.
@@ -135,6 +136,10 @@ public final class FirebirdPlayerManager
             setWidth(this.leftImages[0].getWidth());
             setHeight(this.leftImages[0].getHeight());
         }
+
+        this.messageDispatcher.sendMessage(
+                EnumMessageType.CHANGE_PLAYER_CHARACTER,
+                EnumInventoryObject.FIREBIRD);
     }
 
 

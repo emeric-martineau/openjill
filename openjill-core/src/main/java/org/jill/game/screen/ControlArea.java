@@ -6,10 +6,10 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.jill.game.screen.conf.ControlAreaConf;
+import org.jill.game.screen.conf.KeysControlText;
 import org.jill.game.screen.conf.LineToDraw;
 import org.jill.game.screen.conf.TextToDraw;
 import org.jill.openjill.core.api.manager.
@@ -34,11 +34,6 @@ public class ControlArea implements InterfaceMessageGameHandler {
                     ControlArea.class.getName());
 
     /**
-     * Key for empty string.
-     */
-    private static final String EMPTY_ALT_TEXT = "empty";
-
-    /**
      * To find alt key text.
      */
     private static final String ALT_TEXT_KEY = "-alt-";
@@ -46,7 +41,7 @@ public class ControlArea implements InterfaceMessageGameHandler {
     /**
      * Key for empty string.
      */
-    private static final String EMPTY_CTRL_TEXT = "empty";
+    private static final String EMPTY_TEXT = "      ";
 
     /**
      * To find ctrl key text.
@@ -104,9 +99,14 @@ public class ControlArea implements InterfaceMessageGameHandler {
     private final TextToDraw altKey;
 
     /**
-     * Alt key text.
+     * Shift key text.
      */
-    private final TextToDraw ctrlKey;
+    private final TextToDraw shiftKey;
+
+    /**
+     * Configuration.
+     */
+    private final ControlAreaConf conf;
 
     /**
      * Turtle mode.
@@ -118,10 +118,11 @@ public class ControlArea implements InterfaceMessageGameHandler {
      */
     private boolean noiseMode = false;
 
+
     /**
-     * Configuration.
+     * Current player config for update text.
      */
-    private final ControlAreaConf conf;
+    private KeysControlText currentPlayerConfig;
 
     /**
      * Read config file.
@@ -183,7 +184,7 @@ public class ControlArea implements InterfaceMessageGameHandler {
         for (TextToDraw ttd : this.conf.getText()) {
             if (ALT_TEXT_KEY.equals(ttd.getText())) {
                 lAltKey = ttd;
-                ttd.setText(this.conf.getAltKeyText().get(EMPTY_ALT_TEXT));
+                ttd.setText(EMPTY_TEXT);
                 break;
             }
         }
@@ -193,12 +194,12 @@ public class ControlArea implements InterfaceMessageGameHandler {
         for (TextToDraw ttd : this.conf.getText()) {
             if (CTRL_TEXT_KEY.equals(ttd.getText())) {
                 lAltKey = ttd;
-                ttd.setText(this.conf.getCtrlKeyText().get(EMPTY_CTRL_TEXT));
+                ttd.setText(EMPTY_TEXT);
                 break;
             }
         }
 
-        this.ctrlKey = lAltKey;
+        this.shiftKey = lAltKey;
 
         controlPicture = statusBar.createControlArea();
         g2Control = controlPicture.createGraphics();
@@ -210,6 +211,8 @@ public class ControlArea implements InterfaceMessageGameHandler {
      * @return picture
      */
     public final BufferedImage drawControl() {
+        findDefaultPlayerCharacter();
+
         // Draw background and clear
         g2Control.setColor(inventoryBackgroundColor);
         g2Control.fillRect(0, 0, controlPicture.getWidth(),
@@ -284,6 +287,23 @@ public class ControlArea implements InterfaceMessageGameHandler {
     }
 
     /**
+     * Find default player character.
+     */
+    private void findDefaultPlayerCharacter() {
+        if (this.currentPlayerConfig == null) {
+            for (KeysControlText kct : this.conf.getKeysControlText()) {
+                if (kct.isDefaut()) {
+                    this.currentPlayerConfig = kct;
+                    this.altKey.setText(kct.getAlt());
+                    this.shiftKey.setText(kct.getShift());
+
+                    break;
+                }
+            }
+        }
+    }
+
+    /**
      * Turtule mode.
      *
      * @return turtleMode
@@ -324,21 +344,22 @@ public class ControlArea implements InterfaceMessageGameHandler {
         final Object msg) {
         switch(type) {
             case INVENTORY_ITEM :
-                final InventoryItemMessage iim = (InventoryItemMessage) msg;
-
-                if (iim.isLastItemInv()) {
-                    // clear text when not more item in list
-                    this.altKey.setText(
-                            this.conf.getAltKeyText().get(EMPTY_ALT_TEXT));
-
-                    this.ctrlKey.setText(
-                            this.conf.getCtrlKeyText().get(EMPTY_CTRL_TEXT));
-                } else {
-                    configureTextElement(iim, this.conf.getAltKeyText(),
-                            this.altKey);
-                    configureTextElement(iim, this.conf.getCtrlKeyText(),
-                            this.ctrlKey);
+                if (this.currentPlayerConfig == null) {
+                    findDefaultPlayerCharacter();
                 }
+
+                if (this.currentPlayerConfig.isCanUpdateAltText()) {
+                    updateTextWithInventory(msg);
+                }
+                break;
+            case CHANGE_PLAYER_CHARACTER:
+                final KeysControlText kct = this.conf.getKeysControlText(
+                        msg.toString());
+
+                this.shiftKey.setText(kct.getShift());
+                this.altKey.setText(kct.getAlt());
+
+                this.currentPlayerConfig = kct;
 
                 break;
             default:
@@ -347,20 +368,22 @@ public class ControlArea implements InterfaceMessageGameHandler {
     }
 
     /**
-     * Configure text element.
+     * Update text when receive inventory message.
      *
-     * @param iim inventory message
-     * @param texts map of text
-     * @param textDestination text to draw
+     * @param msg message
      */
-    private void configureTextElement(final InventoryItemMessage iim,
-            final Map<String, String> texts, final TextToDraw textDestination) {
-        final String txt = texts.get(
-                iim.getObj().toString());
+    private void updateTextWithInventory(Object msg) {
+        final InventoryItemMessage iim = (InventoryItemMessage) msg;
 
-        if (txt != null) {
-            // If text found
-            textDestination.setText(txt);
+        if (iim.isLastItemInv()) {
+            this.shiftKey.setText(EMPTY_TEXT);
+        } else {
+            final KeysControlText kct = this.conf.getKeysControlText(
+                msg.toString());
+
+            if (kct != null) {
+                this.shiftKey.setText(kct.getShift());
+            }
         }
     }
 }

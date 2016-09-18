@@ -21,11 +21,18 @@ public class MessageDispatcherImpl implements MessageDispatcher {
             handlersList = new EnumMap<>(EnumMessageType.class);
 
     /**
+     * List of unsend messsage.
+     */
+    private final Map<EnumMessageType, List<Object>>
+            unsendMessageList = new EnumMap<>(EnumMessageType.class);
+
+    /**
      * Constructor.
      */
     public MessageDispatcherImpl() {
         for (EnumMessageType mt : EnumMessageType.values()) {
             handlersList.put(mt, new ArrayList<InterfaceMessageGameHandler>());
+            unsendMessageList.put(mt, new ArrayList());
         }
     }
 
@@ -42,16 +49,16 @@ public class MessageDispatcherImpl implements MessageDispatcher {
 
         handlers = handlersList.get(type);
 
-        for (InterfaceMessageGameHandler mgh : handlers) {
-            mgh.recieveMessage(type, msg);
+        if (handlers.isEmpty()) {
+            final List<Object> list = unsendMessageList.get(type);
+
+            list.add(msg);
+        } else {
+            for (InterfaceMessageGameHandler mgh : handlers) {
+                mgh.recieveMessage(type, msg);
+            }
         }
     }
-    /*
-    public void sendMessage(final MessageType type, final Object msg) {
-        final List<Object> messages = messagesList.get(type);
-
-        messages.add(msg);
-    }*/
 
     /**
      * Add handler.
@@ -66,6 +73,16 @@ public class MessageDispatcherImpl implements MessageDispatcher {
                 handlersList.get(type);
 
         handlers.add(handler);
+
+        final List<Object> list = unsendMessageList.get(type);
+
+        if (!list.isEmpty()) {
+            for (Object obj : list) {
+                handler.recieveMessage(type, obj);
+            }
+
+            list.clear();
+        }
     }
 
     /**

@@ -1,7 +1,9 @@
 package org.jill.game.screen.conf;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 /**
  * Config class to control area.
@@ -28,12 +30,7 @@ public final class ControlAreaConf extends AbstractLineTextConf {
     /**
      * Alt key text by inventory.
      */
-    private Map<String, String> altKeyText;
-
-    /**
-     * Ctrl key text by inventory.
-     */
-    private Map<String, String> ctrlKeyText;
+    private Map<String, KeysControlText> keysControlText;
 
     /**
      * Special key.
@@ -92,10 +89,29 @@ public final class ControlAreaConf extends AbstractLineTextConf {
     /**
      * Alt text.
      *
+     * @param key key to find
+     *
      * @return alt text
      */
-    public Map<String, String> getAltKeyText() {
-        return this.altKeyText;
+    public KeysControlText getKeysControlText(final String key) {
+        return this.keysControlText.get(key);
+    }
+
+    /**
+     * Alt text.
+     *
+     * @return alt text
+     */
+    public List<KeysControlText> getKeysControlText() {
+        List<KeysControlText> types = new ArrayList<>(
+                this.keysControlText.size());
+
+        for (Entry<String, KeysControlText> entry
+                : this.keysControlText.entrySet()) {
+            types.add(entry.getValue());
+        }
+
+        return types;
     }
 
     /**
@@ -103,25 +119,7 @@ public final class ControlAreaConf extends AbstractLineTextConf {
      *
      * @param altText alt text
      */
-    public void setAltKeyText(final Map<String, String> altText) {
-        this.altKeyText = altText;
-    }
-
-    /**
-     * Ctrl text.
-     *
-     * @return alt text
-     */
-    public Map<String, String> getCtrlKeyText() {
-        return this.ctrlKeyText;
-    }
-
-    /**
-     * Ctrl text.
-     *
-     * @param ctrlText alt text
-     */
-    public void setCtrlKeyText(final Map<String, String> ctrlText) {
-        this.ctrlKeyText = ctrlText;
+    public void setKeysControlText(final Map<String, KeysControlText> altText) {
+        this.keysControlText = altText;
     }
 }

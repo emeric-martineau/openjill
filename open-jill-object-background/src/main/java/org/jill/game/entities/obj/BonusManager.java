@@ -128,12 +128,10 @@ public final class BonusManager extends AbstractParameterObjectEntity {
 
             if (this.newPlacerClass != null) {
                 replacePlayer(obj);
+            } else {
+                this.messageDispatcher.sendMessage(
+                    EnumMessageType.INVENTORY_ITEM, this.inventory);
             }
-
-            this.messageDispatcher.sendMessage(
-                EnumMessageType.INVENTORY_ITEM,
-                this.inventory);
-
         }
     }
 

@@ -11,6 +11,7 @@ import org.jill.openjill.core.api.jill.JillConst;
 import org.jill.openjill.core.api.keyboard.KeyboardLayout;
 import org.jill.openjill.core.api.manager.TextManager;
 import org.jill.openjill.core.api.message.EnumMessageType;
+import org.jill.openjill.core.api.message.statusbar.inventory.EnumInventoryObject;
 
 /**
  * Final player class.
@@ -178,6 +179,9 @@ public final class PlayerManager extends AbstractPlayerManager {
             setWidth(img.getWidth());
             setHeight(img.getHeight());
         }
+
+        messageDispatcher.sendMessage(EnumMessageType.CHANGE_PLAYER_CHARACTER,
+                EnumInventoryObject.JILL);
     }
 
     /**

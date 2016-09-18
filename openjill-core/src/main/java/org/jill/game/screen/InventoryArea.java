@@ -414,8 +414,6 @@ public final class InventoryArea implements InterfaceMessageGameHandler {
             }
         } else {
             this.objects.remove(obj);
-
-            // TODO if remove FIREBIRD, change ControlArea text
         }
     }
 

@@ -4,6 +4,7 @@ Level : noise
 
 Sound : do it
 
+
 Jill : Jill fish character
 Jill : Jill frog character
 Jill : Jill firebird character
@@ -16,13 +17,6 @@ Background
 
 Object :
 --------
- - weapon : 
-    In "AbstractExecutingStdPlayerLevel" class, method "doPlayerFire" check if
-    player can fire. Method "checkWeapon" check if player can be fire knive.
-    Must make a generic method.
- 
-    Example for knive : must remove key entry in inventory and remove ALT text.
-    Example for blade : can fire number of blade key item but ALT text not clear
 
 Change needed ?
 ---------------
@@ -30,6 +24,7 @@ Add :
  - StatusBar factory,
  - InventoryArea factory,
  - ControlArea factory,
+ - Create annotation for message dispatcher ?
  
 -----------------
 Creative Music CMF to Standard MIDI

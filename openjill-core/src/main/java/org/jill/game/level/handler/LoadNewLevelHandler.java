@@ -2,6 +2,7 @@ package org.jill.game.level.handler;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.ListIterator;
 import org.jill.game.config.ObjectInstanceFactory;
 import org.jill.game.entities.obj.player.PlayerState;
 import org.jill.game.level.AbstractChangeLevel;
@@ -133,7 +134,14 @@ public class LoadNewLevelHandler extends AbstractChangeLevel {
         final List<Integer> inventoryList =
                 this.jnFile.getSaveData().getInventory();
 
-        for (Integer inventoryItem : inventoryList) {
+        final ListIterator<Integer> itInventory
+                = inventoryList.listIterator(inventoryList.size());
+
+        Integer inventoryItem;
+
+        while (itInventory.hasPrevious()) {
+            inventoryItem = itInventory.previous();
+
             inventory = new InventoryItemMessage(
                     enumList[inventoryItem], true);
 

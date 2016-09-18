@@ -124,15 +124,28 @@
             "x":53,
             "y":43
     },
-    "altKeyText":{
-        "empty":"     ",
-        "KNIVE":"knife",
-        "BLADE":"blade",
-        "FROG":"shoot",
-        "FIREBIRD":"fire"
-    },
-    "ctrlKeyText":{
-        "empty":"jump",
-        "FIREBIRD":"flap"
+    "keysControlText":{
+        "KNIVE":{
+            "alt":"knife",
+            "shift":"jump"
+        },
+        "BLADE":{
+            "alt":"blade",
+            "shift":"jump"
+        },
+        "FROG":{
+            "alt":"shoot",
+            "shift":"jump"
+        },
+        "FIREBIRD":{
+            "alt":"fire",
+            "shift":"flap",
+            "canUpdateAltText": false
+        },
+        "JILL":{
+            "alt":"        ",
+            "shift":"jump",
+            "defaut": true
+        }
     }
 }

@@ -79,5 +79,10 @@ public enum EnumMessageType {
     /**
      * Display message in box on screen.
      */
-    MESSAGE_BOX;
+    MESSAGE_BOX,
+
+    /**
+     * Change player form.
+     */
+    CHANGE_PLAYER_CHARACTER;
 }
