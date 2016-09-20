@@ -29,6 +29,11 @@ public final class ObjectMapping {
     private boolean startLevelObject;
 
     /**
+     * Name of object in inventory.
+     */
+    private String inventoryName;
+
+    /**
      * Type of object.
      *
      * @return the type
@@ -99,4 +104,24 @@ public final class ObjectMapping {
     public void setStartLevelObject(final boolean startLevelObject) {
         this.startLevelObject = startLevelObject;
     }
+
+    /**
+     * Name of object in inventory.
+     *
+     * @return name in inventory
+     */
+    public String getInventoryName() {
+        return inventoryName;
+    }
+
+    /**
+     * Name of object in inventory.
+     *
+     * @param inventoryName Name of object in inventory.
+     */
+    public void setInventoryName(final String inventoryName) {
+        this.inventoryName = inventoryName;
+    }
+
+
 }

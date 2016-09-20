@@ -2,7 +2,8 @@
     {
         "type":0,
         "implementationClass":"org.jill.game.entities.obj.player.PlayerManager",
-        "startLevelObject":true
+        "startLevelObject":true,
+        "inventoryName":"JILL"
     },
     {
         "type":23,
@@ -150,7 +151,8 @@
     },
     {
         "type":56,
-        "implementationClass":"org.jill.game.entities.obj.player.firebird.FirebirdPlayerManager"
+        "implementationClass":"org.jill.game.entities.obj.player.firebird.FirebirdPlayerManager",
+        "inventoryName":"FIREBIRD"
     },
     {
         "type":61,

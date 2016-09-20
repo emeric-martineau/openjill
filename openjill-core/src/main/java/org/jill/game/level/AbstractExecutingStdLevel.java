@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.Map;
 import org.jill.game.gui.menu.ClassicMenu;
 import org.jill.game.gui.menu.MenuInterface;
 import org.jill.game.level.cfg.LevelConfiguration;
@@ -666,10 +667,29 @@ public abstract class AbstractExecutingStdLevel extends AbstractMenuJillLevel {
                 break;
             case CHANGE_PLAYER_CHARACTER:
                 // Get weapon
-                final ObjectMappingWeapon[] weaponsList =
-                    this.objectCache.getTypeOfInventoryWeapon();
+                final Map<String, ObjectMappingWeapon> mapWeapon
+                        = this.objectCache.getMapOfWeapon();
 
-                // TODO find last weapon in inventory and update ControlArea
+                final List<EnumInventoryObject> inventory
+                        = this.inventoryArea.getObjects();
+                final ListIterator<EnumInventoryObject> invIt
+                        = inventory.listIterator(inventory.size());
+
+                EnumInventoryObject currentInventoryItem;
+                ObjectMappingWeapon currentWeapon;
+
+                while (invIt.hasPrevious()) {
+                    currentInventoryItem = invIt.previous();
+                    currentWeapon = mapWeapon.get(
+                            currentInventoryItem.toString());
+
+                    if (currentWeapon != null) {
+                        this.controlArea.recieveMessage(
+                                EnumMessageType.INVENTORY_ITEM,
+                                new InventoryItemMessage(
+                                    currentInventoryItem, false));
+                    }
+                }
 
                 this.updateInventoryScreen = true;
                 break;

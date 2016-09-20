@@ -13,6 +13,7 @@ import java.util.logging.Logger;
 import org.jill.game.manager.object.weapon.ObjectMappingWeapon;
 import org.jill.openjill.core.api.entities.ObjectEntity;
 import org.jill.openjill.core.api.entities.ObjectParam;
+import org.jill.openjill.core.api.message.statusbar.inventory.EnumInventoryObject;
 
 /**
  * Object manager.
@@ -51,6 +52,16 @@ public final class ObjectManager {
      * If this object must be use when load level or restart level (after die).
      */
     private int startLevelObject;
+
+    /**
+     * Map of weapon.
+     */
+    private Map<String, ObjectMappingWeapon> mapWeapon;
+
+    /**
+     * Map of object in inventory.
+     */
+    private Map<Class, EnumInventoryObject> inventoryNameOfObject;
 
     /**
      * Return this instance of object.
@@ -118,7 +129,10 @@ public final class ObjectManager {
         final Map<String, Class<ObjectEntity>> mapObjectNamePicture =
                 new HashMap<>();
 
-        final Map<String, ObjectMappingWeapon> mapInventoryWeapon = new HashMap<>();
+        final Map<String, ObjectMappingWeapon> mapInventoryWeapon
+                = new HashMap<>();
+
+        this.inventoryNameOfObject = new HashMap<>();
 
         String key;
         ObjectMappingWeapon currentWeapon;
@@ -143,6 +157,12 @@ public final class ObjectManager {
             if (om.isStartLevelObject()) {
                 this.startLevelObject = om.getType();
             }
+
+            if (om.getInventoryName() != null) {
+                this.inventoryNameOfObject.put(c,
+                        EnumInventoryObject.valueOf(
+                            om.getInventoryName()));
+            }
         }
 
         this.listWeapon = new ObjectMappingWeapon[mapInventoryWeapon.size()];
@@ -151,6 +171,14 @@ public final class ObjectManager {
             currentWeapon = mapInventoryWeapon.get(weaponKey);
 
             this.listWeapon[currentWeapon.getOrder() - 1] = currentWeapon;
+        }
+
+
+        this.mapWeapon
+                = new HashMap<>(this.listWeapon.length);
+
+        for (ObjectMappingWeapon omw : this.listWeapon) {
+            this.mapWeapon.put(omw.getInventoryKey(), omw);
         }
 
         return mapObjectNamePicture;
@@ -232,6 +260,15 @@ public final class ObjectManager {
     }
 
     /**
+     * Return map with inventory name as key.
+     *
+     * @return map
+     */
+    public Map<String, ObjectMappingWeapon> getMapOfWeapon() {
+        return this.mapWeapon;
+    }
+
+    /**
      * If this object must be use when load level or restart level (after die).
      *
      * @return object type
@@ -240,5 +277,7 @@ public final class ObjectManager {
         return startLevelObject;
     }
 
-
+    public EnumInventoryObject getInvetoryName(Class clazz) {
+        return this.inventoryNameOfObject.get(clazz);
+    }
 }

@@ -121,6 +121,10 @@ public abstract class AbstractExecutingStdPlayerLevel
                     getPlayerMoveScreenYdDown();
 
         initCenterScreen();
+
+        this.messageDispatcher.sendMessage(
+                EnumMessageType.CHANGE_PLAYER_CHARACTER,
+                this.objectCache.getInvetoryName(getPlayer().getClass()));
     }
 
     /**

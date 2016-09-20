@@ -25,7 +25,7 @@ Add :
  - InventoryArea factory,
  - ControlArea factory,
  - Create annotation for message dispatcher ?
- 
+ - Migrate to Java 8 and replace for by stream 
 -----------------
 Creative Music CMF to Standard MIDI
 Posted by Alex on Sat, 04/24/1999 - 14:06.
