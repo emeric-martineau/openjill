@@ -167,10 +167,10 @@ public class DrawFile {
             System.out.println(
                     String.format("WARNING : Object type %d (%s) is ignored at %d/%d",
                             new Object[] {
-                                Integer.valueOf(object.getType()),
+                                object.getType(),
                                 nullOrWhat(namdeObjectCache.getDescription(object.getType())),
-                                Integer.valueOf(object.getX()),
-                                Integer.valueOf(object.getY())
+                                object.getX(),
+                                object.getY()
                                 })) ;
         }
 

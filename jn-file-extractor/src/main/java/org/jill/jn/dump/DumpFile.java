@@ -99,7 +99,7 @@ public class DumpFile {
                 out.print(
                         String.format("%04X ",
                                 new Object[] {
-                                    Integer.valueOf(background.getMapCode(indexX, indexY)) }
+                                    background.getMapCode(indexX, indexY) }
                         )) ;
             }
 
@@ -147,8 +147,8 @@ public class DumpFile {
                 out.println(
                         String.format("Object #%d (0x%04X)",
                                 new Object[] {
-                                    Integer.valueOf(currentObject.getIndex()),
-                                    Integer.valueOf(currentObject.getOffset())}
+                                    currentObject.getIndex(),
+                                    currentObject.getOffset()}
                         )) ;
 
                 typeDescription = namdeObjectCache.getDescription(currentObject.getType()) ;
@@ -215,7 +215,7 @@ public class DumpFile {
         out.println(
                 String.format("Save data layer : (0x%04X)",
                         new Object[] {
-                            Integer.valueOf(saveData.getOffset())}
+                            saveData.getOffset()}
                 )) ;
         out.println() ;
 
@@ -230,20 +230,20 @@ public class DumpFile {
             out.println(
                 String.format("Level : %d",
                         new Object[] {
-                            Integer.valueOf(level) }
+                            level}
                 )) ;
         }
 
         out.println(
             String.format("Health : %d",
                     new Object[] {
-                        Integer.valueOf(saveData.getHealth()) }
+                        saveData.getHealth() }
             )) ;
 
         out.println(
                 String.format("Score : %d",
                         new Object[] {
-                            Integer.valueOf(saveData.getScore()) }
+                            saveData.getScore() }
                 )) ;
 
         final List<Integer> inventory = saveData.getInventory() ;
@@ -251,7 +251,7 @@ public class DumpFile {
         out.println(
                 String.format("Inventory (%d)",
                         new Object[] {
-                            Integer.valueOf(inventory.size()) }
+                            inventory.size() }
                 )) ;
 
         for(int index = 0; index < inventory.size(); index++)
@@ -288,7 +288,7 @@ public class DumpFile {
 
             out.println(
                 String.format("    0x%04X : '%s'",
-                        new Object[] { Integer.valueOf(string.getOffset()),
+                        new Object[] { string.getOffset(),
                         string.getValue() }
                 )) ;
         }

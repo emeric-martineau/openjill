@@ -85,15 +85,10 @@ public class PictureCache
         ShaTileSet tileSet ;
 
         // Init map of tileset
-        for(int indexTileSet = 0; indexTileSet < tileSetArray.length;
-                indexTileSet++)
-        {
-            tileSet = tileSetArray[indexTileSet] ;
-
-            if ((tileSet.getBitColor() != 8) || (typeScreen == ScreenType.VGA))
-            {
-                tileSetIndex = Integer.valueOf(tileSet.getTitleSetIndex()) ;
-
+        for (ShaTileSet tileSetArray1 : tileSetArray) {
+            tileSet = tileSetArray1;
+            if ((tileSet.getBitColor() != 8) || (typeScreen == ScreenType.VGA)) {
+                tileSetIndex = tileSet.getTitleSetIndex();
                 mapOfTile.put(tileSetIndex, tileSet.getShaTile()) ;
             }
         }
@@ -193,7 +188,7 @@ public class PictureCache
 
             if (dmaEntry != null)
             {
-                tileSetIndex = Integer.valueOf(dmaEntry.getTileset()) ;
+                tileSetIndex = dmaEntry.getTileset() ;
 
                 // Get picture
                 tileArray = mapOfTile.get(tileSetIndex) ;
@@ -259,7 +254,7 @@ public class PictureCache
      */
     public BufferedImage getBackgroundPicture(final int mapCode)
     {
-        return mapBackgroundPicture.get(Integer.valueOf(mapCode)) ;
+        return mapBackgroundPicture.get(mapCode) ;
     }
 
     /**

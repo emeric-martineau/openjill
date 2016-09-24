@@ -71,21 +71,16 @@ public final class SkullManager extends AbstractParameterObjectEntity
 
         tileIncrement = 1;
 
-        for (int indexEye = 0; indexEye < this.images.length;
-                indexEye++) {
+        for (BufferedImage image : this.images) {
             eye = this.pictureCache.getImage(tileSetIndex, tileEye);
             //System.out.println(tileEye);
-
             // Draw eye
-            g2d = this.images[indexEye].createGraphics();
-
+            g2d = image.createGraphics();
             g2d.drawImage(eye, eyeLeftX, eyeLeftY, null);
-
             if ((tileEye == eyeMaxTile && tileIncrement > 0)
                     || (tileEye == eyeMinTile && tileIncrement < 0)) {
                 tileIncrement *= -1;
             }
-
             tileEye += tileIncrement;
         }
     }

@@ -96,7 +96,7 @@ public class FileExplorer extends JFrame implements TreeSelectionListener, Actio
     }
 
     public void actionPerformed(ActionEvent e) {
-        // TODO Module de remplacement de méthode auto-généré
+        // TODO Module de remplacement de mï¿½thode auto-gï¿½nï¿½rï¿½
         if (cancelButton.getText().equals(e.getActionCommand()))
         {
             selectedDir = null ;

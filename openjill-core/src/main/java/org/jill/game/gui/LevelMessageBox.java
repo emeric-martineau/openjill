@@ -239,14 +239,9 @@ public final class LevelMessageBox extends AbstractMessageBox {
             int textAreaX = textAreaConf.getX();
 
             // Draw text and center it
-            for (int indexMsg = 0; indexMsg < pictureToDraw.length; indexMsg++) {
-                this.g2BoxPicture.drawImage(pictureToDraw[indexMsg],
-                        textAreaX
-                        + ((textAreaWidth
-                        - pictureToDraw[indexMsg].getWidth()) / 2),
-                        startY, null);
-
-                startY += pictureToDraw[indexMsg].getHeight();
+            for (BufferedImage pictureToDraw1 : pictureToDraw) {
+                this.g2BoxPicture.drawImage(pictureToDraw1, textAreaX + ((textAreaWidth - pictureToDraw1.getWidth()) / 2), startY, null);
+                startY += pictureToDraw1.getHeight();
             }
         }
     }

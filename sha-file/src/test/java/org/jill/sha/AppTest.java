@@ -57,10 +57,7 @@ public class AppTest
             System.out.println(
                 String.format("|     %08X    |      %04X     |  %5b |",
                     new Object[] {
-                        Integer.valueOf(offset[index]),
-                        Integer.valueOf(size[index]),
-                        Boolean.valueOf(shaHeader.isValideEntry(index))
-                        })
+                        offset[index], size[index],shaHeader.isValideEntry(index)})
                         ) ;
             System.out.println("+-----------------+---------------+--------+") ;
         }
@@ -83,26 +80,9 @@ public class AppTest
         System.out.println("| Index |  Offset  | Size | Nb pict  | Cga size | Ega size | Vga size | bt color | Font  | Picutre |") ;
         System.out.println("+-------+----------+------+----------+----------+----------+----------+----------+-------+---------+") ;
 
-        for(int index = 0; index < shaTileset.length; index++)
-        {
-            currentTileset = shaTileset[index] ;
-
-            System.out.println(
-                String.format("|  %3d  | %08X | %04X |  %5d   |  %5d   |  %5d   |   %5d  |    %3d   | %5b |  %5b  |",
-                    new Object[] {
-                        Integer.valueOf(currentTileset.getTitleSetIndex()),
-                        Integer.valueOf(currentTileset.getOffset()),
-                        Integer.valueOf(currentTileset.getSize()),
-                        Integer.valueOf(currentTileset.getNumberTile()),
-                        Integer.valueOf(currentTileset.getCgaSize()),
-                        Integer.valueOf(currentTileset.getEgaSize()),
-                        Integer.valueOf(currentTileset.getVgaSize()),
-                        Integer.valueOf(currentTileset.getBitColor()),
-                        Boolean.valueOf(currentTileset.isFont()),
-                        Boolean.valueOf(currentTileset.isTileset())
-                        })
-                );
-
+        for (ShaTileSet shaTileset1 : shaTileset) {
+            currentTileset = shaTileset1;
+            System.out.println(String.format("|  %3d  | %08X | %04X |  %5d   |  %5d   |  %5d   |   %5d  |    %3d   | %5b |  %5b  |", new Object[]{currentTileset.getTitleSetIndex(), currentTileset.getOffset(), currentTileset.getSize(), currentTileset.getNumberTile(), currentTileset.getCgaSize(), currentTileset.getEgaSize(), currentTileset.getVgaSize(), currentTileset.getBitColor(), currentTileset.isFont(), currentTileset.isTileset()}));
             System.out.println("+-------+----------+------+----------+----------+----------+----------+----------+-------+---------+") ;
         }
 
@@ -126,24 +106,14 @@ public class AppTest
         File outputfile ;
         String fileName ;
 
-        for(int indexTitleSet = 0; indexTitleSet < shaTileset.length; indexTitleSet++)
-        {
-            currentTileset = shaTileset[indexTitleSet] ;
-
+        for (ShaTileSet shaTileset1 : shaTileset) {
+            currentTileset = shaTileset1;
             // Font only
-            if (currentTileset.isFont())
-            {
+            if (currentTileset.isFont()) {
                 shaTile = currentTileset.getShaTile() ;
-
-                for(int indexTile = 0; indexTile < shaTile.length; indexTile++)
-                {
+                for (int indexTile = 0; indexTile < shaTile.length; indexTile++) {
                     bi = shaTile[indexTile].getPictureVga() ;
-
-                    fileName = String.format("%stileset%d_tile%d.png",
-                        new Object[] {tempPath,
-                            Integer.valueOf(currentTileset.getTitleSetIndex()),
-                            Integer.valueOf(indexTile)}) ;
-
+                    fileName = String.format("%stileset%d_tile%d.png", new Object[]{tempPath, currentTileset.getTitleSetIndex(), indexTile});
                     outputfile = new File(fileName) ;
                     ImageIO.write(bi, "png", outputfile);
                 }
@@ -167,32 +137,15 @@ public class AppTest
         File outputfile ;
         String fileName ;
 
-        for(int indexTitleSet = 0; indexTitleSet < shaTileset.length; indexTitleSet++)
-        {
-            currentTileset = shaTileset[indexTitleSet] ;
-
+        for (ShaTileSet shaTileset1 : shaTileset) {
+            currentTileset = shaTileset1;
             // Font only
-            if (currentTileset.isTileset() && (currentTileset.getBitColor() == 8))
-            {
+            if (currentTileset.isTileset() && (currentTileset.getBitColor() == 8)) {
                 shaTile = currentTileset.getShaTile() ;
-
-                for(int indexTile = 0; indexTile < shaTile.length; indexTile++)
-                {
+                for (int indexTile = 0; indexTile < shaTile.length; indexTile++) {
                     bi = shaTile[indexTile].getPictureVga() ;
-
-                    System.out.println(
-                        String.format("Offset : %04X Size : %d",
-                            new Object[] {
-                                Integer.valueOf(shaTile[indexTile].getOffset()),
-                                Integer.valueOf(shaTile[indexTile].getSize())
-                                })
-                        );
-
-                    fileName = String.format("%stileset%d_tile%d.png",
-                        new Object[] {tempPath,
-                            Integer.valueOf(currentTileset.getTitleSetIndex()),
-                            Integer.valueOf(indexTile)}) ;
-
+                    System.out.println(String.format("Offset : %04X Size : %d", new Object[]{shaTile[indexTile].getOffset(), shaTile[indexTile].getSize()}));
+                    fileName = String.format("%stileset%d_tile%d.png", new Object[]{tempPath, currentTileset.getTitleSetIndex(), indexTile});
                     outputfile = new File(fileName) ;
                     ImageIO.write(bi, "png", outputfile);
                 }
@@ -216,32 +169,15 @@ public class AppTest
         File outputfile ;
         String fileName ;
 
-        for(int indexTitleSet = 0; indexTitleSet < shaTileset.length; indexTitleSet++)
-        {
-            currentTileset = shaTileset[indexTitleSet] ;
-
+        for (ShaTileSet shaTileset1 : shaTileset) {
+            currentTileset = shaTileset1;
             // Font only
-            if (currentTileset.isTileset() && (currentTileset.getBitColor() != 8))
-            {
+            if (currentTileset.isTileset() && (currentTileset.getBitColor() != 8)) {
                 shaTile = currentTileset.getShaTile() ;
-
-                for(int indexTile = 0; indexTile < shaTile.length; indexTile++)
-                {
+                for (int indexTile = 0; indexTile < shaTile.length; indexTile++) {
                     bi = shaTile[indexTile].getPictureVga() ;
-
-                    System.out.println(
-                        String.format("Offset : %04X Size : %d",
-                            new Object[] {
-                                Integer.valueOf(shaTile[indexTile].getOffset()),
-                                Integer.valueOf(shaTile[indexTile].getSize())
-                                })
-                        );
-
-                    fileName = String.format("%stileset%d_tile%d.png",
-                        new Object[] {tempPath,
-                            Integer.valueOf(currentTileset.getTitleSetIndex()),
-                            Integer.valueOf(indexTile)}) ;
-
+                    System.out.println(String.format("Offset : %04X Size : %d", new Object[]{shaTile[indexTile].getOffset(), shaTile[indexTile].getSize()}));
+                    fileName = String.format("%stileset%d_tile%d.png", new Object[]{tempPath, currentTileset.getTitleSetIndex(), indexTile});
                     outputfile = new File(fileName) ;
                     ImageIO.write(bi, "png", outputfile);
                 }
@@ -266,10 +202,7 @@ public class AppTest
             System.out.println(
                 String.format("%02X%02X%02X",
                     new Object[] {
-                        Integer.valueOf(red),
-                        Integer.valueOf(green),
-                        Integer.valueOf(blue)
-                        })
+                        red, green, blue})
                 );
         }
     }
@@ -391,10 +324,7 @@ public class AppTest
                 System.out.println(
                     String.format("%02X%02X%02X",
                         new Object[] {
-                            Integer.valueOf((red << 2) | (red >> 2)),
-                            Integer.valueOf((green << 2) | (green >> 2)),
-                            Integer.valueOf((blue << 2) | (blue >> 2))
-                            })
+                            (red << 2) | (red >> 2), (green << 2) | (green >> 2), (blue << 2) | (blue >> 2)})
                     );
             }
         }
@@ -416,31 +346,13 @@ public class AppTest
         File outputfile ;
         String fileName ;
 
-        for(int indexTitleSet = 0; indexTitleSet < shaTileset.length; indexTitleSet++)
-        {
-            currentTileset = shaTileset[indexTitleSet] ;
-
+        for (ShaTileSet shaTileset1 : shaTileset) {
+            currentTileset = shaTileset1;
             shaTile = currentTileset.getShaTile() ;
-
-            for(int indexTile = 0; indexTile < shaTile.length; indexTile++)
-            {
+            for (int indexTile = 0; indexTile < shaTile.length; indexTile++) {
                 bi = shaTile[indexTile].getPictureVga() ;
-
-                System.out.println(
-                    String.format("Index tileset : %d Index tile : %d Offset : %04X Size : %d",
-                        new Object[] {
-                            Integer.valueOf(currentTileset.getTitleSetIndex()),
-                            Integer.valueOf(indexTile),
-                            Integer.valueOf(shaTile[indexTile].getOffset()),
-                            Integer.valueOf(shaTile[indexTile].getSize())
-                            })
-                    );
-
-                fileName = String.format("%stileset%d_tile%d.png",
-                    new Object[] {tempPath,
-                        Integer.valueOf(currentTileset.getTitleSetIndex()),
-                        Integer.valueOf(indexTile)}) ;
-
+                System.out.println(String.format("Index tileset : %d Index tile : %d Offset : %04X Size : %d", new Object[]{currentTileset.getTitleSetIndex(), indexTile, shaTile[indexTile].getOffset(), shaTile[indexTile].getSize()}));
+                fileName = String.format("%stileset%d_tile%d.png", new Object[]{tempPath, currentTileset.getTitleSetIndex(), indexTile});
                 outputfile = new File(fileName) ;
                 ImageIO.write(bi, "png", outputfile);
             }
@@ -476,17 +388,14 @@ public class AppTest
         System.out.println(
             String.format("Index tileset : %d Index tile : %d Offset : %04X Size : %d",
                 new Object[] {
-                    Integer.valueOf(currentTileset.getTitleSetIndex()),
-                    Integer.valueOf(indexTile),
-                    Integer.valueOf(shaTile[indexTile].getOffset()),
-                    Integer.valueOf(shaTile[indexTile].getSize())
-                    })
+                    currentTileset.getTitleSetIndex(), indexTile,
+                    shaTile[indexTile].getOffset(),
+                    shaTile[indexTile].getSize()})
             );
 
         fileName = String.format("%stileset%d_tile%d.png",
             new Object[] {tempPath,
-                Integer.valueOf(currentTileset.getTitleSetIndex()),
-                Integer.valueOf(indexTile)}) ;
+                currentTileset.getTitleSetIndex(), indexTile}) ;
 
         outputfile = new File(fileName) ;
         ImageIO.write(bi, "png", outputfile);
@@ -509,34 +418,15 @@ public class AppTest
         File outputfile ;
         String fileName ;
 
-        for(int indexTitleSet = 0; indexTitleSet < shaTileset.length; indexTitleSet++)
-        {
-            currentTileset = shaTileset[indexTitleSet] ;
-
+        for (ShaTileSet shaTileset1 : shaTileset) {
+            currentTileset = shaTileset1;
             shaTile = currentTileset.getShaTile() ;
-
             // If picture is 8 bits color, there not display in EGA
-            if (currentTileset.getBitColor() != 8)
-            {
-                for(int indexTile = 0; indexTile < shaTile.length; indexTile++)
-                {
+            if (currentTileset.getBitColor() != 8) {
+                for (int indexTile = 0; indexTile < shaTile.length; indexTile++) {
                     bi = shaTile[indexTile].getPictureEga() ;
-
-                    System.out.println(
-                        String.format("Index tileset : %d Index tile : %d Offset : %04X Size : %d",
-                            new Object[] {
-                                Integer.valueOf(currentTileset.getTitleSetIndex()),
-                                Integer.valueOf(indexTile),
-                                Integer.valueOf(shaTile[indexTile].getOffset()),
-                                Integer.valueOf(shaTile[indexTile].getSize())
-                                })
-                        );
-
-                    fileName = String.format("%stileset%d_tile%d.png",
-                        new Object[] {tempPath,
-                            Integer.valueOf(currentTileset.getTitleSetIndex()),
-                            Integer.valueOf(indexTile)}) ;
-
+                    System.out.println(String.format("Index tileset : %d Index tile : %d Offset : %04X Size : %d", new Object[]{currentTileset.getTitleSetIndex(), indexTile, shaTile[indexTile].getOffset(), shaTile[indexTile].getSize()}));
+                    fileName = String.format("%stileset%d_tile%d.png", new Object[]{tempPath, currentTileset.getTitleSetIndex(), indexTile});
                     outputfile = new File(fileName) ;
                     ImageIO.write(bi, "png", outputfile);
                 }
@@ -560,34 +450,15 @@ public class AppTest
         File outputfile ;
         String fileName ;
 
-        for(int indexTitleSet = 0; indexTitleSet < shaTileset.length; indexTitleSet++)
-        {
-            currentTileset = shaTileset[indexTitleSet] ;
-
+        for (ShaTileSet shaTileset1 : shaTileset) {
+            currentTileset = shaTileset1;
             shaTile = currentTileset.getShaTile() ;
-
             // If picture is 8 bits color, there not display in CGA
-            if (currentTileset.getBitColor() != 8)
-            {
-                for(int indexTile = 0; indexTile < shaTile.length; indexTile++)
-                {
+            if (currentTileset.getBitColor() != 8) {
+                for (int indexTile = 0; indexTile < shaTile.length; indexTile++) {
                     bi = shaTile[indexTile].getPictureCga() ;
-
-                    System.out.println(
-                        String.format("Index tileset : %d Index tile : %d Offset : %04X Size : %d",
-                            new Object[] {
-                                Integer.valueOf(currentTileset.getTitleSetIndex()),
-                                Integer.valueOf(indexTile),
-                                Integer.valueOf(shaTile[indexTile].getOffset()),
-                                Integer.valueOf(shaTile[indexTile].getSize())
-                                })
-                        );
-
-                    fileName = String.format("%stileset%d_tile%d.png",
-                        new Object[] {tempPath,
-                            Integer.valueOf(currentTileset.getTitleSetIndex()),
-                            Integer.valueOf(indexTile)}) ;
-
+                    System.out.println(String.format("Index tileset : %d Index tile : %d Offset : %04X Size : %d", new Object[]{currentTileset.getTitleSetIndex(), indexTile, shaTile[indexTile].getOffset(), shaTile[indexTile].getSize()}));
+                    fileName = String.format("%stileset%d_tile%d.png", new Object[]{tempPath, currentTileset.getTitleSetIndex(), indexTile});
                     outputfile = new File(fileName) ;
                     ImageIO.write(bi, "png", outputfile);
                 }

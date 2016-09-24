@@ -96,28 +96,15 @@ public class DmaFileExtractor {
         System.out.println("+--------+------+---------+------+----------+-----") ;
         System.out.println("| Offset |  Id  | Tileset | Tile |  Flags   | Name") ;
         System.out.println("+--------+------+---------+------+----------+-----") ;
-        for(int index = 0; index < arrayDma.length; index++)
-        {
-            currentEntry = arrayDma[index] ;
-
+        for (DmaEntryImpl arrayDma1 : arrayDma) {
+            currentEntry = arrayDma1;
 //            tileFileName = String.format(tileFileNamePattern,
 //                    new Object[] {
 //                        Integer.valueOf(currentEntry.getTileset()),
 //                        Integer.valueOf(currentEntry.getTile()),
 //                        "vga"})  ;
-
-            System.out.println(
-                String.format("|  %04X  | %04X |   %04X  | %04X | %08X | %s",
-                    new Object[] {
-                        Integer.valueOf(currentEntry.getOffset()),
-                        Integer.valueOf(currentEntry.getMapCode()),
-                        Integer.valueOf(currentEntry.getTileset()),
-                        Integer.valueOf(currentEntry.getTile()),
-                        Integer.valueOf(currentEntry.getFlags()),
-                        currentEntry.getName()
+System.out.println(String.format("|  %04X  | %04X |   %04X  | %04X | %08X | %s", new Object[]{currentEntry.getOffset(), currentEntry.getMapCode(), currentEntry.getTileset(), currentEntry.getTile(), currentEntry.getFlags(), currentEntry.getName()
 //                        tileFileName
-                        })
-                        ) ;
-        }
+}));    }
     }
 }

@@ -174,8 +174,7 @@ public class TextManagerImpl implements TextManager {
             letter = text.charAt(indexText);
 
             if (!mapLetter.containsKey(letter)) {
-                mapLetter.put(
-                    Character.valueOf(letter),
+                mapLetter.put(letter,
                     tiles[(int) letter].getFont(textColor));
             }
         }

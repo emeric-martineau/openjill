@@ -63,10 +63,10 @@ public class AppTest
             System.out.println(
                 String.format(" id = %04X, tile = %04X, tileset = %04X, flags = %08X, name = %s",
                     new Object[] {
-                        Integer.valueOf(currentEntry.getMapCode()),
-                        Integer.valueOf(currentEntry.getTile()),
-                        Integer.valueOf(currentEntry.getTileset()),
-                        Integer.valueOf(currentEntry.getFlags()),
+                        currentEntry.getMapCode(),
+                        currentEntry.getTile(),
+                        currentEntry.getTileset(),
+                        currentEntry.getFlags(),
                         currentEntry.getName()
                         })
                         ) ;

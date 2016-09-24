@@ -76,7 +76,7 @@ public class AppTest
                 System.out.print(
                         String.format("%04X ",
                                 new Object[] {
-                                    Integer.valueOf(background.getMapCode(indexX, indexY)) }
+                                    background.getMapCode(indexX, indexY) }
                         )) ;
             }
 
@@ -118,28 +118,21 @@ public class AppTest
             System.out.println(
                     String.format("Object #%d",
                             new Object[] {
-                                Integer.valueOf(currentObject.getIndex()) }
+                                currentObject.getIndex() }
                     )) ;
 
-            for (int i = 0; i < methods.length; i++)
-            {
-                methodeName = methods[i].getName() ;
-
+            for (Method method : methods) {
+                methodeName = method.getName();
                 if (methodeName.startsWith("get") &&
-                        !methodeName.equals("getClass"))
-                {
+                        !methodeName.equals("getClass")) {
                     methodeName = methodeName.substring(3) ;
-
                     System.out.print("    ") ;
                     System.out.print(methodeName.substring(0, 1).
                             toLowerCase(Locale.US)) ;
                     System.out.print(methodeName.substring(1)) ;
                     System.out.print(" = ") ;
-                    System.out.println(
-                            methods[i].invoke(currentObject, new Object[]{})
-                            ) ;
+                    System.out.println(method.invoke(currentObject, new Object[]{}));
                 }
-
             }
         }
     }
@@ -170,20 +163,20 @@ public class AppTest
             System.out.println(
                 String.format("Level : %d",
                         new Object[] {
-                            Integer.valueOf(level) }
+                            level}
                 )) ;
         }
 
         System.out.println(
             String.format("Health : %d",
                     new Object[] {
-                        Integer.valueOf(saveData.getHealth()) }
+                        saveData.getHealth() }
             )) ;
 
         System.out.println(
                 String.format("Score : %d",
                         new Object[] {
-                            Integer.valueOf(saveData.getScore()) }
+                            saveData.getScore() }
                 )) ;
 
         final List<Integer> inventory = saveData.getInventory() ;
@@ -191,7 +184,7 @@ public class AppTest
         System.out.println(
                 String.format("Inventory (%d)",
                         new Object[] {
-                            Integer.valueOf(inventory.size()) }
+                            inventory.size() }
                 )) ;
 
         for(int index = 0; index < inventory.size(); index++)

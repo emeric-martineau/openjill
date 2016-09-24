@@ -58,7 +58,7 @@ public class ExportButton extends AbstractButton {
             try {
                 ShaFileExportTool.exportPictureFromShaFile(value1, value2) ;
             } catch (IOException e1) {
-                // TODO Bloc catch auto-généré
+                // TODO Bloc catch auto-gï¿½nï¿½rï¿½
                 e1.printStackTrace();
             }
         }

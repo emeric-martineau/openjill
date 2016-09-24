@@ -215,8 +215,7 @@ public class TextTileManager extends AbstractTileManager {
 
             if (!mapLetter.containsKey(letter))
             {
-                mapLetter.put(
-                    Character.valueOf(letter),
+                mapLetter.put(letter,
                     tiles[(int) letter].getFont(textColor)) ;
             }
         }
