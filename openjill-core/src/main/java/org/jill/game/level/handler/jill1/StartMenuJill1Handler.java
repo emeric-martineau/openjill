@@ -27,7 +27,7 @@ public class StartMenuJill1Handler extends AbstractChangeLevel {
         IllegalAccessException, InstantiationException {
         super(new JillLevelConfiguration("JILL1.SHA", "INTRO.JN1", "JILL1.VCL",
             "JILL1.CFG", "JN1", StartMenuJill1Handler.class, false));
-        displayHome();
+        centerScreen();
 
         infoBox.setContent(vclFile.getVclText().get(0).getText());
 
@@ -76,16 +76,16 @@ public class StartMenuJill1Handler extends AbstractChangeLevel {
         }
     }
 
-    /**
-     * Display home page.
-     */
-    private void displayHome() {
+    @Override
+    protected void drawControl() {
+        this.statusBar.drawControl(createHigScore());
+    }
+
+    @Override
+    protected void drawInventory() {
         // Draw jill face
         this.statusBar.drawInventory(this.statusBar.createInventoryArea());
-
         this.statusBar.drawControl(createHigScore());
-
-        centerScreen();
     }
 
     /**
@@ -112,8 +112,8 @@ public class StartMenuJill1Handler extends AbstractChangeLevel {
         final int blocOffsetY = 53;
 
         final RectangleConf offset
-            = this.statusBar.getGameAreaConf().getOffset();        
-        
+            = this.statusBar.getGameAreaConf().getOffset();
+
         // Picture offset
         offset.setX(
                 -(blocOffsetX + 1) * JillConst.getBlockSize());

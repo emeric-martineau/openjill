@@ -249,14 +249,14 @@ public abstract class AbstractExecutingStdLevel extends AbstractMenuJillLevel {
     /**
      * Draw control.
      */
-    protected final void drawControl() {
+    protected void drawControl() {
         statusBar.drawControl(controlArea.drawControl());
     }
 
     /**
      * Draw inventory & control area.
      */
-    protected final void drawInventory() {
+    protected void drawInventory() {
         statusBar.drawInventory(inventoryArea.drawInventory());
         statusBar.drawControl(controlArea.drawControl());
         updateInventoryScreen = false;
