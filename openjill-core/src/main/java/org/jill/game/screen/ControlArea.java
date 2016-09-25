@@ -376,13 +376,13 @@ public class ControlArea implements InterfaceMessageGameHandler {
         final InventoryItemMessage iim = (InventoryItemMessage) msg;
 
         if (iim.isLastItemInv()) {
-            this.shiftKey.setText(EMPTY_TEXT);
+            this.altKey.setText(EMPTY_TEXT);
         } else {
             final KeysControlText kct = this.conf.getKeysControlText(
-                msg.toString());
+                iim.getObj().toString());
 
             if (kct != null) {
-                this.shiftKey.setText(kct.getShift());
+                this.altKey.setText(kct.getAlt());
             }
         }
     }
