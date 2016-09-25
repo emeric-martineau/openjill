@@ -29,12 +29,12 @@ public class JnFileExtractor {
     /**
      * automatically generate the help statement
      */
-    private static final HelpFormatter formatter = new HelpFormatter() ;
+    private static final HelpFormatter FORMATTER = new HelpFormatter() ;
 
     /**
      * create Options object
      */
-    private static final Options options = new Options() ;
+    private static final Options OPTIONS = new Options() ;
 
     static
     {
@@ -49,7 +49,7 @@ public class JnFileExtractor {
 
         // http://commons.apache.org/cli/usage.html
         CommandLineParser parser = new PosixParser() ;
-        CommandLine cmd = parser.parse(options, args) ;
+        CommandLine cmd = parser.parse(OPTIONS, args) ;
 
         boolean dumpText = false ;
         boolean drawMap = false ;
@@ -60,7 +60,7 @@ public class JnFileExtractor {
         if (!cmd.hasOption('f'))
         {
             // automatically generate the help statement
-            formatter.printHelp(JnFileExtractor.class.getCanonicalName(), options) ;
+            FORMATTER.printHelp(JnFileExtractor.class.getCanonicalName(), OPTIONS) ;
 
             return ;
         }
@@ -130,23 +130,23 @@ public class JnFileExtractor {
     private static void createOptions()
     {
         // add t option
-        options.addOption("f", "file", true, "file to read (map) to read (*.jn?).") ;
-        options.addOption("fs", "file-sha", true, "file to read for get picture (*.sha).") ;
-        options.addOption("fd", "file-dma", true, "file to read for get map picture (*.dma).") ;
-        options.addOption("ot", "out-text", true, "output file write dump data.") ;
-        options.addOption("od", "out-draw", true, "output file write draw map.") ;
-        options.addOption("drb", "draw-back", false, "draw background layer.") ;
-        options.addOption("dro", "draw-object", false, "draw object layer.") ;
-        options.addOption("dru", "draw-object-unknow", false, "draw all unknow object in object layer.") ;
-        options.addOption("db", "dump-back", false, "dump background layer.") ;
-        options.addOption("do", "dump-object", false, "dump object layer.") ;
-        options.addOption("dsv", "dump-save", false, "dump save data layer.") ;
-        options.addOption("ds", "dump-string", false, "dump string stack layer.") ;
-        options.addOption("c", "cga", false, "draw in CGA mode.") ;
-        options.addOption("e", "ega", false, "draw in EGA mode.") ;
-        options.addOption("v", "vga", false, "draw in VGA mode.") ;
+        OPTIONS.addOption("f", "file", true, "file to read (map) to read (*.jn?).") ;
+        OPTIONS.addOption("fs", "file-sha", true, "file to read for get picture (*.sha).") ;
+        OPTIONS.addOption("fd", "file-dma", true, "file to read for get map picture (*.dma).") ;
+        OPTIONS.addOption("ot", "out-text", true, "output file write dump data.") ;
+        OPTIONS.addOption("od", "out-draw", true, "output file write draw map.") ;
+        OPTIONS.addOption("drb", "draw-back", false, "draw background layer.") ;
+        OPTIONS.addOption("dro", "draw-object", false, "draw object layer.") ;
+        OPTIONS.addOption("dru", "draw-object-unknow", false, "draw all unknow object in object layer.") ;
+        OPTIONS.addOption("db", "dump-back", false, "dump background layer.") ;
+        OPTIONS.addOption("do", "dump-object", false, "dump object layer.") ;
+        OPTIONS.addOption("dsv", "dump-save", false, "dump save data layer.") ;
+        OPTIONS.addOption("ds", "dump-string", false, "dump string stack layer.") ;
+        OPTIONS.addOption("c", "cga", false, "draw in CGA mode.") ;
+        OPTIONS.addOption("e", "ega", false, "draw in EGA mode.") ;
+        OPTIONS.addOption("v", "vga", false, "draw in VGA mode.") ;
 
-        options.addOption("h", "help", false, "print this message.") ;
+        OPTIONS.addOption("h", "help", false, "print this message.") ;
     }
 
 
