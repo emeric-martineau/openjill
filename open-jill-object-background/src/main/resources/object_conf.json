@@ -261,7 +261,7 @@
         "tile":"0",
         "tileSet":"12",
         "killForce":"-4",
-        "hitObject":"37",
+        "hitObject":"org.jill.game.entities.obj.HitFireManager",
         "numberTileSet":"6"
     },
     "CrabManager":
