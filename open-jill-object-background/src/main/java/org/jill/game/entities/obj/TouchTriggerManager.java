@@ -5,7 +5,6 @@ import org.jill.game.entities.ObjectEntityImpl;
 import org.jill.openjill.core.api.entities.ObjectEntity;
 import org.jill.openjill.core.api.keyboard.KeyboardLayout;
 import org.jill.openjill.core.api.message.EnumMessageType;
-import org.jill.openjill.core.api.message.object.ObjectListMessage;
 
 /**
  * Touch trigger for trigger event.
@@ -23,10 +22,6 @@ public final class TouchTriggerManager extends ObjectEntityImpl {
     public void msgTouch(final ObjectEntity obj, KeyboardLayout keyboardLayout) {
         if (obj.isPlayer()) {
             messageDispatcher.sendMessage(EnumMessageType.TRIGGER, this);
-            
-            // Remove source message
-            this.messageDispatcher.sendMessage(EnumMessageType.OBJECT,
-                    new ObjectListMessage(this, false));
         }
     }
 }

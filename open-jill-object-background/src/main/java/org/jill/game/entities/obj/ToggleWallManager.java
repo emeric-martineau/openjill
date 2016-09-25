@@ -70,7 +70,7 @@ public final class ToggleWallManager extends AbstractParameterObjectEntity
     private boolean isWall() {
         return this.ySpeed == 1;
     }
-    
+
     /**
      * Init wall config.
      */
@@ -205,15 +205,15 @@ public final class ToggleWallManager extends AbstractParameterObjectEntity
             // Tacke first replace block to check if is on or off
             final int blockX = this.listBackgroundPassthru.get(0).getX();
             final int blockY = this.listBackgroundPassthru.get(0).getY();
-            
+
             final String nameOfBackgroundBlockWall
                 = getConfString("wallBackgroundName");
             final String nameOfBackgroundBlockFloor = getConfString(
                 "floorBackgroundName");
-            
+
             final String currentBackgroundName
                     = this.background[blockX][blockY].getName();
-            
+
             // If switch.state = 1 wall is off (player can be passthru)
             if (currentBackgroundName.equals(nameOfBackgroundBlockFloor)
                     || currentBackgroundName.equals(nameOfBackgroundBlockWall)) {
@@ -225,6 +225,10 @@ public final class ToggleWallManager extends AbstractParameterObjectEntity
                 this.messageDispatcher.sendMessage(EnumMessageType.BACKGROUND,
                     this.listBackgroundBlock);
             }
+
+            // Remove source message
+            this.messageDispatcher.sendMessage(EnumMessageType.OBJECT,
+                    new ObjectListMessage(switchObj, false));
         }
     }
 

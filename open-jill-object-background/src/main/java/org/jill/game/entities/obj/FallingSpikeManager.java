@@ -103,14 +103,16 @@ public final class FallingSpikeManager extends AbstractHitPlayerObjectEntity
         final Object msg) {
         switch (type) {
             case TRIGGER:
-                // Only if object not in fall
-                if (getySpeed() == 0) {
-                    final ObjectEntity switchObj = (ObjectEntity) msg;
-                    if (switchObj.getCounter() == this.counter) {
-                        // Start fall
-                        setySpeed(this.fallingSpeed);
-                    }
+                final ObjectEntity switchObj = (ObjectEntity) msg;
+                if (switchObj.getCounter() == this.counter) {
+                    // Start fall
+                    setySpeed(this.fallingSpeed);
                 }
+
+                // Remove source message
+                this.messageDispatcher.sendMessage(EnumMessageType.OBJECT,
+                new ObjectListMessage(switchObj, false));
+
                 break;
             default:
         }
