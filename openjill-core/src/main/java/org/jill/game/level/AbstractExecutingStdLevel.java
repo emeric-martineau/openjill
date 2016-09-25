@@ -1,7 +1,10 @@
 package org.jill.game.level;
 
+import java.awt.BasicStroke;
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import java.awt.Stroke;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -121,9 +124,19 @@ public abstract class AbstractExecutingStdLevel extends AbstractMenuJillLevel {
     protected int highJumpCheatCount;
 
     /**
+     * Cheat code for invisible object.
+     */
+    protected int displayInvisibleObject;
+
+    /**
      * True if player invicible.
      */
     protected boolean invincibility;
+
+    /**
+     * Show invisible object.
+     */
+    protected boolean showInvisible;
 
     /**
      * False if pause game.
@@ -336,6 +349,14 @@ public abstract class AbstractExecutingStdLevel extends AbstractMenuJillLevel {
                                      new InventoryItemMessage(
                                          EnumInventoryObject.HIGH_JUMP, true));
                         highJumpCheatCount = 0;
+                    }
+                    break;
+                case 'i':
+                case 'I':
+                    displayInvisibleObject++;
+
+                    if (displayInvisibleObject == CHEAT_CODE_NUMBER) {
+                        showInvisible = true;
                     }
                     break;
                 default:
@@ -591,15 +612,23 @@ public abstract class AbstractExecutingStdLevel extends AbstractMenuJillLevel {
         final RectangleConf offset
                     = this.statusBar.getGameAreaConf().getOffset();
 
+        BufferedImage currentPicture;
+
         while (itDraw.hasPrevious()) {
             currentObject = itDraw.previous();
 
-            g2DrawingScreen.drawImage(currentObject.msgDraw(),
+            currentPicture = currentObject.msgDraw();
+
+            if (this.showInvisible && currentPicture == null) {
+                drawDashedRectFilled(g2DrawingScreen, currentObject, offset);
+            } else {
+                g2DrawingScreen.drawImage(currentPicture,
                     currentObject.getX()
                             + offset.getX(),
                     currentObject.getY()
                             + offset.getY(),
                     null);
+            }
         }
 
         // NOTE : Disable in 0.0.28 cause, new collision method do this
@@ -607,6 +636,30 @@ public abstract class AbstractExecutingStdLevel extends AbstractMenuJillLevel {
         //        player.getY() + offsetY, null);
 
         listObjectToDraw.clear();
+    }
+
+    /**
+     * Draw dashed rectangle for unknow object type
+     *
+     * @param g2 graphic 2d
+     * @param object current object
+     * @param offset offset
+     */
+    private static void drawDashedRectFilled(final Graphics2D g2,
+            final ObjectEntity object, final RectangleConf offset)
+    {
+        Color oldColor = g2.getColor() ;
+        g2.setColor(Color.CYAN) ;
+
+        Rectangle rect = new Rectangle(object.getX() + offset.getX(),
+                object.getY() + offset.getY(),
+                object.getWidth(), object.getWidth());
+        float[] dash = { 5F, 5F } ;
+        Stroke dashedStroke = new BasicStroke( 2F, BasicStroke.CAP_SQUARE,
+        BasicStroke.JOIN_MITER, 3F, dash, 0F );
+        g2.fill( dashedStroke.createStrokedShape( rect ) );
+
+        g2.setColor(oldColor) ;
     }
 
     @Override
