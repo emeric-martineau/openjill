@@ -101,11 +101,15 @@ public final class SkullManager extends AbstractParameterObjectEntity
         int tileIncrement = 1;
         int tileSkull = 0;
 
+        BufferedImage currentSkull;
+
         for (int index = 0; index < this.images.length; index += 2) {
-            this.images[index]
-                = this.pictureCache.getImage(tileSetIndex,
+            currentSkull = this.pictureCache.getImage(tileSetIndex,
                         tileIndex + tileSkull);
-            this.images[index + 1] = this.images[index];
+
+            this.images[index] = copyPicture(currentSkull);
+
+            this.images[index + 1] = copyPicture(currentSkull);
 
             if (tileSkull == skullMax) {
                 tileIncrement *= -1;
@@ -113,6 +117,25 @@ public final class SkullManager extends AbstractParameterObjectEntity
 
             tileSkull += tileIncrement;
         }
+    }
+
+    /**
+     * Create copy of picture.
+     *
+     * @param currentSkull current picture
+     * 
+     * @return new pricture
+     */
+    private static BufferedImage copyPicture(final BufferedImage currentSkull) {
+        final BufferedImage newPicture = new BufferedImage(
+                currentSkull.getWidth(),
+                currentSkull.getHeight(),
+                BufferedImage.TYPE_INT_ARGB);
+
+        Graphics2D g2d = newPicture.createGraphics();
+        g2d.drawImage(currentSkull, 0, 0, null);
+
+        return newPicture;
     }
 
     @Override
