@@ -75,7 +75,9 @@ public final class FirebirdWeaponManager extends AbstractParameterObjectEntity {
     @Override
     public void msgTouch(final ObjectEntity obj,
             final KeyboardLayout keyboardLayout) {
-        // TODO
+        if (!obj.isPlayer() && obj.isKillableObject()) {
+            obj.msgKill(this, 0, 0);
+        }
     }
 
     @Override
