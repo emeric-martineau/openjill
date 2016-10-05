@@ -68,6 +68,15 @@ public abstract class AbstractParameterBackgroundEntity extends
     }
 
     /**
+     * Allow chande dmaName.
+     *
+     * @param newDmaName new dmaName.
+     */
+    protected void setDmaName(final String newDmaName) {
+        this.dmaName = newDmaName;
+    }
+
+    /**
      * Configuration string.
      *
      * @param properties properties file
@@ -119,5 +128,27 @@ public abstract class AbstractParameterBackgroundEntity extends
      */
     protected final int getConfInteger(final String properties) {
         return Integer.valueOf(getConfString(properties));
+    }
+
+    /**
+     * Configuration string.
+     *
+     * @param properties properties file
+     * @param def default value
+     *
+     * @return value
+     */
+    protected final int getConfInteger(final String properties, final int def) {
+        final String value = getConfString(properties, false);
+
+        int result;
+
+        if (value == null) {
+            result = def;
+        } else {
+            result = Integer.valueOf(value);
+        }
+
+        return result;
     }
 }

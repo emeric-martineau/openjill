@@ -1,5 +1,8 @@
 package org.jill.game.entities.back.abs;
 
+import java.awt.Color;
+import java.awt.Graphics2D;
+import java.awt.image.BufferedImage;
 import java.util.HashMap;
 import java.util.Map;
 import org.jill.game.entities.picutre.PictureSynchronizer;
@@ -22,6 +25,32 @@ public abstract class AbstractSynchronisedImageBackgroundEntity
      * Current picture synchronizer.
      */
     private PictureSynchronizer ps;
+
+    /**
+     * Create picture for animate background.
+     *
+     * @param srcImage src image
+     * @param backColor background color
+     *
+     * @return new image
+     */
+    protected static BufferedImage createPicture(final BufferedImage srcImage,
+            final Color backColor) {
+        BufferedImage destImage;
+        Graphics2D g2;
+
+        destImage = new BufferedImage(srcImage.getWidth(),
+                srcImage.getHeight(),
+                BufferedImage.TYPE_INT_ARGB);
+        g2 = destImage.createGraphics();
+        g2.setColor(backColor);
+        g2.fillRect(0, 0, srcImage.getWidth(), srcImage.getHeight());
+        g2.drawImage(srcImage, 0, 0, null);
+
+        g2.dispose();
+
+        return destImage;
+    }
 
     /**
      * For internal use only.

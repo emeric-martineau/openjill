@@ -12,24 +12,19 @@ import org.jill.game.entities.obj.player.PlayerState;
 import org.jill.openjill.core.api.entities.ObjectEntity;
 import org.jill.openjill.core.api.message.statusbar.inventory.
         InventoryLifeMessage;
+import org.jill.game.entities.back.abs.AbstractAnimateBackgroundEntity;
 
 /**
  * Kill 2 background.
  *
  * @author Emeric MARTINEAU
  */
-public final class KillWaterBackgroundEntity extends StdBackgroundEntity {
+public final class KillWaterBackgroundEntity
+        extends AbstractAnimateBackgroundEntity {
     /**
      * Config file name.
      */
     private static final String CONFIG_FILENAME = "background_water_conf.json";
-
-    /**
-     * Logger.
-     */
-    private static final Logger LOGGER
-            = Logger.getLogger(KillWaterBackgroundEntity.class.getName());
-
 
     /**
      * Configuration.
@@ -65,5 +60,10 @@ public final class KillWaterBackgroundEntity extends StdBackgroundEntity {
                     PlayerState.DIE_SUB_STATE_WATER_BACK);
             }
         }
+    }
+
+    @Override
+    public void msgDraw() {
+        // Nothing
     }
 }
