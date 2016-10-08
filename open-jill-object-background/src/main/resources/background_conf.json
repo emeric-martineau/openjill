@@ -86,14 +86,14 @@
     },
     "WATERTL":
     {
-        "cycle":"3",
+        "cycle":"1",
         "numberTileSet":"4",
         "tileSet":28,
         "tile":1
     },
     "WATERTR":
     {
-        "cycle":"3",
+        "cycle":"1",
         "numberTileSet":"4",
         "tileSet":28,
         "tile":4,
@@ -101,28 +101,28 @@
     },
     "WATERRD":
     {
-        "cycle":"3",
+        "cycle":"1",
         "numberTileSet":"3",
         "tileSet":28,
         "tile":12
     },
     "WATERLD":
     {
-        "cycle":"3",
+        "cycle":"1",
         "numberTileSet":"3",
         "tileSet":28,
         "tile":9
     },
     "WATERML":
     {
-        "cycle":"3",
+        "cycle":"1",
         "numberTileSet":"4",
         "tileSet":28,
         "tile":5
     },
     "WATERMR":
     {
-        "cycle":"3",
+        "cycle":"1",
         "numberTileSet":"4",
         "tileSet":28,
         "tile":8,
