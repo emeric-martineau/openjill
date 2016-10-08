@@ -73,9 +73,6 @@ public abstract class AbstractAnimateBackgroundEntity extends
     public BufferedImage getPicture() {
         final int index = getPictureSync().getIndexPicture();
 
-        if (index >= images.length) {
-            System.out.println("ie");
-        }
         return images[index];
     }
 

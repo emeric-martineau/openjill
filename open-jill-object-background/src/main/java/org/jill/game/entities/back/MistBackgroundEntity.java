@@ -1,7 +1,6 @@
 package org.jill.game.entities.back;
 
 import java.awt.Color;
-import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import org.jill.game.entities.back.abs.
         AbstractSynchronisedImageBackgroundEntity;
@@ -40,8 +39,6 @@ public final class MistBackgroundEntity
 
         final Color backColor = getPictureCache().getBackgroundColor();
         BufferedImage srcImage;
-        BufferedImage destImage;
-        Graphics2D g2;
 
         images = new BufferedImage[getConfInteger("numberTileSet")];
 
@@ -49,17 +46,7 @@ public final class MistBackgroundEntity
             srcImage = getPictureCache().getImage(tileSetIndex, tileIndex
                     + index);
 
-            destImage = new BufferedImage(srcImage.getWidth(),
-                    srcImage.getHeight(),
-                    BufferedImage.TYPE_INT_ARGB);
-            g2 = destImage.createGraphics();
-            g2.setColor(backColor);
-            g2.fillRect(0, 0, srcImage.getWidth(), srcImage.getHeight());
-            g2.drawImage(srcImage, 0, 0, null);
-
-            g2.dispose();
-
-            images[index] = destImage;
+            images[index] = createPicture(srcImage, backColor);
         }
 
         if (getPictureSync(this.getClass()) == null) {
