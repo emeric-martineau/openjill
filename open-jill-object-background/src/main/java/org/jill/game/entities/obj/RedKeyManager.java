@@ -13,8 +13,8 @@ public final class RedKeyManager extends AbstractKeyManager {
 
     @Override
     protected boolean getDisplayMessage() {
-        boolean oldValue = this.messageDisplayRedKeyMessage;
-        this.messageDisplayRedKeyMessage = false;
+        boolean oldValue = messageDisplayRedKeyMessage;
+        messageDisplayRedKeyMessage = false;
 
         return oldValue;
     }

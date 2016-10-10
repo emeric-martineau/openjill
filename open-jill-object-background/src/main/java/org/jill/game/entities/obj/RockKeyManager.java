@@ -15,8 +15,8 @@ public final class RockKeyManager
 
     @Override
     protected boolean getDisplayMessage() {
-        boolean oldValue = this.messageDisplayRockMessage;
-        this.messageDisplayRockMessage = false;
+        boolean oldValue = messageDisplayRockMessage;
+        messageDisplayRockMessage = false;
 
         return oldValue;
     }
