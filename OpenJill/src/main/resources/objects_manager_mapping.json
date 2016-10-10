@@ -108,6 +108,10 @@
         "implementationClass":"org.jill.game.entities.obj.SnakeManager"
     },
     {
+        "type":40,
+        "implementationClass":"org.jill.game.entities.obj.underwater.UnderWaterRockManager"
+    },
+    {
         "type":42,
         "implementationClass":"org.jill.game.entities.obj.HugeLetterTileManager"
     },
@@ -131,15 +135,15 @@
         "type":49,
         "implementationClass":"org.jill.game.entities.obj.EpicManager"
     },
-        {
-        "type":50,
-        "implementationClass":"org.jill.game.entities.obj.BladeManager",
-        "weapon": {
-            "order":2,
-            "inventoryKey":"BLADE",
-            "removeInInventory":false,
-            "numberItemPerInventory":1
-        }
+    {
+    "type":50,
+    "implementationClass":"org.jill.game.entities.obj.BladeManager",
+    "weapon": {
+        "order":2,
+        "inventoryKey":"BLADE",
+        "removeInInventory":false,
+        "numberItemPerInventory":1
+    }
     },
     {
         "type":51,
@@ -153,6 +157,10 @@
         "type":56,
         "implementationClass":"org.jill.game.entities.obj.player.firebird.FirebirdPlayerManager",
         "inventoryName":"FIREBIRD"
+    },
+    {
+        "type":58,
+        "implementationClass":"org.jill.game.entities.obj.underwater.BubblesManager"
     },
     {
         "type":61,

@@ -346,5 +346,15 @@
         "numberTileSet":"4",
         "initXD":"8",
         "offsetX":"24"
+    },
+    "UnderWaterRockManager":
+    {
+        "tile":"34",
+        "tileSet":"14"
+    },
+    "BubblesManager":
+    {
+        "tile":"6",
+        "tileSet":"51"
     }
 }
