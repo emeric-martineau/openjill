@@ -426,11 +426,13 @@ public abstract class AbstractExecutingStdLevel extends AbstractMenuJillLevel {
 
             final RectangleConf offset
                     = this.statusBar.getGameAreaConf().getOffset();
+            final int specialScreenShift = this.statusBar.getGameAreaConf()
+                    .getSpecialScreenShift();
 
             // Copy background screen on
             g2DrawingScreen.drawImage(background,
                     offset.getX(),
-                    offset.getY(),
+                    offset.getY() - specialScreenShift,
                     null);
 
             // Draw object
@@ -611,6 +613,8 @@ public abstract class AbstractExecutingStdLevel extends AbstractMenuJillLevel {
 
         final RectangleConf offset
                     = this.statusBar.getGameAreaConf().getOffset();
+        final int specialScreenShift = this.statusBar.getGameAreaConf()
+                    .getSpecialScreenShift();
 
         BufferedImage currentPicture;
 
@@ -626,7 +630,7 @@ public abstract class AbstractExecutingStdLevel extends AbstractMenuJillLevel {
                     currentObject.getX()
                             + offset.getX(),
                     currentObject.getY()
-                            + offset.getY(),
+                            + offset.getY() - specialScreenShift,
                     null);
             }
         }
@@ -645,19 +649,24 @@ public abstract class AbstractExecutingStdLevel extends AbstractMenuJillLevel {
      * @param object current object
      * @param offset offset
      */
-    private static void drawDashedRectFilled(final Graphics2D g2,
-            final ObjectEntity object, final RectangleConf offset)
-    {
-        Color oldColor = g2.getColor() ;
+    private void drawDashedRectFilled(final Graphics2D g2,
+            final ObjectEntity object, final RectangleConf offset) {
+        final int specialScreenShift = this.statusBar.getGameAreaConf()
+                    .getSpecialScreenShift();
+
+        final Color oldColor = g2.getColor() ;
         g2.setColor(Color.CYAN) ;
 
-        Rectangle rect = new Rectangle(object.getX() + offset.getX(),
-                object.getY() + offset.getY(),
+        final Rectangle rect = new Rectangle(object.getX() + offset.getX(),
+                object.getY() + offset.getY() - specialScreenShift,
                 object.getWidth(), object.getWidth());
+
         float[] dash = { 5F, 5F } ;
-        Stroke dashedStroke = new BasicStroke( 2F, BasicStroke.CAP_SQUARE,
+
+        final Stroke dashedStroke = new BasicStroke(2F, BasicStroke.CAP_SQUARE,
         BasicStroke.JOIN_MITER, 3F, dash, 0F );
-        g2.fill( dashedStroke.createStrokedShape( rect ) );
+
+        g2.fill(dashedStroke.createStrokedShape(rect));
 
         g2.setColor(oldColor) ;
     }

@@ -54,11 +54,6 @@ public abstract class AbstractExecutingStdPlayerLevel
             * JillConst.getBlockSize();
 
     /**
-     * Special screen offset for up/down jill.
-     */
-    private int specialScreenOffset = 0;
-
-    /**
      * Move screen state of player.
      */
     private final int playerStateMoveScreen;
@@ -231,14 +226,21 @@ public abstract class AbstractExecutingStdPlayerLevel
         // Player is Stand and not move, and plalyer in down or head up
         if (player.getState() == this.playerStateMoveScreen
                 && ySpeed != 0) {
+            final GameAreaConf gameScreen = this.statusBar.getGameAreaConf();
+
+            int specialScreenOffset = gameScreen.getSpecialScreenShift();
+
             if (ySpeed >= this.playerYdDownMoveScreen
-                    && this.specialScreenOffset < BORDER_SCREEN_PLAYER_Y) {
-                this.specialScreenOffset++;
+                    && specialScreenOffset < BORDER_SCREEN_PLAYER_Y) {
+                specialScreenOffset++;
             } else if (ySpeed <= this.playerYdUpMoveScreen
-                    && this.specialScreenOffset > 0) {
-                this.specialScreenOffset--;
+                    && specialScreenOffset > 0) {
+                specialScreenOffset--;
             }
 
+            specialScreenOffset = Math.max(0, specialScreenOffset);
+
+            gameScreen.setSpecialScreenShift(specialScreenOffset);
         }
     }
 
@@ -267,7 +269,6 @@ public abstract class AbstractExecutingStdPlayerLevel
                     JillConst.getMaxWidth() - gameWidth);
             offset.setX(-1 * newRightOffset);
         }
-
 
         final int playerY = player.getY();
         final int topOffset = playerY + offset.getY();
