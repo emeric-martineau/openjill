@@ -355,6 +355,7 @@
     "BubblesManager":
     {
         "tile":"6",
-        "tileSet":"51"
+        "tileSet":"51",
+        "moveY":-2
     }
 }
