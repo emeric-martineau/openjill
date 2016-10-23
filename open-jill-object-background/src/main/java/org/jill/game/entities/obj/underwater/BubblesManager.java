@@ -29,7 +29,7 @@ public final class BubblesManager extends AbstractParameterObjectEntity {
     /**
      * Move Y
      */
-    private int moveY;
+    private int[] moveY;
 
     /**
      * Default constructor.
@@ -49,7 +49,15 @@ public final class BubblesManager extends AbstractParameterObjectEntity {
 
         this.backgroundObject = objectParam.getBackgroundObject();
 
-        this.moveY = getConfInteger("moveY");
+        // Compute move
+        final String strMove = getConfString("moveY");
+        final String[] arrayMove = strMove.split(",");
+
+        this.moveY = new int[arrayMove.length];
+
+        for (int index = 0; index < arrayMove.length; index++) {
+            this.moveY[index] = Integer.valueOf(arrayMove[index]);
+        }
 
         if (getWidth() == 0 || getHeight() == 0) {
             setWidth(this.image.getWidth());
@@ -60,7 +68,7 @@ public final class BubblesManager extends AbstractParameterObjectEntity {
     @Override
     public void msgUpdate(final KeyboardLayout keyboardLayout) {
         // Move up
-        if (!UtilityObjectEntity.moveObjectUp(this, moveY,
+        if (!UtilityObjectEntity.moveObjectUp(this, this.moveY[getCounter()],
                 this.backgroundObject)) {
             this.messageDispatcher.sendMessage(EnumMessageType.OBJECT,
                 new ObjectListMessage(this, false));
@@ -68,6 +76,7 @@ public final class BubblesManager extends AbstractParameterObjectEntity {
 
         // TODO check if water
         // TODO random update X -1/0/+1
+        // TODO random change counter
     }
 
     @Override
