@@ -356,6 +356,8 @@
     {
         "tile":"6",
         "tileSet":"51",
-        "moveY":"-1,-2,-3"
+        "moveY":"-1,-2,-3",
+        "moveX":"-1,0,1",
+        "waterRegEx":"WATER.*"
     }
 }
