@@ -2,9 +2,7 @@ package org.jill.game.entities.obj.underwater;
 
 import java.awt.image.BufferedImage;
 import org.jill.game.entities.obj.abs.AbstractParameterObjectEntity;
-import org.jill.game.entities.obj.util.UtilityObjectEntity;
 import org.jill.openjill.core.api.entities.BackgroundEntity;
-import org.jill.openjill.core.api.entities.ObjectEntity;
 import org.jill.openjill.core.api.entities.ObjectParam;
 import org.jill.openjill.core.api.jill.JillConst;
 import org.jill.openjill.core.api.keyboard.KeyboardLayout;
@@ -44,6 +42,11 @@ public final class BubblesManager extends AbstractParameterObjectEntity {
     private String waterRegEx;
 
     /**
+     * Max counter value.
+     */
+    private int maxCounter;
+
+    /**
      * Default constructor.
      *
      * @param objectParam object paramter
@@ -52,12 +55,7 @@ public final class BubblesManager extends AbstractParameterObjectEntity {
     public void init(final ObjectParam objectParam) {
         super.init(objectParam);
 
-        // Init list of picture
-        int tileIndex = getConfInteger("tile");
-        int tileSetIndex = getConfInteger("tileSet");
-
-        this.image = objectParam.getPictureCache()
-                .getImage(tileSetIndex, tileIndex + getCounter());
+        loadImage();
 
         this.backgroundObject = objectParam.getBackgroundObject();
 
@@ -66,10 +64,24 @@ public final class BubblesManager extends AbstractParameterObjectEntity {
 
         this.waterRegEx = getConfString("waterRegEx");
 
+        this.maxCounter = getConfInteger("maxCounter");
+
         if (getWidth() == 0 || getHeight() == 0) {
             setWidth(this.image.getWidth());
             setHeight(this.image.getHeight());
         }
+    }
+
+    /**
+     * Load image.
+     */
+    private void loadImage() {
+        // Init list of picture
+        final int tileIndex = getConfInteger("tile");
+        final int tileSetIndex = getConfInteger("tileSet");
+
+        this.image = this.pictureCache
+                .getImage(tileSetIndex, tileIndex + getCounter());
     }
 
     /**
@@ -94,15 +106,10 @@ public final class BubblesManager extends AbstractParameterObjectEntity {
 
     @Override
     public void msgUpdate(final KeyboardLayout keyboardLayout) {
-        // Move up
-        if (!UtilityObjectEntity.moveObjectUp(this, this.moveY[getCounter()],
-                this.backgroundObject)) {
-            killMe();
-        }
+        // Move up. Don't need check if block cause, after check if water.
+        setY(getY() + this.moveY[getCounter()]);
 
         moveLeftRight();
-        
-        // TODO random change counter
 
         checkIfWater();
     }
@@ -130,14 +137,14 @@ public final class BubblesManager extends AbstractParameterObjectEntity {
 
         final int currentMoveX = this.moveX[index];
 
-        if ((currentMoveX < ObjectEntity.X_SPEED_MIDDLE)
-                && !UtilityObjectEntity.moveObjectLeft(this, currentMoveX,
-                        this.backgroundObject)) {
-            killMe();
-        } else if ((currentMoveX > ObjectEntity.X_SPEED_MIDDLE)
-                && !UtilityObjectEntity.moveObjectRight(this, currentMoveX,
-                        this.backgroundObject)) {
-            killMe();
+        setX(getX() + currentMoveX);
+
+        if (currentMoveX == 0 && getCounter() < this.maxCounter) {
+            final int increaseCounter = (int) (Math.random() * 2);
+
+            setCounter(getCounter() + increaseCounter);
+
+            loadImage();
         }
     }
 

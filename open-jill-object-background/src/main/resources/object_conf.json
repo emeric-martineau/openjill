@@ -358,6 +358,8 @@
         "tileSet":"51",
         "moveY":"-1,-2,-3",
         "moveX":"-1,0,1",
-        "waterRegEx":"WATER.*"
+        "waterRegEx":"WATER.*",
+        "maxCounter":2
+
     }
 }
