@@ -350,7 +350,9 @@
     "UnderWaterRockManager":
     {
         "tile":"34",
-        "tileSet":"14"
+        "tileSet":"14",
+        "bubbleObject":"org.jill.game.entities.obj.underwater.BubblesManager",
+        "bubbleTrigger":10
     },
     "BubblesManager":
     {
