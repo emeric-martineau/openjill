@@ -141,9 +141,6 @@ public final class HiveManager extends AbstractParameterObjectEntity {
         return this.images[pictureIndex];
     }
 
-    /**
-     * Call to update.
-     */
     @Override
     public void msgUpdate(final KeyboardLayout keyboardLayout) {
 
