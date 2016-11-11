@@ -6,10 +6,6 @@
         "inventoryName":"JILL"
     },
     {
-        "type":23,
-        "implementationClass":"org.jill.game.entities.obj.player.PlayerManager"
-    },
-    {
         "type":1,
         "implementationClass":"org.jill.game.entities.obj.AppleManager"
     },

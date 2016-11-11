@@ -35,6 +35,12 @@ public final class JillGameConfig extends SimpleGameConfig {
             = "jill.screenmove.player.yd.down";
 
     /**
+     * Player state to move screen.
+     */
+    public static final String JILL_SCREENMOVE_TYPE
+            = "jill.screenmove.player.type";
+
+    /**
      * Screen type by default.
      */
     public static final String JILL_DEFAULT_SCREEN_TYPE
@@ -77,6 +83,11 @@ public final class JillGameConfig extends SimpleGameConfig {
     private final int levelMessageTimeout;
 
     /**
+     * Return jill type.
+     */
+    private int jillType;
+
+    /**
      * Constructor.
      *
      * @param properties file to read
@@ -103,6 +114,10 @@ public final class JillGameConfig extends SimpleGameConfig {
         value = properties.getProperty(JILL_SCREENMOVE_DOWN);
 
         this.jillDown = Integer.valueOf(value);
+
+        value = properties.getProperty(JILL_SCREENMOVE_TYPE);
+
+        this.jillType = Integer.valueOf(value);
 
         value = properties.getProperty(JILL_DEFAULT_SCREEN_TYPE);
 
@@ -151,6 +166,15 @@ public final class JillGameConfig extends SimpleGameConfig {
      */
     public int getPlayerMoveScreenYdUp() {
         return this.jillUp;
+    }
+
+    /**
+     * Return jill type.
+     *
+     * @return type
+     */
+    public int getPlayerMoveScreenType() {
+        return this.jillType;
     }
 
     /**

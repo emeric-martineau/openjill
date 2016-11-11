@@ -69,6 +69,11 @@ public abstract class AbstractExecutingStdPlayerLevel
     private final int playerYdDownMoveScreen;
 
     /**
+     * Type of player for head up/down.
+     */
+    private final int playerTypeMoveScreen;
+
+    /**
      * Create message for status bar.
      *
      * @param prop propertoies
@@ -114,6 +119,10 @@ public abstract class AbstractExecutingStdPlayerLevel
         this.playerYdDownMoveScreen
             = ((JillGameConfig) SimpleGameConfig.getInstance()).
                     getPlayerMoveScreenYdDown();
+
+        this.playerTypeMoveScreen
+            = ((JillGameConfig) SimpleGameConfig.getInstance()).
+                    getPlayerMoveScreenType();
 
         initCenterScreen();
 
@@ -225,7 +234,8 @@ public abstract class AbstractExecutingStdPlayerLevel
 
         // Player is Stand and not move, and plalyer in down or head up
         if (player.getState() == this.playerStateMoveScreen
-                && ySpeed != 0) {
+                && ySpeed != 0
+                && player.getType() == this.playerTypeMoveScreen) {
             final GameAreaConf gameScreen = this.statusBar.getGameAreaConf();
 
             int specialScreenOffset = gameScreen.getSpecialScreenShift();

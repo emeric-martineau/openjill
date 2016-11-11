@@ -198,7 +198,8 @@ public abstract class AbstractObjectJillLevel
      *
      * @param newHandler handler
      */
-    protected final void changeScreenManager(final Class<? extends InterfaceSimpleGameHandleInterface> newHandler) {
+    protected final void changeScreenManager(
+            final Class<? extends InterfaceSimpleGameHandleInterface> newHandler) {
         try {
             SimpleGameHandler.setNewHandler((InterfaceSimpleGameHandleInterface) newHandler.newInstance());
         } catch (IllegalAccessException | InstantiationException ex) {
@@ -223,7 +224,6 @@ public abstract class AbstractObjectJillLevel
             default:
         }
     }
-
 
     private void receiveMessageReplaceObject(
             final ReplaceObjectMessage replaceObjectMessage) {
