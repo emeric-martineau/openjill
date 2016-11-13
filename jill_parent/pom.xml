@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.jill</groupId>
     <artifactId>jill-parent</artifactId>
-    <version>0.2.5-SNAPSHOT</version>
+    <version>0.2.5</version>
     <packaging>pom</packaging>
 
 	<dependencyManagement>
@@ -11,77 +11,77 @@
 	    <dependency>
           <groupId>org.jill.file</groupId>
           <artifactId>abstractfile-api</artifactId>
-          <version>0.2.5-SNAPSHOT</version>
+          <version>0.2.5</version>
         </dependency>
         <dependency>
           <groupId>org.jill.file</groupId>
           <artifactId>abstractfile</artifactId>
-          <version>0.2.5-SNAPSHOT</version>
+          <version>0.2.5</version>
 		</dependency>
 		<dependency>
           <groupId>org.jill.cfg</groupId>
           <artifactId>cfg-file-api</artifactId>
-          <version>0.2.5-SNAPSHOT</version>
+          <version>0.2.5</version>
         </dependency>
 		<dependency>
           <groupId>org.jill.cfg</groupId>
           <artifactId>cfg-file</artifactId>
-          <version>0.2.5-SNAPSHOT</version>
+          <version>0.2.5</version>
         </dependency>
 		<dependency>
           <groupId>org.jill.dma</groupId>
           <artifactId>dma-file-api</artifactId>
-          <version>0.2.5-SNAPSHOT</version>
+          <version>0.2.5</version>
         </dependency>
 		<dependency>
           <groupId>org.jill.dma</groupId>
           <artifactId>dma-file</artifactId>
-          <version>0.2.5-SNAPSHOT</version>
+          <version>0.2.5</version>
         </dependency>
 		<dependency>
           <groupId>org.jill.jn</groupId>
           <artifactId>jn-file-api</artifactId>
-          <version>0.2.5-SNAPSHOT</version>
+          <version>0.2.5</version>
         </dependency>
 		<dependency>
           <groupId>org.jill.jn</groupId>
           <artifactId>jn-file</artifactId>
-          <version>0.2.5-SNAPSHOT</version>
+          <version>0.2.5</version>
         </dependency>
 		<dependency>
           <groupId>org.jill.sha</groupId>
           <artifactId>sha-file-api</artifactId>
-          <version>0.2.5-SNAPSHOT</version>
+          <version>0.2.5</version>
         </dependency>
 		<dependency>
           <groupId>org.jill.sha</groupId>
           <artifactId>sha-file</artifactId>
-          <version>0.2.5-SNAPSHOT</version>
+          <version>0.2.5</version>
         </dependency>
 		<dependency>
           <groupId>org.jill.vcl</groupId>
           <artifactId>vcl-file-api</artifactId>
-          <version>0.2.5-SNAPSHOT</version>
+          <version>0.2.5</version>
         </dependency>
 		<dependency>
           <groupId>org.jill.vcl</groupId>
           <artifactId>vcl-file</artifactId>
-          <version>0.2.5-SNAPSHOT</version>
+          <version>0.2.5</version>
         </dependency>
 		<dependency>
           <groupId>org.jill</groupId>
           <artifactId>openjill-core-api</artifactId>
-          <version>0.2.5-SNAPSHOT</version>
+          <version>0.2.5</version>
         </dependency>
 		<dependency>
           <groupId>org.jill</groupId>
           <artifactId>openjill-core</artifactId>
-          <version>0.2.5-SNAPSHOT</version>
+          <version>0.2.5</version>
         </dependency>
         <dependency>
           <groupId>org.jill.entities</groupId>
           <artifactId>open-jill-object-background</artifactId>
-          <version>0.2.5-SNAPSHOT</version>
+          <version>0.2.5</version>
         </dependency>
         <dependency>
           <groupId>org.simplegame</groupId>
