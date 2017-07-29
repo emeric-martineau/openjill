@@ -3,6 +3,7 @@ package org.jill.openjill.core.api.manager;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.Map;
+
 import org.jill.openjill.core.api.screen.EnumScreenType;
 import org.jill.sha.ShaTile;
 
@@ -131,18 +132,17 @@ public interface TextManager {
      * Constructor.
      *
      * @param mapOfTile map of tile
-     * @param tpScreen type of screen
+     * @param tpScreen  type of screen
      */
-    void init( Map<Integer, ShaTile[]> mapOfTile,
+    void init(Map<Integer, ShaTile[]> mapOfTile,
             EnumScreenType tpScreen);
 
     /**
      * Draw big text.
      *
-     * @param msg text to draw
+     * @param msg       text to draw
      * @param foreColor text color
      * @param backColor background color (BACKGROUND_COLOR_NONE = none)
-     *
      * @return picture
      */
     BufferedImage createBigText(String msg, int foreColor, int backColor);
@@ -150,10 +150,9 @@ public interface TextManager {
     /**
      * Draw small number.
      *
-     * @param number number to draw
+     * @param number    number to draw
      * @param foreColor text color
      * @param backColor background color (BACKGROUND_COLOR_NONE = none)
-     *
      * @return picture
      */
     BufferedImage createSmallNumber(int number, int foreColor, int backColor);
@@ -161,10 +160,9 @@ public interface TextManager {
     /**
      * Draw small text.
      *
-     * @param msg text to draw
+     * @param msg       text to draw
      * @param foreColor text color
      * @param backColor background color (BACKGROUND_COLOR_NONE = none)
-     *
      * @return picture
      */
     BufferedImage createSmallText(String msg, int foreColor, int backColor);
@@ -172,10 +170,10 @@ public interface TextManager {
     /**
      * Draw big text.
      *
-     * @param g2 picture where draw
-     * @param x x
-     * @param y y
-     * @param msg text to draw
+     * @param g2        picture where draw
+     * @param x         x
+     * @param y         y
+     * @param msg       text to draw
      * @param foreColor text color
      * @param backColor background color (BACKGROUND_COLOR_NONE = none)
      */
@@ -185,10 +183,10 @@ public interface TextManager {
     /**
      * Draw small text.
      *
-     * @param g2 picture where draw
-     * @param x x
-     * @param y y
-     * @param msg text to draw
+     * @param g2        picture where draw
+     * @param x         x
+     * @param y         y
+     * @param msg       text to draw
      * @param foreColor text color
      * @param backColor background color (BACKGROUND_COLOR_NONE = none)
      */
@@ -198,10 +196,9 @@ public interface TextManager {
     /**
      * Grap small letter.
      *
-     * @param msg message to display
+     * @param msg       message to display
      * @param foreColor text color
      * @param backColor background color
-     *
      * @return picture array
      */
     BufferedImage[] grapSmallLetter(String msg, int foreColor, int backColor);
@@ -209,10 +206,9 @@ public interface TextManager {
     /**
      * grap special key.
      *
-     * @param key key to draw
+     * @param key       key to draw
      * @param foreColor text color
      * @param backColor background color (BACKGROUND_COLOR_NONE = none)
-     *
      * @return picture
      */
     BufferedImage grapSpecialKey(int key, int foreColor, int backColor);

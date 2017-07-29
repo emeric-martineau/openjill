@@ -1,6 +1,7 @@
 package org.jill.game.gui.menu;
 
 import java.awt.image.BufferedImage;
+
 import org.jill.game.gui.menu.conf.MenuConf;
 import org.jill.game.screen.conf.PictureConf;
 import org.jill.openjill.core.api.manager.TileManager;
@@ -15,7 +16,7 @@ public final class ClassicMenu extends AbstractStdMenu {
      * Constructor.
      *
      * @param configFilename config file
-     * @param pictureCache cache of picture
+     * @param pictureCache   cache of picture
      */
     public ClassicMenu(
             final String configFilename,
@@ -55,8 +56,7 @@ public final class ClassicMenu extends AbstractStdMenu {
      * Get image.
      *
      * @param pictureCache cache manager
-     * @param conf configuration
-     *
+     * @param conf         configuration
      * @return picture
      */
     private BufferedImage getImage(final TileManager pictureCache,

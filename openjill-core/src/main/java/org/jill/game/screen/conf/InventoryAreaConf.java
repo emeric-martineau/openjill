@@ -278,7 +278,7 @@ public final class InventoryAreaConf extends AbstractLineTextConf {
     /**
      * Lifebar size for step.
      *
-     * @param lStepSize  size
+     * @param lStepSize size
      */
     public void setLifeBarStepSize(final int lStepSize) {
         this.lifeBarStepSize = lStepSize;

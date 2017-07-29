@@ -1,17 +1,17 @@
 package org.jill.game.entities.obj;
 
 import java.awt.image.BufferedImage;
+
 import org.jill.game.entities.obj.abs.AbstractParameterObjectEntity;
 import org.jill.game.entities.obj.bullet.BulletObjectFactory;
 import org.jill.game.entities.obj.player.PlayerPositionSynchronizer;
 import org.jill.openjill.core.api.entities.ObjectEntity;
-import org.jill.openjill.core.api.message.object.ObjectListMessage;
 import org.jill.openjill.core.api.entities.ObjectParam;
 import org.jill.openjill.core.api.keyboard.KeyboardLayout;
 import org.jill.openjill.core.api.message.EnumMessageType;
 import org.jill.openjill.core.api.message.object.CreateObjectMessage;
-import org.jill.openjill.core.api.message.statusbar.inventory.
-        InventoryPointMessage;
+import org.jill.openjill.core.api.message.object.ObjectListMessage;
+import org.jill.openjill.core.api.message.statusbar.inventory.InventoryPointMessage;
 
 /**
  * Hive object.
@@ -24,7 +24,7 @@ public final class HiveManager extends AbstractParameterObjectEntity {
      * Player position object.
      */
     private static final PlayerPositionSynchronizer PLAYER_POSITION
-        = PlayerPositionSynchronizer.getInstance();
+            = PlayerPositionSynchronizer.getInstance();
 
     /**
      * To remove this object from object lis.
@@ -90,11 +90,11 @@ public final class HiveManager extends AbstractParameterObjectEntity {
         // Load picture for each object. Don't use cache cause some picture
         // change between jill episod.
         this.images
-            = new BufferedImage[numberTileSet];
+                = new BufferedImage[numberTileSet];
 
         for (int index = 0; index < numberTileSet; index++) {
             this.images[index]
-                = this.pictureCache.getImage(tileSetIndex, tileIndex
+                    = this.pictureCache.getImage(tileSetIndex, tileIndex
                     + index);
         }
 
@@ -112,7 +112,7 @@ public final class HiveManager extends AbstractParameterObjectEntity {
                 getConfString("beesObject"));
 
         this.messageDispatcher.sendMessage(EnumMessageType.CREATE_OBJECT,
-            com);
+                com);
 
         ObjectEntity bees = com.getObject();
         bees.setY(getY());
@@ -169,7 +169,7 @@ public final class HiveManager extends AbstractParameterObjectEntity {
         }
 
         this.indexEtat = PLAYER_POSITION.updatePlayerPosition(
-            this.messageDispatcher, this.indexEtat);
+                this.messageDispatcher, this.indexEtat);
 
         final int xd = PLAYER_POSITION.getX() - this.x;
         final int yd = PLAYER_POSITION.getY() - this.y;
@@ -195,14 +195,14 @@ public final class HiveManager extends AbstractParameterObjectEntity {
 
     @Override
     public void msgKill(final ObjectEntity sender,
-        final int nbLife, final int typeOfDeath) {
+            final int nbLife, final int typeOfDeath) {
         this.messageDispatcher.sendMessage(EnumMessageType.INVENTORY_POINT,
-            new InventoryPointMessage(getConfInteger("point"), true,
-                    this, sender));
+                new InventoryPointMessage(getConfInteger("point"), true,
+                        this, sender));
         this.messageDispatcher.sendMessage(EnumMessageType.OBJECT,
-            this.killme);
+                this.killme);
 
         BulletObjectFactory.explode(this, this.nbColoredBullet,
-                    this.messageDispatcher);
+                this.messageDispatcher);
     }
 }

@@ -5,7 +5,6 @@ package org.jill.sha.ui;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
 import javax.swing.JButton;
 
 /**
@@ -18,25 +17,25 @@ public abstract class AbstractButton extends JButton implements ActionListener {
     /**
      * Creates a button with text.
      *
-     * @param text  the text of the button
+     * @param text the text of the button
      */
     public AbstractButton(String text) {
-        super(text, null) ;
-        
-        addActionListener(this) ;
+        super(text, null);
+
+        addActionListener(this);
     }
-    
+
     /**
      * If click on button
      */
     public void actionPerformed(final ActionEvent e) {
-        onClick(e) ;
+        onClick(e);
     }
-    
+
     /**
      * Call when button click
-     * 
+     *
      * @param e action event
      */
-    public abstract void onClick(final ActionEvent e) ;
+    public abstract void onClick(final ActionEvent e);
 }

@@ -4,6 +4,7 @@ package org.jill.game.level.handler.jill1;
 import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+
 import org.jill.game.level.AbstractExecutingStdPlayerLevel;
 import org.jill.game.level.cfg.JillLevelConfiguration;
 import org.jill.game.screen.conf.RectangleConf;
@@ -16,7 +17,7 @@ import org.simplegame.SimpleGameConfig;
  * @author Emeric MARTINEAU
  */
 public class OrderingInfoScreenJill1Handler
-    extends AbstractExecutingStdPlayerLevel {
+        extends AbstractExecutingStdPlayerLevel {
     /**
      * List of screens.
      */
@@ -30,7 +31,7 @@ public class OrderingInfoScreenJill1Handler
     /**
      * Default constructor of level.
      *
-     * @throws IOException if missing file
+     * @throws IOException                  if missing file
      * @throws ReflectiveOperationException if missing class must be load
      */
     public OrderingInfoScreenJill1Handler() throws IOException, ReflectiveOperationException {
@@ -53,7 +54,6 @@ public class OrderingInfoScreenJill1Handler
      *
      * @param x X in block
      * @param y Y in block
-     *
      * @return a point converting in pixel size
      */
     private static Point newScreen(final int x, final int y) {
@@ -69,7 +69,7 @@ public class OrderingInfoScreenJill1Handler
         return new BufferedImage(
                 SimpleGameConfig.getInstance().getGameWidth(),
                 SimpleGameConfig.getInstance().getGameHeight(),
-                    BufferedImage.TYPE_INT_ARGB);
+                BufferedImage.TYPE_INT_ARGB);
     }
 
     /**
@@ -82,7 +82,7 @@ public class OrderingInfoScreenJill1Handler
     protected void centerScreen() {
         final RectangleConf offset
                 = this.statusBar.getGameAreaConf().getOffset();
-        
+
         offset.setX(
                 screens[currentScreen].x);
         offset.setY(
@@ -102,9 +102,9 @@ public class OrderingInfoScreenJill1Handler
             if (currentScreen >= screens.length) {
                 changeScreenManager(StartMenuJill1Handler.class);
             } else {
-               final RectangleConf offset
-                    = this.statusBar.getGameAreaConf().getOffset();
-               
+                final RectangleConf offset
+                        = this.statusBar.getGameAreaConf().getOffset();
+
                 offset.setX(
                         screens[currentScreen].x);
                 offset.setY(

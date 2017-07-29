@@ -2,10 +2,12 @@ package org.jill.dma;
 
 import java.io.IOException;
 import java.util.Iterator;
+
 import org.jill.file.FileAbstractByte;
 
 /**
  * Class to read DMA file who contain mapping between map and picture of game.
+ *
  * @author Emeric MARTINEAU
  */
 public interface DmaFile {
@@ -14,7 +16,6 @@ public interface DmaFile {
      * Constructor of class ShaFile.java.
      *
      * @param dmaFile file name
-     *
      * @throws IOException if error
      */
     void load(String dmaFile) throws IOException;
@@ -23,7 +24,6 @@ public interface DmaFile {
      * Constructor of class ShaFile.java.
      *
      * @param dmaFile file data
-     *
      * @throws IOException if error
      */
     void load(FileAbstractByte dmaFile) throws IOException;
@@ -32,7 +32,6 @@ public interface DmaFile {
      * Get Dma Entry.
      *
      * @param id id of entry
-     *
      * @return dma
      */
     DmaEntry getDmaEntry(int id);
@@ -41,7 +40,6 @@ public interface DmaFile {
      * Get Dma Entry.
      *
      * @param name name of entry
-     *
      * @return dma
      */
     DmaEntry getDmaEntry(String name);

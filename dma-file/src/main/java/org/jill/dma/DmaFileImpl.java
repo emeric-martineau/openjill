@@ -7,8 +7,9 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-import org.jill.file.FileAbstractByteImpl;
+
 import org.jill.file.FileAbstractByte;
+import org.jill.file.FileAbstractByteImpl;
 
 
 /**
@@ -49,7 +50,6 @@ public class DmaFileImpl implements DmaFile {
      * Constructor of class ShaFile.java.
      *
      * @param dmaFile file name
-     *
      * @throws IOException if error
      */
     @Override
@@ -64,19 +64,17 @@ public class DmaFileImpl implements DmaFile {
      * Constructor of class ShaFile.java.
      *
      * @param dmaFile file data
-     *
      * @throws IOException if error
      */
     @Override
     public void load(final FileAbstractByte dmaFile) throws IOException {
-           readDmaEntry(dmaFile);
+        readDmaEntry(dmaFile);
     }
 
     /**
      * Read Tileset information.
      *
      * @param dmaFile dma data file
-     *
      * @throws IOException if error
      */
     private void readDmaEntry(final FileAbstractByte dmaFile)
@@ -126,7 +124,6 @@ public class DmaFileImpl implements DmaFile {
      * Get Dma Entry.
      *
      * @param id id of entry
-     *
      * @return dma
      */
     @Override
@@ -138,7 +135,6 @@ public class DmaFileImpl implements DmaFile {
      * Get Dma Entry.
      *
      * @param name name of entry
-     *
      * @return dma
      */
     @Override

@@ -7,9 +7,7 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Properties;
-import junit.framework.Test;
-import junit.framework.TestCase;
-import junit.framework.TestSuite;
+
 import org.jill.file.FileAbstractByte;
 import org.jill.file.FileAbstractByteImpl;
 import org.jill.jn.BackgroundLayer;
@@ -21,61 +19,59 @@ import org.jill.jn.ObjectItemImpl;
 import org.jill.jn.SaveData;
 import org.jill.jn.StringItem;
 
+import junit.framework.Test;
+import junit.framework.TestCase;
+import junit.framework.TestSuite;
+
 /**
  * Unit test for simple App.
  */
 public class AppTest
-    extends TestCase
-{
-    private String homePath ;
+        extends TestCase {
+    private String homePath;
 
     /**
      * Create the test case
      *
      * @param testName name of the test case
      */
-    public AppTest( String testName ) throws IOException
-    {
-        super( testName );
+    public AppTest(String testName) throws IOException {
+        super(testName);
 
         final Properties prop = new Properties();
 
-        prop.load(this.getClass().getClassLoader().getResourceAsStream("config.properties")) ;
-        homePath = prop.getProperty("home") ;
+        prop.load(this.getClass().getClassLoader().getResourceAsStream("config.properties"));
+        homePath = prop.getProperty("home");
     }
 
     /**
      * @return the suite of tests being tested
      */
-    public static Test suite()
-    {
-        return new TestSuite( AppTest.class );
+    public static Test suite() {
+        return new TestSuite(AppTest.class);
     }
 
     /**
      * Rigourous Test :-)
      */
-    public void testDumpBackground() throws IOException
-    {
+    public void testDumpBackground() throws IOException {
         final FileAbstractByte f = new FileAbstractByteImpl();
         f.load(homePath + "map.jn1");
         final JnFile jnFile = new JnFileImpl();
-        jnFile.load(f) ;
-        final BackgroundLayer background = jnFile.getBackgroundLayer() ;
+        jnFile.load(f);
+        final BackgroundLayer background = jnFile.getBackgroundLayer();
 
-        System.out.println("Background layer :") ;
-        System.out.println("") ;
+        System.out.println("Background layer :");
+        System.out.println("");
 
-        for(int indexX = 0; indexX < BackgroundLayerImpl.MAP_WIDTH; indexX++)
-        {
-            for(int indexY = 0; indexY < BackgroundLayerImpl.MAP_HEIGHT; indexY++)
-            {
+        for (int indexX = 0; indexX < BackgroundLayerImpl.MAP_WIDTH; indexX++) {
+            for (int indexY = 0; indexY < BackgroundLayerImpl.MAP_HEIGHT; indexY++) {
                 System.out.print(
                         String.format("%04X ",
-                                    background.getMapCode(indexX, indexY))) ;
+                                background.getMapCode(indexX, indexY)));
             }
 
-            System.out.println("") ;
+            System.out.println("");
         }
     }
 
@@ -83,36 +79,35 @@ public class AppTest
      * Rigourous Test :-).
      *
      * @throws InvocationTargetException error
-     * @throws IllegalAccessException error
-     * @throws IllegalArgumentException error
+     * @throws IllegalAccessException    error
+     * @throws IllegalArgumentException  error
      */
-    public void testDumpObject() throws IOException, IllegalArgumentException, IllegalAccessException, InvocationTargetException
-    {
+    public void testDumpObject() throws IOException, IllegalArgumentException, IllegalAccessException, InvocationTargetException {
         final FileAbstractByte f = new FileAbstractByteImpl();
         f.load(homePath + "map.jn1");
 
         final JnFile jnFile = new JnFileImpl();
-        jnFile.load(f) ;
-        final List<ObjectItem> objectLayer = jnFile.getObjectLayer() ;
-        final int nbObject = objectLayer.size() ;
+        jnFile.load(f);
+        final List<ObjectItem> objectLayer = jnFile.getObjectLayer();
+        final int nbObject = objectLayer.size();
 
-        ObjectItem currentObject ;
+        ObjectItem currentObject;
 
-        System.out.println("Object layer (" + String.valueOf(nbObject) + ") :") ;
-        System.out.println("") ;
+        System.out.println("Object layer (" + String.valueOf(nbObject) + ") :");
+        System.out.println("");
 
         final Class tClass = ObjectItemImpl.class;
 
         final Method[] methods = tClass.getMethods();
 
-        String methodeName ;
+        String methodeName;
 
         for (ObjectItem anObjectLayer : objectLayer) {
             currentObject = anObjectLayer;
 
             System.out.println(
                     String.format("Object #%d",
-                                    currentObject.getIndex()));
+                            currentObject.getIndex()));
 
             for (Method method : methods) {
                 methodeName = method.getName();
@@ -133,50 +128,45 @@ public class AppTest
     /**
      * Rigourous Test :-)
      */
-    public void testDumpSaveData() throws IOException
-    {
+    public void testDumpSaveData() throws IOException {
         final FileAbstractByte f = new FileAbstractByteImpl();
         f.load(homePath + "map.jn1");
 
         final JnFile jnFile = new JnFileImpl();
-        jnFile.load(f) ;
-        final SaveData saveData = jnFile.getSaveData() ;
+        jnFile.load(f);
+        final SaveData saveData = jnFile.getSaveData();
 
-        System.out.println("Save data layer :") ;
-        System.out.println("") ;
+        System.out.println("Save data layer :");
+        System.out.println("");
 
-        final int level = saveData.getLevel() ;
+        final int level = saveData.getLevel();
 
-        if (level == SaveData.MAP_LEVEL)
-        {
-            System.out.println("Level : MAP") ;
-        }
-        else
-        {
+        if (level == SaveData.MAP_LEVEL) {
+            System.out.println("Level : MAP");
+        } else {
             System.out.println(
-                String.format("Level : %d", level)) ;
+                    String.format("Level : %d", level));
         }
 
         System.out.println(
-            String.format("Health : %d", saveData.getHealth())) ;
+                String.format("Health : %d", saveData.getHealth()));
 
         System.out.println(
-                String.format("Score : %d", saveData.getScore())) ;
+                String.format("Score : %d", saveData.getScore()));
 
-        final List<Integer> inventory = saveData.getInventory() ;
+        final List<Integer> inventory = saveData.getInventory();
 
         System.out.println(
-                String.format("Inventory (%d)", inventory.size())) ;
+                String.format("Inventory (%d)", inventory.size()));
 
-        for(int index = 0; index < inventory.size(); index++)
-        {
+        for (int index = 0; index < inventory.size(); index++) {
             System.out.print("    ");
             System.out.println(
                     String.format("#%d : %d",
-                            new Object[] {
-                                index,
-                                inventory.get(index) }
-                    )) ;
+                            new Object[]{
+                                    index,
+                                    inventory.get(index)}
+                    ));
         }
     }
 
@@ -184,25 +174,23 @@ public class AppTest
     /**
      * Rigourous Test :-)
      */
-    public void testStringStack() throws IOException
-    {
+    public void testStringStack() throws IOException {
         final FileAbstractByte f = new FileAbstractByteImpl();
         f.load(homePath + "map.jn1");
 
         final JnFile jnFile = new JnFileImpl();
-        jnFile.load(f) ;
-        final List<StringItem> stringStack = jnFile.getStringStack() ;
-        final Iterator<StringItem> it = stringStack.iterator() ;
+        jnFile.load(f);
+        final List<StringItem> stringStack = jnFile.getStringStack();
+        final Iterator<StringItem> it = stringStack.iterator();
 
-        System.out.println("String stack :") ;
-        System.out.println("") ;
+        System.out.println("String stack :");
+        System.out.println("");
 
-        while(it.hasNext())
-        {
+        while (it.hasNext()) {
             System.out.println(
-                String.format("    '%s'",
-                        new Object[] { it.next().getValue() }
-                )) ;
+                    String.format("    '%s'",
+                            new Object[]{it.next().getValue()}
+                    ));
         }
     }
 }

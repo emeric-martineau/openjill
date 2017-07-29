@@ -1,15 +1,16 @@
 package org.jill.game.entities.obj.abs;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import org.jill.game.entities.ObjectEntityImpl;
 import org.jill.openjill.core.api.message.EnumMessageType;
 import org.jill.openjill.core.api.message.statusbar.StatusBarTextMessage;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 
 /**
@@ -36,12 +37,13 @@ public abstract class AbstractParameterObjectEntity extends ObjectEntityImpl {
 
         try {
             conf = mapper.readValue(is,
-                    new TypeReference<Map<String, Map<String, String>>>() { });
+                    new TypeReference<Map<String, Map<String, String>>>() {
+                    });
         } catch (IOException e) {
             Logger.getLogger(
-                AbstractParameterObjectEntity.class.getName()).
-                log(Level.SEVERE,
-                    "Can't load object config file !", e);
+                    AbstractParameterObjectEntity.class.getName()).
+                    log(Level.SEVERE,
+                            "Can't load object config file !", e);
         }
     }
 
@@ -49,7 +51,6 @@ public abstract class AbstractParameterObjectEntity extends ObjectEntityImpl {
      * Configuration string.
      *
      * @param properties properties file
-     *
      * @return value
      */
     protected final String getConfString(final String properties) {
@@ -60,8 +61,7 @@ public abstract class AbstractParameterObjectEntity extends ObjectEntityImpl {
      * Configuration string.
      *
      * @param properties properties file
-     * @param requiered if properties requiered
-     *
+     * @param requiered  if properties requiered
      * @return value
      */
     protected final String getConfString(final String properties,
@@ -78,12 +78,12 @@ public abstract class AbstractParameterObjectEntity extends ObjectEntityImpl {
             } else {
                 // Property not found for class
                 throw new ObjectConfigPropertyNameNotFoundException(properties,
-                    CONFIG_FILENAME);
+                        CONFIG_FILENAME);
             }
         } else {
             // Class not found in properties file
             throw new ObjectConfigPropertyNameNotFoundException(className,
-                CONFIG_FILENAME);
+                    CONFIG_FILENAME);
         }
 
         return value;
@@ -93,7 +93,6 @@ public abstract class AbstractParameterObjectEntity extends ObjectEntityImpl {
      * Configuration string.
      *
      * @param properties properties file
-     *
      * @return value
      */
     protected final int getConfInteger(final String properties) {
@@ -112,12 +111,12 @@ public abstract class AbstractParameterObjectEntity extends ObjectEntityImpl {
                 textTime, textColor);
 
         this.messageDispatcher.sendMessage(
-                    EnumMessageType.MESSAGE_STATUS_BAR, msg);
+                EnumMessageType.MESSAGE_STATUS_BAR, msg);
     }
-    
+
     /**
      * Send default message.
-     * 
+     *
      * @param textMsg message to display.
      */
     protected final void sendMessage(final String textMsg) {
@@ -128,6 +127,6 @@ public abstract class AbstractParameterObjectEntity extends ObjectEntityImpl {
                 textTime, textColor);
 
         this.messageDispatcher.sendMessage(
-                    EnumMessageType.MESSAGE_STATUS_BAR, msg);
+                EnumMessageType.MESSAGE_STATUS_BAR, msg);
     }
 }

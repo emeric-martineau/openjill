@@ -2,6 +2,7 @@ package org.jill.game.entities.obj;
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+
 import org.jill.game.entities.obj.abs.AbstractParameterObjectEntity;
 import org.jill.openjill.core.api.entities.ObjectEntity;
 import org.jill.openjill.core.api.entities.ObjectParam;
@@ -15,7 +16,7 @@ import org.jill.openjill.core.api.message.InterfaceMessageGameHandler;
  * @author Emeric MARTINEAU
  */
 public final class SkullManager extends AbstractParameterObjectEntity
-    implements InterfaceMessageGameHandler {
+        implements InterfaceMessageGameHandler {
     /**
      * Picture array.
      */
@@ -25,6 +26,24 @@ public final class SkullManager extends AbstractParameterObjectEntity
      * Picture array.
      */
     private BufferedImage fixedImages;
+
+    /**
+     * Create copy of picture.
+     *
+     * @param currentSkull current picture
+     * @return new pricture
+     */
+    private static BufferedImage copyPicture(final BufferedImage currentSkull) {
+        final BufferedImage newPicture = new BufferedImage(
+                currentSkull.getWidth(),
+                currentSkull.getHeight(),
+                BufferedImage.TYPE_INT_ARGB);
+
+        Graphics2D g2d = newPicture.createGraphics();
+        g2d.drawImage(currentSkull, 0, 0, null);
+
+        return newPicture;
+    }
 
     /**
      * Default constructor.
@@ -89,14 +108,14 @@ public final class SkullManager extends AbstractParameterObjectEntity
      * Load skull image.
      *
      * @param numberTileSet number of image
-     * @param tileSetIndex tile set
-     * @param tileIndex tile to start
-     * @param skullMax skullMax
+     * @param tileSetIndex  tile set
+     * @param tileIndex     tile to start
+     * @param skullMax      skullMax
      */
     private void loadSkullImage(final int numberTileSet, final int tileSetIndex,
             final int tileIndex, final int skullMax) {
         this.images
-            = new BufferedImage[numberTileSet * 2];
+                = new BufferedImage[numberTileSet * 2];
 
         int tileIncrement = 1;
         int tileSkull = 0;
@@ -105,7 +124,7 @@ public final class SkullManager extends AbstractParameterObjectEntity
 
         for (int index = 0; index < this.images.length; index += 2) {
             currentSkull = this.pictureCache.getImage(tileSetIndex,
-                        tileIndex + tileSkull);
+                    tileIndex + tileSkull);
 
             this.images[index] = copyPicture(currentSkull);
 
@@ -117,25 +136,6 @@ public final class SkullManager extends AbstractParameterObjectEntity
 
             tileSkull += tileIncrement;
         }
-    }
-
-    /**
-     * Create copy of picture.
-     *
-     * @param currentSkull current picture
-     * 
-     * @return new pricture
-     */
-    private static BufferedImage copyPicture(final BufferedImage currentSkull) {
-        final BufferedImage newPicture = new BufferedImage(
-                currentSkull.getWidth(),
-                currentSkull.getHeight(),
-                BufferedImage.TYPE_INT_ARGB);
-
-        Graphics2D g2d = newPicture.createGraphics();
-        g2d.drawImage(currentSkull, 0, 0, null);
-
-        return newPicture;
     }
 
     @Override

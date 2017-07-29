@@ -1,7 +1,5 @@
 package org.jill.game.config;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
@@ -10,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import org.jill.cfg.CfgFile;
 import org.jill.dma.DmaFile;
 import org.jill.file.FileAbstractByte;
@@ -23,9 +22,10 @@ import org.jill.openjill.core.api.message.MessageDispatcher;
 import org.jill.sha.ColorMap;
 import org.jill.sha.ShaFile;
 import org.jill.vcl.VclFile;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
- *
  * @author emeric_martineau
  */
 public final class ObjectInstanceFactory {
@@ -33,13 +33,13 @@ public final class ObjectInstanceFactory {
      * Logger.
      */
     private static final Logger LOGGER = Logger.getLogger(
-                    ObjectInstanceFactory.class.getName());
+            ObjectInstanceFactory.class.getName());
 
     /**
      * Instance.
      */
     private static final ObjectInstanceFactory INSTANCE =
-        new ObjectInstanceFactory();
+            new ObjectInstanceFactory();
 
     /**
      * Instance of object configuration.
@@ -53,11 +53,12 @@ public final class ObjectInstanceFactory {
     private ObjectInstanceFactory() {
         final ObjectMapper mapper = new ObjectMapper();
         final InputStream is = ObjectInstanceFactory.class.getClassLoader().
-                    getResourceAsStream("object_instance_factory.json");
+                getResourceAsStream("object_instance_factory.json");
 
         try {
             final List<ObjectInstance> mapOI = mapper.readValue(is,
-                    new TypeReference<List<ObjectInstance>>() { });
+                    new TypeReference<List<ObjectInstance>>() {
+                    });
 
             for (ObjectInstance oi : mapOI) {
                 this.mapObjectInstance.put(oi.getInterfaceClass(), oi);
@@ -66,91 +67,6 @@ public final class ObjectInstanceFactory {
             Logger.getLogger(ObjectInstanceFactory.class.getName()
             ).log(Level.SEVERE, null, ex);
         }
-    }
-
-    /**
-     * Create class.
-     *
-     * @param name class name
-     * @return object class
-     */
-    private Class createClass(final String name) {
-        Class c = null;
-
-        try {
-            c = Class.forName(name);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(ObjectInstanceFactory.class.getName()
-            ).log(Level.SEVERE, null, ex);
-        }
-
-        return c;
-    }
-
-    /**
-     * Create class.
-     *
-     * @param className classe name.
-     *
-     * @return object
-     */
-    private Object createObject(final String className) {
-        Object o = null;
-
-        final ObjectInstance oi = this.mapObjectInstance.get(className);
-
-        Class c;
-
-        try {
-            if (oi == null) {
-                LOGGER.log(Level.SEVERE,
-                        String.format("Can't find implementation class for %s",
-                                className));
-            } else {
-                if (oi.isSingleton()) {
-                    o = oi.getSingletonInstance();
-
-                    // Object not initialized
-                    if (o == null) {
-                        c = getClazz(oi);
-                        o = c.getConstructor().newInstance();
-                        oi.setSingletonInstance(o);
-
-                        // Clear memory
-                        oi.setImplementationClass(null);
-                        oi.setInterfaceClass(null);
-                    }
-                } else {
-                    c = getClazz(oi);
-                    o = c.getConstructor().newInstance();
-                }
-            }
-        } catch (IllegalArgumentException | SecurityException |
-                InvocationTargetException | NoSuchMethodException |
-                IllegalAccessException | InstantiationException ex) {
-            LOGGER.log(Level.SEVERE,
-                "Create jill object error !", ex);
-        }
-
-        return o;
-    }
-
-    /**
-     * Get class.
-     *
-     * @param oi insotance object
-     *
-     * @return class
-     */
-    private Class getClazz(final ObjectInstance oi) {
-        // Get class
-        Class c = oi.getClazz();
-
-        if (c == null) {
-            c = createClass(oi.getImplementationClass());
-            oi.setClazz(c);
-        }
-        return c;
     }
 
     /**
@@ -176,7 +92,7 @@ public final class ObjectInstanceFactory {
      *
      * @return byte file
      */
-    public static FileAbstractByte getNewFileByte()  {
+    public static FileAbstractByte getNewFileByte() {
         return (FileAbstractByte) INSTANCE.createObject(
                 FileAbstractByte.class.getName());
     }
@@ -186,7 +102,7 @@ public final class ObjectInstanceFactory {
      *
      * @return byte file
      */
-    public static JnFile getNewJn()  {
+    public static JnFile getNewJn() {
         return (JnFile) INSTANCE.createObject(
                 JnFile.class.getName());
     }
@@ -196,7 +112,7 @@ public final class ObjectInstanceFactory {
      *
      * @return byte file
      */
-    public static DmaFile getNewDma()  {
+    public static DmaFile getNewDma() {
         return (DmaFile) INSTANCE.createObject(
                 DmaFile.class.getName());
     }
@@ -206,7 +122,7 @@ public final class ObjectInstanceFactory {
      *
      * @return byte file
      */
-    public static ShaFile getNewSha()  {
+    public static ShaFile getNewSha() {
         return (ShaFile) INSTANCE.createObject(
                 ShaFile.class.getName());
     }
@@ -216,7 +132,7 @@ public final class ObjectInstanceFactory {
      *
      * @return byte file
      */
-    public static ObjectItem getNewObjectItem()  {
+    public static ObjectItem getNewObjectItem() {
         return (ObjectItem) INSTANCE.createObject(
                 ObjectItem.class.getName());
     }
@@ -258,7 +174,7 @@ public final class ObjectInstanceFactory {
      */
     public static TextManager getNewTxtMng() {
         return (TextManager) INSTANCE.createObject(
-            TextManager.class.getName());
+                TextManager.class.getName());
     }
 
     /**
@@ -268,7 +184,7 @@ public final class ObjectInstanceFactory {
      */
     public static TileManager getNewTileMng() {
         return (TileManager) INSTANCE.createObject(
-            TileManager.class.getName());
+                TileManager.class.getName());
     }
 
     /**
@@ -276,7 +192,7 @@ public final class ObjectInstanceFactory {
      *
      * @return byte file
      */
-    public static ColorMap getCgaColor()  {
+    public static ColorMap getCgaColor() {
         return (ColorMap) INSTANCE.createObject("ColorMapCga");
     }
 
@@ -285,7 +201,7 @@ public final class ObjectInstanceFactory {
      *
      * @return byte file
      */
-    public static ColorMap getEgaColor()  {
+    public static ColorMap getEgaColor() {
         return (ColorMap) INSTANCE.createObject("ColorMapEga");
     }
 
@@ -294,16 +210,99 @@ public final class ObjectInstanceFactory {
      *
      * @return byte file
      */
-    public static ColorMap getVgaColor()  {
+    public static ColorMap getVgaColor() {
         return (ColorMap) INSTANCE.createObject("ColorMapVga");
     }
 
     /**
      * Instance.
      *
-     * @return  instance.
+     * @return instance.
      */
     public static ObjectInstanceFactory getInstance() {
         return INSTANCE;
+    }
+
+    /**
+     * Create class.
+     *
+     * @param name class name
+     * @return object class
+     */
+    private Class createClass(final String name) {
+        Class c = null;
+
+        try {
+            c = Class.forName(name);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ObjectInstanceFactory.class.getName()
+            ).log(Level.SEVERE, null, ex);
+        }
+
+        return c;
+    }
+
+    /**
+     * Create class.
+     *
+     * @param className classe name.
+     * @return object
+     */
+    private Object createObject(final String className) {
+        Object o = null;
+
+        final ObjectInstance oi = this.mapObjectInstance.get(className);
+
+        Class c;
+
+        try {
+            if (oi == null) {
+                LOGGER.log(Level.SEVERE,
+                        String.format("Can't find implementation class for %s",
+                                className));
+            } else {
+                if (oi.isSingleton()) {
+                    o = oi.getSingletonInstance();
+
+                    // Object not initialized
+                    if (o == null) {
+                        c = getClazz(oi);
+                        o = c.getConstructor().newInstance();
+                        oi.setSingletonInstance(o);
+
+                        // Clear memory
+                        oi.setImplementationClass(null);
+                        oi.setInterfaceClass(null);
+                    }
+                } else {
+                    c = getClazz(oi);
+                    o = c.getConstructor().newInstance();
+                }
+            }
+        } catch (IllegalArgumentException | SecurityException |
+                InvocationTargetException | NoSuchMethodException |
+                IllegalAccessException | InstantiationException ex) {
+            LOGGER.log(Level.SEVERE,
+                    "Create jill object error !", ex);
+        }
+
+        return o;
+    }
+
+    /**
+     * Get class.
+     *
+     * @param oi insotance object
+     * @return class
+     */
+    private Class getClazz(final ObjectInstance oi) {
+        // Get class
+        Class c = oi.getClazz();
+
+        if (c == null) {
+            c = createClass(oi.getImplementationClass());
+            oi.setClazz(c);
+        }
+        return c;
     }
 }

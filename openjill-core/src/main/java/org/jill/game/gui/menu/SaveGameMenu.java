@@ -4,6 +4,7 @@ import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.util.List;
+
 import org.jill.cfg.SaveGameItem;
 import org.jill.game.gui.tools.LimitedString;
 import org.jill.openjill.core.api.manager.TileManager;
@@ -23,38 +24,38 @@ public final class SaveGameMenu extends AbstractLoadGameMenu {
     /**
      * Constructor.
      *
-     * @param menuScreen object to draw high score
+     * @param menuScreen          object to draw high score
      * @param pictureCacheManager cache of picture
-     * @param saveGameList list of high score (can be modified !)
+     * @param saveGameList        list of high score (can be modified !)
      * @param positionToDrawMenuX x to draw
      * @param positionToDrawMenuY y to draw
      */
     public SaveGameMenu(final BufferedImage menuScreen,
-        final TileManager pictureCacheManager,
-        final List<SaveGameItem> saveGameList,
-        final int positionToDrawMenuX,
-        final int positionToDrawMenuY) {
+            final TileManager pictureCacheManager,
+            final List<SaveGameItem> saveGameList,
+            final int positionToDrawMenuX,
+            final int positionToDrawMenuY) {
         this(menuScreen, pictureCacheManager, saveGameList,
-            positionToDrawMenuX,
-            positionToDrawMenuY, null);
+                positionToDrawMenuX,
+                positionToDrawMenuY, null);
     }
 
     /**
      * Constructor.
      *
-     * @param menuScreen object to draw high score
+     * @param menuScreen          object to draw high score
      * @param pictureCacheManager cache of picture
-     * @param saveGameList list of high score (can be modified !)
+     * @param saveGameList        list of high score (can be modified !)
      * @param positionToDrawMenuX x to draw
      * @param positionToDrawMenuY y to draw
-     * @param nextMenuObj next menu to draw
+     * @param nextMenuObj         next menu to draw
      */
     public SaveGameMenu(final BufferedImage menuScreen,
-        final TileManager pictureCacheManager,
-        final List<SaveGameItem> saveGameList,
-        final int positionToDrawMenuX,
-        final int positionToDrawMenuY,
-        final MenuInterface nextMenuObj) {
+            final TileManager pictureCacheManager,
+            final List<SaveGameItem> saveGameList,
+            final int positionToDrawMenuX,
+            final int positionToDrawMenuY,
+            final MenuInterface nextMenuObj) {
         super(menuScreen, pictureCacheManager, saveGameList,
                 positionToDrawMenuX, positionToDrawMenuY, nextMenuObj);
     }
@@ -121,9 +122,9 @@ public final class SaveGameMenu extends AbstractLoadGameMenu {
             // Create text picture to calculate cursor position
             BufferedImage editTextPicture =
                     getPictureCache().getTextManager().createSmallText(
-                    this.nameSave.toString(),
-                    getConf().getEditmode().getTextColor(),
-                    getBackgroundColor());
+                            this.nameSave.toString(),
+                            getConf().getEditmode().getTextColor(),
+                            getBackgroundColor());
 
             final int oldX = cursorPos.x;
 

@@ -1,6 +1,7 @@
 package org.jill.game.entities.obj;
 
 import java.awt.image.BufferedImage;
+
 import org.jill.game.entities.obj.abs.AbstractParameterObjectEntity;
 import org.jill.game.entities.obj.util.SharedCode;
 import org.jill.openjill.core.api.entities.ObjectEntity;
@@ -8,10 +9,8 @@ import org.jill.openjill.core.api.entities.ObjectParam;
 import org.jill.openjill.core.api.keyboard.KeyboardLayout;
 import org.jill.openjill.core.api.message.EnumMessageType;
 import org.jill.openjill.core.api.message.object.ObjectListMessage;
-import org.jill.openjill.core.api.message.statusbar.inventory.
-        InventoryItemMessage;
-import org.jill.openjill.core.api.message.statusbar.inventory.
-        InventoryPointMessage;
+import org.jill.openjill.core.api.message.statusbar.inventory.InventoryItemMessage;
+import org.jill.openjill.core.api.message.statusbar.inventory.InventoryPointMessage;
 
 /**
  * Rockkey for mapdoor.
@@ -19,7 +18,7 @@ import org.jill.openjill.core.api.message.statusbar.inventory.
  * @author Emeric MARTINEAU
  */
 public abstract class AbstractKeyManager
-    extends AbstractParameterObjectEntity {
+        extends AbstractParameterObjectEntity {
 
     /**
      * Inventory object to add.
@@ -56,16 +55,15 @@ public abstract class AbstractKeyManager
     }
 
 
-
     @Override
     public final void msgTouch(final ObjectEntity obj,
             final KeyboardLayout keyboardLayout) {
         if (obj.isPlayer()) {
             this.messageDispatcher.sendMessage(EnumMessageType.INVENTORY_ITEM,
-                this.inventory);
+                    this.inventory);
             this.messageDispatcher.sendMessage(EnumMessageType.INVENTORY_POINT,
-                new InventoryPointMessage(
-                    getConfInteger("point"), true, this, obj));
+                    new InventoryPointMessage(
+                            getConfInteger("point"), true, this, obj));
 
             if (getDisplayMessage()) {
                 sendMessage();

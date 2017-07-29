@@ -4,16 +4,14 @@ import org.jill.game.entities.obj.abs.AbstractParameterObjectEntity;
 import org.jill.game.entities.obj.util.UtilityObjectEntity;
 import org.jill.openjill.core.api.entities.BackgroundEntity;
 import org.jill.openjill.core.api.entities.ObjectEntity;
-import org.jill.openjill.core.api.message.player.GetPlayerPositionMessage;
-import org.jill.openjill.core.api.message.player.MovePlayerMessage;
-import org.jill.openjill.core.api.message.statusbar.inventory.
-        EnumInventoryObject;
-import org.jill.openjill.core.api.message.statusbar.inventory.
-        InventoryItemMessage;
 import org.jill.openjill.core.api.entities.ObjectParam;
 import org.jill.openjill.core.api.jill.JillConst;
 import org.jill.openjill.core.api.message.EnumMessageType;
 import org.jill.openjill.core.api.message.InterfaceMessageGameHandler;
+import org.jill.openjill.core.api.message.player.GetPlayerPositionMessage;
+import org.jill.openjill.core.api.message.player.MovePlayerMessage;
+import org.jill.openjill.core.api.message.statusbar.inventory.EnumInventoryObject;
+import org.jill.openjill.core.api.message.statusbar.inventory.InventoryItemMessage;
 import org.jill.openjill.core.api.message.statusbar.inventory.InventoryLifeMessage;
 
 /**
@@ -22,7 +20,7 @@ import org.jill.openjill.core.api.message.statusbar.inventory.InventoryLifeMessa
  * @author Emeric MARTINEAU
  */
 public abstract class AbstractPlayerInteractionManager
-    extends AbstractParameterObjectEntity
+        extends AbstractParameterObjectEntity
         implements InterfaceMessageGameHandler {
 
     protected abstract BackgroundEntity[][] getBackgroundObject();
@@ -106,17 +104,17 @@ public abstract class AbstractPlayerInteractionManager
     @Override
     public final void recieveMessage(final EnumMessageType type,
             final Object msg) {
-        switch(type) {
+        switch (type) {
             case INVENTORY_ITEM:
                 messageInventoryItem((InventoryItemMessage) msg);
                 break;
-            case PLAYER_MOVE :
+            case PLAYER_MOVE:
                 messagePlayerMove((MovePlayerMessage) msg);
                 break;
             case PLAYER_GET_POSITION:
                 messagePlayerGetPosition((GetPlayerPositionMessage) msg);
                 break;
-            default :
+            default:
         }
     }
 
@@ -133,17 +131,17 @@ public abstract class AbstractPlayerInteractionManager
     /**
      * Kill player.
      *
-     * @param senderObj object kill player (or hit)
-     * @param senderBack background kill player
-     * @param nbLife number life
+     * @param senderObj   object kill player (or hit)
+     * @param senderBack  background kill player
+     * @param nbLife      number life
      * @param typeOfDeath type of death
      */
     private void msgKill(final ObjectEntity senderObj,
-        final BackgroundEntity senderBack,
-        final int nbLife, final int typeOfDeath) {
+            final BackgroundEntity senderBack,
+            final int nbLife, final int typeOfDeath) {
         // senderObj was null when background
         if (!PalyerActionPerState.canDo(this.state,
-            PlayerAction.INVINCIBLE)) {
+                PlayerAction.INVINCIBLE)) {
             BackgroundEntity senderBack2 = senderBack;
 
             InventoryLifeMessage.STD_MESSAGE.setLife(nbLife);
@@ -161,7 +159,7 @@ public abstract class AbstractPlayerInteractionManager
 
             // Send message to inventory to know if player dead
             this.messageDispatcher.sendMessage(EnumMessageType.INVENTORY_LIFE,
-                InventoryLifeMessage.STD_MESSAGE);
+                    InventoryLifeMessage.STD_MESSAGE);
 
             if (InventoryLifeMessage.STD_MESSAGE.isPlayerDead()) {
                 killPlayer(typeOfDeath, senderBack2);
@@ -171,13 +169,13 @@ public abstract class AbstractPlayerInteractionManager
 
     @Override
     public void msgKill(final ObjectEntity sender, final int nbLife,
-        final int typeOfDeath) {
+            final int typeOfDeath) {
         msgKill(sender, null, nbLife, typeOfDeath);
     }
 
     @Override
     public void msgKill(final BackgroundEntity sender,
-        final int nbLife, final int typeOfDeath) {
+            final int nbLife, final int typeOfDeath) {
         msgKill(null, sender, nbLife, typeOfDeath);
     }
 
@@ -185,8 +183,8 @@ public abstract class AbstractPlayerInteractionManager
      * Player must be dead.
      *
      * @param typeOfDeath type of death (@see PlayerState)
-     * @param senderBack back kill
+     * @param senderBack  back kill
      */
     protected abstract void killPlayer(final int typeOfDeath,
-        final BackgroundEntity senderBack);
+            final BackgroundEntity senderBack);
 }

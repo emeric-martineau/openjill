@@ -44,12 +44,11 @@ public abstract class AbstractMenuJillLevel extends AbstractObjectJillLevel {
      * Level configuration.
      *
      * @param cfgLevel configuration of level
-     *
-     * @throws IOException if error of reading file
+     * @throws IOException                  if error of reading file
      * @throws ReflectiveOperationException if not class found
      */
     public AbstractMenuJillLevel(final LevelConfiguration cfgLevel)
-        throws IOException, ReflectiveOperationException {
+            throws IOException, ReflectiveOperationException {
         super(cfgLevel);
 
         constructor(cfgLevel);
@@ -133,7 +132,7 @@ public abstract class AbstractMenuJillLevel extends AbstractObjectJillLevel {
 
         if (this.infoBox.isEnable()) {
             g.drawImage(this.infoBox.getBox(), this.infoBox.getX(),
-                this.infoBox.getY(), null);
+                    this.infoBox.getY(), null);
         }
 
         if (this.levelMessageBox.isEnable()) {

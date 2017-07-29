@@ -1,6 +1,7 @@
 package org.jill.game.entities.back;
 
 import java.awt.image.BufferedImage;
+
 import org.jill.game.entities.back.abs.AbstractParameterBackgroundEntity;
 import org.jill.game.entities.back.obj.ObjectSyncrhonizer;
 import org.jill.openjill.core.api.entities.BackgroundParam;
@@ -13,10 +14,11 @@ import org.jill.openjill.core.api.message.object.ObjectListMessage;
 
 /**
  * Wood torch background.
+ *
  * @author Emeric MARTINEAU
  */
 public class WoodTorchBackgroundEntity
-    extends AbstractParameterBackgroundEntity {
+        extends AbstractParameterBackgroundEntity {
 
     /**
      * Object syncronizer.
@@ -59,7 +61,7 @@ public class WoodTorchBackgroundEntity
                     this.object);
 
             this.messageDispatcher.sendMessage(EnumMessageType.CREATE_OBJECT,
-                com);
+                    com);
 
             ObjectEntity obj = com.getObject();
 

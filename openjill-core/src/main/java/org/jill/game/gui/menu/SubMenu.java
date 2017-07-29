@@ -48,8 +48,8 @@ public final class SubMenu {
     /**
      * Constrcutor.
      *
-     * @param clr color
-     * @param txt text
+     * @param clr   color
+     * @param txt   text
      * @param index index
      */
     public SubMenu(final int clr, final String txt, final int index) {
@@ -114,6 +114,7 @@ public final class SubMenu {
 
     /**
      * Short cut of this entry.
+     *
      * @param shortCut a char
      */
     public void setShortCut(final char shortCut) {

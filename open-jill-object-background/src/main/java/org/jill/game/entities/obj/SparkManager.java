@@ -1,16 +1,17 @@
 package org.jill.game.entities.obj;
 
 import java.awt.image.BufferedImage;
+
 import org.jill.game.entities.obj.abs.AbstractHitPlayerObjectEntity;
 import org.jill.game.entities.obj.player.PlayerState;
 import org.jill.game.entities.obj.util.SharedCode;
-import org.jill.openjill.core.api.message.player.MovePlayerMessage;
 import org.jill.openjill.core.api.entities.BackgroundEntity;
 import org.jill.openjill.core.api.entities.ObjectEntity;
 import org.jill.openjill.core.api.entities.ObjectParam;
 import org.jill.openjill.core.api.jill.JillConst;
 import org.jill.openjill.core.api.keyboard.KeyboardLayout;
 import org.jill.openjill.core.api.message.EnumMessageType;
+import org.jill.openjill.core.api.message.player.MovePlayerMessage;
 
 /**
  * Spark.
@@ -23,7 +24,7 @@ public final class SparkManager extends AbstractHitPlayerObjectEntity {
      * Static cause only one lift move player at one time.
      */
     private static final MovePlayerMessage MOVE_PLAYER_OBJECT
-        = new MovePlayerMessage();
+            = new MovePlayerMessage();
 
     /**
      * Picture array.
@@ -102,7 +103,7 @@ public final class SparkManager extends AbstractHitPlayerObjectEntity {
         }
 
         if ((this.y > this.maxYTop && this.ySpeed < Y_SPEED_MIDDLE)
-            || (this.y < this.maxYBottom && this.ySpeed > Y_SPEED_MIDDLE)) {
+                || (this.y < this.maxYBottom && this.ySpeed > Y_SPEED_MIDDLE)) {
             this.y += this.ySpeed;
         } else {
             // U turn
@@ -126,7 +127,7 @@ public final class SparkManager extends AbstractHitPlayerObjectEntity {
             MOVE_PLAYER_OBJECT.setState(PlayerState.STAND);
 
             this.messageDispatcher.sendMessage(
-                EnumMessageType.PLAYER_MOVE, MOVE_PLAYER_OBJECT);
+                    EnumMessageType.PLAYER_MOVE, MOVE_PLAYER_OBJECT);
 
             // Hit player
             hitPlayer(obj);

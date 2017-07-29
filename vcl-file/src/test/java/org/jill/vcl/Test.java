@@ -5,11 +5,11 @@
 package org.jill.vcl;
 
 import java.io.IOException;
+
 import org.jill.file.FileAbstractByte;
 import org.jill.file.FileAbstractByteImpl;
 
 /**
- *
  * @author Emeric MARTINEAU
  */
 public class Test {
@@ -19,7 +19,7 @@ public class Test {
         final VclFile vf = new VclFileImpl();
         vf.load(f);
 
-        for(VclTextEntry vte : vf.getVclText()) {
+        for (VclTextEntry vte : vf.getVclText()) {
             System.out.println("/////////////////");
             System.out.println(vte.getText());
             System.out.println("****");

@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+
 import org.jill.dma.DmaEntry;
 import org.jill.dma.DmaFile;
 import org.jill.game.config.ObjectInstanceFactory;
@@ -46,56 +47,47 @@ public final class TileManagerImpl implements TileManager {
       Instance by name of dma/sha file.
      */
 //    private static final Map<String, TileManager> INSTANCES = new HashMap<>();
-
+    private final Map<String, BufferedImage> imageCache = new HashMap<>();
     /**
      * Map of tile.
      */
     private Map<Integer, ShaTile[]> mapOfTile;
-
     /**
      * Map of background tile.
      */
     private Map<Integer, BufferedImage> mapBackgroundPicture;
-
     /**
      * Type opf screen.
      */
     private EnumScreenType typeScreen;
-
     /**
      * Sha file content.
      */
     private ShaFile shaFile;
-
     /**
      * Dma file content.
      */
     private DmaFile dmaFile;
-
     /**
      * Background color.
      */
     private Color backgroundColor;
-
     /**
      * Text manager.
      */
     private TextManager textManager;
-
     /**
      * Current color map.
      */
     private Color[] colorMap;
-
-    private final Map<String, BufferedImage> imageCache = new HashMap<>();
 
     /**
      * Return an instance of TileManagerImpl.
      *
      * @param shaFileName sha file
      * @param dmaFileName dma file
-     * @param typeScreen type of screen
-     * *
+     * @param typeScreen  type of screen
+     *                    *
      * @throws IOException if error reading file
      */
     @Override
@@ -103,13 +95,13 @@ public final class TileManagerImpl implements TileManager {
             final File dmaFileName, final EnumScreenType typeScreen)
             throws IOException {
 
-            final ShaFile currentShaFile = ObjectInstanceFactory.getNewSha();
-            currentShaFile.load(shaFileName.getAbsolutePath());
+        final ShaFile currentShaFile = ObjectInstanceFactory.getNewSha();
+        currentShaFile.load(shaFileName.getAbsolutePath());
 
-            final DmaFile currentDmaFile = ObjectInstanceFactory.getNewDma();
-            currentDmaFile.load(dmaFileName.getAbsolutePath());
+        final DmaFile currentDmaFile = ObjectInstanceFactory.getNewDma();
+        currentDmaFile.load(dmaFileName.getAbsolutePath());
 
-            init(currentShaFile, currentDmaFile, typeScreen);
+        init(currentShaFile, currentDmaFile, typeScreen);
     }
 
     /**
@@ -117,7 +109,7 @@ public final class TileManagerImpl implements TileManager {
      *
      * @param shaFileContent sha file
      * @param dmaFileContent dma file
-     * @param tpScreen type of screen
+     * @param tpScreen       type of screen
      */
     private void init(final ShaFile shaFileContent,
             final DmaFile dmaFileContent,
@@ -155,7 +147,6 @@ public final class TileManagerImpl implements TileManager {
      * Init map of sprite.
      *
      * @param shaContent sha file
-     *
      * @return a map link tileset index with tile
      */
     private Map<Integer, ShaTile[]> initMapSprite(final ShaFile shaContent) {
@@ -185,7 +176,6 @@ public final class TileManagerImpl implements TileManager {
      * Init picture from Dma file.
      *
      * @param dmaContentFile dma file
-     *
      * @return map between tile and picture
      */
     private Map<Integer, BufferedImage> initMapOfBackgroundSprite(
@@ -237,7 +227,6 @@ public final class TileManagerImpl implements TileManager {
      * Return picture of background.
      *
      * @param mapCode map code
-     *
      * @return null if background not found
      */
     @Override
@@ -249,8 +238,7 @@ public final class TileManagerImpl implements TileManager {
      * Return picture aand cache it.
      *
      * @param tileSetIndex index of tileset
-     * @param tileIndex index of tile
-     *
+     * @param tileIndex    index of tile
      * @return can be return null if picture not found
      */
     @Override
@@ -283,7 +271,6 @@ public final class TileManagerImpl implements TileManager {
      * Return image with good screen resolution.
      *
      * @param tile tile
-     *
      * @return picture
      */
     private BufferedImage returnImageFromScreenColor(final ShaTile tile) {

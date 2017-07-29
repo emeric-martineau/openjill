@@ -2,7 +2,7 @@ package org.jill.dma;
 
 /**
  * Entry of dma file.
- * 
+ *
  * @author Emeic MARTINEAU
  */
 public interface DmaEntry {

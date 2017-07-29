@@ -1,6 +1,7 @@
 package org.jill.game.gui.conf;
 
 import java.util.List;
+
 import org.jill.game.screen.conf.ImagesConf;
 import org.jill.game.screen.conf.RectangleConf;
 
@@ -10,7 +11,7 @@ import org.jill.game.screen.conf.RectangleConf;
  * @author Emeric MARTINEAU
  */
 public class MessageConf {
-/**
+    /**
      * Position X.
      */
     private int x;

@@ -41,8 +41,7 @@ public final class PalyerActionPerState {
      * Return if player can do this action.
      *
      * @param palyerState player state
-     * @param action type of action
-     *
+     * @param action      type of action
      * @return true/false
      */
     public static boolean canDo(final int palyerState, final int action) {

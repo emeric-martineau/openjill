@@ -1,15 +1,15 @@
 package org.jill.game.entities.obj;
 
 import java.awt.image.BufferedImage;
+
 import org.jill.game.entities.obj.abs.AbstractParameterObjectEntity;
 import org.jill.game.entities.obj.util.UtilityObjectEntity;
 import org.jill.openjill.core.api.entities.BackgroundEntity;
-import org.jill.openjill.core.api.message.object.ObjectListMessage;
 import org.jill.openjill.core.api.entities.ObjectEntity;
-import static org.jill.openjill.core.api.entities.ObjectEntity.X_SPEED_MIDDLE;
 import org.jill.openjill.core.api.entities.ObjectParam;
 import org.jill.openjill.core.api.keyboard.KeyboardLayout;
 import org.jill.openjill.core.api.message.EnumMessageType;
+import org.jill.openjill.core.api.message.object.ObjectListMessage;
 
 /**
  * Firebird weapon object.
@@ -53,11 +53,11 @@ public final class FirebirdWeaponManager extends AbstractParameterObjectEntity {
         // Load picture for each object. Don't use cache cause some picture
         // change between jill episod.
         this.images
-            = new BufferedImage[numberTileSet];
+                = new BufferedImage[numberTileSet];
 
         for (int index = 0; index < numberTileSet; index++) {
             this.images[index]
-                = this.pictureCache.getImage(tileSetIndex, tileIndex
+                    = this.pictureCache.getImage(tileSetIndex, tileIndex
                     + index);
         }
 
@@ -102,10 +102,10 @@ public final class FirebirdWeaponManager extends AbstractParameterObjectEntity {
 
         if (!((getxSpeed() < X_SPEED_MIDDLE
                 && UtilityObjectEntity.moveObjectLeft(this, getxSpeed(),
-                        backgroundObject))
-            || (getxSpeed() > X_SPEED_MIDDLE
+                backgroundObject))
+                || (getxSpeed() > X_SPEED_MIDDLE
                 && UtilityObjectEntity.moveObjectRight(this, getxSpeed(),
-                        backgroundObject)))) {
+                backgroundObject)))) {
             this.messageDispatcher.sendMessage(EnumMessageType.OBJECT, killme);
         }
     }

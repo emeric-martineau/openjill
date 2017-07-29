@@ -49,35 +49,35 @@ public final class DemoMapManager extends ObjectEntityImpl {
         alwaysOnScreen = true;
 
         // Buffer image
-       image =
-            new BufferedImage(getWidth(), getHeight(),
-                    BufferedImage.TYPE_INT_ARGB);
+        image =
+                new BufferedImage(getWidth(), getHeight(),
+                        BufferedImage.TYPE_INT_ARGB);
 
-       final Graphics g2 = image.createGraphics();
-       BufferedImage letter;
-       int posX = 0;
-       int start;
-       int end;
+        final Graphics g2 = image.createGraphics();
+        BufferedImage letter;
+        int posX = 0;
+        int start;
+        int end;
 
-       if (getxSpeed() > 0) {
-           // MAP
-           start = MAP_START_LETTER;
-           end = MAP_END_LETTER;
-       } else {
-           // DEMO
-           start = DEMO_START_LETTER;
-           end = DEMO_END_LETTER;
-       }
+        if (getxSpeed() > 0) {
+            // MAP
+            start = MAP_START_LETTER;
+            end = MAP_END_LETTER;
+        } else {
+            // DEMO
+            start = DEMO_START_LETTER;
+            end = DEMO_END_LETTER;
+        }
 
-       for (int indexLetter = start; indexLetter < end; indexLetter++) {
-           letter = pictureCache.getImage(3, indexLetter);
+        for (int indexLetter = start; indexLetter < end; indexLetter++) {
+            letter = pictureCache.getImage(3, indexLetter);
 
-           g2.drawImage(letter, posX, 0, null);
+            g2.drawImage(letter, posX, 0, null);
 
-           posX += letter.getWidth();
-       }
+            posX += letter.getWidth();
+        }
 
-       g2.dispose();
+        g2.dispose();
     }
 
     /* (non-Javadoc)

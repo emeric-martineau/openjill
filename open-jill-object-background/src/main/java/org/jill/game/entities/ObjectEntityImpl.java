@@ -17,7 +17,7 @@ import org.jill.openjill.core.api.message.MessageDispatcher;
  * @author Emeric MARTINEAU
  */
 public abstract class ObjectEntityImpl extends ObjectItemImpl
-    implements ObjectEntity {
+        implements ObjectEntity {
     /**
      * Background objects e.g. torches, stalags.
      */
@@ -85,17 +85,14 @@ public abstract class ObjectEntityImpl extends ObjectItemImpl
      * To dispatch message for any object in game.
      */
     protected MessageDispatcher messageDispatcher;
-
-    /**
-     * Remove object out of screen.
-     */
-    private boolean removeOutOfVisibleScreen = false;
-
     /**
      * True if player object.
      */
     protected boolean playerObject = false;
-
+    /**
+     * Remove object out of screen.
+     */
+    private boolean removeOutOfVisibleScreen = false;
     /**
      * True if checkpoint.
      */
@@ -178,8 +175,8 @@ public abstract class ObjectEntityImpl extends ObjectItemImpl
     /**
      * When weapon kill object or ennemy kill player.
      *
-     * @param sender sender
-     * @param nbLife number life to decrease
+     * @param sender      sender
+     * @param nbLife      number life to decrease
      * @param typeOfDeath tyep of death (for player)
      */
     @Override
@@ -191,8 +188,8 @@ public abstract class ObjectEntityImpl extends ObjectItemImpl
     /**
      * When background kill object.
      *
-     * @param sender sender
-     * @param nbLife number life to decrease
+     * @param sender      sender
+     * @param nbLife      number life to decrease
      * @param typeOfDeath tyep of death (for player)
      */
     @Override
@@ -203,7 +200,7 @@ public abstract class ObjectEntityImpl extends ObjectItemImpl
 
     /**
      * To know if object is checkpoint.
-
+     *
      * @return if is chack point
      */
     @Override
@@ -223,7 +220,7 @@ public abstract class ObjectEntityImpl extends ObjectItemImpl
     /**
      * If player object.
      *
-     * @return  true/false
+     * @return true/false
      */
     @Override
     public final boolean isPlayer() {
@@ -249,6 +246,11 @@ public abstract class ObjectEntityImpl extends ObjectItemImpl
         this.killabgeObject = killabge;
     }
 
+    @Override
+    public boolean isRemoveOutOfVisibleScreen() {
+        return this.removeOutOfVisibleScreen;
+    }
+
     /**
      * Remove object out of screen.
      *
@@ -256,11 +258,6 @@ public abstract class ObjectEntityImpl extends ObjectItemImpl
      */
     protected final void setRemoveOutOfVisibleScreen(final boolean remove) {
         this.removeOutOfVisibleScreen = remove;
-    }
-
-    @Override
-    public boolean isRemoveOutOfVisibleScreen() {
-        return this.removeOutOfVisibleScreen;
     }
 
     /**

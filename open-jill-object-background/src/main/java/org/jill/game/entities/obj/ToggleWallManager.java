@@ -1,16 +1,17 @@
 package org.jill.game.entities.obj;
 
-import org.jill.game.entities.obj.abs.AbstractParameterObjectEntity;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.jill.game.entities.obj.abs.AbstractParameterObjectEntity;
+import org.jill.openjill.core.api.entities.BackgroundEntity;
 import org.jill.openjill.core.api.entities.ObjectEntity;
 import org.jill.openjill.core.api.entities.ObjectParam;
-import org.jill.openjill.core.api.message.EnumMessageType;
-import org.jill.openjill.core.api.message.background.BackgroundMessage;
-import org.jill.openjill.core.api.entities.BackgroundEntity;
 import org.jill.openjill.core.api.jill.JillConst;
+import org.jill.openjill.core.api.message.EnumMessageType;
 import org.jill.openjill.core.api.message.InterfaceMessageGameHandler;
+import org.jill.openjill.core.api.message.background.BackgroundMessage;
 import org.jill.openjill.core.api.message.object.ObjectListMessage;
 
 /**
@@ -19,7 +20,7 @@ import org.jill.openjill.core.api.message.object.ObjectListMessage;
  * @author Emeric MARTINEAU
  */
 public final class ToggleWallManager extends AbstractParameterObjectEntity
-    implements InterfaceMessageGameHandler {
+        implements InterfaceMessageGameHandler {
 
     /**
      * Background to create wall/floor.
@@ -84,13 +85,13 @@ public final class ToggleWallManager extends AbstractParameterObjectEntity
         // Name of back to be wall. If object is restore (by save game),
         // background not be ELEVBOT.
         final String nameBack = this.background[this.xBlock][
-            this.yBlock].getName();
+                this.yBlock].getName();
 
         // Search limit of wall
         for (int indexBack = this.yBlock; indexBack < this.background[0].length;
-            indexBack++) {
+             indexBack++) {
             if (!nameBack.equals(
-                this.background[this.xBlock][indexBack].getName())) {
+                    this.background[this.xBlock][indexBack].getName())) {
                 // Stop scan
                 yScanEnd = indexBack;
                 break;
@@ -98,7 +99,7 @@ public final class ToggleWallManager extends AbstractParameterObjectEntity
         }
 
         final String nameOfBackgroundBlock
-            = getConfString("wallBackgroundName");
+                = getConfString("wallBackgroundName");
 
         // Search block to replace.
         // Another wall can be next to this wall
@@ -106,7 +107,7 @@ public final class ToggleWallManager extends AbstractParameterObjectEntity
         String tmpName;
 
         for (int indexBlockX = this.xBlock - 1; indexBlockX > -1;
-            indexBlockX--) {
+             indexBlockX--) {
             tmpName = this.background[indexBlockX][this.yBlock].getName();
 
             if (!tmpName.equals(nameOfBackgroundBlock)) {
@@ -122,11 +123,11 @@ public final class ToggleWallManager extends AbstractParameterObjectEntity
 
         for (int indexBack = this.yBlock; indexBack < yScanEnd; indexBack++) {
             this.listBackgroundBlock.add(
-                new BackgroundMessage(this.xBlock, indexBack,
-                    nameOfBackgroundBlock));
+                    new BackgroundMessage(this.xBlock, indexBack,
+                            nameOfBackgroundBlock));
             this.listBackgroundPassthru.add(
-                new BackgroundMessage(this.xBlock, indexBack,
-                    nameOfBackgroundReplace));
+                    new BackgroundMessage(this.xBlock, indexBack,
+                            nameOfBackgroundReplace));
         }
     }
 
@@ -143,13 +144,13 @@ public final class ToggleWallManager extends AbstractParameterObjectEntity
         // Name of back to be wall. If object is restore (by save game),
         // background not be BRIDGE.
         final String nameBack = this.background[this.xBlock][
-            this.yBlock].getName();
+                this.yBlock].getName();
 
         // Search limit of floor
         for (int indexBack = this.xBlock; indexBack < this.background.length;
-            indexBack++) {
+             indexBack++) {
             if (!nameBack.equals(
-                this.background[indexBack][this.yBlock].getName())) {
+                    this.background[indexBack][this.yBlock].getName())) {
                 // Stop scan
                 xScanEnd = indexBack;
                 break;
@@ -157,7 +158,7 @@ public final class ToggleWallManager extends AbstractParameterObjectEntity
         }
 
         final String nameOfBackgroundBlock = getConfString(
-            "floorBackgroundName");
+                "floorBackgroundName");
 
         // Search block to replace.
         // Another floor can be next to this floor
@@ -180,11 +181,11 @@ public final class ToggleWallManager extends AbstractParameterObjectEntity
 
         for (int indexBack = this.xBlock; indexBack < xScanEnd; indexBack++) {
             this.listBackgroundBlock.add(
-                new BackgroundMessage(indexBack, this.yBlock,
-                    nameOfBackgroundBlock));
+                    new BackgroundMessage(indexBack, this.yBlock,
+                            nameOfBackgroundBlock));
             this.listBackgroundPassthru.add(
-                new BackgroundMessage(indexBack, this.yBlock,
-                    nameOfBackgroundReplace));
+                    new BackgroundMessage(indexBack, this.yBlock,
+                            nameOfBackgroundReplace));
         }
     }
 
@@ -207,9 +208,9 @@ public final class ToggleWallManager extends AbstractParameterObjectEntity
             final int blockY = this.listBackgroundPassthru.get(0).getY();
 
             final String nameOfBackgroundBlockWall
-                = getConfString("wallBackgroundName");
+                    = getConfString("wallBackgroundName");
             final String nameOfBackgroundBlockFloor = getConfString(
-                "floorBackgroundName");
+                    "floorBackgroundName");
 
             final String currentBackgroundName
                     = this.background[blockX][blockY].getName();
@@ -219,11 +220,11 @@ public final class ToggleWallManager extends AbstractParameterObjectEntity
                     || currentBackgroundName.equals(nameOfBackgroundBlockWall)) {
                 // Clear wall
                 this.messageDispatcher.sendMessage(EnumMessageType.BACKGROUND,
-                    this.listBackgroundPassthru);
+                        this.listBackgroundPassthru);
             } else {
                 // Set wall
                 this.messageDispatcher.sendMessage(EnumMessageType.BACKGROUND,
-                    this.listBackgroundBlock);
+                        this.listBackgroundBlock);
             }
 
             // Remove source message

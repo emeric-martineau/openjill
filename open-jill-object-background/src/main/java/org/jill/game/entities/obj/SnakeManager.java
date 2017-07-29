@@ -2,14 +2,15 @@ package org.jill.game.entities.obj;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
-import org.jill.openjill.core.api.entities.ObjectEntity;
+
 import org.jill.game.entities.obj.abs.AbstractHitPlayerObjectEntity;
 import org.jill.game.entities.obj.util.UtilityObjectEntity;
-import org.jill.openjill.core.api.entities.ObjectParam;
-import org.jill.openjill.core.api.message.object.ObjectListMessage;
 import org.jill.openjill.core.api.entities.BackgroundEntity;
+import org.jill.openjill.core.api.entities.ObjectEntity;
+import org.jill.openjill.core.api.entities.ObjectParam;
 import org.jill.openjill.core.api.keyboard.KeyboardLayout;
 import org.jill.openjill.core.api.message.EnumMessageType;
+import org.jill.openjill.core.api.message.object.ObjectListMessage;
 import org.jill.openjill.core.api.message.statusbar.inventory.InventoryPointMessage;
 
 /**
@@ -130,9 +131,8 @@ public final class SnakeManager extends AbstractHitPlayerObjectEntity {
     /**
      * Init picture.
      *
-     * @param key config key
+     * @param key          config key
      * @param tileSetIndex tilset
-     *
      * @return array of picture
      */
     private BufferedImage[] initPicture(final String key, final int tileSetIndex) {
@@ -147,16 +147,16 @@ public final class SnakeManager extends AbstractHitPlayerObjectEntity {
     /**
      * Init picutre.
      *
-     * @param images image array
-     * @param tiles number of tile
+     * @param images       image array
+     * @param tiles        number of tile
      * @param tileSetIndex tile set index
      */
     private void initPicture(final BufferedImage[] images,
-        final String[] tiles, final int tileSetIndex) {
+            final String[] tiles, final int tileSetIndex) {
 
         for (int index = 0; index < tiles.length; index++) {
             images[index] = this.pictureCache.getImage(tileSetIndex,
-                Integer.valueOf(tiles[index]));
+                    Integer.valueOf(tiles[index]));
         }
     }
 
@@ -220,8 +220,8 @@ public final class SnakeManager extends AbstractHitPlayerObjectEntity {
      * Draw middle of snake.
      *
      * @param start start X
-     * @param end end X
-     * @param g2d Graphic2D of image
+     * @param end   end X
+     * @param g2d   Graphic2D of image
      */
     private void drawMiddle(final int start, final int end,
             final Graphics g2d) {
@@ -241,7 +241,7 @@ public final class SnakeManager extends AbstractHitPlayerObjectEntity {
 
     @Override
     public void msgKill(final ObjectEntity sender,
-        final int nbLife, final int typeOfDeath) {
+            final int nbLife, final int typeOfDeath) {
 
         if (getState() == 0) {
             setState(this.stateWhenTouch);
@@ -251,11 +251,11 @@ public final class SnakeManager extends AbstractHitPlayerObjectEntity {
 
             if (getWidth() <= this.tailWidth + this.headWidth) {
                 this.messageDispatcher.sendMessage(
-                    EnumMessageType.INVENTORY_POINT,
-                    new InventoryPointMessage(getConfInteger("point"), true,
-                            this, sender));
+                        EnumMessageType.INVENTORY_POINT,
+                        new InventoryPointMessage(getConfInteger("point"), true,
+                                this, sender));
                 this.messageDispatcher.sendMessage(EnumMessageType.OBJECT,
-                    this.killme);
+                        this.killme);
             }
 
             // Update rightHeadX and leftTailX

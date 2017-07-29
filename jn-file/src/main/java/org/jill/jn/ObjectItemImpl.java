@@ -2,6 +2,7 @@ package org.jill.jn;
 
 import java.io.EOFException;
 import java.io.IOException;
+
 import org.jill.file.FileAbstractByte;
 
 
@@ -14,71 +15,54 @@ import org.jill.file.FileAbstractByte;
 public class ObjectItemImpl implements ObjectItem {
 
     /**
-     * Index of object in file.
-     */
-    private int index;
-
-    /**
      * object type.
      */
     protected int type;
-
     /**
      * X-coordinate of object.
      */
     protected int x;
-
     /**
      * Y-coordinate of object.
      */
     protected int y;
-
     /**
      * object horizontal speed or x direction.
      */
     protected int xSpeed;
-
     /**
      * object vertical speed or y direction.
      */
     protected int ySpeed;
-
     /**
      * Width of object.
      */
     protected int width;
-
     /**
      * Height of object.
      */
     protected int height;
-
     /**
      * Object sub-type (e.g. what type of "point item"), or current "State"
      * (running, jumping, etc).
      */
     protected int state;
-
     /**
      * object-specific semantic.
      */
     protected int subState;
-
     /**
      * object-specific semantic, typically a frame counter.
      */
     protected int stateCount;
-
     /**
      * Various uses. Often used to link doors or switches to obstacles.
      */
     protected int counter;
-
     /**
      * internally used for rendering.
      */
     protected int flags;
-
     /**
      * Used internally as a pointer.
      * If this value is 0, there is no entry for this object in the
@@ -87,17 +71,18 @@ public class ObjectItemImpl implements ObjectItem {
      * stack.
      */
     protected int pointer;
-
     /**
      * Use for player to know way of player.
      */
     protected int info1;
-
     /**
      * Use for object to know if collision with player.
      */
     protected int zapHold;
-
+    /**
+     * Index of object in file.
+     */
+    private int index;
     /**
      * Offset in file of this record.
      */
@@ -112,8 +97,7 @@ public class ObjectItemImpl implements ObjectItem {
      * Constructor.
      *
      * @param jnFile file
-     * @param idx index object in file
-     *
+     * @param idx    index object in file
      * @throws IOException si erreur
      */
     public ObjectItemImpl(final FileAbstractByte jnFile, final int idx)
@@ -166,187 +150,6 @@ public class ObjectItemImpl implements ObjectItem {
     }
 
     /**
-     * Y.
-     *
-     * @return y
-     */
-    @Override
-    public int getY() {
-        return y;
-    }
-
-    /**
-     * X speed/direction.
-     *
-     * @return xSpeed
-     */
-    @Override
-    public int getxSpeed() {
-        return xSpeed;
-    }
-
-    /**
-     * Y speed/direction.
-     *
-     * @return ySpeed
-     */
-    @Override
-    public int getySpeed() {
-        return ySpeed;
-    }
-
-    /**
-     * Width.
-     *
-     * @return width
-     */
-    @Override
-    public int getWidth() {
-        return width;
-    }
-
-    /**
-     * Height.
-     *
-     * @return height
-     */
-    @Override
-    public int getHeight() {
-        return height;
-    }
-
-    /**
-     * State.
-     *
-     * @return state
-     */
-    @Override
-    public int getState() {
-        return state;
-    }
-
-    /**
-     * SubState.
-     *
-     * @return subState
-     */
-    @Override
-    public int getSubState() {
-        return subState;
-    }
-
-    /**
-     * State count.
-     *
-     * @return stateCount
-     */
-    @Override
-    public int getStateCount() {
-        return stateCount;
-    }
-
-    /**
-     * Counter.
-     *
-     * @return counter
-     */
-    @Override
-    public int getCounter() {
-        return counter;
-    }
-
-    /**
-     * Flags.
-     *
-     * @return flags
-     */
-    @Override
-    public int getFlags() {
-        return flags;
-    }
-
-    /**
-     * Pointer on string.
-     *
-     * @return pointer
-     */
-    @Override
-    public int getPointer() {
-        return pointer;
-    }
-
-    /**
-     * Unknow.
-     *
-     * @return info1
-     */
-    @Override
-    public int getInfo1() {
-        return info1;
-    }
-
-    /**
-     * Unknow.
-     *
-     * @return zapHold
-     */
-    @Override
-    public int getZapHold() {
-        return zapHold;
-    }
-
-    /**
-     * Type (Jill play, apple...).
-     *
-     * @return type
-     */
-    @Override
-    public int getType() {
-        return type;
-    }
-
-    /**
-     * Return offset in file for this object.
-     *
-     * @return offset in file
-     */
-    @Override
-    public int getOffset()
-    {
-        return offset;
-    }
-
-    /**
-     * Sting.
-     *
-     * @param stringStackEntry string link to this object
-     */
-    @Override
-    public void setStringStackEntry(StringItem stringStackEntry) {
-        this.stringStackEntry = stringStackEntry;
-    }
-
-    /**
-     * String.
-     *
-     * @return stringStackEntry
-     */
-    @Override
-    public StringItem getStringStackEntry() {
-        return stringStackEntry;
-    }
-
-    /**
-     * setter of type.
-     *
-     * @param type value
-     */
-    @Override
-    public void setType(final int type) {
-        this.type = type;
-    }
-
-    /**
      * setter of x.
      *
      * @param x value
@@ -354,6 +157,16 @@ public class ObjectItemImpl implements ObjectItem {
     @Override
     public void setX(final int x) {
         this.x = x;
+    }
+
+    /**
+     * Y.
+     *
+     * @return y
+     */
+    @Override
+    public int getY() {
+        return y;
     }
 
     /**
@@ -367,6 +180,16 @@ public class ObjectItemImpl implements ObjectItem {
     }
 
     /**
+     * X speed/direction.
+     *
+     * @return xSpeed
+     */
+    @Override
+    public int getxSpeed() {
+        return xSpeed;
+    }
+
+    /**
      * setter of xSpeed.
      *
      * @param xSpeed value
@@ -374,6 +197,16 @@ public class ObjectItemImpl implements ObjectItem {
     @Override
     public void setxSpeed(final int xSpeed) {
         this.xSpeed = xSpeed;
+    }
+
+    /**
+     * Y speed/direction.
+     *
+     * @return ySpeed
+     */
+    @Override
+    public int getySpeed() {
+        return ySpeed;
     }
 
     /**
@@ -387,6 +220,16 @@ public class ObjectItemImpl implements ObjectItem {
     }
 
     /**
+     * Width.
+     *
+     * @return width
+     */
+    @Override
+    public int getWidth() {
+        return width;
+    }
+
+    /**
      * setter of width.
      *
      * @param width value
@@ -394,6 +237,16 @@ public class ObjectItemImpl implements ObjectItem {
     @Override
     public void setWidth(final int width) {
         this.width = width;
+    }
+
+    /**
+     * Height.
+     *
+     * @return height
+     */
+    @Override
+    public int getHeight() {
+        return height;
     }
 
     /**
@@ -407,6 +260,16 @@ public class ObjectItemImpl implements ObjectItem {
     }
 
     /**
+     * State.
+     *
+     * @return state
+     */
+    @Override
+    public int getState() {
+        return state;
+    }
+
+    /**
      * setter of state.
      *
      * @param state value
@@ -414,6 +277,16 @@ public class ObjectItemImpl implements ObjectItem {
     @Override
     public void setState(final int state) {
         this.state = state;
+    }
+
+    /**
+     * SubState.
+     *
+     * @return subState
+     */
+    @Override
+    public int getSubState() {
+        return subState;
     }
 
     /**
@@ -427,6 +300,16 @@ public class ObjectItemImpl implements ObjectItem {
     }
 
     /**
+     * State count.
+     *
+     * @return stateCount
+     */
+    @Override
+    public int getStateCount() {
+        return stateCount;
+    }
+
+    /**
      * setter of state count.
      *
      * @param stateCount value
@@ -434,6 +317,16 @@ public class ObjectItemImpl implements ObjectItem {
     @Override
     public void setStateCount(final int stateCount) {
         this.stateCount = stateCount;
+    }
+
+    /**
+     * Counter.
+     *
+     * @return counter
+     */
+    @Override
+    public int getCounter() {
+        return counter;
     }
 
     /**
@@ -447,6 +340,16 @@ public class ObjectItemImpl implements ObjectItem {
     }
 
     /**
+     * Flags.
+     *
+     * @return flags
+     */
+    @Override
+    public int getFlags() {
+        return flags;
+    }
+
+    /**
      * setter of flags.
      *
      * @param flags value
@@ -454,6 +357,16 @@ public class ObjectItemImpl implements ObjectItem {
     @Override
     public void setFlags(final int flags) {
         this.flags = flags;
+    }
+
+    /**
+     * Pointer on string.
+     *
+     * @return pointer
+     */
+    @Override
+    public int getPointer() {
+        return pointer;
     }
 
     /**
@@ -467,6 +380,16 @@ public class ObjectItemImpl implements ObjectItem {
     }
 
     /**
+     * Unknow.
+     *
+     * @return info1
+     */
+    @Override
+    public int getInfo1() {
+        return info1;
+    }
+
+    /**
      * setter of info1.
      *
      * @param info1 value
@@ -477,6 +400,16 @@ public class ObjectItemImpl implements ObjectItem {
     }
 
     /**
+     * Unknow.
+     *
+     * @return zapHold
+     */
+    @Override
+    public int getZapHold() {
+        return zapHold;
+    }
+
+    /**
      * setter of zaphold.
      *
      * @param zapHold value
@@ -484,6 +417,56 @@ public class ObjectItemImpl implements ObjectItem {
     @Override
     public void setZapHold(final int zapHold) {
         this.zapHold = zapHold;
+    }
+
+    /**
+     * Type (Jill play, apple...).
+     *
+     * @return type
+     */
+    @Override
+    public int getType() {
+        return type;
+    }
+
+    /**
+     * setter of type.
+     *
+     * @param type value
+     */
+    @Override
+    public void setType(final int type) {
+        this.type = type;
+    }
+
+    /**
+     * Return offset in file for this object.
+     *
+     * @return offset in file
+     */
+    @Override
+    public int getOffset() {
+        return offset;
+    }
+
+    /**
+     * String.
+     *
+     * @return stringStackEntry
+     */
+    @Override
+    public StringItem getStringStackEntry() {
+        return stringStackEntry;
+    }
+
+    /**
+     * Sting.
+     *
+     * @param stringStackEntry string link to this object
+     */
+    @Override
+    public void setStringStackEntry(StringItem stringStackEntry) {
+        this.stringStackEntry = stringStackEntry;
     }
 
     /**
@@ -504,7 +487,6 @@ public class ObjectItemImpl implements ObjectItem {
      * Write object to file.
      *
      * @param fab file to write
-     *
      * @throws EOFException if error
      */
     @Override

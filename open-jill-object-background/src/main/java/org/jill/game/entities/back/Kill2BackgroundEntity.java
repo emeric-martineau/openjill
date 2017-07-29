@@ -2,8 +2,7 @@ package org.jill.game.entities.back;
 
 import org.jill.game.entities.obj.player.PlayerState;
 import org.jill.openjill.core.api.entities.ObjectEntity;
-import org.jill.openjill.core.api.message.statusbar.inventory.
-        InventoryLifeMessage;
+import org.jill.openjill.core.api.message.statusbar.inventory.InventoryLifeMessage;
 
 /**
  * Kill 2 background.

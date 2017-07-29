@@ -1,6 +1,5 @@
 package org.jill.game.gui;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -8,11 +7,13 @@ import java.io.InputStream;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import org.jill.game.gui.conf.LevelMessageConf;
 import org.jill.game.screen.conf.RectangleConf;
 import org.jill.openjill.core.api.manager.TextManager;
 import org.jill.openjill.core.api.manager.TileManager;
 import org.jill.openjill.core.api.screen.EnumScreenType;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  * Display level message.
@@ -24,42 +25,36 @@ public final class LevelMessageBox extends AbstractMessageBox {
      * Logger.
      */
     private static final Logger LOGGER = Logger.getLogger(
-                    LevelMessageBox.class.getName());
+            LevelMessageBox.class.getName());
 
     /**
      * Configuration.
      */
     private final LevelMessageConf conf;
-
-    /**
-     * If menu is enable.
-     */
-    private boolean enable = false;
-
-    /**
-     * If level can be load.
-     */
-    private boolean canchange = false;
-
     /**
      * Background.
      */
     private final BufferedImage boxPicture;
-
     /**
      * Graphic of status bar.
      */
     private final Graphics2D g2BoxPicture;
-
     /**
      * Picture cache.
      */
     private final TileManager pictureCache;
-
     /**
      * Key to get good message for level.
      */
     private final String keyOfMessage;
+    /**
+     * If menu is enable.
+     */
+    private boolean enable = false;
+    /**
+     * If level can be load.
+     */
+    private boolean canchange = false;
 
     public LevelMessageBox(final TileManager pctCache,
             final String saveExtension, final EnumScreenType screen) {
@@ -74,8 +69,8 @@ public final class LevelMessageBox extends AbstractMessageBox {
 
         // Buffer image
         this.boxPicture =
-            new BufferedImage(conf.getWidth(), conf.getHeight(),
-                    BufferedImage.TYPE_INT_ARGB);
+                new BufferedImage(conf.getWidth(), conf.getHeight(),
+                        BufferedImage.TYPE_INT_ARGB);
 
         // Graphic
         this.g2BoxPicture = this.boxPicture.createGraphics();
@@ -99,7 +94,6 @@ public final class LevelMessageBox extends AbstractMessageBox {
      * Read config file.
      *
      * @param filename final name of config file
-     *
      * @return properties file
      */
     private static LevelMessageConf readConf(final String filename) {
@@ -116,9 +110,9 @@ public final class LevelMessageBox extends AbstractMessageBox {
             mc = mapper.readValue(is, LevelMessageConf.class);
         } catch (IOException ex) {
             LOGGER.log(Level.SEVERE,
-                String.format("Unable to load config for message level '%s'",
-                        filename),
-                ex);
+                    String.format("Unable to load config for message level '%s'",
+                            filename),
+                    ex);
 
             mc = null;
         }

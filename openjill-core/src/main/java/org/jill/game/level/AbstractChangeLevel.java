@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import org.jill.cfg.SaveGameItem;
 import org.jill.file.FileAbstractByte;
 import org.jill.game.config.JillGameConfig;
@@ -15,11 +16,10 @@ import org.jill.game.config.ObjectInstanceFactory;
 import org.jill.game.gui.menu.HighScoreMenu;
 import org.jill.game.gui.menu.LoadGameMenu;
 import org.jill.game.gui.menu.SaveGameMenu;
-import org.jill.game.screen.conf.RectangleConf;
 import org.jill.game.level.cfg.JillLevelConfiguration;
 import org.jill.game.level.cfg.LevelConfiguration;
 import org.jill.game.level.handler.LoadNewLevelHandler;
-import org.jill.openjill.core.api.message.statusbar.inventory.EnumInventoryObject;
+import org.jill.game.screen.conf.RectangleConf;
 import org.jill.jn.BackgroundLayer;
 import org.jill.jn.JnFile;
 import org.jill.jn.ObjectItem;
@@ -27,6 +27,7 @@ import org.jill.jn.SaveData;
 import org.jill.jn.StringItem;
 import org.jill.openjill.core.api.entities.ObjectEntity;
 import org.jill.openjill.core.api.message.EnumMessageType;
+import org.jill.openjill.core.api.message.statusbar.inventory.EnumInventoryObject;
 import org.simplegame.InterfaceSimpleGameHandleInterface;
 import org.simplegame.SimpleGameConfig;
 import org.simplegame.SimpleGameHandler;
@@ -37,13 +38,13 @@ import org.simplegame.SimpleGameHandler;
  * @author Emeric MARTINEAU
  */
 public abstract class AbstractChangeLevel extends
-    AbstractExecutingStdPlayerLevel {
+        AbstractExecutingStdPlayerLevel {
 
     /**
      * Logger.
      */
     private static final Logger LOGGER = Logger.getLogger(
-        AbstractChangeLevel.class.getName());
+            AbstractChangeLevel.class.getName());
 
     /**
      * Level number to know if restart level.
@@ -94,12 +95,11 @@ public abstract class AbstractChangeLevel extends
      * Level configuration.
      *
      * @param cfgLevel configuration of level
-     *
-     * @throws IOException if error reading file
+     * @throws IOException                  if error reading file
      * @throws ReflectiveOperationException if can't create class
      */
     public AbstractChangeLevel(final LevelConfiguration cfgLevel)
-        throws IOException, ReflectiveOperationException {
+            throws IOException, ReflectiveOperationException {
         super(cfgLevel);
 
         constructor();
@@ -109,10 +109,10 @@ public abstract class AbstractChangeLevel extends
      * Change level.
      *
      * @param levelFileName filename of level
-     * @param levelNumber number of level
+     * @param levelNumber   number of level
      */
     private void changeLevel(final String levelFileName,
-        final int levelNumber) {
+            final int levelNumber) {
         this.newLevelFileName = levelFileName;
         this.newLevelNumber = levelNumber;
 
@@ -194,24 +194,24 @@ public abstract class AbstractChangeLevel extends
 
             // Load level
             LevelConfiguration cfgNewLevel = new JillLevelConfiguration(
-                this.levelConfiguration.getShaFileName(),
-                this.newLevelFileName,
-                this.levelConfiguration.getVclFileName(),
-                this.levelConfiguration.getCfgFileName(),
-                this.levelConfiguration.getCfgSavePrefixe(),
-                this.levelConfiguration.getStartScreen(),
-                this.inventoryArea.getLevel(), this.mapLevel, null,
-                mapFile.getSaveData().getScore(), 0);
+                    this.levelConfiguration.getShaFileName(),
+                    this.newLevelFileName,
+                    this.levelConfiguration.getVclFileName(),
+                    this.levelConfiguration.getCfgFileName(),
+                    this.levelConfiguration.getCfgSavePrefixe(),
+                    this.levelConfiguration.getStartScreen(),
+                    this.inventoryArea.getLevel(), this.mapLevel, null,
+                    mapFile.getSaveData().getScore(), 0);
 
             // Create next level
             final InterfaceSimpleGameHandleInterface newLevel
-                = new LoadNewLevelHandler(cfgNewLevel);
+                    = new LoadNewLevelHandler(cfgNewLevel);
 
             SimpleGameHandler.setNewHandler(newLevel);
         } catch (IOException | ClassNotFoundException |
-            IllegalAccessException | InstantiationException ex) {
+                IllegalAccessException | InstantiationException ex) {
             LOGGER.log(Level.SEVERE,
-                "Error when switch to new level", ex);
+                    "Error when switch to new level", ex);
         }
     }
 
@@ -223,25 +223,25 @@ public abstract class AbstractChangeLevel extends
             this.mapLevel.seek(0);
 
             LevelConfiguration cfgNewLevel = new JillLevelConfiguration(
-                this.levelConfiguration.getShaFileName(),
-                null,
-                this.levelConfiguration.getVclFileName(),
-                this.levelConfiguration.getCfgFileName(),
-                this.levelConfiguration.getCfgSavePrefixe(),
-                this.levelConfiguration.getStartScreen(),
-                this.inventoryArea.getLevel(), null, this.mapLevel,
-                this.inventoryArea.getScore(),
-                getCurrentGemCount());
+                    this.levelConfiguration.getShaFileName(),
+                    null,
+                    this.levelConfiguration.getVclFileName(),
+                    this.levelConfiguration.getCfgFileName(),
+                    this.levelConfiguration.getCfgSavePrefixe(),
+                    this.levelConfiguration.getStartScreen(),
+                    this.inventoryArea.getLevel(), null, this.mapLevel,
+                    this.inventoryArea.getScore(),
+                    getCurrentGemCount());
 
             // Retore map level
             final InterfaceSimpleGameHandleInterface newLevel
-                = new LoadNewLevelHandler(cfgNewLevel);
+                    = new LoadNewLevelHandler(cfgNewLevel);
 
             SimpleGameHandler.setNewHandler(newLevel);
         } catch (IOException | ClassNotFoundException |
-            IllegalAccessException | InstantiationException ex) {
+                IllegalAccessException | InstantiationException ex) {
             LOGGER.log(Level.SEVERE,
-                "Error when return in map level", ex);
+                    "Error when return in map level", ex);
 
         }
     }
@@ -259,25 +259,25 @@ public abstract class AbstractChangeLevel extends
             //jnData.seek(0);
 
             LevelConfiguration cfgNewLevel = new JillLevelConfiguration(
-                this.levelConfiguration.getShaFileName(),
-                this.newLevelFileName,
-                this.levelConfiguration.getVclFileName(),
-                this.levelConfiguration.getCfgFileName(),
-                this.levelConfiguration.getCfgSavePrefixe(),
-                this.levelConfiguration.getStartScreen(),
-                this.newLevelNumber, jnData, null,
-                this.inventoryArea.getScore(),
-                getCurrentGemCount());
+                    this.levelConfiguration.getShaFileName(),
+                    this.newLevelFileName,
+                    this.levelConfiguration.getVclFileName(),
+                    this.levelConfiguration.getCfgFileName(),
+                    this.levelConfiguration.getCfgSavePrefixe(),
+                    this.levelConfiguration.getStartScreen(),
+                    this.newLevelNumber, jnData, null,
+                    this.inventoryArea.getScore(),
+                    getCurrentGemCount());
 
             // Create next level
             final InterfaceSimpleGameHandleInterface newLevel
-                = new LoadNewLevelHandler(cfgNewLevel);
+                    = new LoadNewLevelHandler(cfgNewLevel);
 
             SimpleGameHandler.setNewHandler(newLevel);
         } catch (IOException | ClassNotFoundException |
-            IllegalAccessException | InstantiationException ex) {
+                IllegalAccessException | InstantiationException ex) {
             LOGGER.log(Level.SEVERE,
-                "Error when switch to new level", ex);
+                    "Error when switch to new level", ex);
         }
     }
 
@@ -355,17 +355,16 @@ public abstract class AbstractChangeLevel extends
      * Write background in virtual file.
      *
      * @param fab file
-     *
      * @throws EOFException if virtual file is to small
      */
     private void writeBackgroundInFile(final FileAbstractByte fab)
-        throws EOFException {
+            throws EOFException {
         // Save background. Background store by row
         for (int indexX = 0; indexX < BackgroundLayer.MAP_WIDTH; indexX++) {
             for (int indexY = 0; indexY < BackgroundLayer.MAP_HEIGHT;
-                indexY++) {
+                 indexY++) {
                 fab.write16bitLE(
-                    this.backgroundObject[indexX][indexY].getMapCode());
+                        this.backgroundObject[indexX][indexY].getMapCode());
             }
         }
     }
@@ -374,15 +373,14 @@ public abstract class AbstractChangeLevel extends
      * Write object in virtual file.
      *
      * @param fab file
-     *
      * @throws EOFException if virtual file is to small
      */
     private void writeObjectInFile(final FileAbstractByte fab)
-        throws EOFException {
+            throws EOFException {
         // Calculate object number
         fab.write16bitLE(this.listObject.size()
-            + this.listObjectDrawOnBackground.size()
-            + this.listObjectAlwaysOnScreen.size());
+                + this.listObjectDrawOnBackground.size()
+                + this.listObjectAlwaysOnScreen.size());
 
         // Running object
         for (ObjectItem obj : this.listObject) {
@@ -404,16 +402,15 @@ public abstract class AbstractChangeLevel extends
      * Write save data in virtual file.
      *
      * @param fab file
-     *
      * @throws EOFException if virtual file is to small
      */
     private void writeSaveDataInFile(final FileAbstractByte fab)
-        throws EOFException {
+            throws EOFException {
         fab.write16bitLE(this.inventoryArea.getLevel());
         fab.write16bitLE(this.inventoryArea.getLife());
 
         List<EnumInventoryObject> listInventory
-            = this.inventoryArea.getObjects();
+                = this.inventoryArea.getObjects();
 
         fab.write16bitLE(listInventory.size());
 
@@ -422,7 +419,7 @@ public abstract class AbstractChangeLevel extends
         }
 
         fab.skipBytes(
-            (SaveData.MAX_INVENTORY_ENTRY - listInventory.size()) * 2);
+                (SaveData.MAX_INVENTORY_ENTRY - listInventory.size()) * 2);
 
         fab.write32bitLE(this.inventoryArea.getScore());
 
@@ -433,11 +430,10 @@ public abstract class AbstractChangeLevel extends
      * Write string of object in virtual file.
      *
      * @param fab file
-     *
      * @throws EOFException if virtual file is to small
      */
     private void writeStringObjectInFile(final FileAbstractByte fab)
-        throws EOFException {
+            throws EOFException {
         // Running object
         writeListObjectString(this.listObject, fab);
 
@@ -452,12 +448,11 @@ public abstract class AbstractChangeLevel extends
      * Write string of object.
      *
      * @param listObject list of object
-     * @param fab file to save
-     *
+     * @param fab        file to save
      * @throws EOFException if virtual file is to small
      */
     private void writeListObjectString(final List<ObjectEntity> listObject,
-        final FileAbstractByte fab) throws EOFException {
+            final FileAbstractByte fab) throws EOFException {
         String data;
         int len;
         int indexChar;
@@ -492,7 +487,7 @@ public abstract class AbstractChangeLevel extends
             case CHECK_POINT_CHANGING_LEVEL:
                 oe = (ObjectEntity) msg;
                 changeLevel(oe.getStringStackEntry().getValue(),
-                    oe.getCounter());
+                        oe.getCounter());
                 break;
             case CHECK_POINT_CHANGING_LEVEL_PREVIOUS:
                 changeLevel(null, SaveData.MAP_LEVEL);
@@ -522,7 +517,7 @@ public abstract class AbstractChangeLevel extends
                 e.printStackTrace();
             }
         } else if (this.menu == this.menuHighScore
-            && !this.menuHighScore.isEditorMode()) {
+                && !this.menuHighScore.isEditorMode()) {
             // No name enter, validate
             doMenuValidate();
         } else {
@@ -533,7 +528,7 @@ public abstract class AbstractChangeLevel extends
     @Override
     protected void doMenuValidate() {
         if (this.menu == this.menuSaveGame
-            && this.menuSaveGame.isEditorMode()) {
+                && this.menuSaveGame.isEditorMode()) {
             saveGameInFile();
 
             this.menu = this.menu.getPreviousMenu();
@@ -545,7 +540,7 @@ public abstract class AbstractChangeLevel extends
             this.menuSaveGame.setEditorMode(false);
             this.menuSaveGame.setEnable(false);
         } else if (this.menu == this.menuSaveGame
-            && !this.menuSaveGame.isEditorMode()) {
+                && !this.menuSaveGame.isEditorMode()) {
             // Switch menu to enable keyboard
             this.menuSaveGame.setEditorMode(true);
         } else if (this.menu == this.menuLoadGame) {
@@ -571,40 +566,40 @@ public abstract class AbstractChangeLevel extends
      */
     private void saveGameInFile() {
         final String saveName
-            = this.menuSaveGame.getNameSave().trim();
+                = this.menuSaveGame.getNameSave().trim();
         final int numSave
-            = this.menuSaveGame.getNumberSave();
+                = this.menuSaveGame.getNumberSave();
 
         final SaveGameItem currentSaveGame
-            = this.cfgFile.addNewSaveGame(saveName, numSave);
+                = this.cfgFile.addNewSaveGame(saveName, numSave);
 
         // Create virtual file
         FileAbstractByte fab = putCurrentLevelInFileMemory();
 
         try {
             final String filePath
-                = ((JillGameConfig) SimpleGameConfig.getInstance()).
-                getFilePath();
+                    = ((JillGameConfig) SimpleGameConfig.getInstance()).
+                    getFilePath();
 
             // Save level
             fab.saveToFile(
-                new File(filePath, currentSaveGame.getSaveGameFile()));
+                    new File(filePath, currentSaveGame.getSaveGameFile()));
 
             // Save map
             if (this.levelConfiguration.getLevelMapData() == null) {
                 // Map file is current file
                 fab.saveToFile(
-                    new File(filePath, currentSaveGame.getSaveMapFile()));
+                        new File(filePath, currentSaveGame.getSaveMapFile()));
             } else {
                 this.levelConfiguration.getLevelMapData().saveToFile(
-                    new File(filePath, currentSaveGame.getSaveMapFile()));
+                        new File(filePath, currentSaveGame.getSaveMapFile()));
             }
 
             // Save new save entry
             this.cfgFile.save();
         } catch (final FileNotFoundException ex) {
             LOGGER.log(Level.SEVERE, "Can't save file ! File not found ????",
-                ex);
+                    ex);
         } catch (final IOException ex) {
             LOGGER.log(Level.SEVERE, "Can't save file !", ex);
         }
@@ -615,20 +610,20 @@ public abstract class AbstractChangeLevel extends
      */
     private void loadGameInSaveFile() throws ReflectiveOperationException {
         final int numSave
-            = this.menuLoadGame.getNumberSave();
+                = this.menuLoadGame.getNumberSave();
 
         final SaveGameItem currentSaveGame
-            = this.cfgFile.getSaveGame().get(numSave);
+                = this.cfgFile.getSaveGame().get(numSave);
 
         final String filePath
-            = ((JillGameConfig) SimpleGameConfig.getInstance()).
-            getFilePath();
+                = ((JillGameConfig) SimpleGameConfig.getInstance()).
+                getFilePath();
         try {
             final File saveFileMap = new File(filePath,
-                currentSaveGame.getSaveMapFile());
+                    currentSaveGame.getSaveMapFile());
 
             final File saveFileGame = new File(filePath,
-                currentSaveGame.getSaveGameFile());
+                    currentSaveGame.getSaveGameFile());
 
             if (saveFileMap.exists() && saveFileGame.exists()) {
                 // Load map
@@ -637,7 +632,7 @@ public abstract class AbstractChangeLevel extends
                 mapData.load(saveFileMap);
 
                 final LevelConfiguration cfgNewLevel
-                    = new JillLevelConfiguration(
+                        = new JillLevelConfiguration(
                         this.levelConfiguration.getShaFileName(),
                         currentSaveGame.getSaveGameFile(),
                         this.levelConfiguration.getVclFileName(),
@@ -648,7 +643,7 @@ public abstract class AbstractChangeLevel extends
 
                 // Create next level
                 final InterfaceSimpleGameHandleInterface newLevel
-                    = new LoadNewLevelHandler(cfgNewLevel);
+                        = new LoadNewLevelHandler(cfgNewLevel);
 
                 SimpleGameHandler.setNewHandler(newLevel);
             }
@@ -659,7 +654,7 @@ public abstract class AbstractChangeLevel extends
         } catch (IOException ex) {
             LOGGER.log(Level.SEVERE, "Can't load file !", ex);
         } catch (ClassNotFoundException |
-            IllegalAccessException | InstantiationException ex) {
+                IllegalAccessException | InstantiationException ex) {
             LOGGER.log(Level.SEVERE, "Error when load saved level", ex);
         }
     }
@@ -669,12 +664,12 @@ public abstract class AbstractChangeLevel extends
      */
     private void saveHighScoreMenu() {
         final String highScoreName
-            = this.menuHighScore.getNameHighScore().trim();
+                = this.menuHighScore.getNameHighScore().trim();
 
         // Save
         if (this.menuHighScore.isEditorMode() && !highScoreName.isEmpty()) {
             cfgFile.addNewHighScore(this.menuHighScore.getNameHighScore(),
-                this.inventoryArea.getScore());
+                    this.inventoryArea.getScore());
 
             try {
                 // Save
@@ -719,11 +714,11 @@ public abstract class AbstractChangeLevel extends
      */
     private void constructor() {
         this.messageDispatcher.addHandler(
-            EnumMessageType.CHECK_POINT_CHANGING_LEVEL, this);
+                EnumMessageType.CHECK_POINT_CHANGING_LEVEL, this);
         this.messageDispatcher.addHandler(
-            EnumMessageType.CHECK_POINT_CHANGING_LEVEL_PREVIOUS, this);
+                EnumMessageType.CHECK_POINT_CHANGING_LEVEL_PREVIOUS, this);
         this.messageDispatcher.addHandler(
-            EnumMessageType.DIE_RESTART_LEVEL, this);
+                EnumMessageType.DIE_RESTART_LEVEL, this);
 
         BufferedImage highScore = this.statusBar.createControlArea();
 
@@ -731,20 +726,20 @@ public abstract class AbstractChangeLevel extends
                 this.statusBar.getControlAreaConf();
 
         this.menuHighScore = new HighScoreMenu(highScore, this.pictureCache,
-            this.cfgFile.getHighScore(), controlAreaConf.getX(),
-            controlAreaConf.getY(), this.menu);
+                this.cfgFile.getHighScore(), controlAreaConf.getX(),
+                controlAreaConf.getY(), this.menu);
 
         highScore = this.statusBar.createControlArea();
 
         this.menuSaveGame = new SaveGameMenu(highScore, pictureCache,
-            this.cfgFile.getSaveGame(), controlAreaConf.getX(),
-            controlAreaConf.getY());
+                this.cfgFile.getSaveGame(), controlAreaConf.getX(),
+                controlAreaConf.getY());
 
         highScore = this.statusBar.createControlArea();
 
         this.menuLoadGame = new LoadGameMenu(highScore, pictureCache,
-            this.cfgFile.getSaveGame(), controlAreaConf.getX(),
-            controlAreaConf.getY());
+                this.cfgFile.getSaveGame(), controlAreaConf.getX(),
+                controlAreaConf.getY());
     }
 
     /**

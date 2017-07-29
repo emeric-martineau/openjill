@@ -1,6 +1,7 @@
 package org.jill.game.entities.obj;
 
 import java.awt.image.BufferedImage;
+
 import org.jill.game.entities.ObjectEntityImpl;
 import org.jill.openjill.core.api.entities.ObjectParam;
 
@@ -8,7 +9,6 @@ import org.jill.openjill.core.api.entities.ObjectParam;
  * Object to draw text.
  *
  * @author Emeric MARTINEAU
- *
  */
 public final class HugeLetterTileManager extends ObjectEntityImpl {
     /**

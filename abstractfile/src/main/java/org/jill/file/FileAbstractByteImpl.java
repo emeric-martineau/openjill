@@ -53,61 +53,9 @@ public final class FileAbstractByteImpl implements FileAbstractByte {
     }
 
     /**
-     * Create a virtual file.
-     *
-     * @param size size of file (file cannot be extend)
-     */
-    @Override
-    public void load(final int size) {
-        content = new byte[size];
-    }
-
-    /**
-     * Load from file.
-     *
-     * @param raFile file to read
-     *
-     * @throws IOException file cannont be read
-     */
-    @Override
-    public void load(final RandomAccessFile raFile)
-            throws IOException {
-        content = new byte[(int) raFile.length()];
-
-        raFile.readFully(content);
-    }
-
-    /**
-     * Load form file.
-     *
-     * @param file file
-     *
-     * @throws IOException file cannont be read
-     */
-    @Override
-    public void load(final File file)
-            throws IOException {
-        load(new RandomAccessFile(getRealFileName(file), "r"));
-    }
-
-    /**
-     * Load form file.
-     *
-     * @param filename name of file
-     *
-     * @throws IOException file cannont be read
-     */
-    @Override
-    public void load(final String filename)
-            throws IOException {
-        load(new File(filename));
-    }
-
-    /**
      * Return file to work under windows or unix.
      *
      * @param fileToRead file to read (case unsensitive)
-     *
      * @return real file name (with case sensitive)
      */
     private static File getRealFileName(final File fileToRead) throws FileNotFoundException {
@@ -136,6 +84,54 @@ public final class FileAbstractByteImpl implements FileAbstractByte {
     }
 
     /**
+     * Create a virtual file.
+     *
+     * @param size size of file (file cannot be extend)
+     */
+    @Override
+    public void load(final int size) {
+        content = new byte[size];
+    }
+
+    /**
+     * Load from file.
+     *
+     * @param raFile file to read
+     * @throws IOException file cannont be read
+     */
+    @Override
+    public void load(final RandomAccessFile raFile)
+            throws IOException {
+        content = new byte[(int) raFile.length()];
+
+        raFile.readFully(content);
+    }
+
+    /**
+     * Load form file.
+     *
+     * @param file file
+     * @throws IOException file cannont be read
+     */
+    @Override
+    public void load(final File file)
+            throws IOException {
+        load(new RandomAccessFile(getRealFileName(file), "r"));
+    }
+
+    /**
+     * Load form file.
+     *
+     * @param filename name of file
+     * @throws IOException file cannont be read
+     */
+    @Override
+    public void load(final String filename)
+            throws IOException {
+        load(new File(filename));
+    }
+
+    /**
      * check file size.
      *
      * @throws EOFException if end of file
@@ -144,9 +140,9 @@ public final class FileAbstractByteImpl implements FileAbstractByte {
         if (dataPointer == content.length) {
             throw new EOFException(
                     String.format(
-                    "End of file ! Current lenght of file %d, "
-                    + "internal pointer position %d",
-                    content.length, dataPointer));
+                            "End of file ! Current lenght of file %d, "
+                                    + "internal pointer position %d",
+                            content.length, dataPointer));
         }
     }
 
@@ -154,7 +150,6 @@ public final class FileAbstractByteImpl implements FileAbstractByte {
      * Read unsigned byte.
      *
      * @return return byte
-     *
      * @throws EOFException if end of file
      */
     @Override
@@ -171,7 +166,6 @@ public final class FileAbstractByteImpl implements FileAbstractByte {
      * Read signed byte.
      *
      * @return return signed byte
-     *
      * @throws EOFException if end of file
      */
     @Override
@@ -188,7 +182,6 @@ public final class FileAbstractByteImpl implements FileAbstractByte {
      * Read 32 bits Little Endian.
      *
      * @return return unsignedd 32 bit
-     *
      * @throws EOFException if end of file
      */
     @Override
@@ -206,7 +199,6 @@ public final class FileAbstractByteImpl implements FileAbstractByte {
      * Read 16 bits Little Endian.
      *
      * @return return unsigned 16bits
-     *
      * @throws EOFException if end of file
      */
     @Override
@@ -221,7 +213,6 @@ public final class FileAbstractByteImpl implements FileAbstractByte {
      * Read 8 bits Little Endian.
      *
      * @return unsignedbyte
-     *
      * @throws EOFException if end of file
      */
     @Override
@@ -233,7 +224,6 @@ public final class FileAbstractByteImpl implements FileAbstractByte {
      * Read 32 bits Little Endian.
      *
      * @return signed 32 bit
-     *
      * @throws EOFException if end of file
      */
     @Override
@@ -244,7 +234,7 @@ public final class FileAbstractByteImpl implements FileAbstractByte {
         int byte3 = readByte();
 
         long tmp = (byte0 & UNSIGNED_BYTE) | ((byte1 & UNSIGNED_BYTE) << BYTE_1)
-                 | ((byte2 & UNSIGNED_BYTE) << BYTE_2)
+                | ((byte2 & UNSIGNED_BYTE) << BYTE_2)
                 | ((byte3 & UNSIGNED_BYTE) << BYTE_3);
 
         return (int) tmp;
@@ -254,7 +244,6 @@ public final class FileAbstractByteImpl implements FileAbstractByte {
      * Read 16 bits Little Endian.
      *
      * @return signed 16 bit
-     *
      * @throws EOFException if end of file
      */
     @Override
@@ -272,7 +261,6 @@ public final class FileAbstractByteImpl implements FileAbstractByte {
      * Read 8 bits Little Endian.
      *
      * @return signed 8 bit
-     *
      * @throws EOFException if end of file
      */
     @Override
@@ -283,8 +271,8 @@ public final class FileAbstractByteImpl implements FileAbstractByte {
     /**
      * Returns the current offset in this file.
      *
-     * @return     the offset from the beginning of the file, in bytes,
-     *             at which the next read or write occurs.
+     * @return the offset from the beginning of the file, in bytes,
+     * at which the next read or write occurs.
      */
     @Override
     public int getFilePointer() {
@@ -299,9 +287,9 @@ public final class FileAbstractByteImpl implements FileAbstractByte {
      * change only by writing after the offset has been set beyond the end
      * of the file.
      *
-     * @param      pos   the offset position, measured in bytes from the
-     *                   beginning of the file, at which to set the file
-     *                   pointer.
+     * @param pos the offset position, measured in bytes from the
+     *            beginning of the file, at which to set the file
+     *            pointer.
      */
     @Override
     public void seek(final int pos) {
@@ -326,7 +314,6 @@ public final class FileAbstractByteImpl implements FileAbstractByte {
      * Skip bytes.
      *
      * @param n skip byte
-     *
      * @return number of skiped byte
      */
     @Override
@@ -350,7 +337,6 @@ public final class FileAbstractByteImpl implements FileAbstractByte {
      * write signed byte.
      *
      * @param b byte
-     *
      * @throws EOFException if end of file
      */
     @Override
@@ -366,7 +352,6 @@ public final class FileAbstractByteImpl implements FileAbstractByte {
      * Write 16 bits Little Endian.
      *
      * @param b 16bit
-     *
      * @throws EOFException if end of file
      */
     @Override
@@ -382,7 +367,6 @@ public final class FileAbstractByteImpl implements FileAbstractByte {
      * Write 16 bits Little Endian.
      *
      * @param b 16 bits
-     *
      * @throws EOFException if end of file
      */
     @Override
@@ -394,7 +378,6 @@ public final class FileAbstractByteImpl implements FileAbstractByte {
      * Write 32 bits Little Endian.
      *
      * @param b data
-     *
      * @throws EOFException if end of file
      */
     @Override
@@ -414,7 +397,6 @@ public final class FileAbstractByteImpl implements FileAbstractByte {
      * Write 32 bits Little Endian.
      *
      * @param b data
-     *
      * @throws EOFException if end of file
      */
     @Override
@@ -427,7 +409,6 @@ public final class FileAbstractByteImpl implements FileAbstractByte {
      * Write data in stream.
      *
      * @param fos output stream
-     *
      * @throws IOException if error
      */
     @Override
@@ -439,11 +420,10 @@ public final class FileAbstractByteImpl implements FileAbstractByte {
      * Write data in file.
      *
      * @param filename file name
-     *
      * @throws IOException if error
      */
     @Override
-    public  void saveToFile(final String filename) throws IOException {
+    public void saveToFile(final String filename) throws IOException {
         try (FileOutputStream fos = new FileOutputStream(filename)) {
             saveToFile(fos);
         }
@@ -453,7 +433,6 @@ public final class FileAbstractByteImpl implements FileAbstractByte {
      * Write data in file.
      *
      * @param filename file
-     *
      * @throws IOException if error
      */
     @Override

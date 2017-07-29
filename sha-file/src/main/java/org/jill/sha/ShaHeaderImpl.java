@@ -1,6 +1,7 @@
 package org.jill.sha;
 
 import java.io.IOException;
+
 import org.jill.file.FileAbstractByte;
 
 /**
@@ -24,7 +25,6 @@ public class ShaHeaderImpl implements ShaHeader {
      * Constructor of class ShaHeader.
      *
      * @param shaFile file data
-     *
      * @throws IOException if error
      */
     public ShaHeaderImpl(final FileAbstractByte shaFile) throws IOException {
@@ -69,7 +69,6 @@ public class ShaHeaderImpl implements ShaHeader {
      * Check if entry is valid.
      *
      * @param index index to check if valie
-     *
      * @return true if valid
      */
     @Override

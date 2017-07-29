@@ -1,6 +1,7 @@
 package org.jill.game.gui.menu.conf;
 
 import java.util.List;
+
 import org.jill.game.gui.menu.SubMenu;
 import org.jill.game.screen.conf.PictureConf;
 
@@ -183,7 +184,7 @@ public class MenuConf {
     /**
      * Text position.
      *
-     * @return  x
+     * @return x
      */
     public int getTextX() {
         return textX;
@@ -192,7 +193,7 @@ public class MenuConf {
     /**
      * Text position.
      *
-     * @param x  x
+     * @param x x
      */
     public void setTextX(final int x) {
         this.textX = x;
@@ -201,7 +202,7 @@ public class MenuConf {
     /**
      * Text position.
      *
-     * @return  y
+     * @return y
      */
     public int getTextY() {
         return textY;
@@ -216,7 +217,7 @@ public class MenuConf {
         this.textY = y;
     }
 
-/**
+    /**
      * Corner.
      *
      * @return corner

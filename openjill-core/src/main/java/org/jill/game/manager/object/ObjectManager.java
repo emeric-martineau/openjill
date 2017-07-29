@@ -1,7 +1,5 @@
 package org.jill.game.manager.object;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.reflect.InvocationTargetException;
@@ -10,10 +8,13 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import org.jill.game.manager.object.weapon.ObjectMappingWeapon;
 import org.jill.openjill.core.api.entities.ObjectEntity;
 import org.jill.openjill.core.api.entities.ObjectParam;
 import org.jill.openjill.core.api.message.statusbar.inventory.EnumInventoryObject;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  * Object manager.
@@ -25,7 +26,7 @@ public final class ObjectManager {
      * Logger.
      */
     private static final Logger LOGGER = Logger.getLogger(
-                    ObjectManager.class.getName());
+            ObjectManager.class.getName());
 
     /**
      * Config file name.
@@ -64,6 +65,17 @@ public final class ObjectManager {
     private Map<Class, EnumInventoryObject> inventoryNameOfObject;
 
     /**
+     * Private constructor.
+     */
+    private ObjectManager() {
+        try {
+            mapObjectClass = initMapOfObjectSprite();
+        } catch (ReflectiveOperationException ex) {
+            LOGGER.log(Level.SEVERE, "Error loading object", ex);
+        }
+    }
+
+    /**
      * Return this instance of object.
      *
      * @return instance
@@ -86,11 +98,12 @@ public final class ObjectManager {
 
         try {
             mapObjectTile = mapper.readValue(is,
-                    new TypeReference<List<ObjectMapping>>() { });
+                    new TypeReference<List<ObjectMapping>>() {
+                    });
         } catch (final IOException ex) {
             LOGGER.log(Level.SEVERE,
-                "Error, can't load properties file where "
-                + "mapping objects and manager", ex);
+                    "Error, can't load properties file where "
+                            + "mapping objects and manager", ex);
 
             mapObjectTile = null;
         }
@@ -99,21 +112,9 @@ public final class ObjectManager {
     }
 
     /**
-     * Private constructor.
-     */
-    private ObjectManager() {
-        try {
-            mapObjectClass = initMapOfObjectSprite();
-        } catch (ReflectiveOperationException ex) {
-            LOGGER.log(Level.SEVERE, "Error loading object", ex);
-        }
-    }
-
-    /**
      * Init picture of know object.
      *
      * @return map to link object name and class
-     *
      * @throws ReflectiveOperationException if error
      */
     @SuppressWarnings("unchecked")
@@ -158,7 +159,7 @@ public final class ObjectManager {
             if (om.getInventoryName() != null) {
                 this.inventoryNameOfObject.put(c,
                         EnumInventoryObject.valueOf(
-                            om.getInventoryName()));
+                                om.getInventoryName()));
             }
         }
 
@@ -184,9 +185,8 @@ public final class ObjectManager {
     /**
      * Create a object.
      *
-     * @param className class name
-     * @param objectParam  object
-     *
+     * @param className   class name
+     * @param objectParam object
      * @return object
      */
     private ObjectEntity createObject(final Class<ObjectEntity> className,
@@ -195,15 +195,15 @@ public final class ObjectManager {
 
         try {
             o = className.
-                getConstructor().
-                newInstance();
+                    getConstructor().
+                    newInstance();
 
             o.init(objectParam);
         } catch (IllegalArgumentException | SecurityException |
                 InvocationTargetException | NoSuchMethodException |
                 IllegalAccessException | InstantiationException ex) {
             LOGGER.log(Level.SEVERE,
-                "Create jill object error !", ex);
+                    "Create jill object error !", ex);
         }
 
         return o;
@@ -214,7 +214,6 @@ public final class ObjectManager {
      * Create an jill object.
      *
      * @param objectParam object in file of level
-     *
      * @return object
      */
     public ObjectEntity getNewObject(final ObjectParam objectParam) {
@@ -234,7 +233,6 @@ public final class ObjectManager {
      * Find type by implementation class.
      *
      * @param className classe name
-     *
      * @return type
      */
     public int findTypeByImplementationClassName(final String className) {

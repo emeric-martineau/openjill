@@ -2,6 +2,7 @@ package org.jill.game.entities.back.abs;
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+
 import org.jill.game.entities.picutre.PictureSynchronizer;
 import org.jill.openjill.core.api.entities.BackgroundEntity;
 import org.jill.openjill.core.api.entities.BackgroundParam;
@@ -74,7 +75,6 @@ public abstract class AbstractBaseBackgroundEntity extends
      *
      * @param x x
      * @param y y
-     *
      * @return true/false
      */
     protected final boolean isBackBase(final int x, final int y) {

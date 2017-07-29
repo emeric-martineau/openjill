@@ -18,7 +18,7 @@ public class StoryScreenJill1Handler extends AbstractObjectJillLevel {
     /**
      * Default constructor of level
      *
-     * @throws IOException if missing file
+     * @throws IOException                  if missing file
      * @throws ReflectiveOperationException if missing class must be load
      */
     public StoryScreenJill1Handler() throws IOException, ReflectiveOperationException {
@@ -26,12 +26,12 @@ public class StoryScreenJill1Handler extends AbstractObjectJillLevel {
                 "JILL1.CFG", "JN1"));
 
         final RectangleConf offset
-                    = this.statusBar.getGameAreaConf().getOffset();
+                = this.statusBar.getGameAreaConf().getOffset();
 
         offset.setX(
-                - 36 * JillConst.getBlockSize());
+                -36 * JillConst.getBlockSize());
         offset.setY(
-                - 2 * JillConst.getBlockSize());
+                -2 * JillConst.getBlockSize());
     }
 
     /**
@@ -51,7 +51,7 @@ public class StoryScreenJill1Handler extends AbstractObjectJillLevel {
     @Override
     public void paint(Graphics g) {
         final RectangleConf offset
-                    = this.statusBar.getGameAreaConf().getOffset();
+                = this.statusBar.getGameAreaConf().getOffset();
 
         g.drawImage(background, offset.getX(),
                 offset.getY(), null);

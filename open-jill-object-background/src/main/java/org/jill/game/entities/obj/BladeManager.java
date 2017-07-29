@@ -1,14 +1,15 @@
 package org.jill.game.entities.obj;
 
 import java.awt.image.BufferedImage;
+
 import org.jill.game.entities.obj.abs.AbstractParameterObjectEntity;
 import org.jill.game.entities.obj.util.UtilityObjectEntity;
 import org.jill.openjill.core.api.entities.BackgroundEntity;
-import org.jill.openjill.core.api.message.object.ObjectListMessage;
 import org.jill.openjill.core.api.entities.ObjectEntity;
 import org.jill.openjill.core.api.entities.ObjectParam;
 import org.jill.openjill.core.api.keyboard.KeyboardLayout;
 import org.jill.openjill.core.api.message.EnumMessageType;
+import org.jill.openjill.core.api.message.object.ObjectListMessage;
 
 /**
  * Blade object.
@@ -71,11 +72,11 @@ public final class BladeManager extends AbstractParameterObjectEntity {
         // Load picture for each object. Don't use cache cause some picture
         // change between jill episod.
         this.images
-            = new BufferedImage[numberTileSet];
+                = new BufferedImage[numberTileSet];
 
         for (int index = 0; index < numberTileSet; index++) {
             this.images[index]
-                = this.pictureCache.getImage(tileSetIndex, tileIndex
+                    = this.pictureCache.getImage(tileSetIndex, tileIndex
                     + index);
         }
 
@@ -107,7 +108,7 @@ public final class BladeManager extends AbstractParameterObjectEntity {
     public void msgTouch(final ObjectEntity obj,
             final KeyboardLayout keyboardLayout) {
         if (obj.isPlayer() && !(getSubState() >= this.subStateLaunchStart
-            && getSubState() <= this.subStateLaunchEnd)) {
+                && getSubState() <= this.subStateLaunchEnd)) {
             this.messageDispatcher.sendMessage(EnumMessageType.OBJECT, killme);
         } else if (obj.isKillableObject()) {
             obj.msgKill(this, 0, 0);
@@ -172,11 +173,11 @@ public final class BladeManager extends AbstractParameterObjectEntity {
         // Way change only when blade don't move.
         if ((getxSpeed() > X_SPEED_MIDDLE
                 && !UtilityObjectEntity.moveObjectRight(this, getxSpeed(),
-                    backgroundObject))
+                backgroundObject))
                 || (getxSpeed() < X_SPEED_MIDDLE
                 && !UtilityObjectEntity.moveObjectLeft(this, getxSpeed(),
-                        backgroundObject))) {
-                setxSpeed(getxSpeed() * -1);
+                backgroundObject))) {
+            setxSpeed(getxSpeed() * -1);
         }
     }
 }

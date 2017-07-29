@@ -11,13 +11,13 @@ import java.awt.event.WindowFocusListener;
  * @author Emeric MARTINEAU
  */
 public final class SimpleGameKeyHandler extends KeyAdapter
-    implements WindowFocusListener {
+        implements WindowFocusListener {
 
     /**
      * Instance.
      */
     private static final SimpleGameKeyHandler INSTANCE
-        = new SimpleGameKeyHandler();
+            = new SimpleGameKeyHandler();
 
     /**
      * Key fire is pressed.
@@ -75,19 +75,19 @@ public final class SimpleGameKeyHandler extends KeyAdapter
     private boolean otherKey = true;
 
     /**
+     * Private constructor.
+     */
+    private SimpleGameKeyHandler() {
+
+    }
+
+    /**
      * Return instance of keyboard.
      *
      * @return keyboard
      */
     public static SimpleGameKeyHandler getInstance() {
         return INSTANCE;
-    }
-
-    /**
-     * Private constructor.
-     */
-    private SimpleGameKeyHandler() {
-
     }
 
     @Override
@@ -124,7 +124,7 @@ public final class SimpleGameKeyHandler extends KeyAdapter
     /**
      * Update keyboard status.
      *
-     * @param ke key event
+     * @param ke    key event
      * @param value value to set
      */
     private void updateKeyboardStatus(final int ke, final boolean value) {

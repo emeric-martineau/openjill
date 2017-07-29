@@ -13,7 +13,7 @@ import org.jill.openjill.core.api.message.object.ObjectListMessage;
  * @author Emeric MARTINEAU
  */
 public abstract class AbstractFireHitPlayerObject
-    extends AbstractHitPlayerObjectEntity {
+        extends AbstractHitPlayerObjectEntity {
     /**
      * Dead object.
      */
@@ -54,7 +54,7 @@ public abstract class AbstractFireHitPlayerObject
                 = CreateObjectMessage.buildFromClassName(typeHit);
 
         this.messageDispatcher.sendMessage(EnumMessageType.CREATE_OBJECT,
-            com);
+                com);
 
         this.deadObject = com.getObject();
 
@@ -72,7 +72,7 @@ public abstract class AbstractFireHitPlayerObject
             this.deadObject.setY(obj.getY());
 
             this.messageDispatcher.sendMessage(EnumMessageType.OBJECT,
-                this.deadMessage);
+                    this.deadMessage);
 
             touchPlayer(obj, keyboardLayout);
         }
@@ -83,13 +83,13 @@ public abstract class AbstractFireHitPlayerObject
      */
     protected void killMe() {
         this.messageDispatcher.sendMessage(EnumMessageType.OBJECT,
-            this.killme);
+                this.killme);
     }
 
     /**
      * Call when object touch player.
      *
-     * @param obj object (player)
+     * @param obj            object (player)
      * @param keyboardLayout keyboard
      */
     protected abstract void touchPlayer(final ObjectEntity obj,

@@ -3,6 +3,7 @@ package org.jill.vcl;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+
 import org.jill.file.FileAbstractByte;
 import org.jill.file.FileAbstractByteImpl;
 
@@ -40,7 +41,6 @@ public class VclFileImpl implements VclFile {
      * Constructor of class ShaFile.
      *
      * @param vclFile file name
-     *
      * @throws IOException if error
      */
     @Override
@@ -55,7 +55,6 @@ public class VclFileImpl implements VclFile {
      * Constructor of class ShaFile.
      *
      * @param vclFile file data
-     *
      * @throws IOException if error
      */
     @Override
@@ -67,7 +66,6 @@ public class VclFileImpl implements VclFile {
      * Read text data in VCL file.
      *
      * @param vclFile file data
-     *
      * @throws IOException if error
      */
     private void readTextEntry(final FileAbstractByte vclFile)
@@ -83,12 +81,12 @@ public class VclFileImpl implements VclFile {
         vclFile.seek(SOUND_ENTRY_SKIP);
 
         for (int indexOffset = 0; indexOffset < textOffset.length;
-                indexOffset++) {
+             indexOffset++) {
             textOffset[indexOffset] = vclFile.read32bitLE();
         }
 
         for (int indexLength = 0; indexLength < textOffset.length;
-                indexLength++) {
+             indexLength++) {
             textLength[indexLength] = vclFile.read16bitLE();
         }
 
@@ -96,7 +94,7 @@ public class VclFileImpl implements VclFile {
 
 
         for (int indexOffset = 0; indexOffset < textOffset.length;
-                indexOffset++) {
+             indexOffset++) {
             if (textLength[indexOffset] > 0) {
                 vclFile.seek(textOffset[indexOffset]);
 
@@ -104,7 +102,7 @@ public class VclFileImpl implements VclFile {
                 txt.delete(0, txt.length());
 
                 for (int indexTxt = 0; indexTxt < textLength[indexOffset];
-                        indexTxt++) {
+                     indexTxt++) {
                     txt.append((char) vclFile.read8bitLE());
                 }
 

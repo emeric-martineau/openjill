@@ -6,7 +6,7 @@ package org.jill.game.entities.obj;
  * @author Emeric MARTINEAU
  */
 public final class RockKeyManager
-    extends AbstractKeyManager {
+        extends AbstractKeyManager {
 
     /**
      * To know if message must be display.

@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import org.jill.jn.BackgroundLayer;
 
 /**
@@ -51,7 +52,7 @@ public class JillConst {
     public static void loadFromClasspath(String fileName) {
         final Properties prop = new Properties();
         final InputStream is = JillConst.class.getClassLoader().
-                    getResourceAsStream("jill_const.properties");
+                getResourceAsStream("jill_const.properties");
 
         try {
             prop.load(is);

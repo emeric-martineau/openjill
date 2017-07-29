@@ -2,15 +2,14 @@ package org.jill.game.entities.obj;
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
-import org.jill.game.entities.ObjectEntityImpl;
 
+import org.jill.game.entities.ObjectEntityImpl;
 import org.jill.openjill.core.api.entities.ObjectParam;
 
 /**
  * Object to draw text.
  *
  * @author Emeric MARTINEAU
- *
  */
 public final class TextTileManager extends ObjectEntityImpl {
     /**
@@ -51,8 +50,8 @@ public final class TextTileManager extends ObjectEntityImpl {
 
         // Buffer image
         final BufferedImage image =
-            new BufferedImage(widthObj, heightObj,
-                    BufferedImage.TYPE_INT_ARGB);
+                new BufferedImage(widthObj, heightObj,
+                        BufferedImage.TYPE_INT_ARGB);
         // Graphic
         final Graphics2D g2 = image.createGraphics();
 

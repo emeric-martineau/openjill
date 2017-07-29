@@ -15,7 +15,7 @@ public class SimpleGame {
      * Logger.
      */
     private static final Logger LOGGER = Logger.getLogger(
-                    SimpleGame.class.getName());
+            SimpleGame.class.getName());
 
     /**
      * Frame of game.
@@ -62,8 +62,8 @@ public class SimpleGame {
             Class configClass = Class.forName(value);
 
             final Object o = configClass.
-                getConstructor(Properties.class).
-                newInstance(properties);
+                    getConstructor(Properties.class).
+                    newInstance(properties);
 
             final SimpleGameConfig config = (SimpleGameConfig) o;
             SimpleGameConfig.setInstance(config);
@@ -90,7 +90,7 @@ public class SimpleGame {
 
             SimpleGameHandler.setNewHandler(
                     (InterfaceSimpleGameHandleInterface)
-                    startClass.newInstance());
+                            startClass.newInstance());
         } catch (IllegalAccessException | InstantiationException |
                 ClassNotFoundException ex) {
             LOGGER.log(Level.SEVERE,
@@ -105,7 +105,7 @@ public class SimpleGame {
         try {
             // Wait for jframe create
             while (jframe == null) {
-                    Thread.sleep(1000);
+                Thread.sleep(1000);
             }
 
             jframe.start();

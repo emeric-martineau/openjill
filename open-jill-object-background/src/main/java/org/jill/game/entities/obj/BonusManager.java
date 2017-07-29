@@ -1,7 +1,8 @@
 package org.jill.game.entities.obj;
 
-import org.jill.game.entities.obj.abs.AbstractParameterObjectEntity;
 import java.awt.image.BufferedImage;
+
+import org.jill.game.entities.obj.abs.AbstractParameterObjectEntity;
 import org.jill.game.entities.obj.bullet.BulletObjectFactory;
 import org.jill.openjill.core.api.entities.ObjectEntity;
 import org.jill.openjill.core.api.entities.ObjectParam;
@@ -10,10 +11,8 @@ import org.jill.openjill.core.api.message.EnumMessageType;
 import org.jill.openjill.core.api.message.object.CreateObjectMessage;
 import org.jill.openjill.core.api.message.object.ObjectListMessage;
 import org.jill.openjill.core.api.message.object.ReplaceObjectMessage;
-import org.jill.openjill.core.api.message.statusbar.inventory.
-        EnumInventoryObject;
-import org.jill.openjill.core.api.message.statusbar.inventory.
-        InventoryItemMessage;
+import org.jill.openjill.core.api.message.statusbar.inventory.EnumInventoryObject;
+import org.jill.openjill.core.api.message.statusbar.inventory.InventoryItemMessage;
 
 /**
  * Bonus item manager.
@@ -106,10 +105,10 @@ public final class BonusManager extends AbstractParameterObjectEntity {
 
         if (dontRemove.contains(nameOfInventoryItem)) {
             this.inventory = new InventoryItemMessage(enumList[this.counter],
-                true, true);
+                    true, true);
         } else {
             this.inventory = new InventoryItemMessage(enumList[this.counter],
-                true);
+                    true);
             // Remove me from list of object (= kill me)
             this.killme = new ObjectListMessage(this, false);
         }
@@ -130,7 +129,7 @@ public final class BonusManager extends AbstractParameterObjectEntity {
                 replacePlayer(obj);
             } else {
                 this.messageDispatcher.sendMessage(
-                    EnumMessageType.INVENTORY_ITEM, this.inventory);
+                        EnumMessageType.INVENTORY_ITEM, this.inventory);
             }
         }
     }
@@ -139,12 +138,11 @@ public final class BonusManager extends AbstractParameterObjectEntity {
      * Create player.
      *
      * @param className class name of player
-     *
      * @return player object
      */
     private ObjectEntity createPlayer(final String className) {
         final CreateObjectMessage com = CreateObjectMessage
-                    .buildFromClassName(className);
+                .buildFromClassName(className);
 
         this.messageDispatcher.sendMessage(EnumMessageType.CREATE_OBJECT,
                 com);

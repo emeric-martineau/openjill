@@ -1,14 +1,15 @@
 package org.jill.game.entities.back.abs;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import org.jill.game.entities.BackgroundEntityImpl;
 import org.jill.openjill.core.api.entities.BackgroundParam;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  * Abstract.
@@ -27,11 +28,6 @@ public abstract class AbstractParameterBackgroundEntity extends
      */
     private static Map<String, Map<String, String>> conf;
 
-    /**
-     * Name in DMA file.
-     */
-    private String dmaName;
-
     static {
         final ObjectMapper mapper = new ObjectMapper();
         final InputStream is = AbstractParameterBackgroundEntity.class.
@@ -39,14 +35,20 @@ public abstract class AbstractParameterBackgroundEntity extends
 
         try {
             conf = mapper.readValue(is,
-                    new TypeReference<Map<String, Map<String, String>>>() { });
+                    new TypeReference<Map<String, Map<String, String>>>() {
+                    });
         } catch (IOException e) {
             Logger.getLogger(
-                AbstractParameterBackgroundEntity.class.getName()).
-                log(Level.SEVERE,
-                    "Can't load background config file !", e);
+                    AbstractParameterBackgroundEntity.class.getName()).
+                    log(Level.SEVERE,
+                            "Can't load background config file !", e);
         }
     }
+
+    /**
+     * Name in DMA file.
+     */
+    private String dmaName;
 
     /**
      * For internal use only.
@@ -80,7 +82,6 @@ public abstract class AbstractParameterBackgroundEntity extends
      * Configuration string.
      *
      * @param properties properties file
-     *
      * @return value
      */
     protected final String getConfString(final String properties) {
@@ -92,8 +93,7 @@ public abstract class AbstractParameterBackgroundEntity extends
      * Configuration string.
      *
      * @param properties properties file
-     * @param requiered if properties requiered
-     *
+     * @param requiered  if properties requiered
      * @return value
      */
     protected final String getConfString(final String properties,
@@ -108,12 +108,12 @@ public abstract class AbstractParameterBackgroundEntity extends
             } else {
                 // Property not found for class
                 throw new BackConfigPropertyNameNotFoundException(properties,
-                    CONFIG_FILENAME);
+                        CONFIG_FILENAME);
             }
         } else {
             // Class not found in properties file
             throw new BackConfigPropertyNameNotFoundException(this.dmaName,
-                CONFIG_FILENAME);
+                    CONFIG_FILENAME);
         }
 
         return value;
@@ -123,7 +123,6 @@ public abstract class AbstractParameterBackgroundEntity extends
      * Configuration string.
      *
      * @param properties properties file
-     *
      * @return value
      */
     protected final int getConfInteger(final String properties) {
@@ -134,8 +133,7 @@ public abstract class AbstractParameterBackgroundEntity extends
      * Configuration string.
      *
      * @param properties properties file
-     * @param def default value
-     *
+     * @param def        default value
      * @return value
      */
     protected final int getConfInteger(final String properties, final int def) {

@@ -13,14 +13,14 @@ public interface PlayerWaitConst {
      * Message to display.
      */
     StatusBarTextMessage[] WAIT_MESSAGES = {
-        new StatusBarTextMessage("Have you seen Jill anywhere?",
-                47, TextManager.COLOR_GREEN),
-        new StatusBarTextMessage("Look, an airplane!",
-                47, TextManager.COLOR_GREEN),
-        new StatusBarTextMessage("Hey, your shoes are untied.",
-                47, TextManager.COLOR_GREEN),
-        new StatusBarTextMessage("Are you just gonna sit there?",
-                47, TextManager.COLOR_GREEN)};
+            new StatusBarTextMessage("Have you seen Jill anywhere?",
+                    47, TextManager.COLOR_GREEN),
+            new StatusBarTextMessage("Look, an airplane!",
+                    47, TextManager.COLOR_GREEN),
+            new StatusBarTextMessage("Hey, your shoes are untied.",
+                    47, TextManager.COLOR_GREEN),
+            new StatusBarTextMessage("Are you just gonna sit there?",
+                    47, TextManager.COLOR_GREEN)};
 
     /**
      * Wait anlimation.

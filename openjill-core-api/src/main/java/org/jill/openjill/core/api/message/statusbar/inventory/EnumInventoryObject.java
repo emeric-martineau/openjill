@@ -62,11 +62,6 @@ public enum EnumInventoryObject {
     INVINCIBILITY(10);
 
     /**
-     * Index (value) in map file.
-     */
-    private final int index;
-
-    /**
      * List of enum.
      */
     private static final EnumInventoryObject[] ENUM_LIST;
@@ -84,21 +79,17 @@ public enum EnumInventoryObject {
     }
 
     /**
+     * Index (value) in map file.
+     */
+    private final int index;
+
+    /**
      * Constructor.
      *
      * @param idx index in map file
      */
     EnumInventoryObject(final int idx) {
         this.index = idx;
-    }
-
-    /**
-     * Return index value in map file.
-     *
-     * @return value
-     */
-    public final int getIndex() {
-        return index;
     }
 
     /**
@@ -111,6 +102,15 @@ public enum EnumInventoryObject {
                 new EnumInventoryObject[ENUM_LIST.length];
         System.arraycopy(ENUM_LIST, 0, dest, 0, ENUM_LIST.length);
         return dest;
+    }
+
+    /**
+     * Return index value in map file.
+     *
+     * @return value
+     */
+    public final int getIndex() {
+        return index;
     }
 
 }

@@ -9,27 +9,17 @@ import org.jill.openjill.core.api.entities.ObjectEntity;
  */
 public final class CreateObjectMessage {
     /**
-     * Create object type.
-     */
-    public enum CreateObjectType {
-        CREATE_BY_TYPE, CREATE_BY_CLASS_NAME
-    }
-
-    /**
      * If add object. False = delete object
      */
     private final int objectType;
-
     /**
      * Creation type.
      */
     private final CreateObjectType type;
-
     /**
      * Class name of object.
      */
     private final String className;
-
     /**
      * Object to add/remove.
      */
@@ -47,7 +37,7 @@ public final class CreateObjectMessage {
         this.className = null;
     }
 
-        /**
+    /**
      * Constructor.
      *
      * @param className class name of object to create
@@ -63,7 +53,6 @@ public final class CreateObjectMessage {
      * Create object from type.
      *
      * @param type object type
-     *
      * @return a new object
      */
     public static CreateObjectMessage buildFromObjectType(final int type) {
@@ -74,7 +63,6 @@ public final class CreateObjectMessage {
      * Create object from class name.
      *
      * @param className class name of object.
-     *
      * @return a new object
      */
     public static CreateObjectMessage buildFromClassName(
@@ -93,21 +81,21 @@ public final class CreateObjectMessage {
     }
 
     /**
+     * Object to add.
+     *
+     * @return object
+     */
+    public ObjectEntity getObject() {
+        return object;
+    }
+
+    /**
      * Set object.
      *
      * @param obj object
      */
     public void setObject(final ObjectEntity obj) {
         this.object = obj;
-    }
-
-    /**
-     * Object to add.
-     *
-     * @return  object
-     */
-    public ObjectEntity getObject() {
-        return object;
     }
 
     /**
@@ -126,6 +114,13 @@ public final class CreateObjectMessage {
      */
     public String getClassName() {
         return className;
+    }
+
+    /**
+     * Create object type.
+     */
+    public enum CreateObjectType {
+        CREATE_BY_TYPE, CREATE_BY_CLASS_NAME
     }
 
 

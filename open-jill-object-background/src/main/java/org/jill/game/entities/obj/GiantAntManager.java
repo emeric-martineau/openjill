@@ -1,16 +1,16 @@
 package org.jill.game.entities.obj;
 
 import java.awt.image.BufferedImage;
-import org.jill.openjill.core.api.entities.ObjectEntity;
+
 import org.jill.game.entities.obj.abs.AbstractHitPlayerObjectEntity;
 import org.jill.game.entities.obj.util.UtilityObjectEntity;
+import org.jill.openjill.core.api.entities.BackgroundEntity;
+import org.jill.openjill.core.api.entities.ObjectEntity;
 import org.jill.openjill.core.api.entities.ObjectParam;
+import org.jill.openjill.core.api.keyboard.KeyboardLayout;
 import org.jill.openjill.core.api.message.EnumMessageType;
 import org.jill.openjill.core.api.message.object.ObjectListMessage;
-import org.jill.openjill.core.api.message.statusbar.inventory.
-        InventoryPointMessage;
-import org.jill.openjill.core.api.entities.BackgroundEntity;
-import org.jill.openjill.core.api.keyboard.KeyboardLayout;
+import org.jill.openjill.core.api.message.statusbar.inventory.InventoryPointMessage;
 
 /**
  * Giant ant.
@@ -73,7 +73,7 @@ public final class GiantAntManager extends AbstractHitPlayerObjectEntity {
 
         final int numberTileSet = getConfInteger("numberTileSet");
 
-        final int nbImagePerSide = numberTileSet  / 2;
+        final int nbImagePerSide = numberTileSet / 2;
 
         // Alloc array of picture
         this.leftImages = new BufferedImage[nbImagePerSide];
@@ -97,19 +97,19 @@ public final class GiantAntManager extends AbstractHitPlayerObjectEntity {
     /**
      * Init picutre.
      *
-     * @param images image array
+     * @param images        image array
      * @param numberTileSet number of tile
-     * @param tileSetIndex tile set index
-     * @param tileIndex tile index start
+     * @param tileSetIndex  tile set index
+     * @param tileIndex     tile index start
      */
     private void initPicture(final BufferedImage[] images,
-        final int numberTileSet, final int tileSetIndex, final int tileIndex) {
+            final int numberTileSet, final int tileSetIndex, final int tileIndex) {
 
         final int end = tileIndex + numberTileSet;
 
         for (int index = tileIndex; index < end; index++) {
             images[index - tileIndex] = this.pictureCache.getImage(tileSetIndex,
-                index);
+                    index);
         }
     }
 
@@ -129,10 +129,10 @@ public final class GiantAntManager extends AbstractHitPlayerObjectEntity {
     private void moveAnt() {
         if ((this.xSpeed < ObjectEntity.X_SPEED_MIDDLE)
                 && UtilityObjectEntity.moveObjectLeftOnFloor(this, this.xSpeed,
-                        this.backgroundObject)
+                this.backgroundObject)
                 || (this.xSpeed > ObjectEntity.X_SPEED_MIDDLE)
                 && UtilityObjectEntity.moveObjectRightOnFloor(this, this.xSpeed,
-                        this.backgroundObject)) {
+                this.backgroundObject)) {
             this.counter++;
 
             if (this.counter == this.nbImagePerSideToDisplay) {
@@ -181,11 +181,11 @@ public final class GiantAntManager extends AbstractHitPlayerObjectEntity {
 
     @Override
     public void msgKill(final ObjectEntity sender,
-        final int nbLife, final int typeOfDeath) {
+            final int nbLife, final int typeOfDeath) {
         this.messageDispatcher.sendMessage(EnumMessageType.INVENTORY_POINT,
-            new InventoryPointMessage(getConfInteger("point"), true,
-                    this, sender));
+                new InventoryPointMessage(getConfInteger("point"), true,
+                        this, sender));
         this.messageDispatcher.sendMessage(EnumMessageType.OBJECT,
-            this.killme);
+                this.killme);
     }
 }

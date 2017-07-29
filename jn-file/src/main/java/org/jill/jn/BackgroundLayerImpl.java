@@ -1,6 +1,7 @@
 package org.jill.jn;
 
 import java.io.IOException;
+
 import org.jill.file.FileAbstractByte;
 
 /**
@@ -24,7 +25,6 @@ public class BackgroundLayerImpl implements BackgroundLayer {
      * Constructor.
      *
      * @param jnFile file
-     *
      * @throws IOException if error
      */
     public BackgroundLayerImpl(final FileAbstractByte jnFile)
@@ -33,7 +33,7 @@ public class BackgroundLayerImpl implements BackgroundLayer {
         for (int indexX = 0; indexX < MAP_WIDTH; indexX++) {
             for (int indexY = 0; indexY < MAP_HEIGHT; indexY++) {
                 mapCode[indexX][indexY] = (jnFile.read16bitLE()
-                    & MASK_OF_MAPCODE);
+                        & MASK_OF_MAPCODE);
             }
         }
     }
@@ -43,7 +43,6 @@ public class BackgroundLayerImpl implements BackgroundLayer {
      *
      * @param x x-origin
      * @param y y-origine
-     *
      * @return map code
      */
     @Override

@@ -1,7 +1,7 @@
 package org.jill.cfg;
 
 /**
- *Class represent high sore entry.
+ * Class represent high sore entry.
  *
  * @author Emeric MARTINEAU
  */
@@ -14,9 +14,16 @@ public interface HighScoreItem {
     /**
      * Name.
      *
-     * @return  name
+     * @return name
      */
     String getName();
+
+    /**
+     * Name.
+     *
+     * @param nm name
+     */
+    void setName(final String nm);
 
     /**
      * Socre.
@@ -24,13 +31,6 @@ public interface HighScoreItem {
      * @return score
      */
     int getScore();
-
-    /**
-     * Name.
-     *
-     * @param nm  name
-     */
-    void setName(final String nm);
 
     /**
      * Score.

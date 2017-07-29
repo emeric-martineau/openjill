@@ -22,93 +22,88 @@ public final class UtilityObjectEntity {
     /**
      * Check if object can goto this/there block(s).
      *
-     * @param startX block x start
-     * @param endX block x end
-     * @param startY block y start
-     * @param endY block end y end
+     * @param startX           block x start
+     * @param endX             block x end
+     * @param startY           block y start
+     * @param endY             block end y end
      * @param backgroundObject background map
-     *
      * @return true if object can move
      */
     private static BackgroundEntity checkObjectHitFloor(final int startX,
-        final int endX, final int startY, final int endY,
-        final BackgroundEntity[][] backgroundObject) {
+            final int endX, final int startY, final int endY,
+            final BackgroundEntity[][] backgroundObject) {
         return checkObjectHitBlockOrStair(startX, endX, startY, endY,
-            backgroundObject, true, false, true);
+                backgroundObject, true, false, true);
     }
 
     /**
      * Check if object can goto this/there block(s).
      *
-     * @param startX block x start
-     * @param endX block x end
-     * @param startY block y start
-     * @param endY block end y end
+     * @param startX           block x start
+     * @param endX             block x end
+     * @param startY           block y start
+     * @param endY             block end y end
      * @param backgroundObject background map
-     *
      * @return true if object can move
      */
     private static BackgroundEntity checkObjectHitBlockUp(final int startX,
-        final int endX, final int startY, final int endY,
-        final BackgroundEntity[][] backgroundObject) {
+            final int endX, final int startY, final int endY,
+            final BackgroundEntity[][] backgroundObject) {
         return checkObjectHitBlockOrStair(startX, endX, endY, startY,
-            backgroundObject, false, true, true);
+                backgroundObject, false, true, true);
     }
 
     /**
      * Check if object can goto this/there block(s).
      *
-     * @param startX block x start
-     * @param endX block x end
-     * @param startY block y start
-     * @param endY block end y end
+     * @param startX           block x start
+     * @param endX             block x end
+     * @param startY           block y start
+     * @param endY             block end y end
      * @param backgroundObject background map
-     *
      * @return true if object can move
      */
     private static BackgroundEntity checkObjectHitBlockLeft(final int startX,
-        final int endX, final int startY, final int endY,
-        final BackgroundEntity[][] backgroundObject) {
+            final int endX, final int startY, final int endY,
+            final BackgroundEntity[][] backgroundObject) {
         return checkObjectHitBlockOrStair(endX, startX, startY, endY,
-            backgroundObject, false, false, false);
+                backgroundObject, false, false, false);
     }
 
     /**
      * Check if object can goto this/there block(s).
      *
-     * @param startX block x start
-     * @param endX block x end
-     * @param startY block y start
-     * @param endY block end y end
+     * @param startX           block x start
+     * @param endX             block x end
+     * @param startY           block y start
+     * @param endY             block end y end
      * @param backgroundObject background map
-     *
      * @return true if object can move
      */
     private static BackgroundEntity checkObjectHitBlockRight(final int startX,
-        final int endX, final int startY, final int endY,
-        final BackgroundEntity[][] backgroundObject) {
+            final int endX, final int startY, final int endY,
+            final BackgroundEntity[][] backgroundObject) {
         return checkObjectHitBlockOrStair(startX, endX, startY, endY,
-            backgroundObject, false, false, true);
+                backgroundObject, false, false, true);
     }
 
     /**
      * Check if object can goto this/there block(s).
      *
-     * @param startX block x start
-     * @param endX block x end
-     * @param startY block y start
-     * @param endY block end y end
+     * @param startX           block x start
+     * @param endX             block x end
+     * @param startY           block y start
+     * @param endY             block end y end
      * @param backgroundObject background map
-     * @param checkStair check also stair
-     * @param up true if search is up, else search is down
-     * @param right true if search is right, else search is lieft
-     *
+     * @param checkStair       check also stair
+     * @param up               true if search is up, else search is down
+     * @param right            true if search is right, else search is lieft
      * @return true if object can move
      */
     private static BackgroundEntity checkObjectHitBlockOrStair(final int startX,
-        final int endX, final int startY, final int endY,
-        final BackgroundEntity[][] backgroundObject, final boolean checkStair,
-        final boolean up, final boolean right) {
+            final int endX, final int startY, final int endY,
+            final BackgroundEntity[][] backgroundObject, final boolean checkStair,
+            final boolean up, final boolean right) {
         boolean objectCanMove;
 
         // Index of background for check move
@@ -119,14 +114,14 @@ public final class UtilityObjectEntity {
         final int lEndY = Math.min(endY, BackgroundLayer.MAP_HEIGHT - 1);
 
         // Check if floor
-        for (indexBackX = startX; ;) {
-            for (indexBackY = startY; ;) {
+        for (indexBackX = startX; ; ) {
+            for (indexBackY = startY; ; ) {
                 objectCanMove
-                    = backgroundObject[indexBackX][indexBackY].isPlayerThru();
+                        = backgroundObject[indexBackX][indexBackY].isPlayerThru();
 
                 if (checkStair && objectCanMove) {
                     objectCanMove =
-                        !backgroundObject[indexBackX][indexBackY].isStair();
+                            !backgroundObject[indexBackX][indexBackY].isStair();
                 }
 
                 if (!objectCanMove) {
@@ -169,17 +164,16 @@ public final class UtilityObjectEntity {
     /**
      * Check if object can goto this/there block(s).
      *
-     * @param startX block x start
-     * @param endX block x end
-     * @param startY block y start
-     * @param endY block end y end
+     * @param startX           block x start
+     * @param endX             block x end
+     * @param startY           block y start
+     * @param endY             block end y end
      * @param backgroundObject background map
-     *
      * @return true if object can move
      */
     private static BackgroundEntity checkObjectHitVine(final int startX,
-        final int endX, final int startY, final int endY,
-        final BackgroundEntity[][] backgroundObject) {
+            final int endX, final int startY, final int endY,
+            final BackgroundEntity[][] backgroundObject) {
         boolean isVine;
 
         // Index of background for check move
@@ -193,7 +187,7 @@ public final class UtilityObjectEntity {
         for (indexBackX = startX; indexBackX <= lEndX; indexBackX++) {
             for (indexBackY = startY; indexBackY <= lEndY; indexBackY++) {
                 isVine
-                    = backgroundObject[indexBackX][indexBackY].isVine();
+                        = backgroundObject[indexBackX][indexBackY].isVine();
 
                 if (isVine) {
                     return backgroundObject[indexBackX][indexBackY];
@@ -207,58 +201,54 @@ public final class UtilityObjectEntity {
     /**
      * Check if floor ?
      *
-     * @param obj object
+     * @param obj              object
      * @param backgroundObject background map
-     *
      * @return true if can move
      */
     public static boolean checkIfFloorUnderObject(final ObjectEntity obj,
-        final BackgroundEntity[][] backgroundObject) {
+            final BackgroundEntity[][] backgroundObject) {
         return !moveObjectDown(obj, 1, backgroundObject, false, false);
     }
 
     /**
      * Move object down.
      *
-     * @param obj object
-     * @param mvtSize movement size
+     * @param obj              object
+     * @param mvtSize          movement size
      * @param backgroundObject background map
-     *
      * @return true if can move
      */
     public static boolean moveObjectDown(final ObjectEntity obj,
-        final int mvtSize, final BackgroundEntity[][] backgroundObject) {
+            final int mvtSize, final BackgroundEntity[][] backgroundObject) {
         return moveObjectDown(obj, mvtSize, backgroundObject, true, false);
     }
 
     /**
      * Move object down.
      *
-     * @param obj object
-     * @param mvtSize movement size
+     * @param obj              object
+     * @param mvtSize          movement size
      * @param backgroundObject background map
-     *
      * @return true if can move
      */
     public static boolean moveObjectDownWithIgnoreStair(final ObjectEntity obj,
-        final int mvtSize, final BackgroundEntity[][] backgroundObject) {
+            final int mvtSize, final BackgroundEntity[][] backgroundObject) {
         return moveObjectDown(obj, mvtSize, backgroundObject, true, true);
     }
 
     /**
      * Move object down.
      *
-     * @param obj object
-     * @param mvtSize movement size
+     * @param obj              object
+     * @param mvtSize          movement size
      * @param backgroundObject background map
-     * @param updateObj update object position ?
-     * @param ignoreStair if ignore stair
-     *
+     * @param updateObj        update object position ?
+     * @param ignoreStair      if ignore stair
      * @return true if can move
      */
     private static boolean moveObjectDown(final ObjectEntity obj,
-        final int mvtSize, final BackgroundEntity[][] backgroundObject,
-        final boolean updateObj, final boolean ignoreStair) {
+            final int mvtSize, final BackgroundEntity[][] backgroundObject,
+            final boolean updateObj, final boolean ignoreStair) {
         boolean canMove;
 
         BackgroundEntity block = isBlockOrStairAtThisPosition(obj.getX(),
@@ -286,7 +276,7 @@ public final class UtilityObjectEntity {
             canMove = true;
         } else {
             final int newY = (block.getY() * JillConst.getBlockSize())
-                        - obj.getHeight();
+                    - obj.getHeight();
             if (updateObj) {
                 canMove = newY != obj.getY();
 
@@ -305,7 +295,7 @@ public final class UtilityObjectEntity {
     /**
      * Move down object. Don't care backgrond.
      *
-     * @param obj object
+     * @param obj     object
      * @param mvtSize size of movment
      */
     public static void forceMoveUpDown(final ObjectEntity obj,
@@ -327,13 +317,12 @@ public final class UtilityObjectEntity {
     /**
      * Chech is block or stair.
      *
-     * @param objX objec tx
-     * @param objY object y
-     * @param objWidth object width
-     * @param objHeight object height
-     * @param mvtSize movement size
+     * @param objX             objec tx
+     * @param objY             object y
+     * @param objWidth         object width
+     * @param objHeight        object height
+     * @param mvtSize          movement size
      * @param backgroundObject background layer
-     *
      * @return block if found
      */
     private static BackgroundEntity isBlockOrStairAtThisPosition(final int objX,
@@ -361,7 +350,7 @@ public final class UtilityObjectEntity {
         // for stair, we need check all block
         for (int testY = newStartY; testY <= newEndY; testY++) {
             block = checkObjectHitFloor(
-                startBlockX, endBlockX, testY, testY, backgroundObject);
+                    startBlockX, endBlockX, testY, testY, backgroundObject);
 
             // In case of stair, we take last stair
             if (block != null && block.isStair()) {
@@ -381,20 +370,19 @@ public final class UtilityObjectEntity {
     /**
      * Move object right.
      *
-     * @param obj object
-     * @param mvtSize movement size
+     * @param obj              object
+     * @param mvtSize          movement size
      * @param backgroundObject background map
-     *
      * @return true if can move
      */
     public static boolean moveObjectRight(final ObjectEntity obj,
-        final int mvtSize, final BackgroundEntity[][] backgroundObject) {
+            final int mvtSize, final BackgroundEntity[][] backgroundObject) {
         boolean canMove;
 
         // Calculate number of case Y
         final int startBlockY = obj.getY() / JillConst.getBlockSize();
         final int endBlockY = (obj.getY()
-            + obj.getHeight() - 1) / JillConst.getBlockSize();
+                + obj.getHeight() - 1) / JillConst.getBlockSize();
 
         // Calculate X
         int newPosX = obj.getX() + obj.getWidth() + mvtSize;
@@ -402,13 +390,13 @@ public final class UtilityObjectEntity {
 
         // Check if can move
         final BackgroundEntity back = checkObjectHitBlockRight(endBlockX,
-             endBlockX, startBlockY, endBlockY, backgroundObject);
+                endBlockX, startBlockY, endBlockY, backgroundObject);
 
         if (back == null) {
             // Object can't out of map
             obj.setX(
-                Math.min(obj.getX() + mvtSize,
-                    JillConst.getMaxWidth() - obj.getWidth()));
+                    Math.min(obj.getX() + mvtSize,
+                            JillConst.getMaxWidth() - obj.getWidth()));
 
             canMove = true;
         } else {
@@ -426,20 +414,19 @@ public final class UtilityObjectEntity {
     /**
      * Move object left.
      *
-     * @param obj object
-     * @param mvtSize movement size
+     * @param obj              object
+     * @param mvtSize          movement size
      * @param backgroundObject background map
-     *
      * @return true if can move
      */
     public static boolean moveObjectLeft(final ObjectEntity obj,
-        final int mvtSize, final BackgroundEntity[][] backgroundObject) {
+            final int mvtSize, final BackgroundEntity[][] backgroundObject) {
         boolean canMove;
 
         // Calculate number of case Y
         final int startBlockY = obj.getY() / JillConst.getBlockSize();
         final int endBlockY = (obj.getY()
-            + obj.getHeight() - 1) / JillConst.getBlockSize();
+                + obj.getHeight() - 1) / JillConst.getBlockSize();
 
         // Calculate number of case X
         int newPosX = obj.getX() + mvtSize;
@@ -447,12 +434,12 @@ public final class UtilityObjectEntity {
 
         // Check if can move
         final BackgroundEntity back = checkObjectHitBlockLeft(startBlockX,
-            startBlockX, startBlockY, endBlockY, backgroundObject);
+                startBlockX, startBlockY, endBlockY, backgroundObject);
 
         if (back == null) {
             // Object can't have negative X
             obj.setX(
-                Math.max(newPosX, 0));
+                    Math.max(newPosX, 0));
 
             canMove = true;
         } else {
@@ -469,21 +456,20 @@ public final class UtilityObjectEntity {
     /**
      * Move object up.
      *
-     * @param obj object
-     * @param mvtSize movement size
+     * @param obj              object
+     * @param mvtSize          movement size
      * @param backgroundObject background map
-     *
      * @return true if can move
      */
     public static boolean moveObjectUp(final ObjectEntity obj,
-        final int mvtSize, final BackgroundEntity[][] backgroundObject) {
+            final int mvtSize, final BackgroundEntity[][] backgroundObject) {
         boolean canMove;
         boolean hitBorder = false;
 
         // Calculate number of case X
         final int startBlockX = obj.getX() / JillConst.getBlockSize();
         final int endBlockX = (obj.getX()
-            + obj.getWidth() - 1) / JillConst.getBlockSize();
+                + obj.getWidth() - 1) / JillConst.getBlockSize();
 
         // Object is jumping
         int newPosY = obj.getY() + mvtSize;
@@ -498,7 +484,7 @@ public final class UtilityObjectEntity {
         final int newEndY = obj.getY() / JillConst.getBlockSize();
 
         final BackgroundEntity block = checkObjectHitBlockUp(
-            startBlockX, endBlockX, newStartY, newEndY, backgroundObject);
+                startBlockX, endBlockX, newStartY, newEndY, backgroundObject);
 
         if (block == null) {
             obj.setY(newPosY);
@@ -520,13 +506,12 @@ public final class UtilityObjectEntity {
     /**
      * Check if climb background.
      *
-     * @param obj object
+     * @param obj              object
      * @param backgroundObject background map
-     *
      * @return true if can move
      */
     public static boolean isClimbing(final ObjectEntity obj,
-        final BackgroundEntity[][] backgroundObject) {
+            final BackgroundEntity[][] backgroundObject) {
 
         final BackgroundEntity block;
 
@@ -537,14 +522,14 @@ public final class UtilityObjectEntity {
             // Calculate number of case X
             final int startBlockX = obj.getX() / JillConst.getBlockSize();
             final int endBlockX = (obj.getX()
-                + obj.getWidth() - 1) / JillConst.getBlockSize();
+                    + obj.getWidth() - 1) / JillConst.getBlockSize();
 
             final int newStartY = obj.getY() / JillConst.getBlockSize();
             final int newEndY = (obj.getY() + obj.getHeight() - 1)
                     / JillConst.getBlockSize();
 
             block = checkObjectHitVine(
-                startBlockX, endBlockX, newStartY, newEndY, backgroundObject);
+                    startBlockX, endBlockX, newStartY, newEndY, backgroundObject);
         } else {
             block = null;
         }
@@ -552,23 +537,22 @@ public final class UtilityObjectEntity {
         return block != null;
     }
 
-/**
+    /**
      * Move object left.
      *
-     * @param obj object
-     * @param mvtSize movement size
+     * @param obj              object
+     * @param mvtSize          movement size
      * @param backgroundObject background map
-     *
      * @return true if can move
      */
     public static boolean moveObjectLeftOnFloor(final ObjectEntity obj,
-        final int mvtSize, final BackgroundEntity[][] backgroundObject) {
+            final int mvtSize, final BackgroundEntity[][] backgroundObject) {
         boolean canMove;
 
         // Calculate number of case Y
         final int startBlockY = obj.getY() / JillConst.getBlockSize();
         final int endBlockY = (obj.getY()
-            + obj.getHeight() - 1) / JillConst.getBlockSize();
+                + obj.getHeight() - 1) / JillConst.getBlockSize();
 
         // Calculate number of case X
         int newPosX = obj.getX() + mvtSize;
@@ -576,7 +560,7 @@ public final class UtilityObjectEntity {
 
         // Check if can move
         final BackgroundEntity back = checkObjectHitBlockLeft(startBlockX,
-            startBlockX, startBlockY, endBlockY, backgroundObject);
+                startBlockX, startBlockY, endBlockY, backgroundObject);
 
         if (back == null) {
             final int newX = Math.max(newPosX, 0);
@@ -606,20 +590,19 @@ public final class UtilityObjectEntity {
     /**
      * Move object right.
      *
-     * @param obj object
-     * @param mvtSize movement size
+     * @param obj              object
+     * @param mvtSize          movement size
      * @param backgroundObject background map
-     *
      * @return true if can move
      */
     public static boolean moveObjectRightOnFloor(final ObjectEntity obj,
-        final int mvtSize, final BackgroundEntity[][] backgroundObject) {
+            final int mvtSize, final BackgroundEntity[][] backgroundObject) {
         boolean canMove;
 
         // Calculate number of case Y
         final int startBlockY = obj.getY() / JillConst.getBlockSize();
         final int endBlockY = (obj.getY()
-            + obj.getHeight() - 1) / JillConst.getBlockSize();
+                + obj.getHeight() - 1) / JillConst.getBlockSize();
 
         // Calculate X
         int newPosX = obj.getX() + obj.getWidth() + mvtSize;

@@ -4,7 +4,6 @@
 package org.jill.sha.ui.button;
 
 import java.awt.event.ActionEvent;
-
 import javax.swing.JFileChooser;
 import javax.swing.JTextField;
 
@@ -22,39 +21,39 @@ public class SelectFileButton extends AbstractButton {
     /**
      * File chooser
      */
-    private final JFileChooser fc ;
-    
+    private final JFileChooser fc;
+
     /**
      * Text area
      */
-    private final JTextField textBox ;
-    
+    private final JTextField textBox;
+
     /**
      * Creates a button with text.
      *
-     * @param text  the text of the button
+     * @param text the text of the button
      */
     public SelectFileButton(final String text, final JTextField textField) {
-        super(text) ;
-        
+        super(text);
+
         //Create a file chooser
-        fc = new JFileChooser() ;
-        
+        fc = new JFileChooser();
+
         fc.resetChoosableFileFilters();
         fc.addChoosableFileFilter(new FileExtension("sha", "Fichier SHA"));
-        
-        this.textBox = textField ;
-    }    
-    
+
+        this.textBox = textField;
+    }
+
     /**
      * If click on button
      */
     @Override
     public void onClick(final ActionEvent e) {
-        int returnVal = fc.showOpenDialog(this) ;
+        int returnVal = fc.showOpenDialog(this);
 
         if ((returnVal == JFileChooser.APPROVE_OPTION) && (textBox != null)) {
-            textBox.setText(fc.getSelectedFile().getAbsolutePath()) ;
-        } 
+            textBox.setText(fc.getSelectedFile().getAbsolutePath());
+        }
     }
 }

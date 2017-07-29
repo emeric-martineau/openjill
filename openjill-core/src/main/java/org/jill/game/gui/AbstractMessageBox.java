@@ -3,6 +3,7 @@ package org.jill.game.gui;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+
 import org.jill.game.gui.conf.MessageConf;
 import org.jill.game.screen.conf.ImagesConf;
 import org.jill.game.screen.conf.RectangleConf;
@@ -20,11 +21,11 @@ public class AbstractMessageBox {
      *
      * @param g2BoxPicture Graphic 2D
      * @param pictureCache picture cache
-     * @param conf current config
+     * @param conf         current config
      */
     protected void drawAllPicture(final Graphics2D g2BoxPicture,
             final TileManager pictureCache, final MessageConf conf) {
-                // Draw picture
+        // Draw picture
         for (ImagesConf ic : conf.getImages()) {
             drawOneTile(pictureCache, ic.getTileset(), ic.getTile(), ic.getX(),
                     ic.getY(), g2BoxPicture);
@@ -36,8 +37,7 @@ public class AbstractMessageBox {
      *
      * @param g2BoxPicture grapic 2d to draw
      * @param pictureCache picture cache
-     * @param textArea aera
-     *
+     * @param textArea     aera
      * @throws NumberFormatException error when config file not valid
      */
     protected void drawArea(final Graphics2D g2BoxPicture,
@@ -60,17 +60,17 @@ public class AbstractMessageBox {
      *
      * @param pictureCache picture cache
      * @param tileSetIndex tileset index
-     * @param tileIndex tile index
-     * @param x x
-     * @param y y
-     * @param g2 graphic 2d
+     * @param tileIndex    tile index
+     * @param x            x
+     * @param y            y
+     * @param g2           graphic 2d
      */
     protected void drawOneTile(final TileManager pictureCache,
             final int tileSetIndex, final int tileIndex,
             final int x, final int y, final Graphics2D g2) {
         // Left upper corner
         final BufferedImage tilePicture = pictureCache.getImage(
-                tileSetIndex,tileIndex);
+                tileSetIndex, tileIndex);
         g2.drawImage(tilePicture, x, y, null);
     }
 }

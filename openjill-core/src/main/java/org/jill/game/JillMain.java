@@ -33,13 +33,13 @@ public final class JillMain {
         final Properties prop = new Properties();
 
         final InputStream is = JillMain.class.getClassLoader().
-            getResourceAsStream("open_jill.properties");
+                getResourceAsStream("open_jill.properties");
 
         try {
             if (is == null) {
                 Logger.getLogger(JillMain.class.getName()).
-                    log(Level.SEVERE,
-                        "Could not find open jill config file");
+                        log(Level.SEVERE,
+                                "Could not find open jill config file");
             } else {
                 prop.load(is);
 

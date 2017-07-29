@@ -29,7 +29,7 @@ public final class TextToDraw {
     /**
      * Text to drax.
      *
-     * @return  text
+     * @return text
      */
     public String getText() {
         return text;
@@ -65,7 +65,7 @@ public final class TextToDraw {
     /**
      * Position.
      *
-     * @return  x
+     * @return x
      */
     public int getX() {
         return x;

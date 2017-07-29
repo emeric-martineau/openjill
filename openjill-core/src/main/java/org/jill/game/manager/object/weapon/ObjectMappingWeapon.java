@@ -14,17 +14,17 @@ public class ObjectMappingWeapon {
      * player fire again, create knive.
      */
     private int order;
-    
+
     /**
      * Name of inventory key.
      */
     private String inventoryKey;
-    
+
     /**
      * For knive, remove entry in inventory.
      */
     private boolean removeInInventory;
-    
+
     /**
      * How many object can be create by item.
      */
@@ -35,10 +35,10 @@ public class ObjectMappingWeapon {
      */
     @JsonIgnore
     private int type;
-    
+
     /**
      * Order of weapon to fire.
-     * 
+     *
      * @return integer
      */
     public int getOrder() {
@@ -47,7 +47,7 @@ public class ObjectMappingWeapon {
 
     /**
      * Order of weapon to fire.
-     * 
+     *
      * @param order order
      */
     public void setOrder(final int order) {
@@ -56,7 +56,7 @@ public class ObjectMappingWeapon {
 
     /**
      * Name of inventory key.
-     * 
+     *
      * @return name
      */
     public String getInventoryKey() {
@@ -65,7 +65,7 @@ public class ObjectMappingWeapon {
 
     /**
      * Name of inventory key.
-     * 
+     *
      * @param inventoryKey name of weapon
      */
     public void setInventoryKey(final String inventoryKey) {
@@ -74,7 +74,7 @@ public class ObjectMappingWeapon {
 
     /**
      * For knive, remove entry in inventory.
-     * 
+     *
      * @return true/false
      */
     public boolean isRemoveInInventory() {
@@ -83,7 +83,7 @@ public class ObjectMappingWeapon {
 
     /**
      * For knive, remove entry in inventory.
-     * 
+     *
      * @param removeInInventory true/false
      */
     public void setRemoveInInventory(final boolean removeInInventory) {
@@ -92,7 +92,7 @@ public class ObjectMappingWeapon {
 
     /**
      * How many object can be create by item.
-     * 
+     *
      * @return integer
      */
     public int getNumberItemPerInventory() {
@@ -101,7 +101,7 @@ public class ObjectMappingWeapon {
 
     /**
      * How many object can be create by item.
-     * 
+     *
      * @param numberItemPerInventory integer
      */
     public void setNumberItemPerInventory(final int numberItemPerInventory) {
@@ -110,7 +110,7 @@ public class ObjectMappingWeapon {
 
     /**
      * Type of object.
-     * 
+     *
      * @return type
      */
     public int getType() {
@@ -119,12 +119,12 @@ public class ObjectMappingWeapon {
 
     /**
      * Type of object.
-     * 
+     *
      * @param type type
      */
     public void setType(final int type) {
         this.type = type;
     }
-    
-    
+
+
 }

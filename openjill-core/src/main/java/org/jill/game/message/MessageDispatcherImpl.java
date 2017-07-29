@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
+
 import org.jill.openjill.core.api.message.EnumMessageType;
 import org.jill.openjill.core.api.message.InterfaceMessageGameHandler;
 import org.jill.openjill.core.api.message.MessageDispatcher;
@@ -63,8 +64,8 @@ public class MessageDispatcherImpl implements MessageDispatcher {
     /**
      * Add handler.
      *
-     * @param type distination
-     * @param handler  handler
+     * @param type    distination
+     * @param handler handler
      */
     @Override
     public final void addHandler(final EnumMessageType type,

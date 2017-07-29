@@ -24,8 +24,8 @@ public final class StatusBarTextMessage {
     /**
      * Send a message.
      *
-     * @param msg message to display
-     * @param time time to be display
+     * @param msg       message to display
+     * @param time      time to be display
      * @param textColor text color
      */
     public StatusBarTextMessage(final String msg, final int time,

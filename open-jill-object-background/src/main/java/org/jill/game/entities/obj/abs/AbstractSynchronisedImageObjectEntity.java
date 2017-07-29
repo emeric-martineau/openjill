@@ -3,6 +3,7 @@ package org.jill.game.entities.obj.abs;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
 import java.util.Map;
+
 import org.jill.game.entities.picutre.PictureSynchronizer;
 import org.jill.openjill.core.api.entities.ObjectParam;
 
@@ -12,13 +13,13 @@ import org.jill.openjill.core.api.entities.ObjectParam;
  * @author Emeric MARTINEAU
  */
 public abstract class AbstractSynchronisedImageObjectEntity
-    extends AbstractParameterObjectEntity {
+        extends AbstractParameterObjectEntity {
 
     /**
      * Map of picture.
      */
     private static final Map<Class, PictureSynchronizer> MAP_PICUTRE
-        = new HashMap<>();
+            = new HashMap<>();
 
     /**
      * Current picture synchronizer.
@@ -50,11 +51,11 @@ public abstract class AbstractSynchronisedImageObjectEntity
         // Load picture for each object. Don't use cache cause some picture
         // change between jill episod.
         this.images
-            = new BufferedImage[getConfInteger("numberTileSet")];
+                = new BufferedImage[getConfInteger("numberTileSet")];
 
         for (int index = 0; index < this.images.length; index++) {
             this.images[this.images.length - 1 - index]
-                = this.pictureCache.getImage(tileSetIndex, tileIndex
+                    = this.pictureCache.getImage(tileSetIndex, tileIndex
                     + index);
         }
 
@@ -63,7 +64,7 @@ public abstract class AbstractSynchronisedImageObjectEntity
 
             // Create synchronizer
             addPictureSync(this.getClass(),
-                new PictureSynchronizer(maxDisplayCounter));
+                    new PictureSynchronizer(maxDisplayCounter));
         }
     }
 
@@ -82,11 +83,11 @@ public abstract class AbstractSynchronisedImageObjectEntity
     /**
      * Add picture synchronizer.
      *
-     * @param clazz class
+     * @param clazz   class
      * @param picture picture synchronizer
      */
     private void addPictureSync(final Class clazz,
-        final PictureSynchronizer picture) {
+            final PictureSynchronizer picture) {
         this.ps = picture;
 
         MAP_PICUTRE.put(clazz, picture);
@@ -95,7 +96,7 @@ public abstract class AbstractSynchronisedImageObjectEntity
     @Override
     public final BufferedImage msgDraw() {
         this.indexEtat = this.ps.updatePictureIndex(this.indexEtat,
-            this.images);
+                this.images);
 
         return images[this.ps.getIndexPicture()];
     }

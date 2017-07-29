@@ -40,10 +40,10 @@ public final class SharedCode {
     /**
      * Load picture.
      *
-     * @param pictureCache picture cache object
-     * @param tileIndex index of tile
-     * @param tileSetIndex index in tile set
-     * @param numberTileSet  number images in tile set
+     * @param pictureCache  picture cache object
+     * @param tileIndex     index of tile
+     * @param tileSetIndex  index in tile set
+     * @param numberTileSet number images in tile set
      */
     public static BufferedImage[] loadPicture(final TileManager pictureCache, final int tileIndex, final int tileSetIndex, final int numberTileSet) {
         // Load picture for each object. Don't use cache cause some picture
@@ -69,7 +69,6 @@ public final class SharedCode {
      * Populate list of movement.
      *
      * @param mvtX name of key in config file
-     *
      * @return list of movement
      */
     public static List<MoveSizeAndInterval> populateMove(final String mvtX) {

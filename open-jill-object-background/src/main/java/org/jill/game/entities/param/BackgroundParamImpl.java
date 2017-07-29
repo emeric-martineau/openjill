@@ -47,8 +47,8 @@ public final class BackgroundParamImpl implements BackgroundParam {
     /**
      * Default constructor.
      *
-     * @param backgroundMap background map
-     * @param pictureCacheManager picture cache
+     * @param backgroundMap            background map
+     * @param pictureCacheManager      picture cache
      * @param messageDispatcherManager message dispatcher
      */
     @Override
@@ -102,7 +102,7 @@ public final class BackgroundParamImpl implements BackgroundParam {
     /**
      * Message dispatcher.
      *
-     * @return  message dispatcher for interaction with game
+     * @return message dispatcher for interaction with game
      */
     @Override
     public MessageDispatcher getMessageDispatcher() {

@@ -18,7 +18,7 @@ public class NoisemakerScreenJill1Handler extends AbstractObjectJillLevel {
     /**
      * Default constructor of level
      *
-     * @throws IOException if missing file
+     * @throws IOException                  if missing file
      * @throws ReflectiveOperationException if missing class must be load
      */
     public NoisemakerScreenJill1Handler() throws IOException, ReflectiveOperationException {
@@ -26,9 +26,9 @@ public class NoisemakerScreenJill1Handler extends AbstractObjectJillLevel {
                 "JILL1.CFG", "JN1"));
         final RectangleConf offset
                 = this.statusBar.getGameAreaConf().getOffset();
-        
+
         offset.setX(
-                - 62 * JillConst.getBlockSize());
+                -62 * JillConst.getBlockSize());
         offset.setY(
                 0);
     }
@@ -50,7 +50,7 @@ public class NoisemakerScreenJill1Handler extends AbstractObjectJillLevel {
     public void paint(Graphics g) {
         final RectangleConf offset
                 = this.statusBar.getGameAreaConf().getOffset();
-        
+
         g.drawImage(background, offset.getX(),
                 offset.getY(), null);
     }

@@ -6,7 +6,7 @@ package org.jill.game.entities.obj.player;
  * @author Emeric MARTINEAU
  */
 public interface PlayerPieceOfLandConst {
-/**
+    /**
      * Picture Number.
      */
     int PICTURE_NUMBER = 3;

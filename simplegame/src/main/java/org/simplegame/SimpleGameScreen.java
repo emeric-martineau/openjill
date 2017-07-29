@@ -3,7 +3,6 @@ package org.simplegame;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
-
 import javax.swing.JPanel;
 
 /**
@@ -45,9 +44,9 @@ public class SimpleGameScreen extends JPanel {
     /**
      * Constructor of screen.
      *
-     * @param clientWidth basic size
+     * @param clientWidth  basic size
      * @param clientHeight basic size
-     * @param zoomValue zoom
+     * @param zoomValue    zoom
      */
     public SimpleGameScreen(final int clientWidth,
             final int clientHeight, final int zoomValue) {
@@ -60,7 +59,7 @@ public class SimpleGameScreen extends JPanel {
                     clientHeight * zoomValue, BufferedImage.TYPE_INT_ARGB);
             g2Resize = resizedImage.createGraphics();
 
-            initImage = new BufferedImage(clientWidth ,
+            initImage = new BufferedImage(clientWidth,
                     clientHeight, BufferedImage.TYPE_INT_ARGB);
 
             g2Init = initImage.createGraphics();
@@ -79,7 +78,7 @@ public class SimpleGameScreen extends JPanel {
                 currentHandler.paint(g2Init);
 
                 g2Resize.drawImage(initImage, 0, 0, resizedImage.getWidth(),
-                        resizedImage.getHeight() , null);
+                        resizedImage.getHeight(), null);
 
                 g.drawImage(resizedImage, 0, 0, null);
             } else {

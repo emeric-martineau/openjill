@@ -23,7 +23,7 @@ public final class ReplaceObjectMessage {
      * Constructor.
      *
      * @param objectOrigin object to replace
-     * @param objectNew new object
+     * @param objectNew    new object
      */
     public ReplaceObjectMessage(final ObjectEntity objectOrigin,
             final ObjectEntity objectNew) {

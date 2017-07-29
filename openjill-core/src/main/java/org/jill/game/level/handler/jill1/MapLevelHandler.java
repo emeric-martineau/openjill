@@ -1,6 +1,7 @@
 package org.jill.game.level.handler.jill1;
 
 import java.io.IOException;
+
 import org.jill.game.entities.obj.player.PlayerState;
 import org.jill.game.level.cfg.JillLevelConfiguration;
 import org.jill.game.level.handler.LoadNewLevelHandler;
@@ -13,16 +14,15 @@ import org.jill.openjill.core.api.message.statusbar.inventory.InventoryItemMessa
  * Map level for starting new game. For reload previous map see
  * LoadNewLevelGameHandler.
  *
- * @see org.jill.game.level.handler.LoadNewLevelHandler
- *
  * @author Emeric MARTINEAU
+ * @see org.jill.game.level.handler.LoadNewLevelHandler
  */
 public class MapLevelHandler extends LoadNewLevelHandler {
 
     /**
      * Default constructor of level.
      *
-     * @throws IOException if missing file
+     * @throws IOException                  if missing file
      * @throws ReflectiveOperationException if missing class must be load
      */
     public MapLevelHandler() throws IOException, ReflectiveOperationException {
@@ -34,6 +34,6 @@ public class MapLevelHandler extends LoadNewLevelHandler {
 
         this.messageDispatcher.sendMessage(EnumMessageType.INVENTORY_ITEM,
                 new InventoryItemMessage(
-                                    EnumInventoryObject.JILL, false));
+                        EnumInventoryObject.JILL, false));
     }
 }

@@ -2,6 +2,7 @@ package org.jill.game.entities.back.abs;
 
 import java.awt.Color;
 import java.awt.image.BufferedImage;
+
 import org.jill.game.entities.picutre.PictureSynchronizer;
 import org.jill.openjill.core.api.entities.BackgroundParam;
 
@@ -41,7 +42,7 @@ public abstract class AbstractAnimateBackgroundEntity extends
         super.init(backParam);
 
         // For animage, use non number name
-        setDmaName(getName().replaceAll("\\d",""));
+        setDmaName(getName().replaceAll("\\d", ""));
 
         int tileIndex = getConfInteger("tile");
         final int tileSetIndex = getConfInteger("tileSet");

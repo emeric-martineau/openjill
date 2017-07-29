@@ -91,7 +91,6 @@ public final class ControlAreaConf extends AbstractLineTextConf {
      * Alt text.
      *
      * @param key key to find
-     *
      * @return alt text
      */
     public KeysControlText getKeysControlText(final String key) {

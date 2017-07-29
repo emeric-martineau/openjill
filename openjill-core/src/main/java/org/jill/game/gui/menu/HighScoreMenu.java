@@ -1,6 +1,5 @@
 package org.jill.game.gui.menu;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
@@ -10,6 +9,7 @@ import java.io.InputStream;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import org.jill.cfg.HighScoreItem;
 import org.jill.game.gui.menu.conf.HighScoreMenuConf;
 import org.jill.game.gui.tools.LimitedString;
@@ -17,6 +17,7 @@ import org.jill.game.screen.conf.LineToDraw;
 import org.jill.game.screen.conf.TextToDraw;
 import org.jill.openjill.core.api.manager.TextManager;
 import org.jill.openjill.core.api.manager.TileManager;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  * Class to display/edit high score.
@@ -28,102 +29,91 @@ public final class HighScoreMenu extends AbstractMenu implements MenuInterface {
      * Logger.
      */
     private static final Logger LOGGER = Logger.getLogger(
-                    HighScoreMenu.class.getName());
+            HighScoreMenu.class.getName());
 
     /**
      * Maximum position of X.
      */
     private static final int NUMBER_MAXIMUM_POSITION_X = 62;
-
-    /**
-     * If menu is enable.
-     */
-    private boolean enable = false;
-
     /**
      * Display.
      */
     private final BufferedImage highScoreScreen;
-
     /**
      * Picutre cache.
      */
     private final TileManager pictureCache;
-
     /**
      * List of high score.
      */
     private final List<HighScoreItem> listHiScore;
-
-    /**
-     * titile.
-     */
-    private SubMenu title;
-
-    /**
-     * Background color (current).
-     */
-    private int backgroundColor;
-
-    /**
-     * To know if when are in edit mode.
-     */
-    private boolean editMode = false;
-
-    /**
-     * Score.
-     */
-    private int score;
-
     /**
      * Name of high score.
      */
     private final LimitedString nameHighScore = new LimitedString(
-        HighScoreItem.LEN_HIGHSCORE_NAME);
-
+            HighScoreItem.LEN_HIGHSCORE_NAME);
+    /**
+     * Configuration.
+     */
+    private final HighScoreMenuConf conf;
+    /**
+     * If menu is enable.
+     */
+    private boolean enable = false;
+    /**
+     * titile.
+     */
+    private SubMenu title;
+    /**
+     * Background color (current).
+     */
+    private int backgroundColor;
+    /**
+     * To know if when are in edit mode.
+     */
+    private boolean editMode = false;
+    /**
+     * Score.
+     */
+    private int score;
     /**
      * To know if update hight score.
      */
     private boolean updateNameHighScore = false;
 
     /**
-     * Configuration.
-     */
-    private final HighScoreMenuConf conf;
-
-    /**
      * Constructor.
      *
-     * @param highScorePicture object to draw high score
+     * @param highScorePicture    object to draw high score
      * @param pictureCacheManager cache of picture
-     * @param hiScoreList list of high score (can be modified !)
+     * @param hiScoreList         list of high score (can be modified !)
      * @param positionToDrawMenuX x to draw
      * @param positionToDrawMenuY y to draw
      */
     public HighScoreMenu(final BufferedImage highScorePicture,
-        final TileManager pictureCacheManager,
-        final List<HighScoreItem> hiScoreList,
-        final int positionToDrawMenuX, final int positionToDrawMenuY) {
+            final TileManager pictureCacheManager,
+            final List<HighScoreItem> hiScoreList,
+            final int positionToDrawMenuX, final int positionToDrawMenuY) {
         this(highScorePicture, pictureCacheManager, hiScoreList,
-            positionToDrawMenuX,
-            positionToDrawMenuY, null);
+                positionToDrawMenuX,
+                positionToDrawMenuY, null);
     }
 
     /**
      * Constructor.
      *
-     * @param highScorePicture object to draw high score
+     * @param highScorePicture    object to draw high score
      * @param pictureCacheManager cache of picture
-     * @param hiScoreList list of high score (can be modified !)
+     * @param hiScoreList         list of high score (can be modified !)
      * @param positionToDrawMenuX x to draw
      * @param positionToDrawMenuY y to draw
-     * @param nextMenuObject next menu to draw
+     * @param nextMenuObject      next menu to draw
      */
     public HighScoreMenu(final BufferedImage highScorePicture,
-        final TileManager pictureCacheManager,
-        final List<HighScoreItem> hiScoreList,
-        final int positionToDrawMenuX, final int positionToDrawMenuY,
-        final MenuInterface nextMenuObject) {
+            final TileManager pictureCacheManager,
+            final List<HighScoreItem> hiScoreList,
+            final int positionToDrawMenuX, final int positionToDrawMenuY,
+            final MenuInterface nextMenuObject) {
         super(pictureCacheManager, nextMenuObject);
 
         this.conf = readConf1("high_score_menu.json");
@@ -151,7 +141,6 @@ public final class HighScoreMenu extends AbstractMenu implements MenuInterface {
      * Read config file.
      *
      * @param filename final name of config file
-     *
      * @return properties file
      */
     private static HighScoreMenuConf readConf1(final String filename) {
@@ -168,9 +157,9 @@ public final class HighScoreMenu extends AbstractMenu implements MenuInterface {
             mc = mapper.readValue(is, HighScoreMenuConf.class);
         } catch (IOException ex) {
             LOGGER.log(Level.SEVERE,
-                String.format("Unable to load config for highscore '%s'",
-                        filename),
-                ex);
+                    String.format("Unable to load config for highscore '%s'",
+                            filename),
+                    ex);
 
             mc = null;
         }
@@ -215,7 +204,7 @@ public final class HighScoreMenu extends AbstractMenu implements MenuInterface {
     /**
      * Erase line.
      *
-     * @param g2 Graphic2D of player list
+     * @param g2      Graphic2D of player list
      * @param ptoDraw current position of cursor
      */
     private void eraseLine(final Graphics2D g2, final Point ptoDraw) {
@@ -225,24 +214,24 @@ public final class HighScoreMenu extends AbstractMenu implements MenuInterface {
 
         for (int index = 0; index < maxLenText; index++) {
             g2.drawImage(oldCursorBackground, null,
-                this.conf.getStartCursor().getX() + index * cursorWidth,
-                ptoDraw.y);
+                    this.conf.getStartCursor().getX() + index * cursorWidth,
+                    ptoDraw.y);
         }
     }
 
     /**
      * Write current name of high score enter by player in key board.
      *
-     * @param name palyer name
-     * @param g2 Graphic2D of player list
+     * @param name    palyer name
+     * @param g2      Graphic2D of player list
      * @param ptoDraw current position of cursor
      */
     private void writeCurrentHighScoreNameEnterByPlayer(final String name,
-        final Graphics2D g2,
-        final Point ptoDraw) {
+            final Graphics2D g2,
+            final Point ptoDraw) {
         BufferedImage imageName = pictureCache.getTextManager().createSmallText(
-            name, this.conf.getEditmode().getTextColor(),
-            this.conf.getEditmode().getBackgroundColor());
+                name, this.conf.getEditmode().getTextColor(),
+                this.conf.getEditmode().getBackgroundColor());
 
         g2.drawImage(imageName, null, this.conf.getStartCursor().getX(),
                 ptoDraw.y);
@@ -301,14 +290,14 @@ public final class HighScoreMenu extends AbstractMenu implements MenuInterface {
         // draw background
         g2.setColor(this.pictureCache.getColorMap()[this.backgroundColor]);
         g2.fillRect(0, 0, this.highScoreScreen.getWidth(),
-            this.highScoreScreen.getHeight());
+                this.highScoreScreen.getHeight());
 
         copyBackgroundCursor(this.highScoreScreen);
 
         for (TextToDraw ttd : this.conf.getText()) {
             this.pictureCache.getTextManager().drawSmallText(g2, ttd.getX(),
                     ttd.getY(), ttd.getText(), ttd.getColor(),
-                TextManager.BACKGROUND_COLOR_NONE);
+                    TextManager.BACKGROUND_COLOR_NONE);
         }
 
         // Draw middle line
@@ -333,11 +322,11 @@ public final class HighScoreMenu extends AbstractMenu implements MenuInterface {
             }
 
             imageName = this.pictureCache.getTextManager().createSmallText(
-                name, this.conf.getReadonlymode().getTextColor(),
-                TextManager.BACKGROUND_COLOR_NONE);
+                    name, this.conf.getReadonlymode().getTextColor(),
+                    TextManager.BACKGROUND_COLOR_NONE);
 
             if (jumpLineCheck && this.editMode
-                && (hiScoreItem.getScore() < this.score)) {
+                    && (hiScoreItem.getScore() < this.score)) {
                 // Jump line
                 jumpLineCheck = false;
 
@@ -350,12 +339,12 @@ public final class HighScoreMenu extends AbstractMenu implements MenuInterface {
             g2.drawImage(imageName, null, this.conf.getStartText().getX(), y);
 
             imageName = pictureCache.getTextManager().createSmallNumber(
-                hiScoreItem.getScore(),
-                this.conf.getReadonlymode().getNumberColor(),
-                TextManager.BACKGROUND_COLOR_NONE);
+                    hiScoreItem.getScore(),
+                    this.conf.getReadonlymode().getNumberColor(),
+                    TextManager.BACKGROUND_COLOR_NONE);
 
             g2.drawImage(imageName, null,
-                NUMBER_MAXIMUM_POSITION_X - imageName.getWidth(), y);
+                    NUMBER_MAXIMUM_POSITION_X - imageName.getWidth(), y);
 
             y += imageName.getHeight() + this.conf.getTextInterSpace();
         }
@@ -426,7 +415,7 @@ public final class HighScoreMenu extends AbstractMenu implements MenuInterface {
     @Override
     public void draw(final Graphics g2) {
         g2.drawImage(getPicture(), getX(),
-            getY(), null);
+                getY(), null);
 
         final MenuInterface previousMenu = this.getPreviousMenu();
 

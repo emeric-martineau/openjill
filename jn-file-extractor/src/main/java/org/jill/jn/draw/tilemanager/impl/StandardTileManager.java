@@ -9,6 +9,7 @@ import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
+
 import org.jill.jn.JnFileExtractor;
 import org.jill.jn.ObjectItem;
 import org.jill.jn.draw.ScreenType;
@@ -19,33 +20,30 @@ import org.jill.sha.ShaTile;
  * Class to draw standard manage tile (apple, crystal rock...)
  *
  * @author Emeric MARTINEAU
- *
  */
-public class StandardTileManager extends AbstractTileManager
-{
+public class StandardTileManager extends AbstractTileManager {
     /**
      * Map of object tile
      */
-    private static volatile Map<String, BufferedImage> mapObjectPicture = null ;
+    private static volatile Map<String, BufferedImage> mapObjectPicture = null;
 
     /**
      * Map of tile
      */
-    protected Map<Integer, ShaTile[]> mapOfTile ;
+    protected Map<Integer, ShaTile[]> mapOfTile;
 
     /**
      * Type screen
      */
-    protected ScreenType typeScreen ;
+    protected ScreenType typeScreen;
 
     /**
      * Static cache of picture.
      *
      * @return map of picture
      */
-    protected Map<String, BufferedImage> getMapObjectPicture()
-    {
-        return mapObjectPicture ;
+    protected Map<String, BufferedImage> getMapObjectPicture() {
+        return mapObjectPicture;
     }
 
     /**
@@ -53,23 +51,19 @@ public class StandardTileManager extends AbstractTileManager
      *
      * @return properties file
      */
-    protected Properties loadObjectTitle()
-    {
-        Properties mapObjectTile = new Properties() ;
+    protected Properties loadObjectTitle() {
+        Properties mapObjectTile = new Properties();
 
-        try
-        {
-            mapObjectTile.load(JnFileExtractor.class.getClassLoader().getResourceAsStream("objects_picture_mapping.properties")) ;
-        }
-        catch (IOException e)
-        {
-            System.out.println("Error, can't load properties file where mapping objects and tiles") ;
-            e.printStackTrace() ;
+        try {
+            mapObjectTile.load(JnFileExtractor.class.getClassLoader().getResourceAsStream("objects_picture_mapping.properties"));
+        } catch (IOException e) {
+            System.out.println("Error, can't load properties file where mapping objects and tiles");
+            e.printStackTrace();
 
-            mapObjectTile = null ;
+            mapObjectTile = null;
         }
 
-        return mapObjectTile ;
+        return mapObjectTile;
     }
 
     /**
@@ -77,89 +71,78 @@ public class StandardTileManager extends AbstractTileManager
      *
      * @return map of picture
      */
-    protected Map<String, BufferedImage> initMapOfObjectSrite()
-    {
+    protected Map<String, BufferedImage> initMapOfObjectSrite() {
         // Load mapping
-        final Properties mapObjectTile = loadObjectTitle() ;
+        final Properties mapObjectTile = loadObjectTitle();
         // Get keys
         final Enumeration<?> e = mapObjectTile.propertyNames();
         // Map
-        final Map<String, BufferedImage> mapObjectPicture = new HashMap<>() ;
+        final Map<String, BufferedImage> mapObjectPicture = new HashMap<>();
 
         // Tile picture
-        BufferedImage tilePicture ;
-        String key ;
-        String value ;
-        String[] tileSetTile ;
-        ShaTile[] tileArray ;
-        ShaTile tile ;
+        BufferedImage tilePicture;
+        String key;
+        String value;
+        String[] tileSetTile;
+        ShaTile[] tileArray;
+        ShaTile tile;
 
-        while(e.hasMoreElements())
-        {
-            key = (String) e.nextElement() ;
+        while (e.hasMoreElements()) {
+            key = (String) e.nextElement();
 
-            value = mapObjectTile.getProperty(key) ;
+            value = mapObjectTile.getProperty(key);
 
-            tileSetTile = value.split(",") ;
+            tileSetTile = value.split(",");
 
             // Array of tile
             tileArray = mapOfTile.get(Integer.valueOf(tileSetTile[0]));
-            tile = tileArray[Integer.valueOf(tileSetTile[1])] ;
+            tile = tileArray[Integer.valueOf(tileSetTile[1])];
 
-            if (typeScreen == ScreenType.CGA)
-            {
-                tilePicture = tile.getPictureCga() ;
-            }
-            else if (typeScreen == ScreenType.EGA)
-            {
-                tilePicture = tile.getPictureEga() ;
-            }
-            else
-            {
-                tilePicture = tile.getPictureVga() ;
+            if (typeScreen == ScreenType.CGA) {
+                tilePicture = tile.getPictureCga();
+            } else if (typeScreen == ScreenType.EGA) {
+                tilePicture = tile.getPictureEga();
+            } else {
+                tilePicture = tile.getPictureVga();
             }
 
-            mapObjectPicture.put(key, tilePicture) ;
+            mapObjectPicture.put(key, tilePicture);
         }
 
-        return mapObjectPicture ;
+        return mapObjectPicture;
     }
 
     /* (non-Javadoc)
      * @see org.jill.jn.draw.tilemanager.AbstractTileManager#init(java.util.Map, org.jill.jn.draw.ScreenType)
      */
     @Override
-    public void init(final Map<Integer, ShaTile[]> mapOfTile, final ScreenType typeScreen)
-    {
-        this.mapOfTile = mapOfTile ;
-        this.typeScreen = typeScreen ;
+    public void init(final Map<Integer, ShaTile[]> mapOfTile, final ScreenType typeScreen) {
+        this.mapOfTile = mapOfTile;
+        this.typeScreen = typeScreen;
 
-        if (mapObjectPicture == null)
-        {
-            mapObjectPicture = initMapOfObjectSrite() ;
+        if (mapObjectPicture == null) {
+            mapObjectPicture = initMapOfObjectSrite();
         }
 
-        this.mapOfTile = null ;
-        this.typeScreen = null ;
+        this.mapOfTile = null;
+        this.typeScreen = null;
     }
 
     /* (non-Javadoc)
      * @see org.jill.jn.draw.tilemanager.AbstractTileManager#getTile(org.jill.dma.ObjectItem)
      */
     @Override
-    public BufferedImage getTile(final ObjectItem object)
-    {
-        String objectType = String.valueOf(object.getType()) ;
-        BufferedImage bi ;
+    public BufferedImage getTile(final ObjectItem object) {
+        String objectType = String.valueOf(object.getType());
+        BufferedImage bi;
 
-        bi = mapObjectPicture.get(objectType) ;
+        bi = mapObjectPicture.get(objectType);
 
-        if (bi == null)
-        {
-            System.err.println("No tile found for tileType = ".concat(objectType)) ;
+        if (bi == null) {
+            System.err.println("No tile found for tileType = ".concat(objectType));
         }
 
-        return bi ;
+        return bi;
     }
 
 }

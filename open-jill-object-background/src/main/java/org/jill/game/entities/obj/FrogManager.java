@@ -1,17 +1,17 @@
 package org.jill.game.entities.obj;
 
 import java.awt.image.BufferedImage;
+
 import org.jill.game.entities.obj.abs.AbstractHitPlayerObjectEntity;
 import org.jill.game.entities.obj.player.PlayerPositionSynchronizer;
 import org.jill.game.entities.obj.util.UtilityObjectEntity;
-import org.jill.openjill.core.api.message.object.ObjectListMessage;
-import org.jill.openjill.core.api.message.statusbar.inventory.
-        InventoryPointMessage;
 import org.jill.openjill.core.api.entities.BackgroundEntity;
 import org.jill.openjill.core.api.entities.ObjectEntity;
 import org.jill.openjill.core.api.entities.ObjectParam;
 import org.jill.openjill.core.api.keyboard.KeyboardLayout;
 import org.jill.openjill.core.api.message.EnumMessageType;
+import org.jill.openjill.core.api.message.object.ObjectListMessage;
+import org.jill.openjill.core.api.message.statusbar.inventory.InventoryPointMessage;
 
 /**
  * Frog manager.
@@ -24,7 +24,7 @@ public final class FrogManager extends AbstractHitPlayerObjectEntity {
      * Player position object.
      */
     private static final PlayerPositionSynchronizer PLAYER_POSITION
-        = PlayerPositionSynchronizer.getInstance();
+            = PlayerPositionSynchronizer.getInstance();
 
     /**
      * Value of state to know if on floor.
@@ -133,7 +133,7 @@ public final class FrogManager extends AbstractHitPlayerObjectEntity {
 
             if (this.counter == this.counterBeforeJump) {
                 this.indexEtat = PLAYER_POSITION.updatePlayerPosition(
-                    this.messageDispatcher, this.indexEtat);
+                        this.messageDispatcher, this.indexEtat);
 
                 final int xd = PLAYER_POSITION.getX() - this.x;
 
@@ -152,15 +152,15 @@ public final class FrogManager extends AbstractHitPlayerObjectEntity {
         } else {
             if (this.xSpeed < X_SPEED_MIDDLE) {
                 UtilityObjectEntity.moveObjectLeft(this, this.xSpeed,
-                    this.backgroundObject);
+                        this.backgroundObject);
             } else {
                 UtilityObjectEntity.moveObjectRight(this, this.xSpeed,
-                    this.backgroundObject);
+                        this.backgroundObject);
             }
 
             if (this.ySpeed < Y_SPEED_MIDDLE) {
                 if (!UtilityObjectEntity.moveObjectUp(this, this.ySpeed,
-                    this.backgroundObject)) {
+                        this.backgroundObject)) {
                     this.ySpeed = Y_SPEED_MIDDLE;
                 }
             } else if (this.ySpeed > Y_SPEED_MIDDLE) {
@@ -173,7 +173,7 @@ public final class FrogManager extends AbstractHitPlayerObjectEntity {
 //                }
 
                 if (!UtilityObjectEntity.moveObjectDown(this, this.ySpeed,
-                    this.backgroundObject)) {
+                        this.backgroundObject)) {
                     this.state = this.stateOnFloor;
                     this.counter = 0;
                 }
@@ -220,11 +220,11 @@ public final class FrogManager extends AbstractHitPlayerObjectEntity {
 
     @Override
     public void msgKill(final ObjectEntity sender,
-        final int nbLife, final int typeOfDeath) {
+            final int nbLife, final int typeOfDeath) {
         this.messageDispatcher.sendMessage(EnumMessageType.INVENTORY_POINT,
-            new InventoryPointMessage(getConfInteger("point"), true,
-                    this, sender));
+                new InventoryPointMessage(getConfInteger("point"), true,
+                        this, sender));
         this.messageDispatcher.sendMessage(EnumMessageType.OBJECT,
-            this.killme);
+                this.killme);
     }
 }

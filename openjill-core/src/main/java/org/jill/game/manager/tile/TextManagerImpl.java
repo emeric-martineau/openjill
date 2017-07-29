@@ -5,6 +5,7 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
 import java.util.Map;
+
 import org.jill.game.config.ObjectInstanceFactory;
 import org.jill.openjill.core.api.manager.TextManager;
 import org.jill.openjill.core.api.screen.EnumScreenType;
@@ -18,70 +19,56 @@ import org.jill.sha.ShaTile;
  */
 public class TextManagerImpl implements TextManager {
     /**
+     * Background color index.
+     */
+    private static final int BACKGROUND_COLOR_INDEX = 3;
+    /**
+     * Foreground color index.
+     */
+    private static final int FOREGROUND_COLOR_INDEX1 = 1;
+    /**
+     * Foreground color index.
+     */
+    private static final int FOREGROUND_COLOR_INDEX2 = 2;
+    /**
+     * Small letter.
+     */
+    private static final int SMALL_LETTER_TILESET = 2;
+    /**
+     * Big letter.
+     */
+    private static final int BIG_LETTER_TILESET = 1;
+    /**
+     * Special letter.
+     */
+    private static final int SPECIAL_LETTER_TILESET = 6;
+    /**
+     * Small number.
+     */
+    private static final int SMALL_NUMBER_TILESET = 4;
+    /**
+     * Maximum color for draw letter.
+     */
+    private static final int MAX_LETTER_COLOR = 4;
+    /**
+     * To divide number for draw it.
+     */
+    private static final int DIVISOR_NUMBER_TO_DRAW = 10;
+    /**
      * Color map.
      */
     private final ColorMap vgaColorMap
             = ObjectInstanceFactory.getVgaColor();
-
     /**
      * Color map.
      */
     private final ColorMap egaColorMap
             = ObjectInstanceFactory.getEgaColor();
-
     /**
      * Color map.
      */
     private final ColorMap cgaColorMap
             = ObjectInstanceFactory.getCgaColor();
-
-    /**
-     * Background color index.
-     */
-    private static final int BACKGROUND_COLOR_INDEX = 3;
-
-    /**
-     * Foreground color index.
-     */
-    private static final int FOREGROUND_COLOR_INDEX1 = 1;
-
-    /**
-     * Foreground color index.
-     */
-    private static final int FOREGROUND_COLOR_INDEX2 = 2;
-
-
-    /**
-     * Small letter.
-     */
-    private static final int SMALL_LETTER_TILESET = 2;
-
-    /**
-     * Big letter.
-     */
-    private static final int BIG_LETTER_TILESET = 1;
-
-    /**
-     * Special letter.
-     */
-    private static final int SPECIAL_LETTER_TILESET = 6;
-
-    /**
-     * Small number.
-     */
-    private static final int SMALL_NUMBER_TILESET = 4;
-
-    /**
-     * Maximum color for draw letter.
-     */
-    private static final int MAX_LETTER_COLOR = 4;
-
-    /**
-     * To divide number for draw it.
-     */
-    private static final int DIVISOR_NUMBER_TO_DRAW = 10;
-
-
     /**
      * Tile to draw big text.
      */
@@ -123,7 +110,7 @@ public class TextManagerImpl implements TextManager {
      * Constructor.
      *
      * @param mapOfTile map of tile
-     * @param tpScreen type of screen
+     * @param tpScreen  type of screen
      */
     @Override
     public void init(final Map<Integer, ShaTile[]> mapOfTile,
@@ -155,13 +142,12 @@ public class TextManagerImpl implements TextManager {
     /**
      * Init table letter.
      *
-     * @param tiles tile (big or small)
-     * @param text text to draw
+     * @param tiles     tile (big or small)
+     * @param text      text to draw
      * @param textColor color
-     *
      * @return table letter
      */
-    private Map<Character, BufferedImage> initLetterMap(final  ShaTile[] tiles,
+    private Map<Character, BufferedImage> initLetterMap(final ShaTile[] tiles,
             final String text, final Color[] textColor) {
         // Create map with letter and font
         final Map<Character, BufferedImage> mapLetter = new HashMap<>();
@@ -175,7 +161,7 @@ public class TextManagerImpl implements TextManager {
 
             if (!mapLetter.containsKey(letter)) {
                 mapLetter.put(letter,
-                    tiles[(int) letter].getFont(textColor));
+                        tiles[(int) letter].getFont(textColor));
             }
         }
 
@@ -185,12 +171,11 @@ public class TextManagerImpl implements TextManager {
     /**
      * Init table letter.
      *
-     * @param tiles tile (big or small)
+     * @param tiles     tile (big or small)
      * @param textColor color
-     *
      * @return table letter
      */
-    private BufferedImage[] initNumberMap(final  ShaTile[] tiles,
+    private BufferedImage[] initNumberMap(final ShaTile[] tiles,
             final Color[] textColor) {
         final BufferedImage[] arrayNumber = new BufferedImage[tiles.length];
 
@@ -206,7 +191,6 @@ public class TextManagerImpl implements TextManager {
      *
      * @param foreColor text color
      * @param backColor background color (BACKGROUND_COLOR_NONE = none)
-     *
      * @return tab color
      */
     private Color[] initColorTextMap(final int foreColor, final int backColor) {
@@ -262,13 +246,13 @@ public class TextManagerImpl implements TextManager {
     /**
      * Draw text.
      *
-     * @param g2 picture where draw
-     * @param x x
-     * @param y y
-     * @param msg text to draw
+     * @param g2        picture where draw
+     * @param x         x
+     * @param y         y
+     * @param msg       text to draw
      * @param foreColor text color
      * @param backColor background color (BACKGROUND_COLOR_NONE = none)
-     * @param textTile text tile
+     * @param textTile  text tile
      */
     private void drawText(final Graphics2D g2, final int x, final int y,
             final String msg, final int foreColor, final int backColor,
@@ -301,11 +285,10 @@ public class TextManagerImpl implements TextManager {
     /**
      * Draw text.
      *
-     * @param msg text to draw
+     * @param msg       text to draw
      * @param foreColor text color
      * @param backColor background color (BACKGROUND_COLOR_NONE = none)
-     * @param textTile text tile
-     *
+     * @param textTile  text tile
      * @return picture
      */
     private BufferedImage createText(final String msg, final int foreColor,
@@ -358,11 +341,10 @@ public class TextManagerImpl implements TextManager {
     /**
      * Draw number.
      *
-     * @param number number to draw
+     * @param number    number to draw
      * @param foreColor text color
      * @param backColor background color (BACKGROUND_COLOR_NONE = none)
-     * @param textTile text tile
-     *
+     * @param textTile  text tile
      * @return picture
      */
     private BufferedImage createNumber(final int number, final int foreColor,
@@ -432,10 +414,10 @@ public class TextManagerImpl implements TextManager {
     /**
      * Draw big text.
      *
-     * @param g2 picture where draw
-     * @param x x
-     * @param y y
-     * @param msg text to draw
+     * @param g2        picture where draw
+     * @param x         x
+     * @param y         y
+     * @param msg       text to draw
      * @param foreColor text color
      * @param backColor background color (BACKGROUND_COLOR_NONE = none)
      */
@@ -448,10 +430,10 @@ public class TextManagerImpl implements TextManager {
     /**
      * Draw small text.
      *
-     * @param g2 picture where draw
-     * @param x x
-     * @param y y
-     * @param msg text to draw
+     * @param g2        picture where draw
+     * @param x         x
+     * @param y         y
+     * @param msg       text to draw
      * @param foreColor text color
      * @param backColor background color (BACKGROUND_COLOR_NONE = none)
      */
@@ -465,10 +447,9 @@ public class TextManagerImpl implements TextManager {
     /**
      * Draw big text.
      *
-     * @param msg text to draw
+     * @param msg       text to draw
      * @param foreColor text color
      * @param backColor background color (BACKGROUND_COLOR_NONE = none)
-     *
      * @return picture
      */
     @Override
@@ -480,10 +461,9 @@ public class TextManagerImpl implements TextManager {
     /**
      * Draw small text.
      *
-     * @param msg text to draw
+     * @param msg       text to draw
      * @param foreColor text color
      * @param backColor background color (BACKGROUND_COLOR_NONE = none)
-     *
      * @return picture
      */
     @Override
@@ -495,10 +475,9 @@ public class TextManagerImpl implements TextManager {
     /**
      * Draw small number.
      *
-     * @param number number to draw
+     * @param number    number to draw
      * @param foreColor text color
      * @param backColor background color (BACKGROUND_COLOR_NONE = none)
-     *
      * @return picture
      */
     @Override
@@ -510,10 +489,9 @@ public class TextManagerImpl implements TextManager {
     /**
      * Grap small letter.
      *
-     * @param msg message to display
+     * @param msg       message to display
      * @param foreColor text color
      * @param backColor background color
-     *
      * @return picture array
      */
     @Override
@@ -542,10 +520,9 @@ public class TextManagerImpl implements TextManager {
     /**
      * grap special key.
      *
-     * @param key key to draw
+     * @param key       key to draw
      * @param foreColor text color
      * @param backColor background color (BACKGROUND_COLOR_NONE = none)
-     *
      * @return picture
      */
     @Override

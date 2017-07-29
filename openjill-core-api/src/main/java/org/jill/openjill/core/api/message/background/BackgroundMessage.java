@@ -29,9 +29,9 @@ public final class BackgroundMessage {
     /**
      * Change background by map code.
      *
-     * @param blockX x
-     * @param blockY y
-     * @param codeInMap  map code
+     * @param blockX    x
+     * @param blockY    y
+     * @param codeInMap map code
      */
     public BackgroundMessage(final int blockX, final int blockY,
             final int codeInMap) {
@@ -40,12 +40,12 @@ public final class BackgroundMessage {
         this.mapCode = codeInMap;
     }
 
-        /**
+    /**
      * Change background by map code.
      *
-     * @param blockX x
-     * @param blockY y
-     * @param nameOfBack  map code
+     * @param blockX     x
+     * @param blockY     y
+     * @param nameOfBack map code
      */
     public BackgroundMessage(final int blockX, final int blockY,
             final String nameOfBack) {
@@ -57,7 +57,7 @@ public final class BackgroundMessage {
     /**
      * Map code.
      *
-     * @return  mpa code
+     * @return mpa code
      */
     public int getMapCode() {
         return mapCode;
@@ -111,7 +111,7 @@ public final class BackgroundMessage {
     /**
      * Map name.
      *
-     * @return  name
+     * @return name
      */
     public String getMapName() {
         return mapName;

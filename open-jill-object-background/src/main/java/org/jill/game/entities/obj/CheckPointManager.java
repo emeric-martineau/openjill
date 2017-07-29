@@ -3,13 +3,14 @@ package org.jill.game.entities.obj;
 import java.awt.image.BufferedImage;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import org.jill.game.entities.obj.abs.AbstractParameterObjectEntity;
 import org.jill.game.entities.obj.player.PlayerState;
-import org.jill.openjill.core.api.message.object.ObjectListMessage;
 import org.jill.openjill.core.api.entities.ObjectEntity;
 import org.jill.openjill.core.api.entities.ObjectParam;
 import org.jill.openjill.core.api.keyboard.KeyboardLayout;
 import org.jill.openjill.core.api.message.EnumMessageType;
+import org.jill.openjill.core.api.message.object.ObjectListMessage;
 import org.jill.openjill.core.api.message.player.MovePlayerMessage;
 
 /**
@@ -18,11 +19,11 @@ import org.jill.openjill.core.api.message.player.MovePlayerMessage;
  * @author Emeric MARTINEAU
  */
 public final class CheckPointManager extends AbstractParameterObjectEntity {
-        /**
+    /**
      * Static cause only one lift move player at one time.
      */
     private static final MovePlayerMessage MOVE_PLAYER_OBJECT
-        = new MovePlayerMessage();
+            = new MovePlayerMessage();
 
     /**
      * To know if checkpoint is load new level or juste play music.
@@ -72,21 +73,21 @@ public final class CheckPointManager extends AbstractParameterObjectEntity {
         if (this.getStringStackEntry() != null
                 && !this.getStringStackEntry().getValue().isEmpty()) {
             switch (this.getStringStackEntry().getValue().charAt(0)) {
-                case '*' : // load and play this song from the beginning
+                case '*': // load and play this song from the beginning
                     Logger.getLogger(CheckPointManager.class.getName()).
                             log(Level.INFO, "Warning : 'load and play this "
-                            + "song from the beginning' not supported");
+                                    + "song from the beginning' not supported");
                     break;
-                case '#' : // keep on playing this song
+                case '#': // keep on playing this song
                     Logger.getLogger(CheckPointManager.class.getName()).
                             log(Level.INFO, "Warning : 'keep on playing this "
-                            + "song' not supported");
+                                    + "song' not supported");
                     break;
-                case '!' : // load previous map
+                case '!': // load previous map
                     isLoadPreviousMap = true;
                     grapMsgTouch = true;
                     break;
-                default :
+                default:
                     // Special case. Checkpoint at map level delete whe
                     this.isToDelete = objectParam.getLevel()
                             == this.getCounter();
@@ -107,7 +108,7 @@ public final class CheckPointManager extends AbstractParameterObjectEntity {
     public void msgUpdate(final KeyboardLayout keyboardLayout) {
         if (this.isToDelete) {
             this.messageDispatcher.sendMessage(
-                EnumMessageType.OBJECT, this.killme);
+                    EnumMessageType.OBJECT, this.killme);
         }
     }
 
@@ -128,13 +129,13 @@ public final class CheckPointManager extends AbstractParameterObjectEntity {
                 MOVE_PLAYER_OBJECT.setState(PlayerState.BEGIN);
 
                 this.messageDispatcher.sendMessage(
-                    EnumMessageType.PLAYER_MOVE, MOVE_PLAYER_OBJECT);
+                        EnumMessageType.PLAYER_MOVE, MOVE_PLAYER_OBJECT);
 
                 this.messageDispatcher.sendMessage(
-                    EnumMessageType.OBJECT, this.killme);
+                        EnumMessageType.OBJECT, this.killme);
             } else if (this.isChangingLevel) {
                 this.messageDispatcher.sendMessage(
-                    EnumMessageType.CHECK_POINT_CHANGING_LEVEL, this);
+                        EnumMessageType.CHECK_POINT_CHANGING_LEVEL, this);
             } else if (isLoadPreviousMap) {
                 this.messageDispatcher.sendMessage(
                         EnumMessageType.CHECK_POINT_CHANGING_LEVEL_PREVIOUS,

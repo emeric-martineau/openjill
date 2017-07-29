@@ -34,6 +34,7 @@ public final class MovePlayerMessage {
 
     /**
      * Offset to move X.
+     *
      * @return offset
      */
     public int getOffsetX() {
@@ -52,7 +53,7 @@ public final class MovePlayerMessage {
     /**
      * Offset to move Y.
      *
-     * @return  offset
+     * @return offset
      */
     public int getOffsetY() {
         return offsetY;
@@ -70,7 +71,7 @@ public final class MovePlayerMessage {
     /**
      * Player state.
      *
-     * @return  state
+     * @return state
      */
     public int getState() {
         return state;

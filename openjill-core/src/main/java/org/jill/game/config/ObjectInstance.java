@@ -4,7 +4,6 @@ package org.jill.game.config;
  * Class to store information for dynamic build.
  *
  * @author emeric_martineau
- *
  */
 public final class ObjectInstance {
     /**

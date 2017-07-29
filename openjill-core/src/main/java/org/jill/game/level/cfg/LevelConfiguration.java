@@ -82,19 +82,19 @@ public class LevelConfiguration {
     /**
      * Level configuration.
      *
-     * @param dmaName dma file name
-     * @param shaName sha file name
-     * @param jnName jn file name
-     * @param vclName vcl file name
-     * @param cfgName cfg file name
-     * @param savePrefixe prefixe save
+     * @param dmaName          dma file name
+     * @param shaName          sha file name
+     * @param jnName           jn file name
+     * @param vclName          vcl file name
+     * @param cfgName          cfg file name
+     * @param savePrefixe      prefixe save
      * @param startScreenLevel start screen
-     * @param levelNum level number
-     * @param restoringMap if restore map
+     * @param levelNum         level number
+     * @param restoringMap     if restore map
      * @param levelMapDataFile map data
-     * @param levelDataFile level data
-     * @param scoreGame score
-     * @param numberGemLevel gem
+     * @param levelDataFile    level data
+     * @param scoreGame        score
+     * @param numberGemLevel   gem
      */
     protected LevelConfiguration(
             final String dmaName, final String shaName,
@@ -125,15 +125,15 @@ public class LevelConfiguration {
     /**
      * Constructor use in case of retoring game.
      *
-     * @param dmaName name of DMA file
-     * @param shaName name of SHA file
-     * @param jnName name of JN file
-     * @param vclName name of VCL file
-     * @param cfgName name of CFG file
-     * @param savePrefixe prefix of save file name
+     * @param dmaName          name of DMA file
+     * @param shaName          name of SHA file
+     * @param jnName           name of JN file
+     * @param vclName          name of VCL file
+     * @param cfgName          name of CFG file
+     * @param savePrefixe      prefix of save file name
      * @param startScreenLevel Start screen for this level
      * @param levelMapDataFile level map data
-     * @param levelDataFile level data (if no filename)
+     * @param levelDataFile    level data (if no filename)
      */
     public LevelConfiguration(
             final String dmaName, final String shaName,
@@ -152,20 +152,19 @@ public class LevelConfiguration {
     /**
      * Constructor use in case of load new game.
      *
-     * @param dmaName name of DMA file
-     * @param shaName name of SHA file
-     * @param jnName name of JN file
-     * @param vclName name of VCL file
-     * @param cfgName name of CFG file
-     * @param savePrefixe prefix of save file name
+     * @param dmaName          name of DMA file
+     * @param shaName          name of SHA file
+     * @param jnName           name of JN file
+     * @param vclName          name of VCL file
+     * @param cfgName          name of CFG file
+     * @param savePrefixe      prefix of save file name
      * @param startScreenLevel Start screen for this level
-     * @param levelNum number of level
+     * @param levelNum         number of level
      * @param levelMapDataFile level map data
-     * @param levelDataFile level data (if no filename)
-     * @param scoreGame score
-     * @param numberGemLevel gem
-     * @param beginMsg display begin message
-     *
+     * @param levelDataFile    level data (if no filename)
+     * @param scoreGame        score
+     * @param numberGemLevel   gem
+     * @param beginMsg         display begin message
      */
     public LevelConfiguration(
             final String dmaName, final String shaName,
@@ -184,21 +183,22 @@ public class LevelConfiguration {
                 levelMapDataFile, levelDataFile, scoreGame, numberGemLevel);
         this.displayBeginMessage = beginMsg;
     }
+
     /**
      * Constructor use in case of load new game.
      *
-     * @param dmaName name of DMA file
-     * @param shaName name of SHA file
-     * @param jnName name of JN file
-     * @param vclName name of VCL file
-     * @param cfgName name of CFG file
-     * @param savePrefixe prefix of save file name
+     * @param dmaName          name of DMA file
+     * @param shaName          name of SHA file
+     * @param jnName           name of JN file
+     * @param vclName          name of VCL file
+     * @param cfgName          name of CFG file
+     * @param savePrefixe      prefix of save file name
      * @param startScreenLevel Start screen for this level
-     * @param levelNum number of level
+     * @param levelNum         number of level
      * @param levelMapDataFile level map data
-     * @param levelDataFile level data (if no filename)
-     * @param scoreGame score
-     * @param numberGemLevel gem
+     * @param levelDataFile    level data (if no filename)
+     * @param scoreGame        score
+     * @param numberGemLevel   gem
      */
     public LevelConfiguration(
             final String dmaName, final String shaName,
@@ -219,7 +219,7 @@ public class LevelConfiguration {
     /**
      * Dma file name.
      *
-     * @return  dma file name
+     * @return dma file name
      */
     public final String getDmaFileName() {
         return this.dmaFileName;
@@ -264,7 +264,7 @@ public class LevelConfiguration {
     /**
      * Prefixe of file save.
      *
-     * @return  prefixe
+     * @return prefixe
      */
     public final String getCfgSavePrefixe() {
         return this.cfgSavePrefixe;
@@ -301,7 +301,7 @@ public class LevelConfiguration {
     /**
      * If load game or restore map.
      *
-     * @return  true => restore map, false => new map
+     * @return true => restore map, false => new map
      */
     public final boolean isRestoreMap() {
         return this.restoreMap;

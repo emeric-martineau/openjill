@@ -10,8 +10,8 @@ public interface MessageDispatcher {
     /**
      * Add handler.
      *
-     * @param type distination
-     * @param handler  handler
+     * @param type    distination
+     * @param handler handler
      */
     void addHandler(EnumMessageType type, InterfaceMessageGameHandler handler);
 

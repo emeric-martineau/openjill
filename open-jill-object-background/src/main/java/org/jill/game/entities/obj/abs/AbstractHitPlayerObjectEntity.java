@@ -10,7 +10,7 @@ import org.jill.openjill.core.api.entities.ObjectParam;
  * @author Emeric MARTINEAU
  */
 public abstract class AbstractHitPlayerObjectEntity
-    extends AbstractParameterObjectEntity {
+        extends AbstractParameterObjectEntity {
 
     /**
      * Kill force.
@@ -36,7 +36,7 @@ public abstract class AbstractHitPlayerObjectEntity
      */
     protected final void hitPlayer(final ObjectEntity playerObj) {
         playerObj.msgKill(this, this.killForce,
-            PlayerState.DIE_SUB_STATE_ENNEMY);
+                PlayerState.DIE_SUB_STATE_ENNEMY);
     }
 
     /**
@@ -46,6 +46,6 @@ public abstract class AbstractHitPlayerObjectEntity
      */
     protected final void hitPlayerRock(final ObjectEntity playerObj) {
         playerObj.msgKill(this, this.killForce,
-            PlayerState.DIE_SUB_STATE_OTHER_BACK);
+                PlayerState.DIE_SUB_STATE_OTHER_BACK);
     }
 }

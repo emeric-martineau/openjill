@@ -24,6 +24,7 @@ public final class GetPlayerPositionMessage {
 
     /**
      * X.
+     *
      * @return x
      */
     public int getX() {
@@ -40,9 +41,9 @@ public final class GetPlayerPositionMessage {
     }
 
     /**
-     *  Y.
+     * Y.
      *
-     * @return  y
+     * @return y
      */
     public int getY() {
         return y;

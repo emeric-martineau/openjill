@@ -1,6 +1,5 @@
 package org.jill.game.screen;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
@@ -12,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import org.jill.game.screen.conf.InventoryAreaConf;
 import org.jill.game.screen.conf.ItemConf;
 import org.jill.game.screen.conf.PictureConf;
@@ -19,26 +19,18 @@ import org.jill.game.screen.conf.TextToDraw;
 import org.jill.jn.SaveData;
 import org.jill.openjill.core.api.entities.ObjectEntity;
 import org.jill.openjill.core.api.jill.JillConst;
-import org.jill.openjill.core.api.manager.
-        TextManager;
-import org.jill.openjill.core.api.manager.
-        TileManager;
-import org.jill.openjill.core.api.message.
-        EnumMessageType;
-import org.jill.openjill.core.api.message.
-        InterfaceMessageGameHandler;
-import org.jill.openjill.core.api.message.
-        MessageDispatcher;
+import org.jill.openjill.core.api.manager.TextManager;
+import org.jill.openjill.core.api.manager.TileManager;
+import org.jill.openjill.core.api.message.EnumMessageType;
+import org.jill.openjill.core.api.message.InterfaceMessageGameHandler;
+import org.jill.openjill.core.api.message.MessageDispatcher;
 import org.jill.openjill.core.api.message.object.CreateObjectMessage;
-import org.jill.openjill.core.api.message.object.
-        ObjectListMessage;
-import org.jill.openjill.core.api.message.statusbar.inventory.
-        EnumInventoryObject;
-import org.jill.openjill.core.api.message.statusbar.inventory.
-        InventoryItemMessage;
-import org.jill.openjill.core.api.message.statusbar.inventory.
-        InventoryLifeMessage;
+import org.jill.openjill.core.api.message.object.ObjectListMessage;
+import org.jill.openjill.core.api.message.statusbar.inventory.EnumInventoryObject;
+import org.jill.openjill.core.api.message.statusbar.inventory.InventoryItemMessage;
+import org.jill.openjill.core.api.message.statusbar.inventory.InventoryLifeMessage;
 import org.jill.openjill.core.api.message.statusbar.inventory.InventoryPointMessage;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  * Control area on screen and manage state.
@@ -50,90 +42,76 @@ public final class InventoryArea implements InterfaceMessageGameHandler {
      * Logger.
      */
     private static final Logger LOGGER = Logger.getLogger(
-                    InventoryArea.class.getName());
+            InventoryArea.class.getName());
 
     /**
      * Key to fin map/score in text to draw.
      */
     private static final String MAP_KEY = "map";
-
-    /**
-     * Current back index color.
-     */
-    private int currentBackIndexColor;
-
     /**
      * Picture cache.
      */
     private final TileManager pictureCache;
-
     /**
      * Inventory picture.
      */
     private final BufferedImage inventoryPicture;
-
     /**
      * Graphic object to draw inventory.
      */
     private final Graphics2D g2Inventory;
-
     /**
      * Lifebar.
      */
     private final BufferedImage lifebar;
-
     /**
      * Lifebar end.
      */
     private final BufferedImage lifebarEnd;
-
-    /**
-     * Score.
-     */
-    private int score = 0;
-
-    /**
-     * Level.
-     */
-    private int level;
-
-    /**
-     * Life.
-     */
-    private int life;
-
     /**
      * List of item.
      */
     private final List<EnumInventoryObject> objects = new ArrayList<>();
-
     /**
      * Map with iventory item and picture.
      */
     private final Map<EnumInventoryObject, BufferedImage> listItem
             = new HashMap<>();
-
     /**
      * Configuration.
      */
     private final InventoryAreaConf conf;
-
+    /**
+     * To dispatch message for any object in game.
+     */
+    private final MessageDispatcher messageDispatcher;
+    /**
+     * Current back index color.
+     */
+    private int currentBackIndexColor;
+    /**
+     * Score.
+     */
+    private int score = 0;
+    /**
+     * Level.
+     */
+    private int level;
+    /**
+     * Life.
+     */
+    private int life;
     /**
      * Need redraw inventory arrea ? (for hit player)
      */
     private boolean needRedraw = false;
 
     /**
-     * To dispatch message for any object in game.
-     */
-    private final MessageDispatcher messageDispatcher;
-
-    /**
      * Constructor.
      *
      * @param pictureCacheManager picture cache
-     * @param statusBar status bar
-     * @param msgDispatcher message dispatcher
+     * @param statusBar           status bar
+     * @param msgDispatcher       message dispatcher
      */
     public InventoryArea(final TileManager pictureCacheManager,
             final StatusBar statusBar, final MessageDispatcher msgDispatcher) {
@@ -159,7 +137,6 @@ public final class InventoryArea implements InterfaceMessageGameHandler {
      * Read config file.
      *
      * @param filename final name of config file
-     *
      * @return properties file
      */
     private static InventoryAreaConf readConf(final String filename) {
@@ -176,9 +153,9 @@ public final class InventoryArea implements InterfaceMessageGameHandler {
             mc = mapper.readValue(is, InventoryAreaConf.class);
         } catch (IOException ex) {
             LOGGER.log(Level.SEVERE,
-                String.format("Unable to load config for inventory '%s'",
-                        filename),
-                ex);
+                    String.format("Unable to load config for inventory '%s'",
+                            filename),
+                    ex);
 
             mc = null;
         }
@@ -212,19 +189,19 @@ public final class InventoryArea implements InterfaceMessageGameHandler {
 
             this.pictureCache.getTextManager().drawSmallText(this.g2Inventory,
                     ttd.getX(), ttd.getY(), text, ttd.getColor(),
-                TextManager.BACKGROUND_COLOR_NONE);
+                    TextManager.BACKGROUND_COLOR_NONE);
         }
 
         // Draw score
         final BufferedImage[] scoreLetter = this.pictureCache.getTextManager().
                 grapSmallLetter(String.valueOf(this.score),
-                this.conf.getScore().getColor(),
-                TextManager.BACKGROUND_COLOR_NONE);
+                        this.conf.getScore().getColor(),
+                        TextManager.BACKGROUND_COLOR_NONE);
 
         int offsetX = this.conf.getScore().getX();
 
         for (int indexScore = scoreLetter.length - 1; indexScore >= 0;
-                indexScore--) {
+             indexScore--) {
             this.g2Inventory.drawImage(scoreLetter[indexScore], offsetX,
                     this.conf.getScore().getY(), null);
             offsetX -= scoreLetter[indexScore].getWidth();
@@ -274,7 +251,6 @@ public final class InventoryArea implements InterfaceMessageGameHandler {
      * Return a image by config.
      *
      * @param prop propterties to read
-     *
      * @return picture
      */
     private BufferedImage getImageByConfig(final PictureConf prop) {
@@ -427,10 +403,10 @@ public final class InventoryArea implements InterfaceMessageGameHandler {
             // Create point object
             final CreateObjectMessage com
                     = CreateObjectMessage.buildFromClassName(
-                        this.conf.getObjectPoint());
+                    this.conf.getObjectPoint());
 
             this.messageDispatcher.sendMessage(EnumMessageType.CREATE_OBJECT,
-                com);
+                    com);
 
             ObjectEntity obj = com.getObject();
 
@@ -463,7 +439,7 @@ public final class InventoryArea implements InterfaceMessageGameHandler {
         if (sender == null || sender.getZapHold() == 0) {
             if ((nbLife < 0)
                     && ((sender == null) || !this.objects.contains(
-                            EnumInventoryObject.INVINCIBILITY))) {
+                    EnumInventoryObject.INVINCIBILITY))) {
                 // If decrease live, check player are not invincible
                 this.life += nbLife;
 
@@ -473,9 +449,9 @@ public final class InventoryArea implements InterfaceMessageGameHandler {
 
                 this.needRedraw = true;
             } else if (nbLife > 0) {
-               // Add life
-               this.life += nbLife;
-               this.needRedraw = true;
+                // Add life
+                this.life += nbLife;
+                this.needRedraw = true;
             }
 
             if (this.life > this.conf.getMaxLife()) {
@@ -496,17 +472,17 @@ public final class InventoryArea implements InterfaceMessageGameHandler {
 
     @Override
     public void recieveMessage(final EnumMessageType type,
-        final Object msg) {
-        switch(type) {
-            case INVENTORY_ITEM :
+            final Object msg) {
+        switch (type) {
+            case INVENTORY_ITEM:
                 messageItem((InventoryItemMessage) msg);
                 this.needRedraw = true;
                 break;
-            case INVENTORY_POINT :
+            case INVENTORY_POINT:
                 messagePoint((InventoryPointMessage) msg);
                 this.needRedraw = true;
                 break;
-            case INVENTORY_LIFE :
+            case INVENTORY_LIFE:
                 messageLife((InventoryLifeMessage) msg);
                 break;
             default:

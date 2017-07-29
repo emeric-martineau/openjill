@@ -10,16 +10,14 @@ public final class LimitedString {
      * Maximum size.
      */
     private final int maxSize;
-
-    /**
-     * Current len of string.
-     */
-    private int currentLen;
-
     /**
      * String content.
      */
     private final char[] buffer;
+    /**
+     * Current len of string.
+     */
+    private int currentLen;
 
     /**
      * Create string of x char.

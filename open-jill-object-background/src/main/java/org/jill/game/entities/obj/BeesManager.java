@@ -2,6 +2,7 @@ package org.jill.game.entities.obj;
 
 import java.awt.image.BufferedImage;
 import java.util.List;
+
 import org.jill.game.entities.obj.abs.AbstractHitPlayerObjectEntity;
 import org.jill.game.entities.obj.bees.MoveSizeAndInterval;
 import org.jill.game.entities.obj.player.PlayerPositionSynchronizer;
@@ -25,7 +26,7 @@ public final class BeesManager extends AbstractHitPlayerObjectEntity {
      * Player position object.
      */
     private static final PlayerPositionSynchronizer PLAYER_POSITION
-        = PlayerPositionSynchronizer.getInstance();
+            = PlayerPositionSynchronizer.getInstance();
 
     /**
      * Offset to calculate from start.
@@ -96,11 +97,11 @@ public final class BeesManager extends AbstractHitPlayerObjectEntity {
         // Load picture for each object. Don't use cache cause some picture
         // change between jill episod.
         this.images
-            = new BufferedImage[numberTileSet];
+                = new BufferedImage[numberTileSet];
 
         for (int index = 0; index < numberTileSet; index++) {
             this.images[index]
-                = this.pictureCache.getImage(tileSetIndex, tileIndex
+                    = this.pictureCache.getImage(tileSetIndex, tileIndex
                     + index);
         }
 
@@ -123,7 +124,7 @@ public final class BeesManager extends AbstractHitPlayerObjectEntity {
     @Override
     public BufferedImage msgDraw() {
         this.indexEtat = PLAYER_POSITION.updatePlayerPosition(
-            this.messageDispatcher, this.indexEtat);
+                this.messageDispatcher, this.indexEtat);
 
         final int xd = PLAYER_POSITION.getX() - getX();
         BufferedImage bf;
@@ -147,7 +148,7 @@ public final class BeesManager extends AbstractHitPlayerObjectEntity {
         if (newState == this.stateDie) {
             // Die
             this.messageDispatcher.sendMessage(EnumMessageType.OBJECT,
-                this.killme);
+                    this.killme);
         } else {
             setState(newState);
 
@@ -156,7 +157,7 @@ public final class BeesManager extends AbstractHitPlayerObjectEntity {
             int c = calculateCvalue(newState);
 
             this.indexEtat = PLAYER_POSITION.updatePlayerPosition(
-                this.messageDispatcher, this.indexEtat);
+                    this.messageDispatcher, this.indexEtat);
 
             final int xdSign = PLAYER_POSITION.getX() - getX();
             final int ydSign = PLAYER_POSITION.getY() - getY();
@@ -170,9 +171,9 @@ public final class BeesManager extends AbstractHitPlayerObjectEntity {
     /**
      * Move bees on X.
      *
-     * @param c current state value
+     * @param c      current state value
      * @param xdSign difference between player.x and bees.x (if 0 do nothing).
-     *      Use to know direction to move.
+     *               Use to know direction to move.
      */
     private void moveBeesOnX(final int c, final int xdSign) {
         int xd = getxSpeed();
@@ -205,7 +206,6 @@ public final class BeesManager extends AbstractHitPlayerObjectEntity {
      * Caluculate value to get move size.
      *
      * @param newState state of object
-     *
      * @return c value
      */
     private int calculateCvalue(final int newState) {
@@ -230,9 +230,8 @@ public final class BeesManager extends AbstractHitPlayerObjectEntity {
     /**
      * Get speed X.
      *
-     * @param c state value
+     * @param c      state value
      * @param moveXY movement list
-     *
      * @return size of move
      */
     private int moveXorY(final int c, final List<MoveSizeAndInterval> moveXY) {
@@ -251,9 +250,9 @@ public final class BeesManager extends AbstractHitPlayerObjectEntity {
     /**
      * Move bees on Y.
      *
-     * @param c current state value
+     * @param c      current state value
      * @param ydSign difference between player.y and bees.y (if 0 do nothing).
-     *      Use to know direction to move.
+     *               Use to know direction to move.
      */
     private void moveBeesOnY(final int c, final int ydSign) {
         int yd = getySpeed();
@@ -281,7 +280,6 @@ public final class BeesManager extends AbstractHitPlayerObjectEntity {
 
         setySpeed(newYD);
     }
-
 
 
     @Override

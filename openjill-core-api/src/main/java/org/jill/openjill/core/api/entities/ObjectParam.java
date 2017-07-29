@@ -14,10 +14,10 @@ public interface ObjectParam {
     /**
      * Default constructor.
      *
-     * @param backgroundMap background
-     * @param pictureCacheManager  picture
+     * @param backgroundMap            background
+     * @param pictureCacheManager      picture
      * @param messageDispatcherManager message
-     * @param levelNumber level
+     * @param levelNumber              level
      */
     void init(BackgroundEntity[][] backgroundMap,
             TileManager pictureCacheManager,
@@ -41,7 +41,7 @@ public interface ObjectParam {
     /**
      * Message dispatcher.
      *
-     * @return  message dispatcher for interaction with game
+     * @return message dispatcher for interaction with game
      */
     MessageDispatcher getMessageDispatcher();
 
@@ -53,17 +53,17 @@ public interface ObjectParam {
     ObjectItem getObject();
 
     /**
-     * Picture cache.
-     *
-     * @return picture cache
-     */
-    TileManager getPictureCache();
-
-    /**
      * Object.
      *
      * @param obj set object
      */
     void setObject(final ObjectItem obj);
+
+    /**
+     * Picture cache.
+     *
+     * @return picture cache
+     */
+    TileManager getPictureCache();
 
 }

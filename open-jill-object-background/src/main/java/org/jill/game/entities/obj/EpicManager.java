@@ -7,8 +7,7 @@ import org.jill.openjill.core.api.entities.ObjectParam;
 import org.jill.openjill.core.api.keyboard.KeyboardLayout;
 import org.jill.openjill.core.api.message.EnumMessageType;
 import org.jill.openjill.core.api.message.object.ObjectListMessage;
-import org.jill.openjill.core.api.message.statusbar.inventory.
-        InventoryPointMessage;
+import org.jill.openjill.core.api.message.statusbar.inventory.InventoryPointMessage;
 
 /**
  * Epic bonus.
@@ -54,17 +53,17 @@ public final class EpicManager extends AbstractSynchronisedImageObjectEntity {
             final KeyboardLayout keyboardLayout) {
         if (obj.isPlayer()) {
             this.messageDispatcher.sendMessage(EnumMessageType.INVENTORY_POINT,
-                new InventoryPointMessage(getConfInteger("point"), true,
-                    this, obj));
+                    new InventoryPointMessage(getConfInteger("point"), true,
+                            this, obj));
 
             this.state++;
 
             if (this.state == this.match) {
                 this.messageDispatcher.sendMessage(
-                    EnumMessageType.OBJECT, this.killme);
+                        EnumMessageType.OBJECT, this.killme);
 
                 BulletObjectFactory.explode(this, this.nbColoredBullet,
-                    this.messageDispatcher);
+                        this.messageDispatcher);
             }
         }
     }

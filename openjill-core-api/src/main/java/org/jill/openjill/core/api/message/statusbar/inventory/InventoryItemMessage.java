@@ -29,10 +29,10 @@ public final class InventoryItemMessage {
     /**
      * Constructor.
      *
-     * @param inv object
-     * @param addInv add object
+     * @param inv      object
+     * @param addInv   add object
      * @param lastItem if last inventory item
-     * @param once if alone in inventory
+     * @param once     if alone in inventory
      */
     public InventoryItemMessage(final EnumInventoryObject inv,
             final boolean addInv, final boolean lastItem, final boolean once) {
@@ -44,7 +44,7 @@ public final class InventoryItemMessage {
     /**
      * Constructor.
      *
-     * @param inv object
+     * @param inv    object
      * @param addInv add object
      */
     public InventoryItemMessage(final EnumInventoryObject inv,
@@ -56,7 +56,7 @@ public final class InventoryItemMessage {
     /**
      * Constructor.
      *
-     * @param inv object
+     * @param inv    object
      * @param addInv add object
      */
     public InventoryItemMessage(final String inv, final boolean addInv) {
@@ -67,9 +67,9 @@ public final class InventoryItemMessage {
     /**
      * Constructor.
      *
-     * @param inv object
+     * @param inv    object
      * @param addInv add object
-     * @param once if alone in inventory
+     * @param once   if alone in inventory
      */
     public InventoryItemMessage(final EnumInventoryObject inv,
             final boolean addInv, final boolean once) {
@@ -81,9 +81,9 @@ public final class InventoryItemMessage {
     /**
      * Constructor.
      *
-     * @param inv object
+     * @param inv    object
      * @param addInv add object
-     * @param once if alone in inventory
+     * @param once   if alone in inventory
      */
     public InventoryItemMessage(final String inv, final boolean addInv,
             final boolean once) {
@@ -104,7 +104,7 @@ public final class InventoryItemMessage {
     /**
      * If add object.
      *
-     * @return  false = delete object from inventory
+     * @return false = delete object from inventory
      */
     public boolean isAddObject() {
         return this.add;

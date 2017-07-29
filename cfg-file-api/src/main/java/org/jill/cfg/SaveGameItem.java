@@ -19,6 +19,13 @@ public interface SaveGameItem {
     String getName();
 
     /**
+     * Set name of save entry.
+     *
+     * @param nm name
+     */
+    void setName(String nm);
+
+    /**
      * Save file name.
      *
      * @return filename
@@ -31,11 +38,4 @@ public interface SaveGameItem {
      * @return filename
      */
     String getSaveMapFile();
-
-    /**
-     * Set name of save entry.
-     *
-     * @param nm name
-     */
-    void setName(String nm);
 }

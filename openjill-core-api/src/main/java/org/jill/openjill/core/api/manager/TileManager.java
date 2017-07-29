@@ -4,12 +4,14 @@ import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+
 import org.jill.dma.DmaFile;
 import org.jill.openjill.core.api.screen.EnumScreenType;
 import org.jill.sha.ShaFile;
 
 /**
  * Cache of picture.
+ *
  * @author Emeric MARTINEAU
  */
 public interface TileManager {
@@ -18,9 +20,9 @@ public interface TileManager {
      *
      * @param shaFileName sha file
      * @param dmaFileName dma file
-     * @param typeScreen type of screen
-     * *
-     * @throws IOException if error reading file
+     * @param typeScreen  type of screen
+     *                    *
+     * @throws IOException            if error reading file
      * @throws ClassNotFoundException if error when loading class
      * @throws IllegalAccessException if error when loading class
      * @throws InstantiationException if error when loading class
@@ -38,7 +40,6 @@ public interface TileManager {
      * Return picture of background.
      *
      * @param mapCode map code
-     *
      * @return null if background not found
      */
     BufferedImage getBackgroundPicture(final int mapCode);
@@ -59,8 +60,7 @@ public interface TileManager {
      * Return picture aand cache it.
      *
      * @param tileSetIndex index of tileset
-     * @param tileIndex index of tile
-     *
+     * @param tileIndex    index of tile
      * @return can be return null if picture not found
      */
     BufferedImage getImage(final int tileSetIndex, final int tileIndex);

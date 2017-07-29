@@ -1,6 +1,5 @@
 package org.jill.game.screen;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
@@ -8,18 +7,17 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import org.jill.game.screen.conf.ControlAreaConf;
 import org.jill.game.screen.conf.KeysControlText;
 import org.jill.game.screen.conf.LineToDraw;
 import org.jill.game.screen.conf.TextToDraw;
-import org.jill.openjill.core.api.manager.
-        TextManager;
-import org.jill.openjill.core.api.manager.
-        TileManager;
+import org.jill.openjill.core.api.manager.TextManager;
+import org.jill.openjill.core.api.manager.TileManager;
 import org.jill.openjill.core.api.message.EnumMessageType;
-import org.jill.openjill.core.api.message.
-        InterfaceMessageGameHandler;
+import org.jill.openjill.core.api.message.InterfaceMessageGameHandler;
 import org.jill.openjill.core.api.message.statusbar.inventory.InventoryItemMessage;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  * Control area on screen and manage state.
@@ -31,7 +29,7 @@ public class ControlArea implements InterfaceMessageGameHandler {
      * Logger.
      */
     private static final Logger LOGGER = Logger.getLogger(
-                    ControlArea.class.getName());
+            ControlArea.class.getName());
 
     /**
      * To find alt key text.
@@ -125,41 +123,10 @@ public class ControlArea implements InterfaceMessageGameHandler {
     private KeysControlText currentPlayerConfig;
 
     /**
-     * Read config file.
-     *
-     * @param filename final name of config file
-     *
-     * @return properties file
-     */
-    private static ControlAreaConf readConf(final String filename) {
-
-        final ObjectMapper mapper = new ObjectMapper();
-        final InputStream is =
-                ControlArea.class.getClassLoader().
-                        getResourceAsStream(filename);
-
-        ControlAreaConf mc;
-
-        // Load menu
-        try {
-            mc = mapper.readValue(is, ControlAreaConf.class);
-        } catch (IOException ex) {
-            LOGGER.log(Level.SEVERE,
-                String.format("Unable to load config for control '%s'",
-                        filename),
-                ex);
-
-            mc = null;
-        }
-
-        return mc;
-    }
-
-    /**
      * Constructor.
      *
      * @param pictureCacheManager picture cache
-     * @param statusBar status bar
+     * @param statusBar           status bar
      */
     public ControlArea(final TileManager pictureCacheManager,
             final StatusBar statusBar) {
@@ -206,6 +173,36 @@ public class ControlArea implements InterfaceMessageGameHandler {
     }
 
     /**
+     * Read config file.
+     *
+     * @param filename final name of config file
+     * @return properties file
+     */
+    private static ControlAreaConf readConf(final String filename) {
+
+        final ObjectMapper mapper = new ObjectMapper();
+        final InputStream is =
+                ControlArea.class.getClassLoader().
+                        getResourceAsStream(filename);
+
+        ControlAreaConf mc;
+
+        // Load menu
+        try {
+            mc = mapper.readValue(is, ControlAreaConf.class);
+        } catch (IOException ex) {
+            LOGGER.log(Level.SEVERE,
+                    String.format("Unable to load config for control '%s'",
+                            filename),
+                    ex);
+
+            mc = null;
+        }
+
+        return mc;
+    }
+
+    /**
      * Draw control panel.
      *
      * @return picture
@@ -221,13 +218,13 @@ public class ControlArea implements InterfaceMessageGameHandler {
         for (TextToDraw ttd : this.conf.getText()) {
             pictureCache.getTextManager().drawSmallText(g2Control, ttd.getX(),
                     ttd.getY(), ttd.getText(), ttd.getColor(),
-                TextManager.BACKGROUND_COLOR_NONE);
+                    TextManager.BACKGROUND_COLOR_NONE);
         }
 
         for (TextToDraw ttd : this.conf.getBigText()) {
             pictureCache.getTextManager().drawBigText(g2Control, ttd.getX(),
                     ttd.getY(), ttd.getText(), ttd.getColor(),
-                TextManager.BACKGROUND_COLOR_NONE);
+                    TextManager.BACKGROUND_COLOR_NONE);
         }
 
         BufferedImage picture;
@@ -249,8 +246,8 @@ public class ControlArea implements InterfaceMessageGameHandler {
             }
 
             picture = pictureCache.getTextManager().grapSpecialKey(
-                        index, ttd.getColor(),
-                        TextManager.BACKGROUND_COLOR_NONE);
+                    index, ttd.getColor(),
+                    TextManager.BACKGROUND_COLOR_NONE);
 
             g2Control.drawImage(picture, ttd.getX(), ttd.getY(), null);
         }
@@ -341,9 +338,9 @@ public class ControlArea implements InterfaceMessageGameHandler {
 
     @Override
     public final void recieveMessage(final EnumMessageType type,
-        final Object msg) {
-        switch(type) {
-            case INVENTORY_ITEM :
+            final Object msg) {
+        switch (type) {
+            case INVENTORY_ITEM:
                 if (this.currentPlayerConfig == null) {
                     findDefaultPlayerCharacter();
                 }
@@ -379,7 +376,7 @@ public class ControlArea implements InterfaceMessageGameHandler {
             this.altKey.setText(EMPTY_TEXT);
         } else {
             final KeysControlText kct = this.conf.getKeysControlText(
-                iim.getObj().toString());
+                    iim.getObj().toString());
 
             if (kct != null) {
                 this.altKey.setText(kct.getAlt());

@@ -2,6 +2,7 @@ package org.jill.game.entities.obj.bullet;
 
 import java.awt.image.BufferedImage;
 import java.util.List;
+
 import org.jill.game.entities.obj.abs.AbstractParameterObjectEntity;
 import org.jill.game.entities.obj.bees.MoveSizeAndInterval;
 import org.jill.game.entities.obj.util.SharedCode;
@@ -62,11 +63,11 @@ public final class BulletManager extends AbstractParameterObjectEntity {
         // Load picture for each object. Don't use cache cause some picture
         // change between jill episod.
         this.images
-            = new BufferedImage[numberTileSet];
+                = new BufferedImage[numberTileSet];
 
         for (int index = 0; index < numberTileSet; index++) {
             this.images[index]
-                = this.pictureCache.getImage(tileSetIndex, tileIndex
+                    = this.pictureCache.getImage(tileSetIndex, tileIndex
                     + index);
         }
 
@@ -103,7 +104,7 @@ public final class BulletManager extends AbstractParameterObjectEntity {
 
         if (newCounter >= this.counterDie) {
             this.messageDispatcher.sendMessage(EnumMessageType.OBJECT,
-                this.killme);
+                    this.killme);
         }
 
         setX(getX() + getxSpeed());
@@ -122,9 +123,8 @@ public final class BulletManager extends AbstractParameterObjectEntity {
     /**
      * Get speed X.
      *
-     * @param c state value
+     * @param c      state value
      * @param moveXY movement list
-     *
      * @return size of move
      */
     private int moveXorY(final int c, final List<MoveSizeAndInterval> moveXY) {

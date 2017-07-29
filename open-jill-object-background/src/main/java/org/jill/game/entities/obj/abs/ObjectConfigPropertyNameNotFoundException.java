@@ -6,7 +6,7 @@ package org.jill.game.entities.obj.abs;
  * @author Emeric MARTINEAU
  */
 public class ObjectConfigPropertyNameNotFoundException
-    extends RuntimeException {
+        extends RuntimeException {
 
     /**
      * Create exception.
@@ -15,9 +15,9 @@ public class ObjectConfigPropertyNameNotFoundException
      * @param configFile name of config file
      */
     public ObjectConfigPropertyNameNotFoundException(final String properties,
-        final String configFile) {
+            final String configFile) {
         super(String.format(
-            "The key '%s' not found in properties file '%s'",
-            properties, configFile));
+                "The key '%s' not found in properties file '%s'",
+                properties, configFile));
     }
 }

@@ -4,7 +4,6 @@
 package org.jill.sha.ui.button;
 
 import java.awt.event.ActionEvent;
-
 import javax.swing.JTextField;
 
 import org.jill.sha.ui.AbstractButton;
@@ -21,27 +20,27 @@ public class SelectDirButton extends AbstractButton {
     /**
      * Text area
      */
-    private final JTextField textBox ;
-    
+    private final JTextField textBox;
+
     /**
      * Creates a button with text.
      *
-     * @param text  the text of the button
+     * @param text the text of the button
      */
     public SelectDirButton(final String text, final JTextField textField) {
-        super(text) ;
-        this.textBox = textField ;
-    }    
-    
+        super(text);
+        this.textBox = textField;
+    }
+
     /**
      * If click on button
      */
     @Override
     public void onClick(final ActionEvent e) {
-        final FileExplorer fe = new FileExplorer(".") ;
-        
-        textBox.setText(fe.getSelectedDir()) ;
-        
+        final FileExplorer fe = new FileExplorer(".");
+
+        textBox.setText(fe.getSelectedDir());
+
 //        int returnVal = fc.showOpenDialog(this) ;
 //
 //        if ((returnVal == JFileChooser.APPROVE_OPTION) && (textBox != null)) {

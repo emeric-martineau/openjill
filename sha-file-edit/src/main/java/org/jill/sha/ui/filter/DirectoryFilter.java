@@ -17,6 +17,6 @@ public class DirectoryFilter implements FileFilter {
      * @see javax.swing.filechooser.FileFilter#accept(java.io.File)
      */
     public boolean accept(File f) {
-        return f.isDirectory() ;
+        return f.isDirectory();
     }
 }

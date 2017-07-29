@@ -1,6 +1,5 @@
 package org.jill.game.gui.menu;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
@@ -10,12 +9,14 @@ import java.io.InputStream;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import org.jill.cfg.SaveGameItem;
 import org.jill.game.gui.menu.conf.LoadSaveGameMenuConf;
 import org.jill.game.screen.conf.LineToDraw;
 import org.jill.game.screen.conf.TextToDraw;
 import org.jill.openjill.core.api.manager.TextManager;
 import org.jill.openjill.core.api.manager.TileManager;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  * Class to load game.
@@ -23,58 +24,49 @@ import org.jill.openjill.core.api.manager.TileManager;
  * @author Emeric MARTINEAU
  */
 public abstract class AbstractLoadGameMenu extends AbstractMenu
-    implements MenuInterface {
+        implements MenuInterface {
     /**
      * Logger.
      */
     private static final Logger LOGGER = Logger.getLogger(
-                    AbstractLoadGameMenu.class.getName());
+            AbstractLoadGameMenu.class.getName());
     /**
      * Format of string format.
      */
     private static final String SAVE_DISPLAY_FORMAT
-        = "%d %-" + SaveGameItem.LEN_SAVE_NAME + "s";
-
-    /**
-     * If menu is enable.
-     */
-    private boolean enable = false;
-
+            = "%d %-" + SaveGameItem.LEN_SAVE_NAME + "s";
     /**
      * Display.
      */
     private final BufferedImage saveGameScreen;
-
     /**
      * Picutre cache.
      */
     private final TileManager pictureCache;
-
     /**
      * List of high score.
      */
     private final List<SaveGameItem> listSaveGame;
-
-    /**
-     * To know if when are in edit mode.
-     */
-    private boolean editMode = false;
-
-    /**
-     * If picture need to redraw.
-     */
-    private boolean needToDrawPicture;
-
     /**
      * Background color (current).
      */
     private final int backgroundColor;
-
     /**
      * Configuration.
      */
     private final LoadSaveGameMenuConf conf;
-
+    /**
+     * If menu is enable.
+     */
+    private boolean enable = false;
+    /**
+     * To know if when are in edit mode.
+     */
+    private boolean editMode = false;
+    /**
+     * If picture need to redraw.
+     */
+    private boolean needToDrawPicture;
     /**
      * Previous menu picture.
      */
@@ -83,39 +75,39 @@ public abstract class AbstractLoadGameMenu extends AbstractMenu
     /**
      * Constructor.
      *
-     * @param menuScreen object to draw high score
+     * @param menuScreen          object to draw high score
      * @param pictureCacheManager cache of picture
-     * @param saveGameList list of high score (can be modified !)
+     * @param saveGameList        list of high score (can be modified !)
      * @param positionToDrawMenuX x to draw
      * @param positionToDrawMenuY y to draw
      */
     public AbstractLoadGameMenu(final BufferedImage menuScreen,
-        final TileManager pictureCacheManager,
-        final List<SaveGameItem> saveGameList,
-        final int positionToDrawMenuX,
-        final int positionToDrawMenuY) {
+            final TileManager pictureCacheManager,
+            final List<SaveGameItem> saveGameList,
+            final int positionToDrawMenuX,
+            final int positionToDrawMenuY) {
         this(menuScreen, pictureCacheManager, saveGameList,
-            positionToDrawMenuX,
-            positionToDrawMenuY, null);
+                positionToDrawMenuX,
+                positionToDrawMenuY, null);
     }
 
     /**
      * Constructor.
      *
-     * @param menuScreen object to draw high score
+     * @param menuScreen          object to draw high score
      * @param pictureCacheManager cache of picture
-     * @param saveGameList list of high score (can be modified !)
+     * @param saveGameList        list of high score (can be modified !)
      * @param positionToDrawMenuX x to draw
      * @param positionToDrawMenuY y to draw
-     * @param nextMenuObj next menu to draw
+     * @param nextMenuObj         next menu to draw
      */
     @SuppressWarnings("OverridableMethodCallInConstructor")
     public AbstractLoadGameMenu(final BufferedImage menuScreen,
-        final TileManager pictureCacheManager,
-        final List<SaveGameItem> saveGameList,
-        final int positionToDrawMenuX,
-        final int positionToDrawMenuY,
-        final MenuInterface nextMenuObj) {
+            final TileManager pictureCacheManager,
+            final List<SaveGameItem> saveGameList,
+            final int positionToDrawMenuX,
+            final int positionToDrawMenuY,
+            final MenuInterface nextMenuObj) {
         super(pictureCacheManager, nextMenuObj);
 
         this.conf = readConf1(getConfigFileName());
@@ -136,17 +128,9 @@ public abstract class AbstractLoadGameMenu extends AbstractMenu
     }
 
     /**
-     * Return name of file configuration.
-     *
-     * @return file name (json format)
-     */
-    protected abstract String getConfigFileName();
-
-    /**
      * Read config file.
      *
      * @param filename final name of config file
-     *
      * @return properties file
      */
     private static LoadSaveGameMenuConf readConf1(final String filename) {
@@ -163,15 +147,22 @@ public abstract class AbstractLoadGameMenu extends AbstractMenu
             mc = mapper.readValue(is, LoadSaveGameMenuConf.class);
         } catch (IOException ex) {
             LOGGER.log(Level.SEVERE,
-                String.format("Unable to load config for highscore '%s'",
-                        filename),
-                ex);
+                    String.format("Unable to load config for highscore '%s'",
+                            filename),
+                    ex);
 
             mc = null;
         }
 
         return mc;
     }
+
+    /**
+     * Return name of file configuration.
+     *
+     * @return file name (json format)
+     */
+    protected abstract String getConfigFileName();
 
     /**
      * Clear all item.
@@ -238,12 +229,12 @@ public abstract class AbstractLoadGameMenu extends AbstractMenu
         // draw background
         g2.setColor(pictureCache.getColorMap()[backgroundColor]);
         g2.fillRect(0, 0, this.saveGameScreen.getWidth(),
-            this.saveGameScreen.getHeight());
+                this.saveGameScreen.getHeight());
 
         for (TextToDraw ttd : this.conf.getText()) {
             this.pictureCache.getTextManager().drawSmallText(g2, ttd.getX(),
                     ttd.getY(), ttd.getText(), ttd.getColor(),
-                TextManager.BACKGROUND_COLOR_NONE);
+                    TextManager.BACKGROUND_COLOR_NONE);
         }
 
         // Draw middle line
@@ -258,7 +249,7 @@ public abstract class AbstractLoadGameMenu extends AbstractMenu
         String name;
 
         final boolean addCursorList
-            = this.cursorPositionBySubMenuIndex.isEmpty();
+                = this.cursorPositionBySubMenuIndex.isEmpty();
 
         int indexSave = 1;
 
@@ -272,8 +263,8 @@ public abstract class AbstractLoadGameMenu extends AbstractMenu
             name = String.format(SAVE_DISPLAY_FORMAT, indexSave, name);
 
             imageName = pictureCache.getTextManager().createSmallText(
-                name, this.conf.getReadonlymode().getTextColor(),
-                TextManager.BACKGROUND_COLOR_NONE);
+                    name, this.conf.getReadonlymode().getTextColor(),
+                    TextManager.BACKGROUND_COLOR_NONE);
 
             y += imageName.getHeight() + 2;
 
@@ -282,7 +273,7 @@ public abstract class AbstractLoadGameMenu extends AbstractMenu
             // Init cursor position if ot yet done
             if (addCursorList) {
                 this.cursorPositionBySubMenuIndex.add(
-                    new Point(this.conf.getStartCursor().getX(), y));
+                        new Point(this.conf.getStartCursor().getX(), y));
             }
 
             indexSave++;
@@ -336,7 +327,7 @@ public abstract class AbstractLoadGameMenu extends AbstractMenu
     @Override
     public void draw(final Graphics g2) {
         g2.drawImage(getPicture(), getX(),
-            getY(), null);
+                getY(), null);
 
         if (this.previousMenuPicture != null) {
             g2.drawImage(this.previousMenuPicture, getPreviousMenu().getX(),
@@ -349,7 +340,7 @@ public abstract class AbstractLoadGameMenu extends AbstractMenu
         if (this.editMode) {
             return false;
         } else {
-            switch(consumeOtherKey) {
+            switch (consumeOtherKey) {
                 case '0':
                     this.currentMenuPos = 0;
                     break;
@@ -391,7 +382,7 @@ public abstract class AbstractLoadGameMenu extends AbstractMenu
     /**
      * Return edit mode.
      *
-     * @return  edit mode
+     * @return edit mode
      */
     protected final boolean getEditMode() {
         return this.editMode;

@@ -2,18 +2,19 @@ package org.jill.game.level.handler;
 
 import java.io.IOException;
 import java.util.List;
+
 import org.jill.game.config.ObjectInstanceFactory;
 import org.jill.game.entities.obj.player.PlayerState;
 import org.jill.game.level.AbstractChangeLevel;
 import org.jill.game.level.cfg.LevelConfiguration;
 import org.jill.jn.ObjectItem;
-import org.jill.openjill.core.api.message.statusbar.inventory.EnumInventoryObject;
-import org.jill.openjill.core.api.message.statusbar.inventory.InventoryItemMessage;
 import org.jill.jn.SaveData;
 import org.jill.openjill.core.api.entities.ObjectEntity;
 import org.jill.openjill.core.api.entities.ObjectParam;
 import org.jill.openjill.core.api.message.EnumMessageType;
 import org.jill.openjill.core.api.message.object.ReplaceObjectMessage;
+import org.jill.openjill.core.api.message.statusbar.inventory.EnumInventoryObject;
+import org.jill.openjill.core.api.message.statusbar.inventory.InventoryItemMessage;
 
 /**
  * Class to load a nex level (from map) or restore map.
@@ -24,9 +25,8 @@ public class LoadNewLevelHandler extends AbstractChangeLevel {
     /**
      * Level configuration.
      *
-     * @param cfgLevel  configuration of level
-     *
-     * @throws IOException if error reading file
+     * @param cfgLevel configuration of level
+     * @throws IOException                  if error reading file
      * @throws ReflectiveOperationException if error create class of object
      */
     public LoadNewLevelHandler(final LevelConfiguration cfgLevel)
@@ -135,7 +135,7 @@ public class LoadNewLevelHandler extends AbstractChangeLevel {
                     enumList[inventoryItem], true);
 
             this.messageDispatcher.sendMessage(EnumMessageType.INVENTORY_ITEM,
-                inventory);
+                    inventory);
         }
 
         // always restore life.
@@ -146,7 +146,6 @@ public class LoadNewLevelHandler extends AbstractChangeLevel {
      * Find check point for current level.
      *
      * @param level level number
-     *
      * @return checkpoint or null
      */
     private ObjectEntity findCheckPoint(final int level) {

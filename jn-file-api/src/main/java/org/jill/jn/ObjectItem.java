@@ -1,6 +1,7 @@
 package org.jill.jn;
 
 import java.io.EOFException;
+
 import org.jill.file.FileAbstractByte;
 
 /**
@@ -22,6 +23,13 @@ public interface ObjectItem {
     int getCounter();
 
     /**
+     * setter of counter.
+     *
+     * @param counter value
+     */
+    void setCounter(int counter);
+
+    /**
      * Flags.
      *
      * @return flags
@@ -29,11 +37,25 @@ public interface ObjectItem {
     int getFlags();
 
     /**
+     * setter of flags.
+     *
+     * @param flags value
+     */
+    void setFlags(int flags);
+
+    /**
      * Height.
      *
      * @return height
      */
     int getHeight();
+
+    /**
+     * setter of height.
+     *
+     * @param height value
+     */
+    void setHeight(int height);
 
     /**
      * Index of object in file.
@@ -50,6 +72,13 @@ public interface ObjectItem {
     int getInfo1();
 
     /**
+     * setter of info1.
+     *
+     * @param info1 value
+     */
+    void setInfo1(int info1);
+
+    /**
      * Return offset in file for this object.
      *
      * @return offset in file
@@ -62,6 +91,13 @@ public interface ObjectItem {
      * @return pointer
      */
     int getPointer();
+
+    /**
+     * setter of pointer.
+     *
+     * @param pointer value
+     */
+    void setPointer(int pointer);
 
     /**
      * Return equivalent size in file (include string if set).
@@ -78,116 +114,18 @@ public interface ObjectItem {
     int getState();
 
     /**
-     * State count.
-     *
-     * @return stateCount
-     */
-    int getStateCount();
-
-    /**
-     * String.
-     *
-     * @return stringStackEntry
-     */
-    StringItem getStringStackEntry();
-
-    /**
-     * SubState.
-     *
-     * @return subState
-     */
-    int getSubState();
-
-    /**
-     * Type (Jill play, apple...).
-     *
-     * @return type
-     */
-    int getType();
-
-    /**
-     * Width.
-     *
-     * @return width
-     */
-    int getWidth();
-
-    /**
-     * X.
-     *
-     * @return x
-     */
-    int getX();
-
-    /**
-     * Y.
-     *
-     * @return y
-     */
-    int getY();
-
-    /**
-     * Unknow.
-     *
-     * @return zapHold
-     */
-    int getZapHold();
-
-    /**
-     * X speed/direction.
-     *
-     * @return xSpeed
-     */
-    int getxSpeed();
-
-    /**
-     * Y speed/direction.
-     *
-     * @return ySpeed
-     */
-    int getySpeed();
-
-    /**
-     * setter of counter.
-     *
-     * @param counter value
-     */
-    void setCounter(int counter);
-
-    /**
-     * setter of flags.
-     *
-     * @param flags value
-     */
-    void setFlags(int flags);
-
-    /**
-     * setter of height.
-     *
-     * @param height value
-     */
-    void setHeight(int height);
-
-    /**
-     * setter of info1.
-     *
-     * @param info1 value
-     */
-    void setInfo1(int info1);
-
-    /**
-     * setter of pointer.
-     *
-     * @param pointer value
-     */
-    void setPointer(int pointer);
-
-    /**
      * setter of state.
      *
      * @param state value
      */
     void setState(int state);
+
+    /**
+     * State count.
+     *
+     * @return stateCount
+     */
+    int getStateCount();
 
     /**
      * setter of state count.
@@ -197,11 +135,25 @@ public interface ObjectItem {
     void setStateCount(int stateCount);
 
     /**
+     * String.
+     *
+     * @return stringStackEntry
+     */
+    StringItem getStringStackEntry();
+
+    /**
      * Sting.
      *
      * @param stringStackEntry string link to this object
      */
     void setStringStackEntry(StringItem stringStackEntry);
+
+    /**
+     * SubState.
+     *
+     * @return subState
+     */
+    int getSubState();
 
     /**
      * setter of substate.
@@ -211,11 +163,25 @@ public interface ObjectItem {
     void setSubState(int subState);
 
     /**
+     * Type (Jill play, apple...).
+     *
+     * @return type
+     */
+    int getType();
+
+    /**
      * setter of type.
      *
      * @param type value
      */
     void setType(int type);
+
+    /**
+     * Width.
+     *
+     * @return width
+     */
+    int getWidth();
 
     /**
      * setter of width.
@@ -225,11 +191,25 @@ public interface ObjectItem {
     void setWidth(int width);
 
     /**
+     * X.
+     *
+     * @return x
+     */
+    int getX();
+
+    /**
      * setter of x.
      *
      * @param x value
      */
     void setX(int x);
+
+    /**
+     * Y.
+     *
+     * @return y
+     */
+    int getY();
 
     /**
      * setter of y.
@@ -239,6 +219,13 @@ public interface ObjectItem {
     void setY(int y);
 
     /**
+     * Unknow.
+     *
+     * @return zapHold
+     */
+    int getZapHold();
+
+    /**
      * setter of zaphold.
      *
      * @param zapHold value
@@ -246,11 +233,25 @@ public interface ObjectItem {
     void setZapHold(int zapHold);
 
     /**
+     * X speed/direction.
+     *
+     * @return xSpeed
+     */
+    int getxSpeed();
+
+    /**
      * setter of xSpeed.
      *
      * @param xSpeed value
      */
     void setxSpeed(int xSpeed);
+
+    /**
+     * Y speed/direction.
+     *
+     * @return ySpeed
+     */
+    int getySpeed();
 
     /**
      * setter of ySpeed.
@@ -263,7 +264,6 @@ public interface ObjectItem {
      * Write object to file.
      *
      * @param fab file to write
-     *
      * @throws EOFException if error
      */
     void writeToFile(FileAbstractByte fab) throws EOFException;

@@ -10,7 +10,7 @@ public interface InterfaceMessageGameHandler {
      * Receive message.
      *
      * @param type message type
-     * @param msg message
+     * @param msg  message
      */
     void recieveMessage(EnumMessageType type, Object msg);
 }

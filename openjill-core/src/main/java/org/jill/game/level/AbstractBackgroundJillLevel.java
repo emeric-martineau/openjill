@@ -9,12 +9,12 @@ import java.io.IOException;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import org.jill.dma.DmaEntry;
 import org.jill.game.config.JillGameConfig;
 import org.jill.game.config.ObjectInstanceFactory;
 import org.jill.game.level.cfg.LevelConfiguration;
 import org.jill.game.manager.background.BackgroundManager;
-import org.jill.openjill.core.api.message.background.BackgroundMessage;
 import org.jill.game.screen.StatusBar;
 import org.jill.jn.BackgroundLayer;
 import org.jill.openjill.core.api.entities.BackgroundEntity;
@@ -23,6 +23,7 @@ import org.jill.openjill.core.api.jill.JillConst;
 import org.jill.openjill.core.api.message.EnumMessageType;
 import org.jill.openjill.core.api.message.InterfaceMessageGameHandler;
 import org.jill.openjill.core.api.message.MessageDispatcher;
+import org.jill.openjill.core.api.message.background.BackgroundMessage;
 import org.jill.openjill.core.api.screen.EnumScreenType;
 import org.simplegame.InterfaceSimpleGameHandleInterface;
 import org.simplegame.SimpleGameConfig;
@@ -34,97 +35,68 @@ import org.simplegame.SimpleGameConfig;
  * @author Emeric MARTINEAU
  */
 public abstract class AbstractBackgroundJillLevel
-    extends AbstractBasicCacheLevel
-    implements InterfaceSimpleGameHandleInterface,
-        InterfaceMessageGameHandler  {
+        extends AbstractBasicCacheLevel
+        implements InterfaceSimpleGameHandleInterface,
+        InterfaceMessageGameHandler {
 
     /**
      * Logger.
      */
     private static final Logger LOGGER = Logger.getLogger(
-                    AbstractBackgroundJillLevel.class.getName());
-
+            AbstractBackgroundJillLevel.class.getName());
+    /**
+     * Message dispatcher.
+     */
+    protected final MessageDispatcher messageDispatcher =
+            ObjectInstanceFactory.getNewMsgDispatcher();
+    /**
+     * Background manager.
+     */
+    protected final BackgroundManager backgroundManager =
+            BackgroundManager.getInstance();
     /**
      * Background.
      */
     protected BufferedImage background;
-
     /**
      * Background.
      */
     protected Graphics2D g2Background;
-
     /**
      * Background object.
      */
     protected BackgroundEntity[][] backgroundObject;
-
     /**
      * Status bar.
      */
     protected StatusBar statusBar;
-
     /**
      * Screen type.
      */
-    protected EnumScreenType screenType ;
-
+    protected EnumScreenType screenType;
     /**
      * Screen width.
      */
     protected int screenWidthBlock;
-
     /**
      * Screen height.
      */
     protected int screenHeightBlock;
 
     /**
-     * Message dispatcher.
-     */
-    protected final MessageDispatcher messageDispatcher =
-            ObjectInstanceFactory.getNewMsgDispatcher();
-
-    /**
-     * Background manager.
-     */
-    protected final BackgroundManager backgroundManager =
-            BackgroundManager.getInstance();
-
-    /**
      * Level configuration.
      *
-     * @param cfgLevel  configuration of level
+     * @param cfgLevel configuration of level
      */
     public AbstractBackgroundJillLevel(final LevelConfiguration cfgLevel) {
         this.levelConfiguration = cfgLevel;
     }
 
     /**
-     * Create status bar with inventory.
-     */
-    protected final void createStatusBar() {
-        this.statusBar = new StatusBar(this.pictureCache, this.screenType);
-
-        messageDispatcher.addHandler(EnumMessageType.MESSAGE_STATUS_BAR,
-                statusBar);
-
-        screenWidthBlock =
-                (this.statusBar.getGameAreaConf().getWidth()
-                / JillConst.getBlockSize()) + 1;
-        screenHeightBlock =
-                (this.statusBar.getGameAreaConf().getHeight()
-                / JillConst.getBlockSize()) + 1;
-
-        messageDispatcher.addHandler(EnumMessageType.BACKGROUND,
-                this);
-    }
-
-    /**
      * Fill picture in black.
      *
-     * @param image picture
-     * @param g2 graphic 2d object
+     * @param image     picture
+     * @param g2        graphic 2d object
      * @param backColor color
      */
     protected static void fillPicture(final BufferedImage image,
@@ -140,9 +112,29 @@ public abstract class AbstractBackgroundJillLevel
     }
 
     /**
+     * Create status bar with inventory.
+     */
+    protected final void createStatusBar() {
+        this.statusBar = new StatusBar(this.pictureCache, this.screenType);
+
+        messageDispatcher.addHandler(EnumMessageType.MESSAGE_STATUS_BAR,
+                statusBar);
+
+        screenWidthBlock =
+                (this.statusBar.getGameAreaConf().getWidth()
+                        / JillConst.getBlockSize()) + 1;
+        screenHeightBlock =
+                (this.statusBar.getGameAreaConf().getHeight()
+                        / JillConst.getBlockSize()) + 1;
+
+        messageDispatcher.addHandler(EnumMessageType.BACKGROUND,
+                this);
+    }
+
+    /**
      * Load current level.
      *
-     * @throws IOException if error
+     * @throws IOException                  if error
      * @throws ReflectiveOperationException if error
      */
     protected final void loadLevel() throws IOException, ReflectiveOperationException {
@@ -162,7 +154,7 @@ public abstract class AbstractBackgroundJillLevel
         dmaFile = pictureCache.getDmaFile();
 
         if (this.levelConfiguration.getLevelData() == null) {
-            jnFile =  getJnFile(this.levelConfiguration.getJnFileName(),
+            jnFile = getJnFile(this.levelConfiguration.getJnFileName(),
                     filePath);
         } else {
             // In case of restore map level
@@ -183,10 +175,10 @@ public abstract class AbstractBackgroundJillLevel
     protected final void createBackgound() {
         // Buffer image
         background =
-            new BufferedImage(
-                    BackgroundLayer.MAP_WIDTH * JillConst.getBlockSize(),
-                BackgroundLayer.MAP_HEIGHT * JillConst.getBlockSize(),
-                BufferedImage.TYPE_INT_ARGB);
+                new BufferedImage(
+                        BackgroundLayer.MAP_WIDTH * JillConst.getBlockSize(),
+                        BackgroundLayer.MAP_HEIGHT * JillConst.getBlockSize(),
+                        BufferedImage.TYPE_INT_ARGB);
         // Graphic
         g2Background = background.createGraphics();
 
@@ -203,7 +195,7 @@ public abstract class AbstractBackgroundJillLevel
      *
      * @param startX block start
      * @param startY block start
-     * @param width block end
+     * @param width  block end
      * @param height block end
      */
     protected final void initBackgroundPicture(final int startX,
@@ -233,9 +225,9 @@ public abstract class AbstractBackgroundJillLevel
 
                 if (de == null) {
                     LOGGER.log(Level.SEVERE,
-                        String.format(
-                            "DmaEntry '%d' not found at %d/%d", mapCode,
-                            indexX, indexY));
+                            String.format(
+                                    "DmaEntry '%d' not found at %d/%d", mapCode,
+                                    indexX, indexY));
 
                     // Stange bug in map !
                     de = dmaFile.getDmaEntry(0);
@@ -296,10 +288,10 @@ public abstract class AbstractBackgroundJillLevel
      * Draw one tile on picture.
      *
      * @param tileSetIndex tile set index
-     * @param tileIndex tile index
-     * @param x x
-     * @param y y
-     * @param g2 graphic 2d object
+     * @param tileIndex    tile index
+     * @param x            x
+     * @param y            y
+     * @param g2           graphic 2d object
      */
     protected final void drawOneTile(final int tileSetIndex,
             final int tileIndex, final int x, final int y,
@@ -353,9 +345,9 @@ public abstract class AbstractBackgroundJillLevel
 
         if (de == null) {
             LOGGER.log(Level.SEVERE,
-                String.format(
-                    "DmaEntry '%d' not found at %d/%d", mapCode,
-                    indexX, indexY));
+                    String.format(
+                            "DmaEntry '%d' not found at %d/%d", mapCode,
+                            indexX, indexY));
 
             // Stange bug in map !
             de = dmaFile.getDmaEntry(0);

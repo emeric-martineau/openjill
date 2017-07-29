@@ -1,6 +1,5 @@
 package org.jill.game.screen;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
@@ -9,6 +8,7 @@ import java.io.InputStream;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import org.jill.game.screen.conf.GameAreaConf;
 import org.jill.game.screen.conf.ImagesConf;
 import org.jill.game.screen.conf.RectangleConf;
@@ -21,6 +21,7 @@ import org.jill.openjill.core.api.message.InterfaceMessageGameHandler;
 import org.jill.openjill.core.api.message.statusbar.StatusBarTextMessage;
 import org.jill.openjill.core.api.screen.EnumScreenType;
 import org.simplegame.SimpleGameConfig;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  * Status bar.
@@ -32,48 +33,42 @@ public final class StatusBar implements InterfaceMessageGameHandler {
      * Logger.
      */
     private static final Logger LOGGER = Logger.getLogger(
-                    StatusBar.class.getName());
+            StatusBar.class.getName());
 
     /**
      * Picture cache.
      */
     private final TileManager pictureCache;
-
-    /**
-     * Background.
-     */
-    private BufferedImage statusBar;
-
-    /**
-     * Graphic of status bar.
-     */
-    private Graphics2D graphic2d;
-
     /**
      * Game screen.
      */
     private final BufferedImage gameScreen;
-
     /**
      * Graphic of status bar.
      */
     private final Graphics2D g2GameScreen;
-
+    /**
+     * Configuration.
+     */
+    private final StatusBarConf conf;
+    /**
+     * Background.
+     */
+    private BufferedImage statusBar;
+    /**
+     * Graphic of status bar.
+     */
+    private Graphics2D graphic2d;
     /**
      * Wait time before cleat text in bottom of screen.
      */
     private int waitTimeBeforeClearText = -1;
 
     /**
-     * Configuration.
-     */
-    private final StatusBarConf conf;
-
-    /**
      * Create status bar.
      *
      * @param pictureCacheManager cache manager
-     * @param screen screen type
+     * @param screen              screen type
      */
     public StatusBar(final TileManager pictureCacheManager,
             final EnumScreenType screen) {
@@ -98,7 +93,6 @@ public final class StatusBar implements InterfaceMessageGameHandler {
      * Read config file.
      *
      * @param filename final name of config file
-     *
      * @return properties file
      */
     private static StatusBarConf readConf(final String filename) {
@@ -115,9 +109,9 @@ public final class StatusBar implements InterfaceMessageGameHandler {
             mc = mapper.readValue(is, StatusBarConf.class);
         } catch (IOException ex) {
             LOGGER.log(Level.SEVERE,
-                String.format("Unable to load config for statusbar '%s'",
-                        filename),
-                ex);
+                    String.format("Unable to load config for statusbar '%s'",
+                            filename),
+                    ex);
 
             mc = null;
         }
@@ -131,9 +125,9 @@ public final class StatusBar implements InterfaceMessageGameHandler {
     private void createStatusBar() {
         // Buffer image
         this.statusBar =
-            new BufferedImage(SimpleGameConfig.getInstance().getGameWidth(),
-                SimpleGameConfig.getInstance().getGameHeight(),
-                    BufferedImage.TYPE_INT_ARGB);
+                new BufferedImage(SimpleGameConfig.getInstance().getGameWidth(),
+                        SimpleGameConfig.getInstance().getGameHeight(),
+                        BufferedImage.TYPE_INT_ARGB);
         // Graphic
         this.graphic2d = this.statusBar.createGraphics();
 
@@ -148,13 +142,13 @@ public final class StatusBar implements InterfaceMessageGameHandler {
         for (TextToDraw ttd : this.conf.getText()) {
             this.pictureCache.getTextManager().drawSmallText(this.graphic2d,
                     ttd.getX(), ttd.getY(), ttd.getText(), ttd.getColor(),
-                TextManager.BACKGROUND_COLOR_NONE);
+                    TextManager.BACKGROUND_COLOR_NONE);
         }
 
         for (TextToDraw ttd : this.conf.getBigtext()) {
             this.pictureCache.getTextManager().drawBigText(this.graphic2d,
                     ttd.getX(), ttd.getY(), ttd.getText(), ttd.getColor(),
-                TextManager.BACKGROUND_COLOR_NONE);
+                    TextManager.BACKGROUND_COLOR_NONE);
         }
 
     }
@@ -162,15 +156,15 @@ public final class StatusBar implements InterfaceMessageGameHandler {
     /**
      * Draw message bar.
      *
-     * @param g2 graphic 2d
-     * @param msg message
-     * @param color  color
+     * @param g2    graphic 2d
+     * @param msg   message
+     * @param color color
      */
     private void drawMessageBar(final Graphics2D g2, final String msg,
             final int color) {
         final RectangleConf mb = this.conf.getMessageBar();
         final Color bgcolor = pictureCache.getColorMap()[
-                    Integer.valueOf(mb.getColor())];
+                Integer.valueOf(mb.getColor())];
         g2.setColor(new Color(bgcolor.getRGB()));
 
         g2.fillRect(mb.getX(), mb.getY(), mb.getWidth(), mb.getHeight());
@@ -193,16 +187,16 @@ public final class StatusBar implements InterfaceMessageGameHandler {
      * Draw one tile on picture.
      *
      * @param tileSetIndex tileset index
-     * @param tileIndex tile index
-     * @param x x
-     * @param y y
-     * @param g2 graphic 2d
+     * @param tileIndex    tile index
+     * @param x            x
+     * @param y            y
+     * @param g2           graphic 2d
      */
     private void drawOneTile(final int tileSetIndex, final int tileIndex,
             final int x, final int y, final Graphics2D g2) {
         // Left upper corner
         final BufferedImage tilePicture = pictureCache.getImage(
-                tileSetIndex,tileIndex);
+                tileSetIndex, tileIndex);
         g2.drawImage(tilePicture, x, y, null);
     }
 
@@ -236,21 +230,21 @@ public final class StatusBar implements InterfaceMessageGameHandler {
                 BufferedImage.TYPE_INT_ARGB);
 
         final Color baseColor = pictureCache.getColorMap()[
-                    Integer.valueOf(invArea.getColor())];
+                Integer.valueOf(invArea.getColor())];
 
         Graphics2D g2BoxPicture = bf.createGraphics();
 
         g2BoxPicture.setColor(new Color(baseColor.getRGB()));
 
         g2BoxPicture.fillRect(0, 0,
-                    invArea.getWidth(), invArea.getHeight());
+                invArea.getWidth(), invArea.getHeight());
 
         List<ImagesConf> imagesInvenroy = this.conf.getImagesInvenroy();
 
         if (imagesInvenroy != null) {
             for (ImagesConf ic : imagesInvenroy) {
-            drawOneTile(ic.getTileset(), ic.getTile(), ic.getX(), ic.getY(),
-                    g2BoxPicture);
+                drawOneTile(ic.getTileset(), ic.getTile(), ic.getX(), ic.getY(),
+                        g2BoxPicture);
             }
         }
 
@@ -274,9 +268,9 @@ public final class StatusBar implements InterfaceMessageGameHandler {
      * @return picutre
      */
     public BufferedImage createGameScreen() {
-         return new BufferedImage(this.conf.getGameArea().getWidth(),
-                 this.conf.getGameArea().getHeight(),
-                 BufferedImage.TYPE_INT_ARGB);
+        return new BufferedImage(this.conf.getGameArea().getWidth(),
+                this.conf.getGameArea().getHeight(),
+                BufferedImage.TYPE_INT_ARGB);
     }
 
     /**
@@ -303,8 +297,8 @@ public final class StatusBar implements InterfaceMessageGameHandler {
      * Draw picture in game screen area.
      *
      * @param gS full picture
-     * @param x start position in gS picture to draw
-     * @param y start position in gS picture to draw
+     * @param x  start position in gS picture to draw
+     * @param y  start position in gS picture to draw
      */
     public void drawGameScreen(final BufferedImage gS, final int x,
             final int y) {
@@ -330,13 +324,13 @@ public final class StatusBar implements InterfaceMessageGameHandler {
 
     @Override
     public void recieveMessage(EnumMessageType type, Object msg) {
-        switch(type) {
-            case MESSAGE_STATUS_BAR :
+        switch (type) {
+            case MESSAGE_STATUS_BAR:
                 StatusBarTextMessage sbt = (StatusBarTextMessage) msg;
                 drawMessageBar(graphic2d, sbt.getMessage(), sbt.getColor());
                 this.waitTimeBeforeClearText = sbt.getDuration();
                 break;
-            default :
+            default:
                 // Nothing
         }
     }

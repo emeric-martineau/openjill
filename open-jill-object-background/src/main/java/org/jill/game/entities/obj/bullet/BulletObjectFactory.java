@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import org.jill.openjill.core.api.entities.ObjectEntity;
 import org.jill.openjill.core.api.message.EnumMessageType;
 import org.jill.openjill.core.api.message.MessageDispatcher;
@@ -98,6 +99,6 @@ public final class BulletObjectFactory {
         }
 
         messageDispatcher.sendMessage(EnumMessageType.OBJECT,
-                new ObjectListMessage(listBullet, true)) ;
+                new ObjectListMessage(listBullet, true));
     }
 }

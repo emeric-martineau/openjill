@@ -1,6 +1,7 @@
 package org.jill.game.entities.obj;
 
 import java.awt.image.BufferedImage;
+
 import org.jill.game.entities.obj.abs.AbstractHitPlayerObjectEntity;
 import org.jill.openjill.core.api.entities.BackgroundEntity;
 import org.jill.openjill.core.api.entities.ObjectEntity;
@@ -68,11 +69,11 @@ public final class GhostManager extends AbstractHitPlayerObjectEntity {
         int numberTileSet = getConfInteger("numberTileSet");
 
         this.images
-            = new BufferedImage[numberTileSet];
+                = new BufferedImage[numberTileSet];
 
         for (int index = 0; index < numberTileSet; index++) {
             this.images[index]
-                = this.pictureCache.getImage(tileSetIndex, tileIndex
+                    = this.pictureCache.getImage(tileSetIndex, tileIndex
                     + index);
         }
     }
@@ -128,11 +129,11 @@ public final class GhostManager extends AbstractHitPlayerObjectEntity {
             setySpeed(0);
 
             if (!isRightBorder && this.backMap[blockX + 1][blockY].getMapCode()
-                == currentMapCode) {
+                    == currentMapCode) {
                 setxSpeed(this.getCounter());
             } else if (blockX > 0
                     && this.backMap[blockX - 1][blockY].getMapCode()
-                == currentMapCode) {
+                    == currentMapCode) {
                 setxSpeed(this.getCounter() * X_SPEED_LEFT);
             } else if (getySpeed() > Y_SPEED_MIDDLE) {
                 // Go down

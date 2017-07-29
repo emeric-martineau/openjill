@@ -1,11 +1,12 @@
 package org.jill.sha;
 
 import java.io.IOException;
+
 import org.jill.file.FileAbstractByte;
 
 /**
  * Read SHA (picture) file.
- * 
+ *
  * @author emeric_martineau
  */
 public interface ShaFile {
@@ -14,7 +15,6 @@ public interface ShaFile {
      * Constructor of class ShaFile.java.
      *
      * @param shaFile file data
-     *
      * @throws IOException if error
      */
     void load(String shaFile) throws IOException;
@@ -23,7 +23,6 @@ public interface ShaFile {
      * Constructor of class ShaFile.java.
      *
      * @param shaFile file data
-     *
      * @throws IOException if error
      */
     void load(FileAbstractByte shaFile) throws IOException;

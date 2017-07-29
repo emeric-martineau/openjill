@@ -1,6 +1,7 @@
 package org.jill.game.entities.obj;
 
 import java.awt.image.BufferedImage;
+
 import org.jill.game.entities.obj.abs.AbstractFireHitPlayerObject;
 import org.jill.openjill.core.api.entities.ObjectEntity;
 import org.jill.openjill.core.api.entities.ObjectParam;
@@ -37,9 +38,9 @@ public final class FlameManager extends AbstractFireHitPlayerObject {
         int numberTileSet = getConfInteger("numberTileSet");
 
         this.imagesUp
-            = new BufferedImage[numberTileSet * 2];
+                = new BufferedImage[numberTileSet * 2];
         this.imagesDown
-            = new BufferedImage[this.imagesUp.length];
+                = new BufferedImage[this.imagesUp.length];
 
         initPicture(this.imagesUp, numberTileSet, tileSetIndex, tileIndex);
         initPicture(this.imagesDown, numberTileSet, tileSetIndex,
@@ -55,10 +56,10 @@ public final class FlameManager extends AbstractFireHitPlayerObject {
     /**
      * Load picture.
      *
-     * @param images picture arry
+     * @param images        picture arry
      * @param numberTileSet number of tileset
-     * @param tileSetIndex tileset
-     * @param tileIndex tile
+     * @param tileSetIndex  tileset
+     * @param tileIndex     tile
      */
     private void initPicture(final BufferedImage[] images,
             final int numberTileSet, final int tileSetIndex,
@@ -67,7 +68,7 @@ public final class FlameManager extends AbstractFireHitPlayerObject {
 
         for (int index = 0; index < numberTileSet; index++) {
             images[indexArray]
-                = this.pictureCache.getImage(tileSetIndex, tileIndex
+                    = this.pictureCache.getImage(tileSetIndex, tileIndex
                     + index);
             images[indexArray + 1] = images[indexArray];
 

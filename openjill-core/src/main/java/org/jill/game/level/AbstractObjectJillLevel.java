@@ -6,16 +6,17 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import org.jill.game.config.ObjectInstanceFactory;
 import org.jill.game.level.cfg.LevelConfiguration;
 import org.jill.game.manager.object.ObjectManager;
-import org.jill.openjill.core.api.message.object.CreateObjectMessage;
-import org.jill.openjill.core.api.message.object.ObjectListMessage;
 import org.jill.jn.ObjectItem;
 import org.jill.openjill.core.api.entities.ObjectEntity;
 import org.jill.openjill.core.api.entities.ObjectParam;
 import org.jill.openjill.core.api.jill.JillConst;
 import org.jill.openjill.core.api.message.EnumMessageType;
+import org.jill.openjill.core.api.message.object.CreateObjectMessage;
+import org.jill.openjill.core.api.message.object.ObjectListMessage;
 import org.jill.openjill.core.api.message.object.ReplaceObjectMessage;
 import org.simplegame.InterfaceSimpleGameHandleInterface;
 import org.simplegame.SimpleGameHandler;
@@ -27,59 +28,51 @@ import org.simplegame.SimpleGameKeyHandler;
  * @author Emeric MARTINEAU
  */
 public abstract class AbstractObjectJillLevel
-    extends AbstractBackgroundJillLevel {
+        extends AbstractBackgroundJillLevel {
 
     /**
      * Logger.
      */
     private static final Logger LOGGER = Logger.getLogger(
-        AbstractObjectJillLevel.class.getName());
-
+            AbstractObjectJillLevel.class.getName());
+    /**
+     * List of object.
+     */
+    protected final List<ObjectEntity> listObject = new ArrayList<>();
+    /**
+     * List of object.
+     */
+    protected final List<ObjectEntity> listObjectToRemove = new ArrayList<>();
+    /**
+     * List of object.
+     */
+    protected final List<ObjectEntity> listObjectToAdd = new ArrayList<>();
+    /**
+     * List of object always display on screen.
+     */
+    protected final List<ObjectEntity> listObjectAlwaysOnScreen = new ArrayList<>();
+    /**
+     * List of object on draw background (keep reference for save file).
+     */
+    protected final List<ObjectEntity> listObjectDrawOnBackground = new ArrayList<>();
     /**
      * Keyboard.
      */
     protected SimpleGameKeyHandler keyboard;
-
     /**
      * Object cache.
      */
     protected ObjectManager objectCache;
 
     /**
-     * List of object.
-     */
-    protected final List<ObjectEntity> listObject = new ArrayList<>();
-
-    /**
-     * List of object.
-     */
-    protected final List<ObjectEntity> listObjectToRemove = new ArrayList<>();
-
-    /**
-     * List of object.
-     */
-    protected final List<ObjectEntity> listObjectToAdd = new ArrayList<>();
-
-    /**
-     * List of object always display on screen.
-     */
-    protected final List<ObjectEntity> listObjectAlwaysOnScreen = new ArrayList<>();
-
-    /**
-     * List of object on draw background (keep reference for save file).
-     */
-    protected final List<ObjectEntity> listObjectDrawOnBackground = new ArrayList<>();
-
-    /**
      * Level configuration.
      *
      * @param cfgLevel configuration of level
-     *
-     * @throws IOException if error reading file
+     * @throws IOException                  if error reading file
      * @throws ReflectiveOperationException if error create class of object
      */
     public AbstractObjectJillLevel(final LevelConfiguration cfgLevel)
-        throws IOException, ReflectiveOperationException {
+            throws IOException, ReflectiveOperationException {
         super(cfgLevel);
 
         constructor();
@@ -88,7 +81,7 @@ public abstract class AbstractObjectJillLevel
     /**
      * Construct object.
      *
-     * @throws IOException if error reading file
+     * @throws IOException                  if error reading file
      * @throws ReflectiveOperationException if error create class of object
      */
     private void constructor() throws IOException, ReflectiveOperationException {
@@ -118,8 +111,8 @@ public abstract class AbstractObjectJillLevel
         // Object parameter
         final ObjectParam objParam = ObjectInstanceFactory.getNewObjParam();
         objParam.init(this.backgroundObject,
-            this.pictureCache, this.messageDispatcher,
-            this.levelConfiguration.getLevelNumber());
+                this.pictureCache, this.messageDispatcher,
+                this.levelConfiguration.getLevelNumber());
 
         // Current object
         ObjectEntity obj;
@@ -134,12 +127,12 @@ public abstract class AbstractObjectJillLevel
             // No manager found for this object
             if (obj == null) {
                 LOGGER.warning(String.format("The object with type %d is not "
-                    + "implemented", currentObject.getType()));
+                        + "implemented", currentObject.getType()));
                 continue;
             }
 
             if (obj.isWriteOnBackGround()
-                && checkIfNotUpdatableBackground(obj)) {
+                    && checkIfNotUpdatableBackground(obj)) {
                 listObjectDrawOnBackground.add(obj);
 
                 // Object draw in background only if object can this and not
@@ -163,11 +156,10 @@ public abstract class AbstractObjectJillLevel
      * Check if background have update.
      *
      * @param obj object
-     *
      * @return true if background not updatable
      */
     protected final boolean checkIfNotUpdatableBackground(
-        final ObjectEntity obj) {
+            final ObjectEntity obj) {
         final int blockSize = JillConst.getBlockSize();
 
         final int startX = obj.getX() / blockSize;
@@ -204,7 +196,7 @@ public abstract class AbstractObjectJillLevel
     public void recieveMessage(final EnumMessageType type, final Object msg) {
         super.recieveMessage(type, msg);
 
-        switch(type) {
+        switch (type) {
             case OBJECT:
                 recieveMessageListObject((ObjectListMessage) msg);
                 break;
@@ -276,8 +268,8 @@ public abstract class AbstractObjectJillLevel
         final ObjectParam objParam = ObjectInstanceFactory.getNewObjParam();
 
         objParam.init(this.backgroundObject,
-            this.pictureCache, this.messageDispatcher,
-            this.levelConfiguration.getLevelNumber());
+                this.pictureCache, this.messageDispatcher,
+                this.levelConfiguration.getLevelNumber());
 
         objParam.setObject(oe);
 
@@ -286,7 +278,7 @@ public abstract class AbstractObjectJillLevel
 
         if (obj == null) {
             LOGGER.severe(String.format("Can't find object type '%d' to create"
-                + "it at runtime", oe.getType()));
+                    + "it at runtime", oe.getType()));
         } else {
             com.setObject(obj);
         }

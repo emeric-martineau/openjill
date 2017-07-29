@@ -4,7 +4,6 @@
 package org.jill.sha.ui.filter;
 
 import java.io.File;
-
 import javax.swing.filechooser.FileFilter;
 
 /**
@@ -15,34 +14,31 @@ import javax.swing.filechooser.FileFilter;
  */
 public class FileExtension extends FileFilter {
     /**
-     * Extension of file
-     */
-    private String extension ;
-    
-    /**
      * Description
      */
-    private final String description ;
-    
+    private final String description;
+    /**
+     * Extension of file
+     */
+    private String extension;
+
     /**
      * Constructor
      */
-    public FileExtension(final String extension, final String description)
-    {
-        if (extension != null)
-        {
-            this.extension = extension.toLowerCase() ;
+    public FileExtension(final String extension, final String description) {
+        if (extension != null) {
+            this.extension = extension.toLowerCase();
         }
-        
-        this.description = description ;
+
+        this.description = description;
     }
-    
+
     /* (non-Javadoc)
      * @see javax.swing.filechooser.FileFilter#accept(java.io.File)
      */
     @Override
     public boolean accept(File f) {
-        return (testFile(f.getAbsolutePath()) || f.isDirectory()) ;
+        return (testFile(f.getAbsolutePath()) || f.isDirectory());
     }
 
     /* (non-Javadoc)
@@ -50,20 +46,18 @@ public class FileExtension extends FileFilter {
      */
     @Override
     public String getDescription() {
-        return description ;
+        return description;
     }
 
     /**
      * Test file name.
      * Return false if extension is empty or null for return only directory.
-     * 
+     *
      * @param fileName file name to read
-     * 
      * @return true if file exists
      */
-    private boolean testFile(final String fileName)
-    {
+    private boolean testFile(final String fileName) {
         return ((extension != null) && (!"".equals(extension)) &&
-                fileName.toLowerCase().endsWith(extension)) ;
+                fileName.toLowerCase().endsWith(extension));
     }
 }

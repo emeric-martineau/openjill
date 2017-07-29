@@ -1,15 +1,15 @@
 package org.jill.game.entities.obj;
 
 import java.awt.image.BufferedImage;
+
 import org.jill.game.entities.obj.abs.AbstractParameterObjectEntity;
-import org.jill.openjill.core.api.message.object.ObjectListMessage;
-import org.jill.openjill.core.api.message.statusbar.inventory.
-        InventoryPointMessage;
 import org.jill.openjill.core.api.entities.ObjectEntity;
 import org.jill.openjill.core.api.entities.ObjectParam;
 import org.jill.openjill.core.api.keyboard.KeyboardLayout;
 import org.jill.openjill.core.api.message.EnumMessageType;
+import org.jill.openjill.core.api.message.object.ObjectListMessage;
 import org.jill.openjill.core.api.message.statusbar.inventory.InventoryLifeMessage;
+import org.jill.openjill.core.api.message.statusbar.inventory.InventoryPointMessage;
 
 /**
  * Apple object.
@@ -49,13 +49,13 @@ public final class AppleManager extends AbstractParameterObjectEntity {
         // Load picture for each object. Don't use cache cause some picture
         // change between jill episod.
         this.images
-            = new BufferedImage[numberTileSet * 2];
+                = new BufferedImage[numberTileSet * 2];
 
         int indexArray = (numberTileSet * 2) - 1;
 
         for (int index = 0; index < numberTileSet; index++) {
             this.images[indexArray]
-                = this.pictureCache.getImage(tileSetIndex, tileIndex
+                    = this.pictureCache.getImage(tileSetIndex, tileIndex
                     + index);
             this.images[indexArray - 1] = this.images[indexArray];
 
@@ -75,8 +75,8 @@ public final class AppleManager extends AbstractParameterObjectEntity {
             if (this.getState() == 0) {
                 this.messageDispatcher.sendMessage(
                         EnumMessageType.INVENTORY_POINT,
-                    new InventoryPointMessage(getConfInteger("point"), true,
-                    this, obj));
+                        new InventoryPointMessage(getConfInteger("point"), true,
+                                this, obj));
 
                 this.messageDispatcher.sendMessage(
                         EnumMessageType.INVENTORY_LIFE,
@@ -88,7 +88,7 @@ public final class AppleManager extends AbstractParameterObjectEntity {
                 }
             } else {
                 Integer msgId = (getState() + getConfInteger("boxMsgOffset"))
-                                & getConfInteger("boxMsgMask") ;
+                        & getConfInteger("boxMsgMask");
                 this.messageDispatcher.sendMessage(
                         EnumMessageType.MESSAGE_BOX, msgId);
             }

@@ -20,12 +20,12 @@ public class GameAreaBorderConf {
      * The top of the border.
      */
     private int top;
-    
+
     /**
      * The bottom of the border.
      */
     private int bottom;
-    
+
     /**
      * The left of the border.
      *
@@ -61,37 +61,37 @@ public class GameAreaBorderConf {
     public void setRight(final int h) {
         this.right = h;
     }
-    
+
     /**
      * The top of the border.
-     * 
+     *
      * @return top
      */
     public int getTop() {
         return top;
     }
-    
+
     /**
      * The top of the border.
-     * 
+     *
      * @param t top
      */
     public void setTop(final int t) {
         top = t;
     }
-    
+
     /**
      * The bottom of the border.
-     * 
+     *
      * @return bottom
      */
     public int getBottom() {
         return bottom;
     }
-    
+
     /**
      * The bottom of the border.
-     * 
+     *
      * @param b bottom
      */
     public void setBottom(final int b) {

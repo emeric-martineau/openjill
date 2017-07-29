@@ -1,16 +1,16 @@
 package org.jill.game.entities.obj;
 
 import java.awt.image.BufferedImage;
-import org.jill.openjill.core.api.entities.ObjectEntity;
+
 import org.jill.game.entities.obj.abs.AbstractHitPlayerObjectEntity;
 import org.jill.game.entities.obj.util.UtilityObjectEntity;
+import org.jill.openjill.core.api.entities.BackgroundEntity;
+import org.jill.openjill.core.api.entities.ObjectEntity;
 import org.jill.openjill.core.api.entities.ObjectParam;
+import org.jill.openjill.core.api.keyboard.KeyboardLayout;
 import org.jill.openjill.core.api.message.EnumMessageType;
 import org.jill.openjill.core.api.message.object.ObjectListMessage;
-import org.jill.openjill.core.api.message.statusbar.inventory.
-        InventoryPointMessage;
-import org.jill.openjill.core.api.entities.BackgroundEntity;
-import org.jill.openjill.core.api.keyboard.KeyboardLayout;
+import org.jill.openjill.core.api.message.statusbar.inventory.InventoryPointMessage;
 
 /**
  * Crab.
@@ -83,19 +83,19 @@ public final class CrabManager extends AbstractHitPlayerObjectEntity {
     /**
      * Init picutre.
      *
-     * @param images image array
+     * @param images        image array
      * @param numberTileSet number of tile
-     * @param tileSetIndex tile set index
-     * @param tileIndex tile index start
+     * @param tileSetIndex  tile set index
+     * @param tileIndex     tile index start
      */
     private void initPicture(final BufferedImage[] images,
-        final int numberTileSet, final int tileSetIndex, final int tileIndex) {
+            final int numberTileSet, final int tileSetIndex, final int tileIndex) {
 
         final int end = tileIndex + numberTileSet;
 
         for (int index = tileIndex; index < end; index++) {
             images[index] = this.pictureCache.getImage(tileSetIndex,
-                index);
+                    index);
         }
     }
 
@@ -128,17 +128,17 @@ public final class CrabManager extends AbstractHitPlayerObjectEntity {
     private void moveFloor() {
         if (!((this.xSpeed < ObjectEntity.X_SPEED_MIDDLE)
                 && UtilityObjectEntity.moveObjectLeftOnFloor(this, this.xSpeed,
-                        this.backgroundObject)
+                this.backgroundObject)
                 || (this.xSpeed > ObjectEntity.X_SPEED_MIDDLE)
                 && UtilityObjectEntity.moveObjectRightOnFloor(this, this.xSpeed,
-                        this.backgroundObject))) {
+                this.backgroundObject))) {
             // Change way
             if (this.xSpeed == 0) {
                 this.xSpeed = this.defaultMvtSize;
             } else {
                 this.xSpeed *= -1;
             }
-            
+
             this.counter = 0;
         }
     }
@@ -149,12 +149,12 @@ public final class CrabManager extends AbstractHitPlayerObjectEntity {
     private void moveUpDown() {
         if (this.ySpeed < ObjectEntity.Y_SPEED_MIDDLE) {
             if (!UtilityObjectEntity.moveObjectUp(this, this.ySpeed,
-                        this.backgroundObject)) {
+                    this.backgroundObject)) {
                 this.ySpeed *= -1;
             }
         } else if (this.ySpeed > ObjectEntity.Y_SPEED_MIDDLE) {
             if (!UtilityObjectEntity.moveObjectDown(this, this.ySpeed,
-                        this.backgroundObject)) {
+                    this.backgroundObject)) {
                 setState(0);
                 setySpeed(0);
             }
@@ -176,11 +176,11 @@ public final class CrabManager extends AbstractHitPlayerObjectEntity {
 
     @Override
     public void msgKill(final ObjectEntity sender,
-        final int nbLife, final int typeOfDeath) {
+            final int nbLife, final int typeOfDeath) {
         this.messageDispatcher.sendMessage(EnumMessageType.INVENTORY_POINT,
-            new InventoryPointMessage(getConfInteger("point"), true,
-                    this, sender));
+                new InventoryPointMessage(getConfInteger("point"), true,
+                        this, sender));
         this.messageDispatcher.sendMessage(EnumMessageType.OBJECT,
-            this.killme);
+                this.killme);
     }
 }

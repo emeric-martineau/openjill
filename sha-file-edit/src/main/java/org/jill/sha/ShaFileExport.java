@@ -1,4 +1,4 @@
-package org.jill.sha;   
+package org.jill.sha;
 
 public class ShaFileExport {
 
@@ -7,7 +7,7 @@ public class ShaFileExport {
         //creating and showing this application's GUI.
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                new ShaFileExportFrame() ;
+                new ShaFileExportFrame();
             }
         });
     }

@@ -2,11 +2,12 @@ package org.jill.game.level.handler.jill1;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+
 import org.jill.game.gui.menu.ClassicMenu;
 import org.jill.game.gui.menu.HighScoreMenu;
-import org.jill.game.screen.conf.RectangleConf;
 import org.jill.game.level.AbstractChangeLevel;
 import org.jill.game.level.cfg.JillLevelConfiguration;
+import org.jill.game.screen.conf.RectangleConf;
 import org.jill.openjill.core.api.jill.JillConst;
 
 /**
@@ -18,12 +19,12 @@ public class StartMenuJill1Handler extends AbstractChangeLevel {
     /**
      * Default constructor of level.
      *
-     * @throws IOException if missing file
+     * @throws IOException                  if missing file
      * @throws ReflectiveOperationException if missing class must be load
      */
     public StartMenuJill1Handler() throws IOException, ReflectiveOperationException {
         super(new JillLevelConfiguration("JILL1.SHA", "INTRO.JN1", "JILL1.VCL",
-            "JILL1.CFG", "JN1", StartMenuJill1Handler.class, false));
+                "JILL1.CFG", "JN1", StartMenuJill1Handler.class, false));
         centerScreen();
 
         infoBox.setContent(vclFile.getVclText().get(0).getText());
@@ -97,8 +98,8 @@ public class StartMenuJill1Handler extends AbstractChangeLevel {
                 this.statusBar.getControlAreaConf();
 
         new HighScoreMenu(highScore, pictureCache,
-            cfgFile.getHighScore(), controlAreaConf.getX(),
-            controlAreaConf.getY());
+                cfgFile.getHighScore(), controlAreaConf.getX(),
+                controlAreaConf.getY());
 
         return highScore;
     }
@@ -109,7 +110,7 @@ public class StartMenuJill1Handler extends AbstractChangeLevel {
         final int blocOffsetY = 53;
 
         final RectangleConf offset
-            = this.statusBar.getGameAreaConf().getOffset();
+                = this.statusBar.getGameAreaConf().getOffset();
 
         // Picture offset
         offset.setX(

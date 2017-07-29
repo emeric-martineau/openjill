@@ -1,11 +1,12 @@
 package org.jill.game.entities.obj;
 
 import java.awt.image.BufferedImage;
-import org.jill.openjill.core.api.entities.ObjectEntity;
+
 import org.jill.game.entities.obj.abs.AbstractHitPlayerObjectEntity;
 import org.jill.game.entities.obj.util.UtilityObjectEntity;
-import org.jill.openjill.core.api.entities.ObjectParam;
 import org.jill.openjill.core.api.entities.BackgroundEntity;
+import org.jill.openjill.core.api.entities.ObjectEntity;
+import org.jill.openjill.core.api.entities.ObjectParam;
 import org.jill.openjill.core.api.keyboard.KeyboardLayout;
 
 /**
@@ -89,17 +90,17 @@ public final class RollingRockManager extends AbstractHitPlayerObjectEntity {
     /**
      * Init picture.
      *
-     * @param images image array
+     * @param images       image array
      * @param tileSetIndex tile set
-     * @param tileIndex tile index start
+     * @param tileIndex    tile index start
      */
     private void initPicture(final BufferedImage[] images,
-        final int tileSetIndex, final int tileIndex) {
+            final int tileSetIndex, final int tileIndex) {
         final int end = tileIndex + images.length;
 
         for (int index = tileIndex; index < end; index++) {
             images[index - tileIndex] = this.pictureCache.getImage(tileSetIndex,
-                index);
+                    index);
         }
     }
 
@@ -107,10 +108,10 @@ public final class RollingRockManager extends AbstractHitPlayerObjectEntity {
     public void msgUpdate(final KeyboardLayout keyboardLayout) {
         if (((getxSpeed() < X_SPEED_MIDDLE
                 && UtilityObjectEntity.moveObjectLeft(this, getxSpeed(),
-                        backgroundObject))
-            || (getxSpeed() > X_SPEED_MIDDLE
+                backgroundObject))
+                || (getxSpeed() > X_SPEED_MIDDLE
                 && UtilityObjectEntity.moveObjectRight(this, getxSpeed(),
-                        backgroundObject)))) {
+                backgroundObject)))) {
 
             if (getCounter() != this.counterFall) {
                 setCounter(getCounter() + 1);
@@ -121,7 +122,7 @@ public final class RollingRockManager extends AbstractHitPlayerObjectEntity {
             }
         } else if (getxSpeed() == X_SPEED_MIDDLE) {
             if (UtilityObjectEntity.moveObjectRight(this, this.xSpeedFall,
-                        backgroundObject)) {
+                    backgroundObject)) {
                 setxSpeed(this.xSpeedFall);
             } else {
                 setxSpeed(-1 * this.xSpeedFall);

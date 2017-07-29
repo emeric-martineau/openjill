@@ -1,16 +1,16 @@
 package org.jill.game.entities.obj;
 
 import java.awt.image.BufferedImage;
-import org.jill.openjill.core.api.entities.ObjectEntity;
+
 import org.jill.game.entities.obj.abs.AbstractFireHitPlayerObject;
 import org.jill.game.entities.obj.bullet.BulletObjectFactory;
 import org.jill.game.entities.obj.util.UtilityObjectEntity;
-import org.jill.openjill.core.api.entities.ObjectParam;
-import org.jill.openjill.core.api.message.EnumMessageType;
-import org.jill.openjill.core.api.message.statusbar.inventory.
-        InventoryPointMessage;
 import org.jill.openjill.core.api.entities.BackgroundEntity;
+import org.jill.openjill.core.api.entities.ObjectEntity;
+import org.jill.openjill.core.api.entities.ObjectParam;
 import org.jill.openjill.core.api.keyboard.KeyboardLayout;
+import org.jill.openjill.core.api.message.EnumMessageType;
+import org.jill.openjill.core.api.message.statusbar.inventory.InventoryPointMessage;
 
 /**
  * Firebird.
@@ -107,27 +107,26 @@ public final class FirebirdManager extends AbstractFireHitPlayerObject {
     }
 
 
-
     /**
      * Init picture level.
      *
-     * @param images picture array
+     * @param images         picture array
      * @param baseTileNumber number
-     * @param tileSetIndex tileset
-     * @param tileIndex tile
+     * @param tileSetIndex   tileset
+     * @param tileIndex      tile
      */
     private void initPicture(final BufferedImage[] images,
-        final int baseTileNumber, final int tileSetIndex,
-        final int tileIndex) {
+            final int baseTileNumber, final int tileSetIndex,
+            final int tileIndex) {
         for (int index = 0; index < baseTileNumber; index++) {
             images[index] = this.pictureCache.getImage(tileSetIndex,
-                tileIndex + index);
+                    tileIndex + index);
         }
 
         int indexArray = baseTileNumber;
 
         for (int index = baseTileNumber - NUMBER_PICTURE_TO_REMOVE; index > 0;
-            index--) {
+             index--) {
             images[indexArray] = images[index];
             indexArray++;
         }
@@ -181,17 +180,17 @@ public final class FirebirdManager extends AbstractFireHitPlayerObject {
     public void touchPlayer(final ObjectEntity obj,
             final KeyboardLayout keyboardLayout) {
         killMe();
-        
+
         BulletObjectFactory.explode(this, this.nbColoredBullet,
                 this.messageDispatcher);
     }
 
     @Override
     public void msgKill(final ObjectEntity sender,
-        final int nbLife, final int typeOfDeath) {
+            final int nbLife, final int typeOfDeath) {
         this.messageDispatcher.sendMessage(EnumMessageType.INVENTORY_POINT,
-            new InventoryPointMessage(getConfInteger("point"), true,
-                    this, sender));
+                new InventoryPointMessage(getConfInteger("point"), true,
+                        this, sender));
         killMe();
     }
 }

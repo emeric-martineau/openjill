@@ -54,7 +54,6 @@ public final class PictureSynchronizer {
      *
      * @param currentIndex index of object
      * @param bufferPictre picture
-     *
      * @return new index
      */
     public int updatePictureIndex(final int currentIndex,
@@ -85,7 +84,7 @@ public final class PictureSynchronizer {
     /**
      * Return index picture.
      *
-     * @return  index picutre
+     * @return index picutre
      */
     public int getIndexPicture() {
         return this.indexPicture;

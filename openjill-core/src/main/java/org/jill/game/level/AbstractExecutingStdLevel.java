@@ -12,12 +12,11 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
+
 import org.jill.game.gui.menu.ClassicMenu;
 import org.jill.game.gui.menu.MenuInterface;
 import org.jill.game.level.cfg.LevelConfiguration;
 import org.jill.game.manager.object.weapon.ObjectMappingWeapon;
-import org.jill.openjill.core.api.message.statusbar.inventory.EnumInventoryObject;
-import org.jill.openjill.core.api.message.statusbar.inventory.InventoryItemMessage;
 import org.jill.game.screen.ControlArea;
 import org.jill.game.screen.InventoryArea;
 import org.jill.game.screen.conf.RectangleConf;
@@ -27,6 +26,8 @@ import org.jill.openjill.core.api.entities.ObjectEntity;
 import org.jill.openjill.core.api.jill.JillConst;
 import org.jill.openjill.core.api.keyboard.KeyboardLayout;
 import org.jill.openjill.core.api.message.EnumMessageType;
+import org.jill.openjill.core.api.message.statusbar.inventory.EnumInventoryObject;
+import org.jill.openjill.core.api.message.statusbar.inventory.InventoryItemMessage;
 import org.jill.vcl.VclTextEntry;
 import org.simplegame.InterfaceSimpleGameHandleInterface;
 
@@ -41,114 +42,91 @@ public abstract class AbstractExecutingStdLevel extends AbstractMenuJillLevel {
      * Number of pressed key to activate cheat code.
      */
     private static final int CHEAT_CODE_NUMBER = 3;
-
-    /**
-     * Turtle swith.
-     */
-    protected boolean turtleSwitch = false;
-
-    /**
-     * Load game.
-     */
-    protected MenuInterface menuStd;
-
-    /**
-     * Control area.
-     */
-    protected  ControlArea controlArea;
-
-    /**
-     * Inventory area.
-     */
-    protected InventoryArea inventoryArea;
-
-    /**
-     * Screen to draw.
-     */
-    protected BufferedImage drawingScreen;
-
-    /**
-     * G2 for drawing screen.
-     */
-    protected Graphics2D g2DrawingScreen;
-
-    /**
-     * Screen rectangle.
-     */
-    protected Rectangle updateObjectScreenRect;
-
-    /**
-     * Visible screen rectangle.
-     */
-    protected Rectangle visibleScreenRect;
-
-
     /**
      * Object rectangle (only for optimization).
      */
     protected final Rectangle objRect = new Rectangle();
-
     /**
      * Player rectangle (only for optimization).
      */
     protected final Rectangle obj2Rect = new Rectangle();
-
-    /**
-     * If need update inventory screen.
-     */
-    protected boolean updateInventoryScreen = false;
-
-    /**
-     * Keyboard object share between object (include player).
-     */
-    protected KeyboardLayout keyboardLayout;
-
     /**
      * Object to draw.
      */
     protected final List<ObjectEntity> listObjectToDraw = new ArrayList<>();
-
-    /**
-     * Cheat count.
-     */
-    protected int cheatCount;
-
-    /**
-     * Cheat count for gem.
-     */
-    protected int gemCheatCount;
-
-    /**
-     * Cheat for high jump.
-     */
-    protected int highJumpCheatCount;
-
-    /**
-     * Cheat code for invisible object.
-     */
-    protected int displayInvisibleObject;
-
-    /**
-     * True if player invicible.
-     */
-    protected boolean invincibility;
-
-    /**
-     * Show invisible object.
-     */
-    protected boolean showInvisible;
-
-    /**
-     * False if pause game.
-     */
-    protected boolean runGame;
-
     /**
      * Current list of oject currently on screen.
      */
     private final List<ObjectEntity> listObjectCurrentlyDisplayedOnScreen =
             new ArrayList<>();
-
+    /**
+     * Turtle swith.
+     */
+    protected boolean turtleSwitch = false;
+    /**
+     * Load game.
+     */
+    protected MenuInterface menuStd;
+    /**
+     * Control area.
+     */
+    protected ControlArea controlArea;
+    /**
+     * Inventory area.
+     */
+    protected InventoryArea inventoryArea;
+    /**
+     * Screen to draw.
+     */
+    protected BufferedImage drawingScreen;
+    /**
+     * G2 for drawing screen.
+     */
+    protected Graphics2D g2DrawingScreen;
+    /**
+     * Screen rectangle.
+     */
+    protected Rectangle updateObjectScreenRect;
+    /**
+     * Visible screen rectangle.
+     */
+    protected Rectangle visibleScreenRect;
+    /**
+     * If need update inventory screen.
+     */
+    protected boolean updateInventoryScreen = false;
+    /**
+     * Keyboard object share between object (include player).
+     */
+    protected KeyboardLayout keyboardLayout;
+    /**
+     * Cheat count.
+     */
+    protected int cheatCount;
+    /**
+     * Cheat count for gem.
+     */
+    protected int gemCheatCount;
+    /**
+     * Cheat for high jump.
+     */
+    protected int highJumpCheatCount;
+    /**
+     * Cheat code for invisible object.
+     */
+    protected int displayInvisibleObject;
+    /**
+     * True if player invicible.
+     */
+    protected boolean invincibility;
+    /**
+     * Show invisible object.
+     */
+    protected boolean showInvisible;
+    /**
+     * False if pause game.
+     */
+    protected boolean runGame;
     /**
      * By default, send update message t object on visible screen.
      */
@@ -157,9 +135,8 @@ public abstract class AbstractExecutingStdLevel extends AbstractMenuJillLevel {
     /**
      * Level configuration.
      *
-     * @param cfgLevel  configuration of level
-     *
-     * @throws IOException if error of reading file
+     * @param cfgLevel configuration of level
+     * @throws IOException                  if error of reading file
      * @throws ReflectiveOperationException if not class found
      */
     public AbstractExecutingStdLevel(final LevelConfiguration cfgLevel)
@@ -208,7 +185,7 @@ public abstract class AbstractExecutingStdLevel extends AbstractMenuJillLevel {
                 this);
 
         final RectangleConf offset
-                    = this.statusBar.getGameAreaConf().getOffset();
+                = this.statusBar.getGameAreaConf().getOffset();
 
         offset.setX(0);
         offset.setY(0);
@@ -236,14 +213,14 @@ public abstract class AbstractExecutingStdLevel extends AbstractMenuJillLevel {
 
         // '* 2' because two border
         updateObjectScreenRect = new Rectangle(0, 0,
-            this.statusBar.getGameAreaConf().getWidth()
-                    + JillConst.getxUpdateScreenBorder() * 2,
-            this.statusBar.getGameAreaConf().getHeight()
-                    + JillConst.getyUpdateScreenBorder() * 2);
+                this.statusBar.getGameAreaConf().getWidth()
+                        + JillConst.getxUpdateScreenBorder() * 2,
+                this.statusBar.getGameAreaConf().getHeight()
+                        + JillConst.getyUpdateScreenBorder() * 2);
 
         visibleScreenRect = new Rectangle(0, 0,
-            this.statusBar.getGameAreaConf().getWidth(),
-            this.statusBar.getGameAreaConf().getHeight());
+                this.statusBar.getGameAreaConf().getWidth(),
+                this.statusBar.getGameAreaConf().getHeight());
     }
 
     /**
@@ -275,33 +252,33 @@ public abstract class AbstractExecutingStdLevel extends AbstractMenuJillLevel {
     protected void doRun() {
         if (keyboard.isOtherKey()) {
             switch (keyboard.consumeOtherKey()) {
-                case 'p' :
-                case 'P' :
+                case 'p':
+                case 'P':
                     runGame = !runGame;
                     break;
-                case 'n' :
-                case 'N' :
+                case 'n':
+                case 'N':
                     // TODO noise
                     break;
-                case 'q' :
-                case 'Q' :
+                case 'q':
+                case 'Q':
                     menu.setEnable(true);
                     return;
-                case 's' :
-                case 'S' :
+                case 's':
+                case 'S':
                     saveGame();
                     break;
-                case 'r' :
-                case 'R' :
+                case 'r':
+                case 'R':
                     loadGame();
                     break;
-                case 't' :
-                case 'T' :
+                case 't':
+                case 'T':
                     controlArea.setTurtleMode(!controlArea.isTurtleMode());
                     drawControl();
                     break;
-                case 'x' :
-                case 'X' :
+                case 'x':
+                case 'X':
                     if (invincibility) {
                         break;
                     }
@@ -312,38 +289,38 @@ public abstract class AbstractExecutingStdLevel extends AbstractMenuJillLevel {
                         messageDispatcher.sendMessage(
                                 EnumMessageType.INVENTORY_ITEM,
                                 new InventoryItemMessage(
-                                    EnumInventoryObject.INVINCIBILITY, true));
+                                        EnumInventoryObject.INVINCIBILITY, true));
                         messageDispatcher.sendMessage(
-                                     EnumMessageType.INVENTORY_ITEM,
-                                     new InventoryItemMessage(
-                                         EnumInventoryObject.RED_KEY, true));
+                                EnumMessageType.INVENTORY_ITEM,
+                                new InventoryItemMessage(
+                                        EnumInventoryObject.RED_KEY, true));
 
                         cheatCount = 0;
 
                         invincibility = true;
                     }
                     break;
-                case 'g' :
-                case 'G' :
+                case 'g':
+                case 'G':
                     gemCheatCount++;
 
                     if (gemCheatCount == CHEAT_CODE_NUMBER) {
                         messageDispatcher.sendMessage(
-                            EnumMessageType.INVENTORY_ITEM,
-                                     new InventoryItemMessage(
-                                         EnumInventoryObject.GEM, true));
+                                EnumMessageType.INVENTORY_ITEM,
+                                new InventoryItemMessage(
+                                        EnumInventoryObject.GEM, true));
                         gemCheatCount = 0;
                     }
                     break;
-                case 'h' :
-                case 'H' :
+                case 'h':
+                case 'H':
                     highJumpCheatCount++;
 
                     if (highJumpCheatCount == CHEAT_CODE_NUMBER) {
                         messageDispatcher.sendMessage(
-                            EnumMessageType.INVENTORY_ITEM,
-                                     new InventoryItemMessage(
-                                         EnumInventoryObject.HIGH_JUMP, true));
+                                EnumMessageType.INVENTORY_ITEM,
+                                new InventoryItemMessage(
+                                        EnumInventoryObject.HIGH_JUMP, true));
                         highJumpCheatCount = 0;
                     }
                     break;
@@ -446,13 +423,13 @@ public abstract class AbstractExecutingStdLevel extends AbstractMenuJillLevel {
      */
     private void updateObject() {
         final RectangleConf offset
-                    = this.statusBar.getGameAreaConf().getOffset();
+                = this.statusBar.getGameAreaConf().getOffset();
 
         int lOffsetX = Math.abs(offset.getX());
         int lOffsetY = Math.abs(offset.getY());
 
         updateObjectScreenRect.setLocation(lOffsetX
-                - JillConst.getxUpdateScreenBorder(),
+                        - JillConst.getxUpdateScreenBorder(),
                 lOffsetY - JillConst.getyUpdateScreenBorder());
 
         visibleScreenRect.setLocation(lOffsetX, lOffsetY);
@@ -558,14 +535,14 @@ public abstract class AbstractExecutingStdLevel extends AbstractMenuJillLevel {
     private void updateBackground() {
         final int blockSize = JillConst.getBlockSize();
         final RectangleConf offset
-                    = this.statusBar.getGameAreaConf().getOffset();
+                = this.statusBar.getGameAreaConf().getOffset();
 
         final int startX =
                 Math.abs(offset.getX())
-                / blockSize;
+                        / blockSize;
         final int startY =
                 Math.abs(offset.getY())
-                / blockSize;
+                        / blockSize;
         final int endX = Math.min(startX + screenWidthBlock,
                 BackgroundLayer.MAP_WIDTH);
         final int endY = Math.min(startY + screenHeightBlock,
@@ -606,9 +583,9 @@ public abstract class AbstractExecutingStdLevel extends AbstractMenuJillLevel {
         ObjectEntity currentObject;
 
         final RectangleConf offset
-                    = this.statusBar.getGameAreaConf().getOffset();
+                = this.statusBar.getGameAreaConf().getOffset();
         final int specialScreenShift = this.statusBar.getGameAreaConf()
-                    .getSpecialScreenShift();
+                .getSpecialScreenShift();
 
         BufferedImage currentPicture;
 
@@ -621,11 +598,11 @@ public abstract class AbstractExecutingStdLevel extends AbstractMenuJillLevel {
                 drawDashedRectFilled(g2DrawingScreen, currentObject, offset);
             } else {
                 g2DrawingScreen.drawImage(currentPicture,
-                    currentObject.getX()
-                            + offset.getX(),
-                    currentObject.getY()
-                            + offset.getY() - specialScreenShift,
-                    null);
+                        currentObject.getX()
+                                + offset.getX(),
+                        currentObject.getY()
+                                + offset.getY() - specialScreenShift,
+                        null);
             }
         }
 
@@ -639,30 +616,30 @@ public abstract class AbstractExecutingStdLevel extends AbstractMenuJillLevel {
     /**
      * Draw dashed rectangle for unknow object type
      *
-     * @param g2 graphic 2d
+     * @param g2     graphic 2d
      * @param object current object
      * @param offset offset
      */
     private void drawDashedRectFilled(final Graphics2D g2,
             final ObjectEntity object, final RectangleConf offset) {
         final int specialScreenShift = this.statusBar.getGameAreaConf()
-                    .getSpecialScreenShift();
+                .getSpecialScreenShift();
 
-        final Color oldColor = g2.getColor() ;
-        g2.setColor(Color.CYAN) ;
+        final Color oldColor = g2.getColor();
+        g2.setColor(Color.CYAN);
 
         final Rectangle rect = new Rectangle(object.getX() + offset.getX(),
                 object.getY() + offset.getY() - specialScreenShift,
                 object.getWidth(), object.getWidth());
 
-        float[] dash = { 5F, 5F } ;
+        float[] dash = {5F, 5F};
 
         final Stroke dashedStroke = new BasicStroke(2F, BasicStroke.CAP_SQUARE,
-        BasicStroke.JOIN_MITER, 3F, dash, 0F );
+                BasicStroke.JOIN_MITER, 3F, dash, 0F);
 
         g2.fill(dashedStroke.createStrokedShape(rect));
 
-        g2.setColor(oldColor) ;
+        g2.setColor(oldColor);
     }
 
     @Override
@@ -743,7 +720,7 @@ public abstract class AbstractExecutingStdLevel extends AbstractMenuJillLevel {
                         this.controlArea.recieveMessage(
                                 EnumMessageType.INVENTORY_ITEM,
                                 new InventoryItemMessage(
-                                    currentInventoryItem, false));
+                                        currentInventoryItem, false));
                     }
                 }
 

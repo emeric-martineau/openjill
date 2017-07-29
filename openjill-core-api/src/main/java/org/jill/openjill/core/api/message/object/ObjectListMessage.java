@@ -1,6 +1,7 @@
 package org.jill.openjill.core.api.message.object;
 
 import java.util.List;
+
 import org.jill.openjill.core.api.entities.ObjectEntity;
 
 /**
@@ -27,7 +28,7 @@ public final class ObjectListMessage {
     /**
      * Constructor.
      *
-     * @param obj object
+     * @param obj       object
      * @param addObject add object
      */
     public ObjectListMessage(final ObjectEntity obj, final boolean addObject) {
@@ -39,7 +40,7 @@ public final class ObjectListMessage {
     /**
      * Constructor.
      *
-     * @param listObj object
+     * @param listObj   object
      * @param addObject add object
      */
     public ObjectListMessage(final List<ObjectEntity> listObj,
@@ -52,7 +53,7 @@ public final class ObjectListMessage {
     /**
      * If add object.
      *
-     * @return  false = delete object from inventory
+     * @return false = delete object from inventory
      */
     public boolean isAdd() {
         return add;
@@ -61,7 +62,7 @@ public final class ObjectListMessage {
     /**
      * Object to add.
      *
-     * @return  object
+     * @return object
      */
     public ObjectEntity getObject() {
         return object;
@@ -70,7 +71,7 @@ public final class ObjectListMessage {
     /**
      * Object to add.
      *
-     * @return  object
+     * @return object
      */
     public List<ObjectEntity> getListObject() {
         return listObject;

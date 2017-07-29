@@ -58,6 +58,13 @@ public interface ShaTileSet {
     int getOffset();
 
     /**
+     * Mutateur de offset.
+     *
+     * @param offsetInFile offset
+     */
+    void setOffset(int offsetInFile);
+
+    /**
      * Accessor of shaTile.
      *
      * @return shaTile
@@ -70,6 +77,13 @@ public interface ShaTileSet {
      * @return size
      */
     int getSize();
+
+    /**
+     * Mutateur de size.
+     *
+     * @param sizeInFile size
+     */
+    void setSize(int sizeInFile);
 
     /**
      * The number of this tileset in entry.
@@ -95,22 +109,8 @@ public interface ShaTileSet {
     /**
      * Tileset.
      *
-     * @return  true if tileset (picture)
+     * @return true if tileset (picture)
      */
     boolean isTileset();
-
-    /**
-     * Mutateur de offset.
-     *
-     * @param offsetInFile offset
-     */
-    void setOffset(int offsetInFile);
-
-    /**
-     * Mutateur de size.
-     *
-     * @param sizeInFile size
-     */
-    void setSize(int sizeInFile);
 
 }

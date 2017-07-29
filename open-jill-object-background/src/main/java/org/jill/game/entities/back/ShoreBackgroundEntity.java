@@ -1,6 +1,7 @@
 package org.jill.game.entities.back;
 
 import java.awt.image.BufferedImage;
+
 import org.jill.game.entities.BackgroundEntityImpl;
 
 /**

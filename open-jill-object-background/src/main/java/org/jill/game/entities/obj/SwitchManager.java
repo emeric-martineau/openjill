@@ -1,12 +1,12 @@
 package org.jill.game.entities.obj;
 
-import org.jill.game.entities.obj.abs.AbstractParameterObjectEntity;
 import java.awt.image.BufferedImage;
+
+import org.jill.game.entities.obj.abs.AbstractParameterObjectEntity;
 import org.jill.openjill.core.api.entities.ObjectEntity;
 import org.jill.openjill.core.api.entities.ObjectParam;
-import org.jill.openjill.core.api.message.EnumMessageType;
-
 import org.jill.openjill.core.api.keyboard.KeyboardLayout;
+import org.jill.openjill.core.api.message.EnumMessageType;
 
 /**
  * Switch.
@@ -83,14 +83,14 @@ public final class SwitchManager extends AbstractParameterObjectEntity {
             this.state = SWITCH_OFF;
 
             this.messageDispatcher.sendMessage(EnumMessageType.TRIGGER,
-                this);
+                    this);
         } else if (keyboardLayout.isDown() && state != SWITCH_ON) {
             //keyboardLayout.setDown(false);
 
             this.state = SWITCH_ON;
 
             messageDispatcher.sendMessage(EnumMessageType.TRIGGER,
-                this);
+                    this);
         }
     }
 }

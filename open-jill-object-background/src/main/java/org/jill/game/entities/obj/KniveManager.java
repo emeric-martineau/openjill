@@ -1,19 +1,18 @@
 package org.jill.game.entities.obj;
 
-import org.jill.game.entities.obj.abs.AbstractParameterObjectEntity;
 import java.awt.image.BufferedImage;
-import org.jill.openjill.core.api.entities.ObjectEntity;
+
+import org.jill.game.entities.obj.abs.AbstractParameterObjectEntity;
 import org.jill.game.entities.obj.player.PlayerPositionSynchronizer;
 import org.jill.game.entities.obj.util.UtilityObjectEntity;
+import org.jill.openjill.core.api.entities.BackgroundEntity;
+import org.jill.openjill.core.api.entities.ObjectEntity;
 import org.jill.openjill.core.api.entities.ObjectParam;
+import org.jill.openjill.core.api.keyboard.KeyboardLayout;
 import org.jill.openjill.core.api.message.EnumMessageType;
 import org.jill.openjill.core.api.message.object.ObjectListMessage;
-import org.jill.openjill.core.api.message.statusbar.inventory.
-        EnumInventoryObject;
-import org.jill.openjill.core.api.message.statusbar.inventory.
-        InventoryItemMessage;
-import org.jill.openjill.core.api.entities.BackgroundEntity;
-import org.jill.openjill.core.api.keyboard.KeyboardLayout;
+import org.jill.openjill.core.api.message.statusbar.inventory.EnumInventoryObject;
+import org.jill.openjill.core.api.message.statusbar.inventory.InventoryItemMessage;
 
 /**
  * Knive item manager.
@@ -26,7 +25,7 @@ public final class KniveManager extends AbstractParameterObjectEntity {
      * Player position object.
      */
     private static final PlayerPositionSynchronizer PLAYER_POSITION
-        = PlayerPositionSynchronizer.getInstance();
+            = PlayerPositionSynchronizer.getInstance();
 
     /**
      * To know if message must be display.
@@ -166,11 +165,11 @@ public final class KniveManager extends AbstractParameterObjectEntity {
     @Override
     public void msgUpdate(final KeyboardLayout keyboardLayout) {
         if (this.stateCount >= this.statecountLaunchStart
-            && this.stateCount <= this.statecountLaunchEnd) {
+                && this.stateCount <= this.statecountLaunchEnd) {
             // Knife launch
             moveLeftRight();
         } else if (this.stateCount > this.statecountLaunchEnd
-            && this.stateCount <= this.statecountFollowPlayerMax) {
+                && this.stateCount <= this.statecountFollowPlayerMax) {
             // Follow player
             followPlayer();
         } else if (this.stateCount == this.moveFallingDown) {
@@ -193,7 +192,7 @@ public final class KniveManager extends AbstractParameterObjectEntity {
     public void msgTouch(final ObjectEntity obj,
             final KeyboardLayout keyboardLayout) {
         if (obj.isPlayer() && !(this.stateCount >= this.statecountLaunchStart
-            && this.stateCount <= this.statecountLaunchEnd)) {
+                && this.stateCount <= this.statecountLaunchEnd)) {
             if (messageDisplaySwitchMessage) {
                 sendMessage();
 
@@ -201,11 +200,11 @@ public final class KniveManager extends AbstractParameterObjectEntity {
             }
 
             this.messageDispatcher.sendMessage(EnumMessageType.INVENTORY_ITEM,
-                this.inventory);
+                    this.inventory);
             this.messageDispatcher.sendMessage(EnumMessageType.OBJECT,
-                this.killme);
+                    this.killme);
         } else if (obj.isKillableObject()
-            && this.stateCount != this.statecountNoMoveNoHit) {
+                && this.stateCount != this.statecountNoMoveNoHit) {
             obj.msgKill(this, 0, 0);
             setStateCount(this.statecountLaunchEnd + 1);
         }
@@ -217,10 +216,10 @@ public final class KniveManager extends AbstractParameterObjectEntity {
     private void moveLeftRight() {
         if (this.xSpeed > X_SPEED_MIDDLE) {
             UtilityObjectEntity.moveObjectRight(this, this.xSpeed,
-                this.backgroundObject);
+                    this.backgroundObject);
         } else {
             UtilityObjectEntity.moveObjectLeft(this, this.xSpeed,
-                this.backgroundObject);
+                    this.backgroundObject);
         }
 
         this.stateCount++;
@@ -232,10 +231,10 @@ public final class KniveManager extends AbstractParameterObjectEntity {
     private void moveUpDown() {
         if (this.ySpeed > X_SPEED_MIDDLE) {
             UtilityObjectEntity.moveObjectDown(this, this.ySpeed,
-                this.backgroundObject);
+                    this.backgroundObject);
         } else {
             UtilityObjectEntity.moveObjectUp(this, this.ySpeed,
-                this.backgroundObject);
+                    this.backgroundObject);
         }
     }
 
@@ -246,7 +245,7 @@ public final class KniveManager extends AbstractParameterObjectEntity {
         this.ySpeed = this.moveDown;
 
         if (!UtilityObjectEntity.moveObjectDown(this, this.ySpeed,
-            this.backgroundObject)) {
+                this.backgroundObject)) {
             // Stop down
             this.stateCount = 0;
         }
@@ -257,21 +256,21 @@ public final class KniveManager extends AbstractParameterObjectEntity {
      */
     private void followPlayer() {
         this.indexEtat = PLAYER_POSITION.updatePlayerPosition(
-            this.messageDispatcher, this.indexEtat);
+                this.messageDispatcher, this.indexEtat);
 
         if (this.x < PLAYER_POSITION.getX()
-            && this.xSpeed < this.leftMaxMoveX) {
+                && this.xSpeed < this.leftMaxMoveX) {
             this.xSpeed++;
         } else if (this.x > PLAYER_POSITION.getX()
-            && this.xSpeed > this.rightMaxMoveX) {
+                && this.xSpeed > this.rightMaxMoveX) {
             this.xSpeed--;
         }
 
         if (this.y < PLAYER_POSITION.getY()
-            && this.ySpeed < this.downMaxMoveY) {
+                && this.ySpeed < this.downMaxMoveY) {
             this.ySpeed++;
         } else if (this.y > PLAYER_POSITION.getY()
-            && this.ySpeed > this.upMaxMoveY) {
+                && this.ySpeed > this.upMaxMoveY) {
             this.ySpeed--;
         }
 

@@ -22,7 +22,6 @@ public interface ShaTile {
      * USE ONLY IF FONT !
      *
      * @param mapColor color map
-     *
      * @return image
      */
     BufferedImage getFont(Color[] mapColor);

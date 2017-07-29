@@ -4,22 +4,22 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
 import org.jill.game.entities.obj.abs.AbstractParameterObjectEntity;
 import org.jill.game.entities.obj.player.PlayerState;
-import org.jill.openjill.core.api.message.background.BackgroundMessage;
-import org.jill.openjill.core.api.message.player.MovePlayerMessage;
 import org.jill.openjill.core.api.entities.BackgroundEntity;
 import org.jill.openjill.core.api.entities.ObjectEntity;
 import org.jill.openjill.core.api.entities.ObjectParam;
 import org.jill.openjill.core.api.jill.JillConst;
 import org.jill.openjill.core.api.keyboard.KeyboardLayout;
 import org.jill.openjill.core.api.message.EnumMessageType;
+import org.jill.openjill.core.api.message.background.BackgroundMessage;
+import org.jill.openjill.core.api.message.player.MovePlayerMessage;
 
 /**
  * Object to draw text.
  *
  * @author Emeric MARTINEAU
- *
  */
 public final class LiftManager extends AbstractParameterObjectEntity {
 
@@ -27,7 +27,7 @@ public final class LiftManager extends AbstractParameterObjectEntity {
      * Static cause only one lift move player at one time.
      */
     private static final MovePlayerMessage MOVE_PLAYER_OBJECT
-        = new MovePlayerMessage();
+            = new MovePlayerMessage();
 
     /**
      * To know if message must be display.
@@ -129,14 +129,14 @@ public final class LiftManager extends AbstractParameterObjectEntity {
             MOVE_PLAYER_OBJECT.setState(PlayerState.STAND);
 
             this.messageDispatcher.sendMessage(
-                EnumMessageType.PLAYER_MOVE, MOVE_PLAYER_OBJECT);
+                    EnumMessageType.PLAYER_MOVE, MOVE_PLAYER_OBJECT);
 
             if (MOVE_PLAYER_OBJECT.isCanDoMove()) {
                 final int backX = this.x / JillConst.getBlockSize();
                 final int backY = this.y / JillConst.getBlockSize();
 
                 final BackgroundMessage backMsg
-                    = new BackgroundMessage(backX, backY,
+                        = new BackgroundMessage(backX, backY,
                         nameBlockNonBlock);
 
                 this.messageDispatcher.sendMessage(
@@ -154,7 +154,7 @@ public final class LiftManager extends AbstractParameterObjectEntity {
                 MOVE_PLAYER_OBJECT.setState(PlayerState.STAND);
 
                 this.messageDispatcher.sendMessage(
-                    EnumMessageType.PLAYER_MOVE, MOVE_PLAYER_OBJECT);
+                        EnumMessageType.PLAYER_MOVE, MOVE_PLAYER_OBJECT);
             }
 
             // if ELEVMID -> continue and replace by current graph
@@ -193,11 +193,11 @@ public final class LiftManager extends AbstractParameterObjectEntity {
             this.y += JillConst.getBlockSize();
 
             backMsg
-                = new BackgroundMessage(backX, backY,
+                    = new BackgroundMessage(backX, backY,
                     beToClone.getMapCode());
 
             this.messageDispatcher.sendMessage(EnumMessageType.BACKGROUND,
-                backMsg);
+                    backMsg);
         }
 
         return result;

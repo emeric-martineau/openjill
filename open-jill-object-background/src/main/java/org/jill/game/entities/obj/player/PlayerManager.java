@@ -3,14 +3,15 @@ package org.jill.game.entities.obj.player;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.logging.Logger;
+
 import org.jill.game.entities.obj.bullet.BulletObjectFactory;
-import org.jill.openjill.core.api.message.statusbar.StatusBarTextMessage;
 import org.jill.openjill.core.api.entities.BackgroundEntity;
 import org.jill.openjill.core.api.entities.ObjectParam;
 import org.jill.openjill.core.api.jill.JillConst;
 import org.jill.openjill.core.api.keyboard.KeyboardLayout;
 import org.jill.openjill.core.api.manager.TextManager;
 import org.jill.openjill.core.api.message.EnumMessageType;
+import org.jill.openjill.core.api.message.statusbar.StatusBarTextMessage;
 import org.jill.openjill.core.api.message.statusbar.inventory.EnumInventoryObject;
 
 /**
@@ -24,77 +25,74 @@ public final class PlayerManager extends AbstractPlayerManager {
      * Logger.
      */
     protected static final Logger LOGGER = Logger.getLogger(
-        PlayerManager.class.getName());
-
-    /**
-     * To know if message must be display.
-     */
-    private static boolean messageDisplayHitFloorMessage = true;
-
+            PlayerManager.class.getName());
     /**
      * Size of array for right/middle/leflt.
      */
     private static final int DIRECTION_IMAGE_NUMBER = 3;
-
+    /**
+     * To know if message must be display.
+     */
+    private static boolean messageDisplayHitFloorMessage = true;
     /**
      * Begin player level picture.
      */
     private final BufferedImage[] stBegin
-        = new BufferedImage[PlayerBeginConst.PICTURE_NUMBER];
+            = new BufferedImage[PlayerBeginConst.PICTURE_NUMBER];
 
     /**
      * Jump player to stand.
      */
     private final BufferedImage[][] stJumpingToStandPicture
-        = new BufferedImage[DIRECTION_IMAGE_NUMBER][];
+            = new BufferedImage[DIRECTION_IMAGE_NUMBER][];
 
     /**
      * Jump players.
      */
     private final BufferedImage[][] stJumpingPicture
-        = new BufferedImage[PlayerJumpingConst.PICTURE_NUMBER][];
+            = new BufferedImage[PlayerJumpingConst.PICTURE_NUMBER][];
 
     /**
      * Run left.
      */
     private final BufferedImage[] stStandLeftRunning
-        = new BufferedImage[PlayerStandConst.PICTURE_RUNNING_NUMBER];
+            = new BufferedImage[PlayerStandConst.PICTURE_RUNNING_NUMBER];
 
     /**
      * Run right.
      */
     private final BufferedImage[] stStandRightRunning
-        = new BufferedImage[PlayerStandConst.PICTURE_RUNNING_NUMBER];
+            = new BufferedImage[PlayerStandConst.PICTURE_RUNNING_NUMBER];
 
     /**
      * Full picture face.
      */
     private final BufferedImage[] stStandPicture
-        = new BufferedImage[DIRECTION_IMAGE_NUMBER];
+            = new BufferedImage[DIRECTION_IMAGE_NUMBER];
 
     /**
      * Full picture face.
      */
     private final BufferedImage[] stClimbPicture
-        = new BufferedImage[PlayerClimbConst.PICTURE_NUMBER];
+            = new BufferedImage[PlayerClimbConst.PICTURE_NUMBER];
 
     /**
      * Die 0.
      */
     private final BufferedImage[] stDie0Enemy
-        = new BufferedImage[PlayerDie0Const.IMAGE_NUMBER];
+            = new BufferedImage[PlayerDie0Const.IMAGE_NUMBER];
 
     /**
      * Die 1.
      */
     private final BufferedImage[] stDie1Water
-        = new BufferedImage[PlayerDie1Const.IMAGE_NUMBER];
+            = new BufferedImage[PlayerDie1Const.IMAGE_NUMBER];
 
     /**
      * Die 2.
      */
     private final BufferedImage[] stDie2Other
-        = new BufferedImage[PlayerDie2Const.IMAGE_NUMBER];
+            = new BufferedImage[PlayerDie2Const.IMAGE_NUMBER];
 
     /**
      * Current picture to display.
@@ -126,13 +124,13 @@ public final class PlayerManager extends AbstractPlayerManager {
         super.init(objectParam);
 
         stBegin[PlayerBeginConst.PICTURE_HEAD_DOWN]
-            = pictureCache.getImage(PlayerBeginConst.TILESET_INDEX,
+                = pictureCache.getImage(PlayerBeginConst.TILESET_INDEX,
                 PlayerBeginConst.TILE_HEAD_DOWN_INDEX);
         stBegin[PlayerBeginConst.PICTURE_HEAD_NORMAL]
-            = pictureCache.getImage(PlayerBeginConst.TILESET_INDEX,
+                = pictureCache.getImage(PlayerBeginConst.TILESET_INDEX,
                 PlayerBeginConst.TILE_HEAD_NORMAL_INDEX);
         stBegin[PlayerBeginConst.PICTURE_HEAD_UP]
-            = pictureCache.getImage(PlayerBeginConst.TILESET_INDEX,
+                = pictureCache.getImage(PlayerBeginConst.TILESET_INDEX,
                 PlayerBeginConst.TILE_HEAD_UP_INDEX);
 
         initJumpingPicture();
@@ -207,11 +205,11 @@ public final class PlayerManager extends AbstractPlayerManager {
      */
     private void initJumpingPicture() {
         final BufferedImage[] stJumping
-            = new BufferedImage[PlayerJumpingConst.PICTURE_NUMBER];
+                = new BufferedImage[PlayerJumpingConst.PICTURE_NUMBER];
         final BufferedImage[] stJumpingLeft
-            = new BufferedImage[PlayerJumpingConst.PICTURE_NUMBER];
+                = new BufferedImage[PlayerJumpingConst.PICTURE_NUMBER];
         final BufferedImage[] stJumpingRight
-            = new BufferedImage[PlayerJumpingConst.PICTURE_NUMBER];
+                = new BufferedImage[PlayerJumpingConst.PICTURE_NUMBER];
 
         for (int index = 0; index < stJumping.length; index++) {
             stJumping[index] = pictureCache.getImage(
@@ -228,7 +226,7 @@ public final class PlayerManager extends AbstractPlayerManager {
         for (int index = 0; index < stJumpingRight.length; index++) {
             stJumpingRight[index] = pictureCache.getImage(
                     PlayerJumpingConst.TILESET_INDEX, index
-                        + PlayerJumpingConst.TILE_RIGHT_INDEX);
+                            + PlayerJumpingConst.TILE_RIGHT_INDEX);
         }
 
         stJumpingPicture[0] = stJumpingLeft;
@@ -241,9 +239,9 @@ public final class PlayerManager extends AbstractPlayerManager {
      */
     private void initJumpingToStandPicture() {
         final BufferedImage[] stJumpingToStandLeft
-            = new BufferedImage[PlayerStandConst.PICTURE_NUMBER];
+                = new BufferedImage[PlayerStandConst.PICTURE_NUMBER];
         final BufferedImage[] stJumpingToStandRight
-            = new BufferedImage[PlayerStandConst.PICTURE_NUMBER];
+                = new BufferedImage[PlayerStandConst.PICTURE_NUMBER];
 
         stStandJillSquat = pictureCache.getImage(
                 PlayerStandConst.TILESET_INDEX,
@@ -254,7 +252,7 @@ public final class PlayerManager extends AbstractPlayerManager {
                 PlayerStandConst.TILE_FALL_INDEX);
 
         final BufferedImage[] stJumpingToStand = {temp,
-            stStandJillSquat, stStandJillSquat, temp, temp};
+                stStandJillSquat, stStandJillSquat, temp, temp};
 
         int i = 0;
         stJumpingToStandLeft[i++] = pictureCache.getImage(
@@ -313,8 +311,8 @@ public final class PlayerManager extends AbstractPlayerManager {
             default:
                 currentPicture = null;
                 LOGGER.severe(
-                    String.format("The state %d is unknow for player !",
-                        getState()));
+                        String.format("The state %d is unknow for player !",
+                                getState()));
         }
 
         this.currentPlayerPicture = currentPicture;
@@ -328,7 +326,7 @@ public final class PlayerManager extends AbstractPlayerManager {
 //        if (state == this.state && subState != 0) {
 //            return;
 //        }
-        switch(state) {
+        switch (state) {
             case PlayerState.STAND:
                 setSubState(0);
                 break;
@@ -369,8 +367,8 @@ public final class PlayerManager extends AbstractPlayerManager {
                 break;
             default:
                 LOGGER.severe(
-                    String.format("The state %d is unknow for player !",
-                        getState()));
+                        String.format("The state %d is unknow for player !",
+                                getState()));
         }
     }
 
@@ -381,7 +379,7 @@ public final class PlayerManager extends AbstractPlayerManager {
         this.stateCount++;
 
         if (this.stateCount
-            >= PlayerBeginConst.PICTURE_HEAD_DOWN_STATECOUNT) {
+                >= PlayerBeginConst.PICTURE_HEAD_DOWN_STATECOUNT) {
             setState(PlayerState.STAND);
         }
     }
@@ -492,7 +490,7 @@ public final class PlayerManager extends AbstractPlayerManager {
     private void msgUpdateDiedEnnemy() {
         if (this.stateCount >= PlayerDie0Const.STATECOUNT_MAX_TO_RESTART_GAME) {
             this.messageDispatcher.sendMessage(
-                EnumMessageType.DIE_RESTART_LEVEL, null);
+                    EnumMessageType.DIE_RESTART_LEVEL, null);
         } else {
             this.stateCount++;
         }
@@ -504,7 +502,7 @@ public final class PlayerManager extends AbstractPlayerManager {
     private void msgUpdateDiedWater() {
         if (this.stateCount >= PlayerDie1Const.STATECOUNT_MAX_TO_RESTART_GAME) {
             this.messageDispatcher.sendMessage(
-                EnumMessageType.DIE_RESTART_LEVEL, null);
+                    EnumMessageType.DIE_RESTART_LEVEL, null);
         } else {
             this.stateCount++;
         }
@@ -516,9 +514,9 @@ public final class PlayerManager extends AbstractPlayerManager {
     private void msgUpdateDiedOther() {
         if (this.ySpeed > PlayerDie2Const.YD_MAX_TO_CHANGE) {
             if (this.stateCount
-                > PlayerDie2Const.STATECOUNT_MAX_TO_RESTART_GAME) {
+                    > PlayerDie2Const.STATECOUNT_MAX_TO_RESTART_GAME) {
                 this.messageDispatcher.sendMessage(
-                    EnumMessageType.DIE_RESTART_LEVEL, null);
+                        EnumMessageType.DIE_RESTART_LEVEL, null);
             }
 
             // Realign player on background
@@ -527,14 +525,14 @@ public final class PlayerManager extends AbstractPlayerManager {
 
                 // Align on block under kill background.
                 this.y = (((this.y / JillConst.getBlockSize()))
-                    * JillConst.getBlockSize()) + JillConst.getBlockSize()
-                    + currentPicture.getHeight();
+                        * JillConst.getBlockSize()) + JillConst.getBlockSize()
+                        + currentPicture.getHeight();
 
                 // If player out of screen
                 if ((this.y + currentPicture.getHeight())
-                    > JillConst.getMaxHeight()) {
+                        > JillConst.getMaxHeight()) {
                     this.y = JillConst.getMaxHeight()
-                        - currentPicture.getHeight();
+                            - currentPicture.getHeight();
                 }
             }
 
@@ -560,21 +558,21 @@ public final class PlayerManager extends AbstractPlayerManager {
 
                 // Align player on bottom of background
                 this.y = (senderBack.getY() + 1) * JillConst.getBlockSize()
-                    - this.stDie2Other[
-                            PlayerDie2Const.FIRST_PICTURE].getHeight();
+                        - this.stDie2Other[
+                        PlayerDie2Const.FIRST_PICTURE].getHeight();
                 break;
             case PlayerState.DIE_SUB_STATE_WATER_BACK:
                 setySpeed(PlayerDie1Const.START_YD);
 
                 // Align player on bottom of background
                 this.y = senderBack.getY() * JillConst.getBlockSize()
-                    - this.stDie1Water[
-                            PlayerDie1Const.FIRST_PICTURE].getHeight();
+                        - this.stDie1Water[
+                        PlayerDie1Const.FIRST_PICTURE].getHeight();
                 break;
             case PlayerState.DIE_SUB_STATE_ENNEMY:
                 setySpeed(PlayerDie0Const.START_YD);
             default:
-            // ennemy death
+                // ennemy death
         }
 
         BulletObjectFactory.explode(this,
@@ -617,14 +615,14 @@ public final class PlayerManager extends AbstractPlayerManager {
 
         for (int index = 0; index < PlayerDie0Const.IMAGE_NUMBER; index++) {
             this.stDie0Enemy[index] = pictureCache.getImage(
-                PlayerDie0Const.TILESET_INDEX,
-                PlayerDie0Const.TILE_INDEX + index);
+                    PlayerDie0Const.TILESET_INDEX,
+                    PlayerDie0Const.TILE_INDEX + index);
         }
 
         for (int index = 0; index < PlayerDie1Const.IMAGE_NUMBER; index++) {
             this.stDie1Water[index] = pictureCache.getImage(
-                PlayerDie1Const.TILESET_INDEX,
-                PlayerDie1Const.TILE_INDEX + index);
+                    PlayerDie1Const.TILESET_INDEX,
+                    PlayerDie1Const.TILE_INDEX + index);
         }
     }
 
@@ -641,10 +639,10 @@ public final class PlayerManager extends AbstractPlayerManager {
         if (this.stateCount < PlayerBeginConst.PICTURE_HEAD_UP_STATECOUNT) {
             indexPicture = PlayerBeginConst.PICTURE_HEAD_UP;
         } else if (this.stateCount
-            < PlayerBeginConst.PICTURE_HEAD_NORMAL_STATECOUNT) {
+                < PlayerBeginConst.PICTURE_HEAD_NORMAL_STATECOUNT) {
             indexPicture = PlayerBeginConst.PICTURE_HEAD_NORMAL;
         } else if (this.stateCount
-            < PlayerBeginConst.PICTURE_HEAD_DOWN_STATECOUNT) {
+                < PlayerBeginConst.PICTURE_HEAD_DOWN_STATECOUNT) {
             indexPicture = PlayerBeginConst.PICTURE_HEAD_DOWN;
         } else {
             indexPicture = DIRECTION_IMAGE_NUMBER;
@@ -655,7 +653,7 @@ public final class PlayerManager extends AbstractPlayerManager {
             final BufferedImage baseImage = this.stBegin[indexPicture];
 
             currentPicture = new BufferedImage(baseImage.getWidth(),
-                baseImage.getHeight(), BufferedImage.TYPE_INT_ARGB);
+                    baseImage.getHeight(), BufferedImage.TYPE_INT_ARGB);
 
             final int reduction = baseImage.getHeight() - this.stateCount;
 
@@ -685,14 +683,14 @@ public final class PlayerManager extends AbstractPlayerManager {
             if (getySpeed() > Y_SPEED_MIDDLE) {
                 // Down
                 currentPicture =
-                    this.stJumpingToStandPicture[this.xSpeed + 1][0];
+                        this.stJumpingToStandPicture[this.xSpeed + 1][0];
             } else {
                 currentPicture =
-                    stJumpingPicture[this.xSpeed + 1][2];
+                        stJumpingPicture[this.xSpeed + 1][2];
             }
         } else {
             currentPicture =
-                this.stJumpingPicture[this.xSpeed + 1][this.subState];
+                    this.stJumpingPicture[this.xSpeed + 1][this.subState];
         }
 
         return currentPicture;
@@ -761,7 +759,7 @@ public final class PlayerManager extends AbstractPlayerManager {
 
         currentPicture =
                 this.stJumpingToStandPicture[
-                this.xSpeed + 1][indexPicture];
+                        this.xSpeed + 1][indexPicture];
 
         return currentPicture;
     }
@@ -813,25 +811,25 @@ public final class PlayerManager extends AbstractPlayerManager {
     private BufferedImage msgDrawStandWaitDisplayAnimation() {
         BufferedImage currentPicture;
 
-        switch(this.waitAnimationIndex - 1) {
+        switch (this.waitAnimationIndex - 1) {
             case PlayerWaitConst.HAVE_YOU_SEEN_JILL_ANYWHERE:
                 int reste = (int) Math.IEEEremainder(this.stateCount
-                        - PlayerStandConst.STATECOUNT_WAIT_ANIMATION,
+                                - PlayerStandConst.STATECOUNT_WAIT_ANIMATION,
                         PlayerWaitConst.HAVE_YOU_SEEN_JILL_ANYWHERE_DIV);
                 switch (reste) {
                     case 0:
                     case 1:
                         currentPicture
-                            = stBegin[PlayerBeginConst.PICTURE_HEAD_UP];
+                                = stBegin[PlayerBeginConst.PICTURE_HEAD_UP];
                         break;
                     case 2:
                     case 3:
                         currentPicture
-                            = stBegin[PlayerBeginConst.PICTURE_HEAD_NORMAL];
+                                = stBegin[PlayerBeginConst.PICTURE_HEAD_NORMAL];
                         break;
                     default:
                         currentPicture
-                            = stBegin[PlayerBeginConst.PICTURE_HEAD_DOWN];
+                                = stBegin[PlayerBeginConst.PICTURE_HEAD_DOWN];
                 }
                 break;
             case PlayerWaitConst.LOOK_AN_AIREPLANE:
@@ -912,7 +910,7 @@ public final class PlayerManager extends AbstractPlayerManager {
                     PlayerDie1Const.FIRST_PICTURE];
         } else {
             int indexPicture = this.stateCount
-                / PlayerDie1Const.STATECOUNT_STEP_TO_CHANGE_PICTURE;
+                    / PlayerDie1Const.STATECOUNT_STEP_TO_CHANGE_PICTURE;
 
             if (indexPicture < this.stDie1Water.length) {
                 currentPicture = this.stDie1Water[indexPicture];

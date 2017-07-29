@@ -2,16 +2,16 @@ package org.jill.game.entities.obj;
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
-import org.jill.openjill.core.api.entities.ObjectEntity;
+
 import org.jill.game.entities.obj.abs.AbstractHitPlayerObjectEntity;
 import org.jill.game.entities.obj.util.UtilityObjectEntity;
+import org.jill.openjill.core.api.entities.BackgroundEntity;
+import org.jill.openjill.core.api.entities.ObjectEntity;
 import org.jill.openjill.core.api.entities.ObjectParam;
+import org.jill.openjill.core.api.keyboard.KeyboardLayout;
 import org.jill.openjill.core.api.message.EnumMessageType;
 import org.jill.openjill.core.api.message.object.ObjectListMessage;
-import org.jill.openjill.core.api.message.statusbar.inventory.
-        InventoryPointMessage;
-import org.jill.openjill.core.api.entities.BackgroundEntity;
-import org.jill.openjill.core.api.keyboard.KeyboardLayout;
+import org.jill.openjill.core.api.message.statusbar.inventory.InventoryPointMessage;
 
 /**
  * Firebird.
@@ -80,15 +80,15 @@ public final class GatorManager extends AbstractHitPlayerObjectEntity {
     /**
      * Init picutre.
      *
-     * @param images image array
+     * @param images        image array
      * @param numberTileSet number of tile
-     * @param tileSetIndex tile set index
-     * @param tileHead tile for head
-     * @param tileTail tile for tail
+     * @param tileSetIndex  tile set index
+     * @param tileHead      tile for head
+     * @param tileTail      tile for tail
      */
     private void initPicture(final BufferedImage[] images,
-        final int numberTileSet, final int tileSetIndex,
-        final int tileHead, final int tileTail) {
+            final int numberTileSet, final int tileSetIndex,
+            final int tileHead, final int tileTail) {
         // Current picture for head
         BufferedImage headPicture;
         // Current picture for tail
@@ -101,12 +101,12 @@ public final class GatorManager extends AbstractHitPlayerObjectEntity {
 
         for (int index = 0; index < numberTileSet; index++) {
             headPicture = this.pictureCache.getImage(tileSetIndex,
-                tileHead + index);
+                    tileHead + index);
             tailPicture = this.pictureCache.getImage(tileSetIndex,
-                tileTail + index);
+                    tileTail + index);
 
             joinPicture = new BufferedImage(this.width, this.height,
-                BufferedImage.TYPE_INT_ARGB);
+                    BufferedImage.TYPE_INT_ARGB);
 
             g2 = joinPicture.createGraphics();
 
@@ -164,11 +164,11 @@ public final class GatorManager extends AbstractHitPlayerObjectEntity {
 
     @Override
     public void msgKill(final ObjectEntity sender,
-        final int nbLife, final int typeOfDeath) {
+            final int nbLife, final int typeOfDeath) {
         this.messageDispatcher.sendMessage(EnumMessageType.INVENTORY_POINT,
-            new InventoryPointMessage(getConfInteger("point"), true,
-                    this, sender));
+                new InventoryPointMessage(getConfInteger("point"), true,
+                        this, sender));
         this.messageDispatcher.sendMessage(EnumMessageType.OBJECT,
-            this.killme);
+                this.killme);
     }
 }

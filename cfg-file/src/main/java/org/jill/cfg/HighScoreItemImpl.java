@@ -30,11 +30,21 @@ public class HighScoreItemImpl implements HighScoreItem {
     /**
      * Name.
      *
-     * @return  name
+     * @return name
      */
     @Override
     public final String getName() {
         return name;
+    }
+
+    /**
+     * Name.
+     *
+     * @param nm name
+     */
+    @Override
+    public final void setName(final String nm) {
+        this.name = nm;
     }
 
     /**
@@ -45,16 +55,6 @@ public class HighScoreItemImpl implements HighScoreItem {
     @Override
     public final int getScore() {
         return score;
-    }
-
-    /**
-     * Name.
-     *
-     * @param nm  name
-     */
-    @Override
-    public final void setName(final String nm) {
-        this.name = nm;
     }
 
     /**

@@ -2,11 +2,12 @@ package org.jill.cfg;
 
 import java.io.IOException;
 import java.util.List;
+
 import org.jill.file.FileAbstractByte;
 
 /**
  * Config file.
- * 
+ *
  * @author Emeric MARTINEAU
  */
 public interface CfgFile {
@@ -14,9 +15,8 @@ public interface CfgFile {
     /**
      * Constructor of class.
      *
-     * @param cfgFile file name
+     * @param cfgFile    file name
      * @param prefixSave prefixe of save file
-     *
      * @throws IOException if error
      */
     void load(String cfgFile, String prefixSave)
@@ -25,9 +25,8 @@ public interface CfgFile {
     /**
      * Constructor of class.
      *
-     * @param cfgFile file name
+     * @param cfgFile    file name
      * @param prefixSave prefixe of save file
-     *
      * @throws IOException if error
      */
     void load(FileAbstractByte cfgFile, String prefixSave)
@@ -36,7 +35,7 @@ public interface CfgFile {
     /**
      * Add new high score.
      *
-     * @param name name of player
+     * @param name  name of player
      * @param score score
      */
     void addNewHighScore(String name, int score);
@@ -44,9 +43,8 @@ public interface CfgFile {
     /**
      * Add new save game.
      *
-     * @param name name of player
+     * @param name   name of player
      * @param number save number
-     *
      * @return save item
      */
     SaveGameItem addNewSaveGame(String name, int number);
@@ -61,7 +59,7 @@ public interface CfgFile {
     /**
      * Return higscore list.
      *
-     * @return  hiscore
+     * @return hiscore
      */
     List<HighScoreItem> getHighScore();
 
@@ -110,7 +108,7 @@ public interface CfgFile {
     /**
      * Return save list.
      *
-     * @return  save list
+     * @return save list
      */
     List<SaveGameItem> getSaveGame();
 
@@ -153,7 +151,6 @@ public interface CfgFile {
      * Save file to disk.
      *
      * @param filename file name to save
-     *
      * @throws IOException if error
      */
     void save(String filename) throws IOException;

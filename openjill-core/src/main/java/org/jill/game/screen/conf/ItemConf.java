@@ -29,7 +29,7 @@ public final class ItemConf {
     /**
      * Position.
      *
-     * @return  x
+     * @return x
      */
     public int getX() {
         return x;

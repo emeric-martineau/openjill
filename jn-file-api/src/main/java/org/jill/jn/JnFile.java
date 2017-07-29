@@ -8,6 +8,7 @@ package org.jill.jn;
 
 import java.io.IOException;
 import java.util.List;
+
 import org.jill.file.FileAbstractByte;
 
 /**
@@ -20,7 +21,6 @@ public interface JnFile {
      * Constructor.
      *
      * @param jnFile file name
-     *
      * @throws IOException if error
      */
     void load(String jnFile) throws IOException;
@@ -29,7 +29,6 @@ public interface JnFile {
      * Constructor.
      *
      * @param jnFile file
-     *
      * @throws IOException if error
      */
     void load(FileAbstractByte jnFile) throws IOException;

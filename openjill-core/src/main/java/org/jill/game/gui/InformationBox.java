@@ -1,6 +1,5 @@
 package org.jill.game.gui;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -8,11 +7,13 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import org.jill.game.gui.conf.InformationBoxConf;
 import org.jill.game.gui.menu.SubMenu;
 import org.jill.game.screen.conf.RectangleConf;
 import org.jill.openjill.core.api.manager.TextManager;
 import org.jill.openjill.core.api.manager.TileManager;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  * Information box like instruction or int.
@@ -24,45 +25,38 @@ public final class InformationBox extends AbstractMessageBox {
      * Logger.
      */
     private static final Logger LOGGER = Logger.getLogger(
-                    InformationBox.class.getName());
-
+            InformationBox.class.getName());
+    /**
+     * List of text.
+     */
+    private final ArrayList<SubMenu> listText = new ArrayList<>();
     /**
      * Length of line in box.
      */
     private int lineLength;
-
     /**
      * Number of line in box.
      */
     private int numberLinePerScreen;
-
     /**
      * Background.
      */
     private BufferedImage boxPicture;
-
     /**
      * Graphic of status bar.
      */
     private Graphics2D g2BoxPicture;
-
     /**
      * Picture cache.
      */
     private TileManager pictureCache;
-
-    /**
-     *  List of text.
-     */
-    private final ArrayList<SubMenu> listText = new ArrayList<>();
-
     /**
      * Title of dialog box.
      */
     private SubMenu title;
 
     /**
-     *  Index of text.
+     * Index of text.
      */
     private int currentMenuPos = 0;
 
@@ -99,7 +93,6 @@ public final class InformationBox extends AbstractMessageBox {
      * Read config file.
      *
      * @param filename final name of config file
-     *
      * @return properties file
      */
     private static InformationBoxConf readConf(final String filename) {
@@ -116,9 +109,9 @@ public final class InformationBox extends AbstractMessageBox {
             mc = mapper.readValue(is, InformationBoxConf.class);
         } catch (IOException ex) {
             LOGGER.log(Level.SEVERE,
-                String.format("Unable to load config for message level '%s'",
-                        filename),
-                ex);
+                    String.format("Unable to load config for message level '%s'",
+                            filename),
+                    ex);
 
             mc = null;
         }
@@ -141,8 +134,8 @@ public final class InformationBox extends AbstractMessageBox {
 
         // Buffer image
         this.boxPicture =
-            new BufferedImage(conf.getWidth(), conf.getHeight(),
-                    BufferedImage.TYPE_INT_ARGB);
+                new BufferedImage(conf.getWidth(), conf.getHeight(),
+                        BufferedImage.TYPE_INT_ARGB);
 
         // Graphic
         this.g2BoxPicture = this.boxPicture.createGraphics();
@@ -164,7 +157,6 @@ public final class InformationBox extends AbstractMessageBox {
      * Add space.
      *
      * @param text text to align
-     *
      * @return new text
      */
     private String addSpace(final String text) {
@@ -174,13 +166,13 @@ public final class InformationBox extends AbstractMessageBox {
 
         final StringBuilder sb = new StringBuilder(lineLength);
 
-        for(int i = 0; i < numberStartSpace; i++) {
+        for (int i = 0; i < numberStartSpace; i++) {
             sb.append(' ');
         }
 
         sb.append(text);
 
-        for(int i = 0; i < numberEndSpace; i++) {
+        for (int i = 0; i < numberEndSpace; i++) {
             sb.append(' ');
         }
 
@@ -219,7 +211,7 @@ public final class InformationBox extends AbstractMessageBox {
         int offsetTextX = this.conf.getOffsetTextDrawX();
 
         // Draw text
-        for(int index = currentMenuPos; index < end; index++) {
+        for (int index = currentMenuPos; index < end; index++) {
             line = listText.get(index);
             pictureCache.getTextManager().drawSmallText(g2BoxPicture,
                     offsetTextX, yText, line.getText(), line.getColor(),
@@ -233,7 +225,7 @@ public final class InformationBox extends AbstractMessageBox {
 
         // Now draw title
         pictureCache.getTextManager().drawBigText(g2BoxPicture,
-               offsetTitleX, offsetTitleY, title.getText(), title.getColor(),
+                offsetTitleX, offsetTitleY, title.getText(), title.getColor(),
                 TextManager.BACKGROUND_COLOR_NONE);
     }
 
@@ -266,7 +258,7 @@ public final class InformationBox extends AbstractMessageBox {
         // Text
         String text;
 
-        for(String currentLine : lines) {
+        for (String currentLine : lines) {
             // Check if first char is number. If it's, use for color
             if (currentLine.length() > 0) {
                 colorChar = currentLine.charAt(0);

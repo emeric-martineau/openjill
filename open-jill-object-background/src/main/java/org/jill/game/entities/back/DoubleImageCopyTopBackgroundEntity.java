@@ -66,7 +66,7 @@ public class DoubleImageCopyTopBackgroundEntity extends BackgroundEntityImpl {
         }
 
         realPicutre = new BufferedImage(width, height,
-                    BufferedImage.TYPE_INT_ARGB);
+                BufferedImage.TYPE_INT_ARGB);
 
         final Graphics2D g2 = realPicutre.createGraphics();
 

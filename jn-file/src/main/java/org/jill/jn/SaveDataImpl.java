@@ -1,9 +1,9 @@
 package org.jill.jn;
 
 import java.io.IOException;
-
 import java.util.ArrayList;
 import java.util.List;
+
 import org.jill.file.FileAbstractByte;
 
 
@@ -44,7 +44,6 @@ public class SaveDataImpl implements SaveData {
      * Constructor.
      *
      * @param jnFile file
-     *
      * @throws IOException if error
      */
     public SaveDataImpl(final FileAbstractByte jnFile) throws IOException {
@@ -53,7 +52,7 @@ public class SaveDataImpl implements SaveData {
         level = jnFile.read16bitLE();
         health = jnFile.read16bitLE();
 
-        final int nbInventory =  jnFile.read16bitLE();
+        final int nbInventory = jnFile.read16bitLE();
         inventory = new ArrayList<>(nbInventory);
         int index;
 

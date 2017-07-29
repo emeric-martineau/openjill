@@ -26,7 +26,6 @@ public interface BackgroundLayer {
      *
      * @param x x-origin
      * @param y y-origine
-     *
      * @return map code
      */
     int getMapCode(int x, int y);

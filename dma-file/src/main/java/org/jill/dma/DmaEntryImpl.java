@@ -45,13 +45,13 @@ public class DmaEntryImpl implements DmaEntry {
     /**
      * Constructor.
      *
-     * @param mpCode map code
-     * @param tileIndex index of tile
-     * @param tilesetIndex index of tileset
-     * @param flagsOfEntry flags
+     * @param mpCode           map code
+     * @param tileIndex        index of tile
+     * @param tilesetIndex     index of tileset
+     * @param flagsOfEntry     flags
      * @param nameOfBackground name of dma entry
-     * @param indexInFile index of entry in file
-     * @param offsetInFile offset of entry in file
+     * @param indexInFile      index of entry in file
+     * @param offsetInFile     offset of entry in file
      */
     public DmaEntryImpl(final int mpCode, final int tileIndex,
             final int tilesetIndex, final int flagsOfEntry,

@@ -6,6 +6,7 @@ import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
+
 import org.jill.openjill.core.api.manager.TextManager;
 import org.jill.openjill.core.api.manager.TileManager;
 
@@ -15,63 +16,52 @@ import org.jill.openjill.core.api.manager.TileManager;
  * @author Emeric MARTINEAU
  */
 public abstract class AbstractStdMenu extends AbstractMenu
-    implements MenuInterface {
+        implements MenuInterface {
 
     /**
      * Number of space for boder.
      */
     private static final int NB_BORDER = 5;
-
-    /**
-     * Empty space before text.
-     */
-    private int nbSpaceBefore;
-
-    /**
-     * Start text position x.
-     */
-    private int textX;
-
-    /**
-     * Start text position y.
-     */
-    private int textY;
-
-    /**
-     * Name of menu.
-     */
-    private String name;
-
-    /**
-     * Title of menu.
-     */
-    private SubMenu title;
-
     /**
      * Items of menu.
      */
     private final List<SubMenu> items = new ArrayList<>();
-
-    /**
-     * If menu is enable.
-     */
-    private boolean enable = false;
-
     /**
      * Picture manager.
      */
     private final TileManager pictureCache;
-
     /**
      * Size of font.
      */
     private final int fontSize;
-
     /**
      * Size of font.
      */
     private final int fontSizeSpace;
-
+    /**
+     * Empty space before text.
+     */
+    private int nbSpaceBefore;
+    /**
+     * Start text position x.
+     */
+    private int textX;
+    /**
+     * Start text position y.
+     */
+    private int textY;
+    /**
+     * Name of menu.
+     */
+    private String name;
+    /**
+     * Title of menu.
+     */
+    private SubMenu title;
+    /**
+     * If menu is enable.
+     */
+    private boolean enable = false;
     /**
      * Picutre.
      */
@@ -142,8 +132,8 @@ public abstract class AbstractStdMenu extends AbstractMenu
 
         // Calculate font size
         this.fontSize = pictureCacheManager.getTextManager().createSmallText(" ",
-            TextManager.COLOR_BLUE,
-            TextManager.COLOR_BLUE).getHeight();
+                TextManager.COLOR_BLUE,
+                TextManager.COLOR_BLUE).getHeight();
 
         this.fontSizeSpace = this.fontSize + 2;
 
@@ -218,7 +208,7 @@ public abstract class AbstractStdMenu extends AbstractMenu
         final int pictureHeight = height * this.fontSizeSpace;
 
         this.menuPicture = new BufferedImage(pictureWidth, pictureHeight,
-            BufferedImage.TYPE_INT_ARGB);
+                BufferedImage.TYPE_INT_ARGB);
         final Graphics2D g2 = this.menuPicture.createGraphics();
 
         // Fill background
@@ -227,7 +217,7 @@ public abstract class AbstractStdMenu extends AbstractMenu
         for (int x = 1; x < widthBack; x++) {
             for (int y = 1; y < heightBack; y++) {
                 g2.drawImage(this.background, x * this.fontSizeSpace,
-                    y * this.fontSizeSpace, null);
+                        y * this.fontSizeSpace, null);
             }
         }
 
@@ -238,7 +228,7 @@ public abstract class AbstractStdMenu extends AbstractMenu
         g2.drawImage(this.rightLowerCorner, 0, heightBack * this.fontSizeSpace,
                 null);
         g2.drawImage(this.leftLowerCorner, widthBack * this.fontSizeSpace,
-            heightBack * this.fontSizeSpace, null);
+                heightBack * this.fontSizeSpace, null);
 
         // Draw upper border
         for (int x = 1; x < widthBack; x++) {
@@ -266,8 +256,8 @@ public abstract class AbstractStdMenu extends AbstractMenu
 
         // Draw title
         this.pictureCache.getTextManager().drawSmallText(g2, this.textX,
-            this.textY, this.title.getText(), this.title.getColor(),
-            TextManager.BACKGROUND_COLOR_NONE);
+                this.textY, this.title.getText(), this.title.getColor(),
+                TextManager.BACKGROUND_COLOR_NONE);
 
         final int posCursorX = this.textX + this.fontSize;
         final int posTextX = this.textX + (this.nbSpaceBefore * this.fontSize);
@@ -278,7 +268,7 @@ public abstract class AbstractStdMenu extends AbstractMenu
         for (SubMenu entry : items) {
             this.pictureCache.getTextManager().drawSmallText(g2, posTextX,
                     posTextY, entry.getText(), entry.getColor(),
-                TextManager.BACKGROUND_COLOR_NONE);
+                    TextManager.BACKGROUND_COLOR_NONE);
 
             // Calculate cursor position
             this.cursorPositionBySubMenuIndex.add(new Point(posCursorX,
@@ -619,7 +609,7 @@ public abstract class AbstractStdMenu extends AbstractMenu
     @Override
     public void draw(final Graphics g2) {
         g2.drawImage(getPicture(), getX(),
-            getY(), null);
+                getY(), null);
     }
 
     @Override

@@ -1,6 +1,7 @@
 package org.jill.openjill.core.api.entities;
 
 import java.awt.image.BufferedImage;
+
 import org.jill.jn.ObjectItem;
 import org.jill.openjill.core.api.keyboard.KeyboardLayout;
 
@@ -56,6 +57,7 @@ public interface ObjectEntity extends ObjectItem {
 
     /**
      * To know if object is checkpoint.
+     *
      * @return if is chack point
      */
     boolean isCheckPoint();
@@ -70,13 +72,13 @@ public interface ObjectEntity extends ObjectItem {
     /**
      * If player object.
      *
-     * @return  true/false
+     * @return true/false
      */
     boolean isPlayer();
 
     /**
      * If player can fire (with standard method).
-     * 
+     *
      * @return tre/false
      */
     boolean canFire();
@@ -98,7 +100,7 @@ public interface ObjectEntity extends ObjectItem {
     /**
      * Call when player touch object. (e.g. for lift).
      *
-     * @param obj object
+     * @param obj            object
      * @param keyboardLayout keyboard object
      */
     void msgTouch(ObjectEntity obj, KeyboardLayout keyboardLayout);
@@ -106,8 +108,8 @@ public interface ObjectEntity extends ObjectItem {
     /**
      * When weapon kill object or ennemy kill player.
      *
-     * @param sender sender
-     * @param nbLife number life to decrease
+     * @param sender      sender
+     * @param nbLife      number life to decrease
      * @param typeOfDeath tyep of death (for player)
      */
     void msgKill(ObjectEntity sender, int nbLife, int typeOfDeath);
@@ -115,8 +117,8 @@ public interface ObjectEntity extends ObjectItem {
     /**
      * When background kill object.
      *
-     * @param sender sender
-     * @param nbLife number life to decrease
+     * @param sender      sender
+     * @param nbLife      number life to decrease
      * @param typeOfDeath tyep of death (for player)
      */
     void msgKill(BackgroundEntity sender, int nbLife, int typeOfDeath);

@@ -14,8 +14,8 @@ public interface BackgroundParam {
     /**
      * Default constructor.
      *
-     * @param backgroundMap background map
-     * @param pictureCacheManager picture cache
+     * @param backgroundMap            background map
+     * @param pictureCacheManager      picture cache
      * @param messageDispatcherManager message dispatcher
      */
     void init(BackgroundEntity[][] backgroundMap,
@@ -32,7 +32,7 @@ public interface BackgroundParam {
     /**
      * Message dispatcher.
      *
-     * @return  message dispatcher for interaction with game
+     * @return message dispatcher for interaction with game
      */
     MessageDispatcher getMessageDispatcher();
 
@@ -42,6 +42,13 @@ public interface BackgroundParam {
      * @return DmaEntry
      */
     DmaEntry getDmaEntry();
+
+    /**
+     * dma entry.
+     *
+     * @param dma set dmaEntry
+     */
+    void setDmaEntry(DmaEntry dma);
 
     /**
      * Picture cache.
@@ -58,25 +65,18 @@ public interface BackgroundParam {
     int getX();
 
     /**
-     * Y.
-     *
-     * @return the y
-     */
-    int getY();
-
-    /**
-     * dma entry.
-     *
-     * @param dma set dmaEntry
-     */
-    void setDmaEntry(DmaEntry dma);
-
-    /**
      * X.
      *
      * @param xPos the x to set
      */
     void setX(int xPos);
+
+    /**
+     * Y.
+     *
+     * @return the y
+     */
+    int getY();
 
     /**
      * Y.

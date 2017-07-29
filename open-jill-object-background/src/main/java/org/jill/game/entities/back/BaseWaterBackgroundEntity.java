@@ -8,5 +8,5 @@ import org.jill.game.entities.back.abs.AbstractBaseBackgroundEntity;
  * @author Emeric MARTINEAU
  */
 public final class BaseWaterBackgroundEntity
-    extends AbstractBaseBackgroundEntity {
+        extends AbstractBaseBackgroundEntity {
 }

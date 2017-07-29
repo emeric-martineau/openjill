@@ -1,6 +1,7 @@
 package org.jill.game.entities.obj;
 
 import java.awt.image.BufferedImage;
+
 import org.jill.game.entities.obj.abs.AbstractHitPlayerObjectEntity;
 import org.jill.game.entities.obj.player.PlayerState;
 import org.jill.game.entities.obj.util.UtilityObjectEntity;
@@ -20,7 +21,7 @@ import org.jill.openjill.core.api.message.statusbar.inventory.InventoryLifeMessa
  * @author Emeric MARTINEAU
  */
 public final class FallingSpikeManager extends AbstractHitPlayerObjectEntity
-    implements InterfaceMessageGameHandler {
+        implements InterfaceMessageGameHandler {
 
     /**
      * Picture array.
@@ -100,7 +101,7 @@ public final class FallingSpikeManager extends AbstractHitPlayerObjectEntity
 
     @Override
     public void recieveMessage(final EnumMessageType type,
-        final Object msg) {
+            final Object msg) {
         switch (type) {
             case TRIGGER:
                 final ObjectEntity switchObj = (ObjectEntity) msg;
@@ -111,7 +112,7 @@ public final class FallingSpikeManager extends AbstractHitPlayerObjectEntity
 
                 // Remove source message
                 this.messageDispatcher.sendMessage(EnumMessageType.OBJECT,
-                new ObjectListMessage(switchObj, false));
+                        new ObjectListMessage(switchObj, false));
 
                 break;
             default:
@@ -129,7 +130,7 @@ public final class FallingSpikeManager extends AbstractHitPlayerObjectEntity
                 }
             } else {
                 this.messageDispatcher.sendMessage(EnumMessageType.OBJECT,
-                    this.killme);
+                        this.killme);
             }
         }
     }

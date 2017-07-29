@@ -5,6 +5,7 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
 import java.util.Map;
+
 import org.jill.game.entities.picutre.PictureSynchronizer;
 
 /**
@@ -13,7 +14,7 @@ import org.jill.game.entities.picutre.PictureSynchronizer;
  * @author Emeric MARTINEAU
  */
 public abstract class AbstractSynchronisedImageBackgroundEntity
-    extends AbstractParameterBackgroundEntity {
+        extends AbstractParameterBackgroundEntity {
 
     /**
      * Map of picture.
@@ -27,11 +28,17 @@ public abstract class AbstractSynchronisedImageBackgroundEntity
     private PictureSynchronizer ps;
 
     /**
+     * For internal use only.
+     */
+    protected AbstractSynchronisedImageBackgroundEntity() {
+        super();
+    }
+
+    /**
      * Create picture for animate background.
      *
-     * @param srcImage src image
+     * @param srcImage  src image
      * @param backColor background color
-     *
      * @return new image
      */
     protected static BufferedImage createPicture(final BufferedImage srcImage,
@@ -50,13 +57,6 @@ public abstract class AbstractSynchronisedImageBackgroundEntity
         g2.dispose();
 
         return destImage;
-    }
-
-    /**
-     * For internal use only.
-     */
-    protected AbstractSynchronisedImageBackgroundEntity() {
-        super();
     }
 
     /**
@@ -93,7 +93,7 @@ public abstract class AbstractSynchronisedImageBackgroundEntity
     /**
      * Add picture synchronizer.
      *
-     * @param clazz class
+     * @param clazz   class
      * @param picture picture synchronizer
      */
     protected final void addPictureSync(final Class clazz,
@@ -104,7 +104,7 @@ public abstract class AbstractSynchronisedImageBackgroundEntity
     /**
      * Add picture synchronizer.
      *
-     * @param name class
+     * @param name    class
      * @param picture picture synchronizer
      */
     protected final void addPictureSync(final String name,

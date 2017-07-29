@@ -1,7 +1,8 @@
 package org.jill.game.entities.obj;
 
-import org.jill.game.entities.obj.abs.AbstractParameterObjectEntity;
 import java.awt.image.BufferedImage;
+
+import org.jill.game.entities.obj.abs.AbstractParameterObjectEntity;
 import org.jill.openjill.core.api.entities.ObjectParam;
 import org.jill.openjill.core.api.keyboard.KeyboardLayout;
 import org.jill.openjill.core.api.message.EnumMessageType;
@@ -45,7 +46,7 @@ public final class HitFireManager extends AbstractParameterObjectEntity {
         int baseTileIndex = tileIndex;
 
         for (int index = numberTileSet - 1; index < this.images.length;
-                index++) {
+             index++) {
             this.images[index] = this.pictureCache.getImage(tileSetIndex,
                     baseTileIndex);
             baseTileIndex++;
@@ -75,7 +76,7 @@ public final class HitFireManager extends AbstractParameterObjectEntity {
 
         if (this.counter == this.images.length) {
             this.messageDispatcher.sendMessage(
-                EnumMessageType.OBJECT, killme);
+                    EnumMessageType.OBJECT, killme);
 
             // To prevend IndexOutBoundException
             this.counter--;

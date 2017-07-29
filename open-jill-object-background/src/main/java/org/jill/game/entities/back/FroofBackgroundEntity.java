@@ -10,7 +10,7 @@ import org.jill.game.entities.back.abs.AbstractOorBackgroundEntity;
  * @author Emeric MARTINEAU
  */
 public final class FroofBackgroundEntity
-    extends AbstractOorBackgroundEntity {
+        extends AbstractOorBackgroundEntity {
 
     /**
      * Current inde image to display.

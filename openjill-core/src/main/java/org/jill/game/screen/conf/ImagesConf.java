@@ -24,7 +24,7 @@ public final class ImagesConf extends PictureConf {
     /**
      * Position.
      *
-     * @return  x
+     * @return x
      */
     public int getX() {
         return x;

@@ -17,11 +17,6 @@ public class SaveGameItemImpl implements SaveGameItem {
     private static final String MAP_FILENAME_PATTERN = "%sSAVEM.%d";
 
     /**
-     * Saved game name.
-     */
-    private String name;
-
-    /**
      * Name of save game file.
      */
     private final String saveGameFile;
@@ -32,11 +27,16 @@ public class SaveGameItemImpl implements SaveGameItem {
     private final String saveMapFile;
 
     /**
+     * Saved game name.
+     */
+    private String name;
+
+    /**
      * Constructor.
      *
      * @param prefixe save file prefix
-     * @param index index of save
-     * @param nm name of save
+     * @param index   index of save
+     * @param nm      name of save
      */
     public SaveGameItemImpl(final String prefixe, final int index,
             final String nm) {
@@ -57,6 +57,16 @@ public class SaveGameItemImpl implements SaveGameItem {
     }
 
     /**
+     * Set name of save entry.
+     *
+     * @param nm name
+     */
+    @Override
+    public final void setName(final String nm) {
+        this.name = nm;
+    }
+
+    /**
      * Save file name.
      *
      * @return filename
@@ -74,15 +84,5 @@ public class SaveGameItemImpl implements SaveGameItem {
     @Override
     public final String getSaveMapFile() {
         return saveMapFile;
-    }
-
-    /**
-     * Set name of save entry.
-     *
-     * @param nm name
-     */
-    @Override
-    public final void setName(final String nm) {
-        this.name = nm;
     }
 }

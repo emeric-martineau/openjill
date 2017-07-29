@@ -8,15 +8,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import org.jill.game.entities.obj.abs.AbstractParameterObjectEntity;
 import org.jill.game.entities.obj.lockeddoor.LockedDoorConfig;
-import org.jill.openjill.core.api.message.background.BackgroundMessage;
-import org.jill.openjill.core.api.message.object.ObjectListMessage;
-import org.jill.openjill.core.api.message.statusbar.StatusBarTextMessage;
-import org.jill.openjill.core.api.message.statusbar.inventory.
-        EnumInventoryObject;
-import org.jill.openjill.core.api.message.statusbar.inventory.
-        InventoryItemMessage;
 import org.jill.openjill.core.api.entities.BackgroundEntity;
 import org.jill.openjill.core.api.entities.ObjectEntity;
 import org.jill.openjill.core.api.entities.ObjectParam;
@@ -24,6 +18,11 @@ import org.jill.openjill.core.api.jill.JillConst;
 import org.jill.openjill.core.api.keyboard.KeyboardLayout;
 import org.jill.openjill.core.api.message.EnumMessageType;
 import org.jill.openjill.core.api.message.InterfaceMessageGameHandler;
+import org.jill.openjill.core.api.message.background.BackgroundMessage;
+import org.jill.openjill.core.api.message.object.ObjectListMessage;
+import org.jill.openjill.core.api.message.statusbar.StatusBarTextMessage;
+import org.jill.openjill.core.api.message.statusbar.inventory.EnumInventoryObject;
+import org.jill.openjill.core.api.message.statusbar.inventory.InventoryItemMessage;
 
 /**
  * Locked door for mapdoor or other door.
@@ -31,7 +30,7 @@ import org.jill.openjill.core.api.message.InterfaceMessageGameHandler;
  * @author Emeric MARTINEAU
  */
 public final class LockedDoorManager extends AbstractParameterObjectEntity
-    implements InterfaceMessageGameHandler {
+        implements InterfaceMessageGameHandler {
     /**
      * Map with background.
      */
@@ -118,8 +117,8 @@ public final class LockedDoorManager extends AbstractParameterObjectEntity
 
             if (inventory != null) {
                 listBackground.put(currentBack,
-                    new LockedDoorConfig(openMsg, closeMsg,
-                        EnumInventoryObject.valueOf(inventory)));
+                        new LockedDoorConfig(openMsg, closeMsg,
+                                EnumInventoryObject.valueOf(inventory)));
             } else {
                 // Just to know that we manage this background
                 listBackground.put(currentBack, null);
@@ -151,7 +150,7 @@ public final class LockedDoorManager extends AbstractParameterObjectEntity
         // Get background to know config to get
         final BackgroundEntity back =
                 backgroundObject[x / JillConst.getBlockSize()]
-                    [y / JillConst.getBlockSize()];
+                        [y / JillConst.getBlockSize()];
 
         currentConfig = listBackground.get(back.getName());
 
@@ -160,15 +159,15 @@ public final class LockedDoorManager extends AbstractParameterObjectEntity
             // Message
             closeMessage =
                     new StatusBarTextMessage(currentConfig.getCloseMessage(),
-                        textTime, textColor);
+                            textTime, textColor);
 
             openMessage =
                     new StatusBarTextMessage(currentConfig.getOpenMessage(),
-                        textTime, textColor);
+                            textTime, textColor);
 
             // Create remove inventory message
             removeInventoryMessage = new InventoryItemMessage(
-                currentConfig.getInventory(), false);
+                    currentConfig.getInventory(), false);
         }
 
         // Remove me from list of object (= kill me)
@@ -208,9 +207,8 @@ public final class LockedDoorManager extends AbstractParameterObjectEntity
      * Create door picture.
      *
      * @param doorPicture door picture
-     * @param backColor background color
-     *
-     * @return  new picture
+     * @param backColor   background color
+     * @return new picture
      */
     private BufferedImage createDoorPicture(final BufferedImage doorPicture,
             final Color backColor) {
@@ -266,7 +264,7 @@ public final class LockedDoorManager extends AbstractParameterObjectEntity
             if (getState() >= JillConst.getBlockSize()) {
                 // Remove object source and this
                 messageDispatcher.sendMessage(
-                    EnumMessageType.OBJECT, killme);
+                        EnumMessageType.OBJECT, killme);
             }
         }
     }
@@ -274,13 +272,13 @@ public final class LockedDoorManager extends AbstractParameterObjectEntity
     @Override
     public void recieveMessage(final EnumMessageType type, final Object msg) {
         switch (type) {
-            case INVENTORY_ITEM :
+            case INVENTORY_ITEM:
                 inventoryMessage(msg);
                 break;
-            case TRIGGER :
+            case TRIGGER:
                 triggerMessage(msg);
                 break;
-            default :
+            default:
         }
     }
 
@@ -375,7 +373,7 @@ public final class LockedDoorManager extends AbstractParameterObjectEntity
         if (!isDoor) {
             // Remove object source and this
             messageDispatcher.sendMessage(
-                EnumMessageType.OBJECT, killme);
+                    EnumMessageType.OBJECT, killme);
         }
     }
 

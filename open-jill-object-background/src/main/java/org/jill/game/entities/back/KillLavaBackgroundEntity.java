@@ -1,6 +1,7 @@
 package org.jill.game.entities.back;
 
 import java.awt.image.BufferedImage;
+
 import org.jill.game.entities.back.abs.AbstractSynchronisedImageBackgroundEntity;
 import org.jill.game.entities.obj.player.PlayerState;
 import org.jill.game.entities.picutre.PictureSynchronizer;
@@ -9,10 +10,8 @@ import org.jill.openjill.core.api.entities.ObjectEntity;
 import org.jill.openjill.core.api.message.EnumMessageType;
 import org.jill.openjill.core.api.message.MessageDispatcher;
 import org.jill.openjill.core.api.message.object.CreateObjectMessage;
-import org.jill.openjill.core.api.message.object.
-        ObjectListMessage;
-import org.jill.openjill.core.api.message.statusbar.inventory.
-        InventoryLifeMessage;
+import org.jill.openjill.core.api.message.object.ObjectListMessage;
+import org.jill.openjill.core.api.message.statusbar.inventory.InventoryLifeMessage;
 
 /**
  * Laval background.
@@ -102,7 +101,7 @@ public final class KillLavaBackgroundEntity extends
         this.deadObject.setY(obj.getY());
 
         this.messageDispatcher.sendMessage(EnumMessageType.OBJECT,
-            this.deadMessage);
+                this.deadMessage);
     }
 
     /**
@@ -115,7 +114,7 @@ public final class KillLavaBackgroundEntity extends
                 = CreateObjectMessage.buildFromClassName(typeHit);
 
         this.messageDispatcher.sendMessage(EnumMessageType.CREATE_OBJECT,
-            com);
+                com);
 
         this.deadObject = com.getObject();
 

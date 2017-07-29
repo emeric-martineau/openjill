@@ -41,10 +41,10 @@ public final class ObjectParamImpl implements ObjectParam {
     /**
      * Default constructor.
      *
-     * @param backgroundMap background
-     * @param pictureCacheManager  picture
+     * @param backgroundMap            background
+     * @param pictureCacheManager      picture
      * @param messageDispatcherManager message
-     * @param levelNumber level
+     * @param levelNumber              level
      */
     @Override
     public void init(final BackgroundEntity[][] backgroundMap,
@@ -100,7 +100,7 @@ public final class ObjectParamImpl implements ObjectParam {
     /**
      * Message dispatcher.
      *
-     * @return  message dispatcher for interaction with game
+     * @return message dispatcher for interaction with game
      */
     @Override
     public MessageDispatcher getMessageDispatcher() {

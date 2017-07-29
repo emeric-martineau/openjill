@@ -1,8 +1,8 @@
 package org.jill.game.entities.obj.player;
 
 import org.jill.openjill.core.api.message.EnumMessageType;
-import org.jill.openjill.core.api.message.player.GetPlayerPositionMessage;
 import org.jill.openjill.core.api.message.MessageDispatcher;
+import org.jill.openjill.core.api.message.player.GetPlayerPositionMessage;
 
 /**
  * Some object need player position.
@@ -57,8 +57,7 @@ public final class PlayerPositionSynchronizer {
      * Update index.
      *
      * @param messageDispatcher message dispatcher
-     * @param currentIndex index of object
-     *
+     * @param currentIndex      index of object
      * @return new index
      */
     public int updatePlayerPosition(final MessageDispatcher messageDispatcher,
@@ -67,7 +66,7 @@ public final class PlayerPositionSynchronizer {
             this.indexEtat++;
 
             messageDispatcher.sendMessage(
-                            EnumMessageType.PLAYER_GET_POSITION,
+                    EnumMessageType.PLAYER_GET_POSITION,
                     GET_PLAYER_POSITION);
 
             this.x = GET_PLAYER_POSITION.getX();

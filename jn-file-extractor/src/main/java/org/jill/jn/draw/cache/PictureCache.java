@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Properties;
+
 import org.jill.dma.DmaEntry;
 import org.jill.dma.DmaFile;
 import org.jill.jn.JnFileExtractor;
@@ -25,82 +26,99 @@ import org.jill.sha.ShaTileSet;
  *
  * @author Emeric Martineau
  */
-public class PictureCache
-{
+public class PictureCache {
     /**
      * Map of tile
      */
-    private final Map<Integer, ShaTile[]> mapOfTile ;
+    private final Map<Integer, ShaTile[]> mapOfTile;
 
     /**
      * Map of background tile
      */
-    private final Map<Integer, BufferedImage> mapBackgroundPicture ;
+    private final Map<Integer, BufferedImage> mapBackgroundPicture;
 
     /**
      * Type opf screen
      */
-    private final ScreenType typeScreen ;
+    private final ScreenType typeScreen;
 
     /**
      * Map of object tile
      */
-    private final Map<String, AbstractTileManager> mapObjectPicture ;
+    private final Map<String, AbstractTileManager> mapObjectPicture;
 
     public PictureCache(final ShaFile shaFile, final DmaFile dmaFile,
             final ScreenType typeScreen)
             throws ClassNotFoundException, IllegalAccessException,
-            InstantiationException
-    {
-        this.typeScreen = typeScreen ;
+            InstantiationException {
+        this.typeScreen = typeScreen;
 
         // Init map sprite
-        mapOfTile = initMapSprite(shaFile) ;
+        mapOfTile = initMapSprite(shaFile);
 
         // Init background picture
-        mapBackgroundPicture = initMapOfBackgroundSprite(dmaFile) ;
+        mapBackgroundPicture = initMapOfBackgroundSprite(dmaFile);
 
         // Init object picture
-        mapObjectPicture = initMapOfObjectSrite() ;
+        mapObjectPicture = initMapOfObjectSrite();
+    }
+
+    /**
+     * Load properties.
+     *
+     * @return propoerties object
+     */
+    private static Properties loadObjectTitle() {
+        Properties mapObjectTile = new Properties();
+
+        try {
+            mapObjectTile.load(JnFileExtractor.class.getClassLoader().
+                    getResourceAsStream("objects_manager_mapping.properties"));
+        } catch (IOException e) {
+            System.out.println("Error, can't load properties file where " +
+                    " mapping objects and manager");
+            e.printStackTrace();
+
+            mapObjectTile = null;
+        }
+
+        return mapObjectTile;
     }
 
     /**
      * Init map of sprite
      *
      * @param shaFile sha file
-     *
      * @return map of sprite
      */
-    private Map<Integer, ShaTile[]> initMapSprite(final ShaFile shaFile)
-    {
+    private Map<Integer, ShaTile[]> initMapSprite(final ShaFile shaFile) {
         // TileSet array
-        final ShaTileSet[] tileSetArray = shaFile.getShaTileSet() ;
+        final ShaTileSet[] tileSetArray = shaFile.getShaTileSet();
         // Map of tile
         final Map<Integer, ShaTile[]> mapOfTile =
-                new HashMap<>(tileSetArray.length) ;
+                new HashMap<>(tileSetArray.length);
 
         // Tile set index
-        Integer tileSetIndex ;
+        Integer tileSetIndex;
         // TileSet
-        ShaTileSet tileSet ;
+        ShaTileSet tileSet;
 
         // Init map of tileset
         for (ShaTileSet tileSetArray1 : tileSetArray) {
             tileSet = tileSetArray1;
             if ((tileSet.getBitColor() != 8) || (typeScreen == ScreenType.VGA)) {
                 tileSetIndex = tileSet.getTitleSetIndex();
-                mapOfTile.put(tileSetIndex, tileSet.getShaTile()) ;
+                mapOfTile.put(tileSetIndex, tileSet.getShaTile());
             }
         }
 
-        return mapOfTile ;
+        return mapOfTile;
     }
 
     /**
      * Init picture of know object
      *
      * @return map of tile
-     *
      * @throws ClassNotFoundException if error
      * @throws InstantiationException if error
      * @throws IllegalAccessException if error
@@ -108,52 +126,47 @@ public class PictureCache
     @SuppressWarnings("unchecked")
     private Map<String, AbstractTileManager> initMapOfObjectSrite()
             throws ClassNotFoundException, IllegalAccessException,
-                InstantiationException
-    {
+            InstantiationException {
         // Load mapping
-        final Properties mapObjectTile = loadObjectTitle() ;
+        final Properties mapObjectTile = loadObjectTitle();
         // Get keys
         final Enumeration<?> e = mapObjectTile.propertyNames();
         // Map between key and manager
         final Map<String, AbstractTileManager> mapObjectPicture =
-                new HashMap<>() ;
+                new HashMap<>();
         // Map between manager name and manager
         final Map<String, AbstractTileManager> mapManagerName =
-                new HashMap<>() ;
+                new HashMap<>();
 
 
-        String key ;
-        String value ;
+        String key;
+        String value;
 
-        AbstractTileManager manager ;
+        AbstractTileManager manager;
 
-        Class<AbstractTileManager> c ;
+        Class<AbstractTileManager> c;
 
-        while(e.hasMoreElements())
-        {
-            key = (String) e.nextElement() ;
+        while (e.hasMoreElements()) {
+            key = (String) e.nextElement();
 
-            value = mapObjectTile.getProperty(key) ;
+            value = mapObjectTile.getProperty(key);
 
-            manager = mapManagerName.get(value) ;
+            manager = mapManagerName.get(value);
 
             // Search if manager already exists
-            if (manager == null)
-            {
-                c = (Class<AbstractTileManager>) Class.forName(value) ;
-                manager = c.newInstance() ;
-                manager.init(mapOfTile, typeScreen) ;
+            if (manager == null) {
+                c = (Class<AbstractTileManager>) Class.forName(value);
+                manager = c.newInstance();
+                manager.init(mapOfTile, typeScreen);
 
-                mapObjectPicture.put(key, manager) ;
-                mapManagerName.put(value, manager) ;
-            }
-            else
-            {
-                mapObjectPicture.put(key, manager) ;
+                mapObjectPicture.put(key, manager);
+                mapManagerName.put(value, manager);
+            } else {
+                mapObjectPicture.put(key, manager);
             }
         }
 
-        return mapObjectPicture ;
+        return mapObjectPicture;
     }
 
     /**
@@ -162,124 +175,83 @@ public class PictureCache
      * @param dmaFile dma file
      */
     private Map<Integer, BufferedImage> initMapOfBackgroundSprite(
-            final DmaFile dmaFile)
-    {
-        final Iterator<Integer> itDma = dmaFile.getDmaEntryIterator() ;
+            final DmaFile dmaFile) {
+        final Iterator<Integer> itDma = dmaFile.getDmaEntryIterator();
         final Map<Integer, BufferedImage> mapBackgroundPicture =
-                new HashMap<>(dmaFile.getDmaEntryCount()) ;
+                new HashMap<>(dmaFile.getDmaEntryCount());
 
         // Tile set index
-        Integer tileSetIndex ;
+        Integer tileSetIndex;
         // Dma entry
-        DmaEntry dmaEntry ;
+        DmaEntry dmaEntry;
         // Map code
-        int mapCode ;
+        int mapCode;
         // Tile picture
-        BufferedImage tilePicture ;
+        BufferedImage tilePicture;
         // Array of tile
-        ShaTile[] tileArray ;
+        ShaTile[] tileArray;
         // Tile
-        ShaTile tile ;
+        ShaTile tile;
 
-        while(itDma.hasNext())
-        {
-            mapCode = itDma.next() ;
+        while (itDma.hasNext()) {
+            mapCode = itDma.next();
 
-            dmaEntry = dmaFile.getDmaEntry(mapCode) ;
+            dmaEntry = dmaFile.getDmaEntry(mapCode);
 
-            if (dmaEntry != null)
-            {
-                tileSetIndex = dmaEntry.getTileset() ;
+            if (dmaEntry != null) {
+                tileSetIndex = dmaEntry.getTileset();
 
                 // Get picture
-                tileArray = mapOfTile.get(tileSetIndex) ;
+                tileArray = mapOfTile.get(tileSetIndex);
 
                 // Some Dma entry are invalid
-                if (tileArray != null && (dmaEntry.getTile() < tileArray.length))
-                {
-                    tile = tileArray[dmaEntry.getTile()] ;
+                if (tileArray != null && (dmaEntry.getTile() < tileArray.length)) {
+                    tile = tileArray[dmaEntry.getTile()];
 
-                    if (typeScreen == ScreenType.CGA)
-                    {
-                        tilePicture = tile.getPictureCga() ;
-                    }
-                    else if (typeScreen == ScreenType.EGA)
-                    {
-                        tilePicture = tile.getPictureEga() ;
-                    }
-                    else
-                    {
-                        tilePicture = tile.getPictureVga() ;
+                    if (typeScreen == ScreenType.CGA) {
+                        tilePicture = tile.getPictureCga();
+                    } else if (typeScreen == ScreenType.EGA) {
+                        tilePicture = tile.getPictureEga();
+                    } else {
+                        tilePicture = tile.getPictureVga();
                     }
 
-                    mapBackgroundPicture.put(mapCode, tilePicture) ;
+                    mapBackgroundPicture.put(mapCode, tilePicture);
                 }
             }
         }
 
-        return mapBackgroundPicture ;
-    }
-
-
-    /**
-     * Load properties.
-     *
-     * @return propoerties object
-     */
-    private static Properties loadObjectTitle()
-    {
-        Properties mapObjectTile = new Properties() ;
-
-        try
-        {
-            mapObjectTile.load(JnFileExtractor.class.getClassLoader().
-                    getResourceAsStream("objects_manager_mapping.properties")) ;
-        }
-        catch (IOException e)
-        {
-            System.out.println("Error, can't load properties file where " +
-                    " mapping objects and manager") ;
-            e.printStackTrace() ;
-
-            mapObjectTile = null ;
-        }
-
-        return mapObjectTile ;
+        return mapBackgroundPicture;
     }
 
     /**
      * Return picture of background
      *
      * @param mapCode map code
-     *
      * @return null if background not found
      */
-    public BufferedImage getBackgroundPicture(final int mapCode)
-    {
-        return mapBackgroundPicture.get(mapCode) ;
+    public BufferedImage getBackgroundPicture(final int mapCode) {
+        return mapBackgroundPicture.get(mapCode);
     }
 
     /**
      * Return picture of object
      *
      * @param object object to get picture
-     *
      * @return null if background not found
      */
-    public BufferedImage getObjectPicture(final ObjectItem object)
-    {
-        String objectType = String.valueOf(object.getType()) ;
-        AbstractTileManager manager ;
+    public BufferedImage getObjectPicture(final ObjectItem object) {
+        String objectType = String.valueOf(object.getType());
+        AbstractTileManager manager;
 
-        manager = mapObjectPicture.get(objectType) ;
+        manager = mapObjectPicture.get(objectType);
 
-        if (manager == null)
-        {
+        if (manager == null) {
             //System.err.println("No tile manager found for tileType = ".concat(objectType)) ;
 
-            return null ;
+            return null;
         }
 
-        return manager.getTile(object) ;
+        return manager.getTile(object);
     }
 }

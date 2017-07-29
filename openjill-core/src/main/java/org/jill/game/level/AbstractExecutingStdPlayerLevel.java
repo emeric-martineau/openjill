@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import org.jill.game.config.JillGameConfig;
 import org.jill.game.config.ObjectInstanceFactory;
 import org.jill.game.entities.obj.player.AbstractPlayerManager;
@@ -15,16 +16,14 @@ import org.jill.game.manager.object.weapon.ObjectMappingWeapon;
 import org.jill.game.screen.conf.GameAreaBorderConf;
 import org.jill.game.screen.conf.GameAreaConf;
 import org.jill.game.screen.conf.RectangleConf;
-import org.jill.openjill.core.api.message.statusbar.StatusBarTextMessage;
-import org.jill.openjill.core.api.message.statusbar.inventory.
-        EnumInventoryObject;
-import org.jill.openjill.core.api.message.statusbar.inventory.
-        InventoryItemMessage;
 import org.jill.jn.ObjectItem;
 import org.jill.openjill.core.api.entities.ObjectEntity;
 import org.jill.openjill.core.api.entities.ObjectParam;
 import org.jill.openjill.core.api.jill.JillConst;
 import org.jill.openjill.core.api.message.EnumMessageType;
+import org.jill.openjill.core.api.message.statusbar.StatusBarTextMessage;
+import org.jill.openjill.core.api.message.statusbar.inventory.EnumInventoryObject;
+import org.jill.openjill.core.api.message.statusbar.inventory.InventoryItemMessage;
 import org.simplegame.SimpleGameConfig;
 
 /**
@@ -35,66 +34,43 @@ import org.simplegame.SimpleGameConfig;
  * @author Emeric MARTINEAU
  */
 public abstract class AbstractExecutingStdPlayerLevel
-    extends AbstractExecutingStdLevel {
+        extends AbstractExecutingStdLevel {
     /**
      * Logger.
      */
     private static final Logger LOGGER = Logger.getLogger(
-                    AbstractExecutingStdPlayerLevel.class.getName());
-
+            AbstractExecutingStdPlayerLevel.class.getName());
+    /**
+     * Minimum size between player and border.
+     */
+    private static final int BORDER_SCREEN_PLAYER_Y = 3
+            * JillConst.getBlockSize();
+    /**
+     * Move screen state of player.
+     */
+    private final int playerStateMoveScreen;
+    /**
+     * Yd value to move up.
+     */
+    private final int playerYdUpMoveScreen;
+    /**
+     * Yd value to move down.
+     */
+    private final int playerYdDownMoveScreen;
+    /**
+     * Type of player for head up/down.
+     */
+    private final int playerTypeMoveScreen;
     /**
      * Begin level message.
      */
     private StatusBarTextMessage beginMessage;
 
     /**
-     * Minimum size between player and border.
-     */
-    private static final int BORDER_SCREEN_PLAYER_Y = 3
-            * JillConst.getBlockSize();
-
-    /**
-     * Move screen state of player.
-     */
-    private final int playerStateMoveScreen;
-
-    /**
-     * Yd value to move up.
-     */
-    private final int playerYdUpMoveScreen;
-
-    /**
-     * Yd value to move down.
-     */
-    private final int playerYdDownMoveScreen;
-
-    /**
-     * Type of player for head up/down.
-     */
-    private final int playerTypeMoveScreen;
-
-    /**
-     * Create message for status bar.
-     *
-     * @param prop propertoies
-     * @param key key to search
-     *
-     * @return status bar
-     */
-    private static StatusBarTextMessage createSatusBarMessage(
-            final Properties prop,
-            final String key) {
-        return new StatusBarTextMessage(prop.getProperty(key + ".msg"),
-                Integer.valueOf(prop.getProperty(key + ".duration")),
-                Integer.valueOf(prop.getProperty(key + ".color")));
-    }
-
-    /**
      * Level configuration.
      *
-     * @param cfgLevel  configuration of level
-     *
-     * @throws IOException if error of reading file
+     * @param cfgLevel configuration of level
+     * @throws IOException                  if error of reading file
      * @throws ReflectiveOperationException if not class found
      */
     public AbstractExecutingStdPlayerLevel(final LevelConfiguration cfgLevel)
@@ -106,20 +82,20 @@ public abstract class AbstractExecutingStdPlayerLevel
         }
 
         this.playerStateMoveScreen
-            = ((JillGameConfig) SimpleGameConfig.getInstance()).
-                    getPlayerMoveScreenState();
+                = ((JillGameConfig) SimpleGameConfig.getInstance()).
+                getPlayerMoveScreenState();
 
         this.playerYdUpMoveScreen
-            = ((JillGameConfig) SimpleGameConfig.getInstance()).
-                    getPlayerMoveScreenYdUp();
+                = ((JillGameConfig) SimpleGameConfig.getInstance()).
+                getPlayerMoveScreenYdUp();
 
         this.playerYdDownMoveScreen
-            = ((JillGameConfig) SimpleGameConfig.getInstance()).
-                    getPlayerMoveScreenYdDown();
+                = ((JillGameConfig) SimpleGameConfig.getInstance()).
+                getPlayerMoveScreenYdDown();
 
         this.playerTypeMoveScreen
-            = ((JillGameConfig) SimpleGameConfig.getInstance()).
-                    getPlayerMoveScreenType();
+                = ((JillGameConfig) SimpleGameConfig.getInstance()).
+                getPlayerMoveScreenType();
 
         initCenterScreen();
 
@@ -129,12 +105,27 @@ public abstract class AbstractExecutingStdPlayerLevel
     }
 
     /**
+     * Create message for status bar.
+     *
+     * @param prop propertoies
+     * @param key  key to search
+     * @return status bar
+     */
+    private static StatusBarTextMessage createSatusBarMessage(
+            final Properties prop,
+            final String key) {
+        return new StatusBarTextMessage(prop.getProperty(key + ".msg"),
+                Integer.valueOf(prop.getProperty(key + ".duration")),
+                Integer.valueOf(prop.getProperty(key + ".color")));
+    }
+
+    /**
      * Init center of screen at load.
      */
     protected void initCenterScreen() {
         final GameAreaConf gameScreen = this.statusBar.getGameAreaConf();
         final RectangleConf offset
-                    = gameScreen.getOffset();
+                = gameScreen.getOffset();
         final RectangleConf gameLevelStart = gameScreen.getLevelStart();
 
         final ObjectEntity player = getPlayer();
@@ -260,7 +251,7 @@ public abstract class AbstractExecutingStdPlayerLevel
         final GameAreaConf gameScreen = this.statusBar.getGameAreaConf();
         final GameAreaBorderConf border = gameScreen.getBorder();
         final RectangleConf offset
-                    = gameScreen.getOffset();
+                = gameScreen.getOffset();
 
         // If player is below limit right
         final int playerX = player.getX();
@@ -293,7 +284,6 @@ public abstract class AbstractExecutingStdPlayerLevel
     }
 
 
-
     @Override
     protected final void doPlayerFire() {
         final ObjectEntity player = getPlayer();
@@ -315,7 +305,7 @@ public abstract class AbstractExecutingStdPlayerLevel
 
             // Search weapon from end to start
             for (int indexWeapon = weaponsList.length - 1; indexWeapon >= 0;
-                    indexWeapon--) {
+                 indexWeapon--) {
                 currentWeapon = weaponsList[indexWeapon];
 
                 currentInventory = EnumInventoryObject.valueOf(
@@ -339,10 +329,9 @@ public abstract class AbstractExecutingStdPlayerLevel
     /**
      * Check if weapon knife.
      *
-     * @param listInv list of inventory
+     * @param listInv          list of inventory
      * @param currentInventory weapon inventory
-     * @param currentWeapon current setup of weapon
-     *
+     * @param currentWeapon    current setup of weapon
      * @return true if can create weapon
      */
     private boolean checkWeapon(
@@ -390,9 +379,9 @@ public abstract class AbstractExecutingStdPlayerLevel
     /**
      * Create weapon.
      *
-     * @param typeWeapon weapon object type
+     * @param typeWeapon       weapon object type
      * @param currentInventory weapon inventory
-     * @param currentWeapon current setup of weapon
+     * @param currentWeapon    current setup of weapon
      */
     private void createWeapon(final int typeWeapon,
             final EnumInventoryObject currentInventory,
@@ -404,16 +393,16 @@ public abstract class AbstractExecutingStdPlayerLevel
         if (currentWeapon.isRemoveInInventory()) {
             // Remove object in inventory list
             this.messageDispatcher.sendMessage(
-                EnumMessageType.INVENTORY_ITEM,
-                new InventoryItemMessage(currentInventory, false,
-                currentWeapon.isRemoveInInventory(), false));
+                    EnumMessageType.INVENTORY_ITEM,
+                    new InventoryItemMessage(currentInventory, false,
+                            currentWeapon.isRemoveInInventory(), false));
         }
 
         // Object parameter
         final ObjectParam objParam = ObjectInstanceFactory.getNewObjParam();
         objParam.init(this.backgroundObject,
-            this.pictureCache, this.messageDispatcher,
-            this.levelConfiguration.getLevelNumber());
+                this.pictureCache, this.messageDispatcher,
+                this.levelConfiguration.getLevelNumber());
 
         final ObjectItem weapon = ObjectInstanceFactory.getNewObjectItem();
 

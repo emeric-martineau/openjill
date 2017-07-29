@@ -1,6 +1,7 @@
 package org.jill.sha;
 
 import java.io.IOException;
+
 import org.jill.file.FileAbstractByte;
 
 /**
@@ -20,70 +21,58 @@ public class ShaTileSetImpl implements ShaTileSet {
      * Num of title set.
      */
     private final int titleSetIndex;
-
+    /**
+     * Number of Tile in Tile set.
+     */
+    private final int numberTile;
+    /**
+     * Size for CGA display in video memory after decompress.
+     */
+    private final int cgaSize;
+    /**
+     * Size for EGA display in video memory after decompress.
+     */
+    private final int egaSize;
+    /**
+     * Size for VGA display in video memory after decompress.
+     */
+    private final int vgaSize;
+    /**
+     * Number of color.
+     */
+    private final int bitColor;
+    /**
+     * Type of data.
+     */
+    private final int flags;
+    /**
+     * If is font.
+     */
+    private final boolean font;
+    /**
+     * If is tileset.
+     */
+    private final boolean tileset;
+    /**
+     * Picture.
+     */
+    private final ShaTile[] shaTile;
     /**
      * Offset in file.
      */
     private int offset;
-
     /**
      * Size in file.
      */
     private int size;
 
     /**
-     * Number of Tile in Tile set.
-     */
-    private final int numberTile;
-
-    /**
-     * Size for CGA display in video memory after decompress.
-     */
-    private final int cgaSize;
-
-    /**
-     * Size for EGA display in video memory after decompress.
-     */
-    private final int egaSize;
-
-    /**
-     * Size for VGA display in video memory after decompress.
-     */
-    private final int vgaSize;
-
-    /**
-     * Number of color.
-     */
-    private final int bitColor;
-
-    /**
-     * Type of data.
-     */
-    private final int flags;
-
-    /**
-     * If is font.
-     */
-    private final boolean font;
-
-    /**
-     * If is tileset.
-     */
-    private final boolean tileset;
-
-    /**
-     * Picture.
-     */
-    private final ShaTile[] shaTile;
-
-    /**
      * Constructor.
      *
-     * @param shaFile file data
-     * @param tsIndex tilset index
+     * @param shaFile      file data
+     * @param tsIndex      tilset index
      * @param offsetInFile offset's tile in file
-     * @param sizeInFile size's tile in file
-     *
+     * @param sizeInFile   size's tile in file
      * @throws IOException if any error on reading data
      */
     public ShaTileSetImpl(final FileAbstractByte shaFile, final int tsIndex,
@@ -130,7 +119,6 @@ public class ShaTileSetImpl implements ShaTileSet {
      * Read tile.
      *
      * @param shaFile file data
-     *
      * @throws IOException if error
      */
     private void readTile(final FileAbstractByte shaFile) throws IOException {
@@ -145,7 +133,7 @@ public class ShaTileSetImpl implements ShaTileSet {
             colorMap = new int[(1 << bitColor) * MULTIPLE_FOR_BIT_COLOR];
 
             for (int indexColor = 0; indexColor < colorMap.length;
-                    indexColor++) {
+                 indexColor++) {
                 colorMap[indexColor] = shaFile.read8bitLE();
             }
         } else {
@@ -154,18 +142,8 @@ public class ShaTileSetImpl implements ShaTileSet {
 
         for (int index = 0; index < numberTile; index++) {
             shaTile[index] = new ShaTileImpl(shaFile, titleSetIndex,
-                index, bitColor, colorMap);
+                    index, bitColor, colorMap);
         }
-    }
-
-    /**
-     * Mutateur de offset.
-     *
-     * @param offsetInFile offset
-     */
-    @Override
-    public final void setOffset(final int offsetInFile) {
-        this.offset = offsetInFile;
     }
 
     /**
@@ -179,13 +157,13 @@ public class ShaTileSetImpl implements ShaTileSet {
     }
 
     /**
-     * Mutateur de size.
+     * Mutateur de offset.
      *
-     * @param sizeInFile size
+     * @param offsetInFile offset
      */
     @Override
-    public final void setSize(final int sizeInFile) {
-        this.size = sizeInFile;
+    public final void setOffset(final int offsetInFile) {
+        this.offset = offsetInFile;
     }
 
     /**
@@ -196,6 +174,16 @@ public class ShaTileSetImpl implements ShaTileSet {
     @Override
     public final int getSize() {
         return size;
+    }
+
+    /**
+     * Mutateur de size.
+     *
+     * @param sizeInFile size
+     */
+    @Override
+    public final void setSize(final int sizeInFile) {
+        this.size = sizeInFile;
     }
 
     /**
@@ -271,7 +259,7 @@ public class ShaTileSetImpl implements ShaTileSet {
     /**
      * Tileset.
      *
-     * @return  true if tileset (picture)
+     * @return true if tileset (picture)
      */
     @Override
     public final boolean isTileset() {

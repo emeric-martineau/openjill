@@ -87,28 +87,10 @@ public final class StatusBarConf {
     /**
      * Control area.
      *
-     * @return  control area config
+     * @return control area config
      */
     public RectangleConf getControlArea() {
         return controlArea;
-    }
-
-    /**
-     * Control area.
-     *
-     * @param ca control area config
-     */
-    public void setInventoryArea(final RectangleConf ca) {
-        this.inventoryArea = ca;
-    }
-
-    /**
-     * Control area.
-     *
-     * @return  control area config
-     */
-    public RectangleConf getInventoryArea() {
-        return inventoryArea;
     }
 
     /**
@@ -121,9 +103,27 @@ public final class StatusBarConf {
     }
 
     /**
+     * Control area.
+     *
+     * @return control area config
+     */
+    public RectangleConf getInventoryArea() {
+        return inventoryArea;
+    }
+
+    /**
+     * Control area.
+     *
+     * @param ca control area config
+     */
+    public void setInventoryArea(final RectangleConf ca) {
+        this.inventoryArea = ca;
+    }
+
+    /**
      * Game area.
      *
-     * @return  control area config
+     * @return control area config
      */
     public GameAreaConf getGameArea() {
         return gameArea;
@@ -185,7 +185,7 @@ public final class StatusBarConf {
 
     /**
      * Image to draw by default in inventory area.
-     * 
+     *
      * @param imagesInvenroy list {@link ImagesConf}
      */
     public void setImagesInvenroy(final List<ImagesConf> imagesInvenroy) {

@@ -1,6 +1,7 @@
 package org.jill.jn;
 
 import java.io.IOException;
+
 import org.jill.file.FileAbstractByte;
 
 
@@ -25,7 +26,6 @@ public class StringItemImpl implements StringItem {
      * Constructor.
      *
      * @param jnFile file
-     *
      * @throws IOException if error
      */
     public StringItemImpl(final FileAbstractByte jnFile) throws IOException {

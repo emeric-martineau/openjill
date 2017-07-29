@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+
 import org.jill.file.FileAbstractByte;
 
 /**
@@ -14,45 +15,37 @@ import org.jill.file.FileAbstractByte;
  */
 public class ShaTileImpl implements ShaTile {
     /**
+     * 256 color bit.
+     */
+    static final int BIT_256_COLOR = 8;
+    /**
      * Color map.
      */
     private static final ColorMap VGA_COLOR_MAP = new VgaColorMapImpl();
-
     /**
      * Color map.
      */
     private static final ColorMap EGA_COLOR_MAP = new EgaColorMapImpl();
-
     /**
      * Color map.
      */
     private static final ColorMap CGA_COLOR_MAP = new CgaColorMapImpl();
-
     /**
      * Number byte per color.
      */
     private static final int NB_COLOR_PER_ITEM = 4;
-
     /**
      * Vga color.
      */
     private static final int CGA_COLOR = 0;
-
     /**
      * Vga color.
      */
     private static final int EGA_COLOR = 1;
-
     /**
      * Vga color.
      */
     private static final int VGA_COLOR = 2;
-
-    /**
-     * 256 color bit.
-     */
-    static final int BIT_256_COLOR = 8;
-
     /**
      * Num of title set.
      */
@@ -106,17 +99,16 @@ public class ShaTileImpl implements ShaTile {
     /**
      * Constructor of class ShaTile.
      *
-     * @param shaFile file data
-     * @param tsIndex index of tileset
-     * @param tIndex index of tile
+     * @param shaFile        file data
+     * @param tsIndex        index of tileset
+     * @param tIndex         index of tile
      * @param numberBitColor number of color
-     * @param usedColorMap map color
-     *
+     * @param usedColorMap   map color
      * @throws IOException if error
      */
     public ShaTileImpl(final FileAbstractByte shaFile, final int tsIndex,
-            final int tIndex,  final int numberBitColor,
-        final int[] usedColorMap) throws IOException {
+            final int tIndex, final int numberBitColor,
+            final int[] usedColorMap) throws IOException {
         if (usedColorMap != null) {
             int[] desArray = new int[usedColorMap.length];
             System.arraycopy(usedColorMap, 0, desArray, 0, usedColorMap.length);
@@ -150,14 +142,13 @@ public class ShaTileImpl implements ShaTile {
      * Get picture when tile is font.
      *
      * @param colorOffset start color in color map
-     * @param mapColor map color
-     *
+     * @param mapColor    map color
      * @return picture
      */
     private BufferedImage getPicture(final int colorOffset,
             final Color[] mapColor) {
         final BufferedImage image =
-            new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+                new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
 
         Graphics2D g2 = image.createGraphics();
 
@@ -254,7 +245,6 @@ public class ShaTileImpl implements ShaTile {
      * USE ONLY IF FONT !
      *
      * @param mapColor color map
-     *
      * @return image
      */
     @Override

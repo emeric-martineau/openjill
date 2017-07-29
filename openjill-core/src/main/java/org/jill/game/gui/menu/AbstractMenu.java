@@ -1,6 +1,5 @@
 package org.jill.game.gui.menu;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.image.BufferedImage;
@@ -11,9 +10,11 @@ import java.util.List;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import org.jill.game.gui.menu.conf.MenuConf;
 import org.jill.openjill.core.api.manager.TextManager;
 import org.jill.openjill.core.api.manager.TileManager;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  * Abstract class for menu.
@@ -26,7 +27,7 @@ public class AbstractMenu {
      * Logger.
      */
     private static final Logger LOGGER = Logger.getLogger(
-        AbstractMenu.class.getName());
+            AbstractMenu.class.getName());
 
     /**
      * Number of image in cursor.
@@ -42,17 +43,14 @@ public class AbstractMenu {
      * Cursor.
      */
     protected final BufferedImage[] cursors;
-
-    /**
-     * Current position of cursor.
-     */
-    protected int currentMenuPos = 0;
-
     /**
      * Position of cursor for each submenu.
      */
     protected final List<Point> cursorPositionBySubMenuIndex = new ArrayList<>();
-
+    /**
+     * Current position of cursor.
+     */
+    protected int currentMenuPos = 0;
     /**
      * Cursor index.
      */
@@ -76,11 +74,11 @@ public class AbstractMenu {
     /**
      * Constructor.
      *
-     * @param pictureCache picture cache
+     * @param pictureCache    picture cache
      * @param previousMenuObj previous menu
      */
     public AbstractMenu(final TileManager pictureCache,
-        final MenuInterface previousMenuObj) {
+            final MenuInterface previousMenuObj) {
 
         this.previousMenu = previousMenuObj;
 
@@ -92,11 +90,11 @@ public class AbstractMenu {
 
         this.cursors = pictureCache.getTextManager().grapSmallLetter(
                 sb.toString(),
-            TextManager.COLOR_WHITE, TextManager.BACKGROUND_COLOR_NONE);
+                TextManager.COLOR_WHITE, TextManager.BACKGROUND_COLOR_NONE);
 
         this.oldCursorBackground = new BufferedImage(this.cursors[0].getWidth(),
-            this.cursors[0].getHeight(),
-            BufferedImage.TYPE_INT_ARGB);
+                this.cursors[0].getHeight(),
+                BufferedImage.TYPE_INT_ARGB);
     }
 
     /**
@@ -106,7 +104,7 @@ public class AbstractMenu {
      */
     protected final void eraseCursor(final BufferedImage menuPicture) {
         final Point cursorPos = this.cursorPositionBySubMenuIndex.get(
-            this.currentMenuPos);
+                this.currentMenuPos);
 
         eraseCursor(cursorPos, menuPicture);
     }
@@ -114,11 +112,11 @@ public class AbstractMenu {
     /**
      * Erase cursor.
      *
-     * @param cursorPos cursor position
+     * @param cursorPos   cursor position
      * @param menuPicture picture of menu
      */
     protected final void eraseCursor(final Point cursorPos,
-        final BufferedImage menuPicture) {
+            final BufferedImage menuPicture) {
         // Draw new cursor position
         final Graphics2D g2 = menuPicture.createGraphics();
 
@@ -138,7 +136,7 @@ public class AbstractMenu {
         final Graphics2D g2 = menuPicture.createGraphics();
 
         final Point cursorPos = this.cursorPositionBySubMenuIndex.get(
-            this.currentMenuPos);
+                this.currentMenuPos);
 
         g2Old.drawImage(menuPicture, -1 * cursorPos.x, -1 * cursorPos.y, null);
 
@@ -155,7 +153,7 @@ public class AbstractMenu {
         // Draw new cursor position
         final Graphics2D g2 = menuPicture.createGraphics();
         final Point cursorPos = this.cursorPositionBySubMenuIndex.get(
-            this.currentMenuPos);
+                this.currentMenuPos);
 
         drawCursor(g2, cursorPos, menuPicture);
     }
@@ -163,12 +161,12 @@ public class AbstractMenu {
     /**
      * Draw cursor. Update cursor image at each time.
      *
-     * @param g2 graphic 2d
-     * @param cursorPos cursor position
+     * @param g2          graphic 2d
+     * @param cursorPos   cursor position
      * @param menuPicture picture of menu
      */
     protected final void drawCursor(final Graphics2D g2, final Point cursorPos,
-        final BufferedImage menuPicture) {
+            final BufferedImage menuPicture) {
         // Clear old picture
         g2.drawImage(this.oldCursorBackground, cursorPos.x, cursorPos.y, null);
 
@@ -185,7 +183,6 @@ public class AbstractMenu {
      * Read config file.
      *
      * @param filename final name of config file
-     *
      * @return properties file
      */
     protected final MenuConf readConf(final String filename) {
@@ -201,8 +198,8 @@ public class AbstractMenu {
             mc = mapper.readValue(is, MenuConf.class);
         } catch (IOException ex) {
             LOGGER.log(Level.SEVERE,
-                String.format("Unable to load config for menu '%s'", filename),
-                ex);
+                    String.format("Unable to load config for menu '%s'", filename),
+                    ex);
 
             mc = null;
         }
@@ -214,7 +211,6 @@ public class AbstractMenu {
      * Read config file.
      *
      * @param filename final name of config file
-     *
      * @return properties file
      */
     protected final Properties readConfProp(final String filename) {
@@ -223,11 +219,11 @@ public class AbstractMenu {
         // Load menu
         try {
             conf.load(
-                getClass().getClassLoader().getResourceAsStream(filename));
+                    getClass().getClassLoader().getResourceAsStream(filename));
         } catch (IOException ex) {
             LOGGER.log(Level.SEVERE,
-                String.format("Unable to load config for '%s'", filename),
-                ex);
+                    String.format("Unable to load config for '%s'", filename),
+                    ex);
         }
 
         return conf;
@@ -237,8 +233,7 @@ public class AbstractMenu {
      * Read integer.
      *
      * @param conf configuration file
-     * @param key key to read
-     *
+     * @param key  key to read
      * @return value
      */
     protected final int readInteger(final Properties conf, final String key) {

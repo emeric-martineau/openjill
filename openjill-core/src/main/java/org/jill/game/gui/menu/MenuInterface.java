@@ -95,7 +95,6 @@ public interface MenuInterface {
      * Call to grap key event not managed.
      *
      * @param consumeOtherKey key
-     *
      * @return true if is shortcut and menu is validate
      */
     boolean keyEvent(char consumeOtherKey);

@@ -31,9 +31,9 @@ public final class LockedDoorConfig {
     /**
      * Constructor.
      *
-     * @param openMsg message when door open
+     * @param openMsg  message when door open
      * @param closeMsg message when door is closes
-     * @param inv inventory item to open door
+     * @param inv      inventory item to open door
      */
     public LockedDoorConfig(final String openMsg, final String closeMsg,
             final EnumInventoryObject inv) {

@@ -12,37 +12,37 @@ public class ExtractParameter {
     /**
      * Extract font
      */
-    private boolean font = true ;
+    private boolean font = true;
 
     /**
      * Extract picture
      */
-    private boolean picture = true ;
+    private boolean picture = true;
 
     /**
      * Extract picture in CGA mode
      */
-    private boolean cgaMode = true ;
+    private boolean cgaMode = true;
 
     /**
      * Extract picture in EGA mode
      */
-    private boolean egaMode = true ;
+    private boolean egaMode = true;
 
     /**
      * Extract picture in VGA mode
      */
-    private boolean vgaMode = true ;
+    private boolean vgaMode = true;
 
     /**
      * File name of sha file
      */
-    private String fileName ;
+    private String fileName;
 
     /**
      * Output dir
      */
-    private String dirName ;
+    private String dirName;
 
     /**
      * @return fileName

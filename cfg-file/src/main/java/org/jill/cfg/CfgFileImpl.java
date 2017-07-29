@@ -62,74 +62,60 @@ public class CfgFileImpl implements CfgFile {
      * size of whole in file.
      */
     private static final int CFG_FILE_WHOLE = 20;
-
-    /**
-     * If this is set to 1, no setup avaible.
-     * Must display setup screen.
-     */
-    private boolean setup;
-
-    /**
-     * Joystick enabled if this is nonzero.
-     */
-    private boolean joystick;
-
-    /**
-     * Joystick X left value.
-     */
-    private int joystickLeftX;
-
-    /**
-     * Joystick X right value.
-     */
-    private int joystickRightX;
-
-    /**
-     * Joystick X center value.
-     */
-    private int joystickCenterX;
-
-    /**
-     * Joystick Y left value.
-     */
-    private int joystickLeftY;
-
-    /**
-     * Joystick X right value.
-     */
-    private int joystickRightY;
-
-    /**
-     * Joystick Y center value.
-     */
-    private int joystickCenterY;
-
-    /**
-     * Display configuration. For Jill: 1=CGA, 2=EGA, 4=VGA.
-     */
-    private int displayMode;
-
-    /**
-     * Music configuration. Nonzero value means it is enabled.
-     */
-    private boolean music;
-
-    /**
-     * Digital sound configuration. Nonzero value means it is enabled.
-     */
-    private boolean sound;
-
     /**
      * List of high score.
      */
     private final List<HighScoreItem> highScore =
             new ArrayList<>(NUM_HIGH_SCORE_NAME);
-
     /**
      * List of save name.
      */
     private final List<SaveGameItem> saveGame = new ArrayList<>(NUM_SAVE_NAME);
-
+    /**
+     * If this is set to 1, no setup avaible.
+     * Must display setup screen.
+     */
+    private boolean setup;
+    /**
+     * Joystick enabled if this is nonzero.
+     */
+    private boolean joystick;
+    /**
+     * Joystick X left value.
+     */
+    private int joystickLeftX;
+    /**
+     * Joystick X right value.
+     */
+    private int joystickRightX;
+    /**
+     * Joystick X center value.
+     */
+    private int joystickCenterX;
+    /**
+     * Joystick Y left value.
+     */
+    private int joystickLeftY;
+    /**
+     * Joystick X right value.
+     */
+    private int joystickRightY;
+    /**
+     * Joystick Y center value.
+     */
+    private int joystickCenterY;
+    /**
+     * Display configuration. For Jill: 1=CGA, 2=EGA, 4=VGA.
+     */
+    private int displayMode;
+    /**
+     * Music configuration. Nonzero value means it is enabled.
+     */
+    private boolean music;
+    /**
+     * Digital sound configuration. Nonzero value means it is enabled.
+     */
+    private boolean sound;
     /**
      * Current file name.
      */
@@ -145,9 +131,8 @@ public class CfgFileImpl implements CfgFile {
     /**
      * Constructor of class.
      *
-     * @param cfgFile file name
+     * @param cfgFile    file name
      * @param prefixSave prefixe of save file
-     *
      * @throws IOException if error
      */
     @Override
@@ -162,13 +147,11 @@ public class CfgFileImpl implements CfgFile {
     }
 
 
-
     /**
      * Constructor of class.
      *
-     * @param cfgFile file name
+     * @param cfgFile    file name
      * @param prefixSave prefixe of save file
-     *
      * @throws IOException if error
      */
     @Override
@@ -190,10 +173,8 @@ public class CfgFileImpl implements CfgFile {
      * Read high score name.
      *
      * @param cfgFile file
-     *
-     * @throws IOException if error
-     *
      * @return liste of hiscore
+     * @throws IOException if error
      */
     private List<String> readHighScoreName(final FileAbstractByte cfgFile)
             throws IOException {
@@ -223,9 +204,8 @@ public class CfgFileImpl implements CfgFile {
     /**
      * Read high score.
      *
-     * @param cfgFile file
+     * @param cfgFile       file
      * @param highScoreName list hiscore
-     *
      * @throws IOException if error
      */
     private void populateHighScore(final FileAbstractByte cfgFile,
@@ -242,9 +222,8 @@ public class CfgFileImpl implements CfgFile {
     /**
      * Read save data game.
      *
-     * @param cfgFile file
+     * @param cfgFile    file
      * @param prefixSave prefixe of save
-     *
      * @throws IOException if error
      */
     private void readSave(final FileAbstractByte cfgFile,
@@ -278,7 +257,6 @@ public class CfgFileImpl implements CfgFile {
      * Read common configuration block information.
      *
      * @param cfgFile file
-     *
      * @throws IOException if error
      */
     private void readCommonConfigurationBlock(final FileAbstractByte cfgFile)
@@ -315,7 +293,7 @@ public class CfgFileImpl implements CfgFile {
     /**
      * Add new high score.
      *
-     * @param name name of player
+     * @param name  name of player
      * @param score score
      */
     @Override
@@ -342,9 +320,8 @@ public class CfgFileImpl implements CfgFile {
     /**
      * Add new save game.
      *
-     * @param name name of player
+     * @param name   name of player
      * @param number save number
-     *
      * @return save item
      */
     @Override
@@ -361,7 +338,6 @@ public class CfgFileImpl implements CfgFile {
      * Write high score name.
      *
      * @param cfgFile file
-     *
      * @throws IOException if error
      */
     private void writeHighScoreName(final FileAbstractByte cfgFile)
@@ -375,8 +351,7 @@ public class CfgFileImpl implements CfgFile {
      * Write name of high score in file.
      *
      * @param cfgFile file to write
-     * @param name name to write
-     *
+     * @param name    name to write
      * @throws EOFException if end of file
      */
     private void writeNameHighScoreInFile(final FileAbstractByte cfgFile,
@@ -397,7 +372,6 @@ public class CfgFileImpl implements CfgFile {
      * Read high score.
      *
      * @param cfgFile file
-     *
      * @throws IOException if error
      */
     private void writeHighScore(final FileAbstractByte cfgFile)
@@ -411,7 +385,6 @@ public class CfgFileImpl implements CfgFile {
      * Write save name.
      *
      * @param cfgFile file
-     *
      * @throws IOException if error
      */
     private void writeSaveName(final FileAbstractByte cfgFile)
@@ -425,8 +398,7 @@ public class CfgFileImpl implements CfgFile {
      * Write name of save in file.
      *
      * @param cfgFile file to write
-     * @param name name to write
-     *
+     * @param name    name to write
      * @throws EOFException if error
      */
     private void writeNameSaveInFile(final FileAbstractByte cfgFile,
@@ -454,7 +426,6 @@ public class CfgFileImpl implements CfgFile {
      * write common configuration block information.
      *
      * @param cfgFile config file
-     *
      * @throws IOException if error
      */
     private void writeCommonConfigurationBlock(final FileAbstractByte cfgFile)
@@ -507,7 +478,6 @@ public class CfgFileImpl implements CfgFile {
      * Save file to disk.
      *
      * @param filename file name to save
-     *
      * @throws IOException if error
      */
     @Override
@@ -645,7 +615,7 @@ public class CfgFileImpl implements CfgFile {
     /**
      * Return higscore list.
      *
-     * @return  hiscore
+     * @return hiscore
      */
     @Override
     public final List<HighScoreItem> getHighScore() {
@@ -655,7 +625,7 @@ public class CfgFileImpl implements CfgFile {
     /**
      * Return save list.
      *
-     * @return  save list
+     * @return save list
      */
     @Override
     public final List<SaveGameItem> getSaveGame() {

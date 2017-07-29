@@ -2,6 +2,7 @@ package org.jill.game.entities.back;
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+
 import org.jill.game.entities.BackgroundEntityImpl;
 import org.jill.openjill.core.api.entities.BackgroundEntity;
 import org.jill.openjill.core.api.entities.BackgroundParam;
@@ -12,7 +13,7 @@ import org.jill.openjill.core.api.entities.BackgroundParam;
  * @author Emeric MARTINEAU
  */
 public final class DoubleImageCopyRightBackgroundEntity
-    extends BackgroundEntityImpl {
+        extends BackgroundEntityImpl {
     /**
      * Background map.
      */
@@ -66,7 +67,7 @@ public final class DoubleImageCopyRightBackgroundEntity
         }
 
         realPicutre = new BufferedImage(width, height,
-                    BufferedImage.TYPE_INT_ARGB);
+                BufferedImage.TYPE_INT_ARGB);
 
         final Graphics2D g2 = realPicutre.createGraphics();
 

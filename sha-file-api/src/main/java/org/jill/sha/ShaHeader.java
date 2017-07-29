@@ -29,7 +29,6 @@ public interface ShaHeader {
      * Check if entry is valid.
      *
      * @param index index to check if valie
-     *
      * @return true if valid
      */
     boolean isValideEntry(int index);

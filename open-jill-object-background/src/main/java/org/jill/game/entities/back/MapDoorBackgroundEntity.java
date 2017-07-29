@@ -1,9 +1,8 @@
 package org.jill.game.entities.back;
 
 import java.awt.image.BufferedImage;
-import org.jill.game.entities.back.abs.
-        AbstractSynchronisedImageBackgroundEntity;
 
+import org.jill.game.entities.back.abs.AbstractSynchronisedImageBackgroundEntity;
 import org.jill.game.entities.picutre.PictureSynchronizer;
 import org.jill.openjill.core.api.entities.BackgroundParam;
 
@@ -13,7 +12,7 @@ import org.jill.openjill.core.api.entities.BackgroundParam;
  * @author Emeric MARTINEAU
  */
 public final class MapDoorBackgroundEntity
-    extends AbstractSynchronisedImageBackgroundEntity {
+        extends AbstractSynchronisedImageBackgroundEntity {
     /**
      * Picture array.
      */

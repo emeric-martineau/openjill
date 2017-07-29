@@ -12,14 +12,14 @@ public class JillLevelConfiguration extends LevelConfiguration {
     /**
      * Constructor use in case of restoring game (via Restore game menu).
      *
-     * @param shaFileName name of SHA file
-     * @param jnFileName name of JN file
-     * @param vclFileName name of VCL file
-     * @param cfgFileName name of CFG file
+     * @param shaFileName    name of SHA file
+     * @param jnFileName     name of JN file
+     * @param vclFileName    name of VCL file
+     * @param cfgFileName    name of CFG file
      * @param cfgSavePrefixe prefix of save file name
-     * @param startScreen Start screen for this level
-     * @param levelMapData level map data
-     * @param levelData level data (if no filename)
+     * @param startScreen    Start screen for this level
+     * @param levelMapData   level map data
+     * @param levelData      level data (if no filename)
      */
     public JillLevelConfiguration(final String shaFileName,
             final String jnFileName, final String vclFileName,
@@ -35,16 +35,16 @@ public class JillLevelConfiguration extends LevelConfiguration {
     /**
      * Constructor use in case of load new game (Map->Level or Level->Map)
      *
-     * @param shaFileName name of SHA file
-     * @param jnFileName name of JN file
-     * @param vclFileName name of VCL file
-     * @param cfgFileName name of CFG file
+     * @param shaFileName    name of SHA file
+     * @param jnFileName     name of JN file
+     * @param vclFileName    name of VCL file
+     * @param cfgFileName    name of CFG file
      * @param cfgSavePrefixe prefix of save file name
-     * @param startScreen Start screen for this level
-     * @param levelNumber number of level
-     * @param levelMapData level map data
-     * @param levelData level data (if no filename)
-     * @param scoreGame score
+     * @param startScreen    Start screen for this level
+     * @param levelNumber    number of level
+     * @param levelMapData   level map data
+     * @param levelData      level data (if no filename)
+     * @param scoreGame      score
      * @param numberGemLevel gem
      */
     public JillLevelConfiguration(final String shaFileName,
@@ -63,10 +63,10 @@ public class JillLevelConfiguration extends LevelConfiguration {
     /**
      * Constructor use in case of new screen.
      *
-     * @param shaFileName name of SHA file
-     * @param jnFileName name of JN file
-     * @param vclFileName name of VCL file
-     * @param cfgFileName name of CFG file
+     * @param shaFileName    name of SHA file
+     * @param jnFileName     name of JN file
+     * @param vclFileName    name of VCL file
+     * @param cfgFileName    name of CFG file
      * @param cfgSavePrefixe prefix of save file name
      */
     public JillLevelConfiguration(final String shaFileName,
@@ -79,13 +79,13 @@ public class JillLevelConfiguration extends LevelConfiguration {
     /**
      * Constructor use in case of new screen.
      *
-     * @param shaFileName name of SHA file
-     * @param jnFileName name of JN file
-     * @param vclFileName name of VCL file
-     * @param cfgFileName name of CFG file
+     * @param shaFileName    name of SHA file
+     * @param jnFileName     name of JN file
+     * @param vclFileName    name of VCL file
+     * @param cfgFileName    name of CFG file
      * @param cfgSavePrefixe prefix of save file name
-     * @param startScreen Start screen for this level
-     * @param beginMsg display begin message
+     * @param startScreen    Start screen for this level
+     * @param beginMsg       display begin message
      */
     public JillLevelConfiguration(final String shaFileName,
             final String jnFileName, final String vclFileName,
@@ -100,12 +100,12 @@ public class JillLevelConfiguration extends LevelConfiguration {
     /**
      * Constructor use in case of new screen.
      *
-     * @param shaFileName name of SHA file
-     * @param jnFileName name of JN file
-     * @param vclFileName name of VCL file
-     * @param cfgFileName name of CFG file
+     * @param shaFileName    name of SHA file
+     * @param jnFileName     name of JN file
+     * @param vclFileName    name of VCL file
+     * @param cfgFileName    name of CFG file
      * @param cfgSavePrefixe prefix of save file name
-     * @param startScreen Start screen for this level
+     * @param startScreen    Start screen for this level
      */
     public JillLevelConfiguration(final String shaFileName,
             final String jnFileName, final String vclFileName,
@@ -119,13 +119,13 @@ public class JillLevelConfiguration extends LevelConfiguration {
     /**
      * Constructor use in case of new screen.
      *
-     * @param shaFileName name of SHA file
-     * @param jnFileName name of JN file
-     * @param vclFileName name of VCL file
-     * @param cfgFileName name of CFG file
+     * @param shaFileName    name of SHA file
+     * @param jnFileName     name of JN file
+     * @param vclFileName    name of VCL file
+     * @param cfgFileName    name of CFG file
      * @param cfgSavePrefixe prefix of save file name
-     * @param startScreen Start screen for this level
-     * @param levelNumber number of level
+     * @param startScreen    Start screen for this level
+     * @param levelNumber    number of level
      */
     public JillLevelConfiguration(final String shaFileName,
             final String jnFileName, final String vclFileName,

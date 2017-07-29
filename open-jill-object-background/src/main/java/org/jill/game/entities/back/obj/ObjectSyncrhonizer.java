@@ -1,4 +1,3 @@
-
 package org.jill.game.entities.back.obj;
 
 /**
@@ -30,7 +29,6 @@ public class ObjectSyncrhonizer {
      * Update counter.
      *
      * @param currentCounter counter valeur of background.
-     *
      * @return new counter value
      */
     public int updateCounter(final int currentCounter) {
@@ -49,7 +47,6 @@ public class ObjectSyncrhonizer {
      * If need create object.
      *
      * @param xBoard x of board
-     *
      * @return true if need create object
      */
     public boolean isCreateObject(final int xBoard) {

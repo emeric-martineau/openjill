@@ -1,6 +1,7 @@
 package org.jill.game.entities.obj.underwater;
 
 import java.awt.image.BufferedImage;
+
 import org.jill.game.entities.obj.abs.AbstractParameterObjectEntity;
 import org.jill.openjill.core.api.entities.ObjectEntity;
 import org.jill.openjill.core.api.entities.ObjectParam;
@@ -68,7 +69,7 @@ public final class UnderWaterRockManager extends AbstractParameterObjectEntity {
                 getConfString("bubbleObject"));
 
         this.messageDispatcher.sendMessage(EnumMessageType.CREATE_OBJECT,
-            com);
+                com);
 
         ObjectEntity bees = com.getObject();
         bees.setY(getY() - bees.getY());

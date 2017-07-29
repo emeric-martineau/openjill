@@ -31,10 +31,10 @@ public final class InventoryPointMessage {
     /**
      * Inventory message.
      *
-     * @param pt score
+     * @param pt        score
      * @param addObject add score
-     * @param objKill Object kill that have point
-     * @param objTouch Object touch previous object
+     * @param objKill   Object kill that have point
+     * @param objTouch  Object touch previous object
      */
     public InventoryPointMessage(final int pt, final boolean addObject,
             final ObjectItem objKill, final ObjectItem objTouch) {
@@ -56,7 +56,7 @@ public final class InventoryPointMessage {
     /**
      * If add object.
      *
-     * @return  false = delete object from inventory
+     * @return false = delete object from inventory
      */
     public boolean isAddObject() {
         return add;

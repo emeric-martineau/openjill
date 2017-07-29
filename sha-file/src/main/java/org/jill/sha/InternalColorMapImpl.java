@@ -62,11 +62,10 @@ public class InternalColorMapImpl implements ColorMap {
     public InternalColorMapImpl(final String fileName) {
         try (InputStream is = InternalColorMapImpl.class.
                 getResourceAsStream(fileName);
-                InputStreamReader isr = new InputStreamReader(is,
-                        Charset.forName("ISO-8859-1"))) {
+             InputStreamReader isr = new InputStreamReader(is,
+                     Charset.forName("ISO-8859-1"))) {
             readFile(new BufferedReader(isr));
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             System.err.println("Error loading default color map");
         }
     }
@@ -75,7 +74,6 @@ public class InternalColorMapImpl implements ColorMap {
      * Read file.
      *
      * @param br buffer reader
-     *
      * @throws IOException if can't read file
      */
     private void readFile(final BufferedReader br) throws IOException {
@@ -89,12 +87,12 @@ public class InternalColorMapImpl implements ColorMap {
                 // Transparency color
                 listColor.add(
                         new Color(
-                            Integer.parseInt(ligne.substring(1), HEXA_BASE),
-                            true));
+                                Integer.parseInt(ligne.substring(1), HEXA_BASE),
+                                true));
             } else if (!"".equals(ligne) && !ligne.startsWith("#")) {
                 listColor.add(
-                    new Color(
-                        Integer.parseInt(ligne, HEXA_BASE)
+                        new Color(
+                                Integer.parseInt(ligne, HEXA_BASE)
                         ));
             }
 

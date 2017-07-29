@@ -8,7 +8,6 @@ import java.awt.GridLayout;
 import java.awt.HeadlessException;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -31,18 +30,16 @@ public class ShaFileExportFrame extends JFrame {
     /**
      * @throws HeadlessException
      */
-    public ShaFileExportFrame() throws HeadlessException
-    {
-        super() ;
-        
-        buildUI() ;
+    public ShaFileExportFrame() throws HeadlessException {
+        super();
+
+        buildUI();
     }
 
     /**
      * @param gc
      */
-    protected ShaFileExportFrame(GraphicsConfiguration gc)
-    {
+    protected ShaFileExportFrame(GraphicsConfiguration gc) {
         super(gc);
     }
 
@@ -50,8 +47,7 @@ public class ShaFileExportFrame extends JFrame {
      * @param title
      * @throws HeadlessException
      */
-    protected ShaFileExportFrame(String title) throws HeadlessException
-    {
+    protected ShaFileExportFrame(String title) throws HeadlessException {
         super(title);
     }
 
@@ -59,23 +55,21 @@ public class ShaFileExportFrame extends JFrame {
      * @param title
      * @param gc
      */
-    protected ShaFileExportFrame(String title, GraphicsConfiguration gc)
-    {
+    protected ShaFileExportFrame(String title, GraphicsConfiguration gc) {
         super(title, gc);
     }
 
     /**
      * Buil User Interface
      */
-    protected void buildUI()
-    {
+    protected void buildUI() {
         // Default size
-        setSize(300, 200) ;
+        setSize(300, 200);
         // Title
-        setTitle("Jill of the Jungle image ripper") ;
+        setTitle("Jill of the Jungle image ripper");
         // Close program if clique on arrow
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE) ; 
-        
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
         // See http://stackoverflow.com/questions/7769885/interruptedexception-after-cancel-file-open-dialog-1-6-0-26
         addWindowListener(new WindowAdapter() {
             @Override
@@ -84,56 +78,55 @@ public class ShaFileExportFrame extends JFrame {
             }
         });
 
-        
-        getContentPane().add(buildComponent()) ;
+
+        getContentPane().add(buildComponent());
 
 
         // Display the window.
         pack();
         // Show window
-        setVisible(true) ;
-        
+        setVisible(true);
+
         // Screen center
-        setLocationRelativeTo(null) ;
+        setLocationRelativeTo(null);
         // Not resizable
-        setResizable(false) ;        
+        setResizable(false);
     }
-    
+
     /**
      * Build component. Call bay buildUI()
-     * 
+     *
      * @return a panel
      */
-    protected JPanel buildComponent()
-    {
-        GridLayout layout = new GridLayout(0, 3) ;
+    protected JPanel buildComponent() {
+        GridLayout layout = new GridLayout(0, 3);
 
-        JPanel panel = new JPanel() ;
+        JPanel panel = new JPanel();
 
         // Add layout
-        panel.setLayout(layout) ;
+        panel.setLayout(layout);
 
-        JLabel label = new JLabel("Please select file (SHA format) to extract picture :") ;
+        JLabel label = new JLabel("Please select file (SHA format) to extract picture :");
         panel.add(label);
-        
-        JTextField fileToRead = new JTextField() ;
-        panel.add(fileToRead) ;
-        
-        JButton button = new SelectFileButton("Choose file...", fileToRead) ;
-        panel.add(button) ;         
-        
-        label = new JLabel("Please select path where extract file :") ;
+
+        JTextField fileToRead = new JTextField();
+        panel.add(fileToRead);
+
+        JButton button = new SelectFileButton("Choose file...", fileToRead);
+        panel.add(button);
+
+        label = new JLabel("Please select path where extract file :");
         panel.add(label);
-        
-        JTextField dirToWrite = new JTextField() ;
-        panel.add(dirToWrite) ;        
-        
-        button = new SelectDirButton("Choose directory...", dirToWrite) ;
-        panel.add(button) ;    
-        
-        button = new ExportButton("Extract", fileToRead, dirToWrite) ;
-        panel.add(button) ;        
-        
-        return panel ;
+
+        JTextField dirToWrite = new JTextField();
+        panel.add(dirToWrite);
+
+        button = new SelectDirButton("Choose directory...", dirToWrite);
+        panel.add(button);
+
+        button = new ExportButton("Extract", fileToRead, dirToWrite);
+        panel.add(button);
+
+        return panel;
     }
 }

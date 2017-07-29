@@ -2,6 +2,7 @@ package org.jill.game.entities.obj.player;
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+
 import org.jill.game.entities.obj.util.UtilityObjectEntity;
 import org.jill.openjill.core.api.entities.BackgroundEntity;
 import org.jill.openjill.core.api.entities.ObjectParam;
@@ -13,7 +14,7 @@ import org.jill.openjill.core.api.keyboard.KeyboardLayout;
  * @author Emeric MARTINEAU
  */
 public abstract class AbstractPlayerManager
-    extends AbstractPlayerInteractionManager {
+        extends AbstractPlayerInteractionManager {
 
     /**
      * Background object.
@@ -46,7 +47,7 @@ public abstract class AbstractPlayerManager
      */
     protected final void move(final KeyboardLayout keyboardLayout) {
         if (!PalyerActionPerState.canDo(
-            getState(), PlayerAction.CANMOVE)) {
+                getState(), PlayerAction.CANMOVE)) {
             // Player can't move
             return;
         }
@@ -119,7 +120,7 @@ public abstract class AbstractPlayerManager
 
             // Check climb
             if (UtilityObjectEntity.isClimbing(
-                this, this.backgroundObject)) {
+                    this, this.backgroundObject)) {
                 changeToClimbState();
 
                 if (keyboardLayout.isLeft()) {
@@ -191,7 +192,6 @@ public abstract class AbstractPlayerManager
 
     /**
      * Move in jumping.
-     *
      */
     private void moveStdPlayerUpDownJumping() {
         boolean playerMove;
@@ -219,7 +219,7 @@ public abstract class AbstractPlayerManager
             final int previousY = getY();
 
             playerMove = UtilityObjectEntity.moveObjectUp(this, this.ySpeed
-                    + PlayerJumpingConst.JUMP_INCREMENT_VALUE,
+                            + PlayerJumpingConst.JUMP_INCREMENT_VALUE,
                     this.backgroundObject);
 
             // above -1 cause skip a ySpeed due to previous update
@@ -280,12 +280,12 @@ public abstract class AbstractPlayerManager
             // We already turn, now move
             if (playerWay == X_SPEED_RIGHT) {
                 UtilityObjectEntity.moveObjectRight(this,
-                    PlayerStandConst.PLAYER_MOVE_SIZE,
-                    this.backgroundObject);
+                        PlayerStandConst.PLAYER_MOVE_SIZE,
+                        this.backgroundObject);
             } else {
                 UtilityObjectEntity.moveObjectLeft(this,
-                    -PlayerStandConst.PLAYER_MOVE_SIZE,
-                    this.backgroundObject);
+                        -PlayerStandConst.PLAYER_MOVE_SIZE,
+                        this.backgroundObject);
             }
 
             setxSpeed(playerWay);
@@ -471,9 +471,8 @@ public abstract class AbstractPlayerManager
     /**
      * Add piece of land a end of picture.
      *
-     * @param image picture picture source
+     * @param image    picture picture source
      * @param imagePol picture to write (piece of land)
-     *
      * @return new merge picture
      */
     protected BufferedImage addPieceOfLand(final BufferedImage image,
@@ -504,8 +503,8 @@ public abstract class AbstractPlayerManager
 
         for (int index = 0; index < pieceOfLand.length; index++) {
             pieceOfLand[index] = pictureCache.getImage(
-                PlayerPieceOfLandConst.TILESET_INDEX,
-                PlayerPieceOfLandConst.TILE_INDEX + index);
+                    PlayerPieceOfLandConst.TILESET_INDEX,
+                    PlayerPieceOfLandConst.TILE_INDEX + index);
         }
 
         for (BufferedImage[] pictureSrc1 : pictureSrc) {

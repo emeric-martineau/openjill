@@ -37,23 +37,20 @@ public final class SharedCode {
     /**
      * Load a picture.
      *
-     * @param object current object
+     * @param object           current object
      * @param mapObjectPicture mapping objet and picture
-     *
      * @return picture
      */
-    public static BufferedImage getTile(final ObjectItem object, final Map<String, BufferedImage> mapObjectPicture)
-    {
-        String objectType = String.valueOf(object.getType()).concat("_").concat(String.valueOf(object.getCounter())) ;
-        BufferedImage bi ;
+    public static BufferedImage getTile(final ObjectItem object, final Map<String, BufferedImage> mapObjectPicture) {
+        String objectType = String.valueOf(object.getType()).concat("_").concat(String.valueOf(object.getCounter()));
+        BufferedImage bi;
 
-        bi = mapObjectPicture.get(objectType) ;
+        bi = mapObjectPicture.get(objectType);
 
-        if (bi == null)
-        {
-            System.err.println("No tile found for tileType = ".concat(objectType)) ;
+        if (bi == null) {
+            System.err.println("No tile found for tileType = ".concat(objectType));
         }
 
-        return bi ;
+        return bi;
     }
 }

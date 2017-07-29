@@ -2,14 +2,13 @@ package org.jill.game.entities.back;
 
 import java.awt.Color;
 import java.awt.image.BufferedImage;
-import org.jill.game.entities.back.abs.
-        AbstractSynchronisedImageBackgroundEntity;
+
+import org.jill.game.entities.back.abs.AbstractSynchronisedImageBackgroundEntity;
 import org.jill.game.entities.obj.player.PlayerState;
 import org.jill.game.entities.picutre.PictureSynchronizer;
 import org.jill.openjill.core.api.entities.BackgroundParam;
 import org.jill.openjill.core.api.entities.ObjectEntity;
-import org.jill.openjill.core.api.message.statusbar.inventory.
-        InventoryLifeMessage;
+import org.jill.openjill.core.api.message.statusbar.inventory.InventoryLifeMessage;
 
 /**
  * Spike.
@@ -17,7 +16,7 @@ import org.jill.openjill.core.api.message.statusbar.inventory.
  * @author Emeric MARTINEAU
  */
 public final class SpikeBackgroundEntity
-    extends AbstractSynchronisedImageBackgroundEntity {
+        extends AbstractSynchronisedImageBackgroundEntity {
     /**
      * Picture array.
      */

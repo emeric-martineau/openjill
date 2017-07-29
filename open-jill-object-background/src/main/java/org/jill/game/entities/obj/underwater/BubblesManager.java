@@ -1,6 +1,7 @@
 package org.jill.game.entities.obj.underwater;
 
 import java.awt.image.BufferedImage;
+
 import org.jill.game.entities.obj.abs.AbstractParameterObjectEntity;
 import org.jill.openjill.core.api.entities.BackgroundEntity;
 import org.jill.openjill.core.api.entities.ObjectParam;
@@ -88,7 +89,6 @@ public final class BubblesManager extends AbstractParameterObjectEntity {
      * Create int array from value.
      *
      * @param confKey configuration key
-     *
      * @return array of integer
      */
     private int[] initIntegerArray(final String confKey) {
