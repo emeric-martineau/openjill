@@ -1,5 +1,5 @@
-/**
- * Jill of the Jungle tool.
+/*
+  Jill of the Jungle tool.
  */
 package org.jill.dma;
 
@@ -96,7 +96,7 @@ public class DmaFileImpl implements DmaFile {
         DmaEntryImpl currentDmaEntry;
 
         while (index < lenght) {
-            offset = (int) dmaFile.getFilePointer();
+            offset = dmaFile.getFilePointer();
             mapCode = dmaFile.read16bitLE();
             tile = dmaFile.read8bitLE();
             tileset = (dmaFile.read8bitLE() & MASK_OF_TILESET);

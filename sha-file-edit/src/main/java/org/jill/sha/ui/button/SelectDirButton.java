@@ -1,16 +1,14 @@
-/**
- * Jill of the Jungle tool.
+/*
+  Jill of the Jungle tool.
  */
 package org.jill.sha.ui.button;
 
 import java.awt.event.ActionEvent;
 
-import javax.swing.JFileChooser;
 import javax.swing.JTextField;
 
 import org.jill.sha.ui.AbstractButton;
 import org.jill.sha.ui.directory.FileExplorer;
-import org.jill.sha.ui.filter.FileExtension;
 
 /**
  * Select directory button
@@ -20,11 +18,6 @@ import org.jill.sha.ui.filter.FileExtension;
  */
 public class SelectDirButton extends AbstractButton {
 
-    /**
-     * File chooser
-     */
-    private FileExplorer fe ;
-    
     /**
      * Text area
      */
@@ -45,7 +38,7 @@ public class SelectDirButton extends AbstractButton {
      */
     @Override
     public void onClick(final ActionEvent e) {
-        fe = new FileExplorer(".") ;
+        final FileExplorer fe = new FileExplorer(".") ;
         
         textBox.setText(fe.getSelectedDir()) ;
         

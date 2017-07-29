@@ -1,5 +1,5 @@
-/**
- *
+/*
+
  */
 package org.jill.jn.dump;
 
@@ -97,10 +97,7 @@ public class DumpFile {
                for(int indexX = 0; indexX < BackgroundLayer.MAP_WIDTH; indexX++)
             {
                 out.print(
-                        String.format("%04X ",
-                                new Object[] {
-                                    background.getMapCode(indexX, indexY) }
-                        )) ;
+                        String.format("%04X ", background.getMapCode(indexX, indexY))) ;
             }
 
             out.println() ;
@@ -140,60 +137,53 @@ public class DumpFile {
         out.println() ;
 
         try {
-            for(int indexObject = 0; indexObject < nbObject; indexObject++)
-            {
-                currentObject = objectLayer.get(indexObject) ;
+            for (ObjectItem anObjectLayer : objectLayer) {
+                currentObject = anObjectLayer;
 
                 out.println(
                         String.format("Object #%d (0x%04X)",
-                                new Object[] {
-                                    currentObject.getIndex(),
-                                    currentObject.getOffset()}
-                        )) ;
+                                new Object[]{
+                                        currentObject.getIndex(),
+                                        currentObject.getOffset()}
+                        ));
 
-                typeDescription = namdeObjectCache.getDescription(currentObject.getType()) ;
+                typeDescription = namdeObjectCache.getDescription(currentObject.getType());
 
-                if (typeDescription == null)
-                {
-                    printProperties("type", String.valueOf(currentObject.getType()) + " (????)") ;
-                }
-                else
-                {
-                    printProperties("type", String.valueOf(currentObject.getType()) + " (" + typeDescription + ")") ;
+                if (typeDescription == null) {
+                    printProperties("type", String.valueOf(currentObject.getType()) + " (????)");
+                } else {
+                    printProperties("type", String.valueOf(currentObject.getType()) + " (" + typeDescription + ")");
                 }
 
-                printProperties("x", String.valueOf(currentObject.getX())) ;
-                printProperties("y", String.valueOf(currentObject.getY())) ;
+                printProperties("x", String.valueOf(currentObject.getX()));
+                printProperties("y", String.valueOf(currentObject.getY()));
 
-                printProperties("width", String.valueOf(currentObject.getWidth())) ;
-                printProperties("height", String.valueOf(currentObject.getHeight())) ;
+                printProperties("width", String.valueOf(currentObject.getWidth()));
+                printProperties("height", String.valueOf(currentObject.getHeight()));
 
-                printProperties("xSpeed", String.valueOf(currentObject.getxSpeed())) ;
-                printProperties("ySpeed", String.valueOf(currentObject.getySpeed())) ;
+                printProperties("xSpeed", String.valueOf(currentObject.getxSpeed()));
+                printProperties("ySpeed", String.valueOf(currentObject.getySpeed()));
 
-                printProperties("state", String.valueOf(currentObject.getState())) ;
-                printProperties("subState", String.valueOf(currentObject.getSubState())) ;
-                printProperties("stateCount", String.valueOf(currentObject.getStateCount())) ;
+                printProperties("state", String.valueOf(currentObject.getState()));
+                printProperties("subState", String.valueOf(currentObject.getSubState()));
+                printProperties("stateCount", String.valueOf(currentObject.getStateCount()));
 
-                printProperties("counter", String.valueOf(currentObject.getCounter())) ;
-                printProperties("flags", String.valueOf(currentObject.getFlags())) ;
+                printProperties("counter", String.valueOf(currentObject.getCounter()));
+                printProperties("flags", String.valueOf(currentObject.getFlags()));
 
-                printProperties("info1", String.valueOf(currentObject.getInfo1())) ;
-                        printProperties("zaphold", String.valueOf(currentObject.getZapHold())) ;
+                printProperties("info1", String.valueOf(currentObject.getInfo1()));
+                printProperties("zaphold", String.valueOf(currentObject.getZapHold()));
 
-                if (currentObject.getPointer() == 0)
-                {
-                    printProperties("pointer", String.valueOf(currentObject.getPointer())) ;
-                }
-                else
-                {
-                    out.print("    ") ;
-                    out.print("pointer") ;
-                    out.print(" = ") ;
-                    out.print(String.valueOf(currentObject.getPointer())) ;
-                    out.print(" to '") ;
-                    out.print(String.valueOf(currentObject.getStringStackEntry())) ;
-                    out.println("'") ;
+                if (currentObject.getPointer() == 0) {
+                    printProperties("pointer", String.valueOf(currentObject.getPointer()));
+                } else {
+                    out.print("    ");
+                    out.print("pointer");
+                    out.print(" = ");
+                    out.print(String.valueOf(currentObject.getPointer()));
+                    out.print(" to '");
+                    out.print(String.valueOf(currentObject.getStringStackEntry()));
+                    out.println("'");
                 }
             }
 
@@ -213,10 +203,7 @@ public class DumpFile {
         final SaveData saveData = jnFile.getSaveData() ;
 
         out.println(
-                String.format("Save data layer : (0x%04X)",
-                        new Object[] {
-                            saveData.getOffset()}
-                )) ;
+                String.format("Save data layer : (0x%04X)", saveData.getOffset())) ;
         out.println() ;
 
         final int level = saveData.getLevel() ;
@@ -228,31 +215,19 @@ public class DumpFile {
         else
         {
             out.println(
-                String.format("Level : %d",
-                        new Object[] {
-                            level}
-                )) ;
+                String.format("Level : %d", level)) ;
         }
 
         out.println(
-            String.format("Health : %d",
-                    new Object[] {
-                        saveData.getHealth() }
-            )) ;
+            String.format("Health : %d", saveData.getHealth())) ;
 
         out.println(
-                String.format("Score : %d",
-                        new Object[] {
-                            saveData.getScore() }
-                )) ;
+                String.format("Score : %d", saveData.getScore())) ;
 
         final List<Integer> inventory = saveData.getInventory() ;
 
         out.println(
-                String.format("Inventory (%d)",
-                        new Object[] {
-                            inventory.size() }
-                )) ;
+                String.format("Inventory (%d)", inventory.size())) ;
 
         for(int index = 0; index < inventory.size(); index++)
         {

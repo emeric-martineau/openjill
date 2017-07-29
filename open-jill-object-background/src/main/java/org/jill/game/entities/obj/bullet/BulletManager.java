@@ -1,10 +1,10 @@
 package org.jill.game.entities.obj.bullet;
 
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
 import java.util.List;
 import org.jill.game.entities.obj.abs.AbstractParameterObjectEntity;
 import org.jill.game.entities.obj.bees.MoveSizeAndInterval;
+import org.jill.game.entities.obj.util.SharedCode;
 import org.jill.game.entities.obj.util.UtilityObjectEntity;
 import org.jill.openjill.core.api.entities.ObjectParam;
 import org.jill.openjill.core.api.keyboard.KeyboardLayout;
@@ -75,7 +75,7 @@ public final class BulletManager extends AbstractParameterObjectEntity {
             setHeight(getConfInteger("height"));
         }
 
-        this.tileByState = populateMove("tileByState");
+        this.tileByState = SharedCode.populateMove(getConfString("tileByState"));
 
         this.counterDie = getConfInteger("counterDie");
 
@@ -117,29 +117,6 @@ public final class BulletManager extends AbstractParameterObjectEntity {
 
             setySpeed(yd);
         }
-    }
-
-    /**
-     * Populate list of movement.
-     *
-     * @param keyName name of key in config file
-     *
-     * @return list of movement
-     */
-    private List<MoveSizeAndInterval> populateMove(final String keyName) {
-       // Read moveX
-        String mvtX = getConfString(keyName);
-        // Split #
-        String[] arrayMoveX = mvtX.split("#");
-
-        final List<MoveSizeAndInterval> listMvt =
-                new ArrayList<>(arrayMoveX.length);
-
-        for (String currentMove : arrayMoveX) {
-            listMvt.add(new MoveSizeAndInterval(currentMove));
-        }
-
-        return listMvt;
     }
 
     /**

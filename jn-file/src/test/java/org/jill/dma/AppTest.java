@@ -27,11 +27,7 @@ import org.jill.jn.StringItem;
 public class AppTest
     extends TestCase
 {
-    private Properties prop = new Properties();
-
     private String homePath ;
-
-    private String tempPath ;
 
     /**
      * Create the test case
@@ -42,9 +38,10 @@ public class AppTest
     {
         super( testName );
 
+        final Properties prop = new Properties();
+
         prop.load(this.getClass().getClassLoader().getResourceAsStream("config.properties")) ;
         homePath = prop.getProperty("home") ;
-        tempPath = prop.getProperty("temp") ;
     }
 
     /**
@@ -75,9 +72,7 @@ public class AppTest
             {
                 System.out.print(
                         String.format("%04X ",
-                                new Object[] {
-                                    background.getMapCode(indexX, indexY) }
-                        )) ;
+                                    background.getMapCode(indexX, indexY))) ;
             }
 
             System.out.println("") ;
@@ -111,26 +106,23 @@ public class AppTest
 
         String methodeName ;
 
-        for(int indexObject = 0; indexObject < nbObject; indexObject++)
-        {
-            currentObject = objectLayer.get(indexObject) ;
+        for (ObjectItem anObjectLayer : objectLayer) {
+            currentObject = anObjectLayer;
 
             System.out.println(
                     String.format("Object #%d",
-                            new Object[] {
-                                currentObject.getIndex() }
-                    )) ;
+                                    currentObject.getIndex()));
 
             for (Method method : methods) {
                 methodeName = method.getName();
                 if (methodeName.startsWith("get") &&
                         !methodeName.equals("getClass")) {
-                    methodeName = methodeName.substring(3) ;
-                    System.out.print("    ") ;
+                    methodeName = methodeName.substring(3);
+                    System.out.print("    ");
                     System.out.print(methodeName.substring(0, 1).
-                            toLowerCase(Locale.US)) ;
-                    System.out.print(methodeName.substring(1)) ;
-                    System.out.print(" = ") ;
+                            toLowerCase(Locale.US));
+                    System.out.print(methodeName.substring(1));
+                    System.out.print(" = ");
                     System.out.println(method.invoke(currentObject, new Object[]{}));
                 }
             }
@@ -161,31 +153,19 @@ public class AppTest
         else
         {
             System.out.println(
-                String.format("Level : %d",
-                        new Object[] {
-                            level}
-                )) ;
+                String.format("Level : %d", level)) ;
         }
 
         System.out.println(
-            String.format("Health : %d",
-                    new Object[] {
-                        saveData.getHealth() }
-            )) ;
+            String.format("Health : %d", saveData.getHealth())) ;
 
         System.out.println(
-                String.format("Score : %d",
-                        new Object[] {
-                            saveData.getScore() }
-                )) ;
+                String.format("Score : %d", saveData.getScore())) ;
 
         final List<Integer> inventory = saveData.getInventory() ;
 
         System.out.println(
-                String.format("Inventory (%d)",
-                        new Object[] {
-                            inventory.size() }
-                )) ;
+                String.format("Inventory (%d)", inventory.size())) ;
 
         for(int index = 0; index < inventory.size(); index++)
         {

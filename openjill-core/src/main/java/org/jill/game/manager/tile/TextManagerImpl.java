@@ -279,8 +279,7 @@ public class TextManagerImpl implements TextManager {
                 initLetterMap(textTile, msg, textColor);
 
         // Draw letter
-        final String text = msg;
-        final int textLenght = text.length();
+        final int textLenght = msg.length();
 
         char letter;
 
@@ -289,7 +288,7 @@ public class TextManagerImpl implements TextManager {
         int newX = x;
 
         for (int indexText = 0; indexText < textLenght; indexText++) {
-            letter = text.charAt(indexText);
+            letter = msg.charAt(indexText);
 
             letterToDraw = mapLetter.get(letter);
 
@@ -317,8 +316,7 @@ public class TextManagerImpl implements TextManager {
                 initLetterMap(textTile, msg, textColor);
 
         // Draw letter
-        final String text = msg;
-        final int textLenght = text.length();
+        final int textLenght = msg.length();
 
         char letter;
         BufferedImage letterToDraw;
@@ -328,7 +326,7 @@ public class TextManagerImpl implements TextManager {
 
         // First, calculate size
         for (int indexText = 0; indexText < textLenght; indexText++) {
-            letter = text.charAt(indexText);
+            letter = msg.charAt(indexText);
 
             letterToDraw = mapLetter.get(letter);
 
@@ -345,7 +343,7 @@ public class TextManagerImpl implements TextManager {
 
         // Draw message
         for (int indexText = 0; indexText < textLenght; indexText++) {
-            letter = text.charAt(indexText);
+            letter = msg.charAt(indexText);
 
             letterToDraw = mapLetter.get(letter);
 

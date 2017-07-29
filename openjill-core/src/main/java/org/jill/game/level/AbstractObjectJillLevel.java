@@ -201,7 +201,7 @@ public abstract class AbstractObjectJillLevel
     protected final void changeScreenManager(
             final Class<? extends InterfaceSimpleGameHandleInterface> newHandler) {
         try {
-            SimpleGameHandler.setNewHandler((InterfaceSimpleGameHandleInterface) newHandler.newInstance());
+            SimpleGameHandler.setNewHandler(newHandler.newInstance());
         } catch (IllegalAccessException | InstantiationException ex) {
             LOGGER.log(Level.SEVERE, "Error switch screen", ex);
         }

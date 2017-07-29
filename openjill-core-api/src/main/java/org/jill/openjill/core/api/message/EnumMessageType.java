@@ -84,5 +84,5 @@ public enum EnumMessageType {
     /**
      * Change player form.
      */
-    CHANGE_PLAYER_CHARACTER;
+    CHANGE_PLAYER_CHARACTER
 }

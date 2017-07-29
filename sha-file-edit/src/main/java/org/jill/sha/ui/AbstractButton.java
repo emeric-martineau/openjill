@@ -1,5 +1,5 @@
-/**
- * Jill of the Jungle tool.
+/*
+  Jill of the Jungle tool.
  */
 package org.jill.sha.ui;
 

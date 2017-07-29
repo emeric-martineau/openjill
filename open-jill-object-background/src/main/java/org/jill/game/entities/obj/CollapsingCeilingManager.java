@@ -41,11 +41,6 @@ public final class CollapsingCeilingManager
     private BufferedImage image;
 
     /**
-     * Background to clone.
-     */
-    private BackgroundEntity backToClone;
-
-    /**
      * Background massage to send.
      */
     private final BackgroundMessage backMsg = new BackgroundMessage(0, 0, 0);
@@ -88,8 +83,8 @@ public final class CollapsingCeilingManager
         final int backX = x / JillConst.getBlockSize();
         final int backY = y / JillConst.getBlockSize();
 
-        this.backToClone = this.backgroundObject[backX][backY - 1];
-        this.backMsg.setMapCode(this.backToClone.getMapCode());
+        final BackgroundEntity backToClone = this.backgroundObject[backX][backY - 1];
+        this.backMsg.setMapCode(backToClone.getMapCode());
 
         this.backMsg.setX(backX);
     }

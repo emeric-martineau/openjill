@@ -1,5 +1,5 @@
-/**
- * Jill of the Jungle tool.
+/*
+  Jill of the Jungle tool.
  */
 package org.jill.sha.export;
 
@@ -8,10 +8,6 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
-
-import org.jill.sha.ShaFile;
-import org.jill.sha.ShaTile;
-import org.jill.sha.ShaTileSet;
 
 /**
  * Class to export picture

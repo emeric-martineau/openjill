@@ -48,7 +48,7 @@ public class SaveDataImpl implements SaveData {
      * @throws IOException if error
      */
     public SaveDataImpl(final FileAbstractByte jnFile) throws IOException {
-        this.offset = (int) jnFile.getFilePointer();
+        this.offset = jnFile.getFilePointer();
 
         level = jnFile.read16bitLE();
         health = jnFile.read16bitLE();

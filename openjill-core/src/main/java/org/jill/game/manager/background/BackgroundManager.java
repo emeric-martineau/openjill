@@ -136,7 +136,7 @@ public final class BackgroundManager {
         BackgroundEntity o = null;
 
         try {
-            o = (BackgroundEntity) className.
+            o = className.
                 getConstructor().newInstance();
 
             o.init(backParam);

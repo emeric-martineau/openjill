@@ -54,8 +54,8 @@ public abstract class BackgroundEntityImpl implements BackgroundEntity {
      */
     private static final int F_VINE = 4;
 
-    /**
-     * Always updates object
+    /*
+      Always updates object
      */
     // Never used
     //public static final int F_ALWAYS = 1024;
@@ -167,6 +167,16 @@ public abstract class BackgroundEntityImpl implements BackgroundEntity {
     @Override
     public final boolean isPlayerThru() {
         return playerThru;
+    }
+
+    /**
+     * Msg touch.
+     *
+     * @return true/false
+     */
+    @Override
+    public final boolean isMsgTouch() {
+        return msgTouch;
     }
 
     /**

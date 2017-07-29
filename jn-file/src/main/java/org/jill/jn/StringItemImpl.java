@@ -29,7 +29,7 @@ public class StringItemImpl implements StringItem {
      * @throws IOException if error
      */
     public StringItemImpl(final FileAbstractByte jnFile) throws IOException {
-        this.offset = (int) jnFile.getFilePointer();
+        this.offset = jnFile.getFilePointer();
 
         int strLen;
         StringBuilder name;

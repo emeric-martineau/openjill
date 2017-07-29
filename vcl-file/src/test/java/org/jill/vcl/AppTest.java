@@ -14,11 +14,7 @@ import org.jill.file.FileAbstractByteImpl;
 public class AppTest
     extends TestCase
 {
-       private Properties prop = new Properties();
-
     private String homePath ;
-
-    private String tempPath ;
 
     /**
      * Create the test case
@@ -29,9 +25,9 @@ public class AppTest
     {
         super( testName );
 
+        final Properties prop = new Properties();
         prop.load(this.getClass().getClassLoader().getResourceAsStream("config.properties")) ;
         homePath = prop.getProperty("home") ;
-        tempPath = prop.getProperty("temp") ;
     }
 
     /**

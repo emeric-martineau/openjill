@@ -33,7 +33,7 @@ public class CreditScreenJill1Handler extends AbstractObjectJillLevel {
         offset.setX(
                 - 15 * JillConst.getBlockSize());
         offset.setY(
-                - 0 * JillConst.getBlockSize());
+                0);
     }
 
     /**

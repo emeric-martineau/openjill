@@ -42,8 +42,8 @@ public final class TileManagerImpl implements TileManager {
     private static final ColorMap CGA_COLOR_MAP
             = ObjectInstanceFactory.getCgaColor();
 
-    /**
-     * Instance by name of dma/sha file.
+    /*
+      Instance by name of dma/sha file.
      */
 //    private static final Map<String, TileManager> INSTANCES = new HashMap<>();
 
@@ -210,7 +210,7 @@ public final class TileManagerImpl implements TileManager {
         // Map code
         int mapCode;
         // Tile picture
-        BufferedImage tilePicture;
+        BufferedImage image;
         // Array of tile
         ShaTile[] tileArray;
         // Tile
@@ -232,19 +232,9 @@ public final class TileManagerImpl implements TileManager {
                         && (dmaEntry.getTile() < tileArray.length)) {
                     tile = tileArray[dmaEntry.getTile()];
 
-                    switch (this.typeScreen) {
-                        case CGA:
-                            tilePicture = tile.getPictureCga();
-                            break;
-                        case EGA:
-                            tilePicture = tile.getPictureEga();
-                            break;
-                        default:
-                            tilePicture = tile.getPictureVga();
-                            break;
-                    }
+                    image = returnImageFromScreenColor(tile);
 
-                    localMapBackgroundPicture.put(mapCode, tilePicture);
+                    localMapBackgroundPicture.put(mapCode, image);
                 }
             }
         }
@@ -289,20 +279,34 @@ public final class TileManagerImpl implements TileManager {
             if (tileArray != null && (tileIndex < tileArray.length)) {
                 ShaTile tile = tileArray[tileIndex];
 
-                switch (typeScreen) {
-                    case CGA:
-                        image = tile.getPictureCga();
-                        break;
-                    case EGA:
-                        image = tile.getPictureEga();
-                        break;
-                    default:
-                        image = tile.getPictureVga();
-                        break;
-                }
+                image = returnImageFromScreenColor(tile);
             }
 
             imageCache.put(cacheKey, image);
+        }
+
+        return image;
+    }
+
+    /**
+     * Return image with good screen resolution.
+     *
+     * @param tile tile
+     *
+     * @return picture
+     */
+    private BufferedImage returnImageFromScreenColor(final ShaTile tile) {
+        final BufferedImage image;
+        switch (typeScreen) {
+            case CGA:
+                image = tile.getPictureCga();
+                break;
+            case EGA:
+                image = tile.getPictureEga();
+                break;
+            default:
+                image = tile.getPictureVga();
+                break;
         }
 
         return image;

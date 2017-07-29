@@ -285,7 +285,7 @@ public class ShaTileSetImpl implements ShaTileSet {
      */
     @Override
     public final ShaTile[] getShaTile() {
-        ShaTileImpl[] desArray = new ShaTileImpl[shaTile.length];
+        ShaTile[] desArray = new ShaTileImpl[shaTile.length];
         System.arraycopy(shaTile, 0, desArray, 0, shaTile.length);
         return desArray;
     }

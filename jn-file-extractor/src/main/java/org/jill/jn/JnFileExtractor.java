@@ -1,5 +1,5 @@
-/**
- * Extract
+/*
+  Extract
  */
 package org.jill.jn;
 
@@ -213,7 +213,7 @@ public class JnFileExtractor {
      */
     private static void extractMap(final ExtractParameter param) throws ClassNotFoundException, IllegalAccessException, InstantiationException {
         // File to read
-        JnFile jnFile = null ;
+        JnFile jnFile;
         ShaFile shaFile = null ;
         DmaFile dmaFile = null ;
 
@@ -264,11 +264,7 @@ public class JnFileExtractor {
         {
             System.err.print("Can't open read file : ") ;
 
-            if (jnFile == null)
-            {
-                System.err.print(param.getFile()) ;
-            }
-            else if (shaFile == null)
+            if (shaFile == null)
             {
                 System.err.print(param.getFileSha()) ;
             }
@@ -280,10 +276,6 @@ public class JnFileExtractor {
             {
                 e.printStackTrace() ;
             }
-        }
-        finally
-        {
-
         }
     }
 

@@ -32,16 +32,6 @@ public final class BladeManager extends AbstractParameterObjectEntity {
     private int subStateToRemoveMe;
 
     /**
-     * Initial Y offset.
-     */
-    private int initY;
-
-    /**
-     * Initial X offset.
-     */
-    private int initX;
-
-    /**
      * Statecount to start launch.
      */
     private int subStateLaunchStart;
@@ -50,11 +40,6 @@ public final class BladeManager extends AbstractParameterObjectEntity {
      * Statecount to end launch.
      */
     private int subStateLaunchEnd;
-
-    /**
-     * XD init value.
-     */
-    private int initXD;
 
     /**
      * Background map.
@@ -78,9 +63,10 @@ public final class BladeManager extends AbstractParameterObjectEntity {
         this.subStateToRemoveMe = getConfInteger("subStateToRemoveMe");
         this.subStateLaunchStart = getConfInteger("subStateLaunchStart");
         this.subStateLaunchEnd = getConfInteger("subStateLaunchEnd");
-        this.initXD = getConfInteger("initXD");
-        this.initY = getConfInteger("initY");
-        this.initX = getConfInteger("initX");
+
+        final int initXD = getConfInteger("initXD");
+        final int initY = getConfInteger("initY");
+        final int initX = getConfInteger("initX");
 
         // Load picture for each object. Don't use cache cause some picture
         // change between jill episod.
@@ -106,11 +92,11 @@ public final class BladeManager extends AbstractParameterObjectEntity {
             this.setHeight(this.images[0].getHeight());
 
             // Blade have not same y tha player
-            this.y += this.initY;
-            this.x += this.initX * this.info1;
+            this.y += initY;
+            this.x += initX * this.info1;
 
             // this.xSpeed is -1 or 1 to know way to go
-            setxSpeed(this.initXD * this.info1);
+            setxSpeed(initXD * this.info1);
 
             setInfo1(0);
         }

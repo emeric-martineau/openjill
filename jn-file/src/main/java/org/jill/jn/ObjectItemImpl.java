@@ -119,7 +119,7 @@ public class ObjectItemImpl implements ObjectItem {
     public ObjectItemImpl(final FileAbstractByte jnFile, final int idx)
             throws IOException {
         this.index = idx;
-        this.offset = (int) jnFile.getFilePointer();
+        this.offset = jnFile.getFilePointer();
 
         type = jnFile.read8bitLE();
         x = jnFile.read16bitLE();

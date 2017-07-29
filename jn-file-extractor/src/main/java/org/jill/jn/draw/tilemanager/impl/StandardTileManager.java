@@ -1,5 +1,5 @@
-/**
- *
+/*
+
  */
 package org.jill.jn.draw.tilemanager.impl;
 

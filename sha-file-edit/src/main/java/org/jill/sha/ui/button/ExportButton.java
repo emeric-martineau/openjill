@@ -1,5 +1,5 @@
-/**
- * Jill of the Jungle tool.
+/*
+  Jill of the Jungle tool.
  */
 package org.jill.sha.ui.button;
 
@@ -7,7 +7,6 @@ import java.awt.event.ActionEvent;
 import java.io.File;
 import java.io.IOException;
 
-import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 

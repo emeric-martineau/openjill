@@ -123,9 +123,9 @@ public abstract class AbstractPlayerManager
                 changeToClimbState();
 
                 if (keyboardLayout.isLeft()) {
-                    setySpeed(X_SPEED_LEFT);
+                    setySpeed(Y_SPEED_UP);
                 } else if (keyboardLayout.isRight()) {
-                    setySpeed(X_SPEED_RIGHT);
+                    setySpeed(Y_SPEED_DOWN);
                 }
             }
         }

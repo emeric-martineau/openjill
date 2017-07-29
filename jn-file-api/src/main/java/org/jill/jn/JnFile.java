@@ -23,7 +23,7 @@ public interface JnFile {
      *
      * @throws IOException if error
      */
-    public void load(String jnFile) throws IOException;
+    void load(String jnFile) throws IOException;
 
     /**
      * Constructor.

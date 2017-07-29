@@ -3,6 +3,7 @@ package org.jill.game.entities.obj;
 import java.awt.image.BufferedImage;
 import org.jill.game.entities.obj.abs.AbstractHitPlayerObjectEntity;
 import org.jill.game.entities.obj.player.PlayerState;
+import org.jill.game.entities.obj.util.SharedCode;
 import org.jill.openjill.core.api.message.player.MovePlayerMessage;
 import org.jill.openjill.core.api.entities.BackgroundEntity;
 import org.jill.openjill.core.api.entities.ObjectEntity;
@@ -48,7 +49,8 @@ public final class SparkManager extends AbstractHitPlayerObjectEntity {
     public void init(final ObjectParam objectParam) {
         super.init(objectParam);
 
-        loadPicture();
+        this.images = SharedCode.loadPicture(this.pictureCache, getConfInteger("tile"),
+                getConfInteger("tileSet"), getConfInteger("numberTileSet"));
 
         // Search block
         final BackgroundEntity[][] backMap =
@@ -88,32 +90,6 @@ public final class SparkManager extends AbstractHitPlayerObjectEntity {
         } else {
             this.maxYTop = startY * JillConst.getBlockSize() - halfObject;
             this.maxYBottom = stopY * JillConst.getBlockSize() - halfObject;
-        }
-    }
-
-    /**
-     * Load picture.
-     */
-    private void loadPicture() {
-        int tileIndex = getConfInteger("tile");
-        int tileSetIndex = getConfInteger("tileSet");
-
-        int numberTileSet = getConfInteger("numberTileSet");
-
-        // Load picture for each object. Don't use cache cause some picture
-        // change between jill episod.
-        this.images
-            = new BufferedImage[numberTileSet * 2];
-
-        int indexArray = 0;
-
-        for (int index = 0; index < numberTileSet; index++) {
-            this.images[indexArray]
-                = this.pictureCache.getImage(tileSetIndex, tileIndex
-                    + index);
-            this.images[indexArray + 1] = this.images[indexArray];
-
-            indexArray += 2;
         }
     }
 

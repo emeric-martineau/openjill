@@ -84,7 +84,7 @@ public class AbstractMenu {
 
         this.previousMenu = previousMenuObj;
 
-        final StringBuffer sb = new StringBuffer(NB_CURSOR_IMAGE);
+        final StringBuilder sb = new StringBuilder(NB_CURSOR_IMAGE);
 
         for (int indexImage = 1; indexImage <= NB_CURSOR_IMAGE; indexImage++) {
             sb.append((char) indexImage);

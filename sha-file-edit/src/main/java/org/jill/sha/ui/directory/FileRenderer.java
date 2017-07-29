@@ -1,5 +1,5 @@
-/**
- * Code from http://java.developpez.com/sources/?page=tableauxArbres#JTreeExplorer
+/*
+  Code from http://java.developpez.com/sources/?page=tableauxArbres#JTreeExplorer
  */
 package org.jill.sha.ui.directory;
 

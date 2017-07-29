@@ -199,7 +199,7 @@ public final class PlayerManager extends AbstractPlayerManager {
         stClimbPicture[i++] = pictureCache.getImage(
                 PlayerClimbConst.TILESET_INDEX, PlayerClimbConst.TILE_THREE);
         stClimbPicture[i++] = stClimbPicture[i2];
-        stClimbPicture[i++] = stClimbPicture[2];
+        stClimbPicture[i] = stClimbPicture[2];
     }
 
     /**
@@ -265,7 +265,7 @@ public final class PlayerManager extends AbstractPlayerManager {
                 PlayerStandConst.TILESET_INDEX,
                 PlayerStandConst.TILE_LEFT_HIT_FLOOR_INDEX2);
         stJumpingToStandLeft[i++] = stJumpingToStandLeft[2];
-        stJumpingToStandLeft[i++] = pictureCache.getImage(
+        stJumpingToStandLeft[i] = pictureCache.getImage(
                 PlayerStandConst.TILESET_INDEX,
                 PlayerStandConst.TILE_LEFT_HIT_FLOOR_INDEX1);
 
@@ -279,7 +279,7 @@ public final class PlayerManager extends AbstractPlayerManager {
                 PlayerStandConst.TILESET_INDEX,
                 PlayerStandConst.TILE_RIGHT_HIT_FLOOR_INDEX2);
         stJumpingToStandRight[i++] = stJumpingToStandRight[2];
-        stJumpingToStandRight[i++] = pictureCache.getImage(
+        stJumpingToStandRight[i] = pictureCache.getImage(
                 PlayerStandConst.TILESET_INDEX,
                 PlayerStandConst.TILE_RIGHT_HIT_FLOOR_INDEX1);
 
@@ -612,7 +612,7 @@ public final class PlayerManager extends AbstractPlayerManager {
                 PlayerDie2Const.TILE1);
         stDie2Other[i++] = pictureCache.getImage(PlayerDie2Const.TILESET_INDEX,
                 PlayerDie2Const.TILE2);
-        stDie2Other[i++] = pictureCache.getImage(PlayerDie2Const.TILESET_INDEX,
+        stDie2Other[i] = pictureCache.getImage(PlayerDie2Const.TILESET_INDEX,
                 PlayerDie2Const.TILE3);
 
         for (int index = 0; index < PlayerDie0Const.IMAGE_NUMBER; index++) {

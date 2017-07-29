@@ -1,11 +1,11 @@
 package org.jill.game.entities.obj;
 
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
 import java.util.List;
 import org.jill.game.entities.obj.abs.AbstractHitPlayerObjectEntity;
 import org.jill.game.entities.obj.bees.MoveSizeAndInterval;
 import org.jill.game.entities.obj.player.PlayerPositionSynchronizer;
+import org.jill.game.entities.obj.util.SharedCode;
 import org.jill.game.entities.obj.util.UtilityObjectEntity;
 import org.jill.openjill.core.api.entities.BackgroundEntity;
 import org.jill.openjill.core.api.entities.ObjectEntity;
@@ -116,8 +116,8 @@ public final class BeesManager extends AbstractHitPlayerObjectEntity {
 
         this.backgroundObject = objectParam.getBackgroundObject();
 
-        this.moveX = populateMove("moveX");
-        this.moveY = populateMove("moveY");
+        this.moveX = SharedCode.populateMove(getConfString("moveX"));
+        this.moveY = SharedCode.populateMove(getConfString("moveY"));
     }
 
     @Override
@@ -209,10 +209,9 @@ public final class BeesManager extends AbstractHitPlayerObjectEntity {
      * @return c value
      */
     private int calculateCvalue(final int newState) {
-        int a = (int) ((newState + START_OFFSET) / SIZE_OF_MVT);
+        int a = ((newState + START_OFFSET) / SIZE_OF_MVT);
         int b = a * SIZE_OF_MVT;
-        int c = (newState + START_OFFSET) - b;
-        return c;
+        return (newState + START_OFFSET) - b;
     }
 
     /**
@@ -283,28 +282,7 @@ public final class BeesManager extends AbstractHitPlayerObjectEntity {
         setySpeed(newYD);
     }
 
-    /**
-     * Populate list of movement.
-     *
-     * @param keyName name of key in config file
-     *
-     * @return list of movement
-     */
-    private List<MoveSizeAndInterval> populateMove(final String keyName) {
-       // Read moveX
-        String mvtX = getConfString(keyName);
-        // Split #
-        String[] arrayMoveX = mvtX.split("#");
 
-        final List<MoveSizeAndInterval> listMvt =
-                new ArrayList<>(arrayMoveX.length);
-
-        for (String currentMove : arrayMoveX) {
-            listMvt.add(new MoveSizeAndInterval(currentMove));
-        }
-
-        return listMvt;
-    }
 
     @Override
     public void msgTouch(final ObjectEntity obj,

@@ -19,5 +19,5 @@ public enum EnumScreenType {
     /**
      * VGA.
      */
-    VGA;
+    VGA
 }

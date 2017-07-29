@@ -88,7 +88,7 @@ public enum EnumInventoryObject {
      *
      * @param idx index in map file
      */
-    private EnumInventoryObject(final int idx) {
+    EnumInventoryObject(final int idx) {
         this.index = idx;
     }
 

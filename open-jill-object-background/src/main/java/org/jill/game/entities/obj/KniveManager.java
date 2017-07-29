@@ -39,11 +39,6 @@ public final class KniveManager extends AbstractParameterObjectEntity {
     private int indexEtat = 0;
 
     /**
-     * Initiali Y offset.
-     */
-    private int initY;
-
-    /**
      * Maximum value to speed Y.
      */
     private int downMaxMoveY;
@@ -128,7 +123,7 @@ public final class KniveManager extends AbstractParameterObjectEntity {
 
         this.images = this.pictureCache.getImage(tileSetIndex, tileIndex);
 
-        this.initY = getConfInteger("initY");
+        final int initY = getConfInteger("initY");
         this.downMaxMoveY = getConfInteger("downMaxMoveY");
         this.upMaxMoveY = getConfInteger("upMaxMoveY");
         this.leftMaxMoveX = getConfInteger("leftMaxMoveX");
@@ -156,7 +151,7 @@ public final class KniveManager extends AbstractParameterObjectEntity {
             this.height = this.images.getHeight();
 
             // Knife have not same y tha player
-            this.y += this.initY;
+            this.y += initY;
             // Statecount to launch knife
             this.stateCount = this.statecountLaunchStart;
             // this.xSpeed is -1 or 1 to know way to go

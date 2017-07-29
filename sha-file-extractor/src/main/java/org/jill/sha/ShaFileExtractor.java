@@ -1,5 +1,5 @@
-/**
- * Extract
+/*
+  Extract
  */
 package org.jill.sha;
 
@@ -306,7 +306,7 @@ public class ShaFileExtractor {
             // Font only
             if (font && isFont) {
                 for (int indexTile = 0; indexTile < shaTile.length; indexTile++) {
-                    tileFileName = String.format(tileFileNamePattern, new Object[]{currentTileset.getTitleSetIndex(), indexTile, "font"});
+                    tileFileName = String.format(tileFileNamePattern, currentTileset.getTitleSetIndex(), indexTile, "font");
                     writeFile(shaTile[indexTile].getPictureVga(), tileFileName) ;
                     numberfontExtract++ ;
 //                    out.println("| "+titleSetDisplay+" | "+String.valueOf(indexTile)+" | FONT | {{http://ns10.firstheberg.com/~bubule/web/download/jill/tile/" + tileFileName + "}} |");
@@ -319,21 +319,21 @@ public class ShaFileExtractor {
 //                    out.print("| "+titleSetDisplay+" | "+String.valueOf(indexTile)+" | PICTURE | ");
 //                    titleSetDisplay = ":::" ;
                     if (cgaMode && (currentTileset.getBitColor() != 8)) {
-                        tileFileName = String.format(tileFileNamePattern, new Object[]{currentTileset.getTitleSetIndex(), indexTile, "cga"});
+                        tileFileName = String.format(tileFileNamePattern, currentTileset.getTitleSetIndex(), indexTile, "cga");
                         writeFile(shaTile[indexTile].getPictureCga(), tileFileName) ;
                         numberfontExtract++ ;
 
 //                        out.print(" {{http://ns10.firstheberg.com/~bubule/web/download/jill/tile/" + tileFileName + "}} \\\\ ");
                     }
                     if (egaMode && (currentTileset.getBitColor() != 8)) {
-                        tileFileName = String.format(tileFileNamePattern, new Object[]{currentTileset.getTitleSetIndex(), indexTile, "ega"});
+                        tileFileName = String.format(tileFileNamePattern, currentTileset.getTitleSetIndex(), indexTile, "ega");
                         writeFile(shaTile[indexTile].getPictureEga(), tileFileName) ;
                         numberfontExtract++ ;
 
 //                        out.print(" {{http://ns10.firstheberg.com/~bubule/web/download/jill/tile/" + tileFileName + "}} \\\\ ");
                     }
                     if (vgaMode) {
-                        tileFileName = String.format(tileFileNamePattern, new Object[]{currentTileset.getTitleSetIndex(), indexTile, "vga"});
+                        tileFileName = String.format(tileFileNamePattern, currentTileset.getTitleSetIndex(), indexTile, "vga");
                         writeFile(shaTile[indexTile].getPictureVga(), tileFileName) ;
                         numberfontExtract++ ;
 
@@ -348,9 +348,7 @@ public class ShaFileExtractor {
 
 //        out.close();
 
-        System.out.println(String.format("Item extracted : %d",
-                new Object[] {numberfontExtract}
-                ));
+        System.out.println(String.format("Item extracted : %d", numberfontExtract));
     }
 
     /**

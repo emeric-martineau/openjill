@@ -2,6 +2,7 @@ package org.jill.file;
 
 import java.io.EOFException;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
@@ -109,7 +110,7 @@ public final class FileAbstractByteImpl implements FileAbstractByte {
      *
      * @return real file name (with case sensitive)
      */
-    private static File getRealFileName(final File fileToRead) {
+    private static File getRealFileName(final File fileToRead) throws FileNotFoundException {
         File path = fileToRead.getParentFile();
 
         // filename without directory
@@ -117,7 +118,11 @@ public final class FileAbstractByteImpl implements FileAbstractByte {
             path = new File("./");
         }
 
-        File[] listOfFile = path.listFiles();
+        final File[] listOfFile = path.listFiles();
+
+        if (listOfFile == null) {
+            throw new FileNotFoundException(fileToRead.getAbsolutePath());
+        }
 
         final String fileName = fileToRead.getName();
 
@@ -127,7 +132,7 @@ public final class FileAbstractByteImpl implements FileAbstractByte {
             }
         }
 
-        return null;
+        throw new FileNotFoundException(fileToRead.getAbsolutePath());
     }
 
     /**
@@ -221,9 +226,7 @@ public final class FileAbstractByteImpl implements FileAbstractByte {
      */
     @Override
     public int read8bitLE() throws EOFException {
-        int byte0 = readUnsignedByte();
-
-        return byte0;
+        return readUnsignedByte();
     }
 
     /**
@@ -274,9 +277,7 @@ public final class FileAbstractByteImpl implements FileAbstractByte {
      */
     @Override
     public int readSigned8bitLE() throws EOFException {
-        int byte0 = readByte();
-
-        return byte0;
+        return (int) readByte();
     }
 
     /**

@@ -99,8 +99,8 @@ public class MessageDispatcherImpl implements MessageDispatcher {
         }
     }
 
-    /**
-     * dispatch message
+    /*
+      dispatch message
      */
     /*
     public void dispatch() {

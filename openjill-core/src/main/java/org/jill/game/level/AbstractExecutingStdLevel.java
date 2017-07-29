@@ -404,7 +404,7 @@ public abstract class AbstractExecutingStdLevel extends AbstractMenuJillLevel {
     protected void doRunNext() {
         boolean turtleMode = controlArea.isTurtleMode();
 
-        if ((turtleMode && turtleSwitch) || !turtleMode) {
+        if (!turtleMode || turtleSwitch) {
             // Execute if not in turtle mode or turtle mode and execute cycle
 
             if (keyboardLayout.isFire()) {

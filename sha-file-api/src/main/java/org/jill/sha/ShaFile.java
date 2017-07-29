@@ -17,7 +17,7 @@ public interface ShaFile {
      *
      * @throws IOException if error
      */
-    public void load(String shaFile) throws IOException;
+    void load(String shaFile) throws IOException;
 
     /**
      * Constructor of class ShaFile.java.
@@ -26,7 +26,7 @@ public interface ShaFile {
      *
      * @throws IOException if error
      */
-    public void load(FileAbstractByte shaFile) throws IOException;
+    void load(FileAbstractByte shaFile) throws IOException;
 
     /**
      * Return header.

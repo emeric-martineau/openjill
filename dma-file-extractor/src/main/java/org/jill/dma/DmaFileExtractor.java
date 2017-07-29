@@ -1,5 +1,5 @@
-/**
- * Extract
+/*
+  Extract
  */
 package org.jill.dma;
 

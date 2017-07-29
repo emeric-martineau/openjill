@@ -189,12 +189,7 @@ public final class BonusManager extends AbstractParameterObjectEntity {
         }
 
         // If don't remove, don't send it.
-        if (this.killme == null) {
-            // Special case.
-            // Remove all unremovable
-            // TODO how manage it ?
-
-        } else {
+        if (this.killme != null) {
             this.messageDispatcher.sendMessage(EnumMessageType.OBJECT,
                     this.killme);
         }

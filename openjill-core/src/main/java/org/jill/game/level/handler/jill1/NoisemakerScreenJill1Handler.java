@@ -33,7 +33,7 @@ public class NoisemakerScreenJill1Handler extends AbstractObjectJillLevel {
         offset.setX(
                 - 62 * JillConst.getBlockSize());
         offset.setY(
-                - 0 * JillConst.getBlockSize());
+                0);
     }
 
     /**

@@ -197,7 +197,7 @@ public final class ObjectManager {
         ObjectEntity o = null;
 
         try {
-            o = (ObjectEntity) className.
+            o = className.
                 getConstructor().
                 newInstance();
 

@@ -25,7 +25,7 @@ public interface TileManager {
      * @throws IllegalAccessException if error when loading class
      * @throws InstantiationException if error when loading class
      */
-    public void init(File shaFileName,
+    void init(File shaFileName,
             File dmaFileName, EnumScreenType typeScreen)
             throws IOException, ClassNotFoundException, IllegalAccessException,
             InstantiationException;

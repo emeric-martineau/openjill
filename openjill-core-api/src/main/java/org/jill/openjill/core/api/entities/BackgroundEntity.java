@@ -71,6 +71,13 @@ public interface BackgroundEntity {
     void init(BackgroundParam backParameter);
 
     /**
+     * Msg touch.
+     *
+     * @return true/false
+     */
+    boolean isMsgTouch();
+
+    /**
      * Msg draw.
      *
      * @return true/false

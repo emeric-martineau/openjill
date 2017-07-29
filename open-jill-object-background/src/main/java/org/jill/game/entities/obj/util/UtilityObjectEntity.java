@@ -275,8 +275,6 @@ public final class UtilityObjectEntity {
 
             if (ignoreStair || bottomObject > topOnBlockStair) {
                 block = null;
-            } else {
-
             }
         }
 

@@ -1,11 +1,12 @@
-/**
- * 
+/*
+
  */
 package org.jill.jn.draw.tilemanager.impl;
 
 import java.awt.image.BufferedImage;
 
 import org.jill.jn.ObjectItem;
+import org.jill.jn.draw.tilemanager.SharedCode;
 
 /**
  * Class to draw bonus (hight jump, bag of coins...)
@@ -21,17 +22,7 @@ public class BonusTileManager extends StandardTileManager
     @Override
     public BufferedImage getTile(final ObjectItem object)
     {
-        String objectType = String.valueOf(object.getType()).concat("_").concat(String.valueOf(object.getCounter())) ;
-        BufferedImage bi ;
-        
-        bi = getMapObjectPicture().get(objectType) ;
-        
-        if (bi == null) 
-        {
-            System.err.println("No tile found for tileType = ".concat(objectType)) ;
-        }
-        
-        return bi ;
+        return SharedCode.getTile(object, getMapObjectPicture()) ;
     }
 
 }

@@ -123,8 +123,8 @@ public final class EyesManager extends AbstractParameterObjectEntity {
         final double corner = Math.atan((double) Math.abs(relativeY) / Math.abs(relativeX));
         //final double corner = Math.atan2(relativeY, relativeX);
         
-        final double dx = (double) this.raySize * Math.cos(corner);
-        final double dy = (double) this.raySize * Math.sin(corner);
+        final double dx = this.raySize * Math.cos(corner);
+        final double dy = this.raySize * Math.sin(corner);
         
         int newX = (int) Math.round(dx);
         int newY = (int) Math.round(dy);

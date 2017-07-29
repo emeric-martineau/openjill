@@ -6,5 +6,5 @@ package org.jill.jn.draw;
  * @author Emeric MARTINEAU
  */
 public enum ScreenType {
-    CGA, EGA, VGA ;
+    CGA, EGA, VGA
 }

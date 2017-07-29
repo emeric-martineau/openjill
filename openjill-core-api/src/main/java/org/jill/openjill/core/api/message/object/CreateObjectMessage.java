@@ -11,9 +11,9 @@ public final class CreateObjectMessage {
     /**
      * Create object type.
      */
-    public static enum CreateObjectType {
+    public enum CreateObjectType {
         CREATE_BY_TYPE, CREATE_BY_CLASS_NAME
-    };
+    }
 
     /**
      * If add object. False = delete object

@@ -18,3 +18,4 @@
 /sha-file-extractor/target/
 /dma-file-extractor/target/
 /jn-file-extractor/target/
+*.iml
