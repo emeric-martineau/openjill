@@ -41,8 +41,7 @@ public abstract class AbstractOorBackgroundEntity extends AbstractSynchronisedIm
      *
      * @param backParam background parameter
      *
-     * @todo tileset 12, tile 0->5 for burning (change background object)
-     * and add MsgTouch back
+     * TODO tileset 12, tile 0->5 for burning (change background object) and add MsgTouch back
      */
     @Override
     public void init(final BackgroundParam backParam) {

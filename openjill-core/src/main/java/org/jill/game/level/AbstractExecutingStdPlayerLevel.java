@@ -95,13 +95,10 @@ public abstract class AbstractExecutingStdPlayerLevel
      * @param cfgLevel  configuration of level
      *
      * @throws IOException if error of reading file
-     * @throws ClassNotFoundException if not class found
-     * @throws IllegalAccessException if error
-     * @throws InstantiationException  if error
+     * @throws ReflectiveOperationException if not class found
      */
     public AbstractExecutingStdPlayerLevel(final LevelConfiguration cfgLevel)
-            throws IOException, ClassNotFoundException, IllegalAccessException,
-            InstantiationException {
+            throws IOException, ReflectiveOperationException {
         super(cfgLevel);
 
         if (cfgLevel.getDisplayBeginMessage()) {

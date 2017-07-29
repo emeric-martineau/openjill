@@ -96,13 +96,10 @@ public abstract class AbstractChangeLevel extends
      * @param cfgLevel configuration of level
      *
      * @throws IOException if error reading file
-     * @throws IllegalAccessException if can't create class
-     * @throws InstantiationException if can't create class
-     * @throws ClassNotFoundException if can't create class
+     * @throws ReflectiveOperationException if can't create class
      */
     public AbstractChangeLevel(final LevelConfiguration cfgLevel)
-        throws IOException, IllegalAccessException, InstantiationException,
-        ClassNotFoundException {
+        throws IOException, ReflectiveOperationException {
         super(cfgLevel);
 
         constructor();
@@ -165,24 +162,29 @@ public abstract class AbstractChangeLevel extends
         this.runGame = false;
         this.levelMessageBox.setCanchange(false);
 
-        // If in map level, store map level to object
-        switch (this.newLevelNumber) {
-            case RESTART_LEVEL_NUMBER:
-                loadRestartLevel();
-                break;
-            case SaveData.MAP_LEVEL:
-                loadMapFromLevel();
-                break;
-            default:
-                loadNewLevelFromMap();
-                break;
+        try {
+            // If in map level, store map level to object
+            switch (this.newLevelNumber) {
+                case RESTART_LEVEL_NUMBER:
+                    loadRestartLevel();
+                    break;
+                case SaveData.MAP_LEVEL:
+                    loadMapFromLevel();
+                    break;
+                default:
+                    loadNewLevelFromMap();
+                    break;
+            }
+        } catch (final ReflectiveOperationException e) {
+            LOGGER.severe("Error when loading game.");
+            e.printStackTrace();
         }
     }
 
     /**
      * Restart level.
      */
-    private void loadRestartLevel() {
+    private void loadRestartLevel() throws ReflectiveOperationException {
         try {
             this.mapLevel.seek(0);
 
@@ -216,7 +218,7 @@ public abstract class AbstractChangeLevel extends
     /**
      * Reload map from level.
      */
-    private void loadMapFromLevel() {
+    private void loadMapFromLevel() throws ReflectiveOperationException {
         try {
             this.mapLevel.seek(0);
 
@@ -247,7 +249,7 @@ public abstract class AbstractChangeLevel extends
     /**
      * Load new level from map.
      */
-    private void loadNewLevelFromMap() {
+    private void loadNewLevelFromMap() throws ReflectiveOperationException {
         try {
             // store new level number in map
             this.inventoryArea.setLevel(this.newLevelNumber);
@@ -513,7 +515,12 @@ public abstract class AbstractChangeLevel extends
             createAndLoadNewLevel();
         } else if (this.isRestoreLevel) {
             // Do it here to let all data delete
-            loadGameInSaveFile();
+            try {
+                loadGameInSaveFile();
+            } catch (final ReflectiveOperationException e) {
+                LOGGER.severe("Error when load game in save file.");
+                e.printStackTrace();
+            }
         } else if (this.menu == this.menuHighScore
             && !this.menuHighScore.isEditorMode()) {
             // No name enter, validate
@@ -606,7 +613,7 @@ public abstract class AbstractChangeLevel extends
     /**
      * Load game saved in file.
      */
-    private void loadGameInSaveFile() {
+    private void loadGameInSaveFile() throws ReflectiveOperationException {
         final int numSave
             = this.menuLoadGame.getNumberSave();
 

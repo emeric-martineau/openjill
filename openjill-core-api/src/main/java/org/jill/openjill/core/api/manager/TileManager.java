@@ -27,8 +27,7 @@ public interface TileManager {
      */
     void init(File shaFileName,
             File dmaFileName, EnumScreenType typeScreen)
-            throws IOException, ClassNotFoundException, IllegalAccessException,
-            InstantiationException;
+            throws IOException;
 
     /**
      * @return backgroundColor.

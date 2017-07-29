@@ -22,7 +22,7 @@ public class FileExtension extends FileFilter {
     /**
      * Description
      */
-    private String description ;
+    private final String description ;
     
     /**
      * Constructor
@@ -55,11 +55,11 @@ public class FileExtension extends FileFilter {
 
     /**
      * Test file name.
-     * Return false if extension is empty or null for return only directory
+     * Return false if extension is empty or null for return only directory.
      * 
-     * @param fileName
+     * @param fileName file name to read
      * 
-     * @return
+     * @return true if file exists
      */
     private boolean testFile(final String fileName)
     {

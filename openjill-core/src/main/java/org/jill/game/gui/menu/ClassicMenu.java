@@ -70,8 +70,6 @@ public final class ClassicMenu extends AbstractStdMenu {
      * @param conf propertie
      */
     private void createMenuItem(final MenuConf conf) {
-        for (SubMenu sb : conf.getItem()) {
-            this.addItem(sb);
-        }
+        conf.getItem().forEach(this::addItem);
     }
 }

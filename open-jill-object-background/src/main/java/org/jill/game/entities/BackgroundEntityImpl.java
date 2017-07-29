@@ -312,7 +312,7 @@ public abstract class BackgroundEntityImpl implements BackgroundEntity {
     /**
      * Return DMA entry.
      *
-     * @return
+     * @return dma entry
      */
     public final DmaEntry getDmaEntry() {
         return dmaEntry;

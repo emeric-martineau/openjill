@@ -23,12 +23,12 @@ public class ExportButton extends AbstractButton {
     /**
      * Text area
      */
-    private JTextField fileToRead ;
+    private final JTextField fileToRead ;
     
     /**
      * Text area
      */    
-    private JTextField dirToWrite ;
+    private final JTextField dirToWrite ;
     
     /**
      * Creates a button with text.
@@ -64,9 +64,9 @@ public class ExportButton extends AbstractButton {
     }
     
     /**
-     * Check if value done
+     * Check if value done.
      * 
-     * @param value
+     * @param value value
      * @param msg message to display
      * 
      * @return true false
@@ -85,7 +85,7 @@ public class ExportButton extends AbstractButton {
     /**
      * Check if file exist
      * 
-     * @param file
+     * @param file filename
      * @param msg message to display
      * 
      * @return true false

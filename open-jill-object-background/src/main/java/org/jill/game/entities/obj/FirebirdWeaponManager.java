@@ -14,8 +14,8 @@ import org.jill.openjill.core.api.message.EnumMessageType;
 /**
  * Firebird weapon object.
  *
- * @todo why counter/state/substate is alway same value ?
- * @todo it-it destroy when out of screen ?
+ * TODO why counter/state/substate is alway same value ?
+ * TODO it-it destroy when out of screen ?
  *
  * @author Emeric MARTINEAU
  */

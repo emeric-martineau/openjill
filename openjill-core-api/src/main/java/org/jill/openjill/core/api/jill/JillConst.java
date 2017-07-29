@@ -72,7 +72,7 @@ public class JillConst {
     /**
      * Return size in pixel of block in game.
      *
-     * @return
+     * @return block size
      */
     public static int getBlockSize() {
         return blockSize;
@@ -81,7 +81,7 @@ public class JillConst {
     /**
      * Return maximum size of map in pixel.
      *
-     * @return
+     * @return maximum size
      */
     public static int getMaxWidth() {
         return MAX_WIDTH;
@@ -90,7 +90,7 @@ public class JillConst {
     /**
      * Return maximum size of map in pixel.
      *
-     * @return
+     * @return maximum size
      */
     public static int getMaxHeight() {
         return MAX_HEIGHT;
@@ -99,7 +99,7 @@ public class JillConst {
     /**
      * Return size in pixel to update object.
      *
-     * @return
+     * @return size
      */
     public static int getxUpdateScreenBorder() {
         return xUpdateScreenBorder;
@@ -108,7 +108,7 @@ public class JillConst {
     /**
      * Return size in pixel to update object.
      *
-     * @return
+     * @return size
      */
     public static int getyUpdateScreenBorder() {
         return yUpdateScreenBorder;
@@ -117,7 +117,7 @@ public class JillConst {
     /**
      * Return value of zaphold field to put in object when it touch player.
      *
-     * @return
+     * @return value
      */
     public static int getZapholdValueAfterTouchPlayer() {
         return zapholdValueAfterTouchPlayer;

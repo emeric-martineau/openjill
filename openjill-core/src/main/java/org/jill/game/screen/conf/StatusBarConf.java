@@ -177,7 +177,7 @@ public final class StatusBarConf {
     /**
      * Image to draw by default in inventory area.
      *
-     * @return
+     * @return list {@link ImagesConf}
      */
     public List<ImagesConf> getImagesInvenroy() {
         return imagesInvenroy;
@@ -186,7 +186,7 @@ public final class StatusBarConf {
     /**
      * Image to draw by default in inventory area.
      * 
-     * @param imagesInvenroy
+     * @param imagesInvenroy list {@link ImagesConf}
      */
     public void setImagesInvenroy(final List<ImagesConf> imagesInvenroy) {
         this.imagesInvenroy = imagesInvenroy;

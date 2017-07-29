@@ -82,13 +82,13 @@ public abstract class AbstractBackgroundJillLevel
     /**
      * Message dispatcher.
      */
-    protected MessageDispatcher messageDispatcher =
+    protected final MessageDispatcher messageDispatcher =
             ObjectInstanceFactory.getNewMsgDispatcher();
 
     /**
      * Background manager.
      */
-    protected BackgroundManager backgroundManager =
+    protected final BackgroundManager backgroundManager =
             BackgroundManager.getInstance();
 
     /**
@@ -143,12 +143,9 @@ public abstract class AbstractBackgroundJillLevel
      * Load current level.
      *
      * @throws IOException if error
-     * @throws InstantiationException if error
-     * @throws IllegalAccessException if error
-     * @throws ClassNotFoundException if error
+     * @throws ReflectiveOperationException if error
      */
-    protected final void loadLevel() throws IOException, ClassNotFoundException,
-            IllegalAccessException, InstantiationException {
+    protected final void loadLevel() throws IOException, ReflectiveOperationException {
         final String filePath =
                 ((JillGameConfig) SimpleGameConfig.getInstance()).getFilePath();
 
@@ -318,9 +315,11 @@ public abstract class AbstractBackgroundJillLevel
         if (msg instanceof BackgroundMessage) {
             manageOneMessage((BackgroundMessage) msg);
         } else if (msg instanceof List) {
-            for (BackgroundMessage bm : (List<BackgroundMessage>) msg) {
-                manageOneMessage(bm);
-            }
+            ((List) msg).forEach(item -> {
+                if (item instanceof BackgroundMessage) {
+                    manageOneMessage((BackgroundMessage) item);
+                }
+            });
         }
     }
 

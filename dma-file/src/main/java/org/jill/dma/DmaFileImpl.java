@@ -36,7 +36,7 @@ public class DmaFileImpl implements DmaFile {
     /**
      * Dma entries by name.
      */
-    private final Map<String, DmaEntryImpl> dmaMapByName = new HashMap();
+    private final Map<String, DmaEntryImpl> dmaMapByName = new HashMap<>();
 
     /**
      * Constructor of class ShaFile.java.

@@ -11,24 +11,29 @@ import javax.swing.tree.*;
 import org.jill.sha.ui.filter.DirectoryFilter;
 
 public class FileTreeModel implements TreeModel{
-    private File root; 
+    private final File root;
     public FileTreeModel(File file){
         root = file;    
     }    
     public List<File> getFichiers(Object parent){
         File fileParent = (File)parent;
         File[] fichiers = fileParent.listFiles(new DirectoryFilter());
-        
-        Arrays.sort(fichiers,new Comparator<File>(){
+
+        if (fichiers == null) {
+            return new ArrayList<File>();
+        }
+
+        Arrays.sort(fichiers, new Comparator<File>(){
             public int compare(File f1,File f2){
                 boolean dirf1 = f1.isDirectory();
                 boolean dirf2 = f2.isDirectory();
                 if(dirf1&&!dirf2){return -1;}
                 if(!dirf1&&dirf2){return 1;}
                 return f1.getPath().compareTo(f2.getPath());
-            }    
+            }
         });
-        return    Arrays.asList(fichiers);
+
+        return Arrays.asList(fichiers);
     }
     public Object getRoot(){
         return root;

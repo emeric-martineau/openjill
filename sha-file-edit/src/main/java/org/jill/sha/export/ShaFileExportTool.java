@@ -24,11 +24,12 @@ public class ShaFileExportTool {
     }
     
     /**
-     * Export picture
+     * Export picture.
      * 
      * @param fileToRead file sha to read
      * @param dirToSave directory where save picture
-     * @throws IOException 
+     *
+     * @throws IOException if can't read file
      */
     public static void exportPictureFromShaFile(final String fileToRead, final String dirToSave) throws IOException
     {

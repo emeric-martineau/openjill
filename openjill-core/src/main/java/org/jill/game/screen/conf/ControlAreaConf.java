@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.stream.Collectors;
 
 /**
  * Config class to control area.
@@ -106,10 +107,11 @@ public final class ControlAreaConf extends AbstractLineTextConf {
         List<KeysControlText> types = new ArrayList<>(
                 this.keysControlText.size());
 
-        for (Entry<String, KeysControlText> entry
-                : this.keysControlText.entrySet()) {
-            types.add(entry.getValue());
-        }
+        types.addAll(this.keysControlText
+                .entrySet()
+                .stream()
+                .map(Entry::getValue)
+                .collect(Collectors.toList()));
 
         return types;
     }

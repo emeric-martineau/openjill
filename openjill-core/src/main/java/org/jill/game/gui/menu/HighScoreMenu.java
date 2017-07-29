@@ -43,17 +43,17 @@ public final class HighScoreMenu extends AbstractMenu implements MenuInterface {
     /**
      * Display.
      */
-    private BufferedImage highScoreScreen;
+    private final BufferedImage highScoreScreen;
 
     /**
      * Picutre cache.
      */
-    private TileManager pictureCache;
+    private final TileManager pictureCache;
 
     /**
      * List of high score.
      */
-    private List<HighScoreItem> listHiScore;
+    private final List<HighScoreItem> listHiScore;
 
     /**
      * titile.
@@ -89,7 +89,7 @@ public final class HighScoreMenu extends AbstractMenu implements MenuInterface {
     /**
      * Configuration.
      */
-    private HighScoreMenuConf conf;
+    private final HighScoreMenuConf conf;
 
     /**
      * Constructor.
@@ -421,7 +421,7 @@ public final class HighScoreMenu extends AbstractMenu implements MenuInterface {
     /**
      * Draw menu.
      *
-     * @param g2
+     * @param g2 graphic object to draw
      */
     @Override
     public void draw(final Graphics g2) {

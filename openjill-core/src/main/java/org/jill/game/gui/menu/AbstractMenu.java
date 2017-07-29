@@ -36,12 +36,12 @@ public class AbstractMenu {
     /**
      * Old cursor background.
      */
-    protected BufferedImage oldCursorBackground;
+    protected final BufferedImage oldCursorBackground;
 
     /**
      * Cursor.
      */
-    protected BufferedImage[] cursors;
+    protected final BufferedImage[] cursors;
 
     /**
      * Current position of cursor.
@@ -51,7 +51,7 @@ public class AbstractMenu {
     /**
      * Position of cursor for each submenu.
      */
-    protected List<Point> cursorPositionBySubMenuIndex = new ArrayList<>();
+    protected final List<Point> cursorPositionBySubMenuIndex = new ArrayList<>();
 
     /**
      * Cursor index.

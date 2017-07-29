@@ -16,7 +16,7 @@ public class NameObjectCache
     /**
      * Map of object tile
      */
-    private Properties mapObjectTile = new Properties() ;
+    private final Properties mapObjectTile = new Properties() ;
     
     public NameObjectCache()
     {
@@ -35,9 +35,9 @@ public class NameObjectCache
     /**
      * Return type description
      * 
-     * @param type
+     * @param type type of jill object
      * 
-     * @return nescription or null if not exists
+     * @return description or null if not exists
      */
     public String getDescription(final int type)
     {

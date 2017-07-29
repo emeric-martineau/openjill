@@ -162,10 +162,11 @@ public class ShaFileExtractor {
     }
 
     /**
-     * Print data
+     * Print data.
      *
-     * @param fileName
-     * @throws IOException
+     * @param fileName file name to read
+     *
+     * @throws IOException if can't read file
      */
     private static void showDumpPrint(final String fileName) throws IOException
     {
@@ -265,9 +266,9 @@ public class ShaFileExtractor {
     /**
      * Extract font only
      *
-     * @param fileName file to read
-     * @param dirName where to write
-     * @throws IOException
+     * @param param {@link ExtractParameter}
+     *
+     * @throws IOException if error
      */
     private static void extractCore(final ExtractParameter param) throws IOException
     {
@@ -357,7 +358,7 @@ public class ShaFileExtractor {
      * @param bi picture
      * @param tileFileName filename
      *
-     * @throws IOException
+     * @throws IOException if can't write file
      */
     private static void writeFile(final BufferedImage bi, final String tileFileName) throws IOException
     {

@@ -205,11 +205,12 @@ public class JnFileExtractor {
     }
 
     /**
-     * Extract map into graphical file
-     * @param param
-     * @throws InstantiationException
-     * @throws IllegalAccessException
-     * @throws ClassNotFoundException
+     * Extract map into graphical file.
+     *
+     * @param param {@link ExtractParameter}
+     * @throws InstantiationException if error
+     * @throws IllegalAccessException if error
+     * @throws ClassNotFoundException if can't find class associate to item
      */
     private static void extractMap(final ExtractParameter param) throws ClassNotFoundException, IllegalAccessException, InstantiationException {
         // File to read

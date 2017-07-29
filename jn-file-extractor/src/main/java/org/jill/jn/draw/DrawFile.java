@@ -68,7 +68,7 @@ public class DrawFile {
     /**
      * Cache between object type and name/description
      */
-    private NameObjectCache namdeObjectCache = new NameObjectCache() ;
+    private final NameObjectCache namdeObjectCache = new NameObjectCache() ;
 
     public DrawFile(final ShaFile shaFile,
             final DmaFile dmaFile, final ScreenType screen)
@@ -95,10 +95,11 @@ public class DrawFile {
     }
 
     /**
-     * REturn ???? if null
+     * Return ???? if null.
      *
-     * @param text
-     * @return
+     * @param text text to display
+     *
+     * @return return always a string never null
      */
     private static String nullOrWhat(final String text)
     {
@@ -111,9 +112,10 @@ public class DrawFile {
     }
 
     /**
-     * Fill picture in black
-     * @param image
-     * @param g2
+     * Fill picture in black.
+     *
+     * @param image picture
+     * @param g2 graphic object to draw
      */
     private void fillPictureBlack(final BufferedImage image, final Graphics2D g2)
     {
@@ -153,10 +155,11 @@ public class DrawFile {
     }
 
     /**
-     * Return tile
+     * Return tile.
      *
-     * @param object
-     * @return
+     * @param object jill object
+     *
+     * @return picture
      */
     private BufferedImage getTile(final ObjectItem object)
     {
@@ -199,10 +202,10 @@ public class DrawFile {
     }
 
     /**
-     * Write background
+     * Write background.
      *
-     * @param g2
-     * @param jnFile
+     * @param g2 graphic object to draw
+     * @param jnFile jill map file
      */
     public void writeBackground(final Graphics2D g2, final JnFile jnFile)
     {
@@ -234,9 +237,9 @@ public class DrawFile {
     /**
      * Write background
      *
-     * @param g2
-     * @param jnFile
-     * @param drawUnknowObject
+     * @param g2 graphic object to draw
+     * @param jnFile jill map file
+     * @param drawUnknowObject if draw outline if object unknow
      */
     public void writeObject(final Graphics2D g2, final JnFile jnFile, final boolean drawUnknowObject)
     {
@@ -272,7 +275,7 @@ public class DrawFile {
      * @param bi picture
      * @param tileFileName filename
      *
-     * @throws IOException
+     * @throws IOException when can't read file
      */
     public void writeFile(final BufferedImage bi, final String tileFileName) throws IOException
     {

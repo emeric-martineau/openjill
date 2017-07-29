@@ -21,7 +21,7 @@ import org.jill.sha.VgaColorMapImpl;
 /**
  * Class to draw text
  *
- * @authorEmeric MARTINEAU
+ * @author Emeric MARTINEAU
  */
 public class TextTileManager extends AbstractTileManager {
     /**
@@ -108,9 +108,10 @@ public class TextTileManager extends AbstractTileManager {
     }
 
     /**
-     * Fill picture in black
-     * @param image
-     * @param g2
+     * Fill picture in black.
+     *
+     * @param image picture
+     * @param g2 graphic object to draw
      */
     private static void fillBackground(final BufferedImage image, final Graphics2D g2, final Color color)
     {
@@ -124,9 +125,9 @@ public class TextTileManager extends AbstractTileManager {
     }
 
     /**
-     * Init color tab for text
+     * Init color tab for text.
      *
-     * @param object
+     * @param object jill object
      *
      * @return tab color
      */
@@ -191,10 +192,10 @@ public class TextTileManager extends AbstractTileManager {
     }
 
     /**
-     * Init table letter
+     * Init table letter.
      *
-     * @param tiles
-     * @param object
+     * @param tiles all tiles
+     * @param object jill object
      *
      * @return table letter
      */
@@ -226,9 +227,9 @@ public class TextTileManager extends AbstractTileManager {
     /**
      * Draw all letter
      *
-     * @param g2
+     * @param g2 graphic object to draw
      * @param tiles tiles of letter (big or small)
-     * @param object
+     * @param object jill object
      */
     private void drawLetter(final Graphics2D g2, final  ShaTile[] tiles, final ObjectItem object, final Color[] textColor)
     {

@@ -37,7 +37,8 @@ public class AbstractMessageBox {
      * @param g2BoxPicture grapic 2d to draw
      * @param pictureCache picture cache
      * @param textArea aera
-     * @throws NumberFormatException
+     *
+     * @throws NumberFormatException error when config file not valid
      */
     protected void drawArea(final Graphics2D g2BoxPicture,
             final TileManager pictureCache,

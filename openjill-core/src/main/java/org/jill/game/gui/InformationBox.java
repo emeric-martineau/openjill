@@ -130,10 +130,6 @@ public final class InformationBox extends AbstractMessageBox {
      * Construct object.
      *
      * @param pctCache picture cache manage
-     * @param wd width
-     * @param hg height
-     * @param xpos x position
-     * @param ypos y position
      */
     private void constructor(final TileManager pctCache) {
         this.pictureCache = pctCache;
@@ -165,10 +161,11 @@ public final class InformationBox extends AbstractMessageBox {
     }
 
     /**
-     * Add space
+     * Add space.
      *
-     * @param text
-     * @return
+     * @param text text to align
+     *
+     * @return new text
      */
     private String addSpace(final String text) {
         final int numberStartSpace = (lineLength - text.length()) / 2;
@@ -241,18 +238,18 @@ public final class InformationBox extends AbstractMessageBox {
     }
 
     /**
-     * Return status bar
+     * Return status bar.
      *
-     * @return
+     * @return picture of status bar
      */
     public BufferedImage getBox() {
         return boxPicture;
     }
 
     /**
-     * Set content text
+     * Set content text.
      *
-     * @param content
+     * @param content text to draw
      */
     public void setContent(final String content) {
         // Split CRLF

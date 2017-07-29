@@ -12,67 +12,67 @@ public class LevelConfiguration {
     /**
      * name of DMA file.
      */
-    private String dmaFileName;
+    private final String dmaFileName;
 
     /**
      * name of SHA file.
      */
-    private String shaFileName;
+    private final String shaFileName;
 
     /**
      * name of JN file.
      */
-    private String jnFileName;
+    private final String jnFileName;
 
     /**
      * name of VCL file.
      */
-    private String vclFileName;
+    private final String vclFileName;
 
     /**
      * name of CFG file.
      */
-    private String cfgFileName;
+    private final String cfgFileName;
 
     /**
      * prefix of save file name.
      */
-    private String cfgSavePrefixe;
+    private final String cfgSavePrefixe;
 
     /**
      * Start screen for this level.
      */
-    private Class<? extends InterfaceSimpleGameHandleInterface> startScreen;
+    private final Class<? extends InterfaceSimpleGameHandleInterface> startScreen;
 
     /**
      * Number of level for new level load (if restoreMap == false).
      */
-    private int levelNumber;
+    private final int levelNumber;
 
     /**
      * Level map data.
      */
-    private FileAbstractByte levelMapData;
+    private final FileAbstractByte levelMapData;
 
     /**
      * Level data.
      */
-    private FileAbstractByte levelData;
+    private final FileAbstractByte levelData;
 
     /**
      * If is restore map (true) or new level change (false).
      */
-    private boolean restoreMap;
+    private final boolean restoreMap;
 
     /**
      * Score.
      */
-    private int score;
+    private final int score;
 
     /**
      * Number of gem.
      */
-    private int numberGem;
+    private final int numberGem;
 
     /**
      * Display begin message.

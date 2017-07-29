@@ -48,27 +48,27 @@ public abstract class AbstractObjectJillLevel
     /**
      * List of object.
      */
-    protected List<ObjectEntity> listObject = new ArrayList<>();
+    protected final List<ObjectEntity> listObject = new ArrayList<>();
 
     /**
      * List of object.
      */
-    protected List<ObjectEntity> listObjectToRemove = new ArrayList<>();
+    protected final List<ObjectEntity> listObjectToRemove = new ArrayList<>();
 
     /**
      * List of object.
      */
-    protected List<ObjectEntity> listObjectToAdd = new ArrayList<>();
+    protected final List<ObjectEntity> listObjectToAdd = new ArrayList<>();
 
     /**
      * List of object always display on screen.
      */
-    protected List<ObjectEntity> listObjectAlwaysOnScreen = new ArrayList<>();
+    protected final List<ObjectEntity> listObjectAlwaysOnScreen = new ArrayList<>();
 
     /**
      * List of object on draw background (keep reference for save file).
      */
-    protected List<ObjectEntity> listObjectDrawOnBackground = new ArrayList<>();
+    protected final List<ObjectEntity> listObjectDrawOnBackground = new ArrayList<>();
 
     /**
      * Level configuration.
@@ -76,13 +76,10 @@ public abstract class AbstractObjectJillLevel
      * @param cfgLevel configuration of level
      *
      * @throws IOException if error reading file
-     * @throws ClassNotFoundException if error create class of object
-     * @throws IllegalAccessException if error create class of object
-     * @throws InstantiationException if error create class of object
+     * @throws ReflectiveOperationException if error create class of object
      */
     public AbstractObjectJillLevel(final LevelConfiguration cfgLevel)
-        throws IOException, ClassNotFoundException, IllegalAccessException,
-        InstantiationException {
+        throws IOException, ReflectiveOperationException {
         super(cfgLevel);
 
         constructor();
@@ -92,13 +89,9 @@ public abstract class AbstractObjectJillLevel
      * Construct object.
      *
      * @throws IOException if error reading file
-     * @throws ClassNotFoundException if error create class of object
-     * @throws IllegalAccessException if error create class of object
-     * @throws InstantiationException if error create class of object
+     * @throws ReflectiveOperationException if error create class of object
      */
-    private void constructor() throws IOException,
-        ClassNotFoundException, IllegalAccessException,
-        InstantiationException {
+    private void constructor() throws IOException, ReflectiveOperationException {
         messageDispatcher.addHandler(EnumMessageType.OBJECT, this);
         messageDispatcher.addHandler(EnumMessageType.CREATE_OBJECT, this);
         messageDispatcher.addHandler(EnumMessageType.REPLACE_OBJECT, this);

@@ -87,7 +87,7 @@ public final class TileManagerImpl implements TileManager {
      */
     private Color[] colorMap;
 
-    private Map<String, BufferedImage> imageCache = new HashMap<>();
+    private final Map<String, BufferedImage> imageCache = new HashMap<>();
 
     /**
      * Return an instance of TileManagerImpl.
@@ -97,15 +97,11 @@ public final class TileManagerImpl implements TileManager {
      * @param typeScreen type of screen
      * *
      * @throws IOException if error reading file
-     * @throws ClassNotFoundException if error when loading class
-     * @throws IllegalAccessException if error when loading class
-     * @throws InstantiationException if error when loading class
      */
     @Override
     public void init(final File shaFileName,
             final File dmaFileName, final EnumScreenType typeScreen)
-            throws IOException, ClassNotFoundException, IllegalAccessException,
-            InstantiationException {
+            throws IOException {
 
             final ShaFile currentShaFile = ObjectInstanceFactory.getNewSha();
             currentShaFile.load(shaFileName.getAbsolutePath());
@@ -122,15 +118,10 @@ public final class TileManagerImpl implements TileManager {
      * @param shaFileContent sha file
      * @param dmaFileContent dma file
      * @param tpScreen type of screen
-     *
-     * @throws ClassNotFoundException if error when loading class
-     * @throws IllegalAccessException if error when loading class
-     * @throws InstantiationException if error when loading class
      */
     private void init(final ShaFile shaFileContent,
             final DmaFile dmaFileContent,
-            final EnumScreenType tpScreen) throws ClassNotFoundException,
-            IllegalAccessException, InstantiationException {
+            final EnumScreenType tpScreen) {
         this.shaFile = shaFileContent;
         this.dmaFile = dmaFileContent;
         this.typeScreen = tpScreen;

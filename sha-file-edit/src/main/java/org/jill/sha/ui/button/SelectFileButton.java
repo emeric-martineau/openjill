@@ -22,12 +22,12 @@ public class SelectFileButton extends AbstractButton {
     /**
      * File chooser
      */
-    private JFileChooser fc ;
+    private final JFileChooser fc ;
     
     /**
      * Text area
      */
-    private JTextField textBox ;
+    private final JTextField textBox ;
     
     /**
      * Creates a button with text.

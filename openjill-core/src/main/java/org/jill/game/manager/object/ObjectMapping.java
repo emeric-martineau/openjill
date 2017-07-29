@@ -99,7 +99,7 @@ public final class ObjectMapping {
     /**
      * If this object must be use when load level or restart level (after die).
      *
-     * @param startLevelObject
+     * @param startLevelObject level number to start
      */
     public void setStartLevelObject(final boolean startLevelObject) {
         this.startLevelObject = startLevelObject;

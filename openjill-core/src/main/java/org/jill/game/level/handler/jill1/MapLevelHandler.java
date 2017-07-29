@@ -23,12 +23,9 @@ public class MapLevelHandler extends LoadNewLevelHandler {
      * Default constructor of level.
      *
      * @throws IOException if missing file
-     * @throws ClassNotFoundException if missing class must be load
-     * @throws IllegalAccessException if trouble when class must be load
-     * @throws InstantiationException if trouble when class must be load
+     * @throws ReflectiveOperationException if missing class must be load
      */
-    public MapLevelHandler() throws IOException, ClassNotFoundException,
-            IllegalAccessException, InstantiationException {
+    public MapLevelHandler() throws IOException, ReflectiveOperationException {
         super(new JillLevelConfiguration("JILL1.SHA", "MAP.JN1", "JILL1.VCL",
                 "JILL1.CFG", "JN1", StartMenuJill1Handler.class,
                 SaveData.MAP_LEVEL));

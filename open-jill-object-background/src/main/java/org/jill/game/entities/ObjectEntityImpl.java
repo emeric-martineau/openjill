@@ -263,10 +263,10 @@ public abstract class ObjectEntityImpl extends ObjectItemImpl
         return this.removeOutOfVisibleScreen;
     }
 
-        /**
+    /**
      * If player can fire (with standard method).
      *
-     * @return
+     * @return true/false
      */
     @Override
     public boolean canFire() {

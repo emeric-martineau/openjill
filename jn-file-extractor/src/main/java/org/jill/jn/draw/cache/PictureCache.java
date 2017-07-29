@@ -69,7 +69,7 @@ public class PictureCache
      *
      * @param shaFile sha file
      *
-     * @return
+     * @return map of sprite
      */
     private Map<Integer, ShaTile[]> initMapSprite(final ShaFile shaFile)
     {
@@ -98,11 +98,12 @@ public class PictureCache
 
     /**
      * Init picture of know object
-     * @param typeScreen type of display
-     * @return
-     * @throws ClassNotFoundException
-     * @throws InstantiationException
-     * @throws IllegalAccessException
+     *
+     * @return map of tile
+     *
+     * @throws ClassNotFoundException if error
+     * @throws InstantiationException if error
+     * @throws IllegalAccessException if error
      */
     @SuppressWarnings("unchecked")
     private Map<String, AbstractTileManager> initMapOfObjectSrite()
@@ -221,8 +222,9 @@ public class PictureCache
 
 
     /**
-     * Load properties
-     * @return
+     * Load properties.
+     *
+     * @return propoerties object
      */
     private static Properties loadObjectTitle()
     {

@@ -92,7 +92,7 @@ public class KeysControlText {
     /**
      * If default at startip.
      *
-     * @param defaut
+     * @param defaut default value
      */
     public void setDefaut(final boolean defaut) {
         this.defaut = defaut;

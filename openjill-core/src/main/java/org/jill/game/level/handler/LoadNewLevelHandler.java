@@ -27,13 +27,10 @@ public class LoadNewLevelHandler extends AbstractChangeLevel {
      * @param cfgLevel  configuration of level
      *
      * @throws IOException if error reading file
-     * @throws ClassNotFoundException if error create class of object
-     * @throws IllegalAccessException if error create class of object
-     * @throws InstantiationException if error create class of object
+     * @throws ReflectiveOperationException if error create class of object
      */
     public LoadNewLevelHandler(final LevelConfiguration cfgLevel)
-            throws IOException, ClassNotFoundException, IllegalAccessException,
-            InstantiationException {
+            throws IOException, ReflectiveOperationException {
         super(cfgLevel);
 
         constructor(cfgLevel);

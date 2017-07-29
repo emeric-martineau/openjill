@@ -9,7 +9,7 @@ public final class LimitedString {
     /**
      * Maximum size.
      */
-    private int maxSize;
+    private final int maxSize;
 
     /**
      * Current len of string.
@@ -19,7 +19,7 @@ public final class LimitedString {
     /**
      * String content.
      */
-    private char[] buffer;
+    private final char[] buffer;
 
     /**
      * Create string of x char.

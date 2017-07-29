@@ -29,16 +29,17 @@ public abstract class AbstractTileManager
     /**
      * Init
      *
-     * @param mapOfTile
-     * @param typeScreen
+     * @param mapOfTile map object contain tile
+     * @param typeScreen type of screen (EGA, CGA, VGA)
      */
     public abstract void init(final Map<Integer, ShaTile[]> mapOfTile, final ScreenType typeScreen);
 
     /**
-     * Get tile of object
+     * Get tile of object.
      *
-     * @param object
-     * @return
+     * @param object jill game object
+     *
+     * @return picture
      */
     public abstract BufferedImage getTile(final ObjectItem object) ;
 }

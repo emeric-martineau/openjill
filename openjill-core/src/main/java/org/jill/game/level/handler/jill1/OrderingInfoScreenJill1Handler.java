@@ -31,13 +31,9 @@ public class OrderingInfoScreenJill1Handler
      * Default constructor of level.
      *
      * @throws IOException if missing file
-     * @throws ClassNotFoundException if missing class must be load
-     * @throws IllegalAccessException if trouble when class must be load
-     * @throws InstantiationException if trouble when class must be load
+     * @throws ReflectiveOperationException if missing class must be load
      */
-    public OrderingInfoScreenJill1Handler() throws IOException,
-            ClassNotFoundException, IllegalAccessException,
-            InstantiationException {
+    public OrderingInfoScreenJill1Handler() throws IOException, ReflectiveOperationException {
         super(new JillLevelConfiguration("JILL1.SHA", "INTRO.JN1", "JILL1.VCL",
                 "JILL1.CFG", "JN1"));
 

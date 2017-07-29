@@ -43,17 +43,17 @@ public abstract class AbstractLoadGameMenu extends AbstractMenu
     /**
      * Display.
      */
-    private BufferedImage saveGameScreen;
+    private final BufferedImage saveGameScreen;
 
     /**
      * Picutre cache.
      */
-    private TileManager pictureCache;
+    private final TileManager pictureCache;
 
     /**
      * List of high score.
      */
-    private List<SaveGameItem> listSaveGame;
+    private final List<SaveGameItem> listSaveGame;
 
     /**
      * To know if when are in edit mode.
@@ -68,12 +68,12 @@ public abstract class AbstractLoadGameMenu extends AbstractMenu
     /**
      * Background color (current).
      */
-    private int backgroundColor;
+    private final int backgroundColor;
 
     /**
      * Configuration.
      */
-    private LoadSaveGameMenuConf conf;
+    private final LoadSaveGameMenuConf conf;
 
     /**
      * Previous menu picture.

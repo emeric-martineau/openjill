@@ -26,7 +26,7 @@ public class DumpFile {
     /**
      * Cache between object type and name/description
      */
-    private NameObjectCache namdeObjectCache = new NameObjectCache() ;
+    private final NameObjectCache namdeObjectCache = new NameObjectCache() ;
 
     /**
      * Stream where print

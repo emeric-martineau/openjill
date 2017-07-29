@@ -21,7 +21,7 @@ public class SelectDirButton extends AbstractButton {
     /**
      * Text area
      */
-    private JTextField textBox ;
+    private final JTextField textBox ;
     
     /**
      * Creates a button with text.

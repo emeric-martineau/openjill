@@ -287,7 +287,6 @@ public final class LockedDoorManager extends AbstractParameterObjectEntity
     /**
      * Manage TRIGGER message.
      *
-     * @param type type
      * @param msg message
      */
     private void triggerMessage(final Object msg) {
@@ -320,8 +319,6 @@ public final class LockedDoorManager extends AbstractParameterObjectEntity
 
     /**
      * Replace background.
-     *
-     * @param source object to send message.
      */
     private void replaceBackground() {
         // Display open message

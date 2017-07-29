@@ -85,7 +85,7 @@ public final class JillGameConfig extends SimpleGameConfig {
     /**
      * Return jill type.
      */
-    private int jillType;
+    private final int jillType;
 
     /**
      * Constructor.

@@ -159,9 +159,9 @@ public final class LevelMessageBox extends AbstractMessageBox {
     }
 
     /**
-     * Return status bar
+     * Return status bar.
      *
-     * @return
+     * @return picture of status bar
      */
     public BufferedImage getBox() {
         return boxPicture;
@@ -170,7 +170,7 @@ public final class LevelMessageBox extends AbstractMessageBox {
     /**
      * If can change level.
      *
-     * @return
+     * @return if can change
      */
     public boolean isCanchange() {
         return canchange;
@@ -192,7 +192,7 @@ public final class LevelMessageBox extends AbstractMessageBox {
     /**
      * Set level.
      *
-     * @param level
+     * @param level level number
      */
     public void setLevel(final int level) {
         RectangleConf textAreaConf = this.conf.getTextarea();

@@ -31,8 +31,8 @@ public class MessageDispatcherImpl implements MessageDispatcher {
      */
     public MessageDispatcherImpl() {
         for (EnumMessageType mt : EnumMessageType.values()) {
-            handlersList.put(mt, new ArrayList<InterfaceMessageGameHandler>());
-            unsendMessageList.put(mt, new ArrayList());
+            handlersList.put(mt, new ArrayList<>());
+            unsendMessageList.put(mt, new ArrayList<>());
         }
     }
 

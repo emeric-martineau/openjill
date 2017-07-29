@@ -88,14 +88,11 @@ public final class BackgroundManager {
      *
      * @return map between name of background and class
      *
-     * @throws ClassNotFoundException if error
-     * @throws InstantiationException if error
-     * @throws IllegalAccessException if error
+     * @throws ReflectiveOperationException if error
      */
     @SuppressWarnings("unchecked")
     private Map<String, Class<BackgroundEntity>> initMapOfObjectSrite()
-        throws ClassNotFoundException, IllegalAccessException,
-        InstantiationException {
+            throws ReflectiveOperationException {
         // Load mapping
         final Properties mapObjectTile = loadObjectTitle();
         // Get keys

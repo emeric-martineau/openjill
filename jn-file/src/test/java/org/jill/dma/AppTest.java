@@ -80,10 +80,11 @@ public class AppTest
     }
 
     /**
-     * Rigourous Test :-)
-     * @throws InvocationTargetException
-     * @throws IllegalAccessException
-     * @throws IllegalArgumentException
+     * Rigourous Test :-).
+     *
+     * @throws InvocationTargetException error
+     * @throws IllegalAccessException error
+     * @throws IllegalArgumentException error
      */
     public void testDumpObject() throws IOException, IllegalArgumentException, IllegalAccessException, InvocationTargetException
     {

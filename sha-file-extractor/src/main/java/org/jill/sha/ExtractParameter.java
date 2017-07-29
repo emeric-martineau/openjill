@@ -6,7 +6,7 @@ package org.jill.sha;
 /**
  * Parameter of extract
  *
- * @authorEmeric MARTINEAU
+ * @author Emeric MARTINEAU
  */
 public class ExtractParameter {
     /**

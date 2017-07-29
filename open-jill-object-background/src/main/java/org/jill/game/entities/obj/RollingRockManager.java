@@ -87,10 +87,9 @@ public final class RollingRockManager extends AbstractHitPlayerObjectEntity {
     }
 
     /**
-     * Init picutre.
+     * Init picture.
      *
      * @param images image array
-     * @param numberTileSet number of tile
      * @param tileSetIndex tile set
      * @param tileIndex tile index start
      */

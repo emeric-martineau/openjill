@@ -77,7 +77,7 @@ public interface ObjectEntity extends ObjectItem {
     /**
      * If player can fire (with standard method).
      * 
-     * @return
+     * @return tre/false
      */
     boolean canFire();
 

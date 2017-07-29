@@ -153,8 +153,9 @@ public final class BonusManager extends AbstractParameterObjectEntity {
     }
 
     /**
+     * Replace player by object.
      *
-     * @param obj
+     * @param obj new player object
      */
     private void replacePlayer(final ObjectEntity obj) {
         if (!obj.getClass().getName().equals(this.newPlacerClass)) {

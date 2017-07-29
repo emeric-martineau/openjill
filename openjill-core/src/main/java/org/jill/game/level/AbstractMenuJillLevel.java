@@ -46,13 +46,10 @@ public abstract class AbstractMenuJillLevel extends AbstractObjectJillLevel {
      * @param cfgLevel configuration of level
      *
      * @throws IOException if error of reading file
-     * @throws ClassNotFoundException if not class found
-     * @throws IllegalAccessException if error
-     * @throws InstantiationException if error
+     * @throws ReflectiveOperationException if not class found
      */
     public AbstractMenuJillLevel(final LevelConfiguration cfgLevel)
-        throws IOException, IllegalAccessException, InstantiationException,
-        ClassNotFoundException {
+        throws IOException, ReflectiveOperationException {
         super(cfgLevel);
 
         constructor(cfgLevel);

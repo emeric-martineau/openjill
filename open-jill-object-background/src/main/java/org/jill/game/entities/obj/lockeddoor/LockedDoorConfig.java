@@ -11,17 +11,17 @@ public final class LockedDoorConfig {
     /**
      * Message when door open.
      */
-    private String openMessage;
+    private final String openMessage;
 
     /**
      * Message when door is close.
      */
-    private String closeMessage;
+    private final String closeMessage;
 
     /**
      * Inventory item to open door.
      */
-    private EnumInventoryObject inventory;
+    private final EnumInventoryObject inventory;
 
     /**
      * To know if message must be display.

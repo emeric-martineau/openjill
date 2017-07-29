@@ -28,7 +28,7 @@ public final class KeyControlConf {
     /**
      * Key.
      *
-     * @param key the key to set
+     * @param k the key to set
      */
     public void setKey(final String k) {
         this.key = k;
@@ -46,7 +46,7 @@ public final class KeyControlConf {
     /**
      * Text.
      *
-     * @param text the text to set
+     * @param t the text to set
      */
     public void setText(final String t) {
         this.text = t;

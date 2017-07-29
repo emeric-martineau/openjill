@@ -67,10 +67,11 @@ public class DmaFileExtractor {
 
 
     /**
-     * Ectract font or picture
+     * Extract font or picture.
      *
      * @param param parameter
-     * @throws IOException
+     *
+     * @throws IOException if can read file
      */
     private static void extract(final String param) throws IOException
     {

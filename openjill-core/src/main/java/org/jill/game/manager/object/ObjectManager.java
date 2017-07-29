@@ -114,14 +114,11 @@ public final class ObjectManager {
      *
      * @return map to link object name and class
      *
-     * @throws ClassNotFoundException if error
-     * @throws InstantiationException if error
-     * @throws IllegalAccessException if error
+     * @throws ReflectiveOperationException if error
      */
     @SuppressWarnings("unchecked")
     private Map<String, Class<ObjectEntity>> initMapOfObjectSprite()
-            throws ClassNotFoundException, IllegalAccessException,
-            InstantiationException {
+            throws ReflectiveOperationException {
         // Load mapping
         final List<ObjectMapping> mapObjectTile = loadObjectTitle();
 

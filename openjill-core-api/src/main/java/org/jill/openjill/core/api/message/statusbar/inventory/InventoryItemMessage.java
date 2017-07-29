@@ -9,12 +9,12 @@ public final class InventoryItemMessage {
     /**
      * Object.
      */
-    private EnumInventoryObject obj;
+    private final EnumInventoryObject obj;
 
     /**
      * If add object. False = delete object.
      */
-    private boolean add;
+    private final boolean add;
 
     /**
      * Item is last in inventory list.

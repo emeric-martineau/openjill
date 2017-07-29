@@ -86,12 +86,12 @@ public abstract class AbstractExecutingStdLevel extends AbstractMenuJillLevel {
     /**
      * Object rectangle (only for optimization).
      */
-    protected Rectangle objRect = new Rectangle();
+    protected final Rectangle objRect = new Rectangle();
 
     /**
      * Player rectangle (only for optimization).
      */
-    protected Rectangle obj2Rect = new Rectangle();
+    protected final Rectangle obj2Rect = new Rectangle();
 
     /**
      * If need update inventory screen.
@@ -106,7 +106,7 @@ public abstract class AbstractExecutingStdLevel extends AbstractMenuJillLevel {
     /**
      * Object to draw.
      */
-    protected List<ObjectEntity> listObjectToDraw = new ArrayList<>();
+    protected final List<ObjectEntity> listObjectToDraw = new ArrayList<>();
 
     /**
      * Cheat count.
@@ -160,23 +160,19 @@ public abstract class AbstractExecutingStdLevel extends AbstractMenuJillLevel {
      * @param cfgLevel  configuration of level
      *
      * @throws IOException if error of reading file
-     * @throws ClassNotFoundException if not class found
-     * @throws IllegalAccessException if error
-     * @throws InstantiationException  if error
+     * @throws ReflectiveOperationException if not class found
      */
     public AbstractExecutingStdLevel(final LevelConfiguration cfgLevel)
-            throws IOException, ClassNotFoundException,
-            IllegalAccessException, InstantiationException {
+            throws IOException, ReflectiveOperationException {
         super(cfgLevel);
 
         constructor();
 
         // To preserve add 2 invincibility after load game
-        for (EnumInventoryObject item : this.inventoryArea.getObjects()) {
-            if (item == EnumInventoryObject.INVINCIBILITY) {
-                this.invincibility = true;
-            }
-        }
+        this.inventoryArea.getObjects()
+                .stream()
+                .filter(item -> item == EnumInventoryObject.INVINCIBILITY)
+                .forEach(item -> this.invincibility = true);
     }
 
     /**
@@ -516,9 +512,7 @@ public abstract class AbstractExecutingStdLevel extends AbstractMenuJillLevel {
         listObjectToRemove.clear();
 
         // Add object from list
-        for (ObjectEntity obj1 : listObjectToAdd) {
-            listObject.add(obj1);
-        }
+        listObject.addAll(listObjectToAdd);
 
         listObjectToAdd.clear();
     }

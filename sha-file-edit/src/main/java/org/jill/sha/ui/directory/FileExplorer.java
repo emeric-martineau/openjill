@@ -15,17 +15,17 @@ public class FileExplorer extends JFrame implements TreeSelectionListener, Actio
     /**
      *  Root of directory list
      */
-    private File root;
+    private final File root;
     
     /**
      *  Directory list
      */
-    private TreeModel modele;
+    private final TreeModel modele;
     
     /**
      *  List
      */
-    private JTree tree;
+    private final JTree tree;
     
     /**
      * Button ok

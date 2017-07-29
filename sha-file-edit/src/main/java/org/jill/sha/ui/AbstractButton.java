@@ -36,7 +36,7 @@ public abstract class AbstractButton extends JButton implements ActionListener {
     /**
      * Call when button click
      * 
-     * @param e
+     * @param e action event
      */
     public abstract void onClick(final ActionEvent e) ;
 }

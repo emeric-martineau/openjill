@@ -39,8 +39,9 @@ public class StandardTileManager extends AbstractTileManager
     protected ScreenType typeScreen ;
 
     /**
-     * Static cache of picture
-     * @return
+     * Static cache of picture.
+     *
+     * @return map of picture
      */
     protected Map<String, BufferedImage> getMapObjectPicture()
     {
@@ -48,8 +49,9 @@ public class StandardTileManager extends AbstractTileManager
     }
 
     /**
-     * Load properties
-     * @return
+     * Load properties.
+     *
+     * @return properties file
      */
     protected Properties loadObjectTitle()
     {
@@ -72,8 +74,8 @@ public class StandardTileManager extends AbstractTileManager
 
     /**
      * Init picture of know object
-     * @param typeScreen type of display
-     * @return
+     *
+     * @return map of picture
      */
     protected Map<String, BufferedImage> initMapOfObjectSrite()
     {
