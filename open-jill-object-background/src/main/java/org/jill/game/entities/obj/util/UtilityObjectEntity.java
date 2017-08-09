@@ -334,15 +334,17 @@ public final class UtilityObjectEntity {
                 + objWidth - 1) / JillConst.getBlockSize();
         // Object is jumping
         int newPosY = objY + objHeight + mvtSize;
+
         if (newPosY > JillConst.getMaxHeight()) {
             // Hit top border of screen
             newPosY = JillConst.getMaxHeight() - objHeight;
         }
+
         //final int objPosY = obj.getY() + obj.getHeight();
         final int newStartY = (objY + objHeight)
                 / JillConst.getBlockSize();
 
-        final int newEndY = newPosY / JillConst.getBlockSize();
+        final int newEndY = Math.min(newPosY / JillConst.getBlockSize(), BackgroundLayer.MAP_HEIGHT - 1);
 
         BackgroundEntity block = null;
         BackgroundEntity blockStair = null;
