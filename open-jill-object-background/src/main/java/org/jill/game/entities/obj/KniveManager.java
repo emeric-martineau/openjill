@@ -244,10 +244,6 @@ public final class KniveManager extends AbstractParameterObjectEntity {
     private void moveDown() {
         this.ySpeed = this.moveDown;
 
-        if (this.getY() == 1013) {
-            System.out.println("error");
-        }
-
         if (!UtilityObjectEntity.moveObjectDown(this, this.ySpeed,
                 this.backgroundObject)) {
             // Stop down

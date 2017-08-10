@@ -200,4 +200,11 @@ public final class SaveGameMenu extends AbstractLoadGameMenu {
     public void right() {
         down();
     }
+
+    @Override
+    public void setEnable(final boolean en) {
+        super.setEnable(en);
+
+        setEditorMode(false);
+    }
 }

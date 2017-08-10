@@ -197,7 +197,7 @@ public abstract class AbstractLoadGameMenu extends AbstractMenu
     }
 
     @Override
-    public final void setEnable(final boolean en) {
+    public void setEnable(final boolean en) {
         // If parent, take picture
         if (getPreviousMenu() != null) {
             this.previousMenuPicture = getPreviousMenu().getPicture();
