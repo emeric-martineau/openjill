@@ -114,8 +114,8 @@ public final class UtilityObjectEntity {
         final int lEndY = Math.min(endY, BackgroundLayer.MAP_HEIGHT - 1);
 
         // Check if floor
-        for (indexBackX = startX; ; ) {
-            for (indexBackY = startY; ; ) {
+        for (indexBackX = startX; indexBackX < BackgroundLayer.MAP_WIDTH; ) {
+            for (indexBackY = startY; indexBackY < BackgroundLayer.MAP_HEIGHT; ) {
                 objectCanMove
                         = backgroundObject[indexBackX][indexBackY].isPlayerThru();
 
