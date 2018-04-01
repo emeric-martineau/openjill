@@ -19,3 +19,5 @@
 /dma-file-extractor/target/
 /jn-file-extractor/target/
 *.iml
+/.idea/
+/sha-file-edit/target/

@@ -313,7 +313,10 @@
         "initX":"8",
         "initXD":"6",
         "subStateLaunchStart":"0",
-        "subStateLaunchEnd":"7"
+        "subStateLaunchEnd":"7",
+        "breakWallBlockName": "BREAKWALL",
+        "replaceBlockName": "0",
+        "hitBlockSubStateIncrease": 11
     },
     "EyesManager":
     {
