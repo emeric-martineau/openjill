@@ -5,6 +5,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
+import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -77,11 +78,11 @@ public final class LevelMessageBox extends AbstractMessageBox {
 
         RectangleConf textArea = this.conf.getTextarea();
 
-        drawArea(this.g2BoxPicture, pctCache, textArea);
+        drawArea(this.g2BoxPicture, pctCache, Optional.of(textArea));
 
         textArea = this.conf.getPicturearea();
 
-        drawArea(this.g2BoxPicture, pctCache, textArea);
+        drawArea(this.g2BoxPicture, pctCache, Optional.of(textArea));
 
         // Draw picture
         drawAllPicture(this.g2BoxPicture, this.pictureCache, this.conf);
@@ -114,7 +115,7 @@ public final class LevelMessageBox extends AbstractMessageBox {
                             filename),
                     ex);
 
-            mc = null;
+            throw new RuntimeException(ex);
         }
 
         return mc;
@@ -192,7 +193,7 @@ public final class LevelMessageBox extends AbstractMessageBox {
         RectangleConf textAreaConf = this.conf.getTextarea();
 
         // Clear text area
-        drawArea(this.g2BoxPicture, this.pictureCache, textAreaConf);
+        drawArea(this.g2BoxPicture, this.pictureCache, Optional.of(textAreaConf));
 
         // Compute size of text.
         // Text is splited by \n.

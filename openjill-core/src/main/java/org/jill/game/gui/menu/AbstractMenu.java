@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -69,7 +70,7 @@ public class AbstractMenu {
     /**
      * Next menu to draw.
      */
-    private MenuInterface previousMenu;
+    private Optional<MenuInterface> previousMenu;
 
     /**
      * Constructor.
@@ -78,7 +79,7 @@ public class AbstractMenu {
      * @param previousMenuObj previous menu
      */
     public AbstractMenu(final TileManager pictureCache,
-            final MenuInterface previousMenuObj) {
+            final Optional<MenuInterface> previousMenuObj) {
 
         this.previousMenu = previousMenuObj;
 
@@ -201,7 +202,7 @@ public class AbstractMenu {
                     String.format("Unable to load config for menu '%s'", filename),
                     ex);
 
-            mc = null;
+            throw new RuntimeException(ex);
         }
 
         return mc;
@@ -245,7 +246,7 @@ public class AbstractMenu {
      *
      * @return previous menu
      */
-    public final MenuInterface getPreviousMenu() {
+    public final Optional<MenuInterface> getPreviousMenu() {
         return this.previousMenu;
     }
 
@@ -254,7 +255,7 @@ public class AbstractMenu {
      *
      * @param prevMenu previous menu
      */
-    public final void setPreviousMenu(final MenuInterface prevMenu) {
+    public final void setPreviousMenu(final Optional<MenuInterface> prevMenu) {
         this.previousMenu = prevMenu;
     }
 

@@ -1,5 +1,7 @@
 package org.simplegame;
 
+import java.util.Optional;
+
 /**
  * Class to changer handler of game (timer and keyboard).
  *
@@ -9,7 +11,7 @@ public final class SimpleGameHandler {
     /**
      * Current handler.
      */
-    private static InterfaceSimpleGameHandleInterface currentHandler = null;
+    private static Optional<InterfaceSimpleGameHandleInterface> currentHandler = Optional.empty();
 
     /**
      * Private constructor.
@@ -25,7 +27,7 @@ public final class SimpleGameHandler {
      */
     public static void setNewHandler(
             final InterfaceSimpleGameHandleInterface newHandler) {
-        currentHandler = newHandler;
+        currentHandler = Optional.ofNullable(newHandler);
     }
 
     /**
@@ -33,7 +35,7 @@ public final class SimpleGameHandler {
      *
      * @return current handler
      */
-    public static InterfaceSimpleGameHandleInterface getHandler() {
+    public static Optional<InterfaceSimpleGameHandleInterface> getHandler() {
         return currentHandler;
     }
 }

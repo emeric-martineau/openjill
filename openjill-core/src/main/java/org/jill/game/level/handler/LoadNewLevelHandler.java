@@ -2,6 +2,7 @@ package org.jill.game.level.handler;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 import org.jill.game.config.ObjectInstanceFactory;
 import org.jill.game.entities.obj.player.PlayerState;
@@ -36,7 +37,9 @@ public class LoadNewLevelHandler extends AbstractChangeLevel {
         constructor(cfgLevel);
 
         // Store map level
-        this.mapLevel = cfgLevel.getLevelMapData();
+        if (cfgLevel.getLevelMapData().isPresent()) {
+            this.mapLevel = cfgLevel.getLevelMapData().get();
+        }
     }
 
     /**
@@ -111,8 +114,9 @@ public class LoadNewLevelHandler extends AbstractChangeLevel {
                 = ObjectInstanceFactory.getNewObjectItem();
         tmpPlayer.setType(startObject);
         objParam.setObject(tmpPlayer);
-        final ObjectEntity newPlayer
-                = this.objectCache.getNewObject(objParam);
+
+        final ObjectEntity newPlayer = this.objectCache.getNewObject(objParam).get();
+
         recieveMessage(EnumMessageType.REPLACE_OBJECT,
                 new ReplaceObjectMessage(player, newPlayer));
         player = newPlayer;

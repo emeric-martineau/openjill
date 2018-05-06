@@ -6,6 +6,7 @@ import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.jill.openjill.core.api.manager.TextManager;
 import org.jill.openjill.core.api.manager.TileManager;
@@ -128,7 +129,7 @@ public abstract class AbstractStdMenu extends AbstractMenu
      * @param pictureCacheManager picture cache
      */
     public AbstractStdMenu(final TileManager pictureCacheManager) {
-        super(pictureCacheManager, null);
+        super(pictureCacheManager, Optional.empty());
 
         // Calculate font size
         this.fontSize = pictureCacheManager.getTextManager().createSmallText(" ",
@@ -580,8 +581,8 @@ public abstract class AbstractStdMenu extends AbstractMenu
     }
 
     @Override
-    public SubMenu getTitle() {
-        return this.title;
+    public Optional<SubMenu> getTitle() {
+        return Optional.ofNullable(this.title);
     }
 
     @Override

@@ -2,6 +2,7 @@ package org.jill.game.level.handler.jill1;
 
 import java.awt.Graphics;
 import java.io.IOException;
+import java.util.Optional;
 
 import org.jill.game.level.AbstractObjectJillLevel;
 import org.jill.game.level.cfg.JillLevelConfiguration;
@@ -22,7 +23,7 @@ public class StoryScreenJill1Handler extends AbstractObjectJillLevel {
      * @throws ReflectiveOperationException if missing class must be load
      */
     public StoryScreenJill1Handler() throws IOException, ReflectiveOperationException {
-        super(new JillLevelConfiguration("JILL1.SHA", "INTRO.JN1", "JILL1.VCL",
+        super(new JillLevelConfiguration("JILL1.SHA", Optional.of("INTRO.JN1"), "JILL1.VCL",
                 "JILL1.CFG", "JN1"));
 
         final RectangleConf offset

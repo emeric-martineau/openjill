@@ -7,11 +7,7 @@ import java.awt.Rectangle;
 import java.awt.Stroke;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
-import java.util.Map;
+import java.util.*;
 
 import org.jill.game.gui.menu.ClassicMenu;
 import org.jill.game.gui.menu.MenuInterface;
@@ -668,8 +664,8 @@ public abstract class AbstractExecutingStdLevel extends AbstractMenuJillLevel {
      *
      * @return class
      */
-    protected Class<?
-            extends InterfaceSimpleGameHandleInterface> getStartScreenClass() {
+    protected Optional<Class<?
+                extends InterfaceSimpleGameHandleInterface>> getStartScreenClass() {
         return this.levelConfiguration.getStartScreen();
     }
 
@@ -743,7 +739,9 @@ public abstract class AbstractExecutingStdLevel extends AbstractMenuJillLevel {
      * Call when menu is validate.
      */
     protected void doMenuValidate() {
-        changeScreenManager(getStartScreenClass());
+        if (getStartScreenClass().isPresent()) {
+            changeScreenManager(getStartScreenClass().get());
+        }
     }
 
     /**

@@ -3,6 +3,8 @@ package org.jill.game.level.cfg;
 import org.jill.file.FileAbstractByte;
 import org.simplegame.InterfaceSimpleGameHandleInterface;
 
+import java.util.Optional;
+
 /**
  * Configuration of level.
  *
@@ -22,7 +24,7 @@ public class LevelConfiguration {
     /**
      * name of JN file.
      */
-    private final String jnFileName;
+    private final Optional<String> jnFileName;
 
     /**
      * name of VCL file.
@@ -42,7 +44,7 @@ public class LevelConfiguration {
     /**
      * Start screen for this level.
      */
-    private final Class<? extends InterfaceSimpleGameHandleInterface> startScreen;
+    private final Optional<Class<? extends InterfaceSimpleGameHandleInterface>> startScreen;
 
     /**
      * Number of level for new level load (if restoreMap == false).
@@ -52,12 +54,12 @@ public class LevelConfiguration {
     /**
      * Level map data.
      */
-    private final FileAbstractByte levelMapData;
+    private final Optional<FileAbstractByte> levelMapData;
 
     /**
      * Level data.
      */
-    private final FileAbstractByte levelData;
+    private final Optional<FileAbstractByte> levelData;
 
     /**
      * If is restore map (true) or new level change (false).
@@ -98,14 +100,14 @@ public class LevelConfiguration {
      */
     protected LevelConfiguration(
             final String dmaName, final String shaName,
-            final String jnName, final String vclName,
+            final Optional<String> jnName, final String vclName,
             final String cfgName, final String savePrefixe,
-            final Class<?
-                    extends InterfaceSimpleGameHandleInterface>
+            final Optional<Class<?
+                    extends InterfaceSimpleGameHandleInterface>>
                     startScreenLevel,
             final int levelNum, final boolean restoringMap,
-            final FileAbstractByte levelMapDataFile,
-            final FileAbstractByte levelDataFile,
+            final Optional<FileAbstractByte> levelMapDataFile,
+            final Optional<FileAbstractByte> levelDataFile,
             final int scoreGame, final int numberGemLevel) {
         this.dmaFileName = dmaName;
         this.shaFileName = shaName;
@@ -137,13 +139,13 @@ public class LevelConfiguration {
      */
     public LevelConfiguration(
             final String dmaName, final String shaName,
-            final String jnName, final String vclName,
+            final Optional<String> jnName, final String vclName,
             final String cfgName, final String savePrefixe,
-            final Class<?
-                    extends InterfaceSimpleGameHandleInterface>
+            final Optional<Class<?
+                    extends InterfaceSimpleGameHandleInterface>>
                     startScreenLevel,
-            final FileAbstractByte levelMapDataFile,
-            final FileAbstractByte levelDataFile) {
+            final Optional<FileAbstractByte> levelMapDataFile,
+            final Optional<FileAbstractByte> levelDataFile) {
         this(dmaName, shaName, jnName, vclName, cfgName,
                 savePrefixe, startScreenLevel, -1, true, levelMapDataFile,
                 levelDataFile, -1, -1);
@@ -168,14 +170,14 @@ public class LevelConfiguration {
      */
     public LevelConfiguration(
             final String dmaName, final String shaName,
-            final String jnName, final String vclName,
+            final Optional<String> jnName, final String vclName,
             final String cfgName, final String savePrefixe,
-            final Class<?
-                    extends InterfaceSimpleGameHandleInterface>
+            final Optional<Class<?
+                    extends InterfaceSimpleGameHandleInterface>>
                     startScreenLevel,
             final int levelNum,
-            final FileAbstractByte levelMapDataFile,
-            final FileAbstractByte levelDataFile,
+            final Optional<FileAbstractByte> levelMapDataFile,
+            final Optional<FileAbstractByte> levelDataFile,
             final int scoreGame, final int numberGemLevel,
             final boolean beginMsg) {
         this(dmaName, shaName, jnName, vclName, cfgName,
@@ -202,14 +204,14 @@ public class LevelConfiguration {
      */
     public LevelConfiguration(
             final String dmaName, final String shaName,
-            final String jnName, final String vclName,
+            final Optional<String> jnName, final String vclName,
             final String cfgName, final String savePrefixe,
-            final Class<?
-                    extends InterfaceSimpleGameHandleInterface>
+            final Optional<Class<?
+                    extends InterfaceSimpleGameHandleInterface>>
                     startScreenLevel,
             final int levelNum,
-            final FileAbstractByte levelMapDataFile,
-            final FileAbstractByte levelDataFile,
+            final Optional<FileAbstractByte> levelMapDataFile,
+            final Optional<FileAbstractByte> levelDataFile,
             final int scoreGame, final int numberGemLevel) {
         this(dmaName, shaName, jnName, vclName, cfgName,
                 savePrefixe, startScreenLevel, levelNum, false,
@@ -239,7 +241,7 @@ public class LevelConfiguration {
      *
      * @return Jn file name.
      */
-    public final String getJnFileName() {
+    public final Optional<String> getJnFileName() {
         return this.jnFileName;
     }
 
@@ -275,8 +277,8 @@ public class LevelConfiguration {
      *
      * @return class
      */
-    public final Class<?
-            extends InterfaceSimpleGameHandleInterface> getStartScreen() {
+    public final Optional<Class<?
+            extends InterfaceSimpleGameHandleInterface>> getStartScreen() {
         return this.startScreen;
     }
 
@@ -294,7 +296,7 @@ public class LevelConfiguration {
      *
      * @return data
      */
-    public final FileAbstractByte getLevelMapData() {
+    public final Optional<FileAbstractByte> getLevelMapData() {
         return this.levelMapData;
     }
 
@@ -312,7 +314,7 @@ public class LevelConfiguration {
      *
      * @return data
      */
-    public final FileAbstractByte getLevelData() {
+    public final Optional<FileAbstractByte> getLevelData() {
         return this.levelData;
     }
 

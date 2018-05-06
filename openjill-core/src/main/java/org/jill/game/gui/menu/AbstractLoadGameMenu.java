@@ -7,6 +7,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
+import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -88,7 +89,7 @@ public abstract class AbstractLoadGameMenu extends AbstractMenu
             final int positionToDrawMenuY) {
         this(menuScreen, pictureCacheManager, saveGameList,
                 positionToDrawMenuX,
-                positionToDrawMenuY, null);
+                positionToDrawMenuY, Optional.empty());
     }
 
     /**
@@ -107,7 +108,7 @@ public abstract class AbstractLoadGameMenu extends AbstractMenu
             final List<SaveGameItem> saveGameList,
             final int positionToDrawMenuX,
             final int positionToDrawMenuY,
-            final MenuInterface nextMenuObj) {
+            final Optional<MenuInterface> nextMenuObj) {
         super(pictureCacheManager, nextMenuObj);
 
         this.conf = readConf1(getConfigFileName());
@@ -151,7 +152,7 @@ public abstract class AbstractLoadGameMenu extends AbstractMenu
                             filename),
                     ex);
 
-            mc = null;
+            throw new RuntimeException(ex);
         }
 
         return mc;
@@ -199,16 +200,16 @@ public abstract class AbstractLoadGameMenu extends AbstractMenu
     @Override
     public void setEnable(final boolean en) {
         // If parent, take picture
-        if (getPreviousMenu() != null) {
-            this.previousMenuPicture = getPreviousMenu().getPicture();
+        if (getPreviousMenu().isPresent()) {
+            this.previousMenuPicture = getPreviousMenu().get().getPicture();
         }
 
         this.enable = en;
     }
 
     @Override
-    public final SubMenu getTitle() {
-        return null;
+    public final Optional<SubMenu> getTitle() {
+        return Optional.empty();
     }
 
     @Override
@@ -329,9 +330,9 @@ public abstract class AbstractLoadGameMenu extends AbstractMenu
         g2.drawImage(getPicture(), getX(),
                 getY(), null);
 
-        if (this.previousMenuPicture != null) {
-            g2.drawImage(this.previousMenuPicture, getPreviousMenu().getX(),
-                    getPreviousMenu().getY(), null);
+        if (this.getPreviousMenu().isPresent()) {
+            g2.drawImage(this.previousMenuPicture, getPreviousMenu().get().getX(),
+                    getPreviousMenu().get().getY(), null);
         }
     }
 

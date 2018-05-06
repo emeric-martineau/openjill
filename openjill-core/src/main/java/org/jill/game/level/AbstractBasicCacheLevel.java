@@ -22,26 +22,32 @@ public class AbstractBasicCacheLevel {
      * Current level configuration.
      */
     protected LevelConfiguration levelConfiguration;
+
     /**
      * Dma file (mapping between background and picture/flags).
      */
     protected DmaFile dmaFile = null;
+
     /**
      * Level file.
      */
     protected JnFile jnFile = null;
+
     /**
      * Level file.
      */
     protected VclFile vclFile = null;
+
     /**
      * Config file.
      */
     protected CfgFile cfgFile = null;
+
     /**
      * Picture cache.
      */
     protected TileManager pictureCache;
+
     /**
      * Name of file JN.
      */

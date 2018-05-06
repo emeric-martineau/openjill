@@ -4,6 +4,7 @@ import java.awt.Graphics2D;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -21,6 +22,8 @@ import org.jill.openjill.core.api.message.object.ReplaceObjectMessage;
 import org.simplegame.InterfaceSimpleGameHandleInterface;
 import org.simplegame.SimpleGameHandler;
 import org.simplegame.SimpleGameKeyHandler;
+
+import javax.swing.text.html.Option;
 
 /**
  * This class manage all of object.
@@ -116,16 +119,19 @@ public abstract class AbstractObjectJillLevel
 
         // Current object
         ObjectEntity obj;
+        Optional<ObjectEntity> cacheObject;
 
         for (ObjectItem currentObject : listObjectItem) {
 
             objParam.setObject(currentObject);
 
             // Get jill object
-            obj = this.objectCache.getNewObject(objParam);
+            cacheObject = this.objectCache.getNewObject(objParam);
 
             // No manager found for this object
-            if (obj == null) {
+            if (cacheObject.isPresent()) {
+                obj = cacheObject.get();
+            } else {
                 LOGGER.warning(String.format("The object with type %d is not "
                         + "implemented", currentObject.getType()));
                 continue;
@@ -274,13 +280,13 @@ public abstract class AbstractObjectJillLevel
         objParam.setObject(oe);
 
         // Get jill object
-        final ObjectEntity obj = this.objectCache.getNewObject(objParam);
+        final Optional<ObjectEntity> cacheObject = this.objectCache.getNewObject(objParam);
 
-        if (obj == null) {
+        if (cacheObject.isPresent()) {
+            com.setObject(cacheObject.get());
+        } else {
             LOGGER.severe(String.format("Can't find object type '%d' to create"
                     + "it at runtime", oe.getType()));
-        } else {
-            com.setObject(obj);
         }
     }
 

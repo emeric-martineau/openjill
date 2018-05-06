@@ -3,6 +3,7 @@ package org.simplegame;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.util.Optional;
 import javax.swing.JPanel;
 
 /**
@@ -70,19 +71,19 @@ public class SimpleGameScreen extends JPanel {
     protected final void paintComponent(final Graphics g) {
         super.paintComponents(g);
 
-        InterfaceSimpleGameHandleInterface currentHandler =
+        Optional<InterfaceSimpleGameHandleInterface> currentHandler =
                 SimpleGameHandler.getHandler();
 
-        if (currentHandler != null) {
+        if (currentHandler.isPresent()) {
             if (zoom > 1) {
-                currentHandler.paint(g2Init);
+                currentHandler.get().paint(g2Init);
 
                 g2Resize.drawImage(initImage, 0, 0, resizedImage.getWidth(),
                         resizedImage.getHeight(), null);
 
                 g.drawImage(resizedImage, 0, 0, null);
             } else {
-                currentHandler.paint(g);
+                currentHandler.get().paint(g);
             }
         }
     }

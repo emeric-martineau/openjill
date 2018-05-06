@@ -7,6 +7,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
+import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -35,47 +36,58 @@ public final class HighScoreMenu extends AbstractMenu implements MenuInterface {
      * Maximum position of X.
      */
     private static final int NUMBER_MAXIMUM_POSITION_X = 62;
+
     /**
      * Display.
      */
     private final BufferedImage highScoreScreen;
+
     /**
      * Picutre cache.
      */
     private final TileManager pictureCache;
+
     /**
      * List of high score.
      */
     private final List<HighScoreItem> listHiScore;
+
     /**
      * Name of high score.
      */
     private final LimitedString nameHighScore = new LimitedString(
             HighScoreItem.LEN_HIGHSCORE_NAME);
+
     /**
      * Configuration.
      */
     private final HighScoreMenuConf conf;
+
     /**
      * If menu is enable.
      */
     private boolean enable = false;
+
     /**
-     * titile.
+     * title.
      */
     private SubMenu title;
+
     /**
      * Background color (current).
      */
     private int backgroundColor;
+
     /**
      * To know if when are in edit mode.
      */
     private boolean editMode = false;
+
     /**
      * Score.
      */
     private int score;
+
     /**
      * To know if update hight score.
      */
@@ -96,7 +108,7 @@ public final class HighScoreMenu extends AbstractMenu implements MenuInterface {
             final int positionToDrawMenuX, final int positionToDrawMenuY) {
         this(highScorePicture, pictureCacheManager, hiScoreList,
                 positionToDrawMenuX,
-                positionToDrawMenuY, null);
+                positionToDrawMenuY, Optional.empty());
     }
 
     /**
@@ -113,7 +125,7 @@ public final class HighScoreMenu extends AbstractMenu implements MenuInterface {
             final TileManager pictureCacheManager,
             final List<HighScoreItem> hiScoreList,
             final int positionToDrawMenuX, final int positionToDrawMenuY,
-            final MenuInterface nextMenuObject) {
+            final Optional<MenuInterface> nextMenuObject) {
         super(pictureCacheManager, nextMenuObject);
 
         this.conf = readConf1("high_score_menu.json");
@@ -161,7 +173,7 @@ public final class HighScoreMenu extends AbstractMenu implements MenuInterface {
                             filename),
                     ex);
 
-            mc = null;
+            throw new RuntimeException(ex);
         }
 
         return mc;
@@ -267,8 +279,8 @@ public final class HighScoreMenu extends AbstractMenu implements MenuInterface {
     }
 
     @Override
-    public SubMenu getTitle() {
-        return title;
+    public Optional<SubMenu> getTitle() {
+        return Optional.of(title);
     }
 
     @Override
@@ -417,10 +429,8 @@ public final class HighScoreMenu extends AbstractMenu implements MenuInterface {
         g2.drawImage(getPicture(), getX(),
                 getY(), null);
 
-        final MenuInterface previousMenu = this.getPreviousMenu();
-
-        if (previousMenu != null) {
-            previousMenu.draw(g2);
+        if (this.getPreviousMenu().isPresent()) {
+            this.getPreviousMenu().get().draw(g2);
         }
     }
 

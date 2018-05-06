@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.Optional;
 import javax.swing.JFrame;
 import javax.swing.Timer;
 import javax.swing.WindowConstants;
@@ -100,11 +101,11 @@ public class SimpleGameJFrame extends JFrame implements ActionListener {
 
     @Override
     public final void actionPerformed(final ActionEvent e) {
-        InterfaceSimpleGameHandleInterface currentHandler
+        Optional<InterfaceSimpleGameHandleInterface> currentHandler
                 = SimpleGameHandler.getHandler();
 
-        if (currentHandler != null) {
-            currentHandler.run();
+        if (currentHandler.isPresent()) {
+            currentHandler.get().run();
         }
 
         repaint();

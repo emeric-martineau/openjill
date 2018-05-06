@@ -62,64 +62,78 @@ public class CfgFileImpl implements CfgFile {
      * size of whole in file.
      */
     private static final int CFG_FILE_WHOLE = 20;
+
     /**
      * List of high score.
      */
     private final List<HighScoreItem> highScore =
             new ArrayList<>(NUM_HIGH_SCORE_NAME);
+
     /**
      * List of save name.
      */
     private final List<SaveGameItem> saveGame = new ArrayList<>(NUM_SAVE_NAME);
+
     /**
      * If this is set to 1, no setup avaible.
      * Must display setup screen.
      */
     private boolean setup;
+
     /**
      * Joystick enabled if this is nonzero.
      */
     private boolean joystick;
+
     /**
      * Joystick X left value.
      */
     private int joystickLeftX;
+
     /**
      * Joystick X right value.
      */
     private int joystickRightX;
+
     /**
      * Joystick X center value.
      */
     private int joystickCenterX;
+
     /**
      * Joystick Y left value.
      */
     private int joystickLeftY;
+
     /**
      * Joystick X right value.
      */
     private int joystickRightY;
+
     /**
      * Joystick Y center value.
      */
     private int joystickCenterY;
+
     /**
      * Display configuration. For Jill: 1=CGA, 2=EGA, 4=VGA.
      */
     private int displayMode;
+
     /**
      * Music configuration. Nonzero value means it is enabled.
      */
     private boolean music;
+
     /**
      * Digital sound configuration. Nonzero value means it is enabled.
      */
     private boolean sound;
+
     /**
      * Current file name.
      */
-    private String originalFilename = null;
+    private String originalFilename = "";
 
     /**
      * Constructor of class.
@@ -482,24 +496,26 @@ public class CfgFileImpl implements CfgFile {
      */
     @Override
     public final void save(final String filename) throws IOException {
-        if (filename != null) {
-            final FileAbstractByte cfgFile = new FileAbstractByteImpl();
-
-            cfgFile.load(CFG_FILE_SIZE);
-
-            writeHighScoreName(cfgFile);
-
-            // Skip hole byte
-            cfgFile.skipBytes(CFG_FILE_WHOLE);
-
-            writeHighScore(cfgFile);
-
-            writeSaveName(cfgFile);
-
-            writeCommonConfigurationBlock(cfgFile);
-
-            cfgFile.saveToFile(filename);
+        if (filename == null) {
+            throw new IOException("A filename must be give !");
         }
+
+        final FileAbstractByte cfgFile = new FileAbstractByteImpl();
+
+        cfgFile.load(CFG_FILE_SIZE);
+
+        writeHighScoreName(cfgFile);
+
+        // Skip hole byte
+        cfgFile.skipBytes(CFG_FILE_WHOLE);
+
+        writeHighScore(cfgFile);
+
+        writeSaveName(cfgFile);
+
+        writeCommonConfigurationBlock(cfgFile);
+
+        cfgFile.saveToFile(filename);
     }
 
     /**

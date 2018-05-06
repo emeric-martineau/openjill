@@ -135,9 +135,8 @@ public abstract class AbstractBackgroundJillLevel
      * Load current level.
      *
      * @throws IOException                  if error
-     * @throws ReflectiveOperationException if error
      */
-    protected final void loadLevel() throws IOException, ReflectiveOperationException {
+    protected final void loadLevel() throws IOException {
         final String filePath =
                 ((JillGameConfig) SimpleGameConfig.getInstance()).getFilePath();
 
@@ -153,13 +152,13 @@ public abstract class AbstractBackgroundJillLevel
 
         dmaFile = pictureCache.getDmaFile();
 
-        if (this.levelConfiguration.getLevelData() == null) {
-            jnFile = getJnFile(this.levelConfiguration.getJnFileName(),
-                    filePath);
-        } else {
+        if (this.levelConfiguration.getLevelData().isPresent()) {
             // In case of restore map level
             jnFile = ObjectInstanceFactory.getNewJn();
-            jnFile.load(this.levelConfiguration.getLevelData());
+            jnFile.load(this.levelConfiguration.getLevelData().get());
+        } else {
+            jnFile = getJnFile(this.levelConfiguration.getJnFileName().get(),
+                    filePath);
         }
 
         vclFile = getVclFile(this.levelConfiguration.getVclFileName(),
@@ -349,7 +348,7 @@ public abstract class AbstractBackgroundJillLevel
                             "DmaEntry '%d' not found at %d/%d", mapCode,
                             indexX, indexY));
 
-            // Stange bug in map !
+            // Strange bug in map !
             de = dmaFile.getDmaEntry(0);
         }
 

@@ -1,6 +1,7 @@
 package org.jill.game.level.handler.jill1;
 
 import java.io.IOException;
+import java.util.Optional;
 
 import org.jill.game.entities.obj.player.PlayerState;
 import org.jill.game.level.cfg.JillLevelConfiguration;
@@ -26,8 +27,8 @@ public class MapLevelHandler extends LoadNewLevelHandler {
      * @throws ReflectiveOperationException if missing class must be load
      */
     public MapLevelHandler() throws IOException, ReflectiveOperationException {
-        super(new JillLevelConfiguration("JILL1.SHA", "MAP.JN1", "JILL1.VCL",
-                "JILL1.CFG", "JN1", StartMenuJill1Handler.class,
+        super(new JillLevelConfiguration("JILL1.SHA", Optional.of("MAP.JN1"), "JILL1.VCL",
+                "JILL1.CFG", "JN1", Optional.of(StartMenuJill1Handler.class),
                 SaveData.MAP_LEVEL));
 
         getPlayer().setState(PlayerState.BEGIN);

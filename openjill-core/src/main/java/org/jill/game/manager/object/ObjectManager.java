@@ -6,6 +6,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -15,6 +16,8 @@ import org.jill.openjill.core.api.entities.ObjectParam;
 import org.jill.openjill.core.api.message.statusbar.inventory.EnumInventoryObject;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+import javax.swing.text.html.Option;
 
 /**
  * Object manager.
@@ -216,7 +219,7 @@ public final class ObjectManager {
      * @param objectParam object in file of level
      * @return object
      */
-    public ObjectEntity getNewObject(final ObjectParam objectParam) {
+    public Optional<ObjectEntity> getNewObject(final ObjectParam objectParam) {
         ObjectEntity o = null;
 
         final Class<ObjectEntity> className = mapObjectClass.get(
@@ -226,7 +229,7 @@ public final class ObjectManager {
             o = createObject(className, objectParam);
         }
 
-        return o;
+        return Optional.ofNullable(o);
     }
 
     /**

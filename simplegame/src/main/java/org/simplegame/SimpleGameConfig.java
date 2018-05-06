@@ -1,5 +1,6 @@
 package org.simplegame;
 
+import java.util.Optional;
 import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -14,71 +15,87 @@ public class SimpleGameConfig {
      * Default timer delay.
      */
     public static final int DEFAULT_TIMER_DELAY = 55;
+
     /**
      * Default game width.
      */
     public static final int DEFAULT_GAME_WIDTH = 320;
+
     /**
      * Default game height.
      */
     public static final int DEFAULT_GAME_HEIGHT = 200;
+
     /**
      * Key.
      */
     public static final String GAME_TIMER_DELAY = "game.timer.delay";
+
     /**
      * Key.
      */
     public static final String GAME_TITLE = "game.title";
+
     /**
      * Key.
      */
     public static final String GAME_WIDTH = "game.width";
+
     /**
      * Key.
      */
     public static final String GAME_HEIGHT = "game.height";
+
     /**
      * Key.
      */
     public static final String GAME_START_CLASS = "game.startClass";
+
     /**
      * Key.
      */
     public static final String GAME_SCREEN_ZOOM = "game.zoom";
+
     /**
      * Pattern du workspace.
      */
     private static final Pattern PATTERN_INTEGER =
             Pattern.compile("[0-9]+", Pattern.CASE_INSENSITIVE);
+
     /**
      * Instance.
      */
-    private static SimpleGameConfig instance = null;
+    private static Optional<SimpleGameConfig> instance = Optional.empty();
+
     /**
      * Game start class.
      */
     private final String gameStartClass;
+
     /**
      * Zoom screen.
      */
     private final int zoom;
+
     /**
      * Timer delay (default DEFAULT_TIMER_DELAY).
      */
-    private int gameTimerDelay = DEFAULT_TIMER_DELAY;
+    private int gameTimerDelay;
+
     /**
      * Game title.
      */
     private String gameTitle;
+
     /**
      * Game width (default DEFAULT_GAME_WIDTH).
      */
-    private int gameWidth = DEFAULT_GAME_WIDTH;
+    private int gameWidth;
+
     /**
      * Game Height (default DEFAULT_GAME_HEIGHT).
      */
-    private int gameHeight = DEFAULT_GAME_HEIGHT;
+    private int gameHeight;
 
     /**
      * Constructor.
@@ -113,7 +130,7 @@ public class SimpleGameConfig {
      * @return game config
      */
     public static SimpleGameConfig getInstance() {
-        return instance;
+        return instance.get();
     }
 
     /**
@@ -122,8 +139,8 @@ public class SimpleGameConfig {
      * @param game config
      */
     public static void setInstance(final SimpleGameConfig game) {
-        if (instance == null) {
-            instance = game;
+        if (!instance.isPresent()) {
+            instance = Optional.ofNullable(game);
         }
     }
 

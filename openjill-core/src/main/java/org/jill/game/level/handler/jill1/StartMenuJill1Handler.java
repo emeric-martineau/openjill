@@ -2,6 +2,7 @@ package org.jill.game.level.handler.jill1;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.Optional;
 
 import org.jill.game.gui.menu.ClassicMenu;
 import org.jill.game.gui.menu.HighScoreMenu;
@@ -23,13 +24,13 @@ public class StartMenuJill1Handler extends AbstractChangeLevel {
      * @throws ReflectiveOperationException if missing class must be load
      */
     public StartMenuJill1Handler() throws IOException, ReflectiveOperationException {
-        super(new JillLevelConfiguration("JILL1.SHA", "INTRO.JN1", "JILL1.VCL",
-                "JILL1.CFG", "JN1", StartMenuJill1Handler.class, false));
+        super(new JillLevelConfiguration("JILL1.SHA", Optional.of("INTRO.JN1"), "JILL1.VCL",
+                "JILL1.CFG", "JN1", Optional.of(StartMenuJill1Handler.class), false));
         centerScreen();
 
         infoBox.setContent(vclFile.getVclText().get(0).getText());
 
-        this.menuLoadGame.setPreviousMenu(this.menu);
+        this.menuLoadGame.setPreviousMenu(Optional.of(this.menu));
     }
 
     @Override

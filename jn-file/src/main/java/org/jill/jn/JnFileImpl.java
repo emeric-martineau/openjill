@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Optional;
 
 import org.jill.file.FileAbstractByte;
 import org.jill.file.FileAbstractByteImpl;
@@ -46,9 +47,9 @@ public class JnFileImpl implements JnFile {
      * Return next object item with string pointer.
      *
      * @param itObject iterator
-     * @return null if object not found
+     * @return empty if object not found
      */
-    private static ObjectItem getNextObjectForString(
+    private static Optional<ObjectItem> getNextObjectForString(
             final Iterator<ObjectItem> itObject) {
         ObjectItem obj;
 
@@ -56,11 +57,11 @@ public class JnFileImpl implements JnFile {
             obj = itObject.next();
 
             if (obj.getPointer() != 0) {
-                return obj;
+                return Optional.of(obj);
             }
         }
 
-        return null;
+        return Optional.empty();
     }
 
     /**
@@ -129,7 +130,7 @@ public class JnFileImpl implements JnFile {
 
         StringItem string;
 
-        ObjectItem obj;
+        Optional<ObjectItem> obj;
 
         while (jnFile.getFilePointer() < sizeOfFile) {
             string = new StringItemImpl(jnFile);
@@ -138,8 +139,8 @@ public class JnFileImpl implements JnFile {
 
             obj = getNextObjectForString(itObject);
 
-            if (obj != null) {
-                obj.setStringStackEntry(string);
+            if (obj.isPresent()) {
+                obj.get().setStringStackEntry(string);
             }
         }
     }

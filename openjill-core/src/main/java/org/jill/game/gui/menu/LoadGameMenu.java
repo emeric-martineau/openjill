@@ -2,6 +2,7 @@ package org.jill.game.gui.menu;
 
 import java.awt.image.BufferedImage;
 import java.util.List;
+import java.util.Optional;
 
 import org.jill.cfg.SaveGameItem;
 import org.jill.openjill.core.api.manager.TileManager;
@@ -28,7 +29,7 @@ public final class LoadGameMenu extends AbstractLoadGameMenu {
             final int positionToDrawMenuY) {
         this(menuScreen, pictureCacheManager, saveGameList,
                 positionToDrawMenuX,
-                positionToDrawMenuY, null);
+                positionToDrawMenuY, Optional.empty());
     }
 
     /**
@@ -46,7 +47,7 @@ public final class LoadGameMenu extends AbstractLoadGameMenu {
             final List<SaveGameItem> saveGameList,
             final int positionToDrawMenuX,
             final int positionToDrawMenuY,
-            final MenuInterface nextMenuObj) {
+            final Optional<MenuInterface> nextMenuObj) {
         super(menuScreen, pictureCacheManager, saveGameList,
                 positionToDrawMenuX, positionToDrawMenuY, nextMenuObj);
     }

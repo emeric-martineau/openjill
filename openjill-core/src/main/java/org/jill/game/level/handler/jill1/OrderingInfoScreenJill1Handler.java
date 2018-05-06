@@ -4,6 +4,7 @@ package org.jill.game.level.handler.jill1;
 import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.Optional;
 
 import org.jill.game.level.AbstractExecutingStdPlayerLevel;
 import org.jill.game.level.cfg.JillLevelConfiguration;
@@ -35,7 +36,7 @@ public class OrderingInfoScreenJill1Handler
      * @throws ReflectiveOperationException if missing class must be load
      */
     public OrderingInfoScreenJill1Handler() throws IOException, ReflectiveOperationException {
-        super(new JillLevelConfiguration("JILL1.SHA", "INTRO.JN1", "JILL1.VCL",
+        super(new JillLevelConfiguration("JILL1.SHA", Optional.of("INTRO.JN1"), "JILL1.VCL",
                 "JILL1.CFG", "JN1"));
 
         screens[0] = newScreen(14, 15);

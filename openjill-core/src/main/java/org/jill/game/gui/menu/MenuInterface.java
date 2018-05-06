@@ -2,6 +2,7 @@ package org.jill.game.gui.menu;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.util.Optional;
 
 /**
  * Interface for menu.
@@ -68,7 +69,7 @@ public interface MenuInterface {
      *
      * @return title title
      */
-    SubMenu getTitle();
+    Optional<SubMenu> getTitle();
 
     /**
      * Set title.
@@ -104,7 +105,7 @@ public interface MenuInterface {
      *
      * @return previous menu
      */
-    MenuInterface getPreviousMenu();
+    Optional<MenuInterface> getPreviousMenu();
 
     /**
      * Give text position to draw menu x.

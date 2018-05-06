@@ -5,6 +5,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -113,7 +114,7 @@ public final class InformationBox extends AbstractMessageBox {
                             filename),
                     ex);
 
-            mc = null;
+            throw new RuntimeException(ex);
         }
 
         return mc;
@@ -142,7 +143,7 @@ public final class InformationBox extends AbstractMessageBox {
 
         RectangleConf textArea = this.conf.getTextarea();
 
-        drawArea(this.g2BoxPicture, pctCache, textArea);
+        drawArea(this.g2BoxPicture, pctCache, Optional.of(textArea));
 
         drawAllPicture(this.g2BoxPicture, this.pictureCache, this.conf);
 
@@ -187,7 +188,7 @@ public final class InformationBox extends AbstractMessageBox {
 
         RectangleConf textArea = this.conf.getTextarea();
 
-        drawArea(this.g2BoxPicture, this.pictureCache, textArea);
+        drawArea(this.g2BoxPicture, this.pictureCache, Optional.of(textArea));
 
         int end = currentMenuPos + numberLinePerScreen;
 

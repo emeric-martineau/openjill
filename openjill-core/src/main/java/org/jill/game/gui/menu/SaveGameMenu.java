@@ -4,6 +4,7 @@ import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.util.List;
+import java.util.Optional;
 
 import org.jill.cfg.SaveGameItem;
 import org.jill.game.gui.tools.LimitedString;
@@ -37,7 +38,7 @@ public final class SaveGameMenu extends AbstractLoadGameMenu {
             final int positionToDrawMenuY) {
         this(menuScreen, pictureCacheManager, saveGameList,
                 positionToDrawMenuX,
-                positionToDrawMenuY, null);
+                positionToDrawMenuY, Optional.empty());
     }
 
     /**
@@ -55,7 +56,7 @@ public final class SaveGameMenu extends AbstractLoadGameMenu {
             final List<SaveGameItem> saveGameList,
             final int positionToDrawMenuX,
             final int positionToDrawMenuY,
-            final MenuInterface nextMenuObj) {
+            final Optional<MenuInterface> nextMenuObj) {
         super(menuScreen, pictureCacheManager, saveGameList,
                 positionToDrawMenuX, positionToDrawMenuY, nextMenuObj);
     }

@@ -5,6 +5,8 @@ import org.jill.openjill.core.api.entities.BackgroundEntity;
 import org.jill.openjill.core.api.entities.ObjectEntity;
 import org.jill.openjill.core.api.jill.JillConst;
 
+import java.util.Optional;
+
 /**
  * Object utilility class.
  *
@@ -29,7 +31,7 @@ public final class UtilityObjectEntity {
      * @param backgroundObject background map
      * @return true if object can move
      */
-    private static BackgroundEntity checkObjectHitFloor(final int startX,
+    private static Optional<BackgroundEntity> checkObjectHitFloor(final int startX,
             final int endX, final int startY, final int endY,
             final BackgroundEntity[][] backgroundObject) {
         return checkObjectHitBlockOrStair(startX, endX, startY, endY,
@@ -46,7 +48,7 @@ public final class UtilityObjectEntity {
      * @param backgroundObject background map
      * @return true if object can move
      */
-    private static BackgroundEntity checkObjectHitBlockUp(final int startX,
+    private static Optional<BackgroundEntity> checkObjectHitBlockUp(final int startX,
             final int endX, final int startY, final int endY,
             final BackgroundEntity[][] backgroundObject) {
         return checkObjectHitBlockOrStair(startX, endX, endY, startY,
@@ -63,7 +65,7 @@ public final class UtilityObjectEntity {
      * @param backgroundObject background map
      * @return true if object can move
      */
-    private static BackgroundEntity checkObjectHitBlockLeft(final int startX,
+    private static Optional<BackgroundEntity> checkObjectHitBlockLeft(final int startX,
             final int endX, final int startY, final int endY,
             final BackgroundEntity[][] backgroundObject) {
         return checkObjectHitBlockOrStair(endX, startX, startY, endY,
@@ -80,7 +82,7 @@ public final class UtilityObjectEntity {
      * @param backgroundObject background map
      * @return true if object can move
      */
-    private static BackgroundEntity checkObjectHitBlockRight(final int startX,
+    private static Optional<BackgroundEntity> checkObjectHitBlockRight(final int startX,
             final int endX, final int startY, final int endY,
             final BackgroundEntity[][] backgroundObject) {
         return checkObjectHitBlockOrStair(startX, endX, startY, endY,
@@ -100,10 +102,10 @@ public final class UtilityObjectEntity {
      * @param right            true if search is right, else search is left
      * @return true if object can move
      */
-    private static BackgroundEntity checkObjectHitBlockOrStair(final int startX,
-            final int endX, final int startY, final int endY,
-            final BackgroundEntity[][] backgroundObject, final boolean checkStair,
-            final boolean up, final boolean right) {
+    private static Optional<BackgroundEntity> checkObjectHitBlockOrStair(final int startX,
+                                                final int endX, final int startY, final int endY,
+                                                final BackgroundEntity[][] backgroundObject, final boolean checkStair,
+                                                final boolean up, final boolean right) {
         boolean objectCanMove;
 
         // Index of background for check move
@@ -129,7 +131,7 @@ public final class UtilityObjectEntity {
                 }
 
                 if (!objectCanMove) {
-                    return be;
+                    return Optional.of(be);
                 }
 
                 if (up) {
@@ -162,7 +164,7 @@ public final class UtilityObjectEntity {
             }
         }
 
-        return null;
+        return Optional.empty();
     }
 
     /**
@@ -175,7 +177,7 @@ public final class UtilityObjectEntity {
      * @param backgroundObject background map
      * @return true if object can move
      */
-    private static BackgroundEntity checkObjectHitVine(final int startX,
+    private static Optional<BackgroundEntity> checkObjectHitVine(final int startX,
             final int endX, final int startY, final int endY,
             final BackgroundEntity[][] backgroundObject) {
         boolean isVine;
@@ -194,12 +196,12 @@ public final class UtilityObjectEntity {
                         = backgroundObject[indexBackX][indexBackY].isVine();
 
                 if (isVine) {
-                    return backgroundObject[indexBackX][indexBackY];
+                    return Optional.of(backgroundObject[indexBackX][indexBackY]);
                 }
             }
         }
 
-        return null;
+        return Optional.empty();
     }
 
     /**
@@ -255,31 +257,31 @@ public final class UtilityObjectEntity {
             final boolean updateObj, final boolean ignoreStair) {
         boolean canMove;
 
-        BackgroundEntity block = isBlockOrStairAtThisPosition(obj.getX(),
+        Optional<BackgroundEntity> block = isBlockOrStairAtThisPosition(obj.getX(),
                 obj.getY(), obj.getWidth(), obj.getHeight(), mvtSize,
                 backgroundObject);
 
         // Check if block is stair
-        if (block != null && block.isStair()) {
+        if (block.isPresent() && block.get().isStair()) {
             // If stair, object can down if object not upper that block
-            final int topOnBlockStair = block.getY() * JillConst.getBlockSize();
+            final int topOnBlockStair = block.get().getY() * JillConst.getBlockSize();
 
             // If before move, bottom object is under stair, ignore staire.
             final int bottomObject = obj.getY() + obj.getHeight();
 
             if (ignoreStair || bottomObject > topOnBlockStair) {
-                block = null;
+                block = Optional.empty();
             }
         }
 
-        if (block == null) {
+        if (!block.isPresent()) {
             if (updateObj) {
                 forceMoveUpDown(obj, mvtSize);
             }
 
             canMove = true;
         } else {
-            final int newY = (block.getY() * JillConst.getBlockSize())
+            final int newY = (block.get().getY() * JillConst.getBlockSize())
                     - obj.getHeight();
             if (updateObj) {
                 canMove = newY != obj.getY();
@@ -321,7 +323,7 @@ public final class UtilityObjectEntity {
     /**
      * Chech is block or stair.
      *
-     * @param objX             object tx
+     * @param objX             object x
      * @param objY             object y
      * @param objWidth         object width
      * @param objHeight        object height
@@ -329,7 +331,7 @@ public final class UtilityObjectEntity {
      * @param backgroundObject background layer
      * @return block if found
      */
-    private static BackgroundEntity isBlockOrStairAtThisPosition(final int objX,
+    private static Optional<BackgroundEntity> isBlockOrStairAtThisPosition(final int objX,
             final int objY, final int objWidth, final int objHeight,
             final int mvtSize, final BackgroundEntity[][] backgroundObject) {
         // Calculate number of case X
@@ -348,8 +350,8 @@ public final class UtilityObjectEntity {
 
         final int newEndY = newPosY / JillConst.getBlockSize();
 
-        BackgroundEntity block = null;
-        BackgroundEntity blockStair = null;
+        Optional<BackgroundEntity> block = Optional.empty();
+        Optional<BackgroundEntity> blockStair = Optional.empty();
 
         // for stair, we need check all block
         for (int testY = newStartY; testY <= newEndY; testY++) {
@@ -357,14 +359,14 @@ public final class UtilityObjectEntity {
                     startBlockX, endBlockX, testY, testY, backgroundObject);
 
             // In case of stair, we take last stair
-            if (block != null && block.isStair()) {
+            if (block.isPresent() && block.get().isStair()) {
                 blockStair = block;
-            } else if (block != null && !block.isStair()) {
+            } else if (block.isPresent() && !block.get().isStair()) {
                 break;
             }
         }
 
-        if (block == null) {
+        if (!block.isPresent()) {
             block = blockStair;
         }
 
@@ -382,9 +384,9 @@ public final class UtilityObjectEntity {
     public static boolean moveObjectRight(final ObjectEntity obj,
                                           final int mvtSize, final BackgroundEntity[][] backgroundObject) {
         boolean canMove;
-        final BackgroundEntity back = giveBlockAtRight(obj, mvtSize, backgroundObject);
+        final Optional<BackgroundEntity> back = giveBlockAtRight(obj, mvtSize, backgroundObject);
 
-        if (back == null) {
+        if (!back.isPresent()) {
             // Object can't out of map
             obj.setX(
                     Math.min(obj.getX() + mvtSize,
@@ -392,7 +394,7 @@ public final class UtilityObjectEntity {
 
             canMove = true;
         } else {
-            final int newX = (back.getX() * JillConst.getBlockSize())
+            final int newX = (back.get().getX() * JillConst.getBlockSize())
                     - obj.getWidth();
 
             canMove = newX != obj.getX();
@@ -410,9 +412,9 @@ public final class UtilityObjectEntity {
      * @param mvtSize movement size
      * @param backgroundObject background
      *
-     * @return null or block
+     * @return empty or block
      */
-    public static BackgroundEntity giveBlockAtRight(final ObjectEntity obj, final int mvtSize,
+    public static Optional<BackgroundEntity> giveBlockAtRight(final ObjectEntity obj, final int mvtSize,
                                                     final BackgroundEntity[][] backgroundObject) {
         // Calculate number of case Y
         final int startBlockY = obj.getY() / JillConst.getBlockSize();
@@ -441,16 +443,16 @@ public final class UtilityObjectEntity {
         boolean canMove;
 
         // Check if can move
-        final BackgroundEntity back = giveBlockAtLeft(obj, mvtSize, backgroundObject);
+        final Optional<BackgroundEntity> back = giveBlockAtLeft(obj, mvtSize, backgroundObject);
 
-        if (back == null) {
+        if (!back.isPresent()) {
             // Object can't have negative X
             obj.setX(
                     Math.max(obj.getX() + mvtSize, 0));
 
             canMove = true;
         } else {
-            final int newX = (back.getX() + 1) * JillConst.getBlockSize();
+            final int newX = (back.get().getX() + 1) * JillConst.getBlockSize();
 
             canMove = newX != obj.getX();
 
@@ -467,9 +469,9 @@ public final class UtilityObjectEntity {
      * @param mvtSize movement size
      * @param backgroundObject background map
      *
-     * @return null or block
+     * @return empty or block
      */
-    public static BackgroundEntity giveBlockAtLeft(final ObjectEntity obj, final int mvtSize,
+    public static Optional<BackgroundEntity> giveBlockAtLeft(final ObjectEntity obj, final int mvtSize,
                                                    final BackgroundEntity[][] backgroundObject) {
         // Calculate number of case Y
         final int startBlockY = obj.getY() / JillConst.getBlockSize();
@@ -515,17 +517,17 @@ public final class UtilityObjectEntity {
         final int newStartY = newPosY / JillConst.getBlockSize();
         final int newEndY = obj.getY() / JillConst.getBlockSize();
 
-        final BackgroundEntity block = checkObjectHitBlockUp(
+        final Optional<BackgroundEntity> block = checkObjectHitBlockUp(
                 startBlockX, endBlockX, newStartY, newEndY, backgroundObject);
 
-        if (block == null) {
+        if (!block.isPresent()) {
             obj.setY(newPosY);
 
             canMove = !hitBorder;
         } else {
             // Jump size are to big and object hit a block
             // Set Y to the below block
-            final int newY = (block.getY() + 1) * JillConst.getBlockSize();
+            final int newY = (block.get().getY() + 1) * JillConst.getBlockSize();
 
             canMove = newY != obj.getY();
 
@@ -545,7 +547,7 @@ public final class UtilityObjectEntity {
     public static boolean isClimbing(final ObjectEntity obj,
             final BackgroundEntity[][] backgroundObject) {
 
-        final BackgroundEntity block;
+        final Optional<BackgroundEntity> block;
 
         // Now check player is on same position that block
         final int modX = obj.getX() % JillConst.getBlockSize();
@@ -563,10 +565,10 @@ public final class UtilityObjectEntity {
             block = checkObjectHitVine(
                     startBlockX, endBlockX, newStartY, newEndY, backgroundObject);
         } else {
-            block = null;
+            block = Optional.empty();
         }
 
-        return block != null;
+        return block.isPresent();
     }
 
     /**
@@ -591,25 +593,25 @@ public final class UtilityObjectEntity {
         int startBlockX = newPosX / JillConst.getBlockSize();
 
         // Check if can move
-        final BackgroundEntity back = checkObjectHitBlockLeft(startBlockX,
+        final Optional<BackgroundEntity> back = checkObjectHitBlockLeft(startBlockX,
                 startBlockX, startBlockY, endBlockY, backgroundObject);
 
-        if (back == null) {
+        if (!back.isPresent()) {
             final int newX = Math.max(newPosX, 0);
 
             // Now check if floor at new position
-            BackgroundEntity block = isBlockOrStairAtThisPosition(
+            Optional<BackgroundEntity> block = isBlockOrStairAtThisPosition(
                     newX, obj.getY(), 1, obj.getHeight(),
                     1, backgroundObject);
 
-            canMove = block != null;
+            canMove = block.isPresent();
 
             if (canMove) {
                 // Object can't have negative X
                 obj.setX(newX);
             }
         } else {
-            final int newX = (back.getX() + 1) * JillConst.getBlockSize();
+            final int newX = (back.get().getX() + 1) * JillConst.getBlockSize();
 
             canMove = newX != obj.getX();
 
@@ -632,19 +634,19 @@ public final class UtilityObjectEntity {
         boolean canMove;
 
         // Calculate number of case Y
-        final BackgroundEntity back = giveBlockAtRight(obj, mvtSize, backgroundObject);
+        final Optional<BackgroundEntity> back = giveBlockAtRight(obj, mvtSize, backgroundObject);
 
-        if (back == null) {
+        if (!back.isPresent()) {
             // Object can't out of map
             final int newX = Math.min(obj.getX() + mvtSize,
                     JillConst.getMaxWidth() - obj.getWidth());
 
             // Now check if floor at new position
-            BackgroundEntity block = isBlockOrStairAtThisPosition(
+            Optional<BackgroundEntity> block = isBlockOrStairAtThisPosition(
                     newX + obj.getWidth() - 1, obj.getY(), 1, obj.getHeight(),
                     1, backgroundObject);
 
-            canMove = block != null;
+            canMove = block.isPresent();
 
             if (canMove) {
                 // Object can't have negative X
@@ -652,7 +654,7 @@ public final class UtilityObjectEntity {
             }
 
         } else {
-            final int newX = (back.getX() * JillConst.getBlockSize())
+            final int newX = (back.get().getX() * JillConst.getBlockSize())
                     - obj.getWidth();
 
             canMove = obj.getX() != newX;

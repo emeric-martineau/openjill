@@ -1,6 +1,7 @@
 package org.jill.sha;
 
 import java.io.IOException;
+import java.util.Optional;
 
 import org.jill.file.FileAbstractByte;
 
@@ -122,7 +123,7 @@ public class ShaTileSetImpl implements ShaTileSet {
      * @throws IOException if error
      */
     private void readTile(final FileAbstractByte shaFile) throws IOException {
-        int[] colorMap;
+        Optional<int[]> colorMap;
 
         if (!font && bitColor < ShaTileImpl.BIT_256_COLOR) {
             // Read map color
@@ -130,14 +131,16 @@ public class ShaTileSetImpl implements ShaTileSet {
             // bitColor=1 -> 4 colors
             // bitColor=2 -> 8 colors
             // bitColor=8 -> 256 colors
-            colorMap = new int[(1 << bitColor) * MULTIPLE_FOR_BIT_COLOR];
+            int[] readColorMap = new int[(1 << bitColor) * MULTIPLE_FOR_BIT_COLOR];
 
-            for (int indexColor = 0; indexColor < colorMap.length;
+            for (int indexColor = 0; indexColor < readColorMap.length;
                  indexColor++) {
-                colorMap[indexColor] = shaFile.read8bitLE();
+                readColorMap[indexColor] = shaFile.read8bitLE();
             }
+
+            colorMap = Optional.of(readColorMap);
         } else {
-            colorMap = null;
+            colorMap = Optional.empty();
         }
 
         for (int index = 0; index < numberTile; index++) {

@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -195,12 +196,12 @@ public abstract class AbstractChangeLevel extends
             // Load level
             LevelConfiguration cfgNewLevel = new JillLevelConfiguration(
                     this.levelConfiguration.getShaFileName(),
-                    this.newLevelFileName,
+                    Optional.of(this.newLevelFileName),
                     this.levelConfiguration.getVclFileName(),
                     this.levelConfiguration.getCfgFileName(),
                     this.levelConfiguration.getCfgSavePrefixe(),
                     this.levelConfiguration.getStartScreen(),
-                    this.inventoryArea.getLevel(), this.mapLevel, null,
+                    this.inventoryArea.getLevel(), Optional.of(this.mapLevel), Optional.empty(),
                     mapFile.getSaveData().getScore(), 0);
 
             // Create next level
@@ -224,12 +225,12 @@ public abstract class AbstractChangeLevel extends
 
             LevelConfiguration cfgNewLevel = new JillLevelConfiguration(
                     this.levelConfiguration.getShaFileName(),
-                    null,
+                    Optional.empty(),
                     this.levelConfiguration.getVclFileName(),
                     this.levelConfiguration.getCfgFileName(),
                     this.levelConfiguration.getCfgSavePrefixe(),
                     this.levelConfiguration.getStartScreen(),
-                    this.inventoryArea.getLevel(), null, this.mapLevel,
+                    this.inventoryArea.getLevel(), Optional.empty(), Optional.of(this.mapLevel),
                     this.inventoryArea.getScore(),
                     getCurrentGemCount());
 
@@ -260,12 +261,12 @@ public abstract class AbstractChangeLevel extends
 
             LevelConfiguration cfgNewLevel = new JillLevelConfiguration(
                     this.levelConfiguration.getShaFileName(),
-                    this.newLevelFileName,
+                    Optional.of(this.newLevelFileName),
                     this.levelConfiguration.getVclFileName(),
                     this.levelConfiguration.getCfgFileName(),
                     this.levelConfiguration.getCfgSavePrefixe(),
                     this.levelConfiguration.getStartScreen(),
-                    this.newLevelNumber, jnData, null,
+                    this.newLevelNumber, Optional.of(jnData), Optional.empty(),
                     this.inventoryArea.getScore(),
                     getCurrentGemCount());
 
@@ -531,9 +532,7 @@ public abstract class AbstractChangeLevel extends
                 && this.menuSaveGame.isEditorMode()) {
             saveGameInFile();
 
-            this.menu = this.menu.getPreviousMenu();
-
-            if (this.menu == null) {
+            if (!this.menu.getPreviousMenu().isPresent()) {
                 this.menu = this.menuStd;
             }
 
@@ -545,9 +544,7 @@ public abstract class AbstractChangeLevel extends
             this.menuSaveGame.setEditorMode(true);
         } else if (this.menu == this.menuLoadGame) {
             // Load saved game
-            this.menu = this.menu.getPreviousMenu();
-
-            if (this.menu == null) {
+            if (!this.menu.getPreviousMenu().isPresent()) {
                 this.menu = this.menuStd;
             }
 
@@ -586,12 +583,12 @@ public abstract class AbstractChangeLevel extends
                     new File(filePath, currentSaveGame.getSaveGameFile()));
 
             // Save map
-            if (this.levelConfiguration.getLevelMapData() == null) {
-                // Map file is current file
-                fab.saveToFile(
+            if (this.levelConfiguration.getLevelMapData().isPresent()) {
+                this.levelConfiguration.getLevelMapData().get().saveToFile(
                         new File(filePath, currentSaveGame.getSaveMapFile()));
             } else {
-                this.levelConfiguration.getLevelMapData().saveToFile(
+                // Map file is current file
+                fab.saveToFile(
                         new File(filePath, currentSaveGame.getSaveMapFile()));
             }
 
@@ -634,12 +631,12 @@ public abstract class AbstractChangeLevel extends
                 final LevelConfiguration cfgNewLevel
                         = new JillLevelConfiguration(
                         this.levelConfiguration.getShaFileName(),
-                        currentSaveGame.getSaveGameFile(),
+                        Optional.of(currentSaveGame.getSaveGameFile()),
                         this.levelConfiguration.getVclFileName(),
                         this.levelConfiguration.getCfgFileName(),
                         this.levelConfiguration.getCfgSavePrefixe(),
-                        this.levelConfiguration.getStartScreen(), mapData,
-                        null);
+                        this.levelConfiguration.getStartScreen(), Optional.of(mapData),
+                        Optional.empty());
 
                 // Create next level
                 final InterfaceSimpleGameHandleInterface newLevel
@@ -682,7 +679,9 @@ public abstract class AbstractChangeLevel extends
 
         this.menu = null;
 
-        changeScreenManager(getStartScreenClass());
+        if (getStartScreenClass().isPresent()) {
+            changeScreenManager(getStartScreenClass().get());
+        }
     }
 
     /**
@@ -727,7 +726,7 @@ public abstract class AbstractChangeLevel extends
 
         this.menuHighScore = new HighScoreMenu(highScore, this.pictureCache,
                 this.cfgFile.getHighScore(), controlAreaConf.getX(),
-                controlAreaConf.getY(), this.menu);
+                controlAreaConf.getY(), Optional.ofNullable(this.menu));
 
         highScore = this.statusBar.createControlArea();
 

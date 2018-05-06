@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -417,11 +418,11 @@ public abstract class AbstractExecutingStdPlayerLevel
         weapon.setInfo1(player.getInfo1());
 
         // Get jill object
-        final ObjectEntity obj = this.objectCache.getNewObject(objParam);
+        final Optional<ObjectEntity> cacheObject = this.objectCache.getNewObject(objParam);
 
         // Add object in list
-        if (obj != null) {
-            this.listObject.add(obj);
+        if (cacheObject.isPresent()) {
+            this.listObject.add(cacheObject.get());
         }
     }
 }

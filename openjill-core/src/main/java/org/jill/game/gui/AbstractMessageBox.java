@@ -3,6 +3,7 @@ package org.jill.game.gui;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.util.Optional;
 
 import org.jill.game.gui.conf.MessageConf;
 import org.jill.game.screen.conf.ImagesConf;
@@ -42,16 +43,18 @@ public class AbstractMessageBox {
      */
     protected void drawArea(final Graphics2D g2BoxPicture,
             final TileManager pictureCache,
-            final RectangleConf textArea) throws NumberFormatException {
+            final Optional<RectangleConf> textArea) throws NumberFormatException {
 
-        if (textArea != null) {
+        if (textArea.isPresent()) {
+            final RectangleConf currentTextArea = textArea.get();
+
             final Color baseColor = pictureCache.getColorMap()[
-                    Integer.valueOf(textArea.getColor())];
+                    Integer.valueOf(currentTextArea.getColor())];
             // Draw background text area
             g2BoxPicture.setColor(new Color(baseColor.getRGB()));
 
-            g2BoxPicture.fillRect(textArea.getX(), textArea.getY(),
-                    textArea.getWidth(), textArea.getHeight());
+            g2BoxPicture.fillRect(currentTextArea.getX(), currentTextArea.getY(),
+                    currentTextArea.getWidth(), currentTextArea.getHeight());
         }
     }
 

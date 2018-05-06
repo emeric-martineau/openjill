@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.util.Optional;
 
 import org.jill.file.FileAbstractByte;
 
@@ -74,7 +75,7 @@ public class ShaTileImpl implements ShaTile {
     /**
      * Color map only in picture width numcolor < 8.
      */
-    private final int[] colorMap;
+    private final Optional<int[]> colorMap;
 
     /**
      * Offset of picture.
@@ -108,14 +109,16 @@ public class ShaTileImpl implements ShaTile {
      */
     public ShaTileImpl(final FileAbstractByte shaFile, final int tsIndex,
             final int tIndex, final int numberBitColor,
-            final int[] usedColorMap) throws IOException {
-        if (usedColorMap != null) {
-            int[] desArray = new int[usedColorMap.length];
-            System.arraycopy(usedColorMap, 0, desArray, 0, usedColorMap.length);
+            final Optional<int[]> usedColorMap) throws IOException {
+        if (usedColorMap.isPresent()) {
+            final int[] currentColorMap = usedColorMap.get();
 
-            this.colorMap = desArray;
+            int[] desArray = new int[currentColorMap.length];
+            System.arraycopy(currentColorMap, 0, desArray, 0, currentColorMap.length);
+
+            this.colorMap = Optional.of(desArray);
         } else {
-            this.colorMap = null;
+            this.colorMap = Optional.empty();
         }
 
         this.imageIndex = tIndex;
@@ -165,13 +168,13 @@ public class ShaTileImpl implements ShaTile {
             for (int x = 0; x < width; x++) {
                 colorByte = rawData[x + (y * width)];
 
-                if (colorMap == null) {
-                    color = mapColor[colorByte];
-                } else {
+                if (this.colorMap.isPresent()) {
+                    int[] currentColorMap = this.colorMap.get();
+
                     offsetMap = (colorByte * NB_COLOR_PER_ITEM) + colorOffset;
 
-                    if (offsetMap < colorMap.length) {
-                        colorMapping = colorMap[offsetMap];
+                    if (offsetMap < currentColorMap.length) {
+                        colorMapping = currentColorMap[offsetMap];
 
                         color = mapColor[colorMapping];
                     } else {
@@ -179,6 +182,8 @@ public class ShaTileImpl implements ShaTile {
                         // If there, use Jill default map color.
                         color = mapColor[colorByte];
                     }
+                } else {
+                    color = mapColor[colorByte];
                 }
 
                 g2.setColor(color);
