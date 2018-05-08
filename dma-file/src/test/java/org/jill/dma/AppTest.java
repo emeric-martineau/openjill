@@ -48,10 +48,10 @@ public class AppTest
         final DmaFileImpl dmaFile = new DmaFileImpl();
         dmaFile.load(f);
         final Iterator<Integer> it = dmaFile.getDmaEntryIterator();
-        DmaEntryImpl currentEntry;
+        DmaEntry currentEntry;
 
         while (it.hasNext()) {
-            currentEntry = dmaFile.getDmaEntry(it.next());
+            currentEntry = dmaFile.getDmaEntry(it.next()).get();
 
             System.out.println(
                     String.format(" id = %04X, tile = %04X, tileset = %04X, flags = %08X, name = %s",

@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Optional;
 
 import org.jill.file.FileAbstractByte;
 import org.jill.file.FileAbstractByteImpl;
@@ -127,8 +128,9 @@ public class DmaFileImpl implements DmaFile {
      * @return dma
      */
     @Override
-    public final DmaEntryImpl getDmaEntry(final int id) {
-        return dmaMap.get(id);
+    public final Optional<DmaEntry> getDmaEntry(final int id) {
+        final DmaEntry entry = dmaMap.get(id);
+        return Optional.ofNullable(entry);
     }
 
     /**
@@ -138,8 +140,9 @@ public class DmaFileImpl implements DmaFile {
      * @return dma
      */
     @Override
-    public final DmaEntry getDmaEntry(final String name) {
-        return dmaMapByName.get(name);
+    public final Optional<DmaEntry> getDmaEntry(final String name) {
+        final DmaEntry entry = dmaMapByName.get(name);
+        return Optional.ofNullable(entry);
     }
 
     /**

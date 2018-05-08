@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Optional;
 
 import org.jill.dma.DmaEntry;
 import org.jill.dma.DmaFile;
@@ -187,7 +188,8 @@ public final class TileManagerImpl implements TileManager {
         // Tile set index
         Integer tileSetIndex;
         // Dma entry
-        DmaEntry dmaEntry;
+        Optional<DmaEntry> dmaEntry;
+        DmaEntry de;
         // Map code
         int mapCode;
         // Tile picture
@@ -202,16 +204,18 @@ public final class TileManagerImpl implements TileManager {
 
             dmaEntry = dmaContentFile.getDmaEntry(mapCode);
 
-            if (dmaEntry != null) {
-                tileSetIndex = dmaEntry.getTileset();
+            if (dmaEntry.isPresent()) {
+                de = dmaEntry.get();
+
+                tileSetIndex = de.getTileset();
 
                 // Get picture
                 tileArray = mapOfTile.get(tileSetIndex);
 
                 // Some Dma entry are invalid
                 if (tileArray != null
-                        && (dmaEntry.getTile() < tileArray.length)) {
-                    tile = tileArray[dmaEntry.getTile()];
+                        && (de.getTile() < tileArray.length)) {
+                    tile = tileArray[de.getTile()];
 
                     image = returnImageFromScreenColor(tile);
 

@@ -134,7 +134,7 @@ public class ShaFileExtractor {
             System.err.println("Filename of SHA file missing");
         } else {
             try {
-                showDumpPrint(param.getFileName());
+                showDumpPrint(param.getFileName().get());
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -220,18 +220,18 @@ public class ShaFileExtractor {
      * @param param parameter
      */
     private static void extract(final ExtractParameter param) {
-        if (param.getDirName() == null || "".equals(param.getDirName().trim())) {
+        if (!param.getDirName().isPresent()) {
             param.setDirName(".");
         }
 
-        if (param.getFileName() == null) {
-            System.err.println("Filename of SHA file missing");
-        } else {
+        if (param.getFileName().isPresent()) {
             try {
                 extractCore(param);
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        } else {
+            System.err.println("Filename of SHA file missing");
         }
     }
 
@@ -243,13 +243,13 @@ public class ShaFileExtractor {
      */
     private static void extractCore(final ExtractParameter param) throws IOException {
         final FileAbstractByte f = new FileAbstractByteImpl();
-        f.load(param.getFileName());
+        f.load(param.getFileName().get());
 
         final ShaFile shaFile = new ShaFileImpl();
         shaFile.load(f);
 
         final ShaTileSet[] shaTileset = shaFile.getShaTileSet();
-        final String tileFileNamePattern = param.getDirName().concat("/tileset_%d_tile_%d_%s.png");
+        final String tileFileNamePattern = param.getDirName().get().concat("/tileset_%d_tile_%d_%s.png");
         final boolean picture = param.isPicture();
         final boolean font = param.isFont();
         final boolean cgaMode = param.isCgaMode();

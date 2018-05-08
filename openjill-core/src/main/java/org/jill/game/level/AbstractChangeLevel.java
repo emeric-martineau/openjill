@@ -65,7 +65,7 @@ public abstract class AbstractChangeLevel extends
     /**
      * File name of new level.
      */
-    protected String newLevelFileName;
+    protected Optional<String> newLevelFileName;
 
     /**
      * Level number of new level.
@@ -112,7 +112,7 @@ public abstract class AbstractChangeLevel extends
      * @param levelFileName filename of level
      * @param levelNumber   number of level
      */
-    private void changeLevel(final String levelFileName,
+    private void changeLevel(final Optional<String> levelFileName,
             final int levelNumber) {
         this.newLevelFileName = levelFileName;
         this.newLevelNumber = levelNumber;
@@ -196,7 +196,7 @@ public abstract class AbstractChangeLevel extends
             // Load level
             LevelConfiguration cfgNewLevel = new JillLevelConfiguration(
                     this.levelConfiguration.getShaFileName(),
-                    Optional.of(this.newLevelFileName),
+                    this.newLevelFileName,
                     this.levelConfiguration.getVclFileName(),
                     this.levelConfiguration.getCfgFileName(),
                     this.levelConfiguration.getCfgSavePrefixe(),
@@ -261,7 +261,7 @@ public abstract class AbstractChangeLevel extends
 
             LevelConfiguration cfgNewLevel = new JillLevelConfiguration(
                     this.levelConfiguration.getShaFileName(),
-                    Optional.of(this.newLevelFileName),
+                    this.newLevelFileName,
                     this.levelConfiguration.getVclFileName(),
                     this.levelConfiguration.getCfgFileName(),
                     this.levelConfiguration.getCfgSavePrefixe(),
@@ -487,14 +487,14 @@ public abstract class AbstractChangeLevel extends
         switch (type) {
             case CHECK_POINT_CHANGING_LEVEL:
                 oe = (ObjectEntity) msg;
-                changeLevel(oe.getStringStackEntry().getValue(),
+                changeLevel(Optional.of(oe.getStringStackEntry().getValue()),
                         oe.getCounter());
                 break;
             case CHECK_POINT_CHANGING_LEVEL_PREVIOUS:
-                changeLevel(null, SaveData.MAP_LEVEL);
+                changeLevel(Optional.empty(), SaveData.MAP_LEVEL);
                 break;
             case DIE_RESTART_LEVEL:
-                changeLevel(getCurrentJnFileName(), RESTART_LEVEL_NUMBER);
+                changeLevel(Optional.of(getCurrentJnFileName()), RESTART_LEVEL_NUMBER);
                 break;
             default:
         }

@@ -5,11 +5,7 @@ package org.jill.jn.draw.cache;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.util.Enumeration;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Properties;
+import java.util.*;
 
 import org.jill.dma.DmaEntry;
 import org.jill.dma.DmaFile;
@@ -183,7 +179,8 @@ public class PictureCache {
         // Tile set index
         Integer tileSetIndex;
         // Dma entry
-        DmaEntry dmaEntry;
+        Optional<DmaEntry> dmaEntry;
+        DmaEntry de;
         // Map code
         int mapCode;
         // Tile picture
@@ -198,15 +195,16 @@ public class PictureCache {
 
             dmaEntry = dmaFile.getDmaEntry(mapCode);
 
-            if (dmaEntry != null) {
-                tileSetIndex = dmaEntry.getTileset();
+            if (dmaEntry.isPresent()) {
+                de = dmaEntry.get();
+                tileSetIndex = de.getTileset();
 
                 // Get picture
                 tileArray = mapOfTile.get(tileSetIndex);
 
                 // Some Dma entry are invalid
-                if (tileArray != null && (dmaEntry.getTile() < tileArray.length)) {
-                    tile = tileArray[dmaEntry.getTile()];
+                if (tileArray != null && (de.getTile() < tileArray.length)) {
+                    tile = tileArray[de.getTile()];
 
                     if (typeScreen == ScreenType.CGA) {
                         tilePicture = tile.getPictureCga();

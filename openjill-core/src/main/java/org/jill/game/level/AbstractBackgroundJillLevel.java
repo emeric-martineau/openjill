@@ -7,6 +7,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -215,21 +216,24 @@ public abstract class AbstractBackgroundJillLevel
         // Current background object
         BackgroundEntity backObj;
         // Dma entry
+        Optional<DmaEntry> dmaEntry;
         DmaEntry de;
 
         for (int indexX = startX; indexX < endX; indexX++) {
             for (int indexY = startY; indexY < endY; indexY++) {
                 mapCode = backgroundLayer.getMapCode(indexX, indexY);
-                de = dmaFile.getDmaEntry(mapCode);
+                dmaEntry = dmaFile.getDmaEntry(mapCode);
 
-                if (de == null) {
+                if (dmaEntry.isPresent()) {
+                    de = dmaEntry.get();
+                } else {
                     LOGGER.log(Level.SEVERE,
                             String.format(
                                     "DmaEntry '%d' not found at %d/%d", mapCode,
                                     indexX, indexY));
 
                     // Stange bug in map !
-                    de = dmaFile.getDmaEntry(0);
+                    de = dmaFile.getDmaEntry(0).get();
                 }
 
                 backParam = ObjectInstanceFactory.getNewBackParam();
@@ -334,22 +338,25 @@ public abstract class AbstractBackgroundJillLevel
         // Current background object
         BackgroundEntity backObj;
         // Dma entry
+        Optional<DmaEntry> dmaEntry;
         DmaEntry de;
 
         if (mapName == null) {
-            de = dmaFile.getDmaEntry(mapCode);
+            dmaEntry = dmaFile.getDmaEntry(mapCode);
         } else {
-            de = dmaFile.getDmaEntry(mapName);
+            dmaEntry = dmaFile.getDmaEntry(mapName);
         }
 
-        if (de == null) {
+        if (dmaEntry.isPresent()) {
+            de = dmaEntry.get();
+        } else {
             LOGGER.log(Level.SEVERE,
                     String.format(
                             "DmaEntry '%d' not found at %d/%d", mapCode,
                             indexX, indexY));
 
             // Strange bug in map !
-            de = dmaFile.getDmaEntry(0);
+            de = dmaFile.getDmaEntry(0).get();
         }
 
         backParam = ObjectInstanceFactory.getNewBackParam();

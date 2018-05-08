@@ -102,7 +102,7 @@ public abstract class AbstractExecutingStdPlayerLevel
 
         this.messageDispatcher.sendMessage(
                 EnumMessageType.CHANGE_PLAYER_CHARACTER,
-                this.objectCache.getInvetoryName(getPlayer().getClass()));
+                this.objectCache.getInvetoryName(getPlayer().get().getClass()));
     }
 
     /**
@@ -129,7 +129,7 @@ public abstract class AbstractExecutingStdPlayerLevel
                 = gameScreen.getOffset();
         final RectangleConf gameLevelStart = gameScreen.getLevelStart();
 
-        final ObjectEntity player = getPlayer();
+        final ObjectEntity player = getPlayer().get();
 
         // init center screen
         int offsetX = Math.max(
@@ -190,7 +190,7 @@ public abstract class AbstractExecutingStdPlayerLevel
 
         keyboardLayout.clear();
 
-        final ObjectEntity player = getPlayer();
+        final ObjectEntity player = getPlayer().get();
 
         // Send msgTouch to background
         final int playerX = player.getX();
@@ -217,7 +217,7 @@ public abstract class AbstractExecutingStdPlayerLevel
      * Compute the special offset of screen when player no move and up/down.
      */
     private void computeMoveScreen() {
-        final ObjectEntity player = getPlayer();
+        final ObjectEntity player = getPlayer().get();
 
         int ySpeed = player.getySpeed();
 
@@ -247,7 +247,7 @@ public abstract class AbstractExecutingStdPlayerLevel
      * Center screen with player position.
      */
     protected void centerScreen() {
-        final ObjectEntity player = getPlayer();
+        final ObjectEntity player = getPlayer().get();
 
         final GameAreaConf gameScreen = this.statusBar.getGameAreaConf();
         final GameAreaBorderConf border = gameScreen.getBorder();
@@ -287,7 +287,7 @@ public abstract class AbstractExecutingStdPlayerLevel
 
     @Override
     protected final void doPlayerFire() {
-        final ObjectEntity player = getPlayer();
+        final ObjectEntity player = getPlayer().get();
 
         // Check if player can fire !
         if (player.canFire()) {
@@ -342,7 +342,7 @@ public abstract class AbstractExecutingStdPlayerLevel
 
         boolean canFireThisWeapon;
 
-        if (getPlayer().getInfo1()
+        if (getPlayer().get().getInfo1()
                 == AbstractPlayerManager.X_SPEED_MIDDLE) {
             canFireThisWeapon = false;
         } else {
@@ -411,7 +411,7 @@ public abstract class AbstractExecutingStdPlayerLevel
 
         objParam.setObject(weapon);
 
-        final ObjectEntity player = getPlayer();
+        final ObjectEntity player = getPlayer().get();
 
         weapon.setX(player.getX());
         weapon.setY(player.getY());

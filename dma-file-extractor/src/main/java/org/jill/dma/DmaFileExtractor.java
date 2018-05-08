@@ -74,14 +74,14 @@ public class DmaFileExtractor {
         final DmaFileImpl dmaFile = new DmaFileImpl();
         dmaFile.load(f);
         final Iterator<Integer> it = dmaFile.getDmaEntryIterator();
-        DmaEntryImpl currentEntry;
+        DmaEntry currentEntry;
 
 //        String tileFileName ;
 
-        final DmaEntryImpl[] arrayDma = new DmaEntryImpl[dmaFile.getDmaEntryCount()];
+        final DmaEntry[] arrayDma = new DmaEntry[dmaFile.getDmaEntryCount()];
 
         while (it.hasNext()) {
-            currentEntry = dmaFile.getDmaEntry(it.next());
+            currentEntry = dmaFile.getDmaEntry(it.next()).get();
 
             arrayDma[currentEntry.getIndex()] = currentEntry;
         }
@@ -89,7 +89,7 @@ public class DmaFileExtractor {
         System.out.println("+--------+------+---------+------+----------+-----");
         System.out.println("| Offset |  Id  | Tileset | Tile |  Flags   | Name");
         System.out.println("+--------+------+---------+------+----------+-----");
-        for (DmaEntryImpl arrayDma1 : arrayDma) {
+        for (DmaEntry arrayDma1 : arrayDma) {
             currentEntry = arrayDma1;
 //            tileFileName = String.format(tileFileNamePattern,
 //                    new Object[] {

@@ -61,7 +61,7 @@ public class LoadNewLevelHandler extends AbstractChangeLevel {
 
             //this.inventoryArea.setLife(saveData.getHealth());
         } else {
-            ObjectEntity player = getPlayer();
+            ObjectEntity player = getPlayer().get();
 
             // New level.
             // In start of map level, don't search check point
@@ -76,12 +76,13 @@ public class LoadNewLevelHandler extends AbstractChangeLevel {
                 // Search checkpoint to move player on only on new map
                 player.setState(PlayerState.BEGIN);
 
-                final ObjectEntity checkPoint = findCheckPoint(level);
+                final Optional<ObjectEntity> checkPoint = findCheckPoint(level);
 
-                if (checkPoint != null) {
-                    player.setX(checkPoint.getX());
-                    player.setY(
-                            checkPoint.getY() - checkPoint.getHeight());
+                if (checkPoint.isPresent()) {
+                    final ObjectEntity chkPt = checkPoint.get();
+
+                    player.setX(chkPt.getX());
+                    player.setY(chkPt.getY() - chkPt.getHeight());
                 }
             }
 
@@ -152,14 +153,14 @@ public class LoadNewLevelHandler extends AbstractChangeLevel {
      * @param level level number
      * @return checkpoint or null
      */
-    private ObjectEntity findCheckPoint(final int level) {
+    private Optional<ObjectEntity> findCheckPoint(final int level) {
         for (ObjectEntity obj : this.listObject) {
             if (obj.isCheckPoint() && obj.getCounter() == level) {
-                return obj;
+                return Optional.of(obj);
             }
         }
 
-        return null;
+        return Optional.empty();
     }
 
     @Override

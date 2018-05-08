@@ -252,6 +252,25 @@ public abstract class AbstractObjectJillLevel
     }
 
     /**
+     * Player.
+     *
+     * @return the player
+     */
+    protected Optional<ObjectEntity> getPlayer() {
+        ObjectEntity oe = null;
+
+        for (ObjectEntity currentObject : this.listObject) {
+            if (currentObject.isPlayer()) {
+                oe = currentObject;
+
+                break;
+            }
+        }
+
+        return Optional.ofNullable(oe);
+    }
+
+    /**
      * Create object message.
      *
      * @param com message
@@ -288,24 +307,5 @@ public abstract class AbstractObjectJillLevel
             LOGGER.severe(String.format("Can't find object type '%d' to create"
                     + "it at runtime", oe.getType()));
         }
-    }
-
-    /**
-     * Player.
-     *
-     * @return the player
-     */
-    protected ObjectEntity getPlayer() {
-        ObjectEntity oe = null;
-
-        for (ObjectEntity currentObject : this.listObject) {
-            if (currentObject.isPlayer()) {
-                oe = currentObject;
-
-                break;
-            }
-        }
-
-        return oe;
     }
 }

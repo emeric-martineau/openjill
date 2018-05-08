@@ -430,7 +430,7 @@ public abstract class AbstractExecutingStdLevel extends AbstractMenuJillLevel {
 
         visibleScreenRect.setLocation(lOffsetX, lOffsetY);
 
-        final ObjectEntity player = getPlayer();
+        final ObjectEntity player = getPlayer().get();
 
         // Set player bounds
         obj2Rect.setBounds(player.getX(), player.getY(), player.getWidth(),

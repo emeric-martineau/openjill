@@ -2,6 +2,7 @@ package org.jill.dma;
 
 import java.io.IOException;
 import java.util.Iterator;
+import java.util.Optional;
 
 import org.jill.file.FileAbstractByte;
 
@@ -34,7 +35,7 @@ public interface DmaFile {
      * @param id id of entry
      * @return dma
      */
-    DmaEntry getDmaEntry(int id);
+    Optional<DmaEntry> getDmaEntry(int id);
 
     /**
      * Get Dma Entry.
@@ -42,7 +43,7 @@ public interface DmaFile {
      * @param name name of entry
      * @return dma
      */
-    DmaEntry getDmaEntry(String name);
+    Optional<DmaEntry> getDmaEntry(String name);
 
     /**
      * Dma count.

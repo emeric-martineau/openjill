@@ -3,6 +3,8 @@
  */
 package org.jill.sha;
 
+import java.util.Optional;
+
 /**
  * Parameter of extract
  *
@@ -37,17 +39,17 @@ public class ExtractParameter {
     /**
      * File name of sha file
      */
-    private String fileName;
+    private Optional<String> fileName;
 
     /**
      * Output dir
      */
-    private String dirName;
+    private Optional<String> dirName;
 
     /**
      * @return fileName
      */
-    public String getFileName() {
+    public Optional<String> getFileName() {
         return fileName;
     }
 
@@ -55,13 +57,17 @@ public class ExtractParameter {
      * @param fileName fileName
      */
     public void setFileName(String fileName) {
-        this.fileName = fileName;
+        if (fileName == null || fileName.trim().length() == 0) {
+            this.fileName = Optional.empty();
+        } else {
+            this.fileName = Optional.of(fileName);
+        }
     }
 
     /**
      * @return dirName
      */
-    public String getDirName() {
+    public Optional<String> getDirName() {
         return dirName;
     }
 
@@ -69,7 +75,11 @@ public class ExtractParameter {
      * @param dirName dirName � d�finir
      */
     public void setDirName(String dirName) {
-        this.dirName = dirName;
+        if (dirName == null || dirName.trim().length() == 0) {
+            this.dirName = Optional.empty();
+        } else {
+            this.dirName = Optional.of(dirName);
+        }
     }
 
     /**
