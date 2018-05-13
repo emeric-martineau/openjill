@@ -1,6 +1,7 @@
 package org.jill.game.entities.obj.player.firebird;
 
 import java.awt.image.BufferedImage;
+import java.util.Optional;
 
 import org.jill.game.entities.obj.player.AbstractPlayerInteractionManager;
 import org.jill.game.entities.obj.player.PalyerActionPerState;
@@ -157,7 +158,7 @@ public final class FirebirdPlayerManager
             final int tileIndex) {
         for (int index = 0; index < baseTileNumber; index++) {
             images[index] = this.pictureCache.getImage(tileSetIndex,
-                    tileIndex + index);
+                    tileIndex + index).get();
         }
 
         int indexArray = baseTileNumber;
@@ -308,7 +309,7 @@ public final class FirebirdPlayerManager
 
     @Override
     protected void killPlayer(final int typeOfDeath,
-            final BackgroundEntity senderBack) {
+            final Optional<BackgroundEntity> senderBack) {
         final ObjectEntity stdPlayer = createPlayer();
 
         stdPlayer.setX(getX());
@@ -321,7 +322,7 @@ public final class FirebirdPlayerManager
         this.messageDispatcher.sendMessage(EnumMessageType.REPLACE_OBJECT, rom);
 
         // Simulate kill message
-        stdPlayer.msgKill(senderBack, 0, typeOfDeath);
+        stdPlayer.msgKill(senderBack.get(), 0, typeOfDeath);
     }
 
     /**

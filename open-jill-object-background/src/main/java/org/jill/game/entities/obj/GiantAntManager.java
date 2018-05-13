@@ -109,7 +109,7 @@ public final class GiantAntManager extends AbstractHitPlayerObjectEntity {
 
         for (int index = tileIndex; index < end; index++) {
             images[index - tileIndex] = this.pictureCache.getImage(tileSetIndex,
-                    index);
+                    index).get();
         }
     }
 

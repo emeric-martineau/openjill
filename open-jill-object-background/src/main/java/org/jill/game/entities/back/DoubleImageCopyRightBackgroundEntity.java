@@ -44,7 +44,7 @@ public final class DoubleImageCopyRightBackgroundEntity
     @Override
     public void msgDraw() {
         final BufferedImage thisPicture =
-                getPictureCache().getBackgroundPicture(getMapCode());
+                getPictureCache().getBackgroundPicture(getMapCode()).get();
 
         int theX = getX();
 

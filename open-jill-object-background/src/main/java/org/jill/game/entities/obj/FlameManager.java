@@ -69,7 +69,7 @@ public final class FlameManager extends AbstractFireHitPlayerObject {
         for (int index = 0; index < numberTileSet; index++) {
             images[indexArray]
                     = this.pictureCache.getImage(tileSetIndex, tileIndex
-                    + index);
+                    + index).get();
             images[indexArray + 1] = images[indexArray];
 
             indexArray += 2;

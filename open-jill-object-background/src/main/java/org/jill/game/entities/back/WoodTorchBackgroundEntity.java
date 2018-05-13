@@ -78,7 +78,7 @@ public class WoodTorchBackgroundEntity
 
     @Override
     public BufferedImage getPicture() {
-        return getPictureCache().getBackgroundPicture(getMapCode());
+        return getPictureCache().getBackgroundPicture(getMapCode()).get();
     }
 
     @Override

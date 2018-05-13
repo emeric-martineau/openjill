@@ -54,7 +54,7 @@ public abstract class AbstractOorBackgroundEntity extends AbstractSynchronisedIm
 
         for (int index = 0; index < images.length; index++) {
             images[index] = getPictureCache().getImage(tileSetIndex, tileIndex
-                    + index);
+                    + index).get();
         }
 
         if (getPictureSync(this.getClass()) == null) {

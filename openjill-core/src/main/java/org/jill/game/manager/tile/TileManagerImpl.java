@@ -234,8 +234,8 @@ public final class TileManagerImpl implements TileManager {
      * @return null if background not found
      */
     @Override
-    public BufferedImage getBackgroundPicture(final int mapCode) {
-        return mapBackgroundPicture.get(mapCode);
+    public Optional<BufferedImage> getBackgroundPicture(final int mapCode) {
+        return Optional.ofNullable(mapBackgroundPicture.get(mapCode));
     }
 
     /**
@@ -246,7 +246,7 @@ public final class TileManagerImpl implements TileManager {
      * @return can be return null if picture not found
      */
     @Override
-    public BufferedImage getImage(final int tileSetIndex,
+    public Optional<BufferedImage> getImage(final int tileSetIndex,
             final int tileIndex) {
         BufferedImage image = null;
 
@@ -268,7 +268,7 @@ public final class TileManagerImpl implements TileManager {
             imageCache.put(cacheKey, image);
         }
 
-        return image;
+        return Optional.ofNullable(image);
     }
 
     /**

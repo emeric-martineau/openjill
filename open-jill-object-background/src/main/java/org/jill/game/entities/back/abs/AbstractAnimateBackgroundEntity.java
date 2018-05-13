@@ -54,7 +54,7 @@ public abstract class AbstractAnimateBackgroundEntity extends
 
         for (int index = 0; index < images.length; index++) {
             images[index] = createPicture(getPictureCache().getImage(
-                    tileSetIndex, tileIndex), backColor);
+                    tileSetIndex, tileIndex).get(), backColor);
 
             tileIndex += increment;
         }

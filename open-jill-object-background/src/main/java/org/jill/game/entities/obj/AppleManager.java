@@ -56,7 +56,7 @@ public final class AppleManager extends AbstractParameterObjectEntity {
         for (int index = 0; index < numberTileSet; index++) {
             this.images[indexArray]
                     = this.pictureCache.getImage(tileSetIndex, tileIndex
-                    + index);
+                    + index).get();
             this.images[indexArray - 1] = this.images[indexArray];
 
             indexArray -= 2;

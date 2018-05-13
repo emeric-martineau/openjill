@@ -99,7 +99,7 @@ public final class BonusManager extends AbstractParameterObjectEntity {
         final int tileIndex = Integer.valueOf(keySplit[1]);
         final int tileSetIndex = Integer.valueOf(keySplit[0]);
 
-        this.images = this.pictureCache.getImage(tileSetIndex, tileIndex);
+        this.images = this.pictureCache.getImage(tileSetIndex, tileIndex).get();
 
         final String dontRemove = getConfString("dontRemove");
 

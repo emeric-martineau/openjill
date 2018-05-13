@@ -95,7 +95,7 @@ public final class CrabManager extends AbstractHitPlayerObjectEntity {
 
         for (int index = tileIndex; index < end; index++) {
             images[index] = this.pictureCache.getImage(tileSetIndex,
-                    index);
+                    index).get();
         }
     }
 

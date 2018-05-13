@@ -36,7 +36,7 @@ public final class HugeLetterTileManager extends ObjectEntityImpl {
 //            hugeLetter[tileIndex] = pictureCache.getImage(33, tileIndex);
 //        }
 
-        hugeLetter = pictureCache.getImage(33, getxSpeed());
+        hugeLetter = pictureCache.getImage(33, getxSpeed()).get();
     }
 
     @Override

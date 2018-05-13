@@ -56,7 +56,7 @@ public final class SharedCode {
         for (int index = 0; index < numberTileSet; index++) {
             images[indexArray]
                     = pictureCache.getImage(tileSetIndex, tileIndex
-                    + index);
+                    + index).get();
             images[indexArray + 1] = images[indexArray];
 
             indexArray += 2;

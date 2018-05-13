@@ -90,13 +90,13 @@ public final class FirebirdManager extends AbstractFireHitPlayerObject {
         initPicture(this.rightImages, baseTileNumber, tileSetIndex,
                 tileIndex);
         this.rightImages[this.turnIndexPicture] =
-                this.pictureCache.getImage(tileSetIndex, tileTurnIndex);
+                this.pictureCache.getImage(tileSetIndex, tileTurnIndex).get();
 
         // Init Left
         initPicture(this.leftImages, baseTileNumber, tileSetIndex,
                 tileIndex + baseTileNumber);
         this.leftImages[this.turnIndexPicture] = this.pictureCache.getImage(
-                tileSetIndex, tileTurnIndex + turnTileNumber);
+                tileSetIndex, tileTurnIndex + turnTileNumber).get();
 
         // Search block
         this.backgroundObject = objectParam.getBackgroundObject();
@@ -120,7 +120,7 @@ public final class FirebirdManager extends AbstractFireHitPlayerObject {
             final int tileIndex) {
         for (int index = 0; index < baseTileNumber; index++) {
             images[index] = this.pictureCache.getImage(tileSetIndex,
-                    tileIndex + index);
+                    tileIndex + index).get();
         }
 
         int indexArray = baseTileNumber;

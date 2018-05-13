@@ -70,7 +70,7 @@ public final class KillLavaBackgroundEntity extends
 
         for (int index = 0; index < this.images.length; index++) {
             this.images[index] = getPictureCache().getImage(tileSetIndex,
-                    tileIndex + index);
+                    tileIndex + index).get();
         }
 
         if (getPictureSync(this.getClass()) == null) {

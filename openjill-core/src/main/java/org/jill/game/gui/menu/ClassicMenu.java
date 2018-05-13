@@ -61,7 +61,7 @@ public final class ClassicMenu extends AbstractStdMenu {
      */
     private BufferedImage getImage(final TileManager pictureCache,
             final PictureConf conf) {
-        return pictureCache.getImage(conf.getTileset(), conf.getTile());
+        return pictureCache.getImage(conf.getTileset(), conf.getTile()).get();
     }
 
     /**

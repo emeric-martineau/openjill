@@ -73,7 +73,7 @@ public class AbstractMessageBox {
             final int x, final int y, final Graphics2D g2) {
         // Left upper corner
         final BufferedImage tilePicture = pictureCache.getImage(
-                tileSetIndex, tileIndex);
+                tileSetIndex, tileIndex).get();
         g2.drawImage(tilePicture, x, y, null);
     }
 }

@@ -156,7 +156,7 @@ public final class SnakeManager extends AbstractHitPlayerObjectEntity {
 
         for (int index = 0; index < tiles.length; index++) {
             images[index] = this.pictureCache.getImage(tileSetIndex,
-                    Integer.valueOf(tiles[index]));
+                    Integer.valueOf(tiles[index])).get();
         }
     }
 

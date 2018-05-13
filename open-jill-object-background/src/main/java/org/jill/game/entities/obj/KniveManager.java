@@ -120,7 +120,7 @@ public final class KniveManager extends AbstractParameterObjectEntity {
         final int tileIndex = getConfInteger("tile");
         final int tileSetIndex = getConfInteger("tileSet");
 
-        this.images = this.pictureCache.getImage(tileSetIndex, tileIndex);
+        this.images = this.pictureCache.getImage(tileSetIndex, tileIndex).get();
 
         final int initY = getConfInteger("initY");
         this.downMaxMoveY = getConfInteger("downMaxMoveY");

@@ -6,6 +6,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
+import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -113,7 +114,8 @@ public final class StatusBar implements InterfaceMessageGameHandler {
                             filename),
                     ex);
 
-            mc = null;
+            throw new RuntimeException(String.format("Unable to load config for statusbar '%s'",
+                    filename), ex);
         }
 
         return mc;
@@ -136,7 +138,7 @@ public final class StatusBar implements InterfaceMessageGameHandler {
                     this.graphic2d);
         }
 
-        drawMessageBar(this.graphic2d, null, 0);
+        drawMessageBar(this.graphic2d, Optional.empty(), 0);
 
         // Draw text
         for (TextToDraw ttd : this.conf.getText()) {
@@ -160,7 +162,7 @@ public final class StatusBar implements InterfaceMessageGameHandler {
      * @param msg   message
      * @param color color
      */
-    private void drawMessageBar(final Graphics2D g2, final String msg,
+    private void drawMessageBar(final Graphics2D g2, final Optional<String> msg,
             final int color) {
         final RectangleConf mb = this.conf.getMessageBar();
         final Color bgcolor = pictureCache.getColorMap()[
@@ -169,11 +171,11 @@ public final class StatusBar implements InterfaceMessageGameHandler {
 
         g2.fillRect(mb.getX(), mb.getY(), mb.getWidth(), mb.getHeight());
 
-        if (msg != null) {
+        if (msg.isPresent()) {
             TextManager textManager = this.pictureCache.getTextManager();
 
             // Create picture
-            BufferedImage bi = textManager.createSmallText(msg, color,
+            BufferedImage bi = textManager.createSmallText(msg.get(), color,
                     TextManager.BACKGROUND_COLOR_NONE);
 
             final int x = (this.statusBar.getWidth() - bi.getWidth()) / 2;
@@ -196,7 +198,7 @@ public final class StatusBar implements InterfaceMessageGameHandler {
             final int x, final int y, final Graphics2D g2) {
         // Left upper corner
         final BufferedImage tilePicture = pictureCache.getImage(
-                tileSetIndex, tileIndex);
+                tileSetIndex, tileIndex).get();
         g2.drawImage(tilePicture, x, y, null);
     }
 
@@ -210,7 +212,7 @@ public final class StatusBar implements InterfaceMessageGameHandler {
             waitTimeBeforeClearText--;
         } else if (waitTimeBeforeClearText == 0) {
             // Clear text
-            drawMessageBar(graphic2d, null, 0);
+            drawMessageBar(graphic2d, Optional.empty(), 0);
             waitTimeBeforeClearText--;
         }
 
@@ -327,7 +329,7 @@ public final class StatusBar implements InterfaceMessageGameHandler {
         switch (type) {
             case MESSAGE_STATUS_BAR:
                 StatusBarTextMessage sbt = (StatusBarTextMessage) msg;
-                drawMessageBar(graphic2d, sbt.getMessage(), sbt.getColor());
+                drawMessageBar(graphic2d, Optional.of(sbt.getMessage()), sbt.getColor());
                 this.waitTimeBeforeClearText = sbt.getDuration();
                 break;
             default:

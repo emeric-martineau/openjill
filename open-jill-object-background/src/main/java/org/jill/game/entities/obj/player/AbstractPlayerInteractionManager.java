@@ -14,6 +14,8 @@ import org.jill.openjill.core.api.message.statusbar.inventory.EnumInventoryObjec
 import org.jill.openjill.core.api.message.statusbar.inventory.InventoryItemMessage;
 import org.jill.openjill.core.api.message.statusbar.inventory.InventoryLifeMessage;
 
+import java.util.Optional;
+
 /**
  * Class to implement InterfaceMessageGameHandler methods.
  *
@@ -136,24 +138,27 @@ public abstract class AbstractPlayerInteractionManager
      * @param nbLife      number life
      * @param typeOfDeath type of death
      */
-    private void msgKill(final ObjectEntity senderObj,
-            final BackgroundEntity senderBack,
+    private void msgKill(final Optional<ObjectEntity> senderObj,
+            final Optional<BackgroundEntity> senderBack,
             final int nbLife, final int typeOfDeath) {
         // senderObj was null when background
         if (!PalyerActionPerState.canDo(this.state,
                 PlayerAction.INVINCIBLE)) {
-            BackgroundEntity senderBack2 = senderBack;
+            Optional<BackgroundEntity> senderBack2;
 
             InventoryLifeMessage.STD_MESSAGE.setLife(nbLife);
 
             // In special case if sender is not null and typeOfDeath is other
             // force hit player
-            if (senderObj != null &&
+            if (senderObj.isPresent() &&
                     typeOfDeath == PlayerState.DIE_SUB_STATE_OTHER_BACK) {
-                senderBack2 = getBackgroundObject()[
-                        this.getX() / JillConst.getBlockSize()][
-                        this.getY() / JillConst.getBlockSize()];
+                senderBack2 = Optional.of(
+                        getBackgroundObject()[
+                            this.getX() / JillConst.getBlockSize()][
+                            this.getY() / JillConst.getBlockSize()]);
             } else {
+                senderBack2 = senderBack;
+
                 InventoryLifeMessage.STD_MESSAGE.setSender(senderObj);
             }
 
@@ -170,13 +175,13 @@ public abstract class AbstractPlayerInteractionManager
     @Override
     public void msgKill(final ObjectEntity sender, final int nbLife,
             final int typeOfDeath) {
-        msgKill(sender, null, nbLife, typeOfDeath);
+        msgKill(Optional.of(sender), Optional.empty(), nbLife, typeOfDeath);
     }
 
     @Override
     public void msgKill(final BackgroundEntity sender,
             final int nbLife, final int typeOfDeath) {
-        msgKill(null, sender, nbLife, typeOfDeath);
+        msgKill(Optional.empty(), Optional.of(sender), nbLife, typeOfDeath);
     }
 
     /**
@@ -186,5 +191,5 @@ public abstract class AbstractPlayerInteractionManager
      * @param senderBack  back kill
      */
     protected abstract void killPlayer(final int typeOfDeath,
-            final BackgroundEntity senderBack);
+            final Optional<BackgroundEntity> senderBack);
 }

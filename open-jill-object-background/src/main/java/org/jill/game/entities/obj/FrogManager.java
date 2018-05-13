@@ -110,12 +110,12 @@ public final class FrogManager extends AbstractHitPlayerObjectEntity {
 
         for (int index = 0; index < middle; index++) {
             this.rightImages[index] = this.pictureCache.getImage(
-                    tileSetIndex, tileIndex + index);
+                    tileSetIndex, tileIndex + index).get();
         }
 
         for (int index = 0; index < middle; index++) {
             this.leftImages[index] = this.pictureCache.getImage(
-                    tileSetIndex, tileIndex + index + middle);
+                    tileSetIndex, tileIndex + index + middle).get();
         }
 
         this.killme = new ObjectListMessage(this, false);

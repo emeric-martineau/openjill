@@ -82,7 +82,7 @@ public final class BubblesManager extends AbstractParameterObjectEntity {
         final int tileSetIndex = getConfInteger("tileSet");
 
         this.image = this.pictureCache
-                .getImage(tileSetIndex, tileIndex + getCounter());
+                .getImage(tileSetIndex, tileIndex + getCounter()).get();
     }
 
     /**

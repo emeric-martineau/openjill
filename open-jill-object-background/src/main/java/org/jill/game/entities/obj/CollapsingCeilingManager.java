@@ -69,7 +69,7 @@ public final class CollapsingCeilingManager
         final int tileIndex = getConfInteger("tile");
         final int tileSetIndex = getConfInteger("tileSet");
 
-        this.image = this.pictureCache.getImage(tileSetIndex, tileIndex);
+        this.image = this.pictureCache.getImage(tileSetIndex, tileIndex).get();
 
         this.messageDispatcher.addHandler(EnumMessageType.TRIGGER, this);
 

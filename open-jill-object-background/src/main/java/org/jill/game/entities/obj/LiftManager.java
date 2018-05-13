@@ -78,7 +78,7 @@ public final class LiftManager extends AbstractParameterObjectEntity {
         final int tileIndex = getConfInteger("tile");
         final int tileSetIndex = getConfInteger("tileSet");
 
-        this.image = this.pictureCache.getImage(tileSetIndex, tileIndex);
+        this.image = this.pictureCache.getImage(tileSetIndex, tileIndex).get();
 
         String[] className = getConfString("onlyForObject").split(",");
 

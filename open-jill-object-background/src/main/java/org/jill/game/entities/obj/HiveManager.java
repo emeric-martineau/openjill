@@ -95,7 +95,7 @@ public final class HiveManager extends AbstractParameterObjectEntity {
         for (int index = 0; index < numberTileSet; index++) {
             this.images[index]
                     = this.pictureCache.getImage(tileSetIndex, tileIndex
-                    + index);
+                    + index).get();
         }
 
         // Remove me from list of object (= kill me)

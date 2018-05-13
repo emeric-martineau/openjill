@@ -102,7 +102,7 @@ public final class BeesManager extends AbstractHitPlayerObjectEntity {
         for (int index = 0; index < numberTileSet; index++) {
             this.images[index]
                     = this.pictureCache.getImage(tileSetIndex, tileIndex
-                    + index);
+                    + index).get();
         }
 
         setWidth(this.images[0].getWidth());

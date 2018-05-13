@@ -56,7 +56,7 @@ public abstract class AbstractSynchronisedImageObjectEntity
         for (int index = 0; index < this.images.length; index++) {
             this.images[this.images.length - 1 - index]
                     = this.pictureCache.getImage(tileSetIndex, tileIndex
-                    + index);
+                    + index).get();
         }
 
         if (getPictureSync(this.getClass()) == null) {

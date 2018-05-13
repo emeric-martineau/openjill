@@ -2,6 +2,7 @@ package org.jill.game.entities.obj.player;
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.util.Optional;
 import java.util.logging.Logger;
 
 import org.jill.game.entities.obj.bullet.BulletObjectFactory;
@@ -125,13 +126,13 @@ public final class PlayerManager extends AbstractPlayerManager {
 
         stBegin[PlayerBeginConst.PICTURE_HEAD_DOWN]
                 = pictureCache.getImage(PlayerBeginConst.TILESET_INDEX,
-                PlayerBeginConst.TILE_HEAD_DOWN_INDEX);
+                PlayerBeginConst.TILE_HEAD_DOWN_INDEX).get();
         stBegin[PlayerBeginConst.PICTURE_HEAD_NORMAL]
                 = pictureCache.getImage(PlayerBeginConst.TILESET_INDEX,
-                PlayerBeginConst.TILE_HEAD_NORMAL_INDEX);
+                PlayerBeginConst.TILE_HEAD_NORMAL_INDEX).get();
         stBegin[PlayerBeginConst.PICTURE_HEAD_UP]
                 = pictureCache.getImage(PlayerBeginConst.TILESET_INDEX,
-                PlayerBeginConst.TILE_HEAD_UP_INDEX);
+                PlayerBeginConst.TILE_HEAD_UP_INDEX).get();
 
         initJumpingPicture();
 
@@ -139,31 +140,31 @@ public final class PlayerManager extends AbstractPlayerManager {
 
         for (int index = 0; index < stStandLeftRunning.length; index++) {
             stStandLeftRunning[index] = pictureCache.getImage(
-                    PlayerStandConst.TILESET_INDEX, index);
+                    PlayerStandConst.TILESET_INDEX, index).get();
         }
 
         for (int index = 0; index < stStandLeftRunning.length; index++) {
             stStandRightRunning[index] = pictureCache.getImage(
                     PlayerStandConst.TILESET_INDEX, index
-                            + PlayerStandConst.TILE_LEFT_RUNNING_INDEX);
+                            + PlayerStandConst.TILE_LEFT_RUNNING_INDEX).get();
         }
 
         // Stand picture
         stStandPicture[0] = pictureCache.getImage(
                 PlayerStandConst.TILESET_INDEX,
-                PlayerStandConst.TILE_RIGHT_INDEX);
+                PlayerStandConst.TILE_RIGHT_INDEX).get();
         stStandPicture[1] = pictureCache.getImage(
                 PlayerStandConst.TILESET_INDEX,
-                PlayerStandConst.TILE_MIDDLE_INDEX);
+                PlayerStandConst.TILE_MIDDLE_INDEX).get();
         stStandPicture[2] = pictureCache.getImage(
                 PlayerStandConst.TILESET_INDEX,
-                PlayerStandConst.TILE_LEFT_INDEX);
+                PlayerStandConst.TILE_LEFT_INDEX).get();
 
         initClimbPicture();
 
         stStandJillWaitWithArm = pictureCache.getImage(
                 PlayerStandConst.TILESET_INDEX,
-                PlayerStandConst.TILE_ARM_INDEX);
+                PlayerStandConst.TILE_ARM_INDEX).get();
 
         initDiePicture();
 
@@ -190,12 +191,12 @@ public final class PlayerManager extends AbstractPlayerManager {
         int i = 0;
         final int i2 = 3;
         stClimbPicture[i++] = pictureCache.getImage(
-                PlayerClimbConst.TILESET_INDEX, PlayerClimbConst.TILE_ONE);
+                PlayerClimbConst.TILESET_INDEX, PlayerClimbConst.TILE_ONE).get();
         stClimbPicture[i++] = stClimbPicture[0];
         stClimbPicture[i++] = pictureCache.getImage(
-                PlayerClimbConst.TILESET_INDEX, PlayerClimbConst.TILE_TWO);
+                PlayerClimbConst.TILESET_INDEX, PlayerClimbConst.TILE_TWO).get();
         stClimbPicture[i++] = pictureCache.getImage(
-                PlayerClimbConst.TILESET_INDEX, PlayerClimbConst.TILE_THREE);
+                PlayerClimbConst.TILESET_INDEX, PlayerClimbConst.TILE_THREE).get();
         stClimbPicture[i++] = stClimbPicture[i2];
         stClimbPicture[i] = stClimbPicture[2];
     }
@@ -214,19 +215,19 @@ public final class PlayerManager extends AbstractPlayerManager {
         for (int index = 0; index < stJumping.length; index++) {
             stJumping[index] = pictureCache.getImage(
                     PlayerJumpingConst.TILESET_INDEX, index
-                            + PlayerJumpingConst.TILE_MIDDLE_INDEX);
+                            + PlayerJumpingConst.TILE_MIDDLE_INDEX).get();
         }
 
         for (int index = 0; index < stJumpingLeft.length; index++) {
             stJumpingLeft[index] = pictureCache.getImage(
                     PlayerJumpingConst.TILESET_INDEX, index
-                            + PlayerJumpingConst.TILE_LEFT_INDEX);
+                            + PlayerJumpingConst.TILE_LEFT_INDEX).get();
         }
 
         for (int index = 0; index < stJumpingRight.length; index++) {
             stJumpingRight[index] = pictureCache.getImage(
                     PlayerJumpingConst.TILESET_INDEX, index
-                            + PlayerJumpingConst.TILE_RIGHT_INDEX);
+                            + PlayerJumpingConst.TILE_RIGHT_INDEX).get();
         }
 
         stJumpingPicture[0] = stJumpingLeft;
@@ -245,11 +246,11 @@ public final class PlayerManager extends AbstractPlayerManager {
 
         stStandJillSquat = pictureCache.getImage(
                 PlayerStandConst.TILESET_INDEX,
-                PlayerStandConst.TILE_DOWN_INDEX);
+                PlayerStandConst.TILE_DOWN_INDEX).get();
 
         BufferedImage temp = pictureCache.getImage(
                 PlayerStandConst.TILESET_INDEX,
-                PlayerStandConst.TILE_FALL_INDEX);
+                PlayerStandConst.TILE_FALL_INDEX).get();
 
         final BufferedImage[] stJumpingToStand = {temp,
                 stStandJillSquat, stStandJillSquat, temp, temp};
@@ -257,29 +258,29 @@ public final class PlayerManager extends AbstractPlayerManager {
         int i = 0;
         stJumpingToStandLeft[i++] = pictureCache.getImage(
                 PlayerStandConst.TILESET_INDEX,
-                PlayerStandConst.TILE_LEFT_HIT_FLOOR_INDEX0);
+                PlayerStandConst.TILE_LEFT_HIT_FLOOR_INDEX0).get();
         stJumpingToStandLeft[i++] = stJumpingToStandLeft[0];
         stJumpingToStandLeft[i++] = pictureCache.getImage(
                 PlayerStandConst.TILESET_INDEX,
-                PlayerStandConst.TILE_LEFT_HIT_FLOOR_INDEX2);
+                PlayerStandConst.TILE_LEFT_HIT_FLOOR_INDEX2).get();
         stJumpingToStandLeft[i++] = stJumpingToStandLeft[2];
         stJumpingToStandLeft[i] = pictureCache.getImage(
                 PlayerStandConst.TILESET_INDEX,
-                PlayerStandConst.TILE_LEFT_HIT_FLOOR_INDEX1);
+                PlayerStandConst.TILE_LEFT_HIT_FLOOR_INDEX1).get();
 
         i = 0;
 
         stJumpingToStandRight[i++] = pictureCache.getImage(
                 PlayerStandConst.TILESET_INDEX,
-                PlayerStandConst.TILE_RIGHT_HIT_FLOOR_INDEX0);
+                PlayerStandConst.TILE_RIGHT_HIT_FLOOR_INDEX0).get();
         stJumpingToStandRight[i++] = stJumpingToStandRight[0];
         stJumpingToStandRight[i++] = pictureCache.getImage(
                 PlayerStandConst.TILESET_INDEX,
-                PlayerStandConst.TILE_RIGHT_HIT_FLOOR_INDEX2);
+                PlayerStandConst.TILE_RIGHT_HIT_FLOOR_INDEX2).get();
         stJumpingToStandRight[i++] = stJumpingToStandRight[2];
         stJumpingToStandRight[i] = pictureCache.getImage(
                 PlayerStandConst.TILESET_INDEX,
-                PlayerStandConst.TILE_RIGHT_HIT_FLOOR_INDEX1);
+                PlayerStandConst.TILE_RIGHT_HIT_FLOOR_INDEX1).get();
 
         stJumpingToStandPicture[0] = stJumpingToStandLeft;
         stJumpingToStandPicture[1] = stJumpingToStand;
@@ -547,7 +548,7 @@ public final class PlayerManager extends AbstractPlayerManager {
 
     @Override
     protected void killPlayer(final int typeOfDeath,
-            final BackgroundEntity senderBack) {
+            final Optional<BackgroundEntity> senderBack) {
         setState(PlayerState.DIE);
         setSubState(typeOfDeath);
         setStateCount(0);
@@ -557,7 +558,7 @@ public final class PlayerManager extends AbstractPlayerManager {
                 setySpeed(PlayerDie2Const.START_YD);
 
                 // Align player on bottom of background
-                this.y = (senderBack.getY() + 1) * JillConst.getBlockSize()
+                this.y = (senderBack.get().getY() + 1) * JillConst.getBlockSize()
                         - this.stDie2Other[
                         PlayerDie2Const.FIRST_PICTURE].getHeight();
                 break;
@@ -565,7 +566,7 @@ public final class PlayerManager extends AbstractPlayerManager {
                 setySpeed(PlayerDie1Const.START_YD);
 
                 // Align player on bottom of background
-                this.y = senderBack.getY() * JillConst.getBlockSize()
+                this.y = senderBack.get().getY() * JillConst.getBlockSize()
                         - this.stDie1Water[
                         PlayerDie1Const.FIRST_PICTURE].getHeight();
                 break;
@@ -605,24 +606,24 @@ public final class PlayerManager extends AbstractPlayerManager {
         // Just for checkstyle, sorry
         int i = 0;
         stDie2Other[i++] = pictureCache.getImage(PlayerDie2Const.TILESET_INDEX,
-                PlayerDie2Const.TILE0);
+                PlayerDie2Const.TILE0).get();
         stDie2Other[i++] = pictureCache.getImage(PlayerDie2Const.TILESET_INDEX,
-                PlayerDie2Const.TILE1);
+                PlayerDie2Const.TILE1).get();
         stDie2Other[i++] = pictureCache.getImage(PlayerDie2Const.TILESET_INDEX,
-                PlayerDie2Const.TILE2);
+                PlayerDie2Const.TILE2).get();
         stDie2Other[i] = pictureCache.getImage(PlayerDie2Const.TILESET_INDEX,
-                PlayerDie2Const.TILE3);
+                PlayerDie2Const.TILE3).get();
 
         for (int index = 0; index < PlayerDie0Const.IMAGE_NUMBER; index++) {
             this.stDie0Enemy[index] = pictureCache.getImage(
                     PlayerDie0Const.TILESET_INDEX,
-                    PlayerDie0Const.TILE_INDEX + index);
+                    PlayerDie0Const.TILE_INDEX + index).get();
         }
 
         for (int index = 0; index < PlayerDie1Const.IMAGE_NUMBER; index++) {
             this.stDie1Water[index] = pictureCache.getImage(
                     PlayerDie1Const.TILESET_INDEX,
-                    PlayerDie1Const.TILE_INDEX + index);
+                    PlayerDie1Const.TILE_INDEX + index).get();
         }
     }
 

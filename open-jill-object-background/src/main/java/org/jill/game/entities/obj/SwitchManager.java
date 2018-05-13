@@ -52,7 +52,7 @@ public final class SwitchManager extends AbstractParameterObjectEntity {
 
         for (int index = 0; index < this.images.length; index++) {
             this.images[index] = this.pictureCache.getImage(tileSetIndex,
-                    tileIndex + index);
+                    tileIndex + index).get();
         }
     }
 

@@ -504,7 +504,7 @@ public abstract class AbstractPlayerManager
         for (int index = 0; index < pieceOfLand.length; index++) {
             pieceOfLand[index] = pictureCache.getImage(
                     PlayerPieceOfLandConst.TILESET_INDEX,
-                    PlayerPieceOfLandConst.TILE_INDEX + index);
+                    PlayerPieceOfLandConst.TILE_INDEX + index).get();
         }
 
         for (BufferedImage[] pictureSrc1 : pictureSrc) {

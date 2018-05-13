@@ -63,7 +63,7 @@ public final class FallingSpikeManager extends AbstractHitPlayerObjectEntity
         int tileIndex = getConfInteger("tile");
         int tileSetIndex = getConfInteger("tileSet");
 
-        this.images = this.pictureCache.getImage(tileSetIndex, tileIndex);
+        this.images = this.pictureCache.getImage(tileSetIndex, tileIndex).get();
 
         this.fallingSpeed = getConfInteger("fallingSpeed");
         this.fallingSpeedMax = getConfInteger("fallingSpeedMax");

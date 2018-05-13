@@ -2,6 +2,8 @@ package org.jill.openjill.core.api.message.statusbar.inventory;
 
 import org.jill.openjill.core.api.entities.ObjectEntity;
 
+import java.util.Optional;
+
 /**
  * Life message.
  *
@@ -27,7 +29,7 @@ public final class InventoryLifeMessage {
     /**
      * Sender of message.
      */
-    private ObjectEntity sender;
+    private Optional<ObjectEntity> sender = Optional.empty();
 
     /**
      * If player dead.
@@ -66,7 +68,7 @@ public final class InventoryLifeMessage {
      *
      * @return sneder
      */
-    public ObjectEntity getSender() {
+    public Optional<ObjectEntity> getSender() {
         return sender;
     }
 
@@ -75,7 +77,7 @@ public final class InventoryLifeMessage {
      *
      * @param senderObj sender
      */
-    public void setSender(final ObjectEntity senderObj) {
+    public void setSender(final Optional<ObjectEntity> senderObj) {
         this.sender = senderObj;
     }
 

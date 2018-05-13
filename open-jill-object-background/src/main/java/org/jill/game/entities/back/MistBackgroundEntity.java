@@ -43,7 +43,7 @@ public final class MistBackgroundEntity
 
         for (int index = 0; index < images.length; index++) {
             srcImage = getPictureCache().getImage(tileSetIndex, tileIndex
-                    + index);
+                    + index).get();
 
             images[index] = createPicture(srcImage, backColor);
         }

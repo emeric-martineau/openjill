@@ -81,9 +81,9 @@ public final class EyesManager extends AbstractParameterObjectEntity {
         this.lensOriginX = getConfInteger("lensOriginX");
         this.lensOriginY = getConfInteger("lensOriginY");
 
-        this.eyesImage = this.pictureCache.getImage(tileSetIndex, tileEyes);
+        this.eyesImage = this.pictureCache.getImage(tileSetIndex, tileEyes).get();
 
-        this.lensImage = this.pictureCache.getImage(tileSetIndex, tileLens);
+        this.lensImage = this.pictureCache.getImage(tileSetIndex, tileLens).get();
 
         this.raySize = getConfInteger("raySize");
         this.maxMoveY = getConfInteger("maxMoveY");

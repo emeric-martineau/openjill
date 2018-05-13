@@ -5,10 +5,7 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -254,7 +251,7 @@ public final class InventoryArea implements InterfaceMessageGameHandler {
      * @return picture
      */
     private BufferedImage getImageByConfig(final PictureConf prop) {
-        return this.pictureCache.getImage(prop.getTileset(), prop.getTile());
+        return this.pictureCache.getImage(prop.getTileset(), prop.getTile()).get();
     }
 
     /**
@@ -434,11 +431,11 @@ public final class InventoryArea implements InterfaceMessageGameHandler {
      */
     private void messageLife(final InventoryLifeMessage msg) {
         final int nbLife = msg.getLife();
-        final ObjectEntity sender = msg.getSender();
+        final Optional<ObjectEntity> sender = msg.getSender();
 
-        if (sender == null || sender.getZapHold() == 0) {
+        if (!sender.isPresent() || sender.get().getZapHold() == 0) {
             if ((nbLife < 0)
-                    && ((sender == null) || !this.objects.contains(
+                    && ((!sender.isPresent()) || !this.objects.contains(
                     EnumInventoryObject.INVINCIBILITY))) {
                 // If decrease live, check player are not invincible
                 this.life += nbLife;
@@ -465,8 +462,8 @@ public final class InventoryArea implements InterfaceMessageGameHandler {
             }
         }
 
-        if (sender != null) {
-            sender.setZapHold(JillConst.getZapholdValueAfterTouchPlayer());
+        if (sender.isPresent()) {
+            sender.get().setZapHold(JillConst.getZapholdValueAfterTouchPlayer());
         }
     }
 

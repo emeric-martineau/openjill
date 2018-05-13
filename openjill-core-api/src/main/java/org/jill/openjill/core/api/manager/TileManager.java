@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.Optional;
 
 import org.jill.dma.DmaFile;
 import org.jill.openjill.core.api.screen.EnumScreenType;
@@ -42,7 +43,7 @@ public interface TileManager {
      * @param mapCode map code
      * @return null if background not found
      */
-    BufferedImage getBackgroundPicture(final int mapCode);
+    Optional<BufferedImage> getBackgroundPicture(final int mapCode);
 
     /**
      * @return colorMap
@@ -63,7 +64,7 @@ public interface TileManager {
      * @param tileIndex    index of tile
      * @return can be return null if picture not found
      */
-    BufferedImage getImage(final int tileSetIndex, final int tileIndex);
+    Optional<BufferedImage> getImage(final int tileSetIndex, final int tileIndex);
 
     /**
      * Return sha file content of this cache.

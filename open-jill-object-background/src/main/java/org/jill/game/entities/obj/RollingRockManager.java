@@ -100,7 +100,7 @@ public final class RollingRockManager extends AbstractHitPlayerObjectEntity {
 
         for (int index = tileIndex; index < end; index++) {
             images[index - tileIndex] = this.pictureCache.getImage(tileSetIndex,
-                    index);
+                    index).get();
         }
     }
 

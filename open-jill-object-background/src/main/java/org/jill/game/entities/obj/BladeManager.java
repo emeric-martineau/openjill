@@ -101,7 +101,7 @@ public final class BladeManager extends AbstractParameterObjectEntity {
         for (int index = 0; index < numberTileSet; index++) {
             this.images[index]
                     = this.pictureCache.getImage(tileSetIndex, tileIndex
-                    + index);
+                    + index).get();
         }
 
         this.backgroundObject = objectParam.getBackgroundObject();

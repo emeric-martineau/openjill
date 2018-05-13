@@ -193,9 +193,9 @@ public final class LockedDoorManager extends AbstractParameterObjectEntity
         final Color backColor = this.pictureCache.getBackgroundColor();
 
         BufferedImage lDoortPicutre =
-                this.pictureCache.getImage(doortTileset, doortTile);
+                this.pictureCache.getImage(doortTileset, doortTile).get();
         BufferedImage lDoorbPicutre =
-                this.pictureCache.getImage(doorbTileset, doorbTile);
+                this.pictureCache.getImage(doorbTileset, doorbTile).get();
 
         this.doortPicutre = createDoorPicture(lDoortPicutre, backColor);
         this.doorbPicutre = createDoorPicture(lDoorbPicutre, backColor);

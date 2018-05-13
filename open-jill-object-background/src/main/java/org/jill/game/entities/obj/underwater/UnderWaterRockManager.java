@@ -42,7 +42,7 @@ public final class UnderWaterRockManager extends AbstractParameterObjectEntity {
         int tileSetIndex = getConfInteger("tileSet");
 
         this.image = objectParam.getPictureCache()
-                .getImage(tileSetIndex, tileIndex);
+                .getImage(tileSetIndex, tileIndex).get();
 
         this.bubbleTrigger = getConfInteger("bubbleTrigger");
     }

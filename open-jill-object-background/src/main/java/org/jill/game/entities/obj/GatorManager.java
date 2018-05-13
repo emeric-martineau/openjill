@@ -101,9 +101,9 @@ public final class GatorManager extends AbstractHitPlayerObjectEntity {
 
         for (int index = 0; index < numberTileSet; index++) {
             headPicture = this.pictureCache.getImage(tileSetIndex,
-                    tileHead + index);
+                    tileHead + index).get();
             tailPicture = this.pictureCache.getImage(tileSetIndex,
-                    tileTail + index);
+                    tileTail + index).get();
 
             joinPicture = new BufferedImage(this.width, this.height,
                     BufferedImage.TYPE_INT_ARGB);

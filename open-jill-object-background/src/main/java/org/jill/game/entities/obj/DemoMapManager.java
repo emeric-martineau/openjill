@@ -70,7 +70,7 @@ public final class DemoMapManager extends ObjectEntityImpl {
         }
 
         for (int indexLetter = start; indexLetter < end; indexLetter++) {
-            letter = pictureCache.getImage(3, indexLetter);
+            letter = pictureCache.getImage(3, indexLetter).get();
 
             g2.drawImage(letter, posX, 0, null);
 

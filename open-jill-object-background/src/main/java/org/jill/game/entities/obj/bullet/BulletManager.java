@@ -68,7 +68,7 @@ public final class BulletManager extends AbstractParameterObjectEntity {
         for (int index = 0; index < numberTileSet; index++) {
             this.images[index]
                     = this.pictureCache.getImage(tileSetIndex, tileIndex
-                    + index);
+                    + index).get();
         }
 
         if (getWidth() == 0 || getHeight() == 0) {

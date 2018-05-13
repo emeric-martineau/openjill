@@ -48,7 +48,7 @@ public final class HitFireManager extends AbstractParameterObjectEntity {
         for (int index = numberTileSet - 1; index < this.images.length;
              index++) {
             this.images[index] = this.pictureCache.getImage(tileSetIndex,
-                    baseTileIndex);
+                    baseTileIndex).get();
             baseTileIndex++;
         }
 

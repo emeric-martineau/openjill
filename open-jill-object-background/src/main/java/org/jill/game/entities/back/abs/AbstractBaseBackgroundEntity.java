@@ -56,7 +56,7 @@ public abstract class AbstractBaseBackgroundEntity extends
 
         for (int index = 0; index < images.length; index++) {
             images[index] = getPictureCache().getImage(tileSetIndex, tileIndex
-                    + index);
+                    + index).get();
         }
 
         if (getPictureSync(this.getClass()) == null) {
@@ -129,15 +129,15 @@ public abstract class AbstractBaseBackgroundEntity extends
         final boolean isRight = !isBaseRight();
 
         if (isTop && isBottom && isLeft && isRight) {
-            mask = getPictureCache().getImage(42, 5);
+            mask = getPictureCache().getImage(42, 5).get();
         } else if (isTop && isLeft) {
-            mask = getPictureCache().getImage(42, 1);
+            mask = getPictureCache().getImage(42, 1).get();
         } else if (isTop && isRight) {
-            mask = getPictureCache().getImage(42, 2);
+            mask = getPictureCache().getImage(42, 2).get();
         } else if (isBottom && isLeft) {
-            mask = getPictureCache().getImage(42, 3);
+            mask = getPictureCache().getImage(42, 3).get();
         } else if (isBottom && isRight) {
-            mask = getPictureCache().getImage(42, 4);
+            mask = getPictureCache().getImage(42, 4).get();
         }
 
         if (mask != null) {

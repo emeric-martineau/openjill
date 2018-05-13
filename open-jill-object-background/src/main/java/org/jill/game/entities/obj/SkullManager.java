@@ -57,7 +57,7 @@ public final class SkullManager extends AbstractParameterObjectEntity
         int tileIndex = getConfInteger("fixedTile");
         int tileSetIndex = getConfInteger("fixedTileSet");
 
-        this.fixedImages = this.pictureCache.getImage(tileSetIndex, tileIndex);
+        this.fixedImages = this.pictureCache.getImage(tileSetIndex, tileIndex).get();
 
         tileIndex = getConfInteger("tile");
         tileSetIndex = getConfInteger("tileSet");
@@ -91,8 +91,8 @@ public final class SkullManager extends AbstractParameterObjectEntity
         tileIncrement = 1;
 
         for (BufferedImage image : this.images) {
-            eye = this.pictureCache.getImage(tileSetIndex, tileEye);
-            //System.out.println(tileEye);
+            eye = this.pictureCache.getImage(tileSetIndex, tileEye).get();
+
             // Draw eye
             g2d = image.createGraphics();
             g2d.drawImage(eye, eyeLeftX, eyeLeftY, null);
@@ -124,7 +124,7 @@ public final class SkullManager extends AbstractParameterObjectEntity
 
         for (int index = 0; index < this.images.length; index += 2) {
             currentSkull = this.pictureCache.getImage(tileSetIndex,
-                    tileIndex + tileSkull);
+                    tileIndex + tileSkull).get();
 
             this.images[index] = copyPicture(currentSkull);
 

@@ -12,7 +12,7 @@ import org.jill.game.entities.BackgroundEntityImpl;
 public final class ShoreBackgroundEntity extends BackgroundEntityImpl {
     @Override
     public BufferedImage getPicture() {
-        return getPictureCache().getBackgroundPicture(getMapCode());
+        return getPictureCache().getBackgroundPicture(getMapCode()).get();
     }
 
 
