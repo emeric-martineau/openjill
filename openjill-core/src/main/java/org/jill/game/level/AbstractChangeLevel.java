@@ -461,9 +461,9 @@ public abstract class AbstractChangeLevel extends
 
         // Running object
         for (ObjectEntity obj : listObject) {
-            stringItem = obj.getStringStackEntry();
+            if (obj.getStringStackEntry().isPresent()) {
+                stringItem = obj.getStringStackEntry().get();
 
-            if (stringItem != null) {
                 data = stringItem.getValue();
                 len = data.length();
 
@@ -487,7 +487,7 @@ public abstract class AbstractChangeLevel extends
         switch (type) {
             case CHECK_POINT_CHANGING_LEVEL:
                 oe = (ObjectEntity) msg;
-                changeLevel(Optional.of(oe.getStringStackEntry().getValue()),
+                changeLevel(Optional.of(oe.getStringStackEntry().get().getValue()),
                         oe.getCounter());
                 break;
             case CHECK_POINT_CHANGING_LEVEL_PREVIOUS:

@@ -140,7 +140,7 @@ public class JnFileImpl implements JnFile {
             obj = getNextObjectForString(itObject);
 
             if (obj.isPresent()) {
-                obj.get().setStringStackEntry(string);
+                obj.get().setStringStackEntry(Optional.of(string));
             }
         }
     }

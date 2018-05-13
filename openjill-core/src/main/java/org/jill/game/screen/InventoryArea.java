@@ -154,7 +154,8 @@ public final class InventoryArea implements InterfaceMessageGameHandler {
                             filename),
                     ex);
 
-            mc = null;
+            throw new RuntimeException(String.format("Unable to load config for inventory '%s'",
+                    filename), ex);
         }
 
         return mc;

@@ -2,6 +2,7 @@ package org.jill.jn;
 
 import java.io.EOFException;
 import java.io.IOException;
+import java.util.Optional;
 
 import org.jill.file.FileAbstractByte;
 
@@ -91,7 +92,7 @@ public class ObjectItemImpl implements ObjectItem {
     /**
      * String associate to this object.
      */
-    private StringItem stringStackEntry;
+    private Optional<StringItem> stringStackEntry = Optional.empty();
 
     /**
      * Constructor.
@@ -455,7 +456,7 @@ public class ObjectItemImpl implements ObjectItem {
      * @return stringStackEntry
      */
     @Override
-    public StringItem getStringStackEntry() {
+    public Optional<StringItem> getStringStackEntry() {
         return stringStackEntry;
     }
 
@@ -465,7 +466,7 @@ public class ObjectItemImpl implements ObjectItem {
      * @param stringStackEntry string link to this object
      */
     @Override
-    public void setStringStackEntry(StringItem stringStackEntry) {
+    public void setStringStackEntry(Optional<StringItem> stringStackEntry) {
         this.stringStackEntry = stringStackEntry;
     }
 
@@ -476,8 +477,8 @@ public class ObjectItemImpl implements ObjectItem {
      */
     @Override
     public int getSizeInFile() {
-        if (stringStackEntry != null) {
-            return SIZE_IN_FILE + stringStackEntry.getSizeInFile();
+        if (stringStackEntry.isPresent()) {
+            return SIZE_IN_FILE + stringStackEntry.get().getSizeInFile();
         }
 
         return SIZE_IN_FILE;

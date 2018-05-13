@@ -1,6 +1,7 @@
 package org.jill.jn;
 
 import java.io.EOFException;
+import java.util.Optional;
 
 import org.jill.file.FileAbstractByte;
 
@@ -139,14 +140,14 @@ public interface ObjectItem {
      *
      * @return stringStackEntry
      */
-    StringItem getStringStackEntry();
+    Optional<StringItem> getStringStackEntry();
 
     /**
      * Sting.
      *
      * @param stringStackEntry string link to this object
      */
-    void setStringStackEntry(StringItem stringStackEntry);
+    void setStringStackEntry(Optional<StringItem> stringStackEntry);
 
     /**
      * SubState.

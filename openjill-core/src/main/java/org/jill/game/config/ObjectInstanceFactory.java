@@ -230,13 +230,15 @@ public final class ObjectInstanceFactory {
      * @return object class
      */
     private Class createClass(final String name) {
-        Class c = null;
+        Class c;
 
         try {
             c = Class.forName(name);
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(ObjectInstanceFactory.class.getName()
             ).log(Level.SEVERE, null, ex);
+
+            throw new RuntimeException(ex);
         }
 
         return c;
@@ -249,7 +251,7 @@ public final class ObjectInstanceFactory {
      * @return object
      */
     private Object createObject(final String className) {
-        Object o = null;
+        Object o;
 
         final ObjectInstance oi = this.mapObjectInstance.get(className);
 
@@ -260,6 +262,9 @@ public final class ObjectInstanceFactory {
                 LOGGER.log(Level.SEVERE,
                         String.format("Can't find implementation class for %s",
                                 className));
+
+                throw new RuntimeException(String.format("Can't find implementation class for %s",
+                        className));
             } else {
                 if (oi.isSingleton()) {
                     o = oi.getSingletonInstance();
@@ -284,6 +289,8 @@ public final class ObjectInstanceFactory {
                 IllegalAccessException | InstantiationException ex) {
             LOGGER.log(Level.SEVERE,
                     "Create jill object error !", ex);
+
+            throw new RuntimeException(ex);
         }
 
         return o;
@@ -303,6 +310,7 @@ public final class ObjectInstanceFactory {
             c = createClass(oi.getImplementationClass());
             oi.setClazz(c);
         }
+
         return c;
     }
 }

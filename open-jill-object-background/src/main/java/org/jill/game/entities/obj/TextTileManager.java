@@ -57,11 +57,11 @@ public final class TextTileManager extends ObjectEntityImpl {
 
         if (getType() == SMALL_TEXT) {
             pictureCache.getTextManager().drawSmallText(g2, 0, 0,
-                    getStringStackEntry().getValue(),
+                    getStringStackEntry().get().getValue(),
                     getxSpeed(), getySpeed());
         } else if (getType() == BIG_TEXT) {
             pictureCache.getTextManager().drawBigText(g2, 0, 0,
-                    getStringStackEntry().getValue(),
+                    getStringStackEntry().get().getValue(),
                     getxSpeed(), getySpeed());
         }
 

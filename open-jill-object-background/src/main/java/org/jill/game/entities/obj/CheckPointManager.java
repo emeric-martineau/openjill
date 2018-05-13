@@ -70,9 +70,9 @@ public final class CheckPointManager extends AbstractParameterObjectEntity {
         // rententrence after player die
         grapMsgTouch = (objectParam.getLevel() != counter);
 
-        if (this.getStringStackEntry() != null
-                && !this.getStringStackEntry().getValue().isEmpty()) {
-            switch (this.getStringStackEntry().getValue().charAt(0)) {
+        if (this.getStringStackEntry().isPresent()
+                && !this.getStringStackEntry().get().getValue().isEmpty()) {
+            switch (this.getStringStackEntry().get().getValue().charAt(0)) {
                 case '*': // load and play this song from the beginning
                     Logger.getLogger(CheckPointManager.class.getName()).
                             log(Level.INFO, "Warning : 'load and play this "

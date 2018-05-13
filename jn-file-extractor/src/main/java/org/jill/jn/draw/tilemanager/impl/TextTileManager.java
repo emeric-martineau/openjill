@@ -182,7 +182,7 @@ public class TextTileManager extends AbstractTileManager {
         final Map<Character, BufferedImage> mapLetter = new HashMap<>();
 
         // Draw letter
-        final String text = object.getStringStackEntry().getValue();
+        final String text = object.getStringStackEntry().get().getValue();
         final int textLenght = text.length();
         char letter;
 
@@ -209,7 +209,7 @@ public class TextTileManager extends AbstractTileManager {
         final Map<Character, BufferedImage> mapLetter = initLetterMap(tiles, object, textColor);
 
         // Draw letter
-        final String text = object.getStringStackEntry().getValue();
+        final String text = object.getStringStackEntry().get().getValue();
         final int textLenght = text.length();
 
         char letter;
