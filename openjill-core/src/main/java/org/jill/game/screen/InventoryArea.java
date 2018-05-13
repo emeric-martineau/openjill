@@ -111,7 +111,7 @@ public final class InventoryArea implements InterfaceMessageGameHandler {
      * @param msgDispatcher       message dispatcher
      */
     public InventoryArea(final TileManager pictureCacheManager,
-            final StatusBar statusBar, final MessageDispatcher msgDispatcher) {
+                         final StatusBar statusBar, final MessageDispatcher msgDispatcher) {
         this.conf = readConf("inventory_conf.json");
 
         this.pictureCache = pictureCacheManager;
@@ -224,24 +224,28 @@ public final class InventoryArea implements InterfaceMessageGameHandler {
      * Draw lifebar.
      */
     private void drawLifeBar() {
-        // Draw live status bar
-        int indexLife = this.life - 1;
-        int offsetX = this.conf.getLifebar().getX();
-        int sizeBar = this.conf.getLifeBarStepSize();
+        if (this.life > 0) {
+            // Draw live status bar
+            int indexLife = this.life - 1;
+            int offsetX = this.conf.getLifebar().getX();
+            int sizeBar = this.conf.getLifeBarStepSize();
 
-        while (indexLife > 0) {
-            this.g2Inventory.drawImage(this.lifebar, offsetX,
-                    this.conf.getLifebar().getY(), null);
+            while (indexLife > 0) {
+                this.g2Inventory.drawImage(this.lifebar, offsetX,
+                        this.conf.getLifebar().getY(), null);
 
-            offsetX += sizeBar;
-            indexLife--;
+                offsetX += sizeBar;
+                indexLife--;
+            }
+
+            if (this.life > 1) {
+                offsetX = this.conf.getLifebarEnd().getX()
+                        + ((this.life - 1) * sizeBar);
+            }
+
+            this.g2Inventory.drawImage(this.lifebarEnd, offsetX,
+                    this.conf.getLifebarEnd().getY(), null);
         }
-
-        offsetX = this.conf.getLifebarEnd().getX()
-                + ((this.life - 1) * sizeBar);
-
-        this.g2Inventory.drawImage(this.lifebarEnd, offsetX,
-                this.conf.getLifebarEnd().getY(), null);
     }
 
     /**
@@ -469,7 +473,7 @@ public final class InventoryArea implements InterfaceMessageGameHandler {
 
     @Override
     public void recieveMessage(final EnumMessageType type,
-            final Object msg) {
+                               final Object msg) {
         switch (type) {
             case INVENTORY_ITEM:
                 messageItem((InventoryItemMessage) msg);
