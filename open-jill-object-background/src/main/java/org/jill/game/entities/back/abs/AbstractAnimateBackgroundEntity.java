@@ -2,6 +2,7 @@ package org.jill.game.entities.back.abs;
 
 import java.awt.Color;
 import java.awt.image.BufferedImage;
+import java.util.Optional;
 
 import org.jill.game.entities.picutre.PictureSynchronizer;
 import org.jill.openjill.core.api.entities.BackgroundParam;
@@ -53,8 +54,9 @@ public abstract class AbstractAnimateBackgroundEntity extends
         images = new BufferedImage[getConfInteger("numberTileSet")];
 
         for (int index = 0; index < images.length; index++) {
-            images[index] = createPicture(getPictureCache().getImage(
-                    tileSetIndex, tileIndex).get(), backColor);
+            images[index] =
+                    createPicture(getPictureCache().getImage(
+                        tileSetIndex, tileIndex).get(), backColor);
 
             tileIndex += increment;
         }
@@ -80,6 +82,6 @@ public abstract class AbstractAnimateBackgroundEntity extends
     @Override
     public void msgUpdate() {
         this.indexEtat = getPictureSync().updatePictureIndex(
-                this.indexEtat, images);
+                this.indexEtat, images.length);
     }
 }

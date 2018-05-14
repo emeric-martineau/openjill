@@ -1,6 +1,7 @@
 package org.jill.game.entities.obj;
 
 import java.awt.image.BufferedImage;
+import java.util.Optional;
 
 import org.jill.game.entities.ObjectEntityImpl;
 import org.jill.openjill.core.api.entities.ObjectParam;
@@ -14,7 +15,7 @@ public final class HugeLetterTileManager extends ObjectEntityImpl {
     /**
      * Piture.
      */
-    private BufferedImage hugeLetter;
+    private Optional<BufferedImage> hugeLetter;
 
     /**
      * Default constructor.
@@ -36,11 +37,11 @@ public final class HugeLetterTileManager extends ObjectEntityImpl {
 //            hugeLetter[tileIndex] = pictureCache.getImage(33, tileIndex);
 //        }
 
-        hugeLetter = pictureCache.getImage(33, getxSpeed()).get();
+        hugeLetter = pictureCache.getImage(33, getxSpeed());
     }
 
     @Override
-    public BufferedImage msgDraw() {
+    public Optional<BufferedImage> msgDraw() {
         return hugeLetter;
     }
 }

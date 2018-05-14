@@ -50,12 +50,12 @@ public final class FirebirdPlayerManager
     /**
      * Picture array.
      */
-    private BufferedImage[] leftImages;
+    private Optional<BufferedImage>[] leftImages;
 
     /**
      * Picture array.
      */
-    private BufferedImage[] rightImages;
+    private Optional<BufferedImage>[] rightImages;
 
     /**
      * Background map.
@@ -109,8 +109,8 @@ public final class FirebirdPlayerManager
                 - NUMBER_PICTURE_TO_REMOVE;
 
         // Alloc array of picture
-        this.leftImages = new BufferedImage[numberPicturePerSide];
-        this.rightImages = new BufferedImage[numberPicturePerSide];
+        this.leftImages = new Optional[numberPicturePerSide];
+        this.rightImages = new Optional[numberPicturePerSide];
 
         // Init Right
         initPicture(this.rightImages, baseTileNumber, tileSetIndex,
@@ -135,8 +135,8 @@ public final class FirebirdPlayerManager
 
         if (getWidth() == 0) {
             // Object create during game
-            setWidth(this.leftImages[0].getWidth());
-            setHeight(this.leftImages[0].getHeight());
+            setWidth(this.leftImages[0].get().getWidth());
+            setHeight(this.leftImages[0].get().getHeight());
         }
 
         this.messageDispatcher.sendMessage(
@@ -153,12 +153,12 @@ public final class FirebirdPlayerManager
      * @param tileSetIndex   tileset
      * @param tileIndex      tile
      */
-    private void initPicture(final BufferedImage[] images,
+    private void initPicture(final Optional<BufferedImage>[] images,
             final int baseTileNumber, final int tileSetIndex,
             final int tileIndex) {
         for (int index = 0; index < baseTileNumber; index++) {
             images[index] = this.pictureCache.getImage(tileSetIndex,
-                    tileIndex + index).get();
+                    tileIndex + index);
         }
 
         int indexArray = baseTileNumber;
@@ -185,8 +185,8 @@ public final class FirebirdPlayerManager
     }
 
     @Override
-    public BufferedImage msgDraw() {
-        BufferedImage[] currentPictureArray;
+    public Optional<BufferedImage> msgDraw() {
+        Optional<BufferedImage>[] currentPictureArray;
 
         if (this.getSubState() < 0) {
             // Right

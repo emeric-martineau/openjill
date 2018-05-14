@@ -1,6 +1,7 @@
 package org.jill.game.entities.obj;
 
 import java.awt.image.BufferedImage;
+import java.util.Optional;
 
 import org.jill.game.entities.obj.abs.AbstractParameterObjectEntity;
 import org.jill.game.entities.obj.util.SharedCode;
@@ -33,7 +34,7 @@ public abstract class AbstractKeyManager
     /**
      * Picture array.
      */
-    private BufferedImage[] images;
+    private Optional<BufferedImage>[] images;
 
     /**
      * Default constructor.
@@ -74,7 +75,7 @@ public abstract class AbstractKeyManager
     }
 
     @Override
-    public final BufferedImage msgDraw() {
+    public final Optional<BufferedImage> msgDraw() {
         return this.images[this.counter];
     }
 

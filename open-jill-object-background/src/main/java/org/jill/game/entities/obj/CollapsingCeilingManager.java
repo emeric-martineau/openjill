@@ -1,6 +1,7 @@
 package org.jill.game.entities.obj;
 
 import java.awt.image.BufferedImage;
+import java.util.Optional;
 
 import org.jill.game.entities.obj.abs.AbstractParameterObjectEntity;
 import org.jill.openjill.core.api.entities.BackgroundEntity;
@@ -41,7 +42,7 @@ public final class CollapsingCeilingManager
     /**
      * Picture array.
      */
-    private BufferedImage image;
+    private Optional<BufferedImage> image;
     /**
      * To remove this object from object list.
      */
@@ -69,7 +70,7 @@ public final class CollapsingCeilingManager
         final int tileIndex = getConfInteger("tile");
         final int tileSetIndex = getConfInteger("tileSet");
 
-        this.image = this.pictureCache.getImage(tileSetIndex, tileIndex).get();
+        this.image = this.pictureCache.getImage(tileSetIndex, tileIndex);
 
         this.messageDispatcher.addHandler(EnumMessageType.TRIGGER, this);
 
@@ -87,7 +88,7 @@ public final class CollapsingCeilingManager
     }
 
     @Override
-    public BufferedImage msgDraw() {
+    public Optional<BufferedImage> msgDraw() {
         return this.image;
     }
 

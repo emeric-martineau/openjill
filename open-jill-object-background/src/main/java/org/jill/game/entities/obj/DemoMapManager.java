@@ -2,6 +2,7 @@ package org.jill.game.entities.obj;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.util.Optional;
 
 import org.jill.game.entities.ObjectEntityImpl;
 import org.jill.openjill.core.api.entities.ObjectParam;
@@ -35,7 +36,7 @@ public final class DemoMapManager extends ObjectEntityImpl {
     /**
      * Picture.
      */
-    private BufferedImage image;
+    private Optional<BufferedImage> image;
 
     /**
      * Default constructor.
@@ -49,7 +50,7 @@ public final class DemoMapManager extends ObjectEntityImpl {
         alwaysOnScreen = true;
 
         // Buffer image
-        image =
+        BufferedImage image =
                 new BufferedImage(getWidth(), getHeight(),
                         BufferedImage.TYPE_INT_ARGB);
 
@@ -78,13 +79,15 @@ public final class DemoMapManager extends ObjectEntityImpl {
         }
 
         g2.dispose();
+
+        this.image = Optional.of(image);
     }
 
     /* (non-Javadoc)
      * @see org.jill.openjill.core.api.entities.ObjectEntity#getPicture()
      */
     @Override
-    public BufferedImage msgDraw() {
+    public Optional<BufferedImage> msgDraw() {
         return image;
     }
 

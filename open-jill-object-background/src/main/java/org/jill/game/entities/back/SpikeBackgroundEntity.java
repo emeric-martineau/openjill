@@ -78,7 +78,7 @@ public final class SpikeBackgroundEntity
     @Override
     public void msgUpdate() {
         this.indexEtat = getPictureSync().updatePictureIndex(
-                this.indexEtat, images);
+                this.indexEtat, images.length);
     }
 
     @Override

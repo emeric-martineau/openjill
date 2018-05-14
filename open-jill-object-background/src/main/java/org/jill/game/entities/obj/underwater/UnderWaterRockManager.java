@@ -1,6 +1,7 @@
 package org.jill.game.entities.obj.underwater;
 
 import java.awt.image.BufferedImage;
+import java.util.Optional;
 
 import org.jill.game.entities.obj.abs.AbstractParameterObjectEntity;
 import org.jill.openjill.core.api.entities.ObjectEntity;
@@ -20,7 +21,7 @@ public final class UnderWaterRockManager extends AbstractParameterObjectEntity {
     /**
      * Picture array.
      */
-    private BufferedImage image;
+    private Optional<BufferedImage> image;
 
     /**
      * Bubble trugger.
@@ -42,13 +43,13 @@ public final class UnderWaterRockManager extends AbstractParameterObjectEntity {
         int tileSetIndex = getConfInteger("tileSet");
 
         this.image = objectParam.getPictureCache()
-                .getImage(tileSetIndex, tileIndex).get();
+                .getImage(tileSetIndex, tileIndex);
 
         this.bubbleTrigger = getConfInteger("bubbleTrigger");
     }
 
     @Override
-    public BufferedImage msgDraw() {
+    public Optional<BufferedImage> msgDraw() {
         return this.image;
     }
 

@@ -3,6 +3,7 @@ package org.jill.game.entities.obj;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.jill.game.entities.obj.abs.AbstractParameterObjectEntity;
 import org.jill.openjill.core.api.entities.BackgroundEntity;
@@ -190,8 +191,8 @@ public final class ToggleWallManager extends AbstractParameterObjectEntity
     }
 
     @Override
-    public BufferedImage msgDraw() {
-        return null;
+    public Optional<BufferedImage> msgDraw() {
+        return Optional.empty();
     }
 
     /**

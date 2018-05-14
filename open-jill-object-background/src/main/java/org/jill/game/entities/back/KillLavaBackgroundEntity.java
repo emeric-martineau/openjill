@@ -134,6 +134,6 @@ public final class KillLavaBackgroundEntity extends
     @Override
     public void msgUpdate() {
         this.indexEtat = getPictureSync(this.dmaName).updatePictureIndex(
-                this.indexEtat, images);
+                this.indexEtat, images.length);
     }
 }

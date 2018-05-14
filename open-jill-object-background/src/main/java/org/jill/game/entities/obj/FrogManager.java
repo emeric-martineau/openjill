@@ -1,6 +1,7 @@
 package org.jill.game.entities.obj;
 
 import java.awt.image.BufferedImage;
+import java.util.Optional;
 
 import org.jill.game.entities.obj.abs.AbstractHitPlayerObjectEntity;
 import org.jill.game.entities.obj.player.PlayerPositionSynchronizer;
@@ -59,12 +60,12 @@ public final class FrogManager extends AbstractHitPlayerObjectEntity {
     /**
      * Picture array.
      */
-    private BufferedImage[] leftImages;
+    private Optional<BufferedImage>[] leftImages;
 
     /**
      * Picture array.
      */
-    private BufferedImage[] rightImages;
+    private Optional<BufferedImage>[] rightImages;
 
     /**
      * To remove this object from object list.
@@ -105,17 +106,17 @@ public final class FrogManager extends AbstractHitPlayerObjectEntity {
 
         final int middle = numberTileSet / 2;
 
-        this.leftImages = new BufferedImage[middle];
-        this.rightImages = new BufferedImage[middle];
+        this.leftImages = new Optional[middle];
+        this.rightImages = new Optional[middle];
 
         for (int index = 0; index < middle; index++) {
             this.rightImages[index] = this.pictureCache.getImage(
-                    tileSetIndex, tileIndex + index).get();
+                    tileSetIndex, tileIndex + index);
         }
 
         for (int index = 0; index < middle; index++) {
             this.leftImages[index] = this.pictureCache.getImage(
-                    tileSetIndex, tileIndex + index + middle).get();
+                    tileSetIndex, tileIndex + index + middle);
         }
 
         this.killme = new ObjectListMessage(this, false);
@@ -186,8 +187,8 @@ public final class FrogManager extends AbstractHitPlayerObjectEntity {
     }
 
     @Override
-    public BufferedImage msgDraw() {
-        BufferedImage image;
+    public Optional<BufferedImage> msgDraw() {
+        Optional<BufferedImage> image;
         int indexPicutre;
 
         if (this.state == this.stateOnFloor) {
@@ -204,8 +205,8 @@ public final class FrogManager extends AbstractHitPlayerObjectEntity {
             image = this.rightImages[indexPicutre];
         }
 
-        this.width = image.getWidth();
-        this.height = image.getHeight();
+        this.width = image.get().getWidth();
+        this.height = image.get().getHeight();
 
         return image;
     }

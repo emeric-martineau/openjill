@@ -2,6 +2,7 @@ package org.jill.game.entities.obj;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.util.Optional;
 
 import org.jill.game.entities.obj.abs.AbstractParameterObjectEntity;
 import org.jill.game.entities.obj.player.PlayerPositionSynchronizer;
@@ -92,7 +93,7 @@ public final class EyesManager extends AbstractParameterObjectEntity {
     }
 
     @Override
-    public BufferedImage msgDraw() {
+    public Optional<BufferedImage> msgDraw() {
         BufferedImage currentPicture = new BufferedImage(getWidth(),
                 getHeight(), BufferedImage.TYPE_INT_ARGB);
         Graphics g2d = currentPicture.createGraphics();
@@ -104,7 +105,7 @@ public final class EyesManager extends AbstractParameterObjectEntity {
 
         g2d.dispose();
 
-        return currentPicture;
+        return Optional.of(currentPicture);
     }
 
     @Override

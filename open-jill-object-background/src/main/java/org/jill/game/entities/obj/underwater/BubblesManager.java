@@ -1,6 +1,7 @@
 package org.jill.game.entities.obj.underwater;
 
 import java.awt.image.BufferedImage;
+import java.util.Optional;
 
 import org.jill.game.entities.obj.abs.AbstractParameterObjectEntity;
 import org.jill.openjill.core.api.entities.BackgroundEntity;
@@ -20,7 +21,7 @@ public final class BubblesManager extends AbstractParameterObjectEntity {
     /**
      * Picture array.
      */
-    private BufferedImage image;
+    private Optional<BufferedImage> image;
 
     /**
      * Background map.
@@ -68,8 +69,8 @@ public final class BubblesManager extends AbstractParameterObjectEntity {
         this.maxCounter = getConfInteger("maxCounter");
 
         if (getWidth() == 0 || getHeight() == 0) {
-            setWidth(this.image.getWidth());
-            setHeight(this.image.getHeight());
+            setWidth(this.image.get().getWidth());
+            setHeight(this.image.get().getHeight());
         }
     }
 
@@ -82,7 +83,7 @@ public final class BubblesManager extends AbstractParameterObjectEntity {
         final int tileSetIndex = getConfInteger("tileSet");
 
         this.image = this.pictureCache
-                .getImage(tileSetIndex, tileIndex + getCounter()).get();
+                .getImage(tileSetIndex, tileIndex + getCounter());
     }
 
     /**
@@ -157,7 +158,7 @@ public final class BubblesManager extends AbstractParameterObjectEntity {
     }
 
     @Override
-    public BufferedImage msgDraw() {
+    public Optional<BufferedImage> msgDraw() {
         return this.image;
     }
 }

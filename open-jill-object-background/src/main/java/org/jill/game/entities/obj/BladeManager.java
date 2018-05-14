@@ -3,6 +3,7 @@ package org.jill.game.entities.obj;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.jill.game.entities.obj.abs.AbstractParameterObjectEntity;
 import org.jill.game.entities.obj.util.UtilityObjectEntity;
@@ -30,7 +31,7 @@ public final class BladeManager extends AbstractParameterObjectEntity {
     /**
      * Picture array.
      */
-    private BufferedImage[] images;
+    private Optional<BufferedImage>[] images;
 
     /**
      * SubState value to remove blade.
@@ -96,12 +97,12 @@ public final class BladeManager extends AbstractParameterObjectEntity {
         // Load picture for each object. Don't use cache cause some picture
         // change between jill episod.
         this.images
-                = new BufferedImage[numberTileSet];
+                = new Optional[numberTileSet];
 
         for (int index = 0; index < numberTileSet; index++) {
             this.images[index]
                     = this.pictureCache.getImage(tileSetIndex, tileIndex
-                    + index).get();
+                    + index);
         }
 
         this.backgroundObject = objectParam.getBackgroundObject();
@@ -113,8 +114,8 @@ public final class BladeManager extends AbstractParameterObjectEntity {
 
         // Blade can be create by player, check width height
         if (getWidth() == 0 || getHeight() == 0) {
-            this.setWidth(this.images[0].getWidth());
-            this.setHeight(this.images[0].getHeight());
+            this.setWidth(this.images[0].get().getWidth());
+            this.setHeight(this.images[0].get().getHeight());
 
             // Blade have not same y tha player
             this.y += initY;
@@ -140,7 +141,7 @@ public final class BladeManager extends AbstractParameterObjectEntity {
     }
 
     @Override
-    public BufferedImage msgDraw() {
+    public Optional<BufferedImage> msgDraw() {
         return this.images[this.counter];
     }
 

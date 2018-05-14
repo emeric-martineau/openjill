@@ -1,6 +1,7 @@
 package org.jill.game.entities.obj;
 
 import java.awt.image.BufferedImage;
+import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -100,8 +101,8 @@ public final class CheckPointManager extends AbstractParameterObjectEntity {
     }
 
     @Override
-    public BufferedImage msgDraw() {
-        return null;
+    public Optional<BufferedImage> msgDraw() {
+        return Optional.empty();
     }
 
     @Override

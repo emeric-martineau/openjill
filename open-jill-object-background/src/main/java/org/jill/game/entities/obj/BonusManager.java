@@ -29,7 +29,7 @@ public final class BonusManager extends AbstractParameterObjectEntity {
     /**
      * Picture array.
      */
-    private BufferedImage images;
+    private Optional<BufferedImage> images;
 
     /**
      * Inventory object to add.
@@ -100,7 +100,7 @@ public final class BonusManager extends AbstractParameterObjectEntity {
         final int tileIndex = Integer.valueOf(keySplit[1]);
         final int tileSetIndex = Integer.valueOf(keySplit[0]);
 
-        this.images = this.pictureCache.getImage(tileSetIndex, tileIndex).get();
+        this.images = this.pictureCache.getImage(tileSetIndex, tileIndex);
 
         final String dontRemove = getConfString("dontRemove");
 
@@ -117,7 +117,7 @@ public final class BonusManager extends AbstractParameterObjectEntity {
     }
 
     @Override
-    public BufferedImage msgDraw() {
+    public Optional<BufferedImage> msgDraw() {
         return this.images;
     }
 

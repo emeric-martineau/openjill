@@ -1,6 +1,7 @@
 package org.jill.game.entities.obj;
 
 import java.awt.image.BufferedImage;
+import java.util.Optional;
 
 import org.jill.game.entities.obj.abs.AbstractParameterObjectEntity;
 import org.jill.openjill.core.api.entities.ObjectParam;
@@ -18,7 +19,7 @@ public final class HitFireManager extends AbstractParameterObjectEntity {
     /**
      * Picture array.
      */
-    private BufferedImage[] images;
+    private Optional<BufferedImage>[] images;
 
     /**
      * Kill message.
@@ -40,7 +41,7 @@ public final class HitFireManager extends AbstractParameterObjectEntity {
         final int numberTileSet = getConfInteger("numberTileSet");
 
         // Alloc array of picture
-        this.images = new BufferedImage[(numberTileSet * 2) - 1];
+        this.images = new Optional[(numberTileSet * 2) - 1];
 
         // Base tileset
         int baseTileIndex = tileIndex;
@@ -48,7 +49,7 @@ public final class HitFireManager extends AbstractParameterObjectEntity {
         for (int index = numberTileSet - 1; index < this.images.length;
              index++) {
             this.images[index] = this.pictureCache.getImage(tileSetIndex,
-                    baseTileIndex).get();
+                    baseTileIndex);
             baseTileIndex++;
         }
 
@@ -65,8 +66,8 @@ public final class HitFireManager extends AbstractParameterObjectEntity {
 
         // Create at runtime, check width height
         if (this.width == 0 || this.height == 0) {
-            this.width = this.images[0].getWidth();
-            this.height = this.images[0].getHeight();
+            this.width = this.images[0].get().getWidth();
+            this.height = this.images[0].get().getHeight();
         }
     }
 
@@ -84,7 +85,7 @@ public final class HitFireManager extends AbstractParameterObjectEntity {
     }
 
     @Override
-    public BufferedImage msgDraw() {
+    public Optional<BufferedImage> msgDraw() {
         return this.images[this.counter];
     }
 }

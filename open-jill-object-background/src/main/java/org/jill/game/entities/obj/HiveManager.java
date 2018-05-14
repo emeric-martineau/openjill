@@ -1,6 +1,7 @@
 package org.jill.game.entities.obj;
 
 import java.awt.image.BufferedImage;
+import java.util.Optional;
 
 import org.jill.game.entities.obj.abs.AbstractParameterObjectEntity;
 import org.jill.game.entities.obj.bullet.BulletObjectFactory;
@@ -39,7 +40,7 @@ public final class HiveManager extends AbstractParameterObjectEntity {
     /**
      * Picture array.
      */
-    private BufferedImage[] images;
+    private Optional<BufferedImage>[] images;
 
     /**
      * Counter value to create bees.
@@ -90,12 +91,12 @@ public final class HiveManager extends AbstractParameterObjectEntity {
         // Load picture for each object. Don't use cache cause some picture
         // change between jill episod.
         this.images
-                = new BufferedImage[numberTileSet];
+                = new Optional[numberTileSet];
 
         for (int index = 0; index < numberTileSet; index++) {
             this.images[index]
                     = this.pictureCache.getImage(tileSetIndex, tileIndex
-                    + index).get();
+                    + index);
         }
 
         // Remove me from list of object (= kill me)
@@ -128,7 +129,7 @@ public final class HiveManager extends AbstractParameterObjectEntity {
     }
 
     @Override
-    public BufferedImage msgDraw() {
+    public Optional<BufferedImage> msgDraw() {
         int pictureIndex;
 
         pictureIndex = getCounter();

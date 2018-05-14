@@ -1,6 +1,7 @@
 package org.jill.game.entities.obj;
 
 import java.awt.image.BufferedImage;
+import java.util.Optional;
 
 import org.jill.game.entities.obj.abs.AbstractHitPlayerObjectEntity;
 import org.jill.game.entities.obj.util.UtilityObjectEntity;
@@ -22,7 +23,7 @@ public final class CrabManager extends AbstractHitPlayerObjectEntity {
     /**
      * Picture array.
      */
-    private BufferedImage[] images;
+    private Optional<BufferedImage>[] images;
 
     /**
      * Kill message.
@@ -68,7 +69,7 @@ public final class CrabManager extends AbstractHitPlayerObjectEntity {
         final int numberTileSet = getConfInteger("numberTileSet");
 
         // Alloc array of picture
-        this.images = new BufferedImage[numberTileSet];
+        this.images = new Optional[numberTileSet];
 
         // Init Right
         initPicture(this.images, numberTileSet, tileSetIndex, tileIndex);
@@ -88,14 +89,14 @@ public final class CrabManager extends AbstractHitPlayerObjectEntity {
      * @param tileSetIndex  tile set index
      * @param tileIndex     tile index start
      */
-    private void initPicture(final BufferedImage[] images,
+    private void initPicture(final Optional<BufferedImage>[] images,
             final int numberTileSet, final int tileSetIndex, final int tileIndex) {
 
         final int end = tileIndex + numberTileSet;
 
         for (int index = tileIndex; index < end; index++) {
             images[index] = this.pictureCache.getImage(tileSetIndex,
-                    index).get();
+                    index);
         }
     }
 
@@ -162,7 +163,7 @@ public final class CrabManager extends AbstractHitPlayerObjectEntity {
     }
 
     @Override
-    public BufferedImage msgDraw() {
+    public Optional<BufferedImage> msgDraw() {
         return this.images[this.getCounter()];
     }
 

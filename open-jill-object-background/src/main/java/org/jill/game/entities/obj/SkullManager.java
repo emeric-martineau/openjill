@@ -2,6 +2,7 @@ package org.jill.game.entities.obj;
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.util.Optional;
 
 import org.jill.game.entities.obj.abs.AbstractParameterObjectEntity;
 import org.jill.openjill.core.api.entities.ObjectEntity;
@@ -20,12 +21,12 @@ public final class SkullManager extends AbstractParameterObjectEntity
     /**
      * Picture array.
      */
-    private BufferedImage[] images;
+    private Optional<BufferedImage>[] images;
 
     /**
      * Picture array.
      */
-    private BufferedImage fixedImages;
+    private Optional<BufferedImage> fixedImages;
 
     /**
      * Create copy of picture.
@@ -56,7 +57,7 @@ public final class SkullManager extends AbstractParameterObjectEntity
         int tileIndex = getConfInteger("fixedTile");
         int tileSetIndex = getConfInteger("fixedTileSet");
 
-        this.fixedImages = this.pictureCache.getImage(tileSetIndex, tileIndex).get();
+        this.fixedImages = this.pictureCache.getImage(tileSetIndex, tileIndex);
 
         tileIndex = getConfInteger("tile");
         tileSetIndex = getConfInteger("tileSet");
@@ -88,11 +89,11 @@ public final class SkullManager extends AbstractParameterObjectEntity
 
         tileIncrement = 1;
 
-        for (BufferedImage image : this.images) {
+        for (Optional<BufferedImage> image : this.images) {
             eye = this.pictureCache.getImage(tileSetIndex, tileEye).get();
 
             // Draw eye
-            drawFromImage(image, eye, eyeLeftX, eyeLeftY);
+            drawFromImage(image.get(), eye, eyeLeftX, eyeLeftY);
 
             if ((tileEye == eyeMaxTile && tileIncrement > 0)
                     || (tileEye == eyeMinTile && tileIncrement < 0)) {
@@ -115,7 +116,7 @@ public final class SkullManager extends AbstractParameterObjectEntity
     private void loadSkullImage(final int numberTileSet, final int tileSetIndex,
             final int tileIndex, final int skullMax) {
         this.images
-                = new BufferedImage[numberTileSet * 2];
+                = new Optional[numberTileSet * 2];
 
         int tileIncrement = 1;
         int tileSkull = 0;
@@ -126,9 +127,9 @@ public final class SkullManager extends AbstractParameterObjectEntity
             currentSkull = this.pictureCache.getImage(tileSetIndex,
                     tileIndex + tileSkull).get();
 
-            this.images[index] = copyPicture(currentSkull);
+            this.images[index] = Optional.of(copyPicture(currentSkull));
 
-            this.images[index + 1] = copyPicture(currentSkull);
+            this.images[index + 1] = Optional.of(copyPicture(currentSkull));
 
             if (tileSkull == skullMax) {
                 tileIncrement *= -1;
@@ -139,8 +140,8 @@ public final class SkullManager extends AbstractParameterObjectEntity
     }
 
     @Override
-    public BufferedImage msgDraw() {
-        BufferedImage img;
+    public Optional<BufferedImage> msgDraw() {
+        Optional<BufferedImage> img;
 
         if (getState() == 0) {
             img = this.fixedImages;

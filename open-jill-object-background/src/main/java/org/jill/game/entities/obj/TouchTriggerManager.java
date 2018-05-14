@@ -1,6 +1,7 @@
 package org.jill.game.entities.obj;
 
 import java.awt.image.BufferedImage;
+import java.util.Optional;
 
 import org.jill.game.entities.ObjectEntityImpl;
 import org.jill.openjill.core.api.entities.ObjectEntity;
@@ -15,8 +16,8 @@ import org.jill.openjill.core.api.message.EnumMessageType;
 public final class TouchTriggerManager extends ObjectEntityImpl {
 
     @Override
-    public BufferedImage msgDraw() {
-        return null;
+    public Optional<BufferedImage> msgDraw() {
+        return Optional.empty();
     }
 
     @Override

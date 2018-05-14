@@ -4,6 +4,7 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 import org.jill.game.entities.obj.abs.AbstractParameterObjectEntity;
 import org.jill.game.entities.obj.player.PlayerState;
@@ -47,7 +48,7 @@ public final class LiftManager extends AbstractParameterObjectEntity {
     /**
      * Picture array.
      */
-    private BufferedImage image;
+    private Optional<BufferedImage> image;
 
     /**
      * To know if player is on lift.
@@ -78,7 +79,7 @@ public final class LiftManager extends AbstractParameterObjectEntity {
         final int tileIndex = getConfInteger("tile");
         final int tileSetIndex = getConfInteger("tileSet");
 
-        this.image = this.pictureCache.getImage(tileSetIndex, tileIndex).get();
+        this.image = this.pictureCache.getImage(tileSetIndex, tileIndex);
 
         String[] className = getConfString("onlyForObject").split(",");
 
@@ -86,7 +87,7 @@ public final class LiftManager extends AbstractParameterObjectEntity {
     }
 
     @Override
-    public BufferedImage msgDraw() {
+    public Optional<BufferedImage> msgDraw() {
         return this.image;
     }
 

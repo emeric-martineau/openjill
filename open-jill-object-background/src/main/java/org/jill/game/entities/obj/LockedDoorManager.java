@@ -4,10 +4,7 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.image.BufferedImage;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import org.jill.game.entities.obj.abs.AbstractParameterObjectEntity;
 import org.jill.game.entities.obj.lockeddoor.LockedDoorConfig;
@@ -232,8 +229,8 @@ public final class LockedDoorManager extends AbstractParameterObjectEntity
     }
 
     @Override
-    public BufferedImage msgDraw() {
-        BufferedImage currentPictureDoor = null;
+    public Optional<BufferedImage> msgDraw() {
+        BufferedImage currentPictureDoor;
 
         if (getState() > 0) {
             currentPictureDoor = new BufferedImage(
@@ -253,9 +250,11 @@ public final class LockedDoorManager extends AbstractParameterObjectEntity
             draw(g2CurrentPictureDoor, this.doorbPicutre, 0, startY);
 
             g2CurrentPictureDoor.dispose();
+;
+            return Optional.of(currentPictureDoor);
+        } else {
+            return Optional.empty();
         }
-
-        return currentPictureDoor;
     }
 
     @Override

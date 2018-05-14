@@ -23,6 +23,7 @@ package org.jill.game.entities.obj.util;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.jill.game.entities.obj.bees.MoveSizeAndInterval;
 import org.jill.openjill.core.api.manager.TileManager;
@@ -45,18 +46,18 @@ public final class SharedCode {
      * @param tileSetIndex  index in tile set
      * @param numberTileSet number images in tile set
      */
-    public static BufferedImage[] loadPicture(final TileManager pictureCache, final int tileIndex, final int tileSetIndex, final int numberTileSet) {
+    public static Optional<BufferedImage>[] loadPicture(final TileManager pictureCache, final int tileIndex, final int tileSetIndex, final int numberTileSet) {
         // Load picture for each object. Don't use cache cause some picture
         // change between jill episod.
-        final BufferedImage[] images
-                = new BufferedImage[numberTileSet * 2];
+        final Optional<BufferedImage>[] images
+                = new Optional[numberTileSet * 2];
 
         int indexArray = 0;
 
         for (int index = 0; index < numberTileSet; index++) {
             images[indexArray]
                     = pictureCache.getImage(tileSetIndex, tileIndex
-                    + index).get();
+                    + index);
             images[indexArray + 1] = images[indexArray];
 
             indexArray += 2;

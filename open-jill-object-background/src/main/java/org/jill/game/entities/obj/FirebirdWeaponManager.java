@@ -1,6 +1,7 @@
 package org.jill.game.entities.obj;
 
 import java.awt.image.BufferedImage;
+import java.util.Optional;
 
 import org.jill.game.entities.obj.abs.AbstractParameterObjectEntity;
 import org.jill.game.entities.obj.util.UtilityObjectEntity;
@@ -34,7 +35,7 @@ public final class FirebirdWeaponManager extends AbstractParameterObjectEntity {
     /**
      * Picture array.
      */
-    private BufferedImage[] images;
+    private Optional<BufferedImage>[] images;
 
     /**
      * Default constructor.
@@ -53,12 +54,12 @@ public final class FirebirdWeaponManager extends AbstractParameterObjectEntity {
         // Load picture for each object. Don't use cache cause some picture
         // change between jill episod.
         this.images
-                = new BufferedImage[numberTileSet];
+                = new Optional[numberTileSet];
 
         for (int index = 0; index < numberTileSet; index++) {
             this.images[index]
                     = this.pictureCache.getImage(tileSetIndex, tileIndex
-                    + index).get();
+                    + index);
         }
 
         // Remove me from list of object (= kill me)
@@ -67,8 +68,8 @@ public final class FirebirdWeaponManager extends AbstractParameterObjectEntity {
         this.backgroundObject = objectParam.getBackgroundObject();
 
         if (getWidth() == 0 || getHeight() == 0) {
-            setWidth(this.images[0].getWidth());
-            setHeight(this.images[0].getHeight());
+            setWidth(this.images[0].get().getWidth());
+            setHeight(this.images[0].get().getHeight());
         }
     }
 
@@ -81,7 +82,7 @@ public final class FirebirdWeaponManager extends AbstractParameterObjectEntity {
     }
 
     @Override
-    public BufferedImage msgDraw() {
+    public Optional<BufferedImage> msgDraw() {
         return this.images[this.counter];
     }
 

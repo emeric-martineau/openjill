@@ -2,6 +2,7 @@ package org.jill.game.entities.obj;
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.util.Optional;
 
 import org.jill.game.entities.ObjectEntityImpl;
 import org.jill.openjill.core.api.entities.ObjectParam;
@@ -34,7 +35,7 @@ public final class TextTileManager extends ObjectEntityImpl {
     }
 
     @Override
-    public BufferedImage msgDraw() {
+    public Optional<BufferedImage> msgDraw() {
         // Create picture
         int widthObj = getWidth();
         int heightObj = getHeight();
@@ -65,6 +66,6 @@ public final class TextTileManager extends ObjectEntityImpl {
                     getxSpeed(), getySpeed());
         }
 
-        return image;
+        return Optional.of(image);
     }
 }

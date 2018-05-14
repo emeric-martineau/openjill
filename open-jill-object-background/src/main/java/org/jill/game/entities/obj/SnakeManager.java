@@ -2,6 +2,7 @@ package org.jill.game.entities.obj;
 
 import java.awt.Graphics;
 import java.awt.image.BufferedImage;
+import java.util.Optional;
 
 import org.jill.game.entities.obj.abs.AbstractHitPlayerObjectEntity;
 import org.jill.game.entities.obj.util.UtilityObjectEntity;
@@ -185,7 +186,7 @@ public final class SnakeManager extends AbstractHitPlayerObjectEntity {
     }
 
     @Override
-    public BufferedImage msgDraw() {
+    public Optional<BufferedImage> msgDraw() {
         BufferedImage currentPicture = new BufferedImage(getWidth(),
                 getHeight(), BufferedImage.TYPE_INT_ARGB);
         Graphics g2d = currentPicture.createGraphics();
@@ -210,7 +211,7 @@ public final class SnakeManager extends AbstractHitPlayerObjectEntity {
 
         g2d.dispose();
 
-        return currentPicture;
+        return Optional.of(currentPicture);
     }
 
     /**

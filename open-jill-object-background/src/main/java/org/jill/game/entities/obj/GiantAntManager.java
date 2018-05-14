@@ -1,6 +1,7 @@
 package org.jill.game.entities.obj;
 
 import java.awt.image.BufferedImage;
+import java.util.Optional;
 
 import org.jill.game.entities.obj.abs.AbstractHitPlayerObjectEntity;
 import org.jill.game.entities.obj.util.UtilityObjectEntity;
@@ -22,12 +23,12 @@ public final class GiantAntManager extends AbstractHitPlayerObjectEntity {
     /**
      * Picture array.
      */
-    private BufferedImage[] leftImages;
+    private Optional<BufferedImage>[] leftImages;
 
     /**
      * Picture array.
      */
-    private BufferedImage[] rightImages;
+    private Optional<BufferedImage>[] rightImages;
 
     /**
      * Kill message.
@@ -76,8 +77,8 @@ public final class GiantAntManager extends AbstractHitPlayerObjectEntity {
         final int nbImagePerSide = numberTileSet / 2;
 
         // Alloc array of picture
-        this.leftImages = new BufferedImage[nbImagePerSide];
-        this.rightImages = new BufferedImage[nbImagePerSide];
+        this.leftImages = new Optional[nbImagePerSide];
+        this.rightImages = new Optional[nbImagePerSide];
 
         // Last picture is turn image
         this.nbImagePerSideToDisplay = nbImagePerSide - 1;
@@ -102,14 +103,14 @@ public final class GiantAntManager extends AbstractHitPlayerObjectEntity {
      * @param tileSetIndex  tile set index
      * @param tileIndex     tile index start
      */
-    private void initPicture(final BufferedImage[] images,
+    private void initPicture(final Optional[] images,
             final int numberTileSet, final int tileSetIndex, final int tileIndex) {
 
         final int end = tileIndex + numberTileSet;
 
         for (int index = tileIndex; index < end; index++) {
             images[index - tileIndex] = this.pictureCache.getImage(tileSetIndex,
-                    index).get();
+                    index);
         }
     }
 
@@ -148,8 +149,8 @@ public final class GiantAntManager extends AbstractHitPlayerObjectEntity {
     }
 
     @Override
-    public BufferedImage msgDraw() {
-        BufferedImage[] currentPictureArray;
+    public Optional<BufferedImage> msgDraw() {
+        Optional<BufferedImage>[] currentPictureArray;
 
         if (this.xSpeed > 0) {
             // Right
@@ -159,7 +160,7 @@ public final class GiantAntManager extends AbstractHitPlayerObjectEntity {
             currentPictureArray = this.leftImages;
         }
 
-        BufferedImage img;
+        Optional<BufferedImage> img;
 
         if (this.state == this.stateMove) {
             img = currentPictureArray[this.counter];

@@ -1,6 +1,7 @@
 package org.jill.game.entities.obj;
 
 import java.awt.image.BufferedImage;
+import java.util.Optional;
 
 import org.jill.game.entities.obj.abs.AbstractParameterObjectEntity;
 import org.jill.game.entities.obj.player.PlayerPositionSynchronizer;
@@ -90,7 +91,7 @@ public final class KniveManager extends AbstractParameterObjectEntity {
     /**
      * Picture array.
      */
-    private BufferedImage images;
+    private Optional<BufferedImage> images;
 
     /**
      * Inventory object to add.
@@ -120,7 +121,7 @@ public final class KniveManager extends AbstractParameterObjectEntity {
         final int tileIndex = getConfInteger("tile");
         final int tileSetIndex = getConfInteger("tileSet");
 
-        this.images = this.pictureCache.getImage(tileSetIndex, tileIndex).get();
+        this.images = this.pictureCache.getImage(tileSetIndex, tileIndex);
 
         final int initY = getConfInteger("initY");
         this.downMaxMoveY = getConfInteger("downMaxMoveY");
@@ -146,8 +147,8 @@ public final class KniveManager extends AbstractParameterObjectEntity {
 
         // Knife can be create by player, check width height
         if (this.width == 0 || this.height == 0) {
-            this.width = this.images.getWidth();
-            this.height = this.images.getHeight();
+            this.width = this.images.get().getWidth();
+            this.height = this.images.get().getHeight();
 
             // Knife have not same y tha player
             this.y += initY;
@@ -184,7 +185,7 @@ public final class KniveManager extends AbstractParameterObjectEntity {
     }
 
     @Override
-    public BufferedImage msgDraw() {
+    public Optional<BufferedImage> msgDraw() {
         return this.images;
     }
 

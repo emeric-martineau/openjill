@@ -1,6 +1,7 @@
 package org.jill.game.entities.obj;
 
 import java.awt.image.BufferedImage;
+import java.util.Optional;
 
 import org.jill.game.entities.obj.abs.AbstractFireHitPlayerObject;
 import org.jill.game.entities.obj.bullet.BulletObjectFactory;
@@ -32,12 +33,12 @@ public final class FirebirdManager extends AbstractFireHitPlayerObject {
     /**
      * Picture array.
      */
-    private BufferedImage[] leftImages;
+    private Optional<BufferedImage>[] leftImages;
 
     /**
      * Picture array.
      */
-    private BufferedImage[] rightImages;
+    private Optional<BufferedImage>[] rightImages;
 
     /**
      * Index of turn picture.
@@ -83,20 +84,20 @@ public final class FirebirdManager extends AbstractFireHitPlayerObject {
                 * NUMBER_OF_SIDE);
 
         // Alloc array of picture
-        this.leftImages = new BufferedImage[numberPicturePerSide];
-        this.rightImages = new BufferedImage[numberPicturePerSide];
+        this.leftImages = new Optional[numberPicturePerSide];
+        this.rightImages = new Optional[numberPicturePerSide];
 
         // Init Right
         initPicture(this.rightImages, baseTileNumber, tileSetIndex,
                 tileIndex);
         this.rightImages[this.turnIndexPicture] =
-                this.pictureCache.getImage(tileSetIndex, tileTurnIndex).get();
+                this.pictureCache.getImage(tileSetIndex, tileTurnIndex);
 
         // Init Left
         initPicture(this.leftImages, baseTileNumber, tileSetIndex,
                 tileIndex + baseTileNumber);
         this.leftImages[this.turnIndexPicture] = this.pictureCache.getImage(
-                tileSetIndex, tileTurnIndex + turnTileNumber).get();
+                tileSetIndex, tileTurnIndex + turnTileNumber);
 
         // Search block
         this.backgroundObject = objectParam.getBackgroundObject();
@@ -115,12 +116,12 @@ public final class FirebirdManager extends AbstractFireHitPlayerObject {
      * @param tileSetIndex   tileset
      * @param tileIndex      tile
      */
-    private void initPicture(final BufferedImage[] images,
+    private void initPicture(final Optional<BufferedImage>[] images,
             final int baseTileNumber, final int tileSetIndex,
             final int tileIndex) {
         for (int index = 0; index < baseTileNumber; index++) {
             images[index] = this.pictureCache.getImage(tileSetIndex,
-                    tileIndex + index).get();
+                    tileIndex + index);
         }
 
         int indexArray = baseTileNumber;
@@ -162,8 +163,8 @@ public final class FirebirdManager extends AbstractFireHitPlayerObject {
     }
 
     @Override
-    public BufferedImage msgDraw() {
-        BufferedImage[] currentPictureArray;
+    public Optional<BufferedImage> msgDraw() {
+        Optional<BufferedImage>[] currentPictureArray;
 
         if (this.xSpeed < 0) {
             // Right

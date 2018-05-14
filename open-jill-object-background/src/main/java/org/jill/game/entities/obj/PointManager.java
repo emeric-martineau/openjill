@@ -1,6 +1,7 @@
 package org.jill.game.entities.obj;
 
 import java.awt.image.BufferedImage;
+import java.util.Optional;
 
 import org.jill.game.entities.obj.abs.AbstractParameterObjectEntity;
 import org.jill.openjill.core.api.entities.ObjectParam;
@@ -66,11 +67,11 @@ public class PointManager extends AbstractParameterObjectEntity {
     }
 
     @Override
-    public BufferedImage msgDraw() {
+    public Optional<BufferedImage> msgDraw() {
         int color = (getCounter() & MASK) + 1;
 
-        return this.textManager.createSmallNumber(getState(), color,
-                TextManager.BACKGROUND_COLOR_NONE);
+        return Optional.of(this.textManager.createSmallNumber(getState(), color,
+                TextManager.BACKGROUND_COLOR_NONE));
     }
 
     @Override

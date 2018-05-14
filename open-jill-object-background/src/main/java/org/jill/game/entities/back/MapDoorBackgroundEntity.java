@@ -67,6 +67,6 @@ public final class MapDoorBackgroundEntity
     @Override
     public void msgUpdate() {
         this.indexEtat = getPictureSync().updatePictureIndex(
-                this.indexEtat, images);
+                this.indexEtat, images.length);
     }
 }

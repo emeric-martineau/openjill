@@ -1,6 +1,7 @@
 package org.jill.openjill.core.api.entities;
 
 import java.awt.image.BufferedImage;
+import java.util.Optional;
 
 import org.jill.jn.ObjectItem;
 import org.jill.openjill.core.api.keyboard.KeyboardLayout;
@@ -95,7 +96,7 @@ public interface ObjectEntity extends ObjectItem {
      *
      * @return picture
      */
-    BufferedImage msgDraw();
+    Optional<BufferedImage> msgDraw();
 
     /**
      * Call when player touch object. (e.g. for lift).

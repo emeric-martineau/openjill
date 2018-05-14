@@ -137,14 +137,14 @@ public abstract class AbstractObjectJillLevel
                 continue;
             }
 
-            if (obj.isWriteOnBackGround()
+            if (obj.isWriteOnBackGround() && obj.msgDraw().isPresent()
                     && checkIfNotUpdatableBackground(obj)) {
                 listObjectDrawOnBackground.add(obj);
 
                 // Object draw in background only if object can this and not
                 // background with update msg support.
                 // Grap picture and don't store it in list
-                g2.drawImage(obj.msgDraw(), obj.getX(), obj.getY(), null);
+                g2.drawImage(obj.msgDraw().get(), obj.getX(), obj.getY(), null);
             } else if (obj.isAlwaysOnScreen()) {
                 listObjectAlwaysOnScreen.add(obj);
             } else {

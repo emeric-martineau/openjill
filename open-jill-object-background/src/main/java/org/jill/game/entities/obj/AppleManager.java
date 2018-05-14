@@ -1,6 +1,7 @@
 package org.jill.game.entities.obj;
 
 import java.awt.image.BufferedImage;
+import java.util.Optional;
 
 import org.jill.game.entities.obj.abs.AbstractParameterObjectEntity;
 import org.jill.openjill.core.api.entities.ObjectEntity;
@@ -30,7 +31,7 @@ public final class AppleManager extends AbstractParameterObjectEntity {
     /**
      * Picture array.
      */
-    private BufferedImage[] images;
+    private Optional<BufferedImage>[] images;
 
     /**
      * Default constructor.
@@ -49,14 +50,14 @@ public final class AppleManager extends AbstractParameterObjectEntity {
         // Load picture for each object. Don't use cache cause some picture
         // change between jill episod.
         this.images
-                = new BufferedImage[numberTileSet * 2];
+                = new Optional[numberTileSet * 2];
 
         int indexArray = (numberTileSet * 2) - 1;
 
         for (int index = 0; index < numberTileSet; index++) {
             this.images[indexArray]
                     = this.pictureCache.getImage(tileSetIndex, tileIndex
-                    + index).get();
+                    + index);
             this.images[indexArray - 1] = this.images[indexArray];
 
             indexArray -= 2;
@@ -96,7 +97,7 @@ public final class AppleManager extends AbstractParameterObjectEntity {
     }
 
     @Override
-    public BufferedImage msgDraw() {
+    public Optional<BufferedImage> msgDraw() {
         return this.images[this.counter];
     }
 

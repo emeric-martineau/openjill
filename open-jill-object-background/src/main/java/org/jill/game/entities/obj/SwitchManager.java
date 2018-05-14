@@ -1,6 +1,7 @@
 package org.jill.game.entities.obj;
 
 import java.awt.image.BufferedImage;
+import java.util.Optional;
 
 import org.jill.game.entities.obj.abs.AbstractParameterObjectEntity;
 import org.jill.openjill.core.api.entities.ObjectEntity;
@@ -33,7 +34,7 @@ public final class SwitchManager extends AbstractParameterObjectEntity {
     /**
      * Picture array.
      */
-    private BufferedImage[] images;
+    private Optional<BufferedImage>[] images;
 
     /**
      * Default constructor.
@@ -48,16 +49,16 @@ public final class SwitchManager extends AbstractParameterObjectEntity {
         int tileIndex = getConfInteger("tile");
         int tileSetIndex = getConfInteger("tileSet");
 
-        this.images = new BufferedImage[getConfInteger("numberTileSet")];
+        this.images = new Optional[getConfInteger("numberTileSet")];
 
         for (int index = 0; index < this.images.length; index++) {
             this.images[index] = this.pictureCache.getImage(tileSetIndex,
-                    tileIndex + index).get();
+                    tileIndex + index);
         }
     }
 
     @Override
-    public BufferedImage msgDraw() {
+    public Optional<BufferedImage> msgDraw() {
         return this.images[this.state];
     }
 

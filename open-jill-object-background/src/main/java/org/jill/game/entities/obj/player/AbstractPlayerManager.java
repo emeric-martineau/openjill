@@ -2,6 +2,7 @@ package org.jill.game.entities.obj.player;
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.util.Optional;
 
 import org.jill.game.entities.obj.util.UtilityObjectEntity;
 import org.jill.openjill.core.api.entities.BackgroundEntity;
@@ -495,21 +496,21 @@ public abstract class AbstractPlayerManager
      *
      * @param pictureSrc source picture
      */
-    protected void drawPieceOfLand(final BufferedImage[][] pictureSrc) {
-        final BufferedImage[] pieceOfLand = new BufferedImage[
+    protected void drawPieceOfLand(final Optional<BufferedImage>[][] pictureSrc) {
+        final Optional<BufferedImage>[] pieceOfLand = new Optional[
                 PlayerPieceOfLandConst.PICTURE_NUMBER];
 
         for (int index = 0; index < pieceOfLand.length; index++) {
             pieceOfLand[index] = pictureCache.getImage(
                     PlayerPieceOfLandConst.TILESET_INDEX,
-                    PlayerPieceOfLandConst.TILE_INDEX + index).get();
+                    PlayerPieceOfLandConst.TILE_INDEX + index);
         }
 
-        for (BufferedImage[] pictureSrc1 : pictureSrc) {
+        for (Optional<BufferedImage>[] pictureSrc1 : pictureSrc) {
             for (int indexImg = 0; indexImg < pieceOfLand.length; indexImg++) {
-                pictureSrc1[indexImg + 1] =
-                        addPieceOfLand(pictureSrc1[indexImg + 1],
-                                pieceOfLand[indexImg]);
+                pictureSrc1[indexImg + 1] = Optional.of(
+                        addPieceOfLand(pictureSrc1[indexImg + 1].get(),
+                                pieceOfLand[indexImg].get()));
             }
         }
     }

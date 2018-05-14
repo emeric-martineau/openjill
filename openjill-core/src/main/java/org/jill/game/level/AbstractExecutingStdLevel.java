@@ -570,7 +570,7 @@ public abstract class AbstractExecutingStdLevel extends AbstractMenuJillLevel {
      */
     private void drawObject() {
         for (ObjectEntity currentObject : listObjectAlwaysOnScreen) {
-            g2DrawingScreen.drawImage(currentObject.msgDraw(),
+            g2DrawingScreen.drawImage(currentObject.msgDraw().get(),
                     currentObject.getX(), currentObject.getY(), null);
         }
 
@@ -583,17 +583,13 @@ public abstract class AbstractExecutingStdLevel extends AbstractMenuJillLevel {
         final int specialScreenShift = this.statusBar.getGameAreaConf()
                 .getSpecialScreenShift();
 
-        BufferedImage currentPicture;
-
         while (itDraw.hasPrevious()) {
             currentObject = itDraw.previous();
 
-            currentPicture = currentObject.msgDraw();
-
-            if (this.showInvisible && currentPicture == null) {
+            if (this.showInvisible && !currentObject.msgDraw().isPresent()) {
                 drawDashedRectFilled(g2DrawingScreen, currentObject, offset);
-            } else {
-                g2DrawingScreen.drawImage(currentPicture,
+            } else if (currentObject.msgDraw().isPresent()) {
+                g2DrawingScreen.drawImage(currentObject.msgDraw().get(),
                         currentObject.getX()
                                 + offset.getX(),
                         currentObject.getY()

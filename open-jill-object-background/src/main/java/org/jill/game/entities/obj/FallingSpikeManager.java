@@ -1,6 +1,7 @@
 package org.jill.game.entities.obj;
 
 import java.awt.image.BufferedImage;
+import java.util.Optional;
 
 import org.jill.game.entities.obj.abs.AbstractHitPlayerObjectEntity;
 import org.jill.game.entities.obj.player.PlayerState;
@@ -26,7 +27,7 @@ public final class FallingSpikeManager extends AbstractHitPlayerObjectEntity
     /**
      * Picture array.
      */
-    private BufferedImage images;
+    private Optional<BufferedImage> images;
 
     /**
      * To remove this object from object list.
@@ -63,7 +64,7 @@ public final class FallingSpikeManager extends AbstractHitPlayerObjectEntity
         int tileIndex = getConfInteger("tile");
         int tileSetIndex = getConfInteger("tileSet");
 
-        this.images = this.pictureCache.getImage(tileSetIndex, tileIndex).get();
+        this.images = this.pictureCache.getImage(tileSetIndex, tileIndex);
 
         this.fallingSpeed = getConfInteger("fallingSpeed");
         this.fallingSpeedMax = getConfInteger("fallingSpeedMax");
@@ -74,7 +75,7 @@ public final class FallingSpikeManager extends AbstractHitPlayerObjectEntity
     }
 
     @Override
-    public BufferedImage msgDraw() {
+    public Optional<BufferedImage> msgDraw() {
         return this.images;
     }
 

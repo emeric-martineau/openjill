@@ -2,6 +2,7 @@ package org.jill.game.entities.obj;
 
 import java.awt.image.BufferedImage;
 import java.util.List;
+import java.util.Optional;
 
 import org.jill.game.entities.obj.abs.AbstractHitPlayerObjectEntity;
 import org.jill.game.entities.obj.bees.MoveSizeAndInterval;
@@ -51,7 +52,7 @@ public final class BeesManager extends AbstractHitPlayerObjectEntity {
     /**
      * Picture array.
      */
-    private BufferedImage[] images;
+    private Optional<BufferedImage>[] images;
 
     /**
      * Index in picture array for right picture.
@@ -97,16 +98,16 @@ public final class BeesManager extends AbstractHitPlayerObjectEntity {
         // Load picture for each object. Don't use cache cause some picture
         // change between jill episod.
         this.images
-                = new BufferedImage[numberTileSet];
+                = new Optional[numberTileSet];
 
         for (int index = 0; index < numberTileSet; index++) {
             this.images[index]
                     = this.pictureCache.getImage(tileSetIndex, tileIndex
-                    + index).get();
+                    + index);
         }
 
-        setWidth(this.images[0].getWidth());
-        setHeight(this.images[0].getHeight());
+        setWidth(this.images[0].get().getWidth());
+        setHeight(this.images[0].get().getHeight());
 
         this.indexRight = numberTileSet / 2;
 
@@ -122,12 +123,12 @@ public final class BeesManager extends AbstractHitPlayerObjectEntity {
     }
 
     @Override
-    public BufferedImage msgDraw() {
+    public Optional<BufferedImage> msgDraw() {
         this.indexEtat = PLAYER_POSITION.updatePlayerPosition(
                 this.messageDispatcher, this.indexEtat);
 
         final int xd = PLAYER_POSITION.getX() - getX();
-        BufferedImage bf;
+        Optional<BufferedImage> bf;
 
         if (xd >= X_SPEED_MIDDLE) {
             bf = this.images[this.counter + this.indexRight];

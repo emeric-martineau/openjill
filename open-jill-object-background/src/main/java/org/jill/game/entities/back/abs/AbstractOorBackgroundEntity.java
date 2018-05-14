@@ -21,6 +21,7 @@
 package org.jill.game.entities.back.abs;
 
 import java.awt.image.BufferedImage;
+import java.util.Optional;
 
 import org.jill.game.entities.picutre.PictureSynchronizer;
 import org.jill.openjill.core.api.entities.BackgroundParam;

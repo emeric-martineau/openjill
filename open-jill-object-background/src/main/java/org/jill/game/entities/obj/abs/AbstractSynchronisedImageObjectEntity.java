@@ -3,6 +3,7 @@ package org.jill.game.entities.obj.abs;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Optional;
 
 import org.jill.game.entities.picutre.PictureSynchronizer;
 import org.jill.openjill.core.api.entities.ObjectParam;
@@ -29,7 +30,7 @@ public abstract class AbstractSynchronisedImageObjectEntity
     /**
      * Picture array.
      */
-    private BufferedImage[] images;
+    private Optional<BufferedImage>[] images;
 
     /**
      * Current inde image to display.
@@ -51,12 +52,12 @@ public abstract class AbstractSynchronisedImageObjectEntity
         // Load picture for each object. Don't use cache cause some picture
         // change between jill episod.
         this.images
-                = new BufferedImage[getConfInteger("numberTileSet")];
+                = new Optional[getConfInteger("numberTileSet")];
 
         for (int index = 0; index < this.images.length; index++) {
             this.images[this.images.length - 1 - index]
                     = this.pictureCache.getImage(tileSetIndex, tileIndex
-                    + index).get();
+                    + index);
         }
 
         if (!MAP_PICUTRE.containsKey(this.getClass())) {
@@ -84,9 +85,9 @@ public abstract class AbstractSynchronisedImageObjectEntity
     }
 
     @Override
-    public final BufferedImage msgDraw() {
+    public final Optional<BufferedImage> msgDraw() {
         this.indexEtat = this.ps.updatePictureIndex(this.indexEtat,
-                this.images);
+                this.images.length);
 
         return images[this.ps.getIndexPicture()];
     }

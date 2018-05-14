@@ -1,6 +1,7 @@
 package org.jill.game.entities.obj;
 
 import java.awt.image.BufferedImage;
+import java.util.Optional;
 
 import org.jill.game.entities.obj.abs.AbstractHitPlayerObjectEntity;
 import org.jill.openjill.core.api.entities.BackgroundEntity;
@@ -38,7 +39,7 @@ public final class GhostManager extends AbstractHitPlayerObjectEntity {
     /**
      * Picture array.
      */
-    private BufferedImage[] images;
+    private Optional<BufferedImage>[] images;
 
     /**
      * Background map.
@@ -69,12 +70,12 @@ public final class GhostManager extends AbstractHitPlayerObjectEntity {
         int numberTileSet = getConfInteger("numberTileSet");
 
         this.images
-                = new BufferedImage[numberTileSet];
+                = new Optional[numberTileSet];
 
         for (int index = 0; index < numberTileSet; index++) {
             this.images[index]
                     = this.pictureCache.getImage(tileSetIndex, tileIndex
-                    + index).get();
+                    + index);
         }
     }
 
@@ -191,8 +192,8 @@ public final class GhostManager extends AbstractHitPlayerObjectEntity {
     }
 
     @Override
-    public BufferedImage msgDraw() {
-        BufferedImage image;
+    public Optional<BufferedImage> msgDraw() {
+        Optional<BufferedImage> image;
 
         if (getxSpeed() < X_SPEED_MIDDLE) {
             image = this.images[IMAGE_LEFT];

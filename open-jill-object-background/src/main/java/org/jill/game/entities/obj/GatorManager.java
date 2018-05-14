@@ -2,6 +2,7 @@ package org.jill.game.entities.obj;
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
+import java.util.Optional;
 
 import org.jill.game.entities.obj.abs.AbstractHitPlayerObjectEntity;
 import org.jill.game.entities.obj.util.UtilityObjectEntity;
@@ -23,12 +24,12 @@ public final class GatorManager extends AbstractHitPlayerObjectEntity {
     /**
      * Picture array.
      */
-    private BufferedImage[] leftImages;
+    private Optional<BufferedImage>[] leftImages;
 
     /**
      * Picture array.
      */
-    private BufferedImage[] rightImages;
+    private Optional<BufferedImage>[] rightImages;
 
     /**
      * Kill message.
@@ -61,8 +62,8 @@ public final class GatorManager extends AbstractHitPlayerObjectEntity {
         final int leftTileTail = getConfInteger("leftTileTail");
 
         // Alloc array of picture
-        this.leftImages = new BufferedImage[numberTileSet];
-        this.rightImages = new BufferedImage[numberTileSet];
+        this.leftImages = new Optional[numberTileSet];
+        this.rightImages = new Optional[numberTileSet];
 
         // Init Right
         initPicture(this.rightImages, numberTileSet, tileSetIndex,
@@ -86,7 +87,7 @@ public final class GatorManager extends AbstractHitPlayerObjectEntity {
      * @param tileHead      tile for head
      * @param tileTail      tile for tail
      */
-    private void initPicture(final BufferedImage[] images,
+    private void initPicture(final Optional<BufferedImage>[] images,
             final int numberTileSet, final int tileSetIndex,
             final int tileHead, final int tileTail) {
         // Current picture for head
@@ -115,7 +116,7 @@ public final class GatorManager extends AbstractHitPlayerObjectEntity {
 
             g2.dispose();
 
-            images[index] = joinPicture;
+            images[index] = Optional.of(joinPicture);
         }
     }
 
@@ -140,8 +141,8 @@ public final class GatorManager extends AbstractHitPlayerObjectEntity {
     }
 
     @Override
-    public BufferedImage msgDraw() {
-        BufferedImage[] currentPictureArray;
+    public Optional<BufferedImage> msgDraw() {
+        Optional<BufferedImage>[] currentPictureArray;
 
         if (this.xSpeed > 0) {
             // Right

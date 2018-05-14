@@ -1,6 +1,7 @@
 package org.jill.game.entities.picutre;
 
 import java.awt.image.BufferedImage;
+import java.util.Optional;
 
 /**
  * Class to synchronize picutre.
@@ -53,11 +54,11 @@ public final class PictureSynchronizer {
      * Update index.
      *
      * @param currentIndex index of object
-     * @param bufferPictre picture
+     * @param pictureLength lenght of array picture
      * @return new index
      */
     public int updatePictureIndex(final int currentIndex,
-            final BufferedImage[] bufferPictre) {
+            final int pictureLength) {
         if (currentIndex == this.indexEtat) {
             this.indexEtat++;
 
@@ -65,7 +66,7 @@ public final class PictureSynchronizer {
             if (this.displayCounter == 0) {
                 this.indexPicture++;
 
-                if (this.indexPicture == bufferPictre.length) {
+                if (this.indexPicture == pictureLength) {
                     this.indexPicture = 0;
                 }
             }

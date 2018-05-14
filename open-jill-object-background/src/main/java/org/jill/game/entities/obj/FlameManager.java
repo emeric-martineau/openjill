@@ -1,6 +1,7 @@
 package org.jill.game.entities.obj;
 
 import java.awt.image.BufferedImage;
+import java.util.Optional;
 
 import org.jill.game.entities.obj.abs.AbstractFireHitPlayerObject;
 import org.jill.openjill.core.api.entities.ObjectEntity;
@@ -16,12 +17,12 @@ public final class FlameManager extends AbstractFireHitPlayerObject {
     /**
      * Picture array.
      */
-    private BufferedImage[] imagesUp;
+    private Optional<BufferedImage>[] imagesUp;
 
     /**
      * Picture array.
      */
-    private BufferedImage[] imagesDown;
+    private Optional<BufferedImage>[] imagesDown;
 
     /**
      * Default constructor.
@@ -38,17 +39,17 @@ public final class FlameManager extends AbstractFireHitPlayerObject {
         int numberTileSet = getConfInteger("numberTileSet");
 
         this.imagesUp
-                = new BufferedImage[numberTileSet * 2];
+                = new Optional[numberTileSet * 2];
         this.imagesDown
-                = new BufferedImage[this.imagesUp.length];
+                = new Optional[this.imagesUp.length];
 
         initPicture(this.imagesUp, numberTileSet, tileSetIndex, tileIndex);
         initPicture(this.imagesDown, numberTileSet, tileSetIndex,
                 tileIndex + numberTileSet);
 
         if (getWidth() == 0 || getHeight() == 0) {
-            setHeight(this.imagesUp[0].getHeight());
-            setWidth(this.imagesUp[0].getWidth());
+            setHeight(this.imagesUp[0].get().getHeight());
+            setWidth(this.imagesUp[0].get().getWidth());
         }
 
     }
@@ -61,7 +62,7 @@ public final class FlameManager extends AbstractFireHitPlayerObject {
      * @param tileSetIndex  tileset
      * @param tileIndex     tile
      */
-    private void initPicture(final BufferedImage[] images,
+    private void initPicture(final Optional<BufferedImage>[] images,
             final int numberTileSet, final int tileSetIndex,
             final int tileIndex) {
         int indexArray = 0;
@@ -69,7 +70,7 @@ public final class FlameManager extends AbstractFireHitPlayerObject {
         for (int index = 0; index < numberTileSet; index++) {
             images[indexArray]
                     = this.pictureCache.getImage(tileSetIndex, tileIndex
-                    + index).get();
+                    + index);
             images[indexArray + 1] = images[indexArray];
 
             indexArray += 2;
@@ -77,8 +78,8 @@ public final class FlameManager extends AbstractFireHitPlayerObject {
     }
 
     @Override
-    public BufferedImage msgDraw() {
-        BufferedImage[] img;
+    public Optional<BufferedImage> msgDraw() {
+        Optional<BufferedImage>[] img;
 
         if (this.getySpeed() > Y_SPEED_MIDDLE) {
             img = this.imagesDown;
@@ -96,7 +97,7 @@ public final class FlameManager extends AbstractFireHitPlayerObject {
     public void msgUpdate(final KeyboardLayout keyboardLayout) {
         this.counter++;
 
-        BufferedImage[] img;
+        Optional<BufferedImage>[] img;
 
         if (this.getySpeed() > Y_SPEED_MIDDLE) {
             img = this.imagesDown;
