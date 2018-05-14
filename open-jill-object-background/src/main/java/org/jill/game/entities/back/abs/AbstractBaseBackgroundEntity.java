@@ -154,8 +154,8 @@ public abstract class AbstractBaseBackgroundEntity extends
 
                 g2 = newImage.createGraphics();
 
-                g2.drawImage(currentImage, 0, 0, null);
-                g2.drawImage(mask, 0, 0, null);
+                draw(g2, currentImage, 0, 0);
+                draw(g2, mask, 0, 0);
 
                 g2.dispose();
 

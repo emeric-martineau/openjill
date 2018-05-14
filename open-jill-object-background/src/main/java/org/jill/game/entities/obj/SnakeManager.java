@@ -193,20 +193,17 @@ public final class SnakeManager extends AbstractHitPlayerObjectEntity {
         if (this.xSpeed > 0) {
             // Right
             // Draw head
-            g2d.drawImage(this.rightHeadImages[getCounter()], this.rightHeadX,
-                    0, null);
+            draw(g2d, this.rightHeadImages[getCounter()], this.rightHeadX, 0);
             // Draw tail
-            g2d.drawImage(this.rightTailImages[getCounter()], 0,
-                    this.tailY, null);
+            draw(g2d, this.rightTailImages[getCounter()], 0, this.tailY);
 
             drawMiddle(this.tailWidth, this.rightHeadX, g2d);
         } else {
             // Left
             // Draw head
-            g2d.drawImage(this.leftHeadImages[getCounter()], 0, 0, null);
+            draw(g2d, this.leftHeadImages[getCounter()], 0, 0);
             // Draw tail
-            g2d.drawImage(this.leftTailImages[getCounter()], this.leftTailX,
-                    this.tailY, null);
+            draw(g2d, this.leftTailImages[getCounter()], this.leftTailX, this.tailY);
 
             drawMiddle(this.headWidth, this.leftTailX, g2d);
         }
@@ -226,8 +223,7 @@ public final class SnakeManager extends AbstractHitPlayerObjectEntity {
     private void drawMiddle(final int start, final int end,
             final Graphics g2d) {
         for (int drawX = start; drawX < end; drawX += this.middleWidth) {
-            g2d.drawImage(this.middleImages[getCounter()], drawX,
-                    this.tailY, null);
+            draw(g2d, this.middleImages[getCounter()], drawX, this.tailY);
         }
     }
 

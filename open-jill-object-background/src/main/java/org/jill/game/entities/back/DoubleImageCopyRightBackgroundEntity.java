@@ -71,8 +71,8 @@ public final class DoubleImageCopyRightBackgroundEntity
 
         final Graphics2D g2 = realPicutre.createGraphics();
 
-        g2.drawImage(backPicture, 0, 0, null);
-        g2.drawImage(thisPicture, 0, 0, null);
+        draw(g2, backPicture, 0, 0);
+        draw(g2, thisPicture, 0, 0);
 
         g2.dispose();
     }

@@ -39,8 +39,7 @@ public final class SkullManager extends AbstractParameterObjectEntity
                 currentSkull.getHeight(),
                 BufferedImage.TYPE_INT_ARGB);
 
-        Graphics2D g2d = newPicture.createGraphics();
-        g2d.drawImage(currentSkull, 0, 0, null);
+        drawFromImage(newPicture, currentSkull, 0, 0);
 
         return newPicture;
     }
@@ -86,7 +85,6 @@ public final class SkullManager extends AbstractParameterObjectEntity
         int tileEye = getConfInteger(eyeStartStr);
         int eyeLeftX = getConfInteger(eyeXstr);
         int eyeLeftY = getConfInteger(eyeYstr);
-        Graphics2D g2d;
 
         tileIncrement = 1;
 
@@ -94,14 +92,16 @@ public final class SkullManager extends AbstractParameterObjectEntity
             eye = this.pictureCache.getImage(tileSetIndex, tileEye).get();
 
             // Draw eye
-            g2d = image.createGraphics();
-            g2d.drawImage(eye, eyeLeftX, eyeLeftY, null);
+            drawFromImage(image, eye, eyeLeftX, eyeLeftY);
+
             if ((tileEye == eyeMaxTile && tileIncrement > 0)
                     || (tileEye == eyeMinTile && tileIncrement < 0)) {
                 tileIncrement *= -1;
             }
+
             tileEye += tileIncrement;
         }
+
     }
 
     /**

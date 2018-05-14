@@ -52,7 +52,8 @@ public abstract class AbstractSynchronisedImageBackgroundEntity
         g2 = destImage.createGraphics();
         g2.setColor(backColor);
         g2.fillRect(0, 0, srcImage.getWidth(), srcImage.getHeight());
-        g2.drawImage(srcImage, 0, 0, null);
+
+        draw(g2, srcImage, 0, 0);
 
         g2.dispose();
 

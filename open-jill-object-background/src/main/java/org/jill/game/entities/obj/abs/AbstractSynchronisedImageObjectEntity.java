@@ -59,25 +59,15 @@ public abstract class AbstractSynchronisedImageObjectEntity
                     + index).get();
         }
 
-        if (getPictureSync(this.getClass()) == null) {
+        if (!MAP_PICUTRE.containsKey(this.getClass())) {
             int maxDisplayCounter = getConfInteger("cycle");
 
             // Create synchronizer
             addPictureSync(this.getClass(),
                     new PictureSynchronizer(maxDisplayCounter));
+        } else {
+            this.ps = MAP_PICUTRE.get(this.getClass());
         }
-    }
-
-    /**
-     * Return picture object.
-     *
-     * @param clazz class
-     * @return picture synchronizer
-     */
-    private PictureSynchronizer getPictureSync(final Class clazz) {
-        this.ps = MAP_PICUTRE.get(clazz);
-
-        return this.ps;
     }
 
     /**

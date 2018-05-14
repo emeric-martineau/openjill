@@ -659,11 +659,7 @@ public final class PlayerManager extends AbstractPlayerManager {
             final int reduction = baseImage.getHeight() - this.stateCount;
 
             // Draw picutre
-            final Graphics2D g2 = currentPicture.createGraphics();
-
-            g2.drawImage(baseImage, 0, reduction, null);
-
-            g2.dispose();
+            drawFromImage(currentPicture, baseImage, 0, reduction);
         } else {
             currentPicture = null;
         }

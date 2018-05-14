@@ -110,8 +110,8 @@ public final class GatorManager extends AbstractHitPlayerObjectEntity {
 
             g2 = joinPicture.createGraphics();
 
-            g2.drawImage(headPicture, 0, 0, null);
-            g2.drawImage(tailPicture, headPicture.getWidth(), 0, null);
+            draw(g2, headPicture, 0, 0);
+            draw(g2, tailPicture, headPicture.getWidth(), 0);
 
             g2.dispose();
 

@@ -115,13 +115,13 @@ public final class LockedDoorManager extends AbstractParameterObjectEntity
             closeMsg = getConfString("messageLock_".concat(currentBack), false);
             inventory = getConfString("inventory_".concat(currentBack), false);
 
-            if (inventory != null) {
+            if (inventory == null) {
+                // Just to know that we manage this background
+                listBackground.put(currentBack, null);
+            } else {
                 listBackground.put(currentBack,
                         new LockedDoorConfig(openMsg, closeMsg,
                                 EnumInventoryObject.valueOf(inventory)));
-            } else {
-                // Just to know that we manage this background
-                listBackground.put(currentBack, null);
             }
         }
 
@@ -224,7 +224,9 @@ public final class LockedDoorManager extends AbstractParameterObjectEntity
 
         g2d.fillRect(0, 0, bf.getWidth(), bf.getHeight());
 
-        g2d.drawImage(doorPicture, 0, 0, null);
+        draw(g2d, doorPicture, 0, 0);
+
+        g2d.dispose();
 
         return bf;
     }
@@ -244,13 +246,13 @@ public final class LockedDoorManager extends AbstractParameterObjectEntity
 
             int startY = this.getState() * -1;
 
-            g2CurrentPictureDoor.drawImage(this.doortPicutre, 0,
-                    startY, null);
+            draw(g2CurrentPictureDoor, this.doortPicutre, 0, startY);
 
             startY = this.doortPicutre.getHeight() + this.getState();
 
-            g2CurrentPictureDoor.drawImage(this.doorbPicutre, 0,
-                    startY, null);
+            draw(g2CurrentPictureDoor, this.doorbPicutre, 0, startY);
+
+            g2CurrentPictureDoor.dispose();
         }
 
         return currentPictureDoor;

@@ -482,10 +482,8 @@ public abstract class AbstractPlayerManager
 
         final Graphics2D g2 = newImage.createGraphics();
 
-        g2.drawImage(image, null, 0, 0);
-
-        g2.drawImage(imagePol, null, 0,
-                image.getHeight() - imagePol.getHeight());
+        draw(g2, image, 0, 0);
+        draw(g2, imagePol, 0, image.getHeight() - imagePol.getHeight());
 
         g2.dispose();
 

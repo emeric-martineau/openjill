@@ -1,6 +1,7 @@
 package org.jill.game.entities.obj;
 
 import java.awt.image.BufferedImage;
+import java.util.Optional;
 
 import org.jill.game.entities.obj.abs.AbstractParameterObjectEntity;
 import org.jill.game.entities.obj.bullet.BulletObjectFactory;
@@ -38,7 +39,7 @@ public final class BonusManager extends AbstractParameterObjectEntity {
     /**
      * To remove this object from object list.
      */
-    private ObjectListMessage killme;
+    private Optional<ObjectListMessage> killme;
 
     /**
      * Message to display.
@@ -48,7 +49,7 @@ public final class BonusManager extends AbstractParameterObjectEntity {
     /**
      * New player.
      */
-    private String newPlacerClass;
+    private Optional<String> newPlacerClass;
 
     /**
      * Nb bullet when player change.
@@ -89,10 +90,10 @@ public final class BonusManager extends AbstractParameterObjectEntity {
         }
 
         if (keySplit.length > 3) {
-            this.newPlacerClass = keySplit[3];
+            this.newPlacerClass = Optional.of(keySplit[3]);
             this.nbColoredBullet = getConfInteger("nbColoredBullet");
         } else {
-            this.newPlacerClass = null;
+            this.newPlacerClass = Optional.empty();
         }
 
         // Init list of picture
@@ -106,11 +107,12 @@ public final class BonusManager extends AbstractParameterObjectEntity {
         if (dontRemove.contains(nameOfInventoryItem)) {
             this.inventory = new InventoryItemMessage(enumList[this.counter],
                     true, true);
+            this.killme = Optional.empty();
         } else {
             this.inventory = new InventoryItemMessage(enumList[this.counter],
                     true);
             // Remove me from list of object (= kill me)
-            this.killme = new ObjectListMessage(this, false);
+            this.killme = Optional.of(new ObjectListMessage(this, false));
         }
     }
 
@@ -125,7 +127,7 @@ public final class BonusManager extends AbstractParameterObjectEntity {
         if (obj.isPlayer()) {
             sendItem();
 
-            if (this.newPlacerClass != null) {
+            if (this.newPlacerClass.isPresent()) {
                 replacePlayer(obj);
             } else {
                 this.messageDispatcher.sendMessage(
@@ -156,8 +158,8 @@ public final class BonusManager extends AbstractParameterObjectEntity {
      * @param obj new player object
      */
     private void replacePlayer(final ObjectEntity obj) {
-        if (!obj.getClass().getName().equals(this.newPlacerClass)) {
-            final ObjectEntity player = createPlayer(this.newPlacerClass);
+        if (!obj.getClass().getName().equals(this.newPlacerClass.get())) {
+            final ObjectEntity player = createPlayer(this.newPlacerClass.get());
 
             player.setX(obj.getX());
             player.setY(obj.getY()
@@ -188,9 +190,9 @@ public final class BonusManager extends AbstractParameterObjectEntity {
         }
 
         // If don't remove, don't send it.
-        if (this.killme != null) {
+        if (this.killme.isPresent()) {
             this.messageDispatcher.sendMessage(EnumMessageType.OBJECT,
-                    this.killme);
+                    this.killme.get());
         }
     }
 }

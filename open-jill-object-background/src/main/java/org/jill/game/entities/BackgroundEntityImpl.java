@@ -2,10 +2,14 @@ package org.jill.game.entities;
 
 
 import org.jill.dma.DmaEntry;
+import org.jill.game.entities.obj.util.UtilityObjectEntity;
 import org.jill.openjill.core.api.entities.BackgroundEntity;
 import org.jill.openjill.core.api.entities.BackgroundParam;
 import org.jill.openjill.core.api.entities.ObjectEntity;
 import org.jill.openjill.core.api.manager.TileManager;
+
+import java.awt.*;
+import java.awt.image.BufferedImage;
 
 /**
  * Background object for catch update/draw/... message
@@ -326,5 +330,29 @@ public abstract class BackgroundEntityImpl implements BackgroundEntity {
     @Override
     public void msgTouch(final ObjectEntity obj) {
         // nothing
+    }
+
+    /**
+     * Short way to draw.
+     *
+     * @param g2d graphic
+     * @param img image
+     * @param x x
+     * @param y y
+     */
+    protected static void draw(Graphics g2d, Image img, int x, int y) {
+        UtilityObjectEntity.draw(g2d, img, x, y);
+    }
+
+    /**
+     * Short way to draw.
+     *
+     * @param dest image
+     * @param src
+     * @param x x
+     * @param y y
+     */
+    protected static void drawFromImage(BufferedImage dest, Image src, int x, int y) {
+        UtilityObjectEntity.drawFromImage(dest, src, x, y);
     }
 }

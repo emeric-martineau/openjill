@@ -5,6 +5,8 @@ import org.jill.openjill.core.api.entities.BackgroundEntity;
 import org.jill.openjill.core.api.entities.ObjectEntity;
 import org.jill.openjill.core.api.jill.JillConst;
 
+import java.awt.*;
+import java.awt.image.BufferedImage;
 import java.util.Optional;
 
 /**
@@ -663,5 +665,33 @@ public final class UtilityObjectEntity {
         }
 
         return canMove;
+    }
+
+    /**
+     * Short way to draw.
+     *
+     * @param g2d graphic
+     * @param img image
+     * @param x x
+     * @param y y
+     */
+    public static void draw(Graphics g2d, Image img, int x, int y) {
+        g2d.drawImage(img, x, y, null);
+    }
+
+    /**
+     * Short way to draw.
+     *
+     * @param dest image
+     * @param src
+     * @param x x
+     * @param y y
+     */
+    public static void drawFromImage(BufferedImage dest, Image src, int x, int y) {
+        final Graphics2D g2d = dest.createGraphics();
+
+        g2d.drawImage(src, x, y, null);
+
+        g2d.dispose();
     }
 }

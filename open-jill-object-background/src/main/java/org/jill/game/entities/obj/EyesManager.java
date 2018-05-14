@@ -97,10 +97,10 @@ public final class EyesManager extends AbstractParameterObjectEntity {
                 getHeight(), BufferedImage.TYPE_INT_ARGB);
         Graphics g2d = currentPicture.createGraphics();
 
-        g2d.drawImage(this.eyesImage, 0, 0, null);
+        draw(g2d, this.eyesImage, 0, 0);
 
-        g2d.drawImage(this.lensImage, this.lensOriginX + getxSpeed(),
-                this.lensOriginY + getySpeed(), null);
+        draw(g2d, this.lensImage, this.lensOriginX + getxSpeed(),
+                this.lensOriginY + getySpeed());
 
         g2d.dispose();
 
