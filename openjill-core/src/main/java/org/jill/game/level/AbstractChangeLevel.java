@@ -55,7 +55,7 @@ public abstract class AbstractChangeLevel extends
     /**
      * Map data.
      */
-    protected FileAbstractByte mapLevel;
+    protected Optional<FileAbstractByte> mapLevel;
 
     /**
      * Next level to load.
@@ -187,11 +187,12 @@ public abstract class AbstractChangeLevel extends
      */
     private void loadRestartLevel() throws ReflectiveOperationException {
         try {
-            this.mapLevel.seek(0);
+            final FileAbstractByte map = this.mapLevel.get();
+            map.seek(0);
 
             // Reload map to get some infrmation
             final JnFile mapFile = ObjectInstanceFactory.getNewJn();
-            mapFile.load(this.mapLevel);
+            mapFile.load(map);
 
             // Load level
             LevelConfiguration cfgNewLevel = new JillLevelConfiguration(
@@ -201,7 +202,7 @@ public abstract class AbstractChangeLevel extends
                     this.levelConfiguration.getCfgFileName(),
                     this.levelConfiguration.getCfgSavePrefixe(),
                     this.levelConfiguration.getStartScreen(),
-                    this.inventoryArea.getLevel(), Optional.of(this.mapLevel), Optional.empty(),
+                    this.inventoryArea.getLevel(), this.mapLevel, Optional.empty(),
                     mapFile.getSaveData().getScore(), 0);
 
             // Create next level
@@ -221,7 +222,8 @@ public abstract class AbstractChangeLevel extends
      */
     private void loadMapFromLevel() throws ReflectiveOperationException {
         try {
-            this.mapLevel.seek(0);
+            final FileAbstractByte map = this.mapLevel.get();
+            map.seek(0);
 
             LevelConfiguration cfgNewLevel = new JillLevelConfiguration(
                     this.levelConfiguration.getShaFileName(),
@@ -230,7 +232,7 @@ public abstract class AbstractChangeLevel extends
                     this.levelConfiguration.getCfgFileName(),
                     this.levelConfiguration.getCfgSavePrefixe(),
                     this.levelConfiguration.getStartScreen(),
-                    this.inventoryArea.getLevel(), Optional.empty(), Optional.of(this.mapLevel),
+                    this.inventoryArea.getLevel(), Optional.empty(), this.mapLevel,
                     this.inventoryArea.getScore(),
                     getCurrentGemCount());
 
@@ -705,7 +707,7 @@ public abstract class AbstractChangeLevel extends
      */
     protected boolean isCurrentLevelMap() {
         return this.inventoryArea.getLevel() == SaveData.MAP_LEVEL
-                || this.mapLevel == null;
+                || !this.mapLevel.isPresent();
     }
 
     /**

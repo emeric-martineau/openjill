@@ -38,7 +38,7 @@ public class LoadNewLevelHandler extends AbstractChangeLevel {
 
         // Store map level
         if (cfgLevel.getLevelMapData().isPresent()) {
-            this.mapLevel = cfgLevel.getLevelMapData().get();
+            this.mapLevel = cfgLevel.getLevelMapData();
         }
     }
 
