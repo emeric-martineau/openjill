@@ -4,13 +4,13 @@
     <groupId>org.jill.jn</groupId>
     <artifactId>jn-file-extractor</artifactId>
     <packaging>jar</packaging>
-    <version>1.0.4</version>
+    <version>1.0.5-SNAPSHOT</version>
     <name>jn-file-extractor</name>
 
     <parent>
         <groupId>org.jill</groupId>
         <artifactId>jill-parent</artifactId>
-        <version>0.2.6</version>
+        <version>0.2.7-SNAPSHOT</version>
         <relativePath>../jill_parent/pom.xml</relativePath>
     </parent>
     
