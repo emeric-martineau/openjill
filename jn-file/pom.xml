@@ -4,13 +4,13 @@
     <groupId>org.jill.jn</groupId>
     <artifactId>jn-file</artifactId>
     <packaging>jar</packaging>
-    <version>0.2.5</version>
+    <version>0.2.6</version>
     <name>jn-file</name>
 
     <parent>
         <groupId>org.jill</groupId>
         <artifactId>jill-parent</artifactId>
-        <version>0.2.5</version>
+        <version>0.2.6</version>
         <relativePath>../jill_parent/pom.xml</relativePath>
     </parent>
 

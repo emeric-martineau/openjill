@@ -1,6 +1,5 @@
 package org.jill.game.entities.obj.player;
 
-import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.util.Optional;
 import java.util.logging.Logger;
@@ -877,7 +876,7 @@ public final class PlayerManager extends AbstractPlayerManager {
                 currentPicture = msgDrawDiedOther();
                 break;
             default:
-                currentPicture = null;
+                currentPicture = Optional.empty();
         }
 
         return currentPicture;
