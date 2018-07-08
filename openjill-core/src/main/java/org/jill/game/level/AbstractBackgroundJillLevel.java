@@ -12,8 +12,10 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.jill.dma.DmaEntry;
+import org.jill.file.FileAbstractByte;
 import org.jill.game.config.JillGameConfig;
 import org.jill.game.config.ObjectInstanceFactory;
+import org.jill.game.level.cfg.JillLevelConfiguration;
 import org.jill.game.level.cfg.LevelConfiguration;
 import org.jill.game.manager.background.BackgroundManager;
 import org.jill.game.screen.StatusBar;
@@ -167,6 +169,14 @@ public abstract class AbstractBackgroundJillLevel
 
         cfgFile = getCfgFile(this.levelConfiguration.getCfgFileName(),
                 filePath, this.levelConfiguration.getCfgSavePrefixe());
+
+
+        final LevelConfiguration oldLevelCfg = this.levelConfiguration;
+
+        this.levelConfiguration = new JillLevelConfiguration(oldLevelCfg.getShaFileName(), oldLevelCfg.getJnFileName(),
+                oldLevelCfg.getVclFileName(), oldLevelCfg.getCfgFileName(), oldLevelCfg.getCfgSavePrefixe(),
+                oldLevelCfg.getStartScreen(), jnFile.getSaveData().getLevel(), oldLevelCfg.getLevelMapData(),
+                oldLevelCfg.getLevelData(), oldLevelCfg.getScore(), oldLevelCfg.getNumberGem());
     }
 
     /**

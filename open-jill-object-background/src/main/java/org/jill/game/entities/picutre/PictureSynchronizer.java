@@ -1,8 +1,5 @@
 package org.jill.game.entities.picutre;
 
-import java.awt.image.BufferedImage;
-import java.util.Optional;
-
 /**
  * Class to synchronize picutre.
  *
