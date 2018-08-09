@@ -11,7 +11,9 @@ import java.awt.Stroke;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import javax.imageio.ImageIO;
 
@@ -175,6 +177,7 @@ public class DrawFile {
     public void writeBackground(final Graphics2D g2, final JnFile jnFile) {
         // Background map
         final BackgroundLayer background = jnFile.getBackgroundLayer();
+        final Map<BackgroundEntity, Boolean> msgDraw = new HashMap();
 
         System.out.println("Starting write background in picture");
 
@@ -189,8 +192,10 @@ public class DrawFile {
 
                     final BackgroundEntity manager = this.bckManagerCache.getManager(dma.getName());
 
-                    if (manager.isMsgDraw()) {
+                    if (!msgDraw.containsKey(manager) && manager.isMsgDraw()) {
                         manager.msgDraw(background, x, y);
+
+                        msgDraw.put(manager, Boolean.TRUE);
                     }
 
                     final BufferedImage tilePicture = manager.getPicture();
