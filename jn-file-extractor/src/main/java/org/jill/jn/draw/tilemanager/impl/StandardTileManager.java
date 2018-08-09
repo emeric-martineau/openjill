@@ -12,8 +12,8 @@ import java.util.Properties;
 
 import org.jill.jn.JnFileExtractor;
 import org.jill.jn.ObjectItem;
-import org.jill.jn.draw.ScreenType;
 import org.jill.jn.draw.tilemanager.AbstractTileManager;
+import org.jill.openjill.core.api.screen.EnumScreenType;
 import org.jill.sha.ShaTile;
 
 /**
@@ -35,7 +35,7 @@ public class StandardTileManager extends AbstractTileManager {
     /**
      * Type screen
      */
-    protected ScreenType typeScreen;
+    protected EnumScreenType typeScreen;
 
     /**
      * Static cache of picture.
@@ -98,9 +98,9 @@ public class StandardTileManager extends AbstractTileManager {
             tileArray = mapOfTile.get(Integer.valueOf(tileSetTile[0]));
             tile = tileArray[Integer.valueOf(tileSetTile[1])];
 
-            if (typeScreen == ScreenType.CGA) {
+            if (typeScreen == EnumScreenType.CGA) {
                 tilePicture = tile.getPictureCga();
-            } else if (typeScreen == ScreenType.EGA) {
+            } else if (typeScreen == EnumScreenType.EGA) {
                 tilePicture = tile.getPictureEga();
             } else {
                 tilePicture = tile.getPictureVga();
@@ -116,7 +116,7 @@ public class StandardTileManager extends AbstractTileManager {
      * @see org.jill.jn.draw.tilemanager.AbstractTileManager#init(java.util.Map, org.jill.jn.draw.ScreenType)
      */
     @Override
-    public void init(final Map<Integer, ShaTile[]> mapOfTile, final ScreenType typeScreen) {
+    public void init(final Map<Integer, ShaTile[]> mapOfTile, final EnumScreenType typeScreen) {
         this.mapOfTile = mapOfTile;
         this.typeScreen = typeScreen;
 

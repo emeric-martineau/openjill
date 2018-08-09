@@ -16,8 +16,8 @@ import org.apache.commons.cli.PosixParser;
 import org.jill.dma.DmaFile;
 import org.jill.dma.DmaFileImpl;
 import org.jill.jn.draw.DrawFile;
-import org.jill.jn.draw.ScreenType;
 import org.jill.jn.dump.DumpFile;
+import org.jill.openjill.core.api.screen.EnumScreenType;
 import org.jill.sha.ShaFile;
 import org.jill.sha.ShaFileImpl;
 
@@ -198,12 +198,12 @@ public class JnFileExtractor {
         DmaFile dmaFile = null;
 
         try {
-            ScreenType typeScreen = ScreenType.VGA;
+            EnumScreenType typeScreen = EnumScreenType.VGA;
 
             if (param.isCga()) {
-                typeScreen = ScreenType.CGA;
+                typeScreen = EnumScreenType.CGA;
             } else if (param.isEga()) {
-                typeScreen = ScreenType.EGA;
+                typeScreen = EnumScreenType.EGA;
             }
 
             jnFile = new JnFileImpl();

@@ -1,8 +1,9 @@
 package org.jill.openjill.core.api.entities;
 
 import org.jill.dma.DmaEntry;
-import org.jill.openjill.core.api.manager.TileManager;
-import org.jill.openjill.core.api.message.MessageDispatcher;
+import org.jill.dma.DmaFile;
+import org.jill.openjill.core.api.screen.EnumScreenType;
+import org.jill.sha.ShaFile;
 
 /**
  * Background parameter when background is load.
@@ -14,75 +15,38 @@ public interface BackgroundParam {
     /**
      * Default constructor.
      *
-     * @param backgroundMap            background map
-     * @param pictureCacheManager      picture cache
-     * @param messageDispatcherManager message dispatcher
+     * @param shaFile picture
+     * @param dmaFile  dma file of game
+     * @param dmaEntry dma entry
+     * @param screen screen type
      */
-    void init(BackgroundEntity[][] backgroundMap,
-            TileManager pictureCacheManager,
-            MessageDispatcher messageDispatcherManager);
-
-    /**
-     * Background.
-     *
-     * @return background
-     */
-    BackgroundEntity[][] getBackgroundObject();
-
-    /**
-     * Message dispatcher.
-     *
-     * @return message dispatcher for interaction with game
-     */
-    MessageDispatcher getMessageDispatcher();
-
-    /**
-     * Dma entry.
-     *
-     * @return DmaEntry
-     */
-    DmaEntry getDmaEntry();
-
-    /**
-     * dma entry.
-     *
-     * @param dma set dmaEntry
-     */
-    void setDmaEntry(DmaEntry dma);
+    void init(ShaFile shaFile, DmaFile dmaFile, DmaEntry dmaEntry, EnumScreenType screen);
 
     /**
      * Picture cache.
      *
      * @return picture cache
      */
-    TileManager getPictureCache();
+    ShaFile getShaFile();
 
     /**
-     * X.
+     * Current dma file of game.
      *
-     * @return the x
+     * @return dma file
      */
-    int getX();
+    DmaFile getDmaFile();
 
     /**
-     * X.
+     * Current dma entry of this background.
      *
-     * @param xPos the x to set
+     * @return dma entry
      */
-    void setX(int xPos);
+    DmaEntry getDmaEntry();
 
     /**
-     * Y.
+     * Current type of screen.
      *
-     * @return the y
+     * @return enum
      */
-    int getY();
-
-    /**
-     * Y.
-     *
-     * @param yPos the y to set
-     */
-    void setY(int yPos);
-
+    EnumScreenType getScreen();
 }

@@ -1,0 +1,50 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.jill</groupId>
+    <artifactId>jill-root</artifactId>
+    <version>1.0.0</version>
+    <packaging>pom</packaging>
+
+    <profiles>    
+        <profile>
+            <id>lib</id>
+            <modules>
+                <module>./abstractfile-api</module>
+                <module>./abstractfile</module>
+                <module>./sha-file-api</module>
+                <module>./sha-file</module>
+                <module>./dma-file-api</module>
+                <module>./dma-file</module>
+                <module>./jn-file-api</module>
+                <module>./jn-file</module>
+                <module>./vcl-file-api</module>
+                <module>./vcl-file</module>
+                <module>./cfg-file-api</module>
+                <module>./cfg-file</module>
+                <module>./openjill-object-manager</module>
+                <module>./openjill-background-manager</module>
+                <module>./openjill-core-api</module>
+            </modules>
+        </profile>
+        
+        <profile>
+            <id>tools</id>
+            <modules>
+                <!--<module>./sha-file-extractor</module>
+                <module>./dma-file-extractor</module>-->
+                <module>./jn-file-extractor</module>
+            </modules>
+        </profile>    
+
+        <profile>
+            <id>game</id>
+            <modules>
+                <!--<module>./simplegame</module>
+                <module>./OpenJill</module>
+                <module>./open-jill-object-background</module>
+                <module>./openjill-core</module>-->
+            </modules>
+        </profile>
+    </profiles>
+</project>

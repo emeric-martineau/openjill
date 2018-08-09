@@ -1,5 +1,7 @@
 package org.jill.openjill.core.api.entities;
 
+import org.jill.jn.BackgroundLayer;
+
 import java.awt.image.BufferedImage;
 
 /**
@@ -8,20 +10,6 @@ import java.awt.image.BufferedImage;
  * @author Emeric MARTINEAU
  */
 public interface BackgroundEntity {
-    /**
-     * Return initial config for ReplaceTileBackgroundEntity.
-     *
-     * @return backparameter
-     */
-    BackgroundParam getBackParam();
-
-    /**
-     * Flags.
-     *
-     * @return flags
-     */
-    int getFlags();
-
     /**
      * @return mapCode
      */
@@ -48,20 +36,6 @@ public interface BackgroundEntity {
      * @return tileset
      */
     int getTileset();
-
-    /**
-     * Return X.
-     *
-     * @return x
-     */
-    int getX();
-
-    /**
-     * Return Y.
-     *
-     * @return y
-     */
-    int getY();
 
     /**
      * Init object.
@@ -114,8 +88,12 @@ public interface BackgroundEntity {
 
     /**
      * Draw special case.
+     *
+     * @param background background
+     * @param x background position x
+     * @param y background position x
      */
-    void msgDraw();
+    void msgDraw(BackgroundLayer background, int x, int y);
 
     /**
      * Player touch this background.
@@ -126,7 +104,10 @@ public interface BackgroundEntity {
 
     /**
      * Update in special case.
+     *
+     * @param background background
+     * @param x background position x
+     * @param y background position x
      */
-    void msgUpdate();
-
+    void msgUpdate(BackgroundLayer background, int x, int y);
 }

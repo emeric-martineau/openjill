@@ -84,6 +84,11 @@
           <version>0.2.7-SNAPSHOT</version>
         </dependency>
         <dependency>
+          <groupId>org.jill.entities</groupId>
+          <artifactId>openjill-background-manager</artifactId>
+          <version>0.2.7-SNAPSHOT</version>
+        </dependency>
+        <dependency>
           <groupId>org.simplegame</groupId>
           <artifactId>simplegame</artifactId>
           <version>1.0.0</version>

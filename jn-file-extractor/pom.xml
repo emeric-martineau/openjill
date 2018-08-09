@@ -48,7 +48,19 @@
         <dependency>
             <groupId>org.jill.file</groupId>
             <artifactId>abstractfile</artifactId>
-        </dependency>      
+        </dependency>
+        <dependency>
+            <groupId>org.jill</groupId>
+            <artifactId>openjill-core-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.jill.entities</groupId>
+            <artifactId>openjill-background-manager</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.jill.entities</groupId>
+            <artifactId>open-jill-object-background</artifactId>
+        </dependency>
     </dependencies>
 
     <properties>

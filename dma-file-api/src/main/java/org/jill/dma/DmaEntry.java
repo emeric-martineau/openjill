@@ -56,4 +56,46 @@ public interface DmaEntry {
      */
     int getTileset();
 
+    /**
+     * Msg touch.
+     *
+     * @return true/false
+     */
+    boolean isMsgTouch();
+
+    /**
+     * Msg draw.
+     *
+     * @return true/false
+     */
+    boolean isMsgDraw();
+
+    /**
+     * Msg update.
+     *
+     * @return true/false
+     */
+    boolean isMsgUpdate();
+
+    /**
+     * If player can cross over.
+     *
+     * @return true/false
+     */
+    boolean isPlayerThru();
+
+    /**
+     * If player can stand here.
+     *
+     * @return true/false
+     */
+    boolean isStair();
+
+    /**
+     * Player can climb here.
+     *
+     * @return boolean
+     */
+    boolean isVine();
+
 }

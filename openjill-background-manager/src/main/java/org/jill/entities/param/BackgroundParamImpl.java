@@ -1,9 +1,11 @@
-package org.jill.game.entities.param;
+package org.jill.entities.param;
 
 import org.jill.dma.DmaEntry;
 import org.jill.dma.DmaFile;
 import org.jill.openjill.core.api.entities.BackgroundParam;
-import org.jill.openjill.core.api.manager.TileManager;
+import org.jill.openjill.core.api.screen.EnumScreenType;
+import org.jill.sha.ShaFile;
+import sun.awt.X11.Screen;
 
 
 /**
@@ -19,36 +21,27 @@ public final class BackgroundParamImpl implements BackgroundParam {
     private DmaEntry dmaEntry;
 
     /**
-     * Cache manager.
+     * For picture.
      */
-    private TileManager pictureCache;
+    private ShaFile shaFile;
 
     /**
-     * Dma file
+     * Dma file.
      */
     private DmaFile dmaFile;
 
     /**
-     * Background map.
+     * Screen type.
      */
-    private int[][] backgroundObject;
-
-    /**
-     * Pos X in background map.
-     */
-    private int x;
-
-    /**
-     * Pos Y in background map.
-     */
-    private int y;
+    private EnumScreenType screen;
 
     @Override
-    public void init(int[][] backgroundMap, TileManager pictureCacheManager, DmaFile dmaFile, DmaEntry dmaEntry) {
-        this.pictureCache = pictureCacheManager;
-        this.backgroundObject = backgroundMap;
+    public void init(final ShaFile shaFile, final DmaFile dmaFile,
+                     final DmaEntry dmaEntry, final EnumScreenType screen) {
+        this.shaFile = shaFile;
         this.dmaEntry = dmaEntry;
         this.dmaFile = dmaFile;
+        this.screen = screen;
     }
 
     /**
@@ -60,14 +53,9 @@ public final class BackgroundParamImpl implements BackgroundParam {
         return dmaEntry;
     }
 
-    /**
-     * Background.
-     *
-     * @return background
-     */
     @Override
-    public int[][] getBackgroundObject() {
-        return backgroundObject;
+    public EnumScreenType getScreen() {
+        return this.screen;
     }
 
     /**
@@ -76,13 +64,12 @@ public final class BackgroundParamImpl implements BackgroundParam {
      * @return picture cache
      */
     @Override
-    public TileManager getPictureCache() {
-        return pictureCache;
+    public ShaFile getShaFile() {
+        return shaFile;
     }
 
     @Override
     public DmaFile getDmaFile() {
         return this.dmaFile;
     }
-
 }

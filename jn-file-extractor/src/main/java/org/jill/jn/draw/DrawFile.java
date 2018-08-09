@@ -12,14 +12,19 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 import javax.imageio.ImageIO;
 
+import org.jill.dma.DmaEntry;
 import org.jill.dma.DmaFile;
+import org.jill.entities.param.BackgroundParamImpl;
 import org.jill.jn.BackgroundLayer;
 import org.jill.jn.JnFile;
 import org.jill.jn.ObjectItem;
-import org.jill.jn.draw.cache.NameObjectCache;
-import org.jill.jn.draw.cache.PictureCache;
+import org.jill.jn.draw.cache.BackgroundManagerCache;
+import org.jill.openjill.core.api.entities.BackgroundEntity;
+import org.jill.openjill.core.api.entities.BackgroundParam;
+import org.jill.openjill.core.api.screen.EnumScreenType;
 import org.jill.sha.CgaColorMapImpl;
 import org.jill.sha.ColorMap;
 import org.jill.sha.EgaColorMapImpl;
@@ -56,47 +61,48 @@ public class DrawFile {
      * File format to export
      */
     private static final String FILE_EXPORT_FORMAT = "png";
+
     /**
-     * Cache between object type and name/description
+     * Default background color.
      */
-    private final NameObjectCache namdeObjectCache = new NameObjectCache();
-    private Color backgroundColor = Color.BLACK;
+    private Color backgroundColor;
+
     /**
-     * Cache of picture
+     * Dma file.
      */
-    private PictureCache pictureCache;
+    private final DmaFile dmaFile;
+
+    /**
+     * Sha file.
+     */
+    private final ShaFile shaFile;
+
+    /**
+     * Background manager.
+     */
+    private final BackgroundManagerCache bckManagerCache;
 
     public DrawFile(final ShaFile shaFile,
-            final DmaFile dmaFile, final ScreenType screen)
-            throws ClassNotFoundException, IllegalAccessException, InstantiationException {
-        pictureCache = new PictureCache(shaFile, dmaFile, screen);
-
+            final DmaFile dmaFile, final EnumScreenType screen)
+            throws IllegalAccessException, InstantiationException, ClassNotFoundException {
         Color[] colorMap;
 
-        if (ScreenType.CGA == screen) {
+        if (EnumScreenType.CGA == screen) {
             colorMap = CGA_COLOR_MAP.getColorMap();
-        } else if (ScreenType.EGA == screen) {
+        } else if (EnumScreenType.EGA == screen) {
             colorMap = EGA_COLOR_MAP.getColorMap();
         } else {
             colorMap = VGA_COLOR_MAP.getColorMap();
         }
 
         // Recreate color but without alpha chanel
-        backgroundColor = new Color(colorMap[0].getRGB());
-    }
+        this.backgroundColor = new Color(colorMap[0].getRGB());
 
-    /**
-     * Return ???? if null.
-     *
-     * @param text text to display
-     * @return return always a string never null
-     */
-    private static String nullOrWhat(final String text) {
-        if (text == null) {
-            return "????";
-        }
+        this.dmaFile = dmaFile;
+        this.shaFile = shaFile;
 
-        return text;
+        this.bckManagerCache = new BackgroundManagerCache("std-openjill-background-manager.properties",
+                shaFile, dmaFile, screen);
     }
 
     /**
@@ -141,29 +147,6 @@ public class DrawFile {
     }
 
     /**
-     * Return tile.
-     *
-     * @param object jill object
-     * @return picture
-     */
-    private BufferedImage getTile(final ObjectItem object) {
-        final BufferedImage image = pictureCache.getObjectPicture(object);
-
-        if (image == null) {
-            System.out.println(
-                    String.format("WARNING : Object type %d (%s) is ignored at %d/%d",
-                            new Object[]{
-                                    object.getType(),
-                                    nullOrWhat(namdeObjectCache.getDescription(object.getType())),
-                                    object.getX(),
-                                    object.getY()
-                            }));
-        }
-
-        return image;
-    }
-
-    /**
      * Create picture
      *
      * @return new picture
@@ -193,20 +176,29 @@ public class DrawFile {
         // Background map
         final BackgroundLayer background = jnFile.getBackgroundLayer();
 
-        // Map code
-        int mapCode;
-        // Tile picture
-        BufferedImage tilePicture;
+        System.out.println("Starting write background in picture");
 
-        System.out.println("Starting write background in piture");
+        for (int x = 0; x < BackgroundLayer.MAP_WIDTH; x++) {
+            for (int y = 0; y < BackgroundLayer.MAP_HEIGHT; y++) {
+                final int mapCode = background.getMapCode(x, y);
 
-        for (int indexX = 0; indexX < BackgroundLayer.MAP_WIDTH; indexX++) {
-            for (int indexY = 0; indexY < BackgroundLayer.MAP_HEIGHT; indexY++) {
-                mapCode = background.getMapCode(indexX, indexY);
+                final Optional<DmaEntry> dmaEntry = this.dmaFile.getDmaEntry(mapCode);
 
-                tilePicture = pictureCache.getBackgroundPicture(mapCode);
+                if (dmaEntry.isPresent()) {
+                    final DmaEntry dma = dmaEntry.get();
 
-                g2.drawImage(tilePicture, indexX * BLOCK_SIZE, indexY * BLOCK_SIZE, null);
+                    final BackgroundEntity manager = this.bckManagerCache.getManager(dma.getName());
+
+                    if (manager.isMsgDraw()) {
+                        manager.msgDraw(background, x, y);
+                    }
+
+                    final BufferedImage tilePicture = manager.getPicture();
+
+                    g2.drawImage(tilePicture, x * BLOCK_SIZE, y * BLOCK_SIZE, null);
+                } else {
+                    System.err.println(String.format("Error ! A unknow background found (id: %d).", mapCode));
+                }
             }
         }
 
@@ -225,12 +217,12 @@ public class DrawFile {
         final List<ObjectItem> objectList = jnFile.getObjectLayer();
 
         // Tile picture
-        BufferedImage tilePicture;
+        BufferedImage tilePicture = null;
 
         System.out.println("Starting write object in piture");
 
         for (ObjectItem object : objectList) {
-            tilePicture = getTile(object);
+            //tilePicture = getTile(object);
 
             if ((tilePicture == null) && drawUnknowObject) {
                 drawDashedRectFilled(g2, object.getX(), object.getY(), object.getWidth(),

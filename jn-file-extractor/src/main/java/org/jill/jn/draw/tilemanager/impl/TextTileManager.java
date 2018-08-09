@@ -11,8 +11,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.jill.jn.ObjectItem;
-import org.jill.jn.draw.ScreenType;
 import org.jill.jn.draw.tilemanager.AbstractTileManager;
+import org.jill.openjill.core.api.screen.EnumScreenType;
 import org.jill.sha.CgaColorMapImpl;
 import org.jill.sha.ColorMap;
 import org.jill.sha.EgaColorMapImpl;
@@ -74,7 +74,7 @@ public class TextTileManager extends AbstractTileManager {
     /**
      * Screen type
      */
-    private ScreenType typeScreen;
+    private EnumScreenType typeScreen;
 
     /**
      * Fill picture in black.
@@ -96,7 +96,7 @@ public class TextTileManager extends AbstractTileManager {
      * @see org.jill.jn.draw.tilemanager.AbstractTileManager#init(java.util.Map, org.jill.jn.draw.ScreenType)
      */
     @Override
-    public void init(Map<Integer, ShaTile[]> mapOfTile, ScreenType typeScreen) {
+    public void init(Map<Integer, ShaTile[]> mapOfTile, EnumScreenType typeScreen) {
         // Small text is tileset 2
         smallText = mapOfTile.get(2);
 
@@ -104,11 +104,11 @@ public class TextTileManager extends AbstractTileManager {
         bigText = mapOfTile.get(1);
 
         // Grap color map
-        if (typeScreen == ScreenType.VGA) {
+        if (typeScreen == EnumScreenType.VGA) {
             colorMap = VGA_COLOR_MAP.getColorMap();
-        } else if (typeScreen == ScreenType.EGA) {
+        } else if (typeScreen == EnumScreenType.EGA) {
             colorMap = EGA_COLOR_MAP.getColorMap();
-        } else if (typeScreen == ScreenType.CGA) {
+        } else if (typeScreen == EnumScreenType.CGA) {
             colorMap = CGA_COLOR_MAP.getColorMap();
         }
 
@@ -134,7 +134,7 @@ public class TextTileManager extends AbstractTileManager {
             // Transparent
             textColor[BACKGROUND_COLOR_INDEX] = new Color(0x0, true);
         } else {
-            if (typeScreen == ScreenType.CGA) {
+            if (typeScreen == EnumScreenType.CGA) {
                 // No transparancy
                 textColor[BACKGROUND_COLOR_INDEX] =
                         new Color(colorMap[0].getRGB());
@@ -148,7 +148,7 @@ public class TextTileManager extends AbstractTileManager {
             }
         }
 
-        if (typeScreen == ScreenType.CGA) {
+        if (typeScreen == EnumScreenType.CGA) {
             textColor[FOREGROUND_COLOR_INDEX1] =
                     new Color(colorMap[3].getRGB());
             textColor[FOREGROUND_COLOR_INDEX2] =

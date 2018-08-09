@@ -15,7 +15,6 @@ import org.jill.jn.JnFile;
 import org.jill.jn.ObjectItem;
 import org.jill.jn.SaveData;
 import org.jill.jn.StringItem;
-import org.jill.jn.draw.cache.NameObjectCache;
 
 /**
  * Class to dump information from file
@@ -23,10 +22,6 @@ import org.jill.jn.draw.cache.NameObjectCache;
  * @author Emeric MARTINEAU
  */
 public class DumpFile {
-    /**
-     * Cache between object type and name/description
-     */
-    private final NameObjectCache namdeObjectCache = new NameObjectCache();
 
     /**
      * Stream where print
@@ -135,7 +130,8 @@ public class DumpFile {
                                         currentObject.getOffset()}
                         ));
 
-                typeDescription = namdeObjectCache.getDescription(currentObject.getType());
+                //typeDescription = namdeObjectCache.getDescription(currentObject.getType());
+                typeDescription = "TODO";
 
                 if (typeDescription == null) {
                     printProperties("type", String.valueOf(currentObject.getType()) + " (????)");

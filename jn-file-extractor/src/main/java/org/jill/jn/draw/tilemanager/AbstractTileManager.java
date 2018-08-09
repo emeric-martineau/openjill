@@ -7,7 +7,7 @@ import java.awt.image.BufferedImage;
 import java.util.Map;
 
 import org.jill.jn.ObjectItem;
-import org.jill.jn.draw.ScreenType;
+import org.jill.openjill.core.api.screen.EnumScreenType;
 import org.jill.sha.ShaTile;
 
 /**
@@ -30,7 +30,7 @@ public abstract class AbstractTileManager {
      * @param mapOfTile  map object contain tile
      * @param typeScreen type of screen (EGA, CGA, VGA)
      */
-    public abstract void init(final Map<Integer, ShaTile[]> mapOfTile, final ScreenType typeScreen);
+    public abstract void init(final Map<Integer, ShaTile[]> mapOfTile, final EnumScreenType typeScreen);
 
     /**
      * Get tile of object.

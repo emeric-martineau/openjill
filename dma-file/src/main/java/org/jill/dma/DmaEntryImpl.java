@@ -67,73 +67,72 @@ public class DmaEntryImpl implements DmaEntry {
         this.offset = offsetInFile;
     }
 
-    /**
-     * Return map code.
-     *
-     * @return mapCode code of background
-     */
     @Override
     public final int getMapCode() {
         return mapCode;
     }
 
-    /**
-     * Tile.
-     *
-     * @return tile index of tile
-     */
     @Override
     public final int getTile() {
         return tile;
     }
 
-    /**
-     * Tileset.
-     *
-     * @return tileset index of tileset
-     */
     @Override
     public final int getTileset() {
         return tileset;
     }
 
-    /**
-     * Flags.
-     *
-     * @return flags flags value
-     */
     @Override
     public final int getFlags() {
         return flags;
     }
 
-    /**
-     * Name.
-     *
-     * @return name name of background in file
-     */
     @Override
     public final String getName() {
         return name;
     }
 
-    /**
-     * Index.
-     *
-     * @return index index of this entry in file
-     */
+
     @Override
     public final int getIndex() {
         return index;
     }
 
-    /**
-     * Offset in file where entry can be found.
-     *
-     * @return offset  offset of this entry in file
-     */
     @Override
     public final int getOffset() {
         return offset;
     }
+
+    @Override
+    public boolean isMsgTouch() {
+        return (flags & 8) != 0;
+    }
+
+    @Override
+    public boolean isMsgDraw() {
+        return (flags & 16) != 0;
+    }
+
+    @Override
+    public boolean isMsgUpdate() {
+        return (flags & 32) != 0;
+    }
+
+    @Override
+    public boolean isPlayerThru() {
+        return (flags & 1) != 0;
+    }
+
+    @Override
+    public boolean isStair() {
+        // In flag, f_notstair 2
+        return !((flags & 2) != 0);
+    }
+
+    @Override
+    public boolean isVine() {
+        // In flag, f_notvine 4
+        return !((flags & 4) != 0);
+    }
+
 }
