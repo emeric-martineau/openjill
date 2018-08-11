@@ -23,19 +23,12 @@ public interface BackgroundEntity {
     /**
      * Picture.
      *
+     * @param x background position x
+     * @param y background position y
+     *
      * @return picture
      */
-    BufferedImage getPicture();
-
-    /**
-     * @return tile
-     */
-    int getTile();
-
-    /**
-     * @return tileset
-     */
-    int getTileset();
+    BufferedImage getPicture(int x, int y);
 
     /**
      * Init object.
@@ -91,7 +84,7 @@ public interface BackgroundEntity {
      *
      * @param background background
      * @param x background position x
-     * @param y background position x
+     * @param y background position y
      */
     void msgDraw(BackgroundLayer background, int x, int y);
 
@@ -107,7 +100,9 @@ public interface BackgroundEntity {
      *
      * @param background background
      * @param x background position x
-     * @param y background position x
+     * @param y background position y
      */
     void msgUpdate(BackgroundLayer background, int x, int y);
+
+    // TODO add method to clear cache in all background entities
 }

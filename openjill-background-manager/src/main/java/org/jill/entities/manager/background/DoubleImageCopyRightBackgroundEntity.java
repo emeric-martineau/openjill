@@ -9,6 +9,9 @@ import org.jill.sha.ShaFile;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
 
 public class DoubleImageCopyRightBackgroundEntity extends AbstractBackground {
     /**
@@ -26,6 +29,11 @@ public class DoubleImageCopyRightBackgroundEntity extends AbstractBackground {
      */
     private EnumScreenType screen;
 
+    /**
+     * This class manage many background. We need use cache to avoid image conflict and increase speed performance.
+     */
+    private Map<String, BufferedImage> pictureCache = new HashMap();
+
     @Override
     public void init(BackgroundParam backParameter) {
         dmaFile = backParameter.getDmaFile();
@@ -33,7 +41,12 @@ public class DoubleImageCopyRightBackgroundEntity extends AbstractBackground {
         shaFile = backParameter.getShaFile();
         screen = backParameter.getScreen();
 
-        picture = getPicture(shaFile, dmaEntry.getTileset(), dmaEntry.getTile(), screen);
+        final Optional<BufferedImage> currentPicture = getPicture(backParameter.getShaFile(), dmaEntry.getTileset(),
+                dmaEntry.getTile(), backParameter.getScreen());
+
+        if (currentPicture.isPresent()) {
+            picture = currentPicture.get();
+        }
     }
 
     @Override
@@ -48,7 +61,7 @@ public class DoubleImageCopyRightBackgroundEntity extends AbstractBackground {
 
         final DmaEntry nearDma = dmaFile.getDmaEntry(mapCode).get();
 
-        final BufferedImage backPicture = getPicture(shaFile, nearDma.getTileset(), nearDma.getTile(), screen);
+        final BufferedImage backPicture = getPicture(shaFile, nearDma.getTileset(), nearDma.getTile(), screen).get();
 
         int width = picture.getWidth();
         int height = picture.getHeight();
@@ -71,11 +84,11 @@ public class DoubleImageCopyRightBackgroundEntity extends AbstractBackground {
 
         g2.dispose();
 
-        picture = realPicutre;
+        pictureCache.put(String.format("%d_%d", x, y), realPicutre);
+    }
 
-        dmaFile = null;
-        dmaEntry = null;
-        shaFile = null;
-        screen = null;
+    @Override
+    public BufferedImage getPicture(final int x, final int y) {
+        return pictureCache.get(String.format("%d_%d", x, y));
     }
 }

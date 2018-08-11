@@ -177,7 +177,6 @@ public class DrawFile {
     public void writeBackground(final Graphics2D g2, final JnFile jnFile) {
         // Background map
         final BackgroundLayer background = jnFile.getBackgroundLayer();
-        final Map<BackgroundEntity, Boolean> msgDraw = new HashMap();
 
         System.out.println("Starting write background in picture");
 
@@ -192,13 +191,9 @@ public class DrawFile {
 
                     final BackgroundEntity manager = this.bckManagerCache.getManager(dma.getName());
 
-                    if (!msgDraw.containsKey(manager) && manager.isMsgDraw()) {
-                        manager.msgDraw(background, x, y);
+                    manager.msgDraw(background, x, y);
 
-                        msgDraw.put(manager, Boolean.TRUE);
-                    }
-
-                    final BufferedImage tilePicture = manager.getPicture();
+                    final BufferedImage tilePicture = manager.getPicture(x, y);
 
                     g2.drawImage(tilePicture, x * BLOCK_SIZE, y * BLOCK_SIZE, null);
                 } else {

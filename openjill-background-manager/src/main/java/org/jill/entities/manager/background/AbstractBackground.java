@@ -11,6 +11,7 @@ import org.jill.sha.ShaTileSet;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.Optional;
 
 public abstract class AbstractBackground implements BackgroundEntity {
     /**
@@ -34,21 +35,22 @@ public abstract class AbstractBackground implements BackgroundEntity {
     }
 
     @Override
-    public BufferedImage getPicture() {
+    public BufferedImage getPicture(final int x, final int y) {
         return picture;
     }
 
-    @Override
-    public int getTile() {
-        return dmaEntry.getTile();
-    }
-
-    @Override
-    public int getTileset() {
-        return dmaEntry.getTileset();
-    }
-
-    protected BufferedImage getPicture(final ShaFile shaFile, final int tileSet, final int tile, final EnumScreenType screen) {
+    /**
+     * Get picture for current screen configuration.
+     *
+     * @param shaFile the object contain picture
+     * @param tileSet index of tile set
+     * @param tile tile index
+     * @param screen screen configuration
+     *
+     * @return the desired picture.
+     */
+    protected Optional<BufferedImage> getPicture(final ShaFile shaFile, final int tileSet, final int tile,
+                                                final EnumScreenType screen) {
         final ShaTileSet[] shaTileset = shaFile.getShaTileSet();
 
         ShaTile[] currentShaTile = null;
@@ -67,15 +69,15 @@ public abstract class AbstractBackground implements BackgroundEntity {
 
             switch (screen) {
                 case CGA:
-                    return currentTile.getPictureCga();
+                    return Optional.of(currentTile.getPictureCga());
                 case EGA:
-                    return  currentTile.getPictureEga();
+                    return  Optional.of(currentTile.getPictureEga());
                 default:
-                    return currentTile.getPictureVga();
+                    return Optional.of(currentTile.getPictureVga());
             }
         }
 
-        return null;
+        return Optional.empty();
     }
 
     /**
