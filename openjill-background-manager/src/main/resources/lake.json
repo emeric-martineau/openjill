@@ -1,0 +1,46 @@
+{
+  "numberTileSet": 3,
+  "gamecount": 3,
+  "mask": [
+    {
+      "top": true,
+      "bottom": false,
+      "left": true,
+      "right": false,
+      "tileset": 42,
+      "tile": 1
+    },
+    {
+      "top": true,
+      "bottom": false,
+      "left": false,
+      "right": true,
+      "tileset": 42,
+      "tile": 2
+    },
+    {
+      "top": false,
+      "bottom": true,
+      "left": true,
+      "right": false,
+      "tileset": 42,
+      "tile": 3
+    },
+    {
+      "top": false,
+      "bottom": true,
+      "left": false,
+      "right": true,
+      "tileset": 42,
+      "tile": 4
+    },
+    {
+      "top": true,
+      "bottom": true,
+      "left": true,
+      "right": true,
+      "tileset": 42,
+      "tile": 5
+    }
+  ]
+}

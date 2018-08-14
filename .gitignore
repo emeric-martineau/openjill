@@ -18,6 +18,8 @@
 /sha-file-extractor/target/
 /dma-file-extractor/target/
 /jn-file-extractor/target/
+/openjill-background-manager/target/
+/openjill-object-manager/target/
 *.iml
 /.idea/
 /sha-file-edit/target/

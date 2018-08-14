@@ -8,6 +8,8 @@ import java.util.Optional;
 
 import org.jill.dma.DmaEntry;
 import org.jill.dma.DmaFile;
+import org.jill.entities.manager.background.config.basetreewater.BaseTreeWaterConfig;
+import org.jill.entities.manager.background.config.basetreewater.MaskConfig;
 import org.jill.jn.BackgroundLayer;
 import org.jill.openjill.core.api.entities.BackgroundParam;
 import org.jill.openjill.core.api.screen.EnumScreenType;
@@ -18,7 +20,7 @@ import org.jill.sha.ShaFile;
  *
  * @author Emeric MARTINEAU
  */
-public abstract class AbstractBaseBackgroundEntity extends AbstractBackground {
+public abstract class AbstractBaseBackgroundEntity<T extends BaseTreeWaterConfig> extends AbstractBackground {
     /**
      * Picture array of original image.
      */
@@ -48,6 +50,11 @@ public abstract class AbstractBaseBackgroundEntity extends AbstractBackground {
      * Index of picture.
      */
     private int indexPicture = 0;
+
+    /**
+     * Configuration of background.
+     */
+    private T config;
 
     /**
      * For internal use only.
@@ -124,6 +131,20 @@ public abstract class AbstractBaseBackgroundEntity extends AbstractBackground {
                 || isBackBase(background, x + 1, y);
     }
 
+    /**
+     * Return type of config file.
+     *
+     * @return
+     */
+    protected abstract Class<T> getConfigClass();
+
+    /**
+     * Return name of config file
+     *
+     * @return
+     */
+    protected abstract  String getConfigFilename();
+
     @Override
     public void init(BackgroundParam backParameter) {
         dmaFile = backParameter.getDmaFile();
@@ -131,13 +152,14 @@ public abstract class AbstractBaseBackgroundEntity extends AbstractBackground {
         shaFile = backParameter.getShaFile();
         screen = backParameter.getScreen();
 
-// TODO config file for size of images/originalImage and mask
+        config = readConf(getConfigFilename(), getConfigClass());
+
 // TODO add gamecount & 3 = 0 => update picture
 
         int tileIndex = dmaEntry.getTile();
         int tileSetIndex = dmaEntry.getTileset();
 
-        originalImages = new BufferedImage[3];
+        originalImages = new BufferedImage[config.getNumberTileSet()];
 
         for (int index = 0; index < originalImages.length; index++) {
             final Optional<BufferedImage> currentPicture = getPicture(backParameter.getShaFile(), tileSetIndex,
@@ -158,16 +180,15 @@ public abstract class AbstractBaseBackgroundEntity extends AbstractBackground {
         final boolean isLeft = !isBaseLeft(background, x, y);
         final boolean isRight = !isBaseRight(background, x, y);
 
-        if (isTop && isBottom && isLeft && isRight) {
-            mask = getPicture (shaFile, 42, 5, screen).get();
-        } else if (isTop && isLeft) {
-            mask = getPicture (shaFile, 42, 1, screen).get();
-        } else if (isTop && isRight) {
-            mask = getPicture (shaFile, 42, 2, screen).get();
-        } else if (isBottom && isLeft) {
-            mask = getPicture (shaFile, 42, 3, screen).get();
-        } else if (isBottom && isRight) {
-            mask = getPicture (shaFile, 42, 4, screen).get();
+        for (MaskConfig maskCfg: config.getMask()) {
+            if (maskCfg.isBottom() == isBottom &&
+                    maskCfg.isLeft() == isLeft &&
+                    maskCfg.isRight() == isRight &&
+                    maskCfg.isTop() == isTop) {
+                mask = getPicture (shaFile, maskCfg.getTileset(), maskCfg.getTile(), screen).get();
+
+                break;
+            }
         }
 
         Graphics2D g2;

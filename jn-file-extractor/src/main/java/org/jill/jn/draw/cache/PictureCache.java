@@ -13,6 +13,7 @@ import org.jill.jn.JnFileExtractor;
 import org.jill.jn.ObjectItem;
 import org.jill.jn.draw.ScreenType;
 import org.jill.jn.draw.tilemanager.AbstractTileManager;
+import org.jill.openjill.core.api.screen.EnumScreenType;
 import org.jill.sha.ShaFile;
 import org.jill.sha.ShaTile;
 import org.jill.sha.ShaTileSet;
@@ -36,7 +37,7 @@ public class PictureCache {
     /**
      * Type opf screen
      */
-    private final ScreenType typeScreen;
+    private final EnumScreenType typeScreen;
 
     /**
      * Map of object tile
@@ -44,7 +45,7 @@ public class PictureCache {
     private final Map<String, AbstractTileManager> mapObjectPicture;
 
     public PictureCache(final ShaFile shaFile, final DmaFile dmaFile,
-            final ScreenType typeScreen)
+            final EnumScreenType typeScreen)
             throws ClassNotFoundException, IllegalAccessException,
             InstantiationException {
         this.typeScreen = typeScreen;
@@ -102,7 +103,7 @@ public class PictureCache {
         // Init map of tileset
         for (ShaTileSet tileSetArray1 : tileSetArray) {
             tileSet = tileSetArray1;
-            if ((tileSet.getBitColor() != 8) || (typeScreen == ScreenType.VGA)) {
+            if ((tileSet.getBitColor() != 8) || (typeScreen == EnumScreenType.VGA)) {
                 tileSetIndex = tileSet.getTitleSetIndex();
                 mapOfTile.put(tileSetIndex, tileSet.getShaTile());
             }
@@ -206,9 +207,9 @@ public class PictureCache {
                 if (tileArray != null && (de.getTile() < tileArray.length)) {
                     tile = tileArray[de.getTile()];
 
-                    if (typeScreen == ScreenType.CGA) {
+                    if (typeScreen == EnumScreenType.CGA) {
                         tilePicture = tile.getPictureCga();
-                    } else if (typeScreen == ScreenType.EGA) {
+                    } else if (typeScreen == EnumScreenType.EGA) {
                         tilePicture = tile.getPictureEga();
                     } else {
                         tilePicture = tile.getPictureVga();

@@ -1,5 +1,6 @@
 package org.jill.entities.manager.background;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.jill.dma.DmaEntry;
 import org.jill.jn.BackgroundLayer;
 import org.jill.openjill.core.api.entities.BackgroundEntity;
@@ -11,7 +12,12 @@ import org.jill.sha.ShaTileSet;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.Optional;
+import java.util.logging.Level;
+
+import static com.sun.xml.internal.ws.spi.db.BindingContextFactory.LOGGER;
 
 public abstract class AbstractBackground implements BackgroundEntity {
     /**
@@ -88,7 +94,7 @@ public abstract class AbstractBackground implements BackgroundEntity {
      * @param x x
      * @param y y
      */
-    public static void draw(Graphics g2d, Image img, int x, int y) {
+    protected static void draw(Graphics g2d, Image img, int x, int y) {
         g2d.drawImage(img, x, y, null);
     }
 
@@ -100,12 +106,42 @@ public abstract class AbstractBackground implements BackgroundEntity {
      * @param x x
      * @param y y
      */
-    public static void drawFromImage(BufferedImage dest, Image src, int x, int y) {
+    protected static void drawFromImage(BufferedImage dest, Image src, int x, int y) {
         final Graphics2D g2d = dest.createGraphics();
 
         g2d.drawImage(src, x, y, null);
 
         g2d.dispose();
+    }
+
+    /**
+     * Read config file.
+     *
+     * @param filename final name of config file
+     * @return properties file
+     */
+    protected <T> T readConf(final String filename, final Class<T> clazz) {
+
+        final ObjectMapper mapper = new ObjectMapper();
+        final InputStream is =
+                this.getClass().getClassLoader().
+                        getResourceAsStream(filename);
+
+        T mc;
+
+        // Load config
+        try {
+            mc = mapper.readValue(is, clazz);
+        } catch (IOException ex) {
+            LOGGER.log(Level.SEVERE,
+                    String.format("Unable to load config for control '%s'",
+                            filename),
+                    ex);
+
+            mc = null;
+        }
+
+        return mc;
     }
 
     @Override
