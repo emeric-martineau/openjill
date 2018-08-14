@@ -1,6 +1,8 @@
 package org.jill.jn;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.jill.file.FileAbstractByte;
 
@@ -22,11 +24,10 @@ public class BackgroundLayerImpl implements BackgroundLayer {
     private final int[][] mapCode = new int[MAP_WIDTH][MAP_HEIGHT];
 
     /**
-     * Constructor.
-     *
-     * @param jnFile file
-     * @throws IOException if error
+     * Map to store background update state.
      */
+    private Map<String, Boolean> backgroundUpdate = new HashMap();
+
     public BackgroundLayerImpl(final FileAbstractByte jnFile)
             throws IOException {
         // Background store by row
@@ -38,15 +39,28 @@ public class BackgroundLayerImpl implements BackgroundLayer {
         }
     }
 
-    /**
-     * Return map code value to seach it in dma file.
-     *
-     * @param x x-origin
-     * @param y y-origine
-     * @return map code
-     */
     @Override
     public final int getMapCode(final int x, final int y) {
         return mapCode[x][y];
+    }
+
+    @Override
+    public boolean isUpdateBackground(String backgroundName) {
+        return backgroundUpdate.containsKey(backgroundName);
+    }
+
+    @Override
+    public void setUpdateBackground(String backgroundName, boolean update) {
+        backgroundUpdate.put(backgroundName, Boolean.valueOf(update));
+    }
+
+    @Override
+    public boolean isBackgroundUpdated(String backgroundName) {
+        return backgroundUpdate.containsKey(backgroundName) && backgroundUpdate.get(backgroundName);
+    }
+
+    @Override
+    public void clearBackgroundUpdate() {
+        backgroundUpdate.clear();
     }
 }
