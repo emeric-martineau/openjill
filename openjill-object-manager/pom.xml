@@ -33,7 +33,15 @@
         <dependency>
             <groupId>org.jill.cfg</groupId>
             <artifactId>cfg-file-api</artifactId>
-        </dependency>   
+        </dependency>
+        <dependency>
+            <groupId>org.jill</groupId>
+            <artifactId>openjill-core-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+        </dependency>
     </dependencies>
   
     <properties>

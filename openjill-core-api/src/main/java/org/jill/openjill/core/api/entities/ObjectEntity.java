@@ -11,7 +11,7 @@ import org.jill.openjill.core.api.keyboard.KeyboardLayout;
  *
  * @author Emeric MARTINEAU
  */
-public interface ObjectEntity extends ObjectItem {
+public interface ObjectEntity {
     /**
      * Value to left of speed x.
      */
@@ -50,7 +50,7 @@ public interface ObjectEntity extends ObjectItem {
     void init(ObjectParam objectParam);
 
     /**
-     * if olways on screen.
+     * if always on screen.
      *
      * @return alwaysOnScreen
      */
@@ -59,7 +59,7 @@ public interface ObjectEntity extends ObjectItem {
     /**
      * To know if object is checkpoint.
      *
-     * @return if is chack point
+     * @return if is check point
      */
     boolean isCheckPoint();
 
@@ -83,13 +83,6 @@ public interface ObjectEntity extends ObjectItem {
      * @return tre/false
      */
     boolean canFire();
-
-    /**
-     * Write on background.
-     *
-     * @return writeOnBackGround
-     */
-    boolean isWriteOnBackGround();
 
     /**
      * Return graphic to draw.
@@ -137,4 +130,11 @@ public interface ObjectEntity extends ObjectItem {
      * @return true -> remove it
      */
     boolean isRemoveOutOfVisibleScreen();
+
+    /**
+     * Return default graphic to draw.
+     *
+     * @return picture
+     */
+    Optional<BufferedImage> defaultPicture();
 }

@@ -24,8 +24,10 @@ import org.jill.jn.BackgroundLayer;
 import org.jill.jn.JnFile;
 import org.jill.jn.ObjectItem;
 import org.jill.jn.draw.cache.BackgroundManagerCache;
+import org.jill.jn.draw.cache.ObjectManagerCache;
 import org.jill.openjill.core.api.entities.BackgroundEntity;
 import org.jill.openjill.core.api.entities.BackgroundParam;
+import org.jill.openjill.core.api.entities.ObjectEntity;
 import org.jill.openjill.core.api.screen.EnumScreenType;
 import org.jill.sha.CgaColorMapImpl;
 import org.jill.sha.ColorMap;
@@ -84,6 +86,11 @@ public class DrawFile {
      */
     private final BackgroundManagerCache bckManagerCache;
 
+    /**
+     * Object manager.
+     */
+    private final ObjectManagerCache objManagerCache;
+
     public DrawFile(final ShaFile shaFile,
             final DmaFile dmaFile, final EnumScreenType screen)
             throws IllegalAccessException, InstantiationException, ClassNotFoundException {
@@ -105,6 +112,9 @@ public class DrawFile {
 
         this.bckManagerCache = new BackgroundManagerCache("std-openjill-background-manager.properties",
                 shaFile, dmaFile, screen);
+
+        this.objManagerCache = new ObjectManagerCache("std-openjill-object-manager.properties", shaFile,
+                dmaFile, screen);
     }
 
     /**
@@ -217,18 +227,27 @@ public class DrawFile {
         final List<ObjectItem> objectList = jnFile.getObjectLayer();
 
         // Tile picture
-        BufferedImage tilePicture = null;
+        Optional<BufferedImage> tilePicture;
+        ObjectEntity manager;
 
         System.out.println("Starting write object in piture");
 
         for (ObjectItem object : objectList) {
-            //tilePicture = getTile(object);
 
-            if ((tilePicture == null) && drawUnknowObject) {
+            manager = objManagerCache.getManager(object.getType());
+
+            if (manager == null && drawUnknowObject) {
                 drawDashedRectFilled(g2, object.getX(), object.getY(), object.getWidth(),
                         object.getHeight(), String.valueOf(object.getType()));
-            } else if (tilePicture != null) {
-                g2.drawImage(tilePicture, object.getX(), object.getY(), null);
+            } else {
+                tilePicture = manager.defaultPicture();
+
+                if (tilePicture.isPresent()) {
+                    g2.drawImage(tilePicture.get(), object.getX(), object.getY(), null);
+                } else if (drawUnknowObject) {
+                    drawDashedRectFilled(g2, object.getX(), object.getY(), object.getWidth(),
+                            object.getHeight(), String.valueOf(object.getType()));
+                }
             }
         }
 

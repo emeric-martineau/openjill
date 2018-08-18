@@ -1,8 +1,11 @@
 package org.jill.openjill.core.api.entities;
 
+import org.jill.dma.DmaFile;
+import org.jill.jn.BackgroundLayer;
 import org.jill.jn.ObjectItem;
-import org.jill.openjill.core.api.manager.TileManager;
 import org.jill.openjill.core.api.message.MessageDispatcher;
+import org.jill.openjill.core.api.screen.EnumScreenType;
+import org.jill.sha.ShaFile;
 
 /**
  * Object parameter when object is load.
@@ -14,29 +17,23 @@ public interface ObjectParam {
     /**
      * Default constructor.
      *
-     * @param backgroundMap            background
-     * @param pictureCacheManager      picture
+     * @param background            background
      * @param messageDispatcherManager message
+     * @param shaFile picture
+     * @param dmaFile  dma file of game
+     * @param object object item
+     * @param screen screen type
      * @param levelNumber              level
      */
-    void init(BackgroundEntity[][] backgroundMap,
-            TileManager pictureCacheManager,
-            MessageDispatcher messageDispatcherManager,
-            int levelNumber);
+    void init(BackgroundLayer background, MessageDispatcher messageDispatcherManager, ShaFile shaFile, DmaFile dmaFile,
+              ObjectItem object, EnumScreenType screen, int levelNumber);
 
     /**
      * Background.
      *
      * @return background
      */
-    BackgroundEntity[][] getBackgroundObject();
-
-    /**
-     * Level.
-     *
-     * @return return current level
-     */
-    int getLevel();
+    BackgroundLayer getBackground();
 
     /**
      * Message dispatcher.
@@ -46,6 +43,20 @@ public interface ObjectParam {
     MessageDispatcher getMessageDispatcher();
 
     /**
+     * Picture cache.
+     *
+     * @return picture cache
+     */
+    ShaFile getShaFile();
+
+    /**
+     * Current dma file of game.
+     *
+     * @return dma file
+     */
+    DmaFile getDmaFile();
+
+    /**
      * Object.
      *
      * @return object
@@ -53,17 +64,16 @@ public interface ObjectParam {
     ObjectItem getObject();
 
     /**
-     * Object.
+     * Current type of screen.
      *
-     * @param obj set object
+     * @return enum
      */
-    void setObject(final ObjectItem obj);
+    EnumScreenType getScreen();
 
     /**
-     * Picture cache.
+     * Level.
      *
-     * @return picture cache
+     * @return return current level
      */
-    TileManager getPictureCache();
-
+    int getLevel();
 }
