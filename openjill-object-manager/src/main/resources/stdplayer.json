@@ -1,0 +1,17 @@
+{
+  "stand": [
+    {
+      "tileset": 8,
+      "tile": 20
+    },
+    {
+      "tileset": 8,
+      "tile": 16
+    },
+    {
+      "tileset": 8,
+      "tile": 21
+    }
+  ],
+  "defaultIndexImage": 1
+}

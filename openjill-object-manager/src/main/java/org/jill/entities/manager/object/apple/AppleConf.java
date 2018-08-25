@@ -1,5 +1,7 @@
 package org.jill.entities.manager.object.apple;
 
+import org.jill.entities.manager.object.common.conf.PictureConf;
+
 public class AppleConf {
     /**
      * Gamecount before change background.
@@ -14,17 +16,7 @@ public class AppleConf {
     /**
      * Tileset of picture.
      */
-    private int tileset;
-
-    /**
-     * Tile of picture.
-     */
-    private int tile;
-
-    /**
-     * Number of tile contain background.
-     */
-    private int numberTileSet;
+    private PictureConf[] picture;
 
     /**
      * Number of life point.
@@ -62,12 +54,12 @@ public class AppleConf {
     private int defaultIndexImage;
 
     /**
-     * Number of tile contain background.
+     * Picture.
      *
-     * @return number
+     * @return all picture conf
      */
-    public int getNumberTileSet() {
-        return numberTileSet;
+    public PictureConf[] getPicture() {
+        return picture;
     }
 
     /**
@@ -77,24 +69,6 @@ public class AppleConf {
      */
     public int getGamecount() {
         return gamecount;
-    }
-
-    /**
-     * Tileset of picture.
-     *
-     * @return index of tileset
-     */
-    public int getTileset() {
-        return tileset;
-    }
-
-    /**
-     * Tile of picture.
-     *
-     * @return index of tile
-     */
-    public int getTile() {
-        return tile;
     }
 
     /**

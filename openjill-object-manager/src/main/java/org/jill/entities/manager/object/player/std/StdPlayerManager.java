@@ -1,4 +1,4 @@
-package org.jill.entities.manager.object.apple;
+package org.jill.entities.manager.object.player.std;
 
 import org.jill.entities.manager.object.AbstractObject;
 import org.jill.entities.manager.object.common.conf.PictureConf;
@@ -12,16 +12,11 @@ import org.jill.sha.ShaFile;
 import java.awt.image.BufferedImage;
 import java.util.Optional;
 
-public class AppleManager extends AbstractObject {
-    /**
-     * To know if message must be display.
-     */
-    private boolean messageDisplayAppleMessage = true;
-
+public class StdPlayerManager extends AbstractObject {
     /**
      * Picture array.
      */
-    private BufferedImage[] images;
+    private BufferedImage[] stStandPicture;
 
     /**
      * Default index to extract image in jn-extractor.
@@ -30,20 +25,19 @@ public class AppleManager extends AbstractObject {
 
     @Override
     public void init(final ObjectParam objectParam) {
-        final AppleConf conf = readConf("apple.json", AppleConf.class);
+        final StdPlayerConf conf = readConf("stdplayer.json", StdPlayerConf.class);
 
         final ShaFile shaFile = objectParam.getShaFile();
         final EnumScreenType screen = objectParam.getScreen();
 
         int indexPicture = 0;
 
-        images = new BufferedImage[conf.getPicture().length * 2];
+        stStandPicture = new BufferedImage[conf.getStand().length];
 
-        for (PictureConf pict: conf.getPicture()) {
-            this.images[indexPicture] = getPicture(shaFile, pict.getTileset(), pict.getTile(), screen).get();
-            this.images[indexPicture + 1] = this.images[indexPicture];
+        for (PictureConf pict: conf.getStand()) {
+            this.stStandPicture[indexPicture] = getPicture(shaFile, pict.getTileset(), pict.getTile(), screen).get();
 
-            indexPicture += 2;
+            indexPicture++;
         }
 
         defaultIndexImage = conf.getDefaultIndexImage();
@@ -81,6 +75,6 @@ public class AppleManager extends AbstractObject {
 
     @Override
     public Optional<BufferedImage> defaultPicture() {
-        return Optional.of(images[defaultIndexImage * 2]);
+        return Optional.of(stStandPicture[defaultIndexImage]);
     }
 }

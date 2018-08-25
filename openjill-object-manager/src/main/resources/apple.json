@@ -1,14 +1,29 @@
 {
   "gamecount": 2,
   "point": 12,
-  "tile": 0,
-  "tileset": 9,
-  "numberTileSet": 4,
   "life": 1,
   "msg": "APPLES GIVE YOU HEALTH",
   "msgTime": 20,
   "msgColor": 2,
   "boxMsgOffset": -2,
   "boxMsgMask": 15,
-  "defaultIndexImage": 2
+  "defaultIndexImage": 2,
+  "picture": [
+    {
+      "tileset": 9,
+      "tile": 3
+    },
+    {
+      "tileset": 9,
+      "tile": 2
+    },
+    {
+      "tileset": 9,
+      "tile": 1
+    },
+    {
+      "tileset": 9,
+      "tile": 0
+    }
+  ]
 }
