@@ -1,13 +1,13 @@
 package org.jill.game.level;
 
-import java.awt.Graphics;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-
 import org.jill.game.gui.InformationBox;
 import org.jill.game.gui.LevelMessageBox;
 import org.jill.game.gui.menu.MenuInterface;
 import org.jill.game.level.cfg.LevelConfiguration;
+
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
 
 /**
  * This class manage display menu.
@@ -60,10 +60,10 @@ public abstract class AbstractMenuJillLevel extends AbstractObjectJillLevel {
     private void constructor(final LevelConfiguration cfgLevel) {
         initMenu();
 
-        this.infoBox = new InformationBox(this.pictureCache);
+        this.infoBox = new InformationBox(shaFile, screenType, textManager);
 
-        this.levelMessageBox = new LevelMessageBox(this.pictureCache,
-                cfgLevel.getCfgSavePrefixe(), this.screenType);
+        this.levelMessageBox = new LevelMessageBox(textManager,
+                cfgLevel.getCfgSavePrefixe(), shaFile, screenType);
     }
 
     @Override

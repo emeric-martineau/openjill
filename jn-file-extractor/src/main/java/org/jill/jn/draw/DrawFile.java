@@ -3,37 +3,25 @@
  */
 package org.jill.jn.draw;
 
-import java.awt.BasicStroke;
-import java.awt.Color;
-import java.awt.Graphics2D;
-import java.awt.Rectangle;
-import java.awt.Stroke;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
-import javax.imageio.ImageIO;
-
 import org.jill.dma.DmaEntry;
 import org.jill.dma.DmaFile;
-import org.jill.entities.param.BackgroundParamImpl;
+import org.jill.entities.manager.cache.BackgroundManagerCache;
+import org.jill.entities.manager.cache.ObjectManagerCache;
 import org.jill.jn.BackgroundLayer;
 import org.jill.jn.JnFile;
 import org.jill.jn.ObjectItem;
-import org.jill.jn.draw.cache.BackgroundManagerCache;
-import org.jill.jn.draw.cache.ObjectManagerCache;
 import org.jill.openjill.core.api.entities.BackgroundEntity;
-import org.jill.openjill.core.api.entities.BackgroundParam;
 import org.jill.openjill.core.api.entities.ObjectEntity;
 import org.jill.openjill.core.api.screen.EnumScreenType;
-import org.jill.sha.CgaColorMapImpl;
-import org.jill.sha.ColorMap;
-import org.jill.sha.EgaColorMapImpl;
-import org.jill.sha.ShaFile;
-import org.jill.sha.VgaColorMapImpl;
+import org.jill.sha.*;
+
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
+import java.util.Optional;
 
 /**
  * Class to draw picture from file

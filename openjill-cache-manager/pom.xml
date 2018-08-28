@@ -1,0 +1,40 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.jill.entities</groupId>
+    <artifactId>openjill-cache-managerr</artifactId>
+    <packaging>jar</packaging>
+    <version>0.2.7-SNAPSHOT</version>
+    <name>openjill-cache-manager</name>
+
+    <parent>
+        <groupId>org.jill</groupId>
+        <artifactId>jill-parent</artifactId>
+        <version>0.2.7-SNAPSHOT</version>
+        <relativePath>../jill_parent/pom.xml</relativePath>
+    </parent>
+    
+    <description>Cache to load manager.</description>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>org.jill.dma</groupId>
+            <artifactId>dma-file-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.jill.entities</groupId>
+            <artifactId>openjill-background-manager</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.jill.entities</groupId>
+            <artifactId>openjill-object-manager</artifactId>
+        </dependency>
+    </dependencies>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+    </properties>
+</project>

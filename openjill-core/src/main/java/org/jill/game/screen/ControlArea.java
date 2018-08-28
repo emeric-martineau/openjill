@@ -1,23 +1,21 @@
 package org.jill.game.screen;
 
-import java.awt.Color;
-import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.jill.game.screen.conf.ControlAreaConf;
 import org.jill.game.screen.conf.KeysControlText;
 import org.jill.game.screen.conf.LineToDraw;
 import org.jill.game.screen.conf.TextToDraw;
 import org.jill.openjill.core.api.manager.TextManager;
-import org.jill.openjill.core.api.manager.TileManager;
 import org.jill.openjill.core.api.message.EnumMessageType;
 import org.jill.openjill.core.api.message.InterfaceMessageGameHandler;
 import org.jill.openjill.core.api.message.statusbar.inventory.InventoryItemMessage;
-import com.fasterxml.jackson.databind.ObjectMapper;
+
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Control area on screen and manage state.
@@ -64,7 +62,7 @@ public class ControlArea implements InterfaceMessageGameHandler {
     /**
      * Picture cache.
      */
-    private final TileManager pictureCache;
+    private final TextManager textManager;
 
     /**
      * Control picture.
@@ -125,30 +123,30 @@ public class ControlArea implements InterfaceMessageGameHandler {
     /**
      * Constructor.
      *
-     * @param pictureCacheManager picture cache
+     * @param textManager picture cache
      * @param statusBar           status bar
      */
-    public ControlArea(final TileManager pictureCacheManager,
+    public ControlArea(final TextManager textManager,
             final StatusBar statusBar) {
-        this.conf = readConf("control_area.json");
+        conf = readConf("control_area.json");
 
-        this.pictureCache = pictureCacheManager;
+        this.textManager = textManager;
 
-        inventoryBackgroundColor = pictureCache.getColorMap()[
+        inventoryBackgroundColor = textManager.getColorMap()[
                 conf.getBackgroundColor()];
 
-        bulletOn = pictureCache.getTextManager().grapSpecialKey(
+        bulletOn = textManager.grapSpecialKey(
                 TextManager.SPECIAL_BULLET_ON,
-                this.conf.getNoiseBullet().getColor(),
+                conf.getNoiseBullet().getColor(),
                 TextManager.BACKGROUND_COLOR_NONE);
-        bulletOff = pictureCache.getTextManager().grapSpecialKey(
+        bulletOff = textManager.grapSpecialKey(
                 TextManager.SPECIAL_BULLET_OFF,
-                this.conf.getTurtleBullet().getColor(),
+                conf.getTurtleBullet().getColor(),
                 TextManager.BACKGROUND_COLOR_NONE);
 
         TextToDraw lAltKey = null;
 
-        for (TextToDraw ttd : this.conf.getText()) {
+        for (TextToDraw ttd : conf.getText()) {
             if (ALT_TEXT_KEY.equals(ttd.getText())) {
                 lAltKey = ttd;
                 ttd.setText(EMPTY_TEXT);
@@ -156,9 +154,9 @@ public class ControlArea implements InterfaceMessageGameHandler {
             }
         }
 
-        this.altKey = lAltKey;
+        altKey = lAltKey;
 
-        for (TextToDraw ttd : this.conf.getText()) {
+        for (TextToDraw ttd : conf.getText()) {
             if (CTRL_TEXT_KEY.equals(ttd.getText())) {
                 lAltKey = ttd;
                 ttd.setText(EMPTY_TEXT);
@@ -166,7 +164,7 @@ public class ControlArea implements InterfaceMessageGameHandler {
             }
         }
 
-        this.shiftKey = lAltKey;
+        shiftKey = lAltKey;
 
         controlPicture = statusBar.createControlArea();
         g2Control = controlPicture.createGraphics();
@@ -215,14 +213,14 @@ public class ControlArea implements InterfaceMessageGameHandler {
         g2Control.fillRect(0, 0, controlPicture.getWidth(),
                 controlPicture.getHeight());
 
-        for (TextToDraw ttd : this.conf.getText()) {
-            pictureCache.getTextManager().drawSmallText(g2Control, ttd.getX(),
+        for (TextToDraw ttd : conf.getText()) {
+            textManager.drawSmallText(g2Control, ttd.getX(),
                     ttd.getY(), ttd.getText(), ttd.getColor(),
                     TextManager.BACKGROUND_COLOR_NONE);
         }
 
-        for (TextToDraw ttd : this.conf.getBigText()) {
-            pictureCache.getTextManager().drawBigText(g2Control, ttd.getX(),
+        for (TextToDraw ttd : conf.getBigText()) {
+            textManager.drawBigText(g2Control, ttd.getX(),
                     ttd.getY(), ttd.getText(), ttd.getColor(),
                     TextManager.BACKGROUND_COLOR_NONE);
         }
@@ -230,7 +228,7 @@ public class ControlArea implements InterfaceMessageGameHandler {
         BufferedImage picture;
         int index;
 
-        for (TextToDraw ttd : this.conf.getSpecialKey()) {
+        for (TextToDraw ttd : conf.getSpecialKey()) {
             switch (ttd.getText()) {
                 case SHIFT:
                     index = TextManager.SPECIAL_KEY_SHIFT;
@@ -245,7 +243,7 @@ public class ControlArea implements InterfaceMessageGameHandler {
                     index = 0;
             }
 
-            picture = pictureCache.getTextManager().grapSpecialKey(
+            picture = textManager.grapSpecialKey(
                     index, ttd.getColor(),
                     TextManager.BACKGROUND_COLOR_NONE);
 
@@ -253,8 +251,8 @@ public class ControlArea implements InterfaceMessageGameHandler {
         }
 
         // Draw middle line
-        for (LineToDraw ltd : this.conf.getLines()) {
-            g2Control.setColor(pictureCache.getColorMap()[ltd.getColor()]);
+        for (LineToDraw ltd : conf.getLines()) {
+            g2Control.setColor(textManager.getColorMap()[ltd.getColor()]);
             g2Control.fillRect(0, ltd.getY(), controlPicture.getWidth(), 1);
         }
 
@@ -267,7 +265,7 @@ public class ControlArea implements InterfaceMessageGameHandler {
             bi = bulletOff;
         }
 
-        TextToDraw bullet = this.conf.getTurtleBullet();
+        TextToDraw bullet = conf.getTurtleBullet();
 
         g2Control.drawImage(bi, bullet.getX(), bullet.getY(), null);
 
@@ -277,7 +275,7 @@ public class ControlArea implements InterfaceMessageGameHandler {
             bi = bulletOff;
         }
 
-        bullet = this.conf.getNoiseBullet();
+        bullet = conf.getNoiseBullet();
         g2Control.drawImage(bi, bullet.getX(), bullet.getY(), null);
 
         return controlPicture;
@@ -287,12 +285,12 @@ public class ControlArea implements InterfaceMessageGameHandler {
      * Find default player character.
      */
     private void findDefaultPlayerCharacter() {
-        if (this.currentPlayerConfig == null) {
-            for (KeysControlText kct : this.conf.getKeysControlText()) {
+        if (currentPlayerConfig == null) {
+            for (KeysControlText kct : conf.getKeysControlText()) {
                 if (kct.isDefaut()) {
-                    this.currentPlayerConfig = kct;
-                    this.altKey.setText(kct.getAlt());
-                    this.shiftKey.setText(kct.getShift());
+                    currentPlayerConfig = kct;
+                    altKey.setText(kct.getAlt());
+                    shiftKey.setText(kct.getShift());
 
                     break;
                 }
@@ -315,7 +313,7 @@ public class ControlArea implements InterfaceMessageGameHandler {
      * @param turtle turtleMode
      */
     public final void setTurtleMode(final boolean turtle) {
-        this.turtleMode = turtle;
+        turtleMode = turtle;
     }
 
     /**
@@ -333,7 +331,7 @@ public class ControlArea implements InterfaceMessageGameHandler {
      * @param noise noiseMode
      */
     public final void setNoiseMode(final boolean noise) {
-        this.noiseMode = noise;
+        noiseMode = noise;
     }
 
     @Override
@@ -341,22 +339,22 @@ public class ControlArea implements InterfaceMessageGameHandler {
             final Object msg) {
         switch (type) {
             case INVENTORY_ITEM:
-                if (this.currentPlayerConfig == null) {
+                if (currentPlayerConfig == null) {
                     findDefaultPlayerCharacter();
                 }
 
-                if (this.currentPlayerConfig.isCanUpdateAltText()) {
+                if (currentPlayerConfig.isCanUpdateAltText()) {
                     updateTextWithInventory(msg);
                 }
                 break;
             case CHANGE_PLAYER_CHARACTER:
-                final KeysControlText kct = this.conf.getKeysControlText(
+                final KeysControlText kct = conf.getKeysControlText(
                         msg.toString());
 
-                this.shiftKey.setText(kct.getShift());
-                this.altKey.setText(kct.getAlt());
+                shiftKey.setText(kct.getShift());
+                altKey.setText(kct.getAlt());
 
-                this.currentPlayerConfig = kct;
+                currentPlayerConfig = kct;
 
                 break;
             default:
@@ -373,13 +371,13 @@ public class ControlArea implements InterfaceMessageGameHandler {
         final InventoryItemMessage iim = (InventoryItemMessage) msg;
 
         if (iim.isLastItemInv()) {
-            this.altKey.setText(EMPTY_TEXT);
+            altKey.setText(EMPTY_TEXT);
         } else {
-            final KeysControlText kct = this.conf.getKeysControlText(
+            final KeysControlText kct = conf.getKeysControlText(
                     iim.getObj().toString());
 
             if (kct != null) {
-                this.altKey.setText(kct.getAlt());
+                altKey.setText(kct.getAlt());
             }
         }
     }

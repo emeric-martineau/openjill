@@ -1,19 +1,20 @@
 package org.jill.entities.manager.background;
 
-import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
-
 import org.jill.dma.DmaEntry;
 import org.jill.dma.DmaFile;
 import org.jill.entities.manager.background.config.basetreewater.BaseTreeWaterConfig;
 import org.jill.entities.manager.background.config.basetreewater.MaskConfig;
 import org.jill.jn.BackgroundLayer;
+import org.jill.openjill.core.api.picture.PictureTools;
 import org.jill.openjill.core.api.entities.BackgroundParam;
 import org.jill.openjill.core.api.screen.EnumScreenType;
 import org.jill.sha.ShaFile;
+
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
 
 /**
  * Abstract class for BASExxxx background.
@@ -162,8 +163,8 @@ public abstract class AbstractBaseBackgroundEntity<T extends BaseTreeWaterConfig
         originalImages = new BufferedImage[config.getNumberTileSet()];
 
         for (int index = 0; index < originalImages.length; index++) {
-            final Optional<BufferedImage> currentPicture = getPicture(backParameter.getShaFile(), tileSetIndex,
-                    tileIndex+ index, screen);
+            final Optional<BufferedImage> currentPicture = PictureTools.getPicture(backParameter.getShaFile(),
+                    tileSetIndex, tileIndex+ index, screen);
 
             if (currentPicture.isPresent()) {
                 originalImages[index] = currentPicture.get();
@@ -185,7 +186,7 @@ public abstract class AbstractBaseBackgroundEntity<T extends BaseTreeWaterConfig
                     maskCfg.isLeft() == isLeft &&
                     maskCfg.isRight() == isRight &&
                     maskCfg.isTop() == isTop) {
-                mask = getPicture (shaFile, maskCfg.getTileset(), maskCfg.getTile(), screen).get();
+                mask = PictureTools.getPicture (shaFile, maskCfg.getTileset(), maskCfg.getTile(), screen).get();
 
                 break;
             }

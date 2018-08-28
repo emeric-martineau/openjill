@@ -1,22 +1,14 @@
 package org.jill.game.level;
 
-import java.awt.BasicStroke;
-import java.awt.Color;
-import java.awt.Graphics2D;
-import java.awt.Rectangle;
-import java.awt.Stroke;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.util.*;
-
+import org.jill.dma.DmaEntry;
 import org.jill.game.gui.menu.ClassicMenu;
 import org.jill.game.gui.menu.MenuInterface;
 import org.jill.game.level.cfg.LevelConfiguration;
-import org.jill.game.manager.object.weapon.ObjectMappingWeapon;
 import org.jill.game.screen.ControlArea;
 import org.jill.game.screen.InventoryArea;
 import org.jill.game.screen.conf.RectangleConf;
 import org.jill.jn.BackgroundLayer;
+import org.jill.jn.ObjectItem;
 import org.jill.openjill.core.api.entities.BackgroundEntity;
 import org.jill.openjill.core.api.entities.ObjectEntity;
 import org.jill.openjill.core.api.jill.JillConst;
@@ -26,6 +18,14 @@ import org.jill.openjill.core.api.message.statusbar.inventory.EnumInventoryObjec
 import org.jill.openjill.core.api.message.statusbar.inventory.InventoryItemMessage;
 import org.jill.vcl.VclTextEntry;
 import org.simplegame.InterfaceSimpleGameHandleInterface;
+
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ListIterator;
+import java.util.Optional;
 
 /**
  * This class manage all of execution method of game (run, pause, cheat, key,
@@ -154,9 +154,9 @@ public abstract class AbstractExecutingStdLevel extends AbstractMenuJillLevel {
     private void constructor() {
         keyboardLayout = new KeyboardLayout();
 
-        controlArea = new ControlArea(pictureCache, statusBar);
+        controlArea = new ControlArea(textManager, statusBar);
 
-        inventoryArea = new InventoryArea(pictureCache, statusBar,
+        inventoryArea = new InventoryArea(shaFile, textManager, screenType, statusBar,
                 this.messageDispatcher);
 
         inventoryArea.setLevel(
@@ -429,58 +429,59 @@ public abstract class AbstractExecutingStdLevel extends AbstractMenuJillLevel {
                 lOffsetY - JillConst.getyUpdateScreenBorder());
 
         visibleScreenRect.setLocation(lOffsetX, lOffsetY);
-
-        final ObjectEntity player = getPlayer().get();
-
-        // Set player bounds
-        obj2Rect.setBounds(player.getX(), player.getY(), player.getWidth(),
-                player.getHeight());
-
-        // Grap list of object on screen
-        Iterator<ObjectEntity> itObj = this.listObject.iterator();
-        ObjectEntity obj;
-
-        while (itObj.hasNext()) {
-            obj = itObj.next();
-
-            objRect.setBounds(obj.getX(), obj.getY(), obj.getWidth(),
-                    obj.getHeight());
-
-            if (updateObjectScreenRect.intersects(objRect)) {
-                listObjectCurrentlyDisplayedOnScreen.add(obj);
-            }
-        }
-
-        // Update and object touch
-        itObj = listObjectCurrentlyDisplayedOnScreen.iterator();
-
-        while (itObj.hasNext()) {
-            obj = itObj.next();
-
-            objRect.setBounds(obj.getX(), obj.getY(), obj.getWidth(),
-                    obj.getHeight());
-
-            if (obj.isRemoveOutOfVisibleScreen()
-                    && !visibleScreenRect.intersects(objRect)) {
-                listObjectToRemove.add(obj);
-
-                itObj.remove();
-            } else {
-                checkUpdatedObjectCollision(obj);
-            }
-        }
-
-        // Reset last object. Check if need redraw inventory for backcolor.
+// TODO new architecture
+//
+//        final ObjectEntity player = getPlayer().get();
+//
+//        // Set player bounds
+//        obj2Rect.setBounds(player.getX(), player.getY(), player.getWidth(),
+//                player.getHeight());
+//
+//        // Grap list of object on screen
+//        Iterator<ObjectEntity> itObj = this.listObject.iterator();
+//        ObjectEntity obj;
+//
+//        while (itObj.hasNext()) {
+//            obj = itObj.next();
+//
+//            objRect.setBounds(obj.getX(), obj.getY(), obj.getWidth(),
+//                    obj.getHeight());
+//
+//            if (updateObjectScreenRect.intersects(objRect)) {
+//                listObjectCurrentlyDisplayedOnScreen.add(obj);
+//            }
+//        }
+//
+//        // Update and object touch
+//        itObj = listObjectCurrentlyDisplayedOnScreen.iterator();
+//
+//        while (itObj.hasNext()) {
+//            obj = itObj.next();
+//
+//            objRect.setBounds(obj.getX(), obj.getY(), obj.getWidth(),
+//                    obj.getHeight());
+//
+//            if (obj.isRemoveOutOfVisibleScreen()
+//                    && !visibleScreenRect.intersects(objRect)) {
+//                listObjectToRemove.add(obj);
+//
+//                itObj.remove();
+//            } else {
+//                checkUpdatedObjectCollision(obj);
+//            }
+//        }
+//
+//        // Reset last object. Check if need redraw inventory for backcolor.
         this.updateInventoryScreen = this.inventoryArea.isNeedRedraw()
                 || this.updateInventoryScreen;
-
-        listObjectCurrentlyDisplayedOnScreen.clear();
-
-        // Remove object from list
-        for (ObjectEntity obj1 : listObjectToRemove) {
-            listObject.remove(obj1);
-            listObjectToDraw.remove(obj1);
-        }
+//
+//        listObjectCurrentlyDisplayedOnScreen.clear();
+//
+//        // Remove object from list
+//        for (ObjectEntity obj1 : listObjectToRemove) {
+//            listObject.remove(obj1);
+//            listObjectToDraw.remove(obj1);
+//        }
 
         listObjectToRemove.clear();
 
@@ -495,34 +496,34 @@ public abstract class AbstractExecutingStdLevel extends AbstractMenuJillLevel {
      *
      * @param obj current object
      */
-    private void checkUpdatedObjectCollision(final ObjectEntity obj) {
+    private void checkUpdatedObjectCollision(final ObjectItem obj) {
         int zaphold;
         // Decreate touch player flag
         zaphold = obj.getZapHold();
         if (zaphold > 0) {
             obj.setZapHold(zaphold - 1);
         }
-
-        if (this.updateObject) {
-            obj.msgUpdate(this.keyboardLayout);
-        }
-
-        listObjectToDraw.add(obj);
-
-        for (ObjectEntity obj2 : listObjectCurrentlyDisplayedOnScreen) {
-            obj2Rect.setBounds(obj2.getX(), obj2.getY(),
-                    obj2.getWidth(), obj2.getHeight());
-
-            // Check object collision.
-            // Skip if same object
-            // Skip if obj1 is player because, msgKeyboard call after and
-            // if don't skip when object collision state of player update
-            // twice
-            if (obj != obj2
-                    && obj2Rect.intersects(objRect)) {
-                obj.msgTouch(obj2, this.keyboardLayout);
-            }
-        }
+// TODO new architecture
+//        if (this.updateObject) {
+//            obj.msgUpdate(this.keyboardLayout);
+//        }
+//
+//        listObjectToDraw.add(obj);
+//
+//        for (ObjectEntity obj2 : listObjectCurrentlyDisplayedOnScreen) {
+//            obj2Rect.setBounds(obj2.getX(), obj2.getY(),
+//                    obj2.getWidth(), obj2.getHeight());
+//
+//            // Check object collision.
+//            // Skip if same object
+//            // Skip if obj1 is player because, msgKeyboard call after and
+//            // if don't skip when object collision state of player update
+//            // twice
+//            if (obj != obj2
+//                    && obj2Rect.intersects(objRect)) {
+//                obj.msgTouch(obj2, this.keyboardLayout);
+//            }
+//        }
     }
 
     /**
@@ -544,22 +545,40 @@ public abstract class AbstractExecutingStdLevel extends AbstractMenuJillLevel {
         final int endY = Math.min(startY + screenHeightBlock,
                 BackgroundLayer.MAP_HEIGHT);
 
-        BackgroundEntity back;
+        // Background manager
+        BackgroundEntity bckManager;
 
+        // Map code
+        int mapCode;
+        // Tile picture
         BufferedImage tilePicture;
+        // Dma entry
+        Optional<DmaEntry> dmaEntry;
+        DmaEntry de;
 
-        for (int indexBackX = startX; indexBackX < endX; indexBackX++) {
-            for (int indexBackY = startY; indexBackY < endY; indexBackY++) {
-                back = backgroundObject[indexBackX][indexBackY];
+        for (int indexX = startX; indexX < endX; indexX++) {
+            for (int indexY = startY; indexY < endY; indexY++) {
+                mapCode = backgroundObject.getMapCode(indexX, indexY);
+                dmaEntry = dmaFile.getDmaEntry(mapCode);
 
-                if (back.isMsgUpdate()) {
-                    back.msgUpdate();
-                    tilePicture = back.getPicture();
-
-                    g2Background.drawImage(tilePicture,
-                            indexBackX * blockSize,
-                            indexBackY * blockSize, null);
+                if (dmaEntry.isPresent()) {
+                    de = dmaEntry.get();
+                } else {
+                    // Stange bug in map !
+                    de = dmaFile.getDmaEntry(0).get();
                 }
+
+                bckManager = bckManagerCache.getManager(de.getName());
+
+                if (de.isMsgUpdate()) {
+                    bckManager.msgUpdate(backgroundObject, indexX, indexY);
+                }
+
+                tilePicture = bckManager.getPicture(indexX, indexY);
+
+                g2Background.drawImage(tilePicture,
+                        indexX * JillConst.getBlockSize(),
+                        indexY * JillConst.getBlockSize(), null);
             }
         }
     }
@@ -569,10 +588,11 @@ public abstract class AbstractExecutingStdLevel extends AbstractMenuJillLevel {
      * Start draw by last object.
      */
     private void drawObject() {
-        for (ObjectEntity currentObject : listObjectAlwaysOnScreen) {
-            g2DrawingScreen.drawImage(currentObject.msgDraw().get(),
-                    currentObject.getX(), currentObject.getY(), null);
-        }
+// TODO new architecture
+//        for (ObjectEntity currentObject : listObjectAlwaysOnScreen) {
+//            g2DrawingScreen.drawImage(currentObject.msgDraw().get(),
+//                    currentObject.getX(), currentObject.getY(), null);
+//        }
 
         ListIterator<ObjectEntity> itDraw
                 = listObjectToDraw.listIterator(listObjectToDraw.size());
@@ -582,21 +602,21 @@ public abstract class AbstractExecutingStdLevel extends AbstractMenuJillLevel {
                 = this.statusBar.getGameAreaConf().getOffset();
         final int specialScreenShift = this.statusBar.getGameAreaConf()
                 .getSpecialScreenShift();
-
-        while (itDraw.hasPrevious()) {
-            currentObject = itDraw.previous();
-
-            if (this.showInvisible && !currentObject.msgDraw().isPresent()) {
-                drawDashedRectFilled(g2DrawingScreen, currentObject, offset);
-            } else if (currentObject.msgDraw().isPresent()) {
-                g2DrawingScreen.drawImage(currentObject.msgDraw().get(),
-                        currentObject.getX()
-                                + offset.getX(),
-                        currentObject.getY()
-                                + offset.getY() - specialScreenShift,
-                        null);
-            }
-        }
+// TODO new architecture
+//        while (itDraw.hasPrevious()) {
+//            currentObject = itDraw.previous();
+//
+//            if (this.showInvisible && !currentObject.msgDraw().isPresent()) {
+//                drawDashedRectFilled(g2DrawingScreen, currentObject, offset);
+//            } else if (currentObject.msgDraw().isPresent()) {
+//                g2DrawingScreen.drawImage(currentObject.msgDraw().get(),
+//                        currentObject.getX()
+//                                + offset.getX(),
+//                        currentObject.getY()
+//                                + offset.getY() - specialScreenShift,
+//                        null);
+//            }
+//        }
 
         // NOTE : Disable in 0.0.28 cause, new collision method do this
         //g2DrawingScreen.drawImage(player.msgDraw(), player.getX() + offsetX,
@@ -613,7 +633,7 @@ public abstract class AbstractExecutingStdLevel extends AbstractMenuJillLevel {
      * @param offset offset
      */
     private void drawDashedRectFilled(final Graphics2D g2,
-            final ObjectEntity object, final RectangleConf offset) {
+            final ObjectItem object, final RectangleConf offset) {
         final int specialScreenShift = this.statusBar.getGameAreaConf()
                 .getSpecialScreenShift();
 
@@ -636,7 +656,8 @@ public abstract class AbstractExecutingStdLevel extends AbstractMenuJillLevel {
 
     @Override
     protected void initMenu() {
-        this.menuStd = new ClassicMenu("exit_menu.json", pictureCache);
+        this.menuStd = new ClassicMenu(shaFile, screenType,"exit_menu.json", textManager,
+                defaultBackgroundColor);
         this.menu = menuStd;
     }
 
@@ -691,31 +712,32 @@ public abstract class AbstractExecutingStdLevel extends AbstractMenuJillLevel {
 
                 break;
             case CHANGE_PLAYER_CHARACTER:
-                // Get weapon
-                final Map<String, ObjectMappingWeapon> mapWeapon
-                        = this.objectCache.getMapOfWeapon();
-
-                final List<EnumInventoryObject> inventory
-                        = this.inventoryArea.getObjects();
-                final ListIterator<EnumInventoryObject> invIt
-                        = inventory.listIterator(inventory.size());
-
-                EnumInventoryObject currentInventoryItem;
-                ObjectMappingWeapon currentWeapon;
-
-                while (invIt.hasPrevious()) {
-                    currentInventoryItem = invIt.previous();
-                    currentWeapon = mapWeapon.get(
-                            currentInventoryItem.toString());
-
-                    if (currentWeapon != null) {
-                        this.controlArea.recieveMessage(
-                                EnumMessageType.INVENTORY_ITEM,
-                                new InventoryItemMessage(
-                                        currentInventoryItem, false));
-                    }
-                }
-
+// TODO new architecture
+//                // Get weapon
+//                final Map<String, ObjectMappingWeapon> mapWeapon
+//                        = this.objectCache.getMapOfWeapon();
+//
+//                final List<EnumInventoryObject> inventory
+//                        = this.inventoryArea.getObjects();
+//                final ListIterator<EnumInventoryObject> invIt
+//                        = inventory.listIterator(inventory.size());
+//
+//                EnumInventoryObject currentInventoryItem;
+//                ObjectMappingWeapon currentWeapon;
+//
+//                while (invIt.hasPrevious()) {
+//                    currentInventoryItem = invIt.previous();
+//                    currentWeapon = mapWeapon.get(
+//                            currentInventoryItem.toString());
+//
+//                    if (currentWeapon != null) {
+//                        this.controlArea.recieveMessage(
+//                                EnumMessageType.INVENTORY_ITEM,
+//                                new InventoryItemMessage(
+//                                        currentInventoryItem, false));
+//                    }
+//                }
+//
                 this.updateInventoryScreen = true;
                 break;
         }

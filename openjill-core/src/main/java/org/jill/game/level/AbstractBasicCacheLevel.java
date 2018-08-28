@@ -1,15 +1,16 @@
 package org.jill.game.level;
 
-import java.io.File;
-import java.io.IOException;
-
 import org.jill.cfg.CfgFile;
 import org.jill.dma.DmaFile;
 import org.jill.game.config.ObjectInstanceFactory;
 import org.jill.game.level.cfg.LevelConfiguration;
 import org.jill.jn.JnFile;
-import org.jill.openjill.core.api.manager.TileManager;
+import org.jill.sha.ShaFile;
 import org.jill.vcl.VclFile;
+
+import java.awt.*;
+import java.io.File;
+import java.io.IOException;
 
 /**
  * This class contains basic method for cache file to not reload between level
@@ -29,6 +30,11 @@ public class AbstractBasicCacheLevel {
     protected DmaFile dmaFile = null;
 
     /**
+     * Sha file content.
+     */
+    protected ShaFile shaFile = null;
+
+    /**
      * Level file.
      */
     protected JnFile jnFile = null;
@@ -44,14 +50,14 @@ public class AbstractBasicCacheLevel {
     protected CfgFile cfgFile = null;
 
     /**
-     * Picture cache.
-     */
-    protected TileManager pictureCache;
-
-    /**
      * Name of file JN.
      */
     private String jnFileNameCache;
+
+    /**
+     * Default background color.
+     */
+    protected Color defaultBackgroundColor;
 
     /**
      * Return JN file if cached.

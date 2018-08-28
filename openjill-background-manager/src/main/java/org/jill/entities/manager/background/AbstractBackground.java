@@ -3,23 +3,22 @@ package org.jill.entities.manager.background;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.jill.dma.DmaEntry;
 import org.jill.jn.BackgroundLayer;
+import org.jill.jn.ObjectItem;
 import org.jill.openjill.core.api.entities.BackgroundEntity;
-import org.jill.openjill.core.api.entities.ObjectEntity;
-import org.jill.openjill.core.api.screen.EnumScreenType;
-import org.jill.sha.ShaFile;
-import org.jill.sha.ShaTile;
-import org.jill.sha.ShaTileSet;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Optional;
 import java.util.logging.Level;
-
-import static com.sun.xml.internal.ws.spi.db.BindingContextFactory.LOGGER;
+import java.util.logging.Logger;
 
 public abstract class AbstractBackground implements BackgroundEntity {
+    /**
+     * Logger.
+     */
+    private static final Logger LOGGER = Logger.getLogger(AbstractBackground.class.getName());
+
     /**
      * Picture of background.
      */
@@ -43,47 +42,6 @@ public abstract class AbstractBackground implements BackgroundEntity {
     @Override
     public BufferedImage getPicture(final int x, final int y) {
         return picture;
-    }
-
-    /**
-     * Get picture for current screen configuration.
-     *
-     * @param shaFile the object contain picture
-     * @param tileSet index of tile set
-     * @param tile tile index
-     * @param screen screen configuration
-     *
-     * @return the desired picture.
-     */
-    protected Optional<BufferedImage> getPicture(final ShaFile shaFile, final int tileSet, final int tile,
-                                                final EnumScreenType screen) {
-        final ShaTileSet[] shaTileset = shaFile.getShaTileSet();
-
-        ShaTile[] currentShaTile = null;
-
-        for (ShaTileSet tileset: shaTileset) {
-            if (tileset.getTitleSetIndex() == tileSet) {
-                currentShaTile = tileset.getShaTile();
-
-                 break;
-            }
-        }
-
-        if (tile < currentShaTile.length) {
-            // For background T16, T17, T18, T19, T20, tile are invalid !!!
-            ShaTile currentTile = currentShaTile[tile];
-
-            switch (screen) {
-                case CGA:
-                    return Optional.of(currentTile.getPictureCga());
-                case EGA:
-                    return  Optional.of(currentTile.getPictureEga());
-                default:
-                    return Optional.of(currentTile.getPictureVga());
-            }
-        }
-
-        return Optional.empty();
     }
 
     /**
@@ -181,7 +139,7 @@ public abstract class AbstractBackground implements BackgroundEntity {
     }
 
     @Override
-    public void msgTouch(ObjectEntity obj) {
+    public void msgTouch(ObjectItem obj) {
 
     }
 

@@ -2,6 +2,7 @@ package org.jill.entities.manager.object.apple;
 
 import org.jill.entities.manager.object.AbstractObject;
 import org.jill.entities.manager.object.common.conf.PictureConf;
+import org.jill.openjill.core.api.picture.PictureTools;
 import org.jill.openjill.core.api.entities.BackgroundEntity;
 import org.jill.openjill.core.api.entities.ObjectEntity;
 import org.jill.openjill.core.api.entities.ObjectParam;
@@ -40,7 +41,7 @@ public class AppleManager extends AbstractObject {
         images = new BufferedImage[conf.getPicture().length * 2];
 
         for (PictureConf pict: conf.getPicture()) {
-            this.images[indexPicture] = getPicture(shaFile, pict.getTileset(), pict.getTile(), screen).get();
+            this.images[indexPicture] = PictureTools.getPicture(shaFile, pict.getTileset(), pict.getTile(), screen).get();
             this.images[indexPicture + 1] = this.images[indexPicture];
 
             indexPicture += 2;

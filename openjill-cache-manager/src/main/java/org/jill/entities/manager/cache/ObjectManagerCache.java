@@ -1,7 +1,7 @@
 /*
 
  */
-package org.jill.jn.draw.cache;
+package org.jill.entities.manager.cache;
 
 import org.jill.dma.DmaFile;
 import org.jill.entities.manager.param.ObjectParamImpl;
@@ -53,6 +53,7 @@ public class ObjectManagerCache {
 
             manager = clazz.newInstance();
 
+            // TODO need to be change BackgroundParamImpl like game
             final ObjectParam objParam = new ObjectParamImpl();
 
             objParam.init(null, null, shaFile, dmaFile, null, screen, -1);

@@ -1,31 +1,23 @@
 package org.jill.game.level;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Collections;
-import java.util.List;
-import java.util.Optional;
-import java.util.Properties;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import org.jill.game.config.JillGameConfig;
-import org.jill.game.config.ObjectInstanceFactory;
-import org.jill.game.entities.obj.player.AbstractPlayerManager;
 import org.jill.game.level.cfg.LevelConfiguration;
-import org.jill.game.manager.object.weapon.ObjectMappingWeapon;
 import org.jill.game.screen.conf.GameAreaBorderConf;
 import org.jill.game.screen.conf.GameAreaConf;
 import org.jill.game.screen.conf.RectangleConf;
 import org.jill.jn.ObjectItem;
-import org.jill.openjill.core.api.entities.ObjectEntity;
-import org.jill.openjill.core.api.entities.ObjectParam;
 import org.jill.openjill.core.api.jill.JillConst;
 import org.jill.openjill.core.api.message.EnumMessageType;
 import org.jill.openjill.core.api.message.statusbar.StatusBarTextMessage;
 import org.jill.openjill.core.api.message.statusbar.inventory.EnumInventoryObject;
-import org.jill.openjill.core.api.message.statusbar.inventory.InventoryItemMessage;
 import org.simplegame.SimpleGameConfig;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.List;
+import java.util.Properties;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Abstract class of level of Jill trilogy.
@@ -99,10 +91,10 @@ public abstract class AbstractExecutingStdPlayerLevel
                 getPlayerMoveScreenType();
 
         initCenterScreen();
-
-        this.messageDispatcher.sendMessage(
-                EnumMessageType.CHANGE_PLAYER_CHARACTER,
-                this.objectCache.getInvetoryName(getPlayer().get().getClass()));
+// TODO new architecture
+//        this.messageDispatcher.sendMessage(
+//                EnumMessageType.CHANGE_PLAYER_CHARACTER,
+//                this.objectCache.getInvetoryName(getPlayer().get().getClass()));
     }
 
     /**
@@ -129,7 +121,7 @@ public abstract class AbstractExecutingStdPlayerLevel
                 = gameScreen.getOffset();
         final RectangleConf gameLevelStart = gameScreen.getLevelStart();
 
-        final ObjectEntity player = getPlayer().get();
+        final ObjectItem player = getPlayer().get();
 
         // init center screen
         int offsetX = Math.max(
@@ -190,7 +182,7 @@ public abstract class AbstractExecutingStdPlayerLevel
 
         keyboardLayout.clear();
 
-        final ObjectEntity player = getPlayer().get();
+        final ObjectItem player = getPlayer().get();
 
         // Send msgTouch to background
         final int playerX = player.getX();
@@ -205,11 +197,12 @@ public abstract class AbstractExecutingStdPlayerLevel
         final int startBlockY = playerY / blockSize;
         final int endBlockY = (playerY + playerHeight) / blockSize;
 
-        for (int indexX = startBlockX; indexX < endBlockX; indexX++) {
-            for (int indexY = startBlockY; indexY < endBlockY; indexY++) {
-                this.backgroundObject[indexX][indexY].msgTouch(player);
-            }
-        }
+// TODO new architecture
+//        for (int indexX = startBlockX; indexX < endBlockX; indexX++) {
+//            for (int indexY = startBlockY; indexY < endBlockY; indexY++) {
+//                this.backgroundObject[indexX][indexY].msgTouch(player);
+//            }
+//        }
 
     }
 
@@ -217,7 +210,7 @@ public abstract class AbstractExecutingStdPlayerLevel
      * Compute the special offset of screen when player no move and up/down.
      */
     private void computeMoveScreen() {
-        final ObjectEntity player = getPlayer().get();
+        final ObjectItem player = getPlayer().get();
 
         int ySpeed = player.getySpeed();
 
@@ -247,7 +240,7 @@ public abstract class AbstractExecutingStdPlayerLevel
      * Center screen with player position.
      */
     protected void centerScreen() {
-        final ObjectEntity player = getPlayer().get();
+        final ObjectItem player = getPlayer().get();
 
         final GameAreaConf gameScreen = this.statusBar.getGameAreaConf();
         final GameAreaBorderConf border = gameScreen.getBorder();
@@ -287,44 +280,45 @@ public abstract class AbstractExecutingStdPlayerLevel
 
     @Override
     protected final void doPlayerFire() {
-        final ObjectEntity player = getPlayer().get();
-
-        // Check if player can fire !
-        if (player.canFire()) {
-            // Get inventory
-            final List<EnumInventoryObject> listInv =
-                    this.inventoryArea.getObjects();
-
-            // Get weapon
-            final ObjectMappingWeapon[] weaponsList =
-                    this.objectCache.getTypeOfInventoryWeapon();
-
-            // Current weapon
-            ObjectMappingWeapon currentWeapon;
-            // Current inventory
-            EnumInventoryObject currentInventory;
-
-            // Search weapon from end to start
-            for (int indexWeapon = weaponsList.length - 1; indexWeapon >= 0;
-                 indexWeapon--) {
-                currentWeapon = weaponsList[indexWeapon];
-
-                currentInventory = EnumInventoryObject.valueOf(
-                        currentWeapon.getInventoryKey());
-
-                // Check if weapon found in inventory
-                if (listInv.contains(currentInventory)) {
-                    // Weapon is in inventory
-                    // Cheack if can fire with this weapon
-                    if (checkWeapon(listInv, currentInventory, currentWeapon)) {
-                        createWeapon(currentWeapon.getType(),
-                                currentInventory, currentWeapon);
-
-                        break;
-                    }
-                }
-            }
-        }
+// TODO new architecture
+//        final ObjectItem player = getPlayer().get();
+//
+//        // Check if player can fire !
+//        if (player.canFire()) {
+//            // Get inventory
+//            final List<EnumInventoryObject> listInv =
+//                    this.inventoryArea.getObjects();
+//
+//            // Get weapon
+//            final ObjectMappingWeapon[] weaponsList =
+//                    this.objectCache.getTypeOfInventoryWeapon();
+//
+//            // Current weapon
+//            ObjectMappingWeapon currentWeapon;
+//            // Current inventory
+//            EnumInventoryObject currentInventory;
+//
+//            // Search weapon from end to start
+//            for (int indexWeapon = weaponsList.length - 1; indexWeapon >= 0;
+//                 indexWeapon--) {
+//                currentWeapon = weaponsList[indexWeapon];
+//
+//                currentInventory = EnumInventoryObject.valueOf(
+//                        currentWeapon.getInventoryKey());
+//
+//                // Check if weapon found in inventory
+//                if (listInv.contains(currentInventory)) {
+//                    // Weapon is in inventory
+//                    // Cheack if can fire with this weapon
+//                    if (checkWeapon(listInv, currentInventory, currentWeapon)) {
+//                        createWeapon(currentWeapon.getType(),
+//                                currentInventory, currentWeapon);
+//
+//                        break;
+//                    }
+//                }
+//            }
+//        }
     }
 
     /**
@@ -338,43 +332,45 @@ public abstract class AbstractExecutingStdPlayerLevel
     private boolean checkWeapon(
             final List<EnumInventoryObject> listInv,
             final EnumInventoryObject currentInventory,
-            final ObjectMappingWeapon currentWeapon) {
+            final Object currentWeapon) {
+// TODO new architecture
+//        boolean canFireThisWeapon;
+//
+//        if (getPlayer().get().getInfo1()
+//                == ObjectEntity.X_SPEED_MIDDLE) {
+//            canFireThisWeapon = false;
+//        } else {
+//            // Check if last objet to clear ALT text
+//            final int nbInvWeaponIteam = Collections.frequency(listInv,
+//                    currentInventory);
+//            final int nbItemPetInv = currentWeapon.getNumberItemPerInventory();
+//
+//            if (nbItemPetInv == -1) {
+//                canFireThisWeapon = true;
+//            } else {
+//                // Nb object match for weapon item
+//                int nbObjWeaponItem = 0;
+//
+//                // If remove inventory, don't compute
+//                if (!currentWeapon.isRemoveInInventory()) {
+//                    for (ObjectItem currentObj : this.listObject) {
+//                        if (currentObj.getType() == currentWeapon.getType()) {
+//                            nbObjWeaponItem++;
+//                        }
+//                    }
+//                }
+//
+//                final int nbMaxObj = nbInvWeaponIteam
+//                        * nbItemPetInv;
+//
+//                canFireThisWeapon = (currentWeapon.isRemoveInInventory()
+//                        || nbMaxObj > nbObjWeaponItem);
+//            }
+//        }
+//
+//        return canFireThisWeapon;
 
-        boolean canFireThisWeapon;
-
-        if (getPlayer().get().getInfo1()
-                == AbstractPlayerManager.X_SPEED_MIDDLE) {
-            canFireThisWeapon = false;
-        } else {
-            // Check if last objet to clear ALT text
-            final int nbInvWeaponIteam = Collections.frequency(listInv,
-                    currentInventory);
-            final int nbItemPetInv = currentWeapon.getNumberItemPerInventory();
-
-            if (nbItemPetInv == -1) {
-                canFireThisWeapon = true;
-            } else {
-                // Nb object match for weapon item
-                int nbObjWeaponItem = 0;
-
-                // If remove inventory, don't compute
-                if (!currentWeapon.isRemoveInInventory()) {
-                    for (ObjectEntity currentObj : this.listObject) {
-                        if (currentObj.getType() == currentWeapon.getType()) {
-                            nbObjWeaponItem++;
-                        }
-                    }
-                }
-
-                final int nbMaxObj = nbInvWeaponIteam
-                        * nbItemPetInv;
-
-                canFireThisWeapon = (currentWeapon.isRemoveInInventory()
-                        || nbMaxObj > nbObjWeaponItem);
-            }
-        }
-
-        return canFireThisWeapon;
+        return true;
     }
 
     /**
@@ -386,43 +382,47 @@ public abstract class AbstractExecutingStdPlayerLevel
      */
     private void createWeapon(final int typeWeapon,
             final EnumInventoryObject currentInventory,
-            final ObjectMappingWeapon currentWeapon) {
+            final Object currentWeapon) {
 
         // TODO Alt key text need update by inventory cause, if blade remove,
         // next weapon is display.
-
-        if (currentWeapon.isRemoveInInventory()) {
-            // Remove object in inventory list
-            this.messageDispatcher.sendMessage(
-                    EnumMessageType.INVENTORY_ITEM,
-                    new InventoryItemMessage(currentInventory, false,
-                            currentWeapon.isRemoveInInventory(), false));
-        }
-
-        // Object parameter
-        final ObjectParam objParam = ObjectInstanceFactory.getNewObjParam();
-        objParam.init(this.backgroundObject,
-                this.pictureCache, this.messageDispatcher,
-                this.levelConfiguration.getLevelNumber());
-
-        final ObjectItem weapon = ObjectInstanceFactory.getNewObjectItem();
-
-        weapon.setType(typeWeapon);
-
-        objParam.setObject(weapon);
-
-        final ObjectEntity player = getPlayer().get();
-
-        weapon.setX(player.getX());
-        weapon.setY(player.getY());
-        weapon.setInfo1(player.getInfo1());
-
-        // Get jill object
-        final Optional<ObjectEntity> cacheObject = this.objectCache.getNewObject(objParam);
-
-        // Add object in list
-        if (cacheObject.isPresent()) {
-            this.listObject.add(cacheObject.get());
-        }
+// TODO new architecture
+//        if (currentWeapon.isRemoveInInventory()) {
+//            // Remove object in inventory list
+//            this.messageDispatcher.sendMessage(
+//                    EnumMessageType.INVENTORY_ITEM,
+//                    new InventoryItemMessage(currentInventory, false,
+//                            currentWeapon.isRemoveInInventory(), false));
+//        }
+// TODO new architecture
+//
+//        // Object parameter
+//        final ObjectParam objParam = ObjectInstanceFactory.getNewObjParam();
+//        objParam.init(this.backgroundObject,
+//                this.pictureCache, this.messageDispatcher,
+//                this.levelConfiguration.getLevelNumber());
+//
+//        BackgroundLayer background, MessageDispatcher messageDispatcherManager, ShaFile shaFile, DmaFile dmaFile,
+//                ObjectItem object, EnumScreenType screen, int levelNumber
+//
+//        final ObjectItem weapon = ObjectInstanceFactory.getNewObjectItem();
+//
+//        weapon.setType(typeWeapon);
+//
+//        objParam.setObject(weapon);
+//
+//        final ObjectItem player = getPlayer().get();
+//
+//        weapon.setX(player.getX());
+//        weapon.setY(player.getY());
+//        weapon.setInfo1(player.getInfo1());
+//
+//        // Get jill object
+//        final Optional<ObjectEntity> cacheObject = this.objectCache.getNewObject(objParam);
+//
+//        // Add object in list
+//        if (cacheObject.isPresent()) {
+//            this.listObject.add(cacheObject.get());
+//        }
     }
 }

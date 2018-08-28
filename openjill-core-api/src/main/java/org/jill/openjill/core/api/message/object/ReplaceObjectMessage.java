@@ -1,5 +1,6 @@
 package org.jill.openjill.core.api.message.object;
 
+import org.jill.jn.ObjectItem;
 import org.jill.openjill.core.api.entities.ObjectEntity;
 
 /**
@@ -11,13 +12,13 @@ public final class ReplaceObjectMessage {
     /**
      * Object to add/remove.
      */
-    private final ObjectEntity objectOrigin;
+    private final ObjectItem objectOrigin;
 
 
     /**
      * Object to add/remove.
      */
-    private final ObjectEntity objectNew;
+    private final ObjectItem objectNew;
 
     /**
      * Constructor.
@@ -25,17 +26,17 @@ public final class ReplaceObjectMessage {
      * @param objectOrigin object to replace
      * @param objectNew    new object
      */
-    public ReplaceObjectMessage(final ObjectEntity objectOrigin,
-            final ObjectEntity objectNew) {
+    public ReplaceObjectMessage(final ObjectItem objectOrigin,
+            final ObjectItem objectNew) {
         this.objectOrigin = objectOrigin;
         this.objectNew = objectNew;
     }
 
-    public ObjectEntity getObjectOrigin() {
+    public ObjectItem getObjectOrigin() {
         return objectOrigin;
     }
 
-    public ObjectEntity getObjectNew() {
+    public ObjectItem getObjectNew() {
         return objectNew;
     }
 }

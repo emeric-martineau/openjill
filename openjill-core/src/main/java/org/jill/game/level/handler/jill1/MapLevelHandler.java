@@ -3,7 +3,7 @@ package org.jill.game.level.handler.jill1;
 import java.io.IOException;
 import java.util.Optional;
 
-import org.jill.game.entities.obj.player.PlayerState;
+import org.jill.entities.manager.object.player.PlayerState;
 import org.jill.game.level.cfg.JillLevelConfiguration;
 import org.jill.game.level.handler.LoadNewLevelHandler;
 import org.jill.jn.SaveData;

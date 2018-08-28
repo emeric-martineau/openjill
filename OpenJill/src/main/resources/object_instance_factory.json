@@ -56,12 +56,12 @@
 	},
 	{
 		"interfaceClass":"org.jill.openjill.core.api.entities.BackgroundParam",
-		"implementationClass":"org.jill.game.entities.param.BackgroundParamImpl",
+		"implementationClass":"org.jill.entities.manager.param.BackgroundParamImpl",
 		"singleton":false
 	},
 	{
 		"interfaceClass":"org.jill.openjill.core.api.entities.ObjectParam",
-		"implementationClass":"org.jill.game.entities.param.ObjectParamImpl",
+		"implementationClass":"org.jill.entities.manager.param.ObjectParamImpl",
 		"singleton":false
 	},
 	{

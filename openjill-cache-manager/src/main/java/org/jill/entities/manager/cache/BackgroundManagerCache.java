@@ -1,11 +1,11 @@
 /*
 
  */
-package org.jill.jn.draw.cache;
+package org.jill.entities.manager.cache;
 
 import org.jill.dma.DmaEntry;
 import org.jill.dma.DmaFile;
-import org.jill.entities.param.BackgroundParamImpl;
+import org.jill.entities.manager.param.BackgroundParamImpl;
 import org.jill.openjill.core.api.entities.BackgroundEntity;
 import org.jill.openjill.core.api.entities.BackgroundParam;
 import org.jill.openjill.core.api.screen.EnumScreenType;
@@ -57,6 +57,7 @@ public class BackgroundManagerCache {
 
             manager = clazz.newInstance();
 
+            // TODO need to be change BackgroundParamImpl like game
             final BackgroundParam bckParam = new BackgroundParamImpl();
 
             bckParam.init(shaFile, dmaFile, dmaEntry, screen);

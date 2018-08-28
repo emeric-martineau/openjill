@@ -3,6 +3,7 @@ package org.jill.entities.manager.background;
 import org.jill.dma.DmaEntry;
 import org.jill.dma.DmaFile;
 import org.jill.jn.BackgroundLayer;
+import org.jill.openjill.core.api.picture.PictureTools;
 import org.jill.openjill.core.api.entities.BackgroundParam;
 import org.jill.openjill.core.api.screen.EnumScreenType;
 import org.jill.sha.ShaFile;
@@ -41,7 +42,7 @@ public class DoubleImageCopyRightBackgroundEntity extends AbstractBackground {
         shaFile = backParameter.getShaFile();
         screen = backParameter.getScreen();
 
-        final Optional<BufferedImage> currentPicture = getPicture(backParameter.getShaFile(), dmaEntry.getTileset(),
+        final Optional<BufferedImage> currentPicture = PictureTools.getPicture(backParameter.getShaFile(), dmaEntry.getTileset(),
                 dmaEntry.getTile(), backParameter.getScreen());
 
         if (currentPicture.isPresent()) {
@@ -61,7 +62,8 @@ public class DoubleImageCopyRightBackgroundEntity extends AbstractBackground {
 
         final DmaEntry nearDma = dmaFile.getDmaEntry(mapCode).get();
 
-        final BufferedImage backPicture = getPicture(shaFile, nearDma.getTileset(), nearDma.getTile(), screen).get();
+        final BufferedImage backPicture = PictureTools.getPicture(shaFile, nearDma.getTileset(), nearDma.getTile(),
+                screen).get();
 
         int width = picture.getWidth();
         int height = picture.getHeight();

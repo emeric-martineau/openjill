@@ -1,16 +1,15 @@
 package org.jill.game.manager.tile;
 
-import java.awt.Color;
-import java.awt.Graphics2D;
+import org.jill.openjill.core.api.manager.TextManager;
+import org.jill.openjill.core.api.screen.EnumScreenType;
+import org.jill.sha.ShaFile;
+import org.jill.sha.ShaTile;
+import org.jill.sha.ShaTileSet;
+
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.HashMap;
 import java.util.Map;
-
-import org.jill.game.config.ObjectInstanceFactory;
-import org.jill.openjill.core.api.manager.TextManager;
-import org.jill.openjill.core.api.screen.EnumScreenType;
-import org.jill.sha.ColorMap;
-import org.jill.sha.ShaTile;
 
 /**
  * Class to create text on screen.
@@ -22,53 +21,47 @@ public class TextManagerImpl implements TextManager {
      * Background color index.
      */
     private static final int BACKGROUND_COLOR_INDEX = 3;
+
     /**
      * Foreground color index.
      */
     private static final int FOREGROUND_COLOR_INDEX1 = 1;
+
     /**
      * Foreground color index.
      */
     private static final int FOREGROUND_COLOR_INDEX2 = 2;
+
     /**
      * Small letter.
      */
     private static final int SMALL_LETTER_TILESET = 2;
+
     /**
      * Big letter.
      */
     private static final int BIG_LETTER_TILESET = 1;
+
     /**
      * Special letter.
      */
     private static final int SPECIAL_LETTER_TILESET = 6;
+
     /**
      * Small number.
      */
     private static final int SMALL_NUMBER_TILESET = 4;
+
     /**
      * Maximum color for draw letter.
      */
     private static final int MAX_LETTER_COLOR = 4;
+
     /**
      * To divide number for draw it.
      */
     private static final int DIVISOR_NUMBER_TO_DRAW = 10;
-    /**
-     * Color map.
-     */
-    private final ColorMap vgaColorMap
-            = ObjectInstanceFactory.getVgaColor();
-    /**
-     * Color map.
-     */
-    private final ColorMap egaColorMap
-            = ObjectInstanceFactory.getEgaColor();
-    /**
-     * Color map.
-     */
-    private final ColorMap cgaColorMap
-            = ObjectInstanceFactory.getCgaColor();
+
     /**
      * Tile to draw big text.
      */
@@ -109,34 +102,47 @@ public class TextManagerImpl implements TextManager {
     /**
      * Constructor.
      *
-     * @param mapOfTile map of tile
+     * @param shaFile sha file
+     * @param colorMap color map
      * @param tpScreen  type of screen
      */
     @Override
-    public void init(final Map<Integer, ShaTile[]> mapOfTile,
-            final EnumScreenType tpScreen) {
+    public void init(final ShaFile shaFile, final Color[] colorMap,
+                     final EnumScreenType tpScreen) {
         this.typeScreen = tpScreen;
+        this.colorMap = colorMap;
 
         // Small text is tileset 2
-        smallText = mapOfTile.get(SMALL_LETTER_TILESET);
+        smallText = find(SMALL_LETTER_TILESET, shaFile);
 
         // Big text is tileset 1
-        bigText = mapOfTile.get(BIG_LETTER_TILESET);
+        bigText = find(BIG_LETTER_TILESET, shaFile);
 
         // Specaial key like shift...
-        specialKey = mapOfTile.get(SPECIAL_LETTER_TILESET);
+        specialKey = find(SPECIAL_LETTER_TILESET, shaFile);
 
         // Small number for higscore
-        smallNumber = mapOfTile.get(SMALL_NUMBER_TILESET);
+        smallNumber = find(SMALL_NUMBER_TILESET, shaFile);
+    }
 
-        // Grap color map
-        if (tpScreen == EnumScreenType.VGA) {
-            colorMap = vgaColorMap.getColorMap();
-        } else if (tpScreen == EnumScreenType.EGA) {
-            colorMap = egaColorMap.getColorMap();
-        } else if (tpScreen == EnumScreenType.CGA) {
-            colorMap = cgaColorMap.getColorMap();
+    /**
+     * Find shatileset.
+     *
+     * @param tileSetIndex index
+     * @param shaFile sha file
+     *
+     * @return array of sha tile
+     */
+    private static ShaTile[] find(final int tileSetIndex, final ShaFile shaFile) {
+        final ShaTileSet[] shaTileset = shaFile.getShaTileSet();
+
+        for (ShaTileSet tileset: shaTileset) {
+            if (tileset.getTitleSetIndex() == tileSetIndex) {
+                return tileset.getShaTile();
+            }
         }
+
+        return new ShaTile[0];
     }
 
     /**
@@ -532,5 +538,13 @@ public class TextManagerImpl implements TextManager {
         final Color[] textColor = initColorTextMap(foreColor, backColor);
 
         return specialKey[key].getFont(textColor);
+    }
+
+    /**
+     * @return colorMap
+     */
+    @Override
+    public Color[] getColorMap() {
+        return colorMap;
     }
 }

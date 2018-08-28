@@ -1,10 +1,14 @@
 package org.jill.game.gui.menu;
 
-import java.awt.image.BufferedImage;
-
 import org.jill.game.gui.menu.conf.MenuConf;
 import org.jill.game.screen.conf.PictureConf;
-import org.jill.openjill.core.api.manager.TileManager;
+import org.jill.openjill.core.api.manager.TextManager;
+import org.jill.openjill.core.api.picture.PictureTools;
+import org.jill.openjill.core.api.screen.EnumScreenType;
+import org.jill.sha.ShaFile;
+
+import java.awt.*;
+import java.awt.image.BufferedImage;
 
 /**
  * Classic menu game (start menu, exit menu...).
@@ -16,12 +20,15 @@ public final class ClassicMenu extends AbstractStdMenu {
      * Constructor.
      *
      * @param configFilename config file
-     * @param pictureCache   cache of picture
+     * @param textManager   cache of picture
      */
     public ClassicMenu(
+            final ShaFile shaFile,
+            final EnumScreenType screen,
             final String configFilename,
-            final TileManager pictureCache) {
-        super(pictureCache);
+            final TextManager textManager,
+            final Color backgroundColor) {
+        super(textManager);
 
         final MenuConf conf = readConf(configFilename);
 
@@ -35,33 +42,33 @@ public final class ClassicMenu extends AbstractStdMenu {
 
         setNbSpaceBefore(conf.getNbSpaceBefore());
 
-        setRightUpperCorner(getImage(pictureCache, conf.getRightUpperCorner()));
-        setLeftUpperCorner(getImage(pictureCache, conf.getLeftUpperCorner()));
+        setRightUpperCorner(getImage(shaFile, screen, conf.getRightUpperCorner()));
+        setLeftUpperCorner(getImage(shaFile, screen, conf.getLeftUpperCorner()));
 
-        setRightLowerCorner(getImage(pictureCache, conf.getRightLowerCorner()));
-        setLeftLowerCorner(getImage(pictureCache, conf.getLeftLowerCorner()));
+        setRightLowerCorner(getImage(shaFile, screen, conf.getRightLowerCorner()));
+        setLeftLowerCorner(getImage(shaFile, screen, conf.getLeftLowerCorner()));
 
-        setUpperBar(getImage(pictureCache, conf.getUpperBar()));
-        setLowerBar(getImage(pictureCache, conf.getLowerBar()));
+        setUpperBar(getImage(shaFile, screen, conf.getUpperBar()));
+        setLowerBar(getImage(shaFile, screen, conf.getLowerBar()));
 
-        setLeftBar(getImage(pictureCache, conf.getLeftBar()));
-        setRightBar(getImage(pictureCache, conf.getRightBar()));
+        setLeftBar(getImage(shaFile, screen, conf.getLeftBar()));
+        setRightBar(getImage(shaFile, screen, conf.getRightBar()));
 
-        setBackImage(getImage(pictureCache, conf.getBackImage()));
+        setBackImage(getImage(shaFile, screen, conf.getBackImage()));
 
-        createBackground(pictureCache);
+        createBackground(backgroundColor);
     }
 
     /**
      * Get image.
      *
-     * @param pictureCache cache manager
+     * @param shaFile sha file
      * @param conf         configuration
      * @return picture
      */
-    private BufferedImage getImage(final TileManager pictureCache,
+    private BufferedImage getImage(final ShaFile shaFile, final EnumScreenType screen,
             final PictureConf conf) {
-        return pictureCache.getImage(conf.getTileset(), conf.getTile()).get();
+        return PictureTools.getPicture(shaFile, conf.getTileset(), conf.getTile(), screen).get();
     }
 
     /**

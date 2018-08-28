@@ -1,6 +1,7 @@
 package org.jill.openjill.core.api.entities;
 
 import org.jill.jn.BackgroundLayer;
+import org.jill.jn.ObjectItem;
 
 import java.awt.image.BufferedImage;
 
@@ -93,7 +94,7 @@ public interface BackgroundEntity {
      *
      * @param obj player
      */
-    void msgTouch(ObjectEntity obj);
+    void msgTouch(ObjectItem obj);
 
     /**
      * Update in special case.

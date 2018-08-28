@@ -1,21 +1,17 @@
 package org.jill.game.level.handler;
 
-import java.io.IOException;
-import java.util.List;
-import java.util.Optional;
-
-import org.jill.game.config.ObjectInstanceFactory;
-import org.jill.game.entities.obj.player.PlayerState;
+import org.jill.entities.manager.object.player.PlayerState;
 import org.jill.game.level.AbstractChangeLevel;
 import org.jill.game.level.cfg.LevelConfiguration;
 import org.jill.jn.ObjectItem;
 import org.jill.jn.SaveData;
-import org.jill.openjill.core.api.entities.ObjectEntity;
-import org.jill.openjill.core.api.entities.ObjectParam;
 import org.jill.openjill.core.api.message.EnumMessageType;
-import org.jill.openjill.core.api.message.object.ReplaceObjectMessage;
 import org.jill.openjill.core.api.message.statusbar.inventory.EnumInventoryObject;
 import org.jill.openjill.core.api.message.statusbar.inventory.InventoryItemMessage;
+
+import java.io.IOException;
+import java.util.List;
+import java.util.Optional;
 
 /**
  * Class to load a nex level (from map) or restore map.
@@ -61,25 +57,26 @@ public class LoadNewLevelHandler extends AbstractChangeLevel {
 
             //this.inventoryArea.setLife(saveData.getHealth());
         } else {
-            ObjectEntity player = getPlayer().get();
+            ObjectItem player = getPlayer().get();
 
             // New level.
             // In start of map level, don't search check point
             if (level != SaveData.MAP_LEVEL) {
-                final int startObject = this.objectCache.getStartLevelObject();
-
-                if (player.getType() != startObject) {
-                    player = restoreStdPlayerForRestartLevel(startObject,
-                            player);
-                }
+// TODO new architecture
+//                final int startObject = this.objectCache.getStartLevelObject();
+//
+//                if (player.getType() != startObject) {
+//                    player = restoreStdPlayerForRestartLevel(startObject,
+//                            player);
+//                }
 
                 // Search checkpoint to move player on only on new map
                 player.setState(PlayerState.BEGIN);
 
-                final Optional<ObjectEntity> checkPoint = findCheckPoint(level);
+                final Optional<ObjectItem> checkPoint = findCheckPoint(level);
 
                 if (checkPoint.isPresent()) {
-                    final ObjectEntity chkPt = checkPoint.get();
+                    final ObjectItem chkPt = checkPoint.get();
 
                     player.setX(chkPt.getX());
                     player.setY(chkPt.getY() - chkPt.getHeight());
@@ -104,24 +101,26 @@ public class LoadNewLevelHandler extends AbstractChangeLevel {
         drawInventory();
     }
 
-    protected ObjectEntity restoreStdPlayerForRestartLevel(final int startObject, ObjectEntity player) {
+    protected ObjectItem restoreStdPlayerForRestartLevel(final int startObject, ObjectItem player) {
         // Object parameter
-        final ObjectParam objParam
-                = ObjectInstanceFactory.getNewObjParam();
-        objParam.init(this.backgroundObject,
-                this.pictureCache, this.messageDispatcher,
-                this.levelConfiguration.getLevelNumber());
-        final ObjectItem tmpPlayer
-                = ObjectInstanceFactory.getNewObjectItem();
-        tmpPlayer.setType(startObject);
-        objParam.setObject(tmpPlayer);
-
-        final ObjectEntity newPlayer = this.objectCache.getNewObject(objParam).get();
-
-        recieveMessage(EnumMessageType.REPLACE_OBJECT,
-                new ReplaceObjectMessage(player, newPlayer));
-        player = newPlayer;
-        return player;
+// TODO new architecture
+//        final ObjectParam objParam
+//                = ObjectInstanceFactory.getNewObjParam();
+//        objParam.init(this.backgroundObject,
+//                this.pictureCache, this.messageDispatcher,
+//                this.levelConfiguration.getLevelNumber());
+//        final ObjectItem tmpPlayer
+//                = ObjectInstanceFactory.getNewObjectItem();
+//        tmpPlayer.setType(startObject);
+//        objParam.setObject(tmpPlayer);
+//
+//        final ObjectItem newPlayer = this.objectCache.getNewObject(objParam).get();
+//
+//        recieveMessage(EnumMessageType.REPLACE_OBJECT,
+//                new ReplaceObjectMessage(player, newPlayer));
+//        player = newPlayer;
+//        return player;
+        return null;
     }
 
     /**
@@ -153,12 +152,13 @@ public class LoadNewLevelHandler extends AbstractChangeLevel {
      * @param level level number
      * @return checkpoint or null
      */
-    private Optional<ObjectEntity> findCheckPoint(final int level) {
-        for (ObjectEntity obj : this.listObject) {
-            if (obj.isCheckPoint() && obj.getCounter() == level) {
-                return Optional.of(obj);
-            }
-        }
+    private Optional<ObjectItem> findCheckPoint(final int level) {
+// TODO new architecture
+//        for (ObjectItem obj : this.listObject) {
+//            if (obj.isCheckPoint() && obj.getCounter() == level) {
+//                return Optional.of(obj);
+//            }
+//        }
 
         return Optional.empty();
     }

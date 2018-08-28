@@ -1,8 +1,27 @@
 package org.jill.game.level;
 
-import java.awt.Color;
-import java.awt.Graphics2D;
-import java.awt.Rectangle;
+import org.jill.dma.DmaEntry;
+import org.jill.entities.manager.cache.BackgroundManagerCache;
+import org.jill.game.config.JillGameConfig;
+import org.jill.game.config.ObjectInstanceFactory;
+import org.jill.game.level.cfg.JillLevelConfiguration;
+import org.jill.game.level.cfg.LevelConfiguration;
+import org.jill.game.screen.StatusBar;
+import org.jill.jn.BackgroundLayer;
+import org.jill.openjill.core.api.entities.BackgroundEntity;
+import org.jill.openjill.core.api.entities.BackgroundParam;
+import org.jill.openjill.core.api.jill.JillConst;
+import org.jill.openjill.core.api.manager.TextManager;
+import org.jill.openjill.core.api.message.EnumMessageType;
+import org.jill.openjill.core.api.message.InterfaceMessageGameHandler;
+import org.jill.openjill.core.api.message.MessageDispatcher;
+import org.jill.openjill.core.api.message.background.BackgroundMessage;
+import org.jill.openjill.core.api.picture.PictureTools;
+import org.jill.openjill.core.api.screen.EnumScreenType;
+import org.simplegame.InterfaceSimpleGameHandleInterface;
+import org.simplegame.SimpleGameConfig;
+
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -10,26 +29,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import org.jill.dma.DmaEntry;
-import org.jill.file.FileAbstractByte;
-import org.jill.game.config.JillGameConfig;
-import org.jill.game.config.ObjectInstanceFactory;
-import org.jill.game.level.cfg.JillLevelConfiguration;
-import org.jill.game.level.cfg.LevelConfiguration;
-import org.jill.game.manager.background.BackgroundManager;
-import org.jill.game.screen.StatusBar;
-import org.jill.jn.BackgroundLayer;
-import org.jill.openjill.core.api.entities.BackgroundEntity;
-import org.jill.openjill.core.api.entities.BackgroundParam;
-import org.jill.openjill.core.api.jill.JillConst;
-import org.jill.openjill.core.api.message.EnumMessageType;
-import org.jill.openjill.core.api.message.InterfaceMessageGameHandler;
-import org.jill.openjill.core.api.message.MessageDispatcher;
-import org.jill.openjill.core.api.message.background.BackgroundMessage;
-import org.jill.openjill.core.api.screen.EnumScreenType;
-import org.simplegame.InterfaceSimpleGameHandleInterface;
-import org.simplegame.SimpleGameConfig;
 
 /**
  * This class manage all of background, screen, load files and message
@@ -41,50 +40,67 @@ public abstract class AbstractBackgroundJillLevel
         extends AbstractBasicCacheLevel
         implements InterfaceSimpleGameHandleInterface,
         InterfaceMessageGameHandler {
-
     /**
      * Logger.
      */
     private static final Logger LOGGER = Logger.getLogger(
             AbstractBackgroundJillLevel.class.getName());
+
     /**
      * Message dispatcher.
      */
     protected final MessageDispatcher messageDispatcher =
             ObjectInstanceFactory.getNewMsgDispatcher();
+
     /**
      * Background manager.
      */
-    protected final BackgroundManager backgroundManager =
-            BackgroundManager.getInstance();
+    protected BackgroundManagerCache bckManagerCache;
+
     /**
      * Background.
      */
     protected BufferedImage background;
+
     /**
      * Background.
      */
     protected Graphics2D g2Background;
+
     /**
      * Background object.
      */
-    protected BackgroundEntity[][] backgroundObject;
+    protected BackgroundLayer backgroundObject;
+
+    /**
+     * Color map.
+     */
+    protected Color[] colorMap;
+
     /**
      * Status bar.
      */
     protected StatusBar statusBar;
+
     /**
      * Screen type.
      */
     protected EnumScreenType screenType;
+
     /**
      * Screen width.
      */
     protected int screenWidthBlock;
+
     /**
      * Screen height.
      */
     protected int screenHeightBlock;
+
+    /**
+     * Text manager.
+     */
+    protected TextManager textManager;
 
     /**
      * Level configuration.
@@ -118,7 +134,10 @@ public abstract class AbstractBackgroundJillLevel
      * Create status bar with inventory.
      */
     protected final void createStatusBar() {
-        this.statusBar = new StatusBar(this.pictureCache, this.screenType);
+        textManager = ObjectInstanceFactory.getNewTxtMng();
+        textManager.init(shaFile, colorMap, screenType);
+
+        this.statusBar = new StatusBar(shaFile, screenType, colorMap, textManager);
 
         messageDispatcher.addHandler(EnumMessageType.MESSAGE_STATUS_BAR,
                 statusBar);
@@ -146,14 +165,13 @@ public abstract class AbstractBackgroundJillLevel
         screenType = ((JillGameConfig)
                 SimpleGameConfig.getInstance()).getTypeScreen();
 
-        pictureCache = ObjectInstanceFactory.getNewTileMng();
+        final File shaFilename = new File(filePath, this.levelConfiguration.getShaFileName());
+        shaFile = ObjectInstanceFactory.getNewSha();
+        shaFile.load(shaFilename.getAbsolutePath());
 
-        pictureCache.init(
-                new File(filePath, this.levelConfiguration.getShaFileName()),
-                new File(filePath, this.levelConfiguration.getDmaFileName()),
-                screenType);
-
-        dmaFile = pictureCache.getDmaFile();
+        final File dmaFilename = new File(filePath, this.levelConfiguration.getDmaFileName());
+        dmaFile = ObjectInstanceFactory.getNewDma();
+        dmaFile.load(dmaFilename.getAbsolutePath());
 
         if (this.levelConfiguration.getLevelData().isPresent()) {
             // In case of restore map level
@@ -170,6 +188,20 @@ public abstract class AbstractBackgroundJillLevel
         cfgFile = getCfgFile(this.levelConfiguration.getCfgFileName(),
                 filePath, this.levelConfiguration.getCfgSavePrefixe());
 
+        switch (screenType) {
+            case CGA:
+                colorMap = ObjectInstanceFactory.getCgaColor().getColorMap();
+                break;
+            case EGA:
+                colorMap = ObjectInstanceFactory.getEgaColor().getColorMap();
+                break;
+            default:
+                colorMap = ObjectInstanceFactory.getVgaColor().getColorMap();
+                break;
+
+        }
+
+        defaultBackgroundColor = new Color(colorMap[0].getRGB());
 
         final LevelConfiguration oldLevelCfg = this.levelConfiguration;
 
@@ -182,7 +214,10 @@ public abstract class AbstractBackgroundJillLevel
     /**
      * Create background.
      */
-    protected final void createBackgound() {
+    protected final void createBackgound() throws IllegalAccessException, InstantiationException, ClassNotFoundException {
+        this.bckManagerCache = new BackgroundManagerCache("std-openjill-background-manager.properties",
+                shaFile, dmaFile, screenType);
+
         // Buffer image
         background =
                 new BufferedImage(
@@ -192,12 +227,9 @@ public abstract class AbstractBackgroundJillLevel
         // Graphic
         g2Background = background.createGraphics();
 
-        fillPicture(background, g2Background,
-                pictureCache.getBackgroundColor());
+        fillPicture(background, g2Background, defaultBackgroundColor);
 
-        // Create array
-        backgroundObject = new BackgroundEntity[BackgroundLayer.MAP_WIDTH]
-                [BackgroundLayer.MAP_HEIGHT];
+        backgroundObject = jnFile.getBackgroundLayer();
     }
 
     /**
@@ -210,28 +242,23 @@ public abstract class AbstractBackgroundJillLevel
      */
     protected final void initBackgroundPicture(final int startX,
             final int startY, final int width, final int height) {
-        // Background map
-        final BackgroundLayer backgroundLayer = jnFile.getBackgroundLayer();
-
         final int endX = (startX + width);
         final int endY = (startY + height);
 
-        // Background paramter
-        BackgroundParam backParam;
+        // Background manager
+        BackgroundEntity bckManager;
 
         // Map code
         int mapCode;
         // Tile picture
         BufferedImage tilePicture;
-        // Current background object
-        BackgroundEntity backObj;
         // Dma entry
         Optional<DmaEntry> dmaEntry;
         DmaEntry de;
 
         for (int indexX = startX; indexX < endX; indexX++) {
             for (int indexY = startY; indexY < endY; indexY++) {
-                mapCode = backgroundLayer.getMapCode(indexX, indexY);
+                mapCode = backgroundObject.getMapCode(indexX, indexY);
                 dmaEntry = dmaFile.getDmaEntry(mapCode);
 
                 if (dmaEntry.isPresent()) {
@@ -246,22 +273,19 @@ public abstract class AbstractBackgroundJillLevel
                     de = dmaFile.getDmaEntry(0).get();
                 }
 
-                backParam = ObjectInstanceFactory.getNewBackParam();
-                backParam.init(this.backgroundObject, this.pictureCache,
-                        this.messageDispatcher);
-                backParam.setDmaEntry(de);
-                backParam.setX(indexX);
-                backParam.setY(indexY);
+                bckManager = bckManagerCache.getManager(de.getName());
 
-                backObj = backgroundManager.getJillBackground(backParam);
+                if (de.isMsgDraw()) {
+                    bckManager.msgDraw(backgroundObject, indexX, indexY);
+                }
 
-                backgroundObject[indexX][indexY] = backObj;
+                tilePicture = bckManager.getPicture(indexX, indexY);
+
+                g2Background.drawImage(tilePicture,
+                        indexX * JillConst.getBlockSize(),
+                        indexY * JillConst.getBlockSize(), null);
             }
         }
-
-        for (int indexX = startX; indexX < endX; indexX++) {
-            for (int indexY = startY; indexY < endY; indexY++) {
-                backObj = backgroundObject[indexX][indexY];
 
 // For debug only
 //if (backObj.isMsgDraw() && (backObj instanceof StdBackgroundEntity)) {
@@ -277,16 +301,6 @@ public abstract class AbstractBackgroundJillLevel
 //            String.format("Do a special update for %d/%d = %d (%s)",
 //                    indexX, indexY, backObj.getMapCode(), backObj.getName()));
 //}
-
-                backObj.msgDraw();
-
-                tilePicture = backObj.getPicture();
-
-                g2Background.drawImage(tilePicture,
-                        indexX * JillConst.getBlockSize(),
-                        indexY * JillConst.getBlockSize(), null);
-            }
-        }
     }
 
     /**
@@ -310,8 +324,7 @@ public abstract class AbstractBackgroundJillLevel
             final int tileIndex, final int x, final int y,
             final Graphics2D g2) {
         // Left upper corner
-        final BufferedImage tilePicture = pictureCache.getImage(
-                tileSetIndex, tileIndex).get();
+        final BufferedImage tilePicture = PictureTools.getPicture(shaFile, tileSetIndex, tileIndex, screenType).get();
         g2.drawImage(tilePicture, x, y, null);
     }
 
@@ -369,35 +382,37 @@ public abstract class AbstractBackgroundJillLevel
             de = dmaFile.getDmaEntry(0).get();
         }
 
-        backParam = ObjectInstanceFactory.getNewBackParam();
-        backParam.init(this.backgroundObject, this.pictureCache,
-                this.messageDispatcher);
-        backParam.setDmaEntry(de);
-        backParam.setX(indexX);
-        backParam.setY(indexY);
-
-        backObj = backgroundManager.getJillBackground(backParam);
-
-        backgroundObject[indexX][indexY] = backObj;
-
-        tilePicture = backObj.getPicture();
+// TODO new architecture
+//        backParam = ObjectInstanceFactory.getNewBackParam();
+//        backParam.init(this.backgroundObject, this.pictureCache,
+//                this.messageDispatcher);
+//        backParam.setDmaEntry(de);
+//        backParam.setX(indexX);
+//        backParam.setY(indexY);
+//
+//        backObj = backgroundManager.getJillBackground(backParam);
+//
+//        backgroundObject[indexX][indexY] = backObj;
+//
+//        tilePicture = backObj.getPicture();
 
         // Position of block in background picture
         final int absoluteX = indexX * JillConst.getBlockSize();
         final int absoluteY = indexY * JillConst.getBlockSize();
 
-        // Fill screen to black
-        final Rectangle rect = new Rectangle(absoluteX, absoluteY,
-                tilePicture.getWidth(),
-                tilePicture.getHeight());
-
-        // Draw black
-        g2Background.setColor(pictureCache.getBackgroundColor());
-
-        // Clear background
-        g2Background.fill(rect);
-
-        // Draw background
-        g2Background.drawImage(tilePicture, absoluteX, absoluteY, null);
+// TODO new architecture
+//        // Fill screen to black
+//        final Rectangle rect = new Rectangle(absoluteX, absoluteY,
+//                tilePicture.getWidth(),
+//                tilePicture.getHeight());
+//
+//        // Draw black
+//        g2Background.setColor(pictureCache.getBackgroundColor());
+//
+//        // Clear background
+//        g2Background.fill(rect);
+//
+//        // Draw background
+//        g2Background.drawImage(tilePicture, absoluteX, absoluteY, null);
     }
 }

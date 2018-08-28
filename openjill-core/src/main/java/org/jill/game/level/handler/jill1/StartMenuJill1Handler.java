@@ -1,15 +1,15 @@
 package org.jill.game.level.handler.jill1;
 
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.util.Optional;
-
 import org.jill.game.gui.menu.ClassicMenu;
 import org.jill.game.gui.menu.HighScoreMenu;
 import org.jill.game.level.AbstractChangeLevel;
 import org.jill.game.level.cfg.JillLevelConfiguration;
 import org.jill.game.screen.conf.RectangleConf;
 import org.jill.openjill.core.api.jill.JillConst;
+
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.util.Optional;
 
 /**
  * Start menu of credit for level 1 of Jill Trilogy.
@@ -30,18 +30,22 @@ public class StartMenuJill1Handler extends AbstractChangeLevel {
 
         infoBox.setContent(vclFile.getVclText().get(0).getText());
 
-        this.menuLoadGame.setPreviousMenu(Optional.of(this.menu));
+        menuLoadGame.setPreviousMenu(Optional.of(menu));
+
+        // Need force update
+        updateInventoryScreen = true;
     }
 
     @Override
     protected void initMenu() {
-        this.menuStd = new ClassicMenu("start_menu.json", pictureCache);
-        this.menu = this.menuStd;
+        menuStd = new ClassicMenu(shaFile, screenType, "start_menu.json", textManager,
+                defaultBackgroundColor);
+        menu = menuStd;
     }
 
     @Override
     protected void menuEntryValidate(final int value) {
-        if (this.menu == this.menuLoadGame) {
+        if (menu == menuLoadGame) {
             doMenuValidate();
         } else {
             switch (value) {
@@ -49,8 +53,8 @@ public class StartMenuJill1Handler extends AbstractChangeLevel {
                     changeScreenManager(MapLevelHandler.class);
                     break;
                 case 1:
-                    this.menuLoadGame.setEnable(true);
-                    this.menu = this.menuLoadGame;
+                    menuLoadGame.setEnable(true);
+                    menu = menuLoadGame;
                     break;
                 case 2:
                     changeScreenManager(StoryScreenJill1Handler.class);
@@ -77,14 +81,14 @@ public class StartMenuJill1Handler extends AbstractChangeLevel {
 
     @Override
     protected void drawControl() {
-        this.statusBar.drawControl(createHigScore());
+        statusBar.drawControl(createHigScore());
     }
 
     @Override
     protected void drawInventory() {
         // Draw jill face
-        this.statusBar.drawInventory(this.statusBar.createInventoryArea());
-        this.statusBar.drawControl(createHigScore());
+        statusBar.drawInventory(statusBar.createInventoryArea());
+        statusBar.drawControl(createHigScore());
     }
 
     /**
@@ -96,9 +100,9 @@ public class StartMenuJill1Handler extends AbstractChangeLevel {
         final BufferedImage highScore = statusBar.createControlArea();
 
         final RectangleConf controlAreaConf =
-                this.statusBar.getControlAreaConf();
+                statusBar.getControlAreaConf();
 
-        new HighScoreMenu(highScore, pictureCache,
+        new HighScoreMenu(highScore, textManager,
                 cfgFile.getHighScore(), controlAreaConf.getX(),
                 controlAreaConf.getY());
 
@@ -111,7 +115,7 @@ public class StartMenuJill1Handler extends AbstractChangeLevel {
         final int blocOffsetY = 53;
 
         final RectangleConf offset
-                = this.statusBar.getGameAreaConf().getOffset();
+                = statusBar.getGameAreaConf().getOffset();
 
         // Picture offset
         offset.setX(
@@ -129,9 +133,9 @@ public class StartMenuJill1Handler extends AbstractChangeLevel {
 
     @Override
     protected void doEscape() {
-        if (this.menu == this.menuLoadGame) {
-            this.menu.setEnable(false);
-            this.menu = this.menuStd;
+        if (menu == menuLoadGame) {
+            menu.setEnable(false);
+            menu = menuStd;
         } else {
             System.exit(0);
         }

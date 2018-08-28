@@ -1,15 +1,5 @@
 package org.jill.game.level;
 
-import java.awt.image.BufferedImage;
-import java.io.EOFException;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.util.List;
-import java.util.Optional;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import org.jill.cfg.SaveGameItem;
 import org.jill.file.FileAbstractByte;
 import org.jill.game.config.JillGameConfig;
@@ -21,17 +11,22 @@ import org.jill.game.level.cfg.JillLevelConfiguration;
 import org.jill.game.level.cfg.LevelConfiguration;
 import org.jill.game.level.handler.LoadNewLevelHandler;
 import org.jill.game.screen.conf.RectangleConf;
-import org.jill.jn.BackgroundLayer;
-import org.jill.jn.JnFile;
-import org.jill.jn.ObjectItem;
-import org.jill.jn.SaveData;
-import org.jill.jn.StringItem;
-import org.jill.openjill.core.api.entities.ObjectEntity;
+import org.jill.jn.*;
 import org.jill.openjill.core.api.message.EnumMessageType;
 import org.jill.openjill.core.api.message.statusbar.inventory.EnumInventoryObject;
 import org.simplegame.InterfaceSimpleGameHandleInterface;
 import org.simplegame.SimpleGameConfig;
 import org.simplegame.SimpleGameHandler;
+
+import java.awt.image.BufferedImage;
+import java.io.EOFException;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.List;
+import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * This class contains all methods to change level, load/restore game.
@@ -337,11 +332,6 @@ public abstract class AbstractChangeLevel extends
             objectSize += obj.getSizeInFile();
         }
 
-        // Background object
-        for (ObjectItem obj : this.listObjectDrawOnBackground) {
-            objectSize += obj.getSizeInFile();
-        }
-
         // Object always on screen
         for (ObjectItem obj : listObjectAlwaysOnScreen) {
             objectSize += obj.getSizeInFile();
@@ -367,7 +357,7 @@ public abstract class AbstractChangeLevel extends
             for (int indexY = 0; indexY < BackgroundLayer.MAP_HEIGHT;
                  indexY++) {
                 fab.write16bitLE(
-                        this.backgroundObject[indexX][indexY].getMapCode());
+                        this.backgroundObject.getMapCode(indexX, indexY));
             }
         }
     }
@@ -382,16 +372,10 @@ public abstract class AbstractChangeLevel extends
             throws EOFException {
         // Calculate object number
         fab.write16bitLE(this.listObject.size()
-                + this.listObjectDrawOnBackground.size()
                 + this.listObjectAlwaysOnScreen.size());
 
         // Running object
         for (ObjectItem obj : this.listObject) {
-            obj.writeToFile(fab);
-        }
-
-        // Background object
-        for (ObjectItem obj : this.listObjectDrawOnBackground) {
             obj.writeToFile(fab);
         }
 
@@ -440,9 +424,6 @@ public abstract class AbstractChangeLevel extends
         // Running object
         writeListObjectString(this.listObject, fab);
 
-        // Background object
-        writeListObjectString(this.listObjectDrawOnBackground, fab);
-
         // Object always on screen
         writeListObjectString(this.listObjectAlwaysOnScreen, fab);
     }
@@ -454,7 +435,7 @@ public abstract class AbstractChangeLevel extends
      * @param fab        file to save
      * @throws EOFException if virtual file is to small
      */
-    private void writeListObjectString(final List<ObjectEntity> listObject,
+    private void writeListObjectString(final List<ObjectItem> listObject,
             final FileAbstractByte fab) throws EOFException {
         String data;
         int len;
@@ -462,7 +443,7 @@ public abstract class AbstractChangeLevel extends
         StringItem stringItem;
 
         // Running object
-        for (ObjectEntity obj : listObject) {
+        for (ObjectItem obj : listObject) {
             if (obj.getStringStackEntry().isPresent()) {
                 stringItem = obj.getStringStackEntry().get();
 
@@ -484,11 +465,11 @@ public abstract class AbstractChangeLevel extends
     public void recieveMessage(final EnumMessageType type, final Object msg) {
         super.recieveMessage(type, msg);
 
-        ObjectEntity oe;
+        ObjectItem oe;
 
         switch (type) {
             case CHECK_POINT_CHANGING_LEVEL:
-                oe = (ObjectEntity) msg;
+                oe = (ObjectItem) msg;
                 changeLevel(Optional.of(oe.getStringStackEntry().get().getValue()),
                         oe.getCounter());
                 break;
@@ -726,19 +707,19 @@ public abstract class AbstractChangeLevel extends
         final RectangleConf controlAreaConf =
                 this.statusBar.getControlAreaConf();
 
-        this.menuHighScore = new HighScoreMenu(highScore, this.pictureCache,
+        this.menuHighScore = new HighScoreMenu(highScore, textManager,
                 this.cfgFile.getHighScore(), controlAreaConf.getX(),
                 controlAreaConf.getY(), Optional.ofNullable(this.menu));
 
         highScore = this.statusBar.createControlArea();
 
-        this.menuSaveGame = new SaveGameMenu(highScore, pictureCache,
+        this.menuSaveGame = new SaveGameMenu(highScore, textManager,
                 this.cfgFile.getSaveGame(), controlAreaConf.getX(),
                 controlAreaConf.getY());
 
         highScore = this.statusBar.createControlArea();
 
-        this.menuLoadGame = new LoadGameMenu(highScore, pictureCache,
+        this.menuLoadGame = new LoadGameMenu(highScore, textManager,
                 this.cfgFile.getSaveGame(), controlAreaConf.getX(),
                 controlAreaConf.getY());
     }

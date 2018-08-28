@@ -1,5 +1,6 @@
 package org.jill.entities.manager.background;
 
+import org.jill.openjill.core.api.picture.PictureTools;
 import org.jill.openjill.core.api.entities.BackgroundParam;
 
 import java.awt.image.BufferedImage;
@@ -10,7 +11,7 @@ public class StaticBackground extends AbstractBackground {
     public void init(BackgroundParam backParameter) {
         dmaEntry = backParameter.getDmaEntry();
 
-        final Optional<BufferedImage> currentPicture = getPicture(backParameter.getShaFile(), dmaEntry.getTileset(),
+        final Optional<BufferedImage> currentPicture = PictureTools.getPicture(backParameter.getShaFile(), dmaEntry.getTileset(),
                 dmaEntry.getTile(), backParameter.getScreen());
 
         if (currentPicture.isPresent()) {

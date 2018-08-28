@@ -25,6 +25,7 @@
                 <module>./openjill-object-manager</module>
                 <module>./openjill-background-manager</module>
                 <module>./openjill-core-api</module>
+                <module>./openjill-cache-manager</module>
             </modules>
         </profile>
         
@@ -40,10 +41,9 @@
         <profile>
             <id>game</id>
             <modules>
-                <!--<module>./simplegame</module>
+                <module>./simplegame</module>
                 <module>./OpenJill</module>
-                <module>./open-jill-object-background</module>
-                <module>./openjill-core</module>-->
+                <module>./openjill-core</module>
             </modules>
         </profile>
     </profiles>

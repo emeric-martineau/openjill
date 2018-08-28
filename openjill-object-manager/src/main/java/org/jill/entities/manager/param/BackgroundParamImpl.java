@@ -1,12 +1,10 @@
-package org.jill.entities.param;
+package org.jill.entities.manager.param;
 
 import org.jill.dma.DmaEntry;
 import org.jill.dma.DmaFile;
 import org.jill.openjill.core.api.entities.BackgroundParam;
 import org.jill.openjill.core.api.screen.EnumScreenType;
 import org.jill.sha.ShaFile;
-import sun.awt.X11.Screen;
-
 
 /**
  * Background parameter (same background for all background. Juste dmaEntry

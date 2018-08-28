@@ -1,11 +1,10 @@
 package org.jill.openjill.core.api.manager;
 
-import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
-import java.util.Map;
-
 import org.jill.openjill.core.api.screen.EnumScreenType;
-import org.jill.sha.ShaTile;
+import org.jill.sha.ShaFile;
+
+import java.awt.*;
+import java.awt.image.BufferedImage;
 
 /**
  * Text manager.
@@ -131,11 +130,11 @@ public interface TextManager {
     /**
      * Constructor.
      *
-     * @param mapOfTile map of tile
+     * @param shaFile sha file
+     * @param colorMap color map
      * @param tpScreen  type of screen
      */
-    void init(Map<Integer, ShaTile[]> mapOfTile,
-            EnumScreenType tpScreen);
+    void init(ShaFile shaFile, Color[] colorMap, EnumScreenType tpScreen);
 
     /**
      * Draw big text.
@@ -213,4 +212,8 @@ public interface TextManager {
      */
     BufferedImage grapSpecialKey(int key, int foreColor, int backColor);
 
+    /**
+     * @return colorMap
+     */
+    Color[] getColorMap();
 }

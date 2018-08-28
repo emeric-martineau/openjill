@@ -52,6 +52,14 @@
             <groupId>org.jill.file</groupId>
             <artifactId>abstractfile</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.jill.entities</groupId>
+            <artifactId>openjill-object-manager</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.jill.entities</groupId>
+            <artifactId>openjill-background-manager</artifactId>
+        </dependency>
     </dependencies>
 
     <build>

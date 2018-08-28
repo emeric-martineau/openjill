@@ -1,6 +1,14 @@
 package org.jill.game.gui;
 
-import java.awt.Graphics2D;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.jill.game.gui.conf.InformationBoxConf;
+import org.jill.game.gui.menu.SubMenu;
+import org.jill.game.screen.conf.RectangleConf;
+import org.jill.openjill.core.api.manager.TextManager;
+import org.jill.openjill.core.api.screen.EnumScreenType;
+import org.jill.sha.ShaFile;
+
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
@@ -8,13 +16,6 @@ import java.util.ArrayList;
 import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import org.jill.game.gui.conf.InformationBoxConf;
-import org.jill.game.gui.menu.SubMenu;
-import org.jill.game.screen.conf.RectangleConf;
-import org.jill.openjill.core.api.manager.TextManager;
-import org.jill.openjill.core.api.manager.TileManager;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  * Information box like instruction or int.
@@ -27,30 +28,32 @@ public final class InformationBox extends AbstractMessageBox {
      */
     private static final Logger LOGGER = Logger.getLogger(
             InformationBox.class.getName());
+
     /**
      * List of text.
      */
     private final ArrayList<SubMenu> listText = new ArrayList<>();
+
     /**
      * Length of line in box.
      */
     private int lineLength;
+
     /**
      * Number of line in box.
      */
     private int numberLinePerScreen;
+
     /**
      * Background.
      */
     private BufferedImage boxPicture;
+
     /**
      * Graphic of status bar.
      */
     private Graphics2D g2BoxPicture;
-    /**
-     * Picture cache.
-     */
-    private TileManager pictureCache;
+
     /**
      * Title of dialog box.
      */
@@ -82,12 +85,20 @@ public final class InformationBox extends AbstractMessageBox {
     private int sizeOfLetter;
 
     /**
+     * Text manager.
+     */
+    private TextManager textManager;
+
+    /**
      * Constructor for dialog box 190x130 size.
      *
-     * @param pctCache cache picture manager
+     * @param shaFile sha file
+     * @param screen screen
+     * @param textManager text manager
      */
-    public InformationBox(final TileManager pctCache) {
-        constructor(pctCache);
+    public InformationBox(final ShaFile shaFile, final EnumScreenType screen, final TextManager textManager) {
+        super(shaFile, screen);
+        constructor(textManager);
     }
 
     /**
@@ -123,12 +134,12 @@ public final class InformationBox extends AbstractMessageBox {
     /**
      * Construct object.
      *
-     * @param pctCache picture cache manage
+     * @param textManager picture cache manage
      */
-    private void constructor(final TileManager pctCache) {
-        this.pictureCache = pctCache;
+    private void constructor(final TextManager textManager) {
+        this.textManager = textManager;
 
-        this.sizeOfLetter = pctCache.getTextManager().
+        this.sizeOfLetter = textManager.
                 createSmallText(" ", 0, 0).getWidth();
 
         this.conf = readConf("information_box.json");
@@ -143,9 +154,9 @@ public final class InformationBox extends AbstractMessageBox {
 
         RectangleConf textArea = this.conf.getTextarea();
 
-        drawArea(this.g2BoxPicture, pctCache, Optional.of(textArea));
+        drawArea(this.g2BoxPicture, textManager, Optional.of(textArea));
 
-        drawAllPicture(this.g2BoxPicture, this.pictureCache, this.conf);
+        drawAllPicture(this.g2BoxPicture, this.conf);
 
         this.lineLength = (this.conf.getWidth() - this.conf.getBorderWith() * 2)
                 / this.sizeOfLetter;
@@ -188,7 +199,7 @@ public final class InformationBox extends AbstractMessageBox {
 
         RectangleConf textArea = this.conf.getTextarea();
 
-        drawArea(this.g2BoxPicture, this.pictureCache, Optional.of(textArea));
+        drawArea(this.g2BoxPicture, textManager, Optional.of(textArea));
 
         int end = currentMenuPos + numberLinePerScreen;
 
@@ -214,7 +225,7 @@ public final class InformationBox extends AbstractMessageBox {
         // Draw text
         for (int index = currentMenuPos; index < end; index++) {
             line = listText.get(index);
-            pictureCache.getTextManager().drawSmallText(g2BoxPicture,
+            textManager.drawSmallText(g2BoxPicture,
                     offsetTextX, yText, line.getText(), line.getColor(),
                     TextManager.BACKGROUND_COLOR_NONE);
 
@@ -225,7 +236,7 @@ public final class InformationBox extends AbstractMessageBox {
         int offsetTitleY = this.conf.getOffsetTitleDrawY();
 
         // Now draw title
-        pictureCache.getTextManager().drawBigText(g2BoxPicture,
+        textManager.drawBigText(g2BoxPicture,
                 offsetTitleX, offsetTitleY, title.getText(), title.getColor(),
                 TextManager.BACKGROUND_COLOR_NONE);
     }

@@ -1,33 +1,33 @@
 package org.jill.game.screen;
 
-import java.awt.Color;
-import java.awt.Graphics2D;
-import java.awt.image.BufferedImage;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.jill.game.screen.conf.InventoryAreaConf;
 import org.jill.game.screen.conf.ItemConf;
 import org.jill.game.screen.conf.PictureConf;
 import org.jill.game.screen.conf.TextToDraw;
+import org.jill.jn.ObjectItem;
 import org.jill.jn.SaveData;
-import org.jill.openjill.core.api.entities.ObjectEntity;
 import org.jill.openjill.core.api.jill.JillConst;
 import org.jill.openjill.core.api.manager.TextManager;
-import org.jill.openjill.core.api.manager.TileManager;
 import org.jill.openjill.core.api.message.EnumMessageType;
 import org.jill.openjill.core.api.message.InterfaceMessageGameHandler;
 import org.jill.openjill.core.api.message.MessageDispatcher;
-import org.jill.openjill.core.api.message.object.CreateObjectMessage;
-import org.jill.openjill.core.api.message.object.ObjectListMessage;
 import org.jill.openjill.core.api.message.statusbar.inventory.EnumInventoryObject;
 import org.jill.openjill.core.api.message.statusbar.inventory.InventoryItemMessage;
 import org.jill.openjill.core.api.message.statusbar.inventory.InventoryLifeMessage;
 import org.jill.openjill.core.api.message.statusbar.inventory.InventoryPointMessage;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import org.jill.openjill.core.api.picture.PictureTools;
+import org.jill.openjill.core.api.screen.EnumScreenType;
+import org.jill.sha.ShaFile;
+
+import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.*;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Control area on screen and manage state.
@@ -45,59 +45,83 @@ public final class InventoryArea implements InterfaceMessageGameHandler {
      * Key to fin map/score in text to draw.
      */
     private static final String MAP_KEY = "map";
+
     /**
      * Picture cache.
      */
-    private final TileManager pictureCache;
+    private final TextManager textManager;
+
+    /**
+     * Sha file.
+     */
+    private final ShaFile shaFile;
+
+    /**
+     * Screen.
+     */
+    private final EnumScreenType screen;
+
     /**
      * Inventory picture.
      */
     private final BufferedImage inventoryPicture;
+
     /**
      * Graphic object to draw inventory.
      */
     private final Graphics2D g2Inventory;
+
     /**
      * Lifebar.
      */
     private final BufferedImage lifebar;
+
     /**
      * Lifebar end.
      */
     private final BufferedImage lifebarEnd;
+
     /**
      * List of item.
      */
     private final List<EnumInventoryObject> objects = new ArrayList<>();
+
     /**
      * Map with iventory item and picture.
      */
     private final Map<EnumInventoryObject, BufferedImage> listItem
             = new HashMap<>();
+
     /**
      * Configuration.
      */
     private final InventoryAreaConf conf;
+
     /**
      * To dispatch message for any object in game.
      */
     private final MessageDispatcher messageDispatcher;
+
     /**
      * Current back index color.
      */
     private int currentBackIndexColor;
+
     /**
      * Score.
      */
     private int score = 0;
+
     /**
      * Level.
      */
     private int level;
+
     /**
      * Life.
      */
     private int life;
+
     /**
      * Need redraw inventory arrea ? (for hit player)
      */
@@ -106,26 +130,30 @@ public final class InventoryArea implements InterfaceMessageGameHandler {
     /**
      * Constructor.
      *
-     * @param pictureCacheManager picture cache
+     * @param shaFile sha file
+     * @param textManager picture cache
+     * @param screen screen conf
      * @param statusBar           status bar
      * @param msgDispatcher       message dispatcher
      */
-    public InventoryArea(final TileManager pictureCacheManager,
+    public InventoryArea(final ShaFile shaFile, final TextManager textManager, final EnumScreenType screen,
                          final StatusBar statusBar, final MessageDispatcher msgDispatcher) {
-        this.conf = readConf("inventory_conf.json");
+        conf = readConf("inventory_conf.json");
 
-        this.pictureCache = pictureCacheManager;
+        this.textManager = textManager;
+        this.shaFile = shaFile;
+        this.screen = screen;
 
-        this.life = this.conf.getDefaultLife();
-        this.lifebar = getImageByConfig(this.conf.getLifebarPictureStart());
-        this.lifebarEnd = getImageByConfig(this.conf.getLifebarPictureEnd());
+        life = conf.getDefaultLife();
+        lifebar = getImageByConfig(shaFile, screen, conf.getLifebarPictureStart());
+        lifebarEnd = getImageByConfig(shaFile, screen, conf.getLifebarPictureEnd());
 
-        this.inventoryPicture = statusBar.createInventoryArea();
-        this.g2Inventory = inventoryPicture.createGraphics();
+        inventoryPicture = statusBar.createInventoryArea();
+        g2Inventory = inventoryPicture.createGraphics();
 
-        this.currentBackIndexColor = this.conf.getBackgroundColor();
+        currentBackIndexColor = conf.getBackgroundColor();
 
-        this.messageDispatcher = msgDispatcher;
+        messageDispatcher = msgDispatcher;
 
         initListItem();
     }
@@ -168,102 +196,104 @@ public final class InventoryArea implements InterfaceMessageGameHandler {
      */
     public BufferedImage drawInventory() {
         Color inventoryBackgroundColor =
-                this.pictureCache.getColorMap()[this.currentBackIndexColor];
+                textManager.getColorMap()[currentBackIndexColor];
 
         // Draw background and clear
-        this.g2Inventory.setColor(inventoryBackgroundColor);
-        this.g2Inventory.fillRect(0, 0, this.inventoryPicture.getWidth(),
-                this.inventoryPicture.getHeight());
+        g2Inventory.setColor(inventoryBackgroundColor);
+        g2Inventory.fillRect(0, 0, inventoryPicture.getWidth(),
+                inventoryPicture.getHeight());
 
         String text;
 
-        for (TextToDraw ttd : this.conf.getText()) {
+        for (TextToDraw ttd : conf.getText()) {
             text = ttd.getText();
 
-            if (MAP_KEY.equals(text) && this.level != SaveData.MAP_LEVEL) {
+            if (MAP_KEY.equals(text) && level != SaveData.MAP_LEVEL) {
                 // Draw level not MAP text
-                text = String.valueOf(this.level);
+                text = String.valueOf(level);
             }
 
-            this.pictureCache.getTextManager().drawSmallText(this.g2Inventory,
+            textManager.drawSmallText(g2Inventory,
                     ttd.getX(), ttd.getY(), text, ttd.getColor(),
                     TextManager.BACKGROUND_COLOR_NONE);
         }
 
         // Draw score
-        final BufferedImage[] scoreLetter = this.pictureCache.getTextManager().
-                grapSmallLetter(String.valueOf(this.score),
-                        this.conf.getScore().getColor(),
+        final BufferedImage[] scoreLetter = textManager.
+                grapSmallLetter(String.valueOf(score),
+                        conf.getScore().getColor(),
                         TextManager.BACKGROUND_COLOR_NONE);
 
-        int offsetX = this.conf.getScore().getX();
+        int offsetX = conf.getScore().getX();
 
         for (int indexScore = scoreLetter.length - 1; indexScore >= 0;
              indexScore--) {
-            this.g2Inventory.drawImage(scoreLetter[indexScore], offsetX,
-                    this.conf.getScore().getY(), null);
+            g2Inventory.drawImage(scoreLetter[indexScore], offsetX,
+                    conf.getScore().getY(), null);
             offsetX -= scoreLetter[indexScore].getWidth();
         }
 
         drawInventoryItem();
 
-        if (this.currentBackIndexColor
-                == this.conf.getBackgroundHitPlayerColor()) {
+        if (currentBackIndexColor
+                == conf.getBackgroundHitPlayerColor()) {
             // Reset for next time
-            this.currentBackIndexColor = this.conf.getBackgroundColor();
-            this.needRedraw = true;
+            currentBackIndexColor = conf.getBackgroundColor();
+            needRedraw = true;
         } else {
-            this.needRedraw = false;
+            needRedraw = false;
         }
 
         drawLifeBar();
 
-        return this.inventoryPicture;
+        return inventoryPicture;
     }
 
     /**
      * Draw lifebar.
      */
     private void drawLifeBar() {
-        if (this.life > 0) {
+        if (life > 0) {
             // Draw live status bar
-            int indexLife = this.life - 1;
-            int offsetX = this.conf.getLifebar().getX();
-            int sizeBar = this.conf.getLifeBarStepSize();
+            int indexLife = life - 1;
+            int offsetX = conf.getLifebar().getX();
+            int sizeBar = conf.getLifeBarStepSize();
 
             while (indexLife > 0) {
-                this.g2Inventory.drawImage(this.lifebar, offsetX,
-                        this.conf.getLifebar().getY(), null);
+                g2Inventory.drawImage(lifebar, offsetX,
+                        conf.getLifebar().getY(), null);
 
                 offsetX += sizeBar;
                 indexLife--;
             }
 
-            if (this.life > 1) {
-                offsetX = this.conf.getLifebarEnd().getX()
-                        + ((this.life - 1) * sizeBar);
+            if (life > 1) {
+                offsetX = conf.getLifebarEnd().getX()
+                        + ((life - 1) * sizeBar);
             }
 
-            this.g2Inventory.drawImage(this.lifebarEnd, offsetX,
-                    this.conf.getLifebarEnd().getY(), null);
+            g2Inventory.drawImage(lifebarEnd, offsetX,
+                    conf.getLifebarEnd().getY(), null);
         }
     }
 
     /**
      * Return a image by config.
      *
+     * @param shaFile sha file
+     * @param screen scren conf
      * @param prop propterties to read
      * @return picture
      */
-    private BufferedImage getImageByConfig(final PictureConf prop) {
-        return this.pictureCache.getImage(prop.getTileset(), prop.getTile()).get();
+    private BufferedImage getImageByConfig(final ShaFile shaFile, final EnumScreenType screen, final PictureConf prop) {
+        return PictureTools.getPicture(shaFile, prop.getTileset(), prop.getTile(), screen).get();
     }
 
     /**
      * Init list item map.
      */
     private void initListItem() {
-        final Map<String, PictureConf> listItems = this.conf.getItems();
+        final Map<String, PictureConf> listItems = conf.getItems();
         PictureConf pic;
 
         // Init map item
@@ -271,7 +301,7 @@ public final class InventoryArea implements InterfaceMessageGameHandler {
             pic = listItems.get(io.toString());
 
             if (pic != null) {
-                this.listItem.put(io, getImageByConfig(pic));
+                listItem.put(io, getImageByConfig(shaFile, screen, pic));
             }
         }
     }
@@ -281,7 +311,7 @@ public final class InventoryArea implements InterfaceMessageGameHandler {
      */
     private void drawInventoryItem() {
         // Initial position
-        final ItemConf ic = this.conf.getItemConf();
+        final ItemConf ic = conf.getItemConf();
         final int maxCol = ic.getNbCol();
         final int maxRow = ic.getNbRow();
 
@@ -296,9 +326,9 @@ public final class InventoryArea implements InterfaceMessageGameHandler {
 
         // Draw item
         for (EnumInventoryObject o : getObjects()) {
-            image = this.listItem.get(o);
+            image = listItem.get(o);
 
-            this.g2Inventory.drawImage(image, x, y, null);
+            g2Inventory.drawImage(image, x, y, null);
 
             row++;
             y += image.getHeight() + 2;
@@ -322,7 +352,7 @@ public final class InventoryArea implements InterfaceMessageGameHandler {
      * @return score
      */
     public int getScore() {
-        return this.score;
+        return score;
     }
 
     /**
@@ -331,7 +361,7 @@ public final class InventoryArea implements InterfaceMessageGameHandler {
      * @param point score
      */
     public void setScore(final int point) {
-        this.score = point;
+        score = point;
     }
 
     /**
@@ -340,7 +370,7 @@ public final class InventoryArea implements InterfaceMessageGameHandler {
      * @return level
      */
     public int getLevel() {
-        return this.level;
+        return level;
     }
 
     /**
@@ -349,7 +379,7 @@ public final class InventoryArea implements InterfaceMessageGameHandler {
      * @param lvl level
      */
     public void setLevel(final int lvl) {
-        this.level = lvl;
+        level = lvl;
     }
 
     /**
@@ -358,7 +388,7 @@ public final class InventoryArea implements InterfaceMessageGameHandler {
      * @return life
      */
     public int getLife() {
-        return this.life;
+        return life;
     }
 
     /**
@@ -367,7 +397,7 @@ public final class InventoryArea implements InterfaceMessageGameHandler {
      * @param health life
      */
     public void setLife(final int health) {
-        this.life = health;
+        life = health;
     }
 
     /**
@@ -379,19 +409,19 @@ public final class InventoryArea implements InterfaceMessageGameHandler {
         final EnumInventoryObject obj = msg.getObj();
 
         final boolean add = (!msg.isAlone()
-                || (msg.isAlone() && !this.objects.contains(obj)));
+                || (msg.isAlone() && !objects.contains(obj)));
 
         if (msg.isAddObject()) {
             // Add item only if we have picture.
-            if (add && this.listItem.containsKey(obj)) {
-                this.objects.add(obj);
+            if (add && listItem.containsKey(obj)) {
+                objects.add(obj);
             }
 
             if (obj == EnumInventoryObject.INVINCIBILITY) {
-                this.life = this.conf.getMaxLife();
+                life = conf.getMaxLife();
             }
         } else {
-            this.objects.remove(obj);
+            objects.remove(obj);
         }
     }
 
@@ -401,32 +431,33 @@ public final class InventoryArea implements InterfaceMessageGameHandler {
      * @param msg message
      */
     private void messagePoint(final InventoryPointMessage msg) {
-        if (msg.isAddObject()) {
-            // Create point object
-            final CreateObjectMessage com
-                    = CreateObjectMessage.buildFromClassName(
-                    this.conf.getObjectPoint());
-
-            this.messageDispatcher.sendMessage(EnumMessageType.CREATE_OBJECT,
-                    com);
-
-            ObjectEntity obj = com.getObject();
-
-            obj.setState(msg.getPoint());
-
-            obj.setX(msg.getObjToKill().getX());
-            obj.setY(msg.getObjToKill().getY());
-
-            // Set yd et xd
-            obj.setxSpeed(msg.getObjWhoKill().getxSpeed());
-
-            this.messageDispatcher.sendMessage(EnumMessageType.OBJECT,
-                    new ObjectListMessage(obj, true));
-
-            this.score += msg.getPoint();
-        } else {
-            this.score -= msg.getPoint();
-        }
+// TODO new architecture
+//        if (msg.isAddObject()) {
+//            // Create point object
+//            final CreateObjectMessage com
+//                    = CreateObjectMessage.buildFromClassName(
+//                    conf.getObjectPoint());
+//
+//            messageDispatcher.sendMessage(EnumMessageType.CREATE_OBJECT,
+//                    com);
+//
+//            ObjectEntity obj = com.getObject();
+//
+//            obj.setState(msg.getPoint());
+//
+//            obj.setX(msg.getObjToKill().getX());
+//            obj.setY(msg.getObjToKill().getY());
+//
+//            // Set yd et xd
+//            obj.setxSpeed(msg.getObjWhoKill().getxSpeed());
+//
+//            messageDispatcher.sendMessage(EnumMessageType.OBJECT,
+//                    new ObjectListMessage(obj, true));
+//
+//            score += msg.getPoint();
+//        } else {
+//            score -= msg.getPoint();
+//        }
     }
 
     /**
@@ -436,31 +467,31 @@ public final class InventoryArea implements InterfaceMessageGameHandler {
      */
     private void messageLife(final InventoryLifeMessage msg) {
         final int nbLife = msg.getLife();
-        final Optional<ObjectEntity> sender = msg.getSender();
+        final Optional<ObjectItem> sender = msg.getSender();
 
         if (!sender.isPresent() || sender.get().getZapHold() == 0) {
             if ((nbLife < 0)
-                    && ((!sender.isPresent()) || !this.objects.contains(
+                    && ((!sender.isPresent()) || !objects.contains(
                     EnumInventoryObject.INVINCIBILITY))) {
                 // If decrease live, check player are not invincible
-                this.life += nbLife;
+                life += nbLife;
 
                 // Change background color
-                this.currentBackIndexColor =
-                        this.conf.getBackgroundHitPlayerColor();
+                currentBackIndexColor =
+                        conf.getBackgroundHitPlayerColor();
 
-                this.needRedraw = true;
+                needRedraw = true;
             } else if (nbLife > 0) {
                 // Add life
-                this.life += nbLife;
-                this.needRedraw = true;
+                life += nbLife;
+                needRedraw = true;
             }
 
-            if (this.life > this.conf.getMaxLife()) {
-                this.life = this.conf.getMaxLife();
+            if (life > conf.getMaxLife()) {
+                life = conf.getMaxLife();
                 msg.setPlayerDead(false);
-            } else if (this.life < 1) {
-                this.life = 0;
+            } else if (life < 1) {
+                life = 0;
                 msg.setPlayerDead(true);
             } else {
                 msg.setPlayerDead(false);
@@ -478,11 +509,11 @@ public final class InventoryArea implements InterfaceMessageGameHandler {
         switch (type) {
             case INVENTORY_ITEM:
                 messageItem((InventoryItemMessage) msg);
-                this.needRedraw = true;
+                needRedraw = true;
                 break;
             case INVENTORY_POINT:
                 messagePoint((InventoryPointMessage) msg);
-                this.needRedraw = true;
+                needRedraw = true;
                 break;
             case INVENTORY_LIFE:
                 messageLife((InventoryLifeMessage) msg);
@@ -498,7 +529,7 @@ public final class InventoryArea implements InterfaceMessageGameHandler {
      * @return inventory
      */
     public List<EnumInventoryObject> getObjects() {
-        return this.objects;
+        return objects;
     }
 
     /**
@@ -507,7 +538,7 @@ public final class InventoryArea implements InterfaceMessageGameHandler {
      * @return true if need redraw
      */
     public boolean isNeedRedraw() {
-        return this.needRedraw;
+        return needRedraw;
     }
 
     /**
@@ -516,6 +547,6 @@ public final class InventoryArea implements InterfaceMessageGameHandler {
      * @return default value of life
      */
     public int getDefaultLife() {
-        return this.conf.getDefaultLife();
+        return conf.getDefaultLife();
     }
 }

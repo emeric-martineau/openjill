@@ -59,11 +59,11 @@
         </dependency>
         <dependency>
             <groupId>org.jill.entities</groupId>
-            <artifactId>openjill-object-background</artifactId>
+            <artifactId>openjill-object-manager</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.jill.cfg</groupId>
-            <artifactId>openjill-object-manager</artifactId>
+            <groupId>org.jill.entities</groupId>
+            <artifactId>openjill-cache-managerr</artifactId>
             <version>0.2.7-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>

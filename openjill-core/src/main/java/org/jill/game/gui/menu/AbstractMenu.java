@@ -1,7 +1,10 @@
 package org.jill.game.gui.menu;
 
-import java.awt.Graphics2D;
-import java.awt.Point;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.jill.game.gui.menu.conf.MenuConf;
+import org.jill.openjill.core.api.manager.TextManager;
+
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
@@ -11,11 +14,6 @@ import java.util.Optional;
 import java.util.Properties;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import org.jill.game.gui.menu.conf.MenuConf;
-import org.jill.openjill.core.api.manager.TextManager;
-import org.jill.openjill.core.api.manager.TileManager;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  * Abstract class for menu.
@@ -36,6 +34,11 @@ public class AbstractMenu {
     private static final int NB_CURSOR_IMAGE = 8;
 
     /**
+     * Text manager.
+     */
+    protected TextManager textManager;
+
+    /**
      * Old cursor background.
      */
     protected final BufferedImage oldCursorBackground;
@@ -44,6 +47,7 @@ public class AbstractMenu {
      * Cursor.
      */
     protected final BufferedImage[] cursors;
+
     /**
      * Position of cursor for each submenu.
      */
@@ -75,13 +79,14 @@ public class AbstractMenu {
     /**
      * Constructor.
      *
-     * @param pictureCache    picture cache
+     * @param textManager    picture cache
      * @param previousMenuObj previous menu
      */
-    public AbstractMenu(final TileManager pictureCache,
+    public AbstractMenu(final TextManager textManager,
             final Optional<MenuInterface> previousMenuObj) {
 
         this.previousMenu = previousMenuObj;
+        this.textManager = textManager;
 
         final StringBuilder sb = new StringBuilder(NB_CURSOR_IMAGE);
 
@@ -89,7 +94,7 @@ public class AbstractMenu {
             sb.append((char) indexImage);
         }
 
-        this.cursors = pictureCache.getTextManager().grapSmallLetter(
+        this.cursors = textManager.grapSmallLetter(
                 sb.toString(),
                 TextManager.COLOR_WHITE, TextManager.BACKGROUND_COLOR_NONE);
 
@@ -156,7 +161,7 @@ public class AbstractMenu {
         final Point cursorPos = this.cursorPositionBySubMenuIndex.get(
                 this.currentMenuPos);
 
-        drawCursor(g2, cursorPos, menuPicture);
+        drawCursor(g2, cursorPos);
     }
 
     /**
@@ -164,10 +169,8 @@ public class AbstractMenu {
      *
      * @param g2          graphic 2d
      * @param cursorPos   cursor position
-     * @param menuPicture picture of menu
      */
-    protected final void drawCursor(final Graphics2D g2, final Point cursorPos,
-            final BufferedImage menuPicture) {
+    protected final void drawCursor(final Graphics2D g2, final Point cursorPos) {
         // Clear old picture
         g2.drawImage(this.oldCursorBackground, cursorPos.x, cursorPos.y, null);
 

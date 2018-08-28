@@ -1,15 +1,12 @@
 package org.jill.game.gui.menu;
 
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Point;
+import org.jill.openjill.core.api.manager.TextManager;
+
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
-import org.jill.openjill.core.api.manager.TextManager;
-import org.jill.openjill.core.api.manager.TileManager;
 
 /**
  * This class is menu to display on screen.
@@ -23,46 +20,52 @@ public abstract class AbstractStdMenu extends AbstractMenu
      * Number of space for boder.
      */
     private static final int NB_BORDER = 5;
+
     /**
      * Items of menu.
      */
     private final List<SubMenu> items = new ArrayList<>();
-    /**
-     * Picture manager.
-     */
-    private final TileManager pictureCache;
+
     /**
      * Size of font.
      */
     private final int fontSize;
+
     /**
      * Size of font.
      */
     private final int fontSizeSpace;
+
     /**
      * Empty space before text.
      */
     private int nbSpaceBefore;
+
     /**
      * Start text position x.
      */
     private int textX;
+
     /**
      * Start text position y.
      */
     private int textY;
+
     /**
      * Name of menu.
      */
     private String name;
+
     /**
      * Title of menu.
      */
     private SubMenu title;
+
     /**
      * If menu is enable.
      */
     private boolean enable = false;
+
     /**
      * Picutre.
      */
@@ -124,21 +127,19 @@ public abstract class AbstractStdMenu extends AbstractMenu
     private boolean needToDrawPicture;
 
     /**
-     * Constructeur.
+     * Constructor.
      *
-     * @param pictureCacheManager picture cache
+     * @param textManager picture cache
      */
-    public AbstractStdMenu(final TileManager pictureCacheManager) {
-        super(pictureCacheManager, Optional.empty());
+    public AbstractStdMenu(final TextManager textManager) {
+        super(textManager, Optional.empty());
 
         // Calculate font size
-        this.fontSize = pictureCacheManager.getTextManager().createSmallText(" ",
+        this.fontSize = textManager.createSmallText(" ",
                 TextManager.COLOR_BLUE,
                 TextManager.COLOR_BLUE).getHeight();
 
         this.fontSizeSpace = this.fontSize + 2;
-
-        this.pictureCache = pictureCacheManager;
 
         this.needToDrawPicture = true;
     }
@@ -146,9 +147,9 @@ public abstract class AbstractStdMenu extends AbstractMenu
     /**
      * Create background.
      *
-     * @param pictureCacheManager picture cache
+     * @param backgroundColor back color
      */
-    protected void createBackground(final TileManager pictureCacheManager) {
+    protected void createBackground(final Color backgroundColor) {
         // Create background image
         this.background = new BufferedImage(this.backImage.getWidth(),
                 this.backImage.getHeight(),
@@ -157,7 +158,7 @@ public abstract class AbstractStdMenu extends AbstractMenu
         final Graphics2D g2 = this.background.createGraphics();
 
         // Fill background cause in CGA mode, background picture can be empty
-        g2.setColor(pictureCacheManager.getBackgroundColor());
+        g2.setColor(backgroundColor);
         g2.fillRect(0, 0, this.background.getWidth(),
                 this.background.getWidth());
 
@@ -256,7 +257,7 @@ public abstract class AbstractStdMenu extends AbstractMenu
         }
 
         // Draw title
-        this.pictureCache.getTextManager().drawSmallText(g2, this.textX,
+        textManager.drawSmallText(g2, this.textX,
                 this.textY, this.title.getText(), this.title.getColor(),
                 TextManager.BACKGROUND_COLOR_NONE);
 
@@ -267,7 +268,7 @@ public abstract class AbstractStdMenu extends AbstractMenu
         this.cursorPositionBySubMenuIndex.clear();
 
         for (SubMenu entry : items) {
-            this.pictureCache.getTextManager().drawSmallText(g2, posTextX,
+            textManager.drawSmallText(g2, posTextX,
                     posTextY, entry.getText(), entry.getColor(),
                     TextManager.BACKGROUND_COLOR_NONE);
 

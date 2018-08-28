@@ -1,20 +1,11 @@
 package org.jill.game.level;
 
-import java.awt.Graphics2D;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
+import org.jill.entities.manager.cache.ObjectManagerCache;
 import org.jill.game.config.ObjectInstanceFactory;
 import org.jill.game.level.cfg.LevelConfiguration;
-import org.jill.game.manager.object.ObjectManager;
 import org.jill.jn.ObjectItem;
 import org.jill.openjill.core.api.entities.ObjectEntity;
 import org.jill.openjill.core.api.entities.ObjectParam;
-import org.jill.openjill.core.api.jill.JillConst;
 import org.jill.openjill.core.api.message.EnumMessageType;
 import org.jill.openjill.core.api.message.object.CreateObjectMessage;
 import org.jill.openjill.core.api.message.object.ObjectListMessage;
@@ -23,7 +14,13 @@ import org.simplegame.InterfaceSimpleGameHandleInterface;
 import org.simplegame.SimpleGameHandler;
 import org.simplegame.SimpleGameKeyHandler;
 
-import javax.swing.text.html.Option;
+import java.awt.*;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * This class manage all of object.
@@ -38,34 +35,36 @@ public abstract class AbstractObjectJillLevel
      */
     private static final Logger LOGGER = Logger.getLogger(
             AbstractObjectJillLevel.class.getName());
+
     /**
      * List of object.
      */
-    protected final List<ObjectEntity> listObject = new ArrayList<>();
+    protected final List<ObjectItem> listObject = new ArrayList<>();
+
     /**
      * List of object.
      */
-    protected final List<ObjectEntity> listObjectToRemove = new ArrayList<>();
+    protected final List<ObjectItem> listObjectToRemove = new ArrayList<>();
+
     /**
      * List of object.
      */
-    protected final List<ObjectEntity> listObjectToAdd = new ArrayList<>();
+    protected final List<ObjectItem> listObjectToAdd = new ArrayList<>();
+
     /**
      * List of object always display on screen.
      */
-    protected final List<ObjectEntity> listObjectAlwaysOnScreen = new ArrayList<>();
-    /**
-     * List of object on draw background (keep reference for save file).
-     */
-    protected final List<ObjectEntity> listObjectDrawOnBackground = new ArrayList<>();
+    protected final List<ObjectItem> listObjectAlwaysOnScreen = new ArrayList<>();
+
     /**
      * Keyboard.
      */
     protected SimpleGameKeyHandler keyboard;
+
     /**
      * Object cache.
      */
-    protected ObjectManager objectCache;
+    protected ObjectManagerCache objectCache;
 
     /**
      * Level configuration.
@@ -87,7 +86,7 @@ public abstract class AbstractObjectJillLevel
      * @throws IOException                  if error reading file
      * @throws ReflectiveOperationException if error create class of object
      */
-    private void constructor() throws IOException, ReflectiveOperationException {
+    private void constructor() throws IOException, IllegalAccessException, ClassNotFoundException, InstantiationException {
         messageDispatcher.addHandler(EnumMessageType.OBJECT, this);
         messageDispatcher.addHandler(EnumMessageType.CREATE_OBJECT, this);
         messageDispatcher.addHandler(EnumMessageType.REPLACE_OBJECT, this);
@@ -104,84 +103,61 @@ public abstract class AbstractObjectJillLevel
     /**
      * Create list of object.
      */
-    private void initObjectList() {
+    private void initObjectList() throws IllegalAccessException, InstantiationException, ClassNotFoundException {
         // Create object manager
-        this.objectCache = ObjectManager.getInstance();
+        objectCache = new ObjectManagerCache("std-openjill-object-manager.properties", shaFile,
+                dmaFile, screenType);
+
         // List of object in file
-        final List<ObjectItem> listObjectItem = this.jnFile.getObjectLayer();
+        final List<ObjectItem> listObjectItem = jnFile.getObjectLayer();
         // Graphic
-        final Graphics2D g2 = this.background.createGraphics();
+        final Graphics2D g2 = background.createGraphics();
         // Object parameter
         final ObjectParam objParam = ObjectInstanceFactory.getNewObjParam();
-        objParam.init(this.backgroundObject,
-                this.pictureCache, this.messageDispatcher,
-                this.levelConfiguration.getLevelNumber());
+// TODO new architecture
+//        objParam.init(this.backgroundObject,
+//                this.pictureCache, this.messageDispatcher,
+//                this.levelConfiguration.getLevelNumber());
 
         // Current object
         ObjectEntity obj;
         Optional<ObjectEntity> cacheObject;
 
         for (ObjectItem currentObject : listObjectItem) {
-
-            objParam.setObject(currentObject);
-
-            // Get jill object
-            cacheObject = this.objectCache.getNewObject(objParam);
-
-            // No manager found for this object
-            if (cacheObject.isPresent()) {
-                obj = cacheObject.get();
-            } else {
-                LOGGER.warning(String.format("The object with type %d is not "
-                        + "implemented", currentObject.getType()));
-                continue;
-            }
-
-            if (obj.isWriteOnBackGround() && obj.msgDraw().isPresent()
-                    && checkIfNotUpdatableBackground(obj)) {
-                listObjectDrawOnBackground.add(obj);
-
-                // Object draw in background only if object can this and not
-                // background with update msg support.
-                // Grap picture and don't store it in list
-                g2.drawImage(obj.msgDraw().get(), obj.getX(), obj.getY(), null);
-            } else if (obj.isAlwaysOnScreen()) {
-                listObjectAlwaysOnScreen.add(obj);
-            } else {
-                // In original game engine, player is the first object
-                // Level can contain more than one player but only first is
-                // playable.
-                listObject.add(obj);
-            }
+// TODO new architecture
+//            objParam.setObject(currentObject);
+//
+//            // Get jill object
+//            cacheObject = this.objectCache.getNewObject(objParam);
+//
+//            // No manager found for this object
+//            if (cacheObject.isPresent()) {
+//                obj = cacheObject.get();
+//            } else {
+//                LOGGER.warning(String.format("The object with type %d is not "
+//                        + "implemented", currentObject.getType()));
+//                continue;
+//            }
+//
+//            if (obj.isWriteOnBackGround() && obj.msgDraw().isPresent()
+//                    && checkIfNotUpdatableBackground(obj)) {
+//                listObjectDrawOnBackground.add(obj);
+//
+//                // Object draw in background only if object can this and not
+//                // background with update msg support.
+//                // Grap picture and don't store it in list
+//                g2.drawImage(obj.msgDraw().get(), obj.getX(), obj.getY(), null);
+//            } else if (obj.isAlwaysOnScreen()) {
+//                listObjectAlwaysOnScreen.add(obj);
+//            } else {
+//                // In original game engine, player is the first object
+//                // Level can contain more than one player but only first is
+//                // playable.
+//                listObject.add(obj);
+//            }
         }
 
         g2.dispose();
-    }
-
-    /**
-     * Check if background have update.
-     *
-     * @param obj object
-     * @return true if background not updatable
-     */
-    protected final boolean checkIfNotUpdatableBackground(
-            final ObjectEntity obj) {
-        final int blockSize = JillConst.getBlockSize();
-
-        final int startX = obj.getX() / blockSize;
-        final int endX = (obj.getX() + obj.getWidth()) / blockSize;
-        final int startY = obj.getY() / blockSize;
-        final int endY = (obj.getY() + obj.getHeight()) / blockSize;
-
-        for (int indexX = startX; indexX <= endX; indexX++) {
-            for (int indexY = startY; indexY <= endY; indexY++) {
-                if (backgroundObject[indexX][indexY].isMsgUpdate()) {
-                    return false;
-                }
-            }
-        }
-
-        return true;
     }
 
     /**
@@ -220,11 +196,11 @@ public abstract class AbstractObjectJillLevel
             final ReplaceObjectMessage replaceObjectMessage) {
         final int indexObject = this.listObject.indexOf(
                 replaceObjectMessage.getObjectOrigin());
-
-        if (indexObject >= 0) {
-            this.listObject.set(indexObject,
-                    replaceObjectMessage.getObjectNew());
-        }
+// TODO new architecture
+//        if (indexObject >= 0) {
+//            this.listObject.set(indexObject,
+//                    replaceObjectMessage.getObjectNew());
+//        }
     }
 
     /**
@@ -234,21 +210,21 @@ public abstract class AbstractObjectJillLevel
      */
     private void recieveMessageListObject(final ObjectListMessage olm) {
         final ObjectEntity obj = olm.getObject();
-
-        if (olm.isAdd()) {
-            if (obj == null) {
-                this.listObjectToAdd.addAll(olm.getListObject());
-            } else {
-                this.listObjectToAdd.add(obj);
-            }
-        } else {
-            if (obj == null) {
-                this.listObjectToRemove.addAll(olm.getListObject());
-            } else {
-                this.listObjectToRemove.add(obj);
-            }
-
-        }
+// TODO new architecture
+//        if (olm.isAdd()) {
+//            if (obj == null) {
+//                this.listObjectToAdd.addAll(olm.getListObject());
+//            } else {
+//                this.listObjectToAdd.add(obj);
+//            }
+//        } else {
+//            if (obj == null) {
+//                this.listObjectToRemove.addAll(olm.getListObject());
+//            } else {
+//                this.listObjectToRemove.add(obj);
+//            }
+//
+//        }
     }
 
     /**
@@ -256,16 +232,17 @@ public abstract class AbstractObjectJillLevel
      *
      * @return the player
      */
-    protected Optional<ObjectEntity> getPlayer() {
-        ObjectEntity oe = null;
-
-        for (ObjectEntity currentObject : this.listObject) {
-            if (currentObject.isPlayer()) {
-                oe = currentObject;
-
-                break;
-            }
-        }
+    protected Optional<ObjectItem> getPlayer() {
+        ObjectItem oe = null;
+// TODO new architecture
+oe = ObjectInstanceFactory.getNewObjectItem();
+//        for (ObjectItem currentObject : this.listObject) {
+//            if (currentObject.isPlayer()) {
+//                oe = currentObject;
+//
+//                break;
+//            }
+//        }
 
         return Optional.ofNullable(oe);
     }
@@ -279,33 +256,33 @@ public abstract class AbstractObjectJillLevel
         final ObjectItem oe = ObjectInstanceFactory.getNewObjectItem();
 
         int type;
-
-        if (com.getType() == CreateObjectMessage.CreateObjectType.CREATE_BY_CLASS_NAME) {
-            type = this.objectCache
-                    .findTypeByImplementationClassName(com.getClassName());
-        } else {
-            type = com.getObjectType();
-        }
-
-        oe.setType(type);
+// TODO new architecture
+//        if (com.getType() == CreateObjectMessage.CreateObjectType.CREATE_BY_CLASS_NAME) {
+//            type = this.objectCache
+//                    .findTypeByImplementationClassName(com.getClassName());
+//        } else {
+//            type = com.getObjectType();
+//        }
+//
+//        oe.setType(type);
 
         // Object parameter
         final ObjectParam objParam = ObjectInstanceFactory.getNewObjParam();
-
-        objParam.init(this.backgroundObject,
-                this.pictureCache, this.messageDispatcher,
-                this.levelConfiguration.getLevelNumber());
-
-        objParam.setObject(oe);
-
-        // Get jill object
-        final Optional<ObjectEntity> cacheObject = this.objectCache.getNewObject(objParam);
-
-        if (cacheObject.isPresent()) {
-            com.setObject(cacheObject.get());
-        } else {
-            LOGGER.severe(String.format("Can't find object type '%d' to create"
-                    + "it at runtime", oe.getType()));
-        }
+// TODO new architecture
+//        objParam.init(this.backgroundObject,
+//                this.pictureCache, this.messageDispatcher,
+//                this.levelConfiguration.getLevelNumber());
+//
+//        objParam.setObject(oe);
+//
+//        // Get jill object
+//        final Optional<ObjectEntity> cacheObject = this.objectCache.getNewObject(objParam);
+//
+//        if (cacheObject.isPresent()) {
+//            com.setObject(cacheObject.get());
+//        } else {
+//            LOGGER.severe(String.format("Can't find object type '%d' to create"
+//                    + "it at runtime", oe.getType()));
+//        }
     }
 }

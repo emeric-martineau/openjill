@@ -53,7 +53,7 @@
         <!-- Objects and Background -->
         <dependency>
             <groupId>org.jill.entities</groupId>
-            <artifactId>open-jill-object-background</artifactId>
+            <artifactId>openjill-object-manager</artifactId>
         </dependency>
         <!-- Simple game layer -->
         <dependency>
@@ -68,7 +68,29 @@
         <dependency>
           <groupId>com.fasterxml.jackson.core</groupId>
           <artifactId>jackson-databind</artifactId>
-        </dependency>      
+        </dependency>
+        <dependency>
+            <groupId>org.jill.jn</groupId>
+            <artifactId>jn-file-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.jill</groupId>
+            <artifactId>openjill-core-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.jill.jn</groupId>
+            <artifactId>jn-file-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.jill</groupId>
+            <artifactId>openjill-core-api</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.jill.entities</groupId>
+            <artifactId>openjill-cache-managerr</artifactId>
+            <version>0.2.7-SNAPSHOT</version>
+            <scope>compile</scope>
+        </dependency>
     </dependencies>
 
     <build>

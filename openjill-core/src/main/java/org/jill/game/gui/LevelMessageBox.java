@@ -1,6 +1,13 @@
 package org.jill.game.gui;
 
-import java.awt.Graphics2D;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import org.jill.game.gui.conf.LevelMessageConf;
+import org.jill.game.screen.conf.RectangleConf;
+import org.jill.openjill.core.api.manager.TextManager;
+import org.jill.openjill.core.api.screen.EnumScreenType;
+import org.jill.sha.ShaFile;
+
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
@@ -8,13 +15,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import org.jill.game.gui.conf.LevelMessageConf;
-import org.jill.game.screen.conf.RectangleConf;
-import org.jill.openjill.core.api.manager.TextManager;
-import org.jill.openjill.core.api.manager.TileManager;
-import org.jill.openjill.core.api.screen.EnumScreenType;
-import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  * Display level message.
@@ -43,7 +43,7 @@ public final class LevelMessageBox extends AbstractMessageBox {
     /**
      * Picture cache.
      */
-    private final TileManager pictureCache;
+    private final TextManager textManager;
     /**
      * Key to get good message for level.
      */
@@ -57,10 +57,12 @@ public final class LevelMessageBox extends AbstractMessageBox {
      */
     private boolean canchange = false;
 
-    public LevelMessageBox(final TileManager pctCache,
-            final String saveExtension, final EnumScreenType screen) {
+    public LevelMessageBox(final TextManager textManager,
+                           final String saveExtension, final ShaFile shaFile, final EnumScreenType screen) {
 
-        this.pictureCache = pctCache;
+        super(shaFile, screen);
+
+        this.textManager = textManager;
 
         if (screen == EnumScreenType.VGA) {
             this.conf = readConf("level_messagebox_vga.json");
@@ -78,14 +80,14 @@ public final class LevelMessageBox extends AbstractMessageBox {
 
         RectangleConf textArea = this.conf.getTextarea();
 
-        drawArea(this.g2BoxPicture, pctCache, Optional.of(textArea));
+        drawArea(this.g2BoxPicture, textManager, Optional.of(textArea));
 
         textArea = this.conf.getPicturearea();
 
-        drawArea(this.g2BoxPicture, pctCache, Optional.of(textArea));
+        drawArea(this.g2BoxPicture, textManager, Optional.of(textArea));
 
         // Draw picture
-        drawAllPicture(this.g2BoxPicture, this.pictureCache, this.conf);
+        drawAllPicture(this.g2BoxPicture, this.conf);
 
         this.keyOfMessage = saveExtension;
     }
@@ -193,7 +195,7 @@ public final class LevelMessageBox extends AbstractMessageBox {
         RectangleConf textAreaConf = this.conf.getTextarea();
 
         // Clear text area
-        drawArea(this.g2BoxPicture, this.pictureCache, Optional.of(textAreaConf));
+        drawArea(this.g2BoxPicture, textManager, Optional.of(textAreaConf));
 
         // Compute size of text.
         // Text is splited by \n.
@@ -218,7 +220,7 @@ public final class LevelMessageBox extends AbstractMessageBox {
                     textToDraw[indexMsg] = " ";
                 }
 
-                pictureToDraw[indexMsg] = this.pictureCache.getTextManager()
+                pictureToDraw[indexMsg] = textManager
                         .createSmallText(textToDraw[indexMsg],
                                 this.conf.getTextColor(),
                                 TextManager.BACKGROUND_COLOR_NONE);
