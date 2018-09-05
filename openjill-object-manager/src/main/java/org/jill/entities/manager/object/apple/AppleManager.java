@@ -2,11 +2,11 @@ package org.jill.entities.manager.object.apple;
 
 import org.jill.entities.manager.object.AbstractObject;
 import org.jill.entities.manager.object.common.conf.PictureConf;
-import org.jill.openjill.core.api.picture.PictureTools;
+import org.jill.jn.ObjectItem;
 import org.jill.openjill.core.api.entities.BackgroundEntity;
-import org.jill.openjill.core.api.entities.ObjectEntity;
 import org.jill.openjill.core.api.entities.ObjectParam;
 import org.jill.openjill.core.api.keyboard.KeyboardLayout;
+import org.jill.openjill.core.api.picture.PictureTools;
 import org.jill.openjill.core.api.screen.EnumScreenType;
 import org.jill.sha.ShaFile;
 
@@ -51,17 +51,17 @@ public class AppleManager extends AbstractObject {
     }
 
     @Override
-    public Optional<BufferedImage> msgDraw() {
-        return Optional.empty();
+    public Optional<BufferedImage> msgDraw(final ObjectItem object) {
+        return Optional.of(images[defaultIndexImage * 2]);
     }
 
     @Override
-    public void msgTouch(ObjectEntity obj, KeyboardLayout keyboardLayout) {
+    public void msgTouch(ObjectItem obj, KeyboardLayout keyboardLayout) {
 
     }
 
     @Override
-    public void msgKill(ObjectEntity sender, int nbLife, int typeOfDeath) {
+    public void msgKill(ObjectItem sender, int nbLife, int typeOfDeath) {
 
     }
 
@@ -71,7 +71,7 @@ public class AppleManager extends AbstractObject {
     }
 
     @Override
-    public void msgUpdate(KeyboardLayout keyboardLayout) {
+    public void msgUpdate(KeyboardLayout keyboardLayout, final ObjectItem object) {
 
     }
 

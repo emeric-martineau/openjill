@@ -22,10 +22,8 @@ import org.simplegame.InterfaceSimpleGameHandleInterface;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.*;
 import java.util.List;
-import java.util.ListIterator;
-import java.util.Optional;
 
 /**
  * This class manage all of execution method of game (run, pause, cheat, key,
@@ -38,91 +36,113 @@ public abstract class AbstractExecutingStdLevel extends AbstractMenuJillLevel {
      * Number of pressed key to activate cheat code.
      */
     private static final int CHEAT_CODE_NUMBER = 3;
+
     /**
      * Object rectangle (only for optimization).
      */
     protected final Rectangle objRect = new Rectangle();
+
     /**
      * Player rectangle (only for optimization).
      */
     protected final Rectangle obj2Rect = new Rectangle();
+
     /**
      * Object to draw.
      */
-    protected final List<ObjectEntity> listObjectToDraw = new ArrayList<>();
+    protected final List<ObjectItem> listObjectToDraw = new ArrayList<>();
+
     /**
      * Current list of oject currently on screen.
      */
-    private final List<ObjectEntity> listObjectCurrentlyDisplayedOnScreen =
+    private final List<ObjectItem> listObjectCurrentlyDisplayedOnScreen =
             new ArrayList<>();
+
     /**
      * Turtle swith.
      */
     protected boolean turtleSwitch = false;
+
     /**
      * Load game.
      */
     protected MenuInterface menuStd;
+
     /**
      * Control area.
      */
     protected ControlArea controlArea;
+
     /**
      * Inventory area.
      */
     protected InventoryArea inventoryArea;
+
     /**
      * Screen to draw.
      */
     protected BufferedImage drawingScreen;
+
     /**
      * G2 for drawing screen.
      */
     protected Graphics2D g2DrawingScreen;
+
     /**
      * Screen rectangle.
      */
     protected Rectangle updateObjectScreenRect;
+
     /**
      * Visible screen rectangle.
      */
     protected Rectangle visibleScreenRect;
+
     /**
      * If need update inventory screen.
      */
     protected boolean updateInventoryScreen = false;
+
     /**
      * Keyboard object share between object (include player).
      */
     protected KeyboardLayout keyboardLayout;
+
     /**
      * Cheat count.
      */
     protected int cheatCount;
+
     /**
      * Cheat count for gem.
      */
     protected int gemCheatCount;
+
     /**
      * Cheat for high jump.
      */
     protected int highJumpCheatCount;
+
     /**
      * Cheat code for invisible object.
      */
     protected int displayInvisibleObject;
+
     /**
      * True if player invicible.
      */
     protected boolean invincibility;
+
     /**
      * Show invisible object.
      */
     protected boolean showInvisible;
+
     /**
      * False if pause game.
      */
     protected boolean runGame;
+
     /**
      * By default, send update message t object on visible screen.
      */
@@ -429,59 +449,61 @@ public abstract class AbstractExecutingStdLevel extends AbstractMenuJillLevel {
                 lOffsetY - JillConst.getyUpdateScreenBorder());
 
         visibleScreenRect.setLocation(lOffsetX, lOffsetY);
-// TODO new architecture
-//
-//        final ObjectEntity player = getPlayer().get();
-//
-//        // Set player bounds
-//        obj2Rect.setBounds(player.getX(), player.getY(), player.getWidth(),
-//                player.getHeight());
-//
-//        // Grap list of object on screen
-//        Iterator<ObjectEntity> itObj = this.listObject.iterator();
-//        ObjectEntity obj;
-//
-//        while (itObj.hasNext()) {
-//            obj = itObj.next();
-//
-//            objRect.setBounds(obj.getX(), obj.getY(), obj.getWidth(),
-//                    obj.getHeight());
-//
-//            if (updateObjectScreenRect.intersects(objRect)) {
-//                listObjectCurrentlyDisplayedOnScreen.add(obj);
-//            }
-//        }
-//
-//        // Update and object touch
-//        itObj = listObjectCurrentlyDisplayedOnScreen.iterator();
-//
-//        while (itObj.hasNext()) {
-//            obj = itObj.next();
-//
-//            objRect.setBounds(obj.getX(), obj.getY(), obj.getWidth(),
-//                    obj.getHeight());
-//
-//            if (obj.isRemoveOutOfVisibleScreen()
-//                    && !visibleScreenRect.intersects(objRect)) {
-//                listObjectToRemove.add(obj);
-//
-//                itObj.remove();
-//            } else {
-//                checkUpdatedObjectCollision(obj);
-//            }
-//        }
-//
-//        // Reset last object. Check if need redraw inventory for backcolor.
+
+        final ObjectItem player = getPlayer().get();
+
+        // Set player bounds
+        obj2Rect.setBounds(player.getX(), player.getY(), player.getWidth(),
+                player.getHeight());
+
+        // Grap list of object on screen
+        Iterator<ObjectItem> itObj = this.listObject.iterator();
+        ObjectItem obj;
+        ObjectEntity objManager;
+
+        while (itObj.hasNext()) {
+            obj = itObj.next();
+
+            objRect.setBounds(obj.getX(), obj.getY(), obj.getWidth(),
+                    obj.getHeight());
+
+            if (updateObjectScreenRect.intersects(objRect)) {
+                listObjectCurrentlyDisplayedOnScreen.add(obj);
+            }
+        }
+
+        // Update and object touch
+        itObj = listObjectCurrentlyDisplayedOnScreen.iterator();
+
+        while (itObj.hasNext()) {
+            obj = itObj.next();
+
+            objManager = objectCache.getManager(obj.getType());
+
+            objRect.setBounds(obj.getX(), obj.getY(), obj.getWidth(),
+                    obj.getHeight());
+
+            if (objManager.isRemoveOutOfVisibleScreen()
+                    && !visibleScreenRect.intersects(objRect)) {
+                listObjectToRemove.add(obj);
+
+                itObj.remove();
+            } else {
+                checkUpdatedObjectCollision(obj);
+            }
+        }
+
+        // Reset last object. Check if need redraw inventory for backcolor.
         this.updateInventoryScreen = this.inventoryArea.isNeedRedraw()
                 || this.updateInventoryScreen;
-//
-//        listObjectCurrentlyDisplayedOnScreen.clear();
-//
-//        // Remove object from list
-//        for (ObjectEntity obj1 : listObjectToRemove) {
-//            listObject.remove(obj1);
-//            listObjectToDraw.remove(obj1);
-//        }
+
+        listObjectCurrentlyDisplayedOnScreen.clear();
+
+        // Remove object from list
+        for (ObjectItem obj1 : listObjectToRemove) {
+            listObject.remove(obj1);
+            listObjectToDraw.remove(obj1);
+        }
 
         listObjectToRemove.clear();
 
@@ -498,32 +520,34 @@ public abstract class AbstractExecutingStdLevel extends AbstractMenuJillLevel {
      */
     private void checkUpdatedObjectCollision(final ObjectItem obj) {
         int zaphold;
+
         // Decreate touch player flag
         zaphold = obj.getZapHold();
+
         if (zaphold > 0) {
             obj.setZapHold(zaphold - 1);
         }
-// TODO new architecture
-//        if (this.updateObject) {
-//            obj.msgUpdate(this.keyboardLayout);
-//        }
-//
-//        listObjectToDraw.add(obj);
-//
-//        for (ObjectEntity obj2 : listObjectCurrentlyDisplayedOnScreen) {
-//            obj2Rect.setBounds(obj2.getX(), obj2.getY(),
-//                    obj2.getWidth(), obj2.getHeight());
-//
-//            // Check object collision.
-//            // Skip if same object
-//            // Skip if obj1 is player because, msgKeyboard call after and
-//            // if don't skip when object collision state of player update
-//            // twice
-//            if (obj != obj2
-//                    && obj2Rect.intersects(objRect)) {
-//                obj.msgTouch(obj2, this.keyboardLayout);
-//            }
-//        }
+
+        if (this.updateObject) {
+            objectCache.getManager(obj.getType()).msgUpdate(this.keyboardLayout, obj);
+        }
+
+        listObjectToDraw.add(obj);
+
+        for (ObjectItem obj2 : listObjectCurrentlyDisplayedOnScreen) {
+            obj2Rect.setBounds(obj2.getX(), obj2.getY(),
+                    obj2.getWidth(), obj2.getHeight());
+
+            // Check object collision.
+            // Skip if same object
+            // Skip if obj1 is player because, msgKeyboard call after and
+            // if don't skip when object collision state of player update
+            // twice
+            if (obj != obj2
+                    && obj2Rect.intersects(objRect)) {
+                objectCache.getManager(obj.getType()).msgTouch(obj2, this.keyboardLayout);
+            }
+        }
     }
 
     /**
@@ -588,35 +612,40 @@ public abstract class AbstractExecutingStdLevel extends AbstractMenuJillLevel {
      * Start draw by last object.
      */
     private void drawObject() {
-// TODO new architecture
-//        for (ObjectEntity currentObject : listObjectAlwaysOnScreen) {
-//            g2DrawingScreen.drawImage(currentObject.msgDraw().get(),
-//                    currentObject.getX(), currentObject.getY(), null);
-//        }
+        ObjectEntity objManager;
 
-        ListIterator<ObjectEntity> itDraw
+        for (ObjectItem currentObject : listObjectAlwaysOnScreen) {
+            objManager = objectCache.getManager(currentObject.getType());
+
+            g2DrawingScreen.drawImage(objManager.msgDraw(currentObject).get(),
+                    currentObject.getX(), currentObject.getY(), null);
+        }
+
+        ListIterator<ObjectItem> itDraw
                 = listObjectToDraw.listIterator(listObjectToDraw.size());
-        ObjectEntity currentObject;
+        ObjectItem currentObject;
 
         final RectangleConf offset
                 = this.statusBar.getGameAreaConf().getOffset();
         final int specialScreenShift = this.statusBar.getGameAreaConf()
                 .getSpecialScreenShift();
-// TODO new architecture
-//        while (itDraw.hasPrevious()) {
-//            currentObject = itDraw.previous();
-//
-//            if (this.showInvisible && !currentObject.msgDraw().isPresent()) {
-//                drawDashedRectFilled(g2DrawingScreen, currentObject, offset);
-//            } else if (currentObject.msgDraw().isPresent()) {
-//                g2DrawingScreen.drawImage(currentObject.msgDraw().get(),
-//                        currentObject.getX()
-//                                + offset.getX(),
-//                        currentObject.getY()
-//                                + offset.getY() - specialScreenShift,
-//                        null);
-//            }
-//        }
+
+        while (itDraw.hasPrevious()) {
+            currentObject = itDraw.previous();
+
+            objManager = objectCache.getManager(currentObject.getType());
+
+            if (this.showInvisible && !objManager.msgDraw(currentObject).isPresent()) {
+                drawDashedRectFilled(g2DrawingScreen, currentObject, offset);
+            } else if (objManager.msgDraw(currentObject).isPresent()) {
+                g2DrawingScreen.drawImage(objManager.msgDraw(currentObject).get(),
+                        currentObject.getX()
+                                + offset.getX(),
+                        currentObject.getY()
+                                + offset.getY() - specialScreenShift,
+                        null);
+            }
+        }
 
         // NOTE : Disable in 0.0.28 cause, new collision method do this
         //g2DrawingScreen.drawImage(player.msgDraw(), player.getX() + offsetX,

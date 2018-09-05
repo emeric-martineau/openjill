@@ -124,37 +124,19 @@ public abstract class AbstractObjectJillLevel
         Optional<ObjectEntity> cacheObject;
 
         for (ObjectItem currentObject : listObjectItem) {
+            cacheObject = Optional.ofNullable(objectCache.getManager(currentObject.getType()));
 // TODO new architecture
 //            objParam.setObject(currentObject);
 //
-//            // Get jill object
-//            cacheObject = this.objectCache.getNewObject(objParam);
 //
-//            // No manager found for this object
-//            if (cacheObject.isPresent()) {
-//                obj = cacheObject.get();
-//            } else {
-//                LOGGER.warning(String.format("The object with type %d is not "
-//                        + "implemented", currentObject.getType()));
-//                continue;
-//            }
-//
-//            if (obj.isWriteOnBackGround() && obj.msgDraw().isPresent()
-//                    && checkIfNotUpdatableBackground(obj)) {
-//                listObjectDrawOnBackground.add(obj);
-//
-//                // Object draw in background only if object can this and not
-//                // background with update msg support.
-//                // Grap picture and don't store it in list
-//                g2.drawImage(obj.msgDraw().get(), obj.getX(), obj.getY(), null);
-//            } else if (obj.isAlwaysOnScreen()) {
-//                listObjectAlwaysOnScreen.add(obj);
-//            } else {
-//                // In original game engine, player is the first object
-//                // Level can contain more than one player but only first is
-//                // playable.
-//                listObject.add(obj);
-//            }
+            // Manager found for this object
+            if (cacheObject.isPresent()) {
+                listObject.add(currentObject);
+            } else {
+                LOGGER.warning(String.format("The object with type %d is not "
+                        + "implemented", currentObject.getType()));
+                continue;
+            }
         }
 
         g2.dispose();
@@ -233,18 +215,19 @@ public abstract class AbstractObjectJillLevel
      * @return the player
      */
     protected Optional<ObjectItem> getPlayer() {
-        ObjectItem oe = null;
-// TODO new architecture
-oe = ObjectInstanceFactory.getNewObjectItem();
-//        for (ObjectItem currentObject : this.listObject) {
-//            if (currentObject.isPlayer()) {
-//                oe = currentObject;
-//
-//                break;
-//            }
-//        }
+        ObjectItem player = null;
+        ObjectEntity objManager;
+        for (ObjectItem currentObject : this.listObject) {
+            objManager = objectCache.getManager(currentObject.getType());
 
-        return Optional.ofNullable(oe);
+            if (objManager.isPlayer()) {
+                player = currentObject;
+
+                break;
+            }
+        }
+
+        return Optional.ofNullable(player);
     }
 
     /**

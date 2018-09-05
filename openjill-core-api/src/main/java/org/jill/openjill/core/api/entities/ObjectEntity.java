@@ -1,10 +1,10 @@
 package org.jill.openjill.core.api.entities;
 
-import java.awt.image.BufferedImage;
-import java.util.Optional;
-
 import org.jill.jn.ObjectItem;
 import org.jill.openjill.core.api.keyboard.KeyboardLayout;
+
+import java.awt.image.BufferedImage;
+import java.util.Optional;
 
 /**
  * Object entity interface.
@@ -89,7 +89,7 @@ public interface ObjectEntity {
      *
      * @return picture
      */
-    Optional<BufferedImage> msgDraw();
+    Optional<BufferedImage> msgDraw(ObjectItem object);
 
     /**
      * Call when player touch object. (e.g. for lift).
@@ -97,7 +97,7 @@ public interface ObjectEntity {
      * @param obj            object
      * @param keyboardLayout keyboard object
      */
-    void msgTouch(ObjectEntity obj, KeyboardLayout keyboardLayout);
+    void msgTouch(ObjectItem obj, KeyboardLayout keyboardLayout);
 
     /**
      * When weapon kill object or ennemy kill player.
@@ -106,7 +106,7 @@ public interface ObjectEntity {
      * @param nbLife      number life to decrease
      * @param typeOfDeath tyep of death (for player)
      */
-    void msgKill(ObjectEntity sender, int nbLife, int typeOfDeath);
+    void msgKill(ObjectItem sender, int nbLife, int typeOfDeath);
 
     /**
      * When background kill object.
@@ -122,7 +122,7 @@ public interface ObjectEntity {
      *
      * @param keyboardLayout keyboard object
      */
-    void msgUpdate(KeyboardLayout keyboardLayout);
+    void msgUpdate(KeyboardLayout keyboardLayout, ObjectItem object);
 
     /**
      * Remove object if out of visible screen.
