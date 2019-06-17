@@ -1,0 +1,26 @@
+====== Snake ======
+
+Snake is like [[jill:algo:gator|Gator]]. Except size that decrease when hit by weapon.\\
+Allowed size is 56, 48, 40, 32, 24.\\
+//iXD// is speed of Snake.\\
+//iCounter// give image.\\
+//iState// to know if hit by weapon.
+
+For right :
+^ iCounter ^ Head (tileset/tile) ^ Middle (tileset/tile) ^ Tail (tileset/tile) ^
+| 0 | 15/0 | 15/3 | 15/7 |
+| 1 | 15/1 | 15/4 | 15/7 |
+| 2 | 15/0 | 15/5 | 15/8 |
+| 3 | 15/2 | 15/6 | 15/8 |
+
+For left :
+^ iCounter ^ Head (tileset/tile) ^ Middle (tileset/tile) ^ Tail (tileset/tile) ^
+| 0 | 15/9 | 15/3 | 15/12 |
+| 1 | 15/10 | 15/4 | 15/12 |
+| 2 | 15/9 | 15/5 | 15/13 |
+| 3 | 15/11 | 15/6 | 15/13 |
+
+When Snake is hit by weapon, //iState// set to 16 and decrease at each cycle, size (width) is decrease (-8).\\
+Weapon cannot hit Snake if //iState// is not set to 0.
+
+When Snake dead, player win 35 points.

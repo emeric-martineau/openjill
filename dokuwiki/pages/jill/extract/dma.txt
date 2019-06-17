@@ -1,0 +1,327 @@
+====== DMA file content extract ======
+
+^ID^TileSet^Tile^Flags^Name^Picture (VGA only)^
+| 0000 | 0007 | 0000 | F_PLAYERTHRU, 0x0200 | 0 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_7_tile_0_vga.png}} |
+| 0014 | 001B | 0000 | F_PLAYERTHRU, F_MSGDRAW, F_MSGUPDATE | BASETREE | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_27_tile_0_vga.png}} See [[jill:algo:base|Base background]] |
+| 0015 | 001B | 0003 | F_PLAYERTHRU, F_MSGDRAW, F_MSGUPDATE | BASESHORE | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_27_tile_3_vga.png}} See [[jill:algo:base|Base background]] |
+| 0016 | 001B | 0006 | F_PLAYERTHRU, F_MSGDRAW, F_MSGUPDATE | BASECLIFF | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_27_tile_6_vga.png}} See [[jill:algo:base|Base background]] |
+| 0017 | 001B | 0009 | F_PLAYERTHRU, F_MSGDRAW, F_MSGUPDATE | BASEWATER | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_27_tile_9_vga.png}} See [[jill:algo:base|Base background]] |
+| 001E | 0030 | 0000 | 0x0 | SMALLBRICKS | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_48_tile_0_vga.png}} |
+| 001F | 0030 | 0001 | 0x0 | BIGBRICKS | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_48_tile_1_vga.png}} |
+| 0020 | 0030 | 0002 | F_PLAYERTHRU | WOODPLACK | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_48_tile_2_vga.png}} |
+| 0021 | 0030 | 0003 | F_PLAYERTHRU, F_MSGUPDATE | WOODTORCH | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_48_tile_3_vga.png}} See [[jill:algo:woodtorch|Woodtorch background]] |
+| 0022 | 0030 | 0004 | 0x0 | WOODPANEL | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_48_tile_4_vga.png}} |
+| 0023 | 0030 | 0005 | F_PLAYERTHRU | HINTPANEL | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_48_tile_5_vga.png}} |
+| 002D | 002A | 0000 | F_PLAYERTHRU, F_MSGDRAW, 0x0200 | SHORE | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_42_tile_0_vga.png}} |
+| 0032 | 0011 | 0000 | F_PLAYERTHRU, 0x0200 | SUN | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_17_tile_0_vga.png}} |
+| 0033 | 0011 | 0001 | F_PLAYERTHRU, 0x0200 | SUNB | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_17_tile_1_vga.png}} |
+| 0034 | 0011 | 0002 | F_PLAYERTHRU, 0x0200 | SUNT | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_17_tile_2_vga.png}} |
+| 0035 | 0011 | 0003 | F_PLAYERTHRU, 0x0200 | SUNTL | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_17_tile_3_vga.png}} |
+| 0036 | 0011 | 0004 | F_PLAYERTHRU, 0x0200 | SUNTR | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_17_tile_4_vga.png}} |
+| 0037 | 0011 | 0005 | F_PLAYERTHRU, 0x0200 | SUNBL | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_17_tile_5_vga.png}} |
+| 0038 | 0011 | 0006 | F_PLAYERTHRU, 0x0200 | SUNBR | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_17_tile_6_vga.png}} |
+| 0039 | 0012 | 0000 | F_PLAYERTHRU, 0x0200 | LASHADE0 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_18_tile_0_vga.png}} |
+| 003A | 0012 | 0001 | F_PLAYERTHRU, 0x0200 | LASHADE1 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_18_tile_1_vga.png}} |
+| 003B | 0012 | 0002 | F_PLAYERTHRU, 0x0200 | LASHADE2 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_18_tile_2_vga.png}} |
+| 003C | 0012 | 0003 | F_PLAYERTHRU, 0x0200 | LASHADE3 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_18_tile_3_vga.png}} |
+| 003D | 0012 | 0004 | F_PLAYERTHRU, 0x0200 | LASHADE4 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_18_tile_4_vga.png}} |
+| 003E | 0012 | 0005 | F_PLAYERTHRU, 0x0200 | LASHADE5 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_18_tile_5_vga.png}} |
+| 003F | 0012 | 0006 | F_PLAYERTHRU, 0x0200 | LASHADE6 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_18_tile_6_vga.png}} |
+| 0040 | 0012 | 0007 | F_PLAYERTHRU, 0x0200 | LASHADE7 | //Invalid entry. No tile found// |
+| 0041 | 0013 | 0001 | F_PLAYERTHRU, 0x0200 | BLSHADE1 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_19_tile_1_vga.png}} |
+| 0042 | 0013 | 0002 | F_PLAYERTHRU, 0x0200 | BLSHADE2 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_19_tile_2_vga.png}} |
+| 0043 | 0013 | 0003 | F_PLAYERTHRU, 0x0200 | BLSHADE3 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_19_tile_3_vga.png}} |
+| 0044 | 0013 | 0004 | F_PLAYERTHRU, 0x0200 | BLSHADE4 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_19_tile_4_vga.png}} |
+| 0045 | 0013 | 0005 | F_PLAYERTHRU, 0x0200 | BLSHADE5 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_19_tile_5_vga.png}} |
+| 0046 | 0013 | 0006 | F_PLAYERTHRU, 0x0200 | BLSHADE6 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_19_tile_6_vga.png}} |
+| 0047 | 0013 | 0007 | F_PLAYERTHRU, 0x0200 | BLSHADE7 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_19_tile_7_vga.png}} |
+| 0048 | 0013 | 0008 | F_PLAYERTHRU, 0x0200 | BLSHADE8 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_19_tile_8_vga.png}} |
+| 0049 | 0013 | 0009 | F_PLAYERTHRU, 0x0200 | BLSHADE9 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_19_tile_9_vga.png}} |
+| 004A | 0013 | 0000 | F_PLAYERTHRU, 0x0200 | BLSHADE0 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_19_tile_0_vga.png}} |
+| 0050 | 0020 | 0000 | F_PLAYERTHRU | STALK0 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_32_tile_0_vga.png}} |
+| 0051 | 0020 | 0001 | F_PLAYERTHRU | STALK1 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_32_tile_1_vga.png}} |
+| 0052 | 0020 | 0002 | F_PLAYERTHRU | STALK2 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_32_tile_2_vga.png}} |
+| 0053 | 0020 | 0003 | F_PLAYERTHRU | STALK3 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_32_tile_3_vga.png}} |
+| 0054 | 0020 | 0004 | F_PLAYERTHRU, F_STAIR | STALK4 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_32_tile_4_vga.png}} |
+| 0055 | 0020 | 0005 | F_PLAYERTHRU | STALK5 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_32_tile_5_vga.png}} |
+| 0056 | 0020 | 0006 | F_PLAYERTHRU, F_STAIR | STALK6 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_32_tile_6_vga.png}} |
+| 0057 | 0020 | 0007 | F_PLAYERTHRU | STALK7 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_32_tile_7_vga.png}} |
+| 0058 | 0020 | 0008 | F_PLAYERTHRU | STALK8 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_32_tile_8_vga.png}} |
+| 0059 | 0020 | 0009 | F_PLAYERTHRU | STALK9 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_32_tile_9_vga.png}} |
+| 005A | 0036 | 0000 | F_PLAYERTHRU | BUSHTL | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_54_tile_0_vga.png}} |
+| 005B | 0036 | 0001 | F_PLAYERTHRU | BUSHTR | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_54_tile_1_vga.png}} |
+| 005C | 0036 | 0002 | F_PLAYERTHRU | BUSHBL | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_54_tile_2_vga.png}} |
+| 005D | 0036 | 0003 | F_PLAYERTHRU | BUSHBR | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_54_tile_3_vga.png}} |
+| 005E | 0038 | 0000 | F_PLAYERTHRU | TTT | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_56_tile_0_vga.png}} |
+| 005F | 0038 | 0001 | F_PLAYERTHRU | TTM | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_56_tile_1_vga.png}} |
+| 0060 | 0038 | 0002 | F_PLAYERTHRU | TTRR | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_56_tile_2_vga.png}} |
+| 0061 | 0038 | 0003 | F_PLAYERTHRU | TTLL | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_56_tile_3_vga.png}} |
+| 0062 | 0038 | 0004 | F_PLAYERTHRU | TTL | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_56_tile_4_vga.png}} |
+| 0063 | 0038 | 0005 | F_PLAYERTHRU | TTR | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_56_tile_5_vga.png}} |
+| 006C | 0038 | 0006 | F_PLAYERTHRU | TTLS | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_56_tile_6_vga.png}} |
+| 006D | 0038 | 0007 | F_PLAYERTHRU | TTRS | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_56_tile_7_vga.png}} |
+| 0064 | 000E | 0000 | F_PLAYERTHRU, F_MSGDRAW | PILT | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_14_tile_0_vga.png}} See [[jill:algo:pillar|Pillar background]] |
+| 0065 | 000E | 0001 | F_PLAYERTHRU, F_MSGDRAW | PILM | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_14_tile_1_vga.png}} See [[jill:algo:pillar|Pillar background]] |
+| 0066 | 000E | 0002 | F_PLAYERTHRU, F_MSGDRAW | PILB | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_14_tile_2_vga.png}} See [[jill:algo:pillar|Pillar background]] |
+| 0067 | 000E | 0015 | F_PLAYERTHRU, F_STAIR, F_MSGDRAW | REDPLATL | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_14_tile_21_vga.png}} See [[jill:algo:red_platform|Red platform background]] |
+| 0068 | 000E | 0016 | F_PLAYERTHRU, F_STAIR, F_MSGDRAW | REDPLATM | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_14_tile_22_vga.png}} See [[jill:algo:red_platform|Red platform background]] |
+| 0069 | 000E | 0017 | F_PLAYERTHRU, F_STAIR, F_MSGDRAW | REDPLATR | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_14_tile_23_vga.png}} See [[jill:algo:red_platform|Red platform background]] |
+| 006E | 0037 | 0000 | F_PLAYERTHRU, F_MSGDRAW, F_MSGUPDATE | MIST | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_55_tile_0_vga.png}} See [[jill:algo:mist|Mist background]]|
+| 0078 | 0029 | 0000 | F_PLAYERTHRU | WHITEHINT | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_41_tile_0_vga.png}} |
+| 0079 | 0029 | 0001 | 0x0 | WHITEWALL | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_41_tile_1_vga.png}} |
+| 007A | 0029 | 0002 | 0x0 | REDBR | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_41_tile_2_vga.png}} |
+| 007B | 0029 | 0003 | 0x0 | REDBL | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_41_tile_3_vga.png}} |
+| 007C | 0029 | 0004 | 0x0 | REDB | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_41_tile_4_vga.png}} |
+| 007D | 0029 | 0005 | F_PLAYERTHRU | REDHINT1 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_41_tile_5_vga.png}} |
+| 007E | 0029 | 0006 | F_PLAYERTHRU | REDHINT2 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_41_tile_6_vga.png}} |
+| 007F | 0029 | 0007 | F_PLAYERTHRU | REDHINT3 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_41_tile_7_vga.png}} |
+| 0080 | 0029 | 000E | F_PLAYERTHRU, F_VINE | WHITECLIMB | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_41_tile_14_vga.png}} |
+| 0081 | 0029 | 0008 | F_PLAYERTHRU, F_MSGUPDATE | BLINK | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_41_tile_8_vga.png}} |
+| 0082 | 0029 | 000D | 0x0 | BOULD1 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_41_tile_13_vga.png}} |
+| 0083 | 0029 | 000F | 0x0 | BLUE | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_41_tile_15_vga.png}} |
+| 0084 | 0029 | 0010 | F_PLAYERTHRU | BLUEHINT | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_41_tile_16_vga.png}} |
+| 0085 | 0029 | 0011 | F_PLAYERTHRU, F_STAIR | BLUESTAIR | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_41_tile_17_vga.png}} |
+| 0086 | 0029 | 0012 | F_PLAYERTHRU | SIGNL | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_41_tile_18_vga.png}} |
+| 0087 | 0029 | 0013 | F_PLAYERTHRU | SIGNM | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_41_tile_19_vga.png}} |
+| 0088 | 0029 | 0014 | F_PLAYERTHRU | SIGNR | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_41_tile_20_vga.png}} |
+| 0089 | 0029 | 0015 | F_PLAYERTHRU | SIGNPOST | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_41_tile_21_vga.png}} |
+| 008A | 0029 | 0016 | 0x0 | ELEVMID | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_41_tile_22_vga.png}} |
+| 008C | 0029 | 0016 | 0x0 | ELEVBOT | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_41_tile_22_vga.png}} |
+| 00B4 | 0029 | 0018 | 0x0 | N0 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_41_tile_24_vga.png}} |
+| 00B5 | 0029 | 0019 | 0x0 | N1 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_41_tile_25_vga.png}} |
+| 00B6 | 0029 | 001A | 0x0 | N2 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_41_tile_26_vga.png}} |
+| 00B7 | 0029 | 001B | 0x0 | N3 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_41_tile_27_vga.png}} |
+| 00B8 | 0029 | 001C | 0x0 | N4 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_41_tile_28_vga.png}} |
+| 00B9 | 0029 | 001D | 0x0 | N5 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_41_tile_29_vga.png}} |
+| 00BA | 0029 | 001E | 0x0 | N6 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_41_tile_30_vga.png}} |
+| 00BB | 0029 | 001F | 0x0 | N7 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_41_tile_31_vga.png}} |
+| 00BC | 0029 | 0020 | 0x0 | N8 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_41_tile_32_vga.png}} |
+| 00BD | 0029 | 0021 | 0x0 | N9 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_41_tile_33_vga.png}} |
+| 00BE | 0029 | 0022 | F_MSGDRAW, F_MSGUPDATE | MAPDOOR | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_41_tile_34_vga.png}} See [[jill:algo:lockeddoor|Locked door]]|
+| 0096 | 0014 | 0000 | 0x0 | ROCKS | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_20_tile_0_vga.png}} |
+| 0097 | 0014 | 0001 | F_PLAYERTHRU | ROCKL | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_20_tile_1_vga.png}} |
+| 0098 | 0014 | 0002 | F_PLAYERTHRU | ROCKR | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_20_tile_2_vga.png}} |
+| 0099 | 0014 | 0003 | F_PLAYERTHRU | COBL | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_20_tile_3_vga.png}} |
+| 009A | 0014 | 0004 | F_PLAYERTHRU | COBR | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_20_tile_4_vga.png}} |
+| 009B | 0014 | 0005 | F_PLAYERTHRU, F_VINE | POLET | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_20_tile_5_vga.png}} |
+| 009C | 0014 | 0006 | F_PLAYERTHRU, F_VINE | POLEM | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_20_tile_6_vga.png}} |
+| 009D | 0014 | 0007 | 0x0 | BOULD2 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_20_tile_7_vga.png}} |
+| 009E | 0014 | 0008 | 0x0 | STONEWALL | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_20_tile_8_vga.png}} |
+| 009F | 0014 | 0009 | 0x0 | BEDROCK | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_20_tile_9_vga.png}} |
+| 00A0 | 0014 | 000A | F_PLAYERTHRU | HINTWALL | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_20_tile_10_vga.png}} |
+| 00A1 | 0014 | 000B | 0x0 | DOORT | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_20_tile_11_vga.png}} See [[jill:algo:lockeddoor|Locked door]] |
+| 00A2 | 0014 | 000C | 0x0 | DOORB | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_20_tile_12_vga.png}} See [[jill:algo:lockeddoor|Locked door]] |
+| 00A3 | 0014 | 000D | F_PLAYERTHRU, F_STAIR | LEDGEM | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_20_tile_13_vga.png}} |
+| 00A4 | 0014 | 000E | F_PLAYERTHRU, F_STAIR | LEDGEL | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_20_tile_14_vga.png}} |
+| 00A5 | 0014 | 000F | F_PLAYERTHRU, F_STAIR | LEDGER | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_20_tile_15_vga.png}} |
+| 00A6 | 0014 | 0010 | F_PLAYERTHRU, F_MSGTOUCH, F_MSGDRAW, F_MSGUPDATE | SPIKE | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_20_tile_16_vga.png}} [1] See [[jill:algo:spike|Spike background]]|
+| 00A7 | 0014 | 0014 | 0x0 | BREAKWALL | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_20_tile_20_vga.png}} |
+| 00A8 | 0014 | 0015 | 0x0 | DOORMID | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_20_tile_21_vga.png}} |
+| 00C8 | 0039 | 0000 | F_PLAYERTHRU | MUSH1 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_57_tile_0_vga.png}} |
+| 00C9 | 0039 | 0001 | F_PLAYERTHRU | MUSH2 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_57_tile_1_vga.png}} |
+| 00CA | 0039 | 0002 | F_PLAYERTHRU, F_STAIR | MUSHT | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_57_tile_2_vga.png}} |
+| 00CB | 0039 | 0003 | F_PLAYERTHRU, F_STAIR | MUSHTR | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_57_tile_3_vga.png}} |
+| 00CC | 0039 | 0004 | F_PLAYERTHRU, F_STAIR | MUSHTL | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_57_tile_4_vga.png}} |
+| 00CD | 0039 | 0005 | F_PLAYERTHRU | PLANET1 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_57_tile_5_vga.png}} |
+| 00CE | 0039 | 0006 | F_PLAYERTHRU | PLANET2 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_57_tile_6_vga.png}} |
+| 00CF | 0039 | 0007 | F_PLAYERTHRU | PLANET3 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_57_tile_7_vga.png}} |
+| 00D0 | 0039 | 0008 | F_PLAYERTHRU, F_STAIR | MUSHM | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_57_tile_8_vga.png}} |
+| 00D1 | 0039 | 0009 | F_PLAYERTHRU | MUSHS | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_57_tile_9_vga.png}} |
+| 00DC | 0022 | 0000 | F_PLAYERTHRU | CL0 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_34_tile_0_vga.png}} |
+| 00DD | 0022 | 0001 | F_PLAYERTHRU | CL1 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_34_tile_1_vga.png}} |
+| 00DE | 0022 | 0002 | F_PLAYERTHRU | CL2 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_34_tile_2_vga.png}} |
+| 00DF | 0022 | 0003 | F_PLAYERTHRU | CL3 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_34_tile_3_vga.png}} |
+| 00E0 | 0022 | 0004 | F_PLAYERTHRU | CL4 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_34_tile_4_vga.png}} |
+| 00E1 | 0022 | 0005 | F_PLAYERTHRU | CL5 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_34_tile_5_vga.png}} |
+| 00E2 | 0022 | 0006 | F_PLAYERTHRU | CL6 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_34_tile_6_vga.png}} |
+| 00E3 | 0022 | 0007 | F_PLAYERTHRU | CL7 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_34_tile_7_vga.png}} |
+| 00E4 | 0022 | 0008 | F_PLAYERTHRU | CL8 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_34_tile_8_vga.png}} |
+| 00E5 | 0022 | 0009 | F_PLAYERTHRU | CL9 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_34_tile_9_vga.png}} |
+| 00E6 | 0022 | 000A | F_PLAYERTHRU | CL10 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_34_tile_10_vga.png}} |
+| 00E7 | 0022 | 000B | F_PLAYERTHRU | CL11 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_34_tile_11_vga.png}} |
+| 00E8 | 0022 | 000C | F_PLAYERTHRU | CL12 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_34_tile_12_vga.png}} |
+| 00E9 | 0022 | 000D | F_PLAYERTHRU | CL13 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_34_tile_13_vga.png}} |
+| 00EA | 0022 | 000E | F_PLAYERTHRU | CL14 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_34_tile_14_vga.png}} |
+| 00EB | 0022 | 000F | F_PLAYERTHRU | CL15 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_34_tile_15_vga.png}} |
+| 00EC | 0022 | 0010 | F_PLAYERTHRU | CL16 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_34_tile_16_vga.png}} |
+| 00ED | 0022 | 0011 | F_PLAYERTHRU, 0x0200 | CL17 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_34_tile_17_vga.png}} |
+| 00EE | 0022 | 0012 | F_PLAYERTHRU | CL18 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_34_tile_18_vga.png}} |
+| 00EF | 0022 | 0013 | F_PLAYERTHRU | CL19 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_34_tile_19_vga.png}} |
+| 00F0 | 0022 | 0014 | F_PLAYERTHRU | CL20 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_34_tile_20_vga.png}} |
+| 012C | 0017 | 0000 | 0x0 | LGC | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_23_tile_0_vga.png}} |
+| 012D | 0017 | 0001 | 0x0 | GG | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_23_tile_1_vga.png}} |
+| 012E | 0017 | 0002 | 0x0 | RGC | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_23_tile_2_vga.png}} |
+| 012F | 0017 | 0003 | 0x0 | GRO | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_23_tile_3_vga.png}} |
+| 0130 | 0017 | 0004 | 0x0 | GROCKS | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_23_tile_4_vga.png}} |
+| 0131 | 0017 | 0005 | 0x0 | GBROCKS | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_23_tile_5_vga.png}} |
+| 0132 | 0017 | 0006 | 0x0 | GBRL | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_23_tile_6_vga.png}} |
+| 0133 | 0017 | 0007 | 0x0 | GBRR | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_23_tile_7_vga.png}} |
+| 0134 | 0017 | 0008 | 0x0 | BROCK | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_23_tile_8_vga.png}} |
+| 0135 | 0017 | 0009 | 0x0 | BRLLC | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_23_tile_9_vga.png}} |
+| 0136 | 0017 | 000A | 0x0 | BRRLC | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_23_tile_10_vga.png}} |
+| 0137 | 0017 | 000B | 0x0 | BRLEFT | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_23_tile_11_vga.png}} |
+| 0138 | 0017 | 000C | 0x0 | BRRIGHT | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_23_tile_12_vga.png}} |
+| 0139 | 0017 | 000D | 0x0 | BRTOP | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_23_tile_13_vga.png}} |
+| 013A | 0017 | 000E | 0x0 | BRTOPR | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_23_tile_14_vga.png}} |
+| 013B | 0017 | 000F | 0x0 | BRTOPL | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_23_tile_15_vga.png}} |
+| 013C | 0017 | 0010 | F_MSGUPDATE | BRFLOOR | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_23_tile_16_vga.png}} |
+| 013D | 0017 | 0011 | F_MSGUPDATE | BRSTEPL | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_23_tile_17_vga.png}} |
+| 013E | 0017 | 0012 | 0x0 | BRSTEPR | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_23_tile_18_vga.png}} |
+| 013F | 0017 | 0013 | F_PLAYERTHRU, 0x0200 | BRFADE | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_23_tile_19_vga.png}} |
+| 0140 | 0017 | 0014 | 0x0 | BROCKG | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_23_tile_20_vga.png}} |
+| 0141 | 0017 | 0015 | F_PLAYERTHRU, F_MSGTOUCH | STALACBR | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_23_tile_21_vga.png}} [2] |
+| 0142 | 0017 | 0016 | F_PLAYERTHRU, F_MSGTOUCH | STALAGBR | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_23_tile_22_vga.png}} [2] |
+| 0143 | 0017 | 0017 | F_PLAYERTHRU | BUSHLEFT | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_23_tile_23_vga.png}} |
+| 0144 | 0017 | 0018 | F_PLAYERTHRU | BUSHRIGHT | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_23_tile_24_vga.png}} |
+| 0145 | 0017 | 0019 | F_PLAYERTHRU | TREERIGHT | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_23_tile_25_vga.png}} |
+| 0146 | 0017 | 001A | F_PLAYERTHRU | TREECENTRE | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_23_tile_26_vga.png}} |
+| 0147 | 0017 | 001B | F_PLAYERTHRU | TREELEFT | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_23_tile_27_vga.png}} |
+| 0148 | 0017 | 001C | F_PLAYERTHRU, F_STAIR | TREEBL | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_23_tile_28_vga.png}} |
+| 0149 | 0017 | 001D | F_PLAYERTHRU, F_STAIR, F_VINE | VINEBR | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_23_tile_29_vga.png}} |
+| 014A | 0017 | 001E | F_PLAYERTHRU, F_VINE | VNORM | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_23_tile_30_vga.png}} |
+| 014B | 0017 | 001F | F_PLAYERTHRU, F_VINE | VEND | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_23_tile_31_vga.png}} |
+| 014C | 0017 | 0020 | F_PLAYERTHRU, F_STAIR | TREEBR | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_23_tile_32_vga.png}} |
+| 014D | 0017 | 0021 | F_PLAYERTHRU | ROCKRIGHT | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_23_tile_33_vga.png}} |
+| 014E | 0017 | 0022 | F_PLAYERTHRU | ROCKLEFT | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_23_tile_34_vga.png}} |
+| 014F | 0017 | 0023 | F_PLAYERTHRU, F_STAIR | BRANCHLEFT | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_23_tile_35_vga.png}} |
+| 0150 | 0017 | 0024 | F_PLAYERTHRU, F_STAIR | BRANCHRIGHT | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_23_tile_36_vga.png}} |
+| 0151 | 0017 | 0025 | F_PLAYERTHRU, F_VINE | VINFADE | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_23_tile_37_vga.png}} |
+| 0152 | 0017 | 0026 | 0x0 | BRL | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_23_tile_38_vga.png}} |
+| 0153 | 0017 | 0027 | 0x0 | BRR | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_23_tile_39_vga.png}} |
+| 0154 | 0017 | 0028 | F_PLAYERTHRU, F_STAIR | BRANCHNORM | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_23_tile_40_vga.png}} |
+| 0155 | 0017 | 0029 | F_PLAYERTHRU, F_MSGTOUCH | WTHORN | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_23_tile_41_vga.png}} [2] |
+| 0156 | 0017 | 002A | F_PLAYERTHRU, F_MSGTOUCH | WTHORN2 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_23_tile_42_vga.png}} [2] |
+| 0157 | 0017 | 002B | 0x0 | BRICKTOP | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_23_tile_43_vga.png}} |
+| 0158 | 0017 | 002C | 0x0 | BRICKTOPR | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_23_tile_44_vga.png}} |
+| 0159 | 0017 | 002D | 0x0 | BRICKTOPL | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_23_tile_45_vga.png}} |
+| 015A | 0017 | 002E | 0x0 | BRICKNORM | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_23_tile_46_vga.png}} |
+| 015B | 0017 | 002F | 0x0 | BRICKSL | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_23_tile_47_vga.png}} |
+| 015C | 0017 | 0030 | 0x0 | BRICKSR | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_23_tile_48_vga.png}} |
+| 015D | 0017 | 0031 | 0x0 | BRICKJ | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_23_tile_49_vga.png}} |
+| 015E | 0017 | 0032 | F_PLAYERTHRU, 0x0200 | BRICKFADE | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_23_tile_50_vga.png}} |
+| 015F | 0017 | 0035 | F_MSGDRAW, F_MSGUPDATE | FFLOOR | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_23_tile_53_vga.png}} |
+| 0160 | 0017 | 0038 | F_MSGDRAW, F_MSGUPDATE | FROOF | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_23_tile_56_vga.png}} |
+| 0161 | 0017 | 0039 | F_PLAYERTHRU | PILLARB | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_23_tile_57_vga.png}} |
+| 0162 | 0017 | 003A | F_PLAYERTHRU, F_STAIR | PILLART | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_23_tile_58_vga.png}} |
+| 0163 | 0017 | 003B | F_PLAYERTHRU | PILLARM | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_23_tile_59_vga.png}} |
+| 0164 | 0017 | 003C | F_PLAYERTHRU, F_VINE | BRCHAIN | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_23_tile_60_vga.png}} |
+| 0165 | 0017 | 003D | F_PLAYERTHRU, F_STAIR | BRPLAT1 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_23_tile_61_vga.png}} |
+| 0166 | 0017 | 003E | F_PLAYERTHRU, F_STAIR | BRPLAT2 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_23_tile_62_vga.png}} |
+| 0167 | 0017 | 003F | F_PLAYERTHRU, F_STAIR | BRPLAT3 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_23_tile_63_vga.png}} |
+| 0168 | 0017 | 0040 | 0x0 | GGG | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_23_tile_64_vga.png}} |
+| 0186 | 0015 | 0000 | F_PLAYERTHRU, F_MSGTOUCH, F_MSGUPDATE | LAVA1 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_21_tile_0_vga.png}} [2] See [[jill:algo:lava|Lava background]]|
+| 0187 | 0015 | 0001 | F_PLAYERTHRU, F_MSGTOUCH, F_MSGUPDATE | LAVA2 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_21_tile_1_vga.png}} [2] See [[jill:algo:lava|Lava background]]|
+| 0188 | 0015 | 0002 | F_PLAYERTHRU, F_MSGTOUCH, F_MSGUPDATE | LAVA3 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_21_tile_2_vga.png}} [2] See [[jill:algo:lava|Lava background]]|
+| 0189 | 0015 | 0003 | F_PLAYERTHRU, F_MSGTOUCH, F_MSGUPDATE | LAVA4 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_21_tile_3_vga.png}} [2] See [[jill:algo:lava|Lava background]]|
+| 018A | 0015 | 0004 | F_PLAYERTHRU, F_MSGTOUCH, F_MSGUPDATE | LAVA5 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_21_tile_4_vga.png}} [2] See [[jill:algo:lava|Lava background]]|
+| 018B | 0015 | 0005 | F_PLAYERTHRU | LAVAB | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_21_tile_5_vga.png}} |
+| 018C | 0015 | 0006 | F_PLAYERTHRU | AUP | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_21_tile_6_vga.png}} |
+| 018D | 0015 | 0007 | F_PLAYERTHRU | ADOWN | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_21_tile_7_vga.png}} |
+| 018E | 0015 | 0008 | F_PLAYERTHRU | ALEFT | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_21_tile_8_vga.png}} |
+| 018F | 0015 | 0009 | F_PLAYERTHRU | ARIGHT | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_21_tile_9_vga.png}} |
+| 0190 | 001C | 0001 | F_PLAYERTHRU, F_MSGTOUCH, F_MSGUPDATE, 0x2000, 0x4000 | WATERTL | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_28_tile_1_vga.png}} [1] |
+| 0191 | 001C | 0002 | F_PLAYERTHRU, F_MSGTOUCH, F_MSGUPDATE, 0x2000, 0x4000 | WATERTL2 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_28_tile_2_vga.png}} [1] |
+| 0192 | 001C | 0003 | F_PLAYERTHRU, F_MSGTOUCH, F_MSGUPDATE, 0x2000, 0x4000 | WATERTL3 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_28_tile_3_vga.png}} [1] |
+| 0193 | 001C | 0004 | F_PLAYERTHRU, F_MSGTOUCH, F_MSGUPDATE, 0x2000, 0x4000 | WATERTL4 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_28_tile_4_vga.png}} [1] |
+| 0194 | 001C | 0004 | F_PLAYERTHRU, F_MSGTOUCH, F_MSGUPDATE, 0x2000, 0x4000 | WATERTR | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_28_tile_4_vga.png}} [1] |
+| 0195 | 001C | 0003 | F_PLAYERTHRU, F_MSGTOUCH, F_MSGUPDATE, 0x2000, 0x4000 | WATERTR2 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_28_tile_3_vga.png}} [1] |
+| 0196 | 001C | 0002 | F_PLAYERTHRU, F_MSGTOUCH, F_MSGUPDATE, 0x2000, 0x4000 | WATERTR3 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_28_tile_2_vga.png}} [1] |
+| 0197 | 001C | 0001 | F_PLAYERTHRU, F_MSGTOUCH, F_MSGUPDATE, 0x2000, 0x4000 | WATERTR4 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_28_tile_1_vga.png}} [1] |
+| 0198 | 001C | 0005 | F_PLAYERTHRU, F_MSGTOUCH, F_MSGUPDATE, 0x2000, 0x4000 | WATERML | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_28_tile_5_vga.png}} [3] |
+| 0199 | 001C | 0006 | F_PLAYERTHRU, F_MSGTOUCH, F_MSGUPDATE, 0x2000, 0x4000 | WATERML2 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_28_tile_6_vga.png}} [3] |
+| 019A | 001C | 0007 | F_PLAYERTHRU, F_MSGTOUCH, F_MSGUPDATE, 0x2000, 0x4000 | WATERML3 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_28_tile_7_vga.png}} [3] |
+| 019B | 001C | 0008 | F_PLAYERTHRU, F_MSGTOUCH, F_MSGUPDATE, 0x2000, 0x4000 | WATERML4 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_28_tile_8_vga.png}} [3] |
+| 019C | 001C | 0008 | F_PLAYERTHRU, F_MSGTOUCH, F_MSGUPDATE, 0x2000, 0x4000 | WATERMR | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_28_tile_8_vga.png}} [3] |
+| 019D | 001C | 0007 | F_PLAYERTHRU, F_MSGTOUCH, F_MSGUPDATE, 0x2000, 0x4000 | WATERMR2 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_28_tile_7_vga.png}} [3] |
+| 019E | 001C | 0006 | F_PLAYERTHRU, F_MSGTOUCH, F_MSGUPDATE, 0x2000, 0x4000 | WATERMR3 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_28_tile_6_vga.png}} [3] |
+| 019F | 001C | 0005 | F_PLAYERTHRU, F_MSGTOUCH, F_MSGUPDATE, 0x2000, 0x4000 | WATERMR4 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_28_tile_5_vga.png}} [3] |
+| 01A0 | 001C | 0009 | F_PLAYERTHRU, F_MSGTOUCH, F_MSGUPDATE, 0x2000, 0x4000 | WATERLD | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_28_tile_9_vga.png}} [3] |
+| 01A1 | 001C | 000A | F_PLAYERTHRU, F_MSGTOUCH, F_MSGUPDATE, 0x2000, 0x4000 | WATERLD2 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_28_tile_10_vga.png}} [3] |
+| 01A2 | 001C | 000B | F_PLAYERTHRU, F_MSGTOUCH, F_MSGUPDATE, 0x2000, 0x4000 | WATERLD3 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_28_tile_11_vga.png}} [3] |
+| 01A3 | 001C | 000C | F_PLAYERTHRU, F_MSGTOUCH, F_MSGUPDATE, 0x2000, 0x4000 | WATERRD | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_28_tile_12_vga.png}} [3] |
+| 01A4 | 001C | 000D | F_PLAYERTHRU, F_MSGTOUCH, F_MSGUPDATE, 0x2000, 0x4000 | WATERRD2 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_28_tile_13_vga.png}} [3] |
+| 01A5 | 001C | 000E | F_PLAYERTHRU, F_MSGTOUCH, F_MSGUPDATE, 0x2000, 0x4000 | WATERRD3 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_28_tile_14_vga.png}} [3] |
+| 01A6 | 001C | 0006 | F_PLAYERTHRU, F_MSGTOUCH, F_MSGUPDATE, 0x2000, 0x4000 | STILLWATER | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_28_tile_6_vga.png}} |
+| 01AE | 0019 | 0000 | F_PLAYERTHRU | FLAGPOLE | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_25_tile_0_vga.png}} |
+| 01AF | 0019 | 0001 | 0x0 | CASTLE | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_25_tile_1_vga.png}} |
+| 01B0 | 0019 | 0002 | F_PLAYERTHRU, F_STAIR | BRIDGE | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_25_tile_2_vga.png}} |
+| 01B1 | 0019 | 0003 | F_PLAYERTHRU | CHAINL | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_25_tile_3_vga.png}} |
+| 01B2 | 0019 | 0004 | F_PLAYERTHRU | CHAINR | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_25_tile_4_vga.png}} |
+| 01B3 | 0019 | 0005 | F_PLAYERTHRU | CASBL | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_25_tile_5_vga.png}} |
+| 01B4 | 0019 | 0006 | F_PLAYERTHRU | CASML | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_25_tile_6_vga.png}} |
+| 01B5 | 0019 | 0007 | F_PLAYERTHRU, F_STAIR | CASTL | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_25_tile_7_vga.png}} |
+| 01B6 | 0019 | 0008 | F_PLAYERTHRU | CASBR | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_25_tile_8_vga.png}} |
+| 01B7 | 0019 | 0009 | F_PLAYERTHRU | CASMR | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_25_tile_9_vga.png}} |
+| 01B8 | 0019 | 000A | F_PLAYERTHRU, F_STAIR | CASTR | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_25_tile_10_vga.png}} |
+| 01B9 | 0019 | 000B | F_PLAYERTHRU | BRIDGEM | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_25_tile_11_vga.png}} |
+| 01BA | 0019 | 000C | F_PLAYERTHRU | BRIDGEL | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_25_tile_12_vga.png}} |
+| 01BB | 0019 | 000D | F_PLAYERTHRU | BRIDGER | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_25_tile_13_vga.png}} |
+| 01BC | 0019 | 000E | 0x0 | CASTLEL | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_25_tile_14_vga.png}} |
+| 01BD | 0019 | 000F | 0x0 | CASTLER | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_25_tile_15_vga.png}} |
+| 01BE | 0019 | 0011 | 0x0 | CASAR | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_25_tile_17_vga.png}} |
+| 01BF | 0019 | 0012 | 0x0 | CASAL | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_25_tile_18_vga.png}} |
+| 01C0 | 0019 | 0013 | 0x0 | CASAU | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_25_tile_19_vga.png}} |
+| 01C1 | 0019 | 0014 | 0x0 | CASAD | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_25_tile_20_vga.png}} |
+| 01C2 | 001E | 0000 | F_PLAYERTHRU | FORESTN | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_30_tile_0_vga.png}} |
+| 01C3 | 001E | 0001 | F_PLAYERTHRU, 0x0200 | FORESTF1 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_30_tile_1_vga.png}} |
+| 01C4 | 001E | 0002 | F_PLAYERTHRU, 0x0200 | FORESTF2 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_30_tile_2_vga.png}} |
+| 01C5 | 001E | 0003 | F_PLAYERTHRU, 0x0200 | FORESTF12 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_30_tile_3_vga.png}} |
+| 01C6 | 001E | 0004 | F_PLAYERTHRU, 0x0200 | FORESTF21 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_30_tile_4_vga.png}} |
+| 01C7 | 001E | 0005 | F_PLAYERTHRU, 0x0200 | FORESTF10 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_30_tile_5_vga.png}} |
+| 01C8 | 001E | 0006 | F_PLAYERTHRU, 0x0200 | FORESTF01 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_30_tile_6_vga.png}} |
+| 01C9 | 001E | 0007 | F_PLAYERTHRU | FORESTF32 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_30_tile_7_vga.png}} |
+| 01CA | 001E | 0008 | F_PLAYERTHRU | FORESTF23 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_30_tile_8_vga.png}} |
+| 01CB | 001E | 0009 | F_PLAYERTHRU | FORESTSR | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_30_tile_9_vga.png}} |
+| 01CC | 001E | 000A | F_PLAYERTHRU | FORESTSR2 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_30_tile_10_vga.png}} |
+| 01CD | 001E | 000B | F_PLAYERTHRU | FORESTSL | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_30_tile_11_vga.png}} |
+| 01CE | 001E | 000C | F_PLAYERTHRU, 0x0200 | PLAINS | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_30_tile_12_vga.png}} |
+| 01CF | 001E | 000D | F_PLAYERTHRU, 0x0200 | MAPHUT | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_30_tile_13_vga.png}} |
+| 01D0 | 001E | 000E | F_PLAYERTHRU, 0x0200 | MAPSKULLS | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_30_tile_14_vga.png}} |
+| 01D1 | 001E | 000F | F_PLAYERTHRU | FORESTT | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_30_tile_15_vga.png}} |
+| 01D2 | 001E | 0010 | F_PLAYERTHRU, 0x0200 | MAPROADF | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_30_tile_16_vga.png}} |
+| 01D3 | 001E | 0011 | F_PLAYERTHRU | FORESTT2 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_30_tile_17_vga.png}} |
+| 01D4 | 001E | 0012 | F_PLAYERTHRU, 0x0200 | FORESTTRC | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_30_tile_18_vga.png}} |
+| 01D5 | 001E | 0013 | F_PLAYERTHRU, 0x0200 | FORESTTLC | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_30_tile_19_vga.png}} |
+| 01D6 | 001E | 0014 | F_PLAYERTHRU | FORESTTSR | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_30_tile_20_vga.png}} |
+| 01D7 | 001E | 0015 | F_PLAYERTHRU | FORESTTSL | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_30_tile_21_vga.png}} |
+| 01D8 | 001E | 0016 | F_PLAYERTHRU | FORESTF31 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_30_tile_22_vga.png}} |
+| 01D9 | 001E | 0017 | F_PLAYERTHRU | FORESTF13 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_30_tile_23_vga.png}} |
+| 01F4 | 0018 | 0001 | F_PLAYERTHRU, 0x0200 | T1 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_24_tile_1_vga.png}} |
+| 01F5 | 0018 | 0002 | F_PLAYERTHRU, 0x0200 | T2 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_24_tile_2_vga.png}} |
+| 01F6 | 0018 | 0003 | F_PLAYERTHRU, 0x0200 | T3 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_24_tile_3_vga.png}} |
+| 01F7 | 0018 | 0004 | F_PLAYERTHRU, 0x0200 | T4 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_24_tile_4_vga.png}} |
+| 01F8 | 0018 | 0005 | F_PLAYERTHRU, 0x0200 | T5 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_24_tile_5_vga.png}} |
+| 01F9 | 0018 | 0006 | F_PLAYERTHRU, 0x0200 | T6 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_24_tile_6_vga.png}} |
+| 01FA | 0018 | 0007 | F_PLAYERTHRU, 0x0200 | T7 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_24_tile_7_vga.png}} |
+| 01FB | 0018 | 0008 | F_PLAYERTHRU, 0x0200 | T8 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_24_tile_8_vga.png}} |
+| 01FC | 0018 | 0009 | F_PLAYERTHRU, 0x0200 | T9 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_24_tile_9_vga.png}} |
+| 01FD | 0018 | 000A | F_PLAYERTHRU, 0x0200 | T10 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_24_tile_10_vga.png}} |
+| 01FE | 0018 | 000B | F_PLAYERTHRU, 0x0200 | T11 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_24_tile_11_vga.png}} |
+| 01FF | 0018 | 000C | F_PLAYERTHRU, 0x0200 | T12 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_24_tile_12_vga.png}} |
+| 0200 | 0018 | 000D | F_PLAYERTHRU, 0x0200 | T13 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_24_tile_13_vga.png}} |
+| 0201 | 0018 | 000E | F_PLAYERTHRU, 0x0200 | T14 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_24_tile_14_vga.png}} |
+| 0202 | 0018 | 000F | F_PLAYERTHRU, 0x0200 | T15 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_24_tile_15_vga.png}} |
+| 0203 | 0018 | 0010 | F_PLAYERTHRU, 0x0200 | T16 | //Invalid entry. No tile found// |
+| 0204 | 0018 | 0011 | F_PLAYERTHRU, 0x0200 | T17 | //Invalid entry. No tile found// |
+| 0205 | 0018 | 0012 | F_PLAYERTHRU, 0x0200 | T18 | //Invalid entry. No tile found// |
+| 0206 | 0018 | 0013 | F_PLAYERTHRU, 0x0200 | T19 | //Invalid entry. No tile found// |
+| 0207 | 0018 | 0014 | F_PLAYERTHRU, 0x0200 | T20 | //Invalid entry. No tile found// |
+| 0208 | 001D | 0000 | F_PLAYERTHRU | BLAHBLAH | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_29_tile_0_vga.png}} |
+| 0209 | 001D | 0001 | F_PLAYERTHRU, 0x0200 | MAPFLAGB | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_29_tile_1_vga.png}} |
+| 020A | 001D | 0002 | F_PLAYERTHRU, 0x0200 | MAPFLAG | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_29_tile_2_vga.png}} |
+| 020B | 001D | 0003 | F_PLAYERTHRU, 0x0200 | MAPSTAIR | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_29_tile_3_vga.png}} |
+| 020C | 001D | 0004 | F_PLAYERTHRU, 0x0200 | MAPHOUSE | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_29_tile_4_vga.png}} |
+| 020D | 001D | 0005 | F_PLAYERTHRU, 0x0200 | PLAINS2 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_29_tile_5_vga.png}} |
+| 020E | 001D | 0006 | F_PLAYERTHRU, 0x0200 | PLAINS3 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_29_tile_6_vga.png}} |
+| 020F | 001D | 0007 | F_PLAYERTHRU, 0x0200 | PLAINS4 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_29_tile_7_vga.png}} |
+| 0210 | 001D | 0008 | F_PLAYERTHRU | WALL1 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_29_tile_8_vga.png}} |
+| 0211 | 001D | 0009 | F_PLAYERTHRU | WALL2 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_29_tile_9_vga.png}} |
+| 0212 | 001D | 000A | F_PLAYERTHRU | WALL3 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_29_tile_10_vga.png}} |
+| 0213 | 001D | 000B | F_PLAYERTHRU | WALL4 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_29_tile_11_vga.png}} |
+| 0214 | 001D | 000C | F_PLAYERTHRU | WALL5 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_29_tile_12_vga.png}} |
+| 0215 | 001D | 000D | F_PLAYERTHRU | WALL6 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_29_tile_13_vga.png}} |
+| 0216 | 001D | 000E | F_PLAYERTHRU | WALL7 | {{http://www.openjill.org/openjill/pub/other/tiles_extract/jill-tiles/tileset_29_tile_14_vga.png}} |
+
+[1] : Kill player in normal and firebird mode.\\
+[2] : Kill player in all mode.
+[3] : Kill only in firebird mode.

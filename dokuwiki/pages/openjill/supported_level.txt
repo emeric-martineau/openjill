@@ -1,0 +1,29 @@
+====== Support level ======
+
+
+Below each version of OpenJill to support level
+
+===== Jill of the Jungle =====
+
+^ Level ^ Supported ? ^ Since ^ Comment ^
+|  map  | yes | 0.0.34 | //Full support// |
+|   1   | yes | 0.0.34 | //Full support// |
+|   2   | yes | 0.2.1  | //Full support// |
+|   3   | yes | 0.2.3  | //Full support// |
+|   4   | yes | 0.2.3  | //Full support// |
+|   5   | yes | 0.2.3  | //Full support// |
+|   6   | yes | 0.2.4  | //Full support// |
+|   7   | yes | 0.2.5  | //Full support// |
+|   8   | yes | 0.2.6 | //Full support// |
+|   9   | | | not tested |
+|   10  | | | not tested |
+|   11  | | | not tested |
+|   12  | | | not tested |
+|   13  | | | not tested |
+|  BONUS  | | | not tested |
+|  DEMO  | | | not tested | 
+|  END  | <wrap danger>Not implemented</wrap> | |  |
+
+===== Jill goes Underground =====
+
+===== Jill save the Prince =====

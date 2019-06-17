@@ -1,0 +1,1081 @@
+Object layer (67) :
+
+Object #0 (0x4002)
+    type = 0 (Jill (normal))
+    x = 96
+    y = 912
+    width = 16
+    height = 32
+    xSpeed = 0
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 0
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #1 (0x4021)
+    type = 12 (Trigger: Checkpoint)
+    x = 128
+    y = 928
+    width = 16
+    height = 16
+    xSpeed = 0
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 15
+    flags = 0
+    info1 = 0
+    pointer = 1993277448 to '&end1.mac'
+Object #2 (0x4040)
+    type = 12 (Trigger: Checkpoint)
+    x = 272
+    y = 848
+    width = 16
+    height = 16
+    xSpeed = 0
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 16
+    flags = 0
+    info1 = 0
+    pointer = 1993146376 to '*seven.ddt'
+Object #3 (0x405F)
+    type = 12 (Trigger: Checkpoint)
+    x = 1088
+    y = 880
+    width = 16
+    height = 16
+    xSpeed = 0
+    ySpeed = 0
+    state = 3
+    subState = 0
+    stateCount = 0
+    counter = 52
+    flags = 0
+    info1 = 0
+    pointer = 1993080840 to ''
+Object #4 (0x407E)
+    type = 12 (Trigger: Checkpoint)
+    x = 0
+    y = 0
+    width = 16
+    height = 16
+    xSpeed = -55
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = -56
+    flags = 0
+    info1 = 0
+    pointer = 1993015304 to ''
+Object #5 (0x409D)
+    type = 28 (Bonus (Hight jump, knif...))
+    x = 304
+    y = 800
+    width = 16
+    height = 16
+    xSpeed = 0
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 5
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #6 (0x40BC)
+    type = 28 (Bonus (Hight jump, knif...))
+    x = 1280
+    y = 688
+    width = 16
+    height = 16
+    xSpeed = 0
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 0
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #7 (0x40DB)
+    type = 1 (Apple)
+    x = 1088
+    y = 880
+    width = 12
+    height = 12
+    xSpeed = 0
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 0
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #8 (0x40FA)
+    type = 20 (write text small)
+    x = 96
+    y = 56
+    width = 168
+    height = 7
+    xSpeed = 7
+    ySpeed = -1
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 0
+    flags = 0
+    info1 = 0
+    pointer = 1992818696 to 'FIVE HUNDRED MILES AWAY FROM'
+Object #9 (0x4119)
+    type = 20 (write text small)
+    x = 80
+    y = 64
+    width = 192
+    height = 7
+    xSpeed = 7
+    ySpeed = -1
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 0
+    flags = 0
+    info1 = 0
+    pointer = 1992622088 to 'HER STARTING POINT, JILL WANDERS'
+Object #10 (0x4138)
+    type = 20 (write text small)
+    x = 64
+    y = 72
+    width = 216
+    height = 7
+    xSpeed = 7
+    ySpeed = -1
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 0
+    flags = 0
+    info1 = 0
+    pointer = 1992425480 to 'INTO A STRANGE AND MYSTICAL GROVE OF'
+Object #11 (0x4157)
+    type = 20 (write text small)
+    x = 48
+    y = 80
+    width = 228
+    height = 7
+    xSpeed = 7
+    ySpeed = -1
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 0
+    flags = 0
+    info1 = 0
+    pointer = 1992228872 to 'MUSHROOMS.  TRANSFORMING BACK INTO HER'
+Object #12 (0x4176)
+    type = 20 (write text small)
+    x = 48
+    y = 88
+    width = 216
+    height = 7
+    xSpeed = 7
+    ySpeed = -1
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 0
+    flags = 0
+    info1 = 0
+    pointer = 1992032264 to 'HUMAN FORM,  SHE STOPS TO PONDER THE'
+Object #13 (0x4195)
+    type = 20 (write text small)
+    x = 48
+    y = 96
+    width = 204
+    height = 7
+    xSpeed = 7
+    ySpeed = -1
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 0
+    flags = 0
+    info1 = 0
+    pointer = 1991835656 to 'SITUATION.  THIS IS A PLACE UNLIKE'
+Object #14 (0x41B4)
+    type = 20 (write text small)
+    x = 48
+    y = 104
+    width = 222
+    height = 7
+    xSpeed = 7
+    ySpeed = -1
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 0
+    flags = 0
+    info1 = 0
+    pointer = 1991639048 to 'ANYTHING SEEN BY THE EYES OF A HUMAN.'
+Object #15 (0x41D3)
+    type = 0 (Jill (normal))
+    x = 96
+    y = 128
+    width = 16
+    height = 32
+    xSpeed = 0
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 0
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #16 (0x41F2)
+    type = 12 (Trigger: Checkpoint)
+    x = 672
+    y = 0
+    width = 16
+    height = 16
+    xSpeed = -53
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = -54
+    flags = 0
+    info1 = 0
+    pointer = 1991573512 to ''
+Object #17 (0x4211)
+    type = 20 (write text small)
+    x = 448
+    y = 32
+    width = 156
+    height = 7
+    xSpeed = 7
+    ySpeed = -1
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 0
+    flags = 0
+    info1 = 0
+    pointer = 1991376904 to 'WHAT UNSPEAKABLE FORCES OF'
+Object #18 (0x4230)
+    type = 20 (write text small)
+    x = 448
+    y = 40
+    width = 168
+    height = 7
+    xSpeed = 7
+    ySpeed = -1
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 0
+    flags = 0
+    info1 = 0
+    pointer = 1991180296 to 'NATURE LIE BEYOND THE GROVE?'
+Object #19 (0x424F)
+    type = 20 (write text small)
+    x = 448
+    y = 56
+    width = 168
+    height = 7
+    xSpeed = 7
+    ySpeed = -1
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 0
+    flags = 0
+    info1 = 0
+    pointer = 1990983688 to 'CAN A LADY LIKE JILL UNCOVER'
+Object #20 (0x426E)
+    type = 20 (write text small)
+    x = 448
+    y = 64
+    width = 174
+    height = 7
+    xSpeed = 7
+    ySpeed = -1
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 0
+    flags = 0
+    info1 = 0
+    pointer = 1990787080 to 'THE MYSTERIES OF THIS PLACE, '
+Object #21 (0x428D)
+    type = 20 (write text small)
+    x = 448
+    y = 72
+    width = 174
+    height = 7
+    xSpeed = 7
+    ySpeed = -1
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 0
+    flags = 0
+    info1 = 0
+    pointer = 1990590472 to 'AND ESCAPE WITHOUT MESSING UP'
+Object #22 (0x42AC)
+    type = 20 (write text small)
+    x = 448
+    y = 80
+    width = 96
+    height = 7
+    xSpeed = 7
+    ySpeed = -1
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 0
+    flags = 0
+    info1 = 0
+    pointer = 1990459400 to 'HER BLONDE HAIR?'
+Object #23 (0x42CB)
+    type = 20 (write text small)
+    x = 464
+    y = 96
+    width = 120
+    height = 7
+    xSpeed = 3
+    ySpeed = -1
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 0
+    flags = 0
+    info1 = 0
+    pointer = 1990328328 to 'FIND THE ANSWERS IN:'
+Object #24 (0x42EA)
+    type = 21 (write text big)
+    x = 464
+    y = 112
+    width = 168
+    height = 8
+    xSpeed = 2
+    ySpeed = -1
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 0
+    flags = 0
+    info1 = 0
+    pointer = 1990197256 to 'Jill Goes Underground'
+Object #25 (0x4309)
+    type = 20 (write text small)
+    x = 496
+    y = 121
+    width = 126
+    height = 7
+    xSpeed = 2
+    ySpeed = -1
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 0
+    flags = 0
+    info1 = 0
+    pointer = 1990066184 to 'THE STARTLING SEQUEL!'
+Object #26 (0x4328)
+    type = 20 (write text small)
+    x = 480
+    y = 136
+    width = 54
+    height = 7
+    xSpeed = 3
+    ySpeed = -1
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 0
+    flags = 0
+    info1 = 0
+    pointer = 1989935112 to 'AND ALSO:'
+Object #27 (0x4347)
+    type = 21 (write text big)
+    x = 464
+    y = 152
+    width = 176
+    height = 8
+    xSpeed = 2
+    ySpeed = -1
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 0
+    flags = 0
+    info1 = 0
+    pointer = 1989804040 to ' Jill Saves the Prince'
+Object #28 (0x4366)
+    type = 20 (write text small)
+    x = 496
+    y = 160
+    width = 114
+    height = 7
+    xSpeed = 2
+    ySpeed = -1
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 0
+    flags = 0
+    info1 = 0
+    pointer = 1989672968 to 'YOUR ULTIMATE QUEST'
+Object #29 (0x4385)
+    type = 21 (write text big)
+    x = 688
+    y = 32
+    width = 272
+    height = 8
+    xSpeed = 7
+    ySpeed = -1
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 0
+    flags = 0
+    info1 = 0
+    pointer = 1989476360 to ' Just When You Thought It Was Over'
+Object #30 (0x43A4)
+    type = 20 (write text small)
+    x = 752
+    y = 48
+    width = 156
+    height = 7
+    xSpeed = 3
+    ySpeed = -1
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 0
+    flags = 0
+    info1 = 0
+    pointer = 1989279752 to 'THE JILL SERIES CONTINUES!'
+Object #31 (0x43C3)
+    type = 20 (write text small)
+    x = 704
+    y = 64
+    width = 228
+    height = 7
+    xSpeed = 7
+    ySpeed = -1
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 0
+    flags = 0
+    info1 = 0
+    pointer = 1989083144 to 'IN VOLUME II, "JILL GOES UNDERGROUND":'
+Object #32 (0x43E2)
+    type = 20 (write text small)
+    x = 720
+    y = 72
+    width = 168
+    height = 7
+    xSpeed = 2
+    ySpeed = -1
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 0
+    flags = 0
+    info1 = 0
+    pointer = 1988886536 to '* EXPLORE MONTEZUMA'S CASTLE'
+Object #33 (0x4401)
+    type = 20 (write text small)
+    x = 720
+    y = 80
+    width = 240
+    height = 7
+    xSpeed = 2
+    ySpeed = -1
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 0
+    flags = 0
+    info1 = 0
+    pointer = 1988624392 to '* DISCOVER THE LAND OF ETERNAL WEIRDNESS'
+Object #34 (0x4420)
+    type = 20 (write text small)
+    x = 720
+    y = 88
+    width = 204
+    height = 7
+    xSpeed = 2
+    ySpeed = -1
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 0
+    flags = 0
+    info1 = 0
+    pointer = 1988427784 to '* VENTURE INTO THE DEMON'S HIDEOUT'
+Object #35 (0x443F)
+    type = 20 (write text small)
+    x = 720
+    y = 104
+    width = 204
+    height = 7
+    xSpeed = 7
+    ySpeed = -1
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 0
+    flags = 0
+    info1 = 0
+    pointer = 1988231176 to 'WITH LOTS OF NEW GRAPHICS, LEVELS,'
+Object #36 (0x445E)
+    type = 20 (write text small)
+    x = 720
+    y = 112
+    width = 150
+    height = 7
+    xSpeed = 7
+    ySpeed = -1
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 0
+    flags = 0
+    info1 = 0
+    pointer = 1988034568 to 'SOUND EFFECTS, AND MUSIC!'
+Object #37 (0x447D)
+    type = 20 (write text small)
+    x = 704
+    y = 128
+    width = 234
+    height = 7
+    xSpeed = 7
+    ySpeed = -1
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 0
+    flags = 0
+    info1 = 0
+    pointer = 1987837960 to 'IN VOLUME III, "JILL SAVES THE PRINCE":'
+Object #38 (0x449C)
+    type = 20 (write text small)
+    x = 720
+    y = 136
+    width = 198
+    height = 7
+    xSpeed = 2
+    ySpeed = -1
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 0
+    flags = 0
+    info1 = 0
+    pointer = 1987641352 to '* JOURNEY THROUGH A CASTLE FILLED'
+Object #39 (0x44BB)
+    type = 20 (write text small)
+    x = 720
+    y = 144
+    width = 144
+    height = 7
+    xSpeed = 2
+    ySpeed = -1
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 0
+    flags = 0
+    info1 = 0
+    pointer = 1987444744 to '  WITH BATS AND KNIGHTS!'
+Object #40 (0x44DA)
+    type = 20 (write text small)
+    x = 720
+    y = 152
+    width = 240
+    height = 7
+    xSpeed = 2
+    ySpeed = -1
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 0
+    flags = 0
+    info1 = 0
+    pointer = 1987182600 to '* Explore the aerie and the mega puzzle,'
+Object #41 (0x44F9)
+    type = 20 (write text small)
+    x = 720
+    y = 160
+    width = 210
+    height = 7
+    xSpeed = 2
+    ySpeed = -1
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 0
+    flags = 0
+    info1 = 0
+    pointer = 1986985992 to '  then battle your way onto a ship.'
+Object #42 (0x4518)
+    type = 20 (write text small)
+    x = 720
+    y = 168
+    width = 234
+    height = 7
+    xSpeed = 2
+    ySpeed = -1
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 0
+    flags = 0
+    info1 = 0
+    pointer = 1986789384 to '* Features an overhead-view jungle map.'
+Object #43 (0x4537)
+    type = 20 (write text small)
+    x = 720
+    y = 176
+    width = 192
+    height = 7
+    xSpeed = 2
+    ySpeed = -1
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 0
+    flags = 0
+    info1 = 0
+    pointer = 1986592776 to '* MUCH, MUCH, MUCH, MUCH MORE!!!'
+Object #44 (0x4556)
+    type = 12 (Trigger: Checkpoint)
+    x = 1008
+    y = 0
+    width = 16
+    height = 16
+    xSpeed = 0
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = -53
+    flags = 0
+    info1 = 0
+    pointer = 1986527240 to ''
+Object #45 (0x4575)
+    type = 49 (Epic text)
+    x = 1072
+    y = 8
+    width = 32
+    height = 16
+    xSpeed = 0
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 0
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #46 (0x4594)
+    type = 42 (Misc: Huge letter)
+    x = 1056
+    y = 32
+    width = 20
+    height = 24
+    xSpeed = 1
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 0
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #47 (0x45B3)
+    type = 42 (Misc: Huge letter)
+    x = 1088
+    y = 32
+    width = 20
+    height = 24
+    xSpeed = 2
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 0
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #48 (0x45D2)
+    type = 42 (Misc: Huge letter)
+    x = 1120
+    y = 32
+    width = 20
+    height = 24
+    xSpeed = 3
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 0
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #49 (0x45F1)
+    type = 42 (Misc: Huge letter)
+    x = 1152
+    y = 32
+    width = 20
+    height = 24
+    xSpeed = 2
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 0
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #50 (0x4610)
+    type = 42 (Misc: Huge letter)
+    x = 1184
+    y = 32
+    width = 20
+    height = 24
+    xSpeed = 3
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 0
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #51 (0x462F)
+    type = 42 (Misc: Huge letter)
+    x = 1216
+    y = 32
+    width = 20
+    height = 24
+    xSpeed = 0
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 0
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #52 (0x464E)
+    type = 42 (Misc: Huge letter)
+    x = 1248
+    y = 32
+    width = 20
+    height = 24
+    xSpeed = 1
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 0
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #53 (0x466D)
+    type = 42 (Misc: Huge letter)
+    x = 1280
+    y = 32
+    width = 20
+    height = 24
+    xSpeed = 4
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 0
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #54 (0x468C)
+    type = 42 (Misc: Huge letter)
+    x = 1024
+    y = 32
+    width = 20
+    height = 24
+    xSpeed = 0
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 0
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #55 (0x46AB)
+    type = 21 (write text big)
+    x = 1120
+    y = 96
+    width = 128
+    height = 8
+    xSpeed = 7
+    ySpeed = -1
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 0
+    flags = 0
+    info1 = 0
+    pointer = 1986396168 to 'CONGRATULATIONS!'
+Object #56 (0x46CA)
+    type = 20 (write text small)
+    x = 1104
+    y = 112
+    width = 174
+    height = 7
+    xSpeed = 7
+    ySpeed = -1
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 0
+    flags = 0
+    info1 = 0
+    pointer = 1986199560 to 'YOU HAVE CONQUERED THE JUNGLE'
+Object #57 (0x46E9)
+    type = 20 (write text small)
+    x = 1104
+    y = 128
+    width = 150
+    height = 7
+    xSpeed = 2
+    ySpeed = -1
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 0
+    flags = 0
+    info1 = 0
+    pointer = 1986002952 to ' WE HOPE YOU HAVE ENJOYED'
+Object #58 (0x4708)
+    type = 20 (write text small)
+    x = 1104
+    y = 136
+    width = 162
+    height = 7
+    xSpeed = 2
+    ySpeed = -1
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 0
+    flags = 0
+    info1 = 0
+    pointer = 1985806344 to ' PLAYING JILL OF THE JUNGLE'
+Object #59 (0x4727)
+    type = 20 (write text small)
+    x = 1120
+    y = 152
+    width = 120
+    height = 7
+    xSpeed = 7
+    ySpeed = -1
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 0
+    flags = 0
+    info1 = 0
+    pointer = 1985675272 to 'THE EPIC DESIGN TEAM'
+Object #60 (0x4746)
+    type = 20 (write text small)
+    x = 1152
+    y = 160
+    width = 66
+    height = 7
+    xSpeed = 3
+    ySpeed = -1
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 0
+    flags = 0
+    info1 = 0
+    pointer = 1985544200 to 'TIM SWEENEY'
+Object #61 (0x4765)
+    type = 20 (write text small)
+    x = 1120
+    y = 168
+    width = 132
+    height = 7
+    xSpeed = 3
+    ySpeed = -1
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 0
+    flags = 0
+    info1 = 0
+    pointer = 1985413128 to 'JOHN PALLETT-PLOWRIGHT'
+Object #62 (0x4784)
+    type = 20 (write text small)
+    x = 1152
+    y = 176
+    width = 72
+    height = 7
+    xSpeed = 3
+    ySpeed = -1
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 0
+    flags = 0
+    info1 = 0
+    pointer = 1985282056 to 'DAN FROELICH'
+Object #63 (0x47A3)
+    type = 20 (write text small)
+    x = 1152
+    y = 184
+    width = 72
+    height = 7
+    xSpeed = 3
+    ySpeed = -1
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 0
+    flags = 0
+    info1 = 0
+    pointer = 1985150984 to 'JOE HITCHENS'
+Object #64 (0x47C2)
+    type = 12 (Trigger: Checkpoint)
+    x = 336
+    y = 0
+    width = 16
+    height = 16
+    xSpeed = -54
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = -55
+    flags = 0
+    info1 = 0
+    pointer = 1985085448 to ''
+Object #65 (0x47E1)
+    type = 21 (write text big)
+    x = 80
+    y = 864
+    width = 48
+    height = 8
+    xSpeed = 7
+    ySpeed = -1
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 0
+    flags = 0
+    info1 = 0
+    pointer = 1803288584 to 'Ending'
+Object #66 (0x4800)
+    type = 21 (write text big)
+    x = 64
+    y = 872
+    width = 72
+    height = 8
+    xSpeed = 7
+    ySpeed = -1
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 0
+    flags = 0
+    info1 = 0
+    pointer = 1803157512 to ' Sequence'
+
+Save data layer : (0x481F)
+
+Level : 0
+Health : 6
+Score : 0
+Inventory (1)
+    #0 : 0
+
+String stack :
+
+    0x4865 : '&end1.mac'
+    0x4871 : '*seven.ddt'
+    0x487E : ''
+    0x4881 : ''
+    0x4884 : 'FIVE HUNDRED MILES AWAY FROM'
+    0x48A3 : 'HER STARTING POINT, JILL WANDERS'
+    0x48C6 : 'INTO A STRANGE AND MYSTICAL GROVE OF'
+    0x48ED : 'MUSHROOMS.  TRANSFORMING BACK INTO HER'
+    0x4916 : 'HUMAN FORM,  SHE STOPS TO PONDER THE'
+    0x493D : 'SITUATION.  THIS IS A PLACE UNLIKE'
+    0x4962 : 'ANYTHING SEEN BY THE EYES OF A HUMAN.'
+    0x498A : ''
+    0x498D : 'WHAT UNSPEAKABLE FORCES OF'
+    0x49AA : 'NATURE LIE BEYOND THE GROVE?'
+    0x49C9 : 'CAN A LADY LIKE JILL UNCOVER'
+    0x49E8 : 'THE MYSTERIES OF THIS PLACE, '
+    0x4A08 : 'AND ESCAPE WITHOUT MESSING UP'
+    0x4A28 : 'HER BLONDE HAIR?'
+    0x4A3B : 'FIND THE ANSWERS IN:'
+    0x4A52 : 'Jill Goes Underground'
+    0x4A6A : 'THE STARTLING SEQUEL!'
+    0x4A82 : 'AND ALSO:'
+    0x4A8E : ' Jill Saves the Prince'
+    0x4AA7 : 'YOUR ULTIMATE QUEST'
+    0x4ABD : ' Just When You Thought It Was Over'
+    0x4AE2 : 'THE JILL SERIES CONTINUES!'
+    0x4AFF : 'IN VOLUME II, "JILL GOES UNDERGROUND":'
+    0x4B28 : '* EXPLORE MONTEZUMA'S CASTLE'
+    0x4B47 : '* DISCOVER THE LAND OF ETERNAL WEIRDNESS'
+    0x4B72 : '* VENTURE INTO THE DEMON'S HIDEOUT'
+    0x4B97 : 'WITH LOTS OF NEW GRAPHICS, LEVELS,'
+    0x4BBC : 'SOUND EFFECTS, AND MUSIC!'
+    0x4BD8 : 'IN VOLUME III, "JILL SAVES THE PRINCE":'
+    0x4C02 : '* JOURNEY THROUGH A CASTLE FILLED'
+    0x4C26 : '  WITH BATS AND KNIGHTS!'
+    0x4C41 : '* Explore the aerie and the mega puzzle,'
+    0x4C6C : '  then battle your way onto a ship.'
+    0x4C92 : '* Features an overhead-view jungle map.'
+    0x4CBC : '* MUCH, MUCH, MUCH, MUCH MORE!!!'
+    0x4CDF : ''
+    0x4CE2 : 'CONGRATULATIONS!'
+    0x4CF5 : 'YOU HAVE CONQUERED THE JUNGLE'
+    0x4D15 : ' WE HOPE YOU HAVE ENJOYED'
+    0x4D31 : ' PLAYING JILL OF THE JUNGLE'
+    0x4D4F : 'THE EPIC DESIGN TEAM'
+    0x4D66 : 'TIM SWEENEY'
+    0x4D74 : 'JOHN PALLETT-PLOWRIGHT'
+    0x4D8D : 'DAN FROELICH'
+    0x4D9C : 'JOE HITCHENS'
+    0x4DAB : ''
+    0x4DAE : 'Ending'
+    0x4DB7 : ' Sequence'
+
+Starting write background in piture
+Done
+Starting write object in piture
+WARNING : Object type 12 (Trigger: Checkpoint) is ignored at 128/928
+WARNING : Object type 12 (Trigger: Checkpoint) is ignored at 272/848
+WARNING : Object type 12 (Trigger: Checkpoint) is ignored at 1088/880
+WARNING : Object type 12 (Trigger: Checkpoint) is ignored at 0/0
+WARNING : Object type 12 (Trigger: Checkpoint) is ignored at 672/0
+WARNING : Object type 12 (Trigger: Checkpoint) is ignored at 1008/0
+WARNING : Object type 12 (Trigger: Checkpoint) is ignored at 336/0

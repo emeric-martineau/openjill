@@ -1,0 +1,7 @@
+How is calculate size ega/cag/vga in sha file ?
+
+Add ST_xxx value
+
+CMF file format (*.ddt music) : emulator http://opl3.cozendey.com/
+
+Macro file format

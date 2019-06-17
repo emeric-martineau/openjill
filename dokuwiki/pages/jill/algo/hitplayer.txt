@@ -1,0 +1,15 @@
+====== How ennemy hit player ? ======
+
+When ennemy hit player, 3 value is put in **zaphold** field.\\
+When enneny don't hit player, **zaphold** field decrease by 1, an each cycle.
+
+Player life is decrease only if ennemy have **zaphold** field to 0.
+
+By this method, an object must wait 3 cycles out of player collision to send new hit player.
+
+===== Inventory bar =====
+
+When object hit player, the life of player decrease by 1.\\
+Background of inventory paint on red during one cycle.
+
+{{:jill:algo:hitbar.png|}}

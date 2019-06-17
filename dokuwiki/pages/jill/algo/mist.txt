@@ -1,0 +1,4 @@
+====== Mist background ======
+
+Mist background is animate background (4 pictures).\\
+Background wait 10 cycles before update picture.

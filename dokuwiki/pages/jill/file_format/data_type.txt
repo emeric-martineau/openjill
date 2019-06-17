@@ -1,0 +1,68 @@
+====== Data type ======
+
+(Originally from http://www.shikadi.net/moddingwiki/File_format_data_types)
+
+This is a list of all the data types used in the file format descriptions on the wiki.  They are loosely based on common C/C++ data types, and should be used throughout the wiki for consistency.
+
+===== Type list =====
+
+===== Numeric values ====
+
+
+^Data type^Description^
+|UINT8|Unsigned 8-bit integer|
+|UINT16LE|Unsigned 16-bit integer in little-endian format|
+|UINT16BE|Unsigned 16-bit integer in big-endian format|
+|UINT32LE|Unsigned 32-bit integer in little-endian format|
+|UINT32BE|Unsigned 32-bit integer in big-endian format|
+
+Signed equivalents are the same without the leading U, i.e. //INT8//, //INT16LE//, etc.  Unless otherwise stated, the format is in [[http://en.wikipedia.org/wiki/Two%27s_complement|Two's complement]] (where a UINT8 value of 255 is -1 as an INT8, for example.)
+
+====  Character strings ====
+
+^Data type^Description^
+|char[x]|String ''x'' characters long|
+|char|Single 8-bit character|
+|ASCIIZ|A C-style string (variable-length, terminated with a single NULL/0x00 value)|
+
+==== Misc data types ====
+
+^Data type^Description^
+|BYTE|Same as UINT8 but conceptually for generic data rather than numeric values (e.g. UINT8 would be used for a number, while a BYTE would be used for a bitfield)|
+|BYTE[x]|Block of data ''x'' bytes long|
+
+
+==== Big endian vs little endian ====
+
+For numeric values larger than a single byte, the endianness specifies how the values are split over multiple bytes.  For example a hex value of 0x1234AABB when written to a file will take up two bytes, as follows:
+
+^Endian^Bytes in file^
+|Big|<code>12 34 AA BB</code>|
+|Little|<code>BB AA 34 12</code>|
+
+
+For those languages that allow direct memory access such as C/C++, converting an integer value to a byte array will reveal the value stored in-memory in the same order as the table above.
+
+Normally when reading or writing a variable to a file a programmer will simply pass the memory address of the variable, resulting in the file mirroring the byte order in memory.  This is no problem when reading the variable back in on the same system, as the byte order will match.  However when reading data from a different system (for example using an Intel PC to read files from a PowerPC Mac) the byte order will be opposite to what the system expects and the programmer must convert the values manually.
+
+====  Conversion examples ====
+
+If a value is being read on the same system (little to little or big to big) then no action is required.  If the systems are different, then the values must be swapped.  The following sections list examples for different programming languages.
+
+=== C/C++ ===
+
+<code c>
+// 16-bit
+int in = 0x1234;
+int out = ((in & 0xFF) << 8) | (in >> 8);
+// out should now be 0x3412
+
+// 32-bit
+int in = 0x1234AABB;
+int out =
+  ((in & 0xFF) << 24) |
+  ((in & 0xFF00) << 8) |
+  ((in & 0xFF0000) >> 8) |
+  (in >> 24);
+// out should now be 0xBBAA3412
+</code>

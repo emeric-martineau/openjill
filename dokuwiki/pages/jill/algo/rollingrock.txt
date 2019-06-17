@@ -1,0 +1,18 @@
+====== Rolling Rock ======
+
+Rolling rock is unkillable object that move on floor and fall if no floor under object.\\
+//iXD// is speed of horizontal movement. When object fall, //iXD// set to 0.\\
+If //iXD// is 0, first value of //iXD// is 4.\\
+//iYD// is speed of vertical movement. When object fall, //iYD// increase by 2 at each cycle with maximum 12.
+
+^ iCounter ^ tileset ^ tile ^ comment ^
+| 0 | 14 | 24 | image diplay when rock fall |
+| 1 | 14 | 25 | image diplay when rock roll |
+| 2 | 14 | 26 | image diplay when rock roll |
+| 3 | 14 | 27 | image diplay when rock roll |
+
+When rock fall if //iXD// is not 0, move object horizontally.
+
+<WRAP round important>
+When Rolling rocks hit block, set //iXD// to 0 first. Next cycle set to 4 or -4.
+</WRAP>

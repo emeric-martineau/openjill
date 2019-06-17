@@ -1,0 +1,48 @@
+====== Save file format ======
+
+
+When game save level, it's create two files : JN**x**SAVE.**y** and JN**x**SAVEM.**y** (where **x** is the number of episode of Jill and **y** is the number of save in the list).\\
+This is the file JNxSAVE.y where store save data.\\
+File JNxSAVEM.y store map level to permit find same map when current level is end.\\
+
+The only change between [[jill:file_format:jn|Jill of the Jungle map format]] and save data, is [[jill:file_format:jn#object_layer|Object layer]] (when a ennemi is dead, is delete from list) and save data game layer.
+
+This layer have 70 bytes length.
+
+^Data type^Description^
+|[[jill:file_format:data_type|UINT16LE]] level|The number of level. If = 0x7f, display 'MAP' in status|
+|[[jill:file_format:data_type|UINT16LE]] health|Initial value is 6. Maximum value is 8. Health is always set to 6 at load/restore game.|
+|[[jill:file_format:data_type|UINT16LE]] nbInventory|Number of item in inventory|
+|[[jill:file_format:data_type|UINT16LE]] item1|item #1 of inventory|
+|[[jill:file_format:data_type|UINT16LE]] item2|item #2 of inventory|
+|[[jill:file_format:data_type|UINT16LE]] item3|item #3 of inventory|
+|[[jill:file_format:data_type|UINT16LE]] item4|item #4 of inventory|
+|[[jill:file_format:data_type|UINT16LE]] item5|item #5 of inventory|
+|[[jill:file_format:data_type|UINT16LE]] item6|item #6 of inventory|
+|[[jill:file_format:data_type|UINT16LE]] item7|item #7 of inventory|
+|[[jill:file_format:data_type|UINT16LE]] item8|item #8 of inventory|
+|[[jill:file_format:data_type|UINT16LE]] item9|item #9 of inventory|
+|[[jill:file_format:data_type|UINT16LE]] item10|item #10 of inventory|
+|[[jill:file_format:data_type|UINT16LE]] item11|item #11 of inventory|
+|[[jill:file_format:data_type|UINT16LE]] item12|item #12 of inventory|
+|[[jill:file_format:data_type|UINT16LE]] item13|item #13 of inventory|
+|[[jill:file_format:data_type|UINT16LE]] item14|item #14 of inventory|
+|[[jill:file_format:data_type|UINT16LE]] item15|item #15 of inventory|
+|[[jill:file_format:data_type|UINT16LE]] item16|item #16 of inventory|
+|[[jill:file_format:data_type|UINT32LE]] score|game score|
+|[[jill:file_format:data_type|UINT8]] //empty[28]//|28 empty byte|
+
+===== Item inventory list =====
+
+^Id^Description^Tileset^Tile^Statusbar message^
+|0|Morph: Jill|14|38| |
+|1|Key: Red Key|14|12| |
+|2|Weapon: Knive|14|13| |
+|3|Key: Crystal Rock|14|11| |
+|4|Morph: Frog|14|14| |
+|5|Morph: Fire bird (phoenix)|14|15| ZZZZZZZT! |
+|6|Morph: Spider (not working on original game)|14|18| |
+|7|Morph: Fish|14|20| |
+|8|Weapon: Blade|14|35| YOU FOUND A SPINNING BLADE |
+|9|Bonus: High Jump|14|36| |
+|10|Invincibility|14|37| |

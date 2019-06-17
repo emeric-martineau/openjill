@@ -1,0 +1,152 @@
+====== Jill game screen Area ======
+
+{{:jill:other:jill1_000.png|}}
+
+===== Screen area =====
+
+{{:jill:other:screen_area.png|}}
+
+^ Text ^ Color ^ X ^ Y ^
+| CONTROLS | 1 | 10 | 5 |
+| INVENTORY | 1 | 13 | 179 |
+| Open Jill : Jungle | 1 | 129 | 4 |
+
+==== Message bar ====
+
+^ x ^ y ^ width ^ height ^ color ^
+| 0 | 188 | 320 | 12 | black |
+
+==== Control area ====
+
+Control area is use to display control during game, score menu, load/save menu.
+
+^ x ^ y ^ width ^ height ^ color ^
+| 8 | 16 | 64 | 85 |  |
+
+=== Control draw === 
+
+Default background use color n°8.
+
+Draw a line (color 12) at Y=39.
+
+Draw special key :
+^ Text ^ Color ^ X ^ Y ^
+| SHIFT | 5 | 2 | 29 |
+| ALT | 5 | 2 | 18 |
+| F1 | 5 | 2 | 27 |
+
+Draw small text :
+^ Text ^ Color ^ X ^ Y ^
+| move jill | 4 | 5 | 2 |
+| jump | 7 | 37 | 10 |
+| ?? | 7 | 33 | 19 |
+| help | 7 | 20 | 28 |
+| NOISE | 2 | 14 | 44 |
+| QUIT | 2 | 14 | 52 |
+| SAVE | 2 | 14 | 60 |
+| RESTORE | 2 | 14 | 68 |
+| TURTLE | 2 | 14 | 78 |
+
+Draw big text :
+^ Text ^ Color ^ X ^ Y ^
+| N | 3 | 1 | 43 |
+| Q | 3 | 1 | 51 |
+| S | 3 | 1 | 59 |
+| R | 3 | 1 | 67 |
+| T | 3 | 1 | 75 |
+
+=== Score draw === 
+
+{{:jill:other:score.png|}}
+
+== Display mode ==
+
+Background color is #8\\
+Text color is #2\\
+Number color is #6.
+
+<WRAP round tip 60%>
+Score number use special policies tileset 2.
+</WRAP>
+
+== Edit mode ==
+
+Text color is #7\\
+Number color is #4.
+
+== Common ==
+
+At line x=0/y=10, a line with color #13.\\
+The text ''HI SCORES'' is draw with color #4 at x=5/y=2.\\
+Score start draw at x=2/y=15.
+
+=== Load menu draw === 
+
+{{:jill:other:load_menu.png|}}
+
+At line x=0/y=10, a line with color #13.\\
+Background color is #1\\
+Text color is #3\\
+
+^ Text ^ # Color ^ X ^ Y ^
+| LOAD GAME | 2 | 6 | 2 |
+| PRESS | 2 | 14 | 65 |
+| ESCAPE | 4 | 12 | 71 |
+| TO ABORD | 2 | 7 | 77 |
+
+Text start à x=8/y=5.
+
+If no saved game, display ''<empty>''.
+
+===  Save menu draw === 
+
+{{:jill:other:save_menu.png|}}
+
+If edit mode, background color is 1 and text color is 7.
+
+If no saved game, display nothing.
+==== Inventory area ====
+
+^ x ^ y ^ width ^ height ^ color ^
+| 8 | 107 | 64 | 69 |  |
+
+Inventory area is is to display level, life bar and all inventory.\\
+It use also, in start screen to display jill face in VGA mode.
+
+Default background use color n°8.\\
+
+^ Text ^ Color ^ X ^ Y ^
+| health | 5 | 2 | 2 |
+| level | 2 | 1 | 10 |
+| map | 2 | 1 | 16 |
+| score | 4 | 33 | 10 |
+
+=== Draw lifebar ===
+
+Lifebar have two picture, first tilset=14/tile=42, end bar is tilset=14/tile=43.\\
+To know number of fist picture to draw, take life point - 1 (e.g. jill have 6 point), and draw five bar. Warning, picture have four pixel to width but only three is used.\\
+Draw first picture at begin X=42/Y=2.
+
+To draw end bar, calculate offset X = (life point - 1) * 3. Draw end bar picture at begin X=40/Y=2.\\
+
+{{:jill:other:lifebar_normal.png|}}
+
+That meams, if life is 1, life bar start at X=40/Y=2, not X=42/Y=2.\\
+
+{{:jill:other:lifebar_1.png|}}
+
+And if life is 0, life bar start at X=37/Y=2 !
+
+{{:jill:other:lifebar_0.png|}}
+
+=== Hit player ===
+
+When player is hit, background color switch to color 4 during one cycle.
+
+===== Game area =====
+^ x ^ y ^ width ^ height ^ color ^
+| 80 | 16 | 232 | 160 |  |
+
+===== Screen border area =====
+
+{{:jill:other:statusbar.png|}}

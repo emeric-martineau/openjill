@@ -1,0 +1,41 @@
+====== Bees ======
+
+Bees are create by [[jill:algo:hive|Hive]] when player is next to.\\
+Bees created with all fields to 0, except with (always 16), height (always 16), y (same that hive), x (same that hive + 8).\\
+Bees kill when //iState// is 160 (//iState// increase by 1 at each cycle).\\
+Bees follow player like [[jill:algo:knife|Knife]] but goal is bees.x=player.x, bees.y=player.y.
+
+===== Algorithme to move bees : =====
+
+<WRAP round important>
+Algorithme may be wrong ! It's very hard, without source code to understand how bees works.
+</WRAP>
+
+To know size move of bees (//iXD// or //iYD//), you must use :
+<code>
+a = int((state + 7) / 32)
+b = a * 32
+c = (state + 7) - b
+</code>
+
+^ c ^ 0-3 ^ 4-10 ^ 11-14 ^ 15-26 ^ 27-30 ^ 31 ^ Comment ^
+| moveY | random(0-3) | random(0-4) | random(0-3) | 0 | random(0-1) | random(0-2) | If player is not on same Y, use sign to go to player. If player is on same Y, use sign inverted last yd. |
+| moveX | 1 | 0 | 1 | random(2-4) | random(2-4) | random(2-4) | |
+
+Now :
+<code>
+//iYD// = moveY[c]
+//iXD// = moveX[c]
+</code>
+
+===== Animation =====
+
+//iCounter// = //iState// & 3
+
+^ iCounter ^ player position ^ tileset ^ tile ^
+| 0 | >=0 | 37 | 7 |
+| 1 | >=0 | 37 | 8 |
+| 2 | >=0 | 37 | 9 |
+| 0 | <0 | 37 | 4 |
+| 1 | <0 | 37 | 5 |
+| 2 | <0 | 37 | 6 |

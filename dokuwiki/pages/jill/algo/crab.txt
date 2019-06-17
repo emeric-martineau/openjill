@@ -1,0 +1,13 @@
+====== Crab ======
+
+Crab is ennemy like [[jill:algo:gator|Gator]] for movement.\\
+Size move of Crab is give by //iXD// (//iXD// (usually '4'): movement speed).\\
+Giant Ant add 2 points to score.
+
+^iCounter^tileset^tile^comment^
+|0|38|0|move|
+|1|38|1|move|
+|2|38|2|move|
+|3|38|3|move|
+
+When crac walk on same climb block, randomly, it up on (//iYD// is 2/-1).

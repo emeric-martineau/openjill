@@ -1,0 +1,56 @@
+====== Organization of sources ======
+
+<WRAP round important>Since OpenJill 0.2.0, see README file in source code to know source code file/directory organization !</WRAP>
+
+OpenJill project contain some librairies, listed below :
+
+===== abstractfile =====
+
+This is part of code to virtualize file in memory or in hard disk. It's use to store/restore map level in memory when user enter/leave in level of game.\\
+Encapsulate RandomAccessFile for access file on hard-disk and emulate it in memory.\\
+It's very basic class, just load file in array of interger.
+
+===== cfg-file =====
+
+This librairy read CFG file. See [[jill:file_format:cfg|CFG file format]]
+
+===== dma-file =====
+
+This librairy read DMA file. See [[jill:file_format:dma|DMA file format]]
+
+===== dma-file-extractor =====
+
+It's tool to extract all DMA content on hard-disk. It's standalone program.
+
+===== jill_parent =====
+
+It's root maven projet with profile to build librairy, tools and game.
+
+===== jn-file =====
+
+This librairy read JN (map) file. See [[jill:file_format:jn|Jill of the Jungle map format]] and [[jill:file_format:save|Save file format]]
+
+===== jn-file-extractor =====
+
+It's tool to extract all JN content on hard-disk. It's standalone program.\\
+If you use it, you discover many funy stuff of original map.
+
+===== sha-file =====
+
+This librairy read SHA file. See [[jill:file_format:sha|SHA file format]]
+
+===== sha-file-extractor =====
+
+It's tool to extract all SHA content on hard-disk. It's standalone program.
+
+===== sha-file-edit =====
+
+I try to start write an editor of SHA file but no longer code.
+
+===== vcl-file =====
+
+This librairy read VCL file. See [[jill:file_format:vcl|VCL file format]]
+
+===== OpenJill =====
+
+See [[openjill:sources:openjill_sub_folder|OpenJill sub folder]]

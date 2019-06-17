@@ -1,0 +1,25 @@
+====== Firebird player ======
+
+See [[jill:algo:firebird|Firebird]] for draw picture.
+
+===== Left/Right movement =====
+
+Firebird player use //iXD// to move and //iSubState// to store last //iXD//.
+
+If go right and substate positiv, //iXD// and //iSubState// = 8\\
+If go left and substate negativ, //iXD// and //iSubState// = -8\\
+If go right and substate negativ, //iXD// and //iSubState// = 4\\
+If go left and substate positiv, //iXD// and //iSubState// = -4\\
+No key pressed //iXD// = 0
+
+===== Up/Down movement =====
+
+When player up, //iYD// set to -6.
+
+At each cycle, //iYD// increase (+1) with 8 to max value.
+
+===== Other =====
+
+//iInfo1// not used and old value is keeped (from standard player Jill).
+
+When player die, restore standard player.

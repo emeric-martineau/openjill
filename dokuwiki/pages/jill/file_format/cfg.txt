@@ -1,0 +1,56 @@
+====== CFG file format ======
+
+(Originally from [[http://www.shikadi.net/moddingwiki/CFG_Format_%28Jill_of_the_Jungle%29]]) 
+
+The CFG file contain configuration of game. It contain also high score and saved game name.
+
+===== File format =====
+
+High scores and game configuration are stored in the JILL#.CFG file.\\
+Saved game names are only allowed to be 7 characters long in-game. In file, saved game name complet by 0-byte.
+
+^Offset ^Type ^Description  ^
+|0| String[10]| High score name #1|
+|10| String[10]| High score name #2|
+|20| String[10]| High score name #3|
+|30| String[10]| High score name #4|
+|40| String[10]| High score name #5|
+|50| String[10]| High score name #6|
+|60| String[10]| High score name #7|
+|70| String[10]| High score name #8|
+|80| String[10]| High score name #9|
+|90| String[10]| High score name #10|
+|100-119| ? | (unknown)  |
+|120| SINT32| High score value #1|
+|124| SINT32| High score value #2|
+|128| SINT32| High score value #3|
+|132| SINT32| High score value #4|
+|136| SINT32| High score value #5|
+|140| SINT32| High score value #6|
+|144| SINT32| High score value #7|
+|148| SINT32| High score value #8|
+|152| SINT32| High score value #9|
+|156| SINT32| High score value #10|
+|160| String[12]| Saved game name #1|
+|172| String[12]| Saved game name #2|
+|184| String[12]| Saved game name #3|
+|196| String[12]| Saved game name #4|
+|208| String[12]| Saved game name #5|
+|220| String[12]| Saved game name #6|
+|232| CFG_STRUCT| Common configuration block|
+
+===== Common configuration block =====
+ 
+
+^Offset ^Type ^Description  ^
+|0| SINT16| If this is set to 1, the configuration will reset. Game display setup screen. Use for the first run |
+|2| SINT16| Joystick enabled if this is nonzero.  |
+|4| SINT16| Joystick X left value.  |
+|6| SINT16| Joystick X center value.  |
+|8| SINT16| Joystick X right value.  |
+|10| SINT16| Joystick Y up value.  |
+|12| SINT16| Joystick Y center value.  |
+|14| SINT16| Joystick Y down value.  |
+|16| SINT16| Display configuration. For Jill: 1=CGA, 2=EGA, 4=VGA.  |
+|18| SINT16| Music configuration. Nonzero value means it is enabled.  |
+|20| SINT16| Digital sound configuration. Nonzero value means it is enabled.  |

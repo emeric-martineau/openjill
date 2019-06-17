@@ -1,0 +1,14 @@
+====== Hint & Instructions ======
+
+Hint windows and Instructions windows are same.\\
+Look :\\
+
+**Hint windows :**\\
+{{:jill:other:hint.png|}}
+
+**Instruction windows :**\\
+{{:jill:other:how_to_play.png|}}
+
+Text are center verticaly and horizontaly !
+
+To draw border see [[jill:other:screen_game_area|Jill game screen Area]]

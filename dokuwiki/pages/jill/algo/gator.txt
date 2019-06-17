@@ -1,0 +1,19 @@
+====== Gator ======
+
+Gator move horizontaly. At runtime, check if block is front and move on back not PLAYERTHRU or on STAIR. If block find, gator U turn.\\
+Speed and way of move is set by //iXD// (usually '2').\\
+Gator add 3 points to score.
+
+Image display for right:
+^iCounter^tileset^tile for head^tile for tail^
+|0|39|0|4|
+|1|39|1|5|
+|2|39|2|6|
+|3|39|3|7|
+
+Image display for left:
+^iCounter^tileset^tile for head^tile for tail^
+|0|39|12|8|
+|1|39|13|9|
+|2|39|14|10|
+|3|39|15|11|

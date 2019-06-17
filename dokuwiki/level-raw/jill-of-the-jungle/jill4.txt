@@ -1,0 +1,1153 @@
+Object layer (74) :
+
+Object #0 (0x4002)
+    type = 0 (Jill (normal))
+    x = 1056
+    y = 928
+    width = 16
+    height = 32
+    xSpeed = 0
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 0
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #1 (0x4021)
+    type = 14 (Red key)
+    x = 496
+    y = 240
+    width = 16
+    height = 8
+    xSpeed = 0
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 2
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #2 (0x4040)
+    type = 1 (Apple)
+    x = 512
+    y = 208
+    width = 16
+    height = 16
+    xSpeed = 0
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 2
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #3 (0x405F)
+    type = 1 (Apple)
+    x = 480
+    y = 208
+    width = 16
+    height = 16
+    xSpeed = 0
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 2
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #4 (0x407E)
+    type = 24 (Locked Door)
+    x = 432
+    y = 432
+    width = 16
+    height = 24
+    xSpeed = 0
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 3
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #5 (0x409D)
+    type = 15 (Trigger: Touch Trigger)
+    x = 448
+    y = 448
+    width = 16
+    height = 16
+    xSpeed = 0
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 3
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #6 (0x40BC)
+    type = 24 (Locked Door)
+    x = 496
+    y = 384
+    width = 16
+    height = 24
+    xSpeed = 0
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 4
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #7 (0x40DB)
+    type = 15 (Trigger: Touch Trigger)
+    x = 512
+    y = 400
+    width = 16
+    height = 16
+    xSpeed = 0
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 4
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #8 (0x40FA)
+    type = 14 (Red key)
+    x = 656
+    y = 368
+    width = 16
+    height = 8
+    xSpeed = 0
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 2
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #9 (0x4119)
+    type = 24 (Locked Door)
+    x = 464
+    y = 384
+    width = 16
+    height = 24
+    xSpeed = 0
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 5
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #10 (0x4138)
+    type = 15 (Trigger: Touch Trigger)
+    x = 480
+    y = 400
+    width = 16
+    height = 16
+    xSpeed = 0
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 5
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #11 (0x4157)
+    type = 25 (Misc: Collapsing ceiling)
+    x = 800
+    y = 272
+    width = 16
+    height = 16
+    xSpeed = 0
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 7
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #12 (0x4176)
+    type = 15 (Trigger: Touch Trigger)
+    x = 880
+    y = 304
+    width = 16
+    height = 16
+    xSpeed = 0
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 7
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #13 (0x4195)
+    type = 24 (Locked Door)
+    x = 800
+    y = 224
+    width = 16
+    height = 24
+    xSpeed = 0
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 8
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #14 (0x41B4)
+    type = 15 (Trigger: Touch Trigger)
+    x = 816
+    y = 240
+    width = 16
+    height = 16
+    xSpeed = 0
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 8
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #15 (0x41D3)
+    type = 24 (Locked Door)
+    x = 64
+    y = 480
+    width = 16
+    height = 24
+    xSpeed = 0
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 9
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #16 (0x41F2)
+    type = 15 (Trigger: Touch Trigger)
+    x = 80
+    y = 496
+    width = 16
+    height = 16
+    xSpeed = 0
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 9
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #17 (0x4211)
+    type = 25 (Misc: Collapsing ceiling)
+    x = 240
+    y = 448
+    width = 16
+    height = 16
+    xSpeed = 0
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 10
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #18 (0x4230)
+    type = 15 (Trigger: Touch Trigger)
+    x = 320
+    y = 496
+    width = 16
+    height = 16
+    xSpeed = 0
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 10
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #19 (0x424F)
+    type = 14 (Red key)
+    x = 272
+    y = 368
+    width = 16
+    height = 8
+    xSpeed = 0
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 0
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #20 (0x426E)
+    type = 14 (Red key)
+    x = 976
+    y = 16
+    width = 16
+    height = 8
+    xSpeed = 0
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 0
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #21 (0x428D)
+    type = 14 (Red key)
+    x = 1024
+    y = 240
+    width = 16
+    height = 8
+    xSpeed = 0
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 0
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #22 (0x42AC)
+    type = 1 (Apple)
+    x = 1024
+    y = 64
+    width = 16
+    height = 16
+    xSpeed = 0
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 0
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #23 (0x42CB)
+    type = 28 (Bonus (Hight jump, knif...))
+    x = 1600
+    y = 756
+    width = 16
+    height = 16
+    xSpeed = 0
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 4
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #24 (0x42EA)
+    type = 42 (Misc: Huge letter)
+    x = 1072
+    y = 840
+    width = 20
+    height = 24
+    xSpeed = 0
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 100
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #25 (0x4309)
+    type = 15 (Trigger: Touch Trigger)
+    x = 1072
+    y = 960
+    width = 16
+    height = 16
+    xSpeed = 0
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 100
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #26 (0x4328)
+    type = 1 (Apple)
+    x = 912
+    y = 704
+    width = 12
+    height = 12
+    xSpeed = 0
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 0
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #27 (0x4347)
+    type = 1 (Apple)
+    x = 960
+    y = 704
+    width = 12
+    height = 12
+    xSpeed = 0
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 0
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #28 (0x4366)
+    type = 1 (Apple)
+    x = 1008
+    y = 704
+    width = 12
+    height = 12
+    xSpeed = 0
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 0
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #29 (0x4385)
+    type = 1 (Apple)
+    x = 1136
+    y = 704
+    width = 12
+    height = 12
+    xSpeed = 0
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 0
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #30 (0x43A4)
+    type = 1 (Apple)
+    x = 1184
+    y = 704
+    width = 12
+    height = 12
+    xSpeed = 0
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 0
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #31 (0x43C3)
+    type = 1 (Apple)
+    x = 1232
+    y = 704
+    width = 12
+    height = 12
+    xSpeed = 0
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 0
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #32 (0x43E2)
+    type = 28 (Bonus (Hight jump, knif...))
+    x = 1536
+    y = 340
+    width = 16
+    height = 16
+    xSpeed = 0
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 5
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #33 (0x4401)
+    type = 66 (Misc: Flag)
+    x = 1456
+    y = 80
+    width = 36
+    height = 16
+    xSpeed = 0
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 0
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #34 (0x4420)
+    type = 66 (Misc: Flag)
+    x = 1536
+    y = 96
+    width = 36
+    height = 16
+    xSpeed = 0
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 0
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #35 (0x443F)
+    type = 66 (Misc: Flag)
+    x = 1616
+    y = 80
+    width = 36
+    height = 16
+    xSpeed = 0
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 0
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #36 (0x445E)
+    type = 33 (Rock key)
+    x = 1536
+    y = 48
+    width = 16
+    height = 16
+    xSpeed = 0
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 0
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #37 (0x447D)
+    type = 15 (Trigger: Touch Trigger)
+    x = 1536
+    y = 48
+    width = 16
+    height = 16
+    xSpeed = 0
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 101
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #38 (0x449C)
+    type = 25 (Misc: Collapsing ceiling)
+    x = 1568
+    y = 736
+    width = 16
+    height = 16
+    xSpeed = 0
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 101
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #39 (0x44BB)
+    type = 25 (Misc: Collapsing ceiling)
+    x = 1632
+    y = 736
+    width = 16
+    height = 16
+    xSpeed = 0
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 101
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #40 (0x44DA)
+    type = 19 (Misc: Cloud )
+    x = 1424
+    y = 16
+    width = 16
+    height = 16
+    xSpeed = 2
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 3
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #41 (0x44F9)
+    type = 19 (Misc: Cloud )
+    x = 1648
+    y = 0
+    width = 16
+    height = 16
+    xSpeed = -1
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 0
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #42 (0x4518)
+    type = 19 (Misc: Cloud )
+    x = 1712
+    y = 96
+    width = 16
+    height = 16
+    xSpeed = -1
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 43
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #43 (0x4537)
+    type = 19 (Misc: Cloud )
+    x = 1712
+    y = 176
+    width = 16
+    height = 16
+    xSpeed = -2
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 43
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #44 (0x4556)
+    type = 19 (Misc: Cloud )
+    x = 1712
+    y = 272
+    width = 16
+    height = 16
+    xSpeed = -1
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 0
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #45 (0x4575)
+    type = 19 (Misc: Cloud )
+    x = 1712
+    y = 384
+    width = 16
+    height = 16
+    xSpeed = 1
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 43
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #46 (0x4594)
+    type = 19 (Misc: Cloud )
+    x = 1712
+    y = 464
+    width = 16
+    height = 16
+    xSpeed = 1
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 43
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #47 (0x45B3)
+    type = 19 (Misc: Cloud )
+    x = 1712
+    y = 512
+    width = 16
+    height = 16
+    xSpeed = 2
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 40
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #48 (0x45D2)
+    type = 19 (Misc: Cloud )
+    x = 1712
+    y = 624
+    width = 16
+    height = 16
+    xSpeed = 1
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 40
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #49 (0x45F1)
+    type = 19 (Misc: Cloud )
+    x = 1712
+    y = 704
+    width = 16
+    height = 16
+    xSpeed = 2
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 40
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #50 (0x4610)
+    type = 19 (Misc: Cloud )
+    x = 1712
+    y = 800
+    width = 16
+    height = 16
+    xSpeed = 2
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 34
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #51 (0x462F)
+    type = 19 (Misc: Cloud )
+    x = 1712
+    y = 880
+    width = 16
+    height = 16
+    xSpeed = 3
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 34
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #52 (0x464E)
+    type = 19 (Misc: Cloud )
+    x = 1360
+    y = 96
+    width = 16
+    height = 16
+    xSpeed = 1
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 40
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #53 (0x466D)
+    type = 19 (Misc: Cloud )
+    x = 1360
+    y = 240
+    width = 16
+    height = 16
+    xSpeed = 2
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 38
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #54 (0x468C)
+    type = 19 (Misc: Cloud )
+    x = 1360
+    y = 336
+    width = 16
+    height = 16
+    xSpeed = 1
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 34
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #55 (0x46AB)
+    type = 19 (Misc: Cloud )
+    x = 1360
+    y = 496
+    width = 16
+    height = 16
+    xSpeed = 2
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 31
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #56 (0x46CA)
+    type = 19 (Misc: Cloud )
+    x = 1360
+    y = 656
+    width = 16
+    height = 16
+    xSpeed = 1
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 29
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #57 (0x46E9)
+    type = 19 (Misc: Cloud )
+    x = 1360
+    y = 816
+    width = 16
+    height = 16
+    xSpeed = 1
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 21
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #58 (0x4708)
+    type = 19 (Misc: Cloud )
+    x = 1264
+    y = 880
+    width = 16
+    height = 16
+    xSpeed = 1
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 0
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #59 (0x4727)
+    type = 1 (Apple)
+    x = 1072
+    y = 624
+    width = 12
+    height = 12
+    xSpeed = 0
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 0
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #60 (0x4746)
+    type = 12 (Trigger: Checkpoint)
+    x = 1056
+    y = 960
+    width = 16
+    height = 16
+    xSpeed = 0
+    ySpeed = 0
+    state = 1
+    subState = 0
+    stateCount = 0
+    counter = 13
+    flags = 0
+    info1 = 0
+    pointer = 2138177544 to '*dan.ddt'
+Object #61 (0x4765)
+    type = 12 (Trigger: Checkpoint)
+    x = 128
+    y = 480
+    width = 16
+    height = 16
+    xSpeed = 0
+    ySpeed = 0
+    state = 1
+    subState = 0
+    stateCount = 0
+    counter = 6
+    flags = 0
+    info1 = 0
+    pointer = 2138046472 to '*dan.ddt'
+Object #62 (0x4784)
+    type = 12 (Trigger: Checkpoint)
+    x = 0
+    y = 496
+    width = 16
+    height = 16
+    xSpeed = 0
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 0
+    flags = 0
+    info1 = 0
+    pointer = 2137980936 to '!'
+Object #63 (0x47A3)
+    type = 12 (Trigger: Checkpoint)
+    x = 1072
+    y = 416
+    width = 16
+    height = 16
+    xSpeed = 0
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 0
+    flags = 0
+    info1 = 0
+    pointer = 2137915400 to '!'
+Object #64 (0x47C2)
+    type = 21 (write text big)
+    x = 1520
+    y = 324
+    width = 48
+    height = 8
+    xSpeed = 7
+    ySpeed = -1
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 0
+    flags = 0
+    info1 = 0
+    pointer = 2137849864 to 'GO UP!'
+Object #65 (0x47E1)
+    type = 15 (Trigger: Touch Trigger)
+    x = 1072
+    y = 472
+    width = 16
+    height = 16
+    xSpeed = 0
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = -102
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #66 (0x4800)
+    type = 24 (Locked Door)
+    x = 1072
+    y = 468
+    width = 16
+    height = 24
+    xSpeed = 0
+    ySpeed = 1
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = -102
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #67 (0x481F)
+    type = 33 (Rock key)
+    x = 1072
+    y = 448
+    width = 16
+    height = 16
+    xSpeed = 0
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 0
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #68 (0x483E)
+    type = 33 (Rock key)
+    x = 32
+    y = 492
+    width = 16
+    height = 16
+    xSpeed = 0
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 0
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #69 (0x485D)
+    type = 29 (Giant Ant)
+    x = 1504
+    y = 896
+    width = 32
+    height = 16
+    xSpeed = 2
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 0
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #70 (0x487C)
+    type = 29 (Giant Ant)
+    x = 1488
+    y = 784
+    width = 32
+    height = 16
+    xSpeed = 2
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 0
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #71 (0x489B)
+    type = 29 (Giant Ant)
+    x = 1520
+    y = 368
+    width = 32
+    height = 16
+    xSpeed = 2
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 0
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #72 (0x48BA)
+    type = 29 (Giant Ant)
+    x = 1296
+    y = 960
+    width = 32
+    height = 16
+    xSpeed = -2
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 0
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #73 (0x48D9)
+    type = 20 (write text small)
+    x = 576
+    y = 516
+    width = 48
+    height = 7
+    xSpeed = 7
+    ySpeed = -1
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 0
+    flags = 0
+    info1 = 0
+    pointer = 1627455496 to ' Tricky!'
+
+Save data layer : (0x48F8)
+
+Level : 0
+Health : 6
+Score : 0
+Inventory (1)
+    #0 : 0
+
+String stack :
+
+    0x493E : '*dan.ddt'
+    0x4949 : '*dan.ddt'
+    0x4954 : '!'
+    0x4958 : '!'
+    0x495C : 'GO UP!'
+    0x4965 : ' Tricky!'
+
+Starting write background in piture
+Done
+Starting write object in piture
+WARNING : Object type 24 (Locked Door) is ignored at 432/432
+WARNING : Object type 15 (Trigger: Touch Trigger) is ignored at 448/448
+WARNING : Object type 24 (Locked Door) is ignored at 496/384
+WARNING : Object type 15 (Trigger: Touch Trigger) is ignored at 512/400
+WARNING : Object type 24 (Locked Door) is ignored at 464/384
+WARNING : Object type 15 (Trigger: Touch Trigger) is ignored at 480/400
+WARNING : Object type 15 (Trigger: Touch Trigger) is ignored at 880/304
+WARNING : Object type 24 (Locked Door) is ignored at 800/224
+WARNING : Object type 15 (Trigger: Touch Trigger) is ignored at 816/240
+WARNING : Object type 24 (Locked Door) is ignored at 64/480
+WARNING : Object type 15 (Trigger: Touch Trigger) is ignored at 80/496
+WARNING : Object type 15 (Trigger: Touch Trigger) is ignored at 320/496
+WARNING : Object type 15 (Trigger: Touch Trigger) is ignored at 1072/960
+WARNING : Object type 15 (Trigger: Touch Trigger) is ignored at 1536/48
+WARNING : Object type 12 (Trigger: Checkpoint) is ignored at 1056/960
+WARNING : Object type 12 (Trigger: Checkpoint) is ignored at 128/480
+WARNING : Object type 12 (Trigger: Checkpoint) is ignored at 0/496
+WARNING : Object type 12 (Trigger: Checkpoint) is ignored at 1072/416
+WARNING : Object type 15 (Trigger: Touch Trigger) is ignored at 1072/472
+WARNING : Object type 24 (Locked Door) is ignored at 1072/468

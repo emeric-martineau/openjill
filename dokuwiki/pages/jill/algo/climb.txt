@@ -1,0 +1,68 @@
+====== How Jill climb ? ======
+
+Player set to climb state only if player //iX// == block //iX//.
+
+===== Up climb =====
+^ iState ^ iSubState ^ iStateCount ^ y move size ^ Tileset ^ Tile ^
+|   3    |    5      |      ++     |     -4      |    8    |  25  |
+|   3    |    4      |      ++     |     -4      |    8    |  26  |
+|   3    |    3      |      ++     |     -4      |    8    |  26  |
+|   3    |    2      |      ++     |     -6      |    8    |  25  |
+|   3    |    1      |      ++     |      0      |    8    |  24  |
+|   3    |    0      |      ++     |      0      |    8    |  24  |
+
+Check if player always an vine block. If not, set player stand state. 
+
+Note //iSubState// = 0 only avaible for jump. Only display in this table to easy show all possible state.
+
+===== Down climb =====
+^ iState ^ iSubState ^ iStateCount ^ y move size ^ Tileset ^ Tile ^
+|   3    |    2      |      ++     |     -4      |    8    |  25  |
+
+Check if player always an vine block. If not, set player stand state. 
+
+===== Left/Right climb =====
+
+If //iXd// = 0 :
+  * Set player to stand state,
+  * Add +8/-8 to X of player (if possible, check block).
+
+If //iXd// != 0 and if not left/right key pressed :
+  * set //iX// to 0.
+
+===== Climb to straight jump =====
+
+Player cannot straight jump.
+
+===== Climb to Left/Right jump =====
+
+  * Add +8/-8 to X of player,
+  * Set player to jump state,
+  * //iYd// set to 12 and don't add high jump.
+
+===== Straight jump to climb =====
+
+Player don't set climb state.
+
+===== Left/Right jump to climb =====
+
+If //iX// of player is stricly the same //iX// of vine block :
+  * set state to climb,
+  * //iSubState// set to 2,
+  * //iYd// not modified,
+  * //iXd// not modified.
+
+^ Key state ^ iState ^ iSubState ^ iY ^
+| not release| 3 | 2 | 0 |
+| release| 3 | 0 | 0 |
+
+===== Fall to climb =====
+
+Fall is like jump Left/Right include straight fall.
+
+===== Stand to climb =====
+
+Player is on head up and //iX// of player is stricly the same //iX// of vine block :
+  * set climb state,
+  * //iSubState// set to 2,
+  * //iY// -= 4.

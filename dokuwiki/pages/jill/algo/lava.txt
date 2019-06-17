@@ -1,0 +1,5 @@
+====== Lava background ======
+
+Lava background is animate background (5 pictures).\\
+Background is update at each cycle.\\
+When player hit this background, object 37 is create and player is kill.

@@ -1,0 +1,16 @@
+====== Locked door ======
+
+//iYD// ('0' unlocked, '1' locked) means required key.\\
+If key is not in inventory, first time, display this message ''YOU NEED A GEM TO PASS'' if Locked Door is on MAPDOOR.\\
+Display this message ''THE DOOR IS LOCKED'' if Locked Door is on DOORT/DOORB.
+
+If key is in inventory, display this message ''THE GATE OPENS'' if Locked Door is on MAPDOOR else ''THE DOOR OPENS''.
+
+//iCounter// tag target of object type 15.
+
+Replace the MAPDOOR or DOORT/DOORB by first non-blocking map block at left, on trigger message.
+
+In case that DOORT/DOORB, display annimation.\\
+To do animation, //iState// is increase by 1, and space between DOORT/DOORB is //iState// * 2.
+
+Locked door not remove trigger object.

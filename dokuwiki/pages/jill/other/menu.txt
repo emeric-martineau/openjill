@@ -1,0 +1,13 @@
+====== Menu (start and exit) ======
+
+Menu in Jill draw like :\\
+{{:jill:other:menu.png|}}
+
+Background is tileset=7 and tile=9.\\
+The bullet is tileset=1 and tile=1 to 8.
+
+First letter of each item in menu is shortchut. For example ''y'' is shortcut of ''yes''.
+
+Text start draw on x=13/y=16.
+
+4 spaces draw before each item.

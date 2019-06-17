@@ -1,0 +1,27 @@
+====== Blade weapon ======
+
+Blade weapon is send when player has right inventory : item inventory n°8
+
+Blade display image tileset 45.\\
+//iCounter// is index of picture (0 to 3).\\
+//xd// is always -6 or 6.\\
+//yd// start to 0 and increment by 1 at each cycle.
+
+When blade hit a wall, //xd// is multipy by -1.\\
+When blade hit floor or something above //yd// is multipy by -1.\\
+
+===== Launch (fire key pressed) =====
+When player fire, blade is create at X = player.X-8 and Y = player.Y+2.\\
+//iStateCount// and //iCounter// set to 0.\\
+iXd = 6 or -6 (depend of iXd of player)
+
+<WRAP center round important>
+At each cycle, //subState// is increase by 1. When //subState// is 63, blade is removed.
+
+Blade remove when is out of visible screen !
+
+Blade don't hit stair.
+</WRAP>
+
+====== Break wall ======
+Blade weapon can break block called **BREAKWALL** and replace it by block called **0**.

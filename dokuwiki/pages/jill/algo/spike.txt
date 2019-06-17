@@ -1,0 +1,4 @@
+====== Spike background ======
+
+Spike background is animate background (4 pictures).\\
+Background wait 3 cycles before update picture.

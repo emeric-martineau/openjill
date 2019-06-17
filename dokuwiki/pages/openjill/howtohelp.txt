@@ -1,0 +1,18 @@
+====== How to help ======
+
+===== Donate =====
+
+You can donate to [[http://www.dosbox.com|DosBox Project]] the DOS emulator use to run original game to understand how work Jill Trilogy.
+
+
+You can danote to [[https://www.dokuwiki.org/donate|DokuWiki]] wiki engine I use.
+
+No donate page are avaible for OpenJill at this time.
+
+
+===== Participate =====
+
+If you have spare time and you want help this project, better way is to help me understand you original Jill work. Specialy, map format (or save format).\\ 
+Understand value of field (counet, zaphold...) to give result or behaviour of object.
+
+You can send me your result at bubulemaster [----at----] yahoo [.] fr

@@ -1,0 +1,19 @@
+====== Frog ======
+
+Frog is object that follow player, only when on floor.
+
+^step^mean^iState value^iCounter value^iYD value^iXD value^tileset^tile^
+| 1 | Frog on background | 0 | 0 to 16 | //unknow// | //unknow// | 63 | 0 (right) 3 (left) |
+| 2 | Frog jumping | 1 | 17 | -10 | 4 | 63 | 1 (right) 4 (left) |
+| 3 | Frog jumping | 1 | 17 | -9 -> -1 | 4 | 63 | 1 (right) 4 (left) |
+| 4 | Frog jumping | 1 | 17 | 0 | 4 | 63 | 0 (right) 3 (left) |
+| 5 | Frog jumping | 1 | 17 | 1 -> 12 | 4 | 63 | 2 (right) 5 (left) |
+
+//iYD// and //iXD// contain value to add to //iY// and //iX//.\\
+-10 is special value for //iYD//. Don't add to //iY//, juste change picture.\\
+Check always before add to //iX// if frog can go to new position (block is F_PLAYERTHRU).\\
+For //iY// check like //iX// but, check also if block is F_STAIR.
+
+12 is max value of //iYD//.
+
+In special case, if player is on same position (//iX//) that the frog, frog doesn't add value to x, //iXD// = 0.

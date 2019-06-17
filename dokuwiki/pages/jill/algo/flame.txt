@@ -1,0 +1,37 @@
+====== Flame ======
+
+Flame object is create by WOODTORCH or FROOF/FFLOOR backgound.
+
+//iYD// give way of flame. -1 to top, 1 to bottom.
+
+//iCounter// is tile index display. Firebird has 4 pictures for right.\\
+
+^ iCounter ^ tileset ^ tile ^ Comment ^
+| 0 | 12 | 0 | up |
+| 1 | 12 | 0 | up |
+| 2 | 12 | 1 | up |
+| 3 | 12 | 1 | up |
+| 4 | 12 | 2 | up |
+| 5 | 12 | 2 | up |
+| 6 | 12 | 3 | up |
+| 7 | 12 | 3 | up |
+| 8 | 12 | 4 | up |
+| 9 | 12 | 4 | up |
+| 10 | 12 | 5 | up |
+| 11 | 12 | 5 | up |
+
+^ iCounter ^ tileset ^ tile ^ Comment ^
+| 0 | 12 | 6 | down |
+| 1 | 12 | 6 | down |
+| 2 | 12 | 7 | down |
+| 3 | 12 | 7 | down |
+| 4 | 12 | 8 | down |
+| 5 | 12 | 8 | down |
+| 6 | 12 | 9 | down |
+| 7 | 12 | 9 | down |
+| 8 | 12 | 10 | down |
+| 9 | 12 | 10 | down |
+| 10 | 12 | 11 | down |
+| 11 | 12 | 11 | down |
+
+If player hit flame, object 37 (Fire hit player) is create. Flame isn't kill but player lost 4 point of health

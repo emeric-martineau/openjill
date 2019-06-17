@@ -1,0 +1,68 @@
+====== How Jill jump ? ======
+
+
+Jill has no a linear jump. The cool feature is velocity.
+
+To have a more natural jump, original game simulate a gravity.
+When you jump up in real word, you jump speed decrease.
+
+To reproduce gravity, game have initial speed and decrease velocity of 2 pixels.
+
+Initial speed (yd or ySpeed) = -(16 + 4 * high jump count)
+
+At each cycle (~55ms), add 2 to ySpeed.
+
+If ySpeed > 16, reinit to 16 to limit falling velocity.
+
+Before, jump, wait end of animation (3 pictures to jum).
+
+===== Player fall =====
+
+^ iState ^ iSubstate ^ iStateCount ^ iYD ^ iCounter ^ tileSet ^ tile ^ Comment ^
+| 2| 0 | ++ | 0 | | 8 | 56 (left 36, right 44)| |
+| 2| 1 | ++ | 0 | | 8 | 57 (left 36, right 44)| |
+| 2| 2 | ++ | 0 | | 8 | 58 (left 37, right 45)| |
+| 2| 3 | ++ | 2 | | 8 | 60 (left 37, right 45) | Player down |
+| 2| ++ | ++ | 4 -> 16 (by +2) | | 8 | 60 | Player down iYD max is 16 |
+| 2| 16 | ++ | 0 | | 8 | 60 | Player touch floor |
+| 0| 17 | 65530 | 0 | 5 | 8 | 60 (left 36, right 44)| Touch floor animation |
+| 0| 17 | 65531 | 0 | 4 | 8 | 61 (left 36, right 44)| Touch floor animation |
+| 0| 17 | 65532 | 0 | 3 | 8 | 61 (left 37, right 45)| Touch floor animation |
+| 0| 17 | 65533 | 0 | 2 | 8 | 60 (left 37, right 45)| Touch floor animation |
+| 0| 17 | 65534 | 0 | 1 | 8 | 60 (left 20, right 21)| Touch floor animation |
+| 0| 17 | 65535 | 0 | 0 | 8 | 60 (left 20, right 21)| Touch floor animation. Display message ''HEY, YOUR SHOES ARE UNTIED'' |
+
+===== Player jump =====
+
+^ iState ^ iSubstate ^ iStateCount ^ iYD ^ iCounter ^ tileSet ^ tile ^ Comment ^
+| 2| 0 | ++ | -16 | | 8 | 56 | //Player can't move to left/right// |
+| 2| 1 | ++ | -16 | | 8 | 57 | //Player can't move to left/right// |
+| 2| 2 | ++ | -16 | | 8 | 58 | //Player can't move to left/right// |
+| 2| 3 | ++ | -14 | | 8 | 58 | Player move -16 pixel |
+| 2| ++ | ++ | -12 -> 0 (by +2) | | 8 | 58 | Player move |
+
+Player jump/fall left or right
+
+Simply move player to 8 px
+
+
+===== Example =====
+
+When jump, the move of player is :\\ 
+y += -14\\ 
+y += -12\\ 
+y += -10\\ 
+y += -8\\ 
+y += -6\\ 
+y += -4\\ 
+y += -2\\ 
+y += 0\\ 
+now player go down\\ 
+y += +2\\ 
+y += +4\\ 
+y += +6\\ 
+y += +8\\ 
+y += +10\\ 
+y += +12\\ 
+y += +14\\ 
+y += +16

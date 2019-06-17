@@ -1,0 +1,78 @@
+====== About ======
+
+OpenJill is open source game engine to clone Jill Trilogy game (Jill of the jungle, Jill goes Underground, Jill save the Prince).
+The project try to be most compatible with the original game.
+
+OpenJill replace only this MS-DOS executable file. To work, OpenJill need all game file (*.vcl, *.sha...).
+
+Follow us on [[https://plus.google.com/u/0/communities/101394478288995733520|Google+]] or [[https://twitter.com/hashtag/OpenJill?src=hash|Twitter]]
+====== Download ======
+
+See [[openjill:download|Download]] page\\
+Source code on Google code (Git repository) : <del>https://code.google.com/p/openjill</del> https://github.com/bubulemaster/openjill
+====== How to help ======
+
+See [[openjill:howtohelp|How to help]] page
+
+====== Roadmap ======
+
+See [[openjill:roadmap|Roadmap]] page
+====== History ======
+
+In 2011 a co-worker show me a game works under Android platform that he write. He say me "That is the futur ! Forget Delphi.".\\ 
+Yes, it's true. In my spare time, I wrote some program in Delphi.\\  
+He makes fun of me because Delphi is old technologie (but not death !).\\ 
+I say "Ok, let me show that I can create a plateform game in Delphi from scratch without any help."
+One year later, I show [[http://www.openjill.org/other/tnc/|The Nuclear Caves]] game, a clone of "Crystal Caves" game, but wrote in Lazarus (a clone of Delphi).\\ 
+The only problem is that the game store map level in own MS-DOS executable, I must recreate all graphic item. It's very long and I dislike this.
+
+In summer of 2012, I discover the [[http://www.shikadi.net/moddingwiki|Modding Wiki]] website with many thing about the "Jill trilogy" game".
+
+I remember this game that took me long hour when I'm young.
+OpenJill project was born.
+
+I decide to use Java plateform for this project cause I'm JEE developper and I never use GUI library like AWT or Swing.
+
+====== Documentation ======
+
+===== Jill : file format =====
+
+[[jill:file_format:sha|SHA file format]]\\ 
+[[jill:file_format:dma|DMA file format]]\\ 
+[[jill:file_format:vcl|VCL file format]]\\ 
+[[jill:file_format:cfg|CFG file format]]\\ 
+[[jill:file_format:jn|Jill of the Jungle map format]]\\ 
+[[jill:file_format:save|Save file format]]\\
+\\
+[[jill:file_format:data_type|Data type]]\\ 
+
+===== Jill : Secret working =====
+
+[[jill:file_format:text_format|How to drawing text ?]]\\
+[[jill:algo:stand|How player move on floor ?]]\\
+[[jill:algo:begin|How Jill begin ?]]\\
+[[jill:algo:jump|How Jill jump ?]]\\ 
+[[jill:algo:climb|How Jill climb ?]]\\
+[[jill:algo:hitplayer|How ennemy hit player ?]]\\
+[[jill:algo:playerdie|How player die ?]]\\
+[[jill:other:store_map_file_at_change_level|How original game give map in memory when level is loaded ?]]\\
+[[jill:other:screen_game_area|Jill game screen Area]]\\
+[[jill:other:level_message|Level message]]\\
+[[jill:other:hint_and_how_play|Hint & Instructions]]\\
+[[jill:other:menu|Menu (start and exit)]]\\
+[[jill:extract:dma|DMA file content extract]]\\ 
+\\
+[[jill:colors:vga|VGA color map]]\\ 
+[[jill:colors:ega|EGA color map]]\\ 
+[[jill:colors:cga|CGA color map]]\\ 
+
+===== OpenJill : DevZone=====
+
+[[openjill:supported_level|Support level]]\\
+[[http://www.openjill.org/openjill/pub/other/level-raw|Extrat level information and picture]]\\
+[[openjill:sources:organization|Organization of sources]]\\ 
+[[todo]]
+
+===== License =====
+
+OpenJill is release under **Mozilla Public License v2**, see [[openjill:license|License]] page.

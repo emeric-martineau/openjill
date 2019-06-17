@@ -1,0 +1,18 @@
+====== How Jill begin ? ======
+
+At start of level, Jill state is :
+| iState | 4 |
+| iSubState | 18 |
+| iStateCount | 0 |
+
+At each cycle, //iStateCount// is increase by 1.
+
+After, //iStateCount// value indicate the picture :
+^ iStatCount ^ tileSet ^ tile ^ Comment ^
+| 0 -> 14 | 8 | 19 | Head up |
+| 15 -> 23 | 8 | 16 | Head normal |
+| 24 -> 32 | 8 | 18 | Head down |
+
+To display picture, use picture.height - //iStateCount//.
+
+When //iStateCount// is 33, switch to Stand state (just change state).

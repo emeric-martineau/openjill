@@ -1,0 +1,52 @@
+====== DMA file format ======
+
+(Originally from http://www.shikadi.net/moddingwiki/DMA_Format)
+
+The DMA format stores information about the properties of tiles used in game maps.  In Jill of the Jungle the file is called //jill.dma//.
+
+===== File format =====
+
+DMA files contain no header - just a list of entries repeated until the end of the file.
+==== Tile entry ====
+
+Each tile entry is arranged in the following structure:
+
+^Offset^Type^Description^
+| 0 | [[jill:file_format:data_type|INT16LE]] code | Map code |
+| 2 | [[jill:file_format:data_type|UINT8]] image | Index into the Shape collection (tileset) where the graphic is located |
+| 3 | [[jill:file_format:data_type|UINT8]] tileset | Shape collection number |
+| 4 | [[jill:file_format:data_type|INT16LE]] flags | Tile properties |
+| 6 | [[jill:file_format:data_type|UINT8]] lenName | Length in bytes of the name |
+| 7 | [[jill:file_format:data_type|char]][lenName] name | Name of this element. |
+
+The background layer in the map file contains a list of codes, which correspond to the //code// value above.  This is used to look up which image to draw for each tile in the map layer.
+
+Note that only the lower six bits of tileset refer to the tile number. The purpose of the upper unknown bits is unknown. To get a valid tileset index use //tileset & 0x3F//.
+
+==== Tile properties ====
+
+^Bit^Hex^Name^Description^
+|-|0x0000|//<zero>//|Default solid block|
+|1|0x0001|F_PLAYERTHRU|Blocks you can walk, jump or fall through (background tiles, the path on the overhead map, etc.)|
+|2|0x0002|F_STAIR|Blocks that you can stand on (can also jump up through when combined with F_PLAYERTHRU)|
+|3|0x0004|F_VINE,|Can climb this block - usually combined with F_PLAYERTHRU (giving 0x0005)|
+|4|0x0008|F_MSGTOUCH|Activates game-specific code when touched|
+|5|0x0010|F_MSGDRAW| Regular blocks have just one shape, f_msgdraw triggers //msg_block(msg_draw)// for animated blocks.|
+|6|0x0020|F_MSGUPDATE| game-specific code (through //msg_block(msg_update)//) at every frame. For animated blocks.|
+|7|0x0040|F_INSIDE|This block contains text inside it|
+|8|0x0080|F_FRONT| object property : Foreground object|
+|9|0x0100|F_TRIGGER| object property : object is trigger (like object 24). If an object (like 15) want to send on/off, this object seach any object who have this flag and counter value|
+|10|0x0200|F_BACK | object property: Background object (e.g. torches)|
+|10|0x0200|F_TINYTHRU| (likely PlayerThru when player is in 'mini' mode)|
+|11|0x0400|F_ALWAYS| object property : "Always updates object"|
+|12|0x0800|F_KILLABLE| object property : monster can be killed with regular weapon.|
+|13|0x1000|F_FIREBALL| object property : object is a fireball|
+|14|0x2000|F_WATER| A water tile. regular player will sink, the S.U.B. and aquatic monster can swim through it, but not out of it|
+|15|0x4000|F_WEAPON| object property : object is a regular weapon|
+|16|0x8000|(unused)|(unused)
+
+
+Note that the same "flag set" is used for both blocks and objects. Some properties only apply to blocks, some only apply to objects, some to both (//f_msgtouch//), and some flags have a different meaning for blocks and tile (e.g. 0x200).
+
+
+Note for the object, flag not store in Map File. Flag are init by engine at load of oject.

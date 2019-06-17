@@ -1,0 +1,51 @@
+====== Level message ======
+
+For draw border please refer to [[jill:other:screen_game_area|Jill game screen Area]]
+
+===== VGA mode =====
+
+{{:jill:other:level_message_vga.png|}}
+
+Size of Jill face box : 64x64\\
+Size of text area bow : 105x64
+
+Jill face draw :
+
+^ # Line ^ Tileset ^ Tile ... ^
+| 1 | 24 | 0 1 2 |
+| 2 | 24 | 3 4 5 |
+| 3 | 24 | 6 7 8 |
+| 4 | 24 | 9 10 11 |
+
+<WRAP round tip 60%>
+Box where Jill face is draw is too small. Jill face bottom is truncate.
+</WRAP>
+
+===== CGA/EGA mode =====
+
+Size of text area bow : 105x64
+
+{{:jill:other:level_message_cga_ega.png|}}
+
+===== Messages =====
+
+==== Level 1 ====
+
+^ # Level ^ Message ^
+| 0 | JILL ENTERS\nTHE\nJUNGLE MAP. |
+| 1 | JILL BOUNDS\nTHROUGH\nTHE BOULDERS |
+| 3 | JILL ENTERS\nTHE HUT |
+| 6 | JILL DASHES INTO\nTHE CASTLE |
+| 7 | JILL EXPLORES\nTHE FOREST |
+| 8 | JILL SNEAKS\nINTO\nARG'S DUNGEON |
+| 9 | JILL ENTERS\nTHE\nPHOENIX MAZE |
+| 10 | JILL VENTURES\nINTO THE\nKNIGHT'S PUZZLE |
+| 11 | JILL CREEPS INTO\nTHE DARK FOREST |
+| 12 | JILL SPLASHES INTO\nTHE UNDERGROUND\nRIVER |
+| 13 | JILL ENTERS\nYET\nANOTHER PUZZLE |
+| 14 | JILL ENTERS\nTHE PLATEAU |
+| 15 | JILL REACHES\nTHE ENDING\n\nNOW SIT BACK\nAND ENJOY |
+| 20 | JILL BOUNDS INTO\nTHE BONUS LEVEL |
+
+0 : is return map message
+20 : is end message

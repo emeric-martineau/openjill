@@ -1,0 +1,73 @@
+====== Download ======
+
+===== Game =====
+<WRAP round important>Original game use ''ALT'' key to jump. Cause OpenJill run in a window, ''ALT'' key is grab by windows. Use ''SPACE'' key to jump.</WRAP>
+
+<WRAP round help>See [[openjill:install_note|Install note]] to know how run OpenJill.</WRAP>
+
+<WRAP round download>
+[[http://www.openjill.org/openjill/pub/bin/openjill/openjill-0.2.6-bundle.jar|Last stable binary]] (version 0.2.6 - 1.8 Mb - 26-May-2018) - See [[openjill:supported_level|Support level]] for more information.
+
+[[http://www.openjill.org/openjill/pub/bin/openjill/|All binaries]]\\
+[[http://www.openjill.org/openjill/pub/src/|All sources]]
+
+[[http://www.openjill.org/openjill/pub/bin/original/jill10.zip|Original Jill of the Jungle shareware]] (version 1.0 - 263 Kb)\\
+[[http://www.openjill.org/openjill/pub/bin/original/jill11.zip|Original Jill of the Jungle shareware]] (version 1.1 - 323 Kb)\\
+[[http://www.openjill.org/openjill/pub/bin/original/jill12.zip|Original Jill of the Jungle shareware]] (version 1.2 - 299 Kb)</WRAP>
+
+===== Tools =====
+
+<WRAP round download>[[http://www.openjill.org/openjill/pub/bin/openjill/tools/dma-file-extractor-1.0.2-bundle.jar|DmaFileExtractor ]] - 54Kb (26-May-2018).\\
+[[http://www.openjill.org/openjill/pub/bin/openjill/tools/sha-file-extractor-1.0.2-bundle.jar|ShaFileExtractor ]] - 69Kb (26-May-2018).\\
+[[http://www.openjill.org/openjill/pub/bin/openjill/tools/jn-file-extractor-1.0.4-bundle.jar|JnFileExtractor ]] - 113 Kb (26-May-2018).</WRAP>
+==== DmaFileExtractor ====
+
+
+DmaFileExtractor is basic tool to dump information of DMA file on stdout.\\
+To launch it, use :
+<code>java -jar dma-file-extractor-1.0.0.jar -f <path_of_dma_file></code>
+
+==== ShaFileExtractor ====
+
+ShaFileExtractor is tool to extract picture from SHA file.\\
+You can extract picture with specify mode screen or type of picture (picture, text).\\
+List of options :
+<code>
+-d or --dump         dump information from file (header...)
+-c or --cga          extract only picture who can display in CGA mode
+-e or --ega          extract only picture who can display in EGA mode
+-v or --cga          extract only picture who can display in VGA mode
+-f or --file         file to read [requiered]
+-o or --out          output directory [requiered]
+-t or --fontonly     extract only font
+-p or --pictureonly  extract only picture
+
+java -jar sha-file-extractor-1.0.0.jar -h
+</code>
+
+==== JnFileExtractor ====
+
+JnFileExtractor is tool to extract dump map in picture file and/or in stdout.\\
+You can extract all field of object, draw map and invisible object...\\
+Drawing map is basic, juste draw a simple picture of object without any context (field of object not used).\\
+List of options :
+<code>
+-f or --file                    file to read (map) to read (*.jn?). [requiered]
+-fs or --file-sha               file to read for get picture (*.sha). [requiered]
+-fd or --file-dma               file to read for get map picture (*.dma). [requiered]
+-ot or --out-text               output file write dump data.
+-od or --out-draw               output file write draw map.
+-drb or --draw-back             draw background layer.
+-dro or --draw-object           draw object layer.
+-dru or --draw-object-unknow    draw all unknow object in object layer.
+-db or --dump-back              dump background layer.
+-do or --dump-object            dump object layer.
+-dsv or --dump-save             dump save data layer.
+-ds or --dump-string            dump string stack layer.
+-c or --cga                     draw in CGA mode.
+-e or --ega                     draw in EGA mode.
+-v or --vga                     draw in VGA mode.
+</code>
+
+Example :
+<code>java -jar jn-file-extractor-1.0.0.jar -dsv -do -dro -dru -drb -ds -f /home/joj/file/jn1save.4 -fd /home/joj/file/JILL.DMA -fs /home/joj/file/JILL1.SHA -vga -od /home/joj/jillmap.png</code>

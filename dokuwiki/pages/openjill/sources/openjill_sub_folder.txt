@@ -1,0 +1,119 @@
+====== OpenJill sub folder ======
+
+OpenJill subfolder contain the core of game (object, background, save, load...). It's very big (too big, must be explode near time) folder.
+
+===== Game engine =====
+
+//package : org.simplegame//\\
+//config file : open_jill.properties//
+
+This package contains very basic game engine.
+
+Game engine is build with windows (JForm) and JPanel.\\
+Simply timer call a class who implement **InterfaceSimpleGameHandleInterface**.\\
+The class **SimpleGameKeyHandler** grap key event.
+
+===== Configuration =====
+
+//package : org.jill.game.config//
+
+Class **JillGameConfig** give some setup parameter (path of file, screen depth).\\
+Classe **JillConst** give some const.
+
+===== Object =====
+
+//package : org.jill.game.entities.obj//\\
+//config file : object_conf.properties & objects_manager_mapping.properties//
+
+This package contains all object of game (apple, ennemies...).
+
+===== Background =====
+
+//package : org.jill.game.entities.back//\\
+//config file : background_conf.properties & background_manager_mapping.properties//
+
+This package contains all background.
+
+
+===== Screen object =====
+
+//package : org.jill.game.screen//\\
+//config file : status_bar.properties & inventory_conf.properties & control_area.properties//
+
+Class **ControlArea** is class to display control area on screen.\\
+Class **InventoryArea** is class to display inventory area on screen.\\
+Class **StatusBar** is class to display all screen object (control area, game area...).\\
+Class **EnumScreenType** is class to enumerate display type (CGA, EGA, VGA).
+
+Note :\\
+Inventory area in start screen not displayed. It's Jill face that are draw.\\
+Control area not display when high score or save/load game menu display.
+===== Messages =====
+
+//package : org.jill.game.message//
+
+This package contains alla class to send message.\\
+Because, it's more easy to code when object doesn't know other object, a message manager was created for jill game.\\
+If you want display message on status bar, the object (for example GEM) just send message in **MESSAGE_STATUS_BAR** pipe.
+
+All interaction between object or game use message manager.
+
+Class **EnumMessageType** is pipe of messages.\\
+Class **MessageDispatcher** is message manager. Use it to register object that will receive message.\\
+Class **InterfaceMessageGameHandler** is interface that object must be implement to receive message.
+
+Note : message type depends of message type
+===== Manager =====
+
+//package : org.jill.game.manager//
+
+Manager is use to create something (object, background...)
+
+Class **BackgroundManager** create background from file data.\\
+Class **ObjectManager** create object form file data.\\
+Class **TileManager** is picture cache and create picture from file data.\\
+Class **TextManager** is tool to help draw text.
+===== Level =====
+
+//package : org.jill.game.level//
+
+This package contains all basic class for run level.
+
+^Class name^Comment^Extend class^
+| AbstractChangeLevel | This class contains all methods to change level, load/restore game | //the class below// |
+| AbstractExecutingStdPlayerLevel | This class contains methods to center screen on player, move player and contains startup level message | //the class below// |
+| AbstractExecutingStdLevel | This class manage all of execution method of game (run, pause, cheat, key, update background, update object...) | //the class below// |
+| AbstractMenuJillLevel | This class manage display menu | //the class below// |
+| AbstractObjectJillLevel | This class manage all of background, screen, load files and message dispatcher | //the class below// |
+| AbstractBasicCacheLevel | This class contains basic method for cache file to not reload between level if same file | //the class below// |
+
+//package : org.jill.game.level.handler//
+
+This package contains final class to be use in game.
+
+Class **LoadNewLevelHandler** is use to load a new level or restore a saved game.\\
+This class clear inventory (except GEM), keep score and search check point (for new level).
+
+//package : org.jill.game.level.handler.jill1//
+
+This package contains specific class for first episode of Jill.
+See [[openjill:class|Basic class diagram]]
+===== Menu and information box =====
+
+//package : org.jill.game.gui//\\
+//config file : high_score_menu//
+
+Class **InformationBox** display information box (in start screen use for instruction).
+
+//package : org.jill.game.gui.menu//\\
+//config file : start_menu.properties & save_game_menu.properties & load_game_menu.properties & high_score_menu.properties & exit_menu.properties//
+
+Class **AbstractMenu** is root class for all menu.\\
+Class **StdMenu** is standard menu displayed (exit, start menu).\\
+Class **ClassicMenu** is menu (exit, start menu) use configuration file to be load...\\
+Class **SaveGameMenu** menu to save game.\\
+Class **LoadGameMenu**  menu to load game.\\
+Class **HighScoreMenu** menu to display high score.
+
+Class **MenuInterface** is interface for all menu.\\
+Class **SubMenu** is menu entry for **StdMenu**.

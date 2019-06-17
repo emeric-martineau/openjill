@@ -1,0 +1,7 @@
+====== Ghost ======
+
+Ghost is monster that move always on same type of tile.\\
+//iCounter// give default speed.\\
+//iXD// and //iYD// give speed and way to move it.
+
+Ghost is unkillable.

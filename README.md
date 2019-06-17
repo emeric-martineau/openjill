@@ -1,6 +1,8 @@
 OpenJill
 ========
 
+**THIS PROJECT IS DISCONTINUED**
+
 OpenJill is open source implementation of Jill Trilogy game engine (Jill of the Jungle, Jill goes Underground, Jill save the Prince).
 It's release under Mozilla Public License (see LICENSE file).
 

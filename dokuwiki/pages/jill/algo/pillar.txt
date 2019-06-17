@@ -1,0 +1,3 @@
+====== Pillar background ======
+
+Pillar background use left picture to background and draw his picture on.

@@ -1,0 +1,44 @@
+====== VCL file format ======
+
+(Originally from http://www.shikadi.net/moddingwiki/VCL_Format)
+
+VCL files store sound files. They also store text for pop-ups in the game (for example, when you pick up an apple with a message attached) and the help window.
+
+===== File structure =====
+
+The format consists of five tables: Sound Offset table, Sound Length table, Sound Frequency table, Text Offset table, and Text Length table. The order of occurrence is important; the game uses indexes to this table to determine which sound to play or what text to show. The sounds are stored in raw format without headers.
+
+==== File definition tables ====
+
+There are 50 sounds and 40 text blocks per VCL file. Not all entries contain data. Regardless, they can still be used by the game. Empty entries have a length of zero.
+
+^Offset^Description^
+|0x0|Sound Offsets (x50)\\ Each entry is a UINT32. The value is the offset where the sound is located.|
+|0xC8 (200) | Sound Lengths (x50)\\ Each entry is a UINT16. This is the length, in bytes, of the sound.|
+|0x12C (300)| Sound Frequencies (x50)\\ Each entry is a UINT16. This is the frequency in hertz at which the sound is to be played.|
+|0x190 (400) | Text Offsets (x40)\\ Each entry is a UINT32. The value is the offset where the text is located.|
+|0x230 (560)| Text Lengths (x40)\\ Each entry is a UINT16. This is the length, in bytes, of the text.|
+|0x280 (640) | (unknown data) |
+
+==== Unknown data ====
+
+In the official game files, there is some space used between the end of the last table and the lowest data offset. It is unknown at this time what the purpose of these bytes is, but the format of this data IS known.
+
+
+^Type^Description^
+|UINT16|Sequence length|
+|?|Sequence|
+
+Sequences can have a length of 0.
+
+===== Stored data information =====
+
+The information stored in this file must be of a specific format.
+
+==== Audio ====
+
+The sounds are stored as 8-bit signed data, which is the same as the wave data inside Creative VOC. No headers are included, it's just one big raw chunk of sound data. Jill mostly uses 6000hz for playing back sounds. Xargon mostly uses 6024hz.
+
+==== Text ====
+
+Text is in plain ASCII. However, all lines of text must be preceded by a number which defines the style to use when rendering it. These styles are hardcoded into the game.

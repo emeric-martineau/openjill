@@ -1,0 +1,27 @@
+====== EGA color map ======
+
+This is the EGA color used by Jill of the Jungle in all episodes.\\
+EGA screen has 16 colors.
+
+{{ :jill:colors:ega_color.png |}}
+
+===== Text value of color =====
+
+<code>
+000000
+0000A2
+00A200
+00A2A2
+A20000
+A200A2
+A25100
+A2A2A2
+515151
+5151F7
+51F751
+51F7F7
+F75151
+F751F7
+F7F751
+F7F7F7
+</code>

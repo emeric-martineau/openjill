@@ -1,0 +1,97 @@
+====== SHA file format ======
+
+
+(Originally from http://www.shikadi.net/moddingwiki/SHA_Format)
+
+
+The SHA file contains all the graphical elements used by Jill of the Jungle, grouped into tilesets.
+Each image is stored in 8-bit linear VGA format (one byte for one pixel) along with an optional colour mapping table to convert the colour codes into a reduced range suitable for display in EGA and CGA video modes.
+
+===== File format =====
+
+The file has no signature, however the array of tile offsets can be read and checked to ensure they are within range (and don't point past the end of the file.)  Likewise parsing the rest of the fields to ensure they are in range will ensure only valid files are read.
+
+First entry always invalid (length = 0, offset = 0)
+
+
+
+{{ :jill:file_format:schema.png |}}
+==== Header ====
+
+^Data type^Description^
+| [[jill:file_format:data_type|UINT32LE]] offsets[128] | Offset of each tileset |
+| [[jill:file_format:data_type|UINT16LE]] sizes[128] | Size of each tileset |
+
+
+The file starts with an array of 128 32-bit unsigned integers. Only the first half of these contain actual values. The second half are zero/unused. These numbers represent the position of the first byte of each tile set in the file.  If the offset and size are both zero, that entry is unused.
+
+The file continues with an array of 128 16-bit unsigned shorts. Again, only the first 64 contain values. These numbers represent the length, in bytes, of each respective tile set.
+
+The first tile set object starts directly following this table at byte 768, i.e. **( ( 128 * 4 ) + ( 128 * 2 ) )**, as indicated by one of the offsets in the table itself.
+
+It is important to note that these values are stored little-endian. This means that for example the offset 768 is stored as the four bytes 00-03-00-00, not as 00-00-03-00. This is true for both offsets and lengths.
+
+===== Tileset Objects =====
+
+At the offset given in the header, each tileset is in the following structure.
+
+^ Data type ^ Description ^
+| [[jill:file_format:data_type|UINT8]] numShapes | Number of tiles in the tile set |
+| [[jill:file_format:data_type|UINT16LE]] numRots | always 1 |
+| [[jill:file_format:data_type|UINT16LE]] lenCGA | How many bytes of memory will be used for data in the respective video mode after decompression |
+| [[jill:file_format:data_type|UINT16LE]] lenEGA | ::: |
+| [[jill:file_format:data_type|UINT16LE]] lenVGA | ::: |
+| [[jill:file_format:data_type|UINT8]] numColourBits | Bit depth of colour map (see below) |
+| [[jill:file_format:data_type|UINT16LE]] flags | One or more values defining how the data should be treated:\\ 0x0000 = graphic image\\ 0x0001 = SHM_FONTF (font)\\ 0x0002 = unused\\ 0x0004 = SHM_BLFLAG (level tile set) |
+
+If the //SHM_FONTF// flag is set, the data is typically a font and there is no colour map present (and so a byte value of 1 will refer to colour #1 in CGA, EGA and VGA modes.)
+
+Likewise if the //numColourBits// is 8, there is no colour map either.\\ 
+If there, picture only display in VGA mode.
+
+
+Otherwise, the structure above is immediately followed by a colour map (see below.)  The size of the colour map is calculated from the //numColourBits// field:
+
+  length = (1 << numColourBits) * 4
+
+===== Colour map =====
+
+If the colour map is present (graphic with colorbit != 8), it is used to reduce the 8-bit (256 colour) images down to EGA (16 colour) and CGA (four colour) depths.
+
+The //numColourBits// field controls how many entries are in the colour map:
+
+  entries = 1 << numColourBits
+
+Each entry is four bytes long, representing CGA, EGA and VGA, respectively, and then an unused zero value.  Each byte maps to the index of a colour in the palette.  If there is no colour map, the bytes stored in the image directly correlate with the game's palette.
+
+:!: It's possible, to store a color out of map. Exemple, if coulor map have 2 bits (4 colors) and when you read file, you find a byte value = 15. 15 is not index color in colour map but the color in graphical color map (EGA, VGA, CGA).
+
+{{ :jill:file_format:schema_colormap.png |}}
+===== Tiles =====
+
+Following the colour map is the array of tile objects.  Each tile has a three byte header.
+
+^ Data type ^ Description ^
+| [[jill:file_format:data_type|UINT8]] width | Image width in bytes/pixels |
+| [[jill:file_format:data_type|UINT8]] height | Image height in bytes/pixels |
+| [[jill:file_format:data_type|UINT8]] type | Data format |
+
+The image data follows, with the exact format dependent on the //type// value.
+
+Jill of the Jungle uses the earliest known version of the engine, which doesn't support anything but BYTE.
+
+=== Type 0: BYTE ===
+
+This format is raw 8bpp - each byte represents a pixel.  The first byte is the pixel at (0,0) and the last byte is the pixel at (w-1,h-1).  The byte's value is transformed through the colour map (if one is present), then it becomes an index into the game's palette.
+
+The length of the image data (in bytes) is calculated as **width * height**.
+
+
+===== See also =====
+
+[[jill:colors:vga|VGA color map]]\\
+[[jill:colors:ega|EGA color map]]\\
+[[jill:colors:cga|CGA color map]]\\
+[[jill:file_format:data_type|Data type]]\\ 
+[[http://ns10.firstheberg.com/~bubule/web/download/jill/jill-tiles.zip|Download all tiles]]\\
+[[http://ns10.firstheberg.com/~bubule/web/download/jill/tile|Browse tiles]]\\

@@ -1,0 +1,14 @@
+====== Roadmap ======
+
+===== OpenJill =====
+
+
+^ Date      ^ Release       ^ Feature          ^ Done ^
+| 19-Feb-2014   | 0.0.34  | -> first public release | yes |
+| 25-Apr-2014   | 0.1.0  | Rework on player state\\ Create inteface jar of SHA, VCL, JN, DMA\\ Create implementation jar of SHA, VCL, JN, DMA\\ Create interface jar of game object\\ Create implementation jar of game object\\ Create interface jar of game backgournd\\ Create implementation jar of game backgournd | Yes |
+| ?   | 1.0     | Support macro file and function | |
+| ?   | 1.1     | Sound support        | |
+
+===== Tools =====
+
+Not yeat roadmap

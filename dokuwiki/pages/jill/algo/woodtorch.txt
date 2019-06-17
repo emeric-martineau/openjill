@@ -1,0 +1,9 @@
+====== Woodtorch background ======
+
+Woodtorch background is fixed background.\\
+At each 44 cycle, Woodtorch create [[jill:algo:flame|Flame]] with X = **Woodtorch block X**, Y = **Woodtorch block Y** - **flame Height** - (block size / 2).
+
+===== Example =====
+At cycle 0, block 0/block 44/block 88 create flame.
+At cycle 1, block 1/block 45/block 89 create flame.
+...

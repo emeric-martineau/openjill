@@ -1,0 +1,1082 @@
+Object layer (67) :
+
+Object #0 (0x4002)
+    type = 0 (Jill (normal))
+    x = 96
+    y = 40
+    width = 16
+    height = 32
+    xSpeed = 0
+    ySpeed = 0
+    state = 0
+    subState = 18
+    stateCount = 31
+    counter = 0
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #1 (0x4021)
+    type = 24 (Locked Door)
+    x = 192
+    y = 192
+    width = 16
+    height = 24
+    xSpeed = 1
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 1
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #2 (0x4040)
+    type = 15 (Trigger: Touch Trigger)
+    x = 176
+    y = 208
+    width = 16
+    height = 16
+    xSpeed = 0
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 1
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #3 (0x405F)
+    type = 12 (Trigger: Checkpoint)
+    x = 352
+    y = 208
+    width = 16
+    height = 16
+    xSpeed = 344
+    ySpeed = -64
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 1
+    flags = 0
+    info1 = 0
+    pointer = 1666908168 to '1.jn1'
+Object #4 (0x407E)
+    type = 33 (Rock key)
+    x = 64
+    y = 144
+    width = 16
+    height = 16
+    xSpeed = 0
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 0
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #5 (0x409D)
+    type = 12 (Trigger: Checkpoint)
+    x = 496
+    y = 176
+    width = 16
+    height = 16
+    xSpeed = 0
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 2
+    flags = 0
+    info1 = 0
+    pointer = 1666842632 to '2.jn1'
+Object #6 (0x40BC)
+    type = 24 (Locked Door)
+    x = 784
+    y = 128
+    width = 16
+    height = 24
+    xSpeed = 1
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 3
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #7 (0x40DB)
+    type = 15 (Trigger: Touch Trigger)
+    x = 800
+    y = 144
+    width = 16
+    height = 16
+    xSpeed = 0
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 3
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #8 (0x40FA)
+    type = 12 (Trigger: Checkpoint)
+    x = 736
+    y = 144
+    width = 16
+    height = 16
+    xSpeed = 0
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 3
+    flags = 0
+    info1 = 0
+    pointer = 1666777096 to '3.jn1'
+Object #9 (0x4119)
+    type = 14 (Red key)
+    x = 592
+    y = 80
+    width = 16
+    height = 8
+    xSpeed = 0
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 0
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #10 (0x4138)
+    type = 61 (Lift arrow)
+    x = 960
+    y = 160
+    width = 16
+    height = 16
+    xSpeed = 0
+    ySpeed = 0
+    state = -1
+    subState = 0
+    stateCount = 0
+    counter = -1
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #11 (0x4157)
+    type = 24 (Locked Door)
+    x = 912
+    y = 144
+    width = 16
+    height = 24
+    xSpeed = 0
+    ySpeed = 1
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 4
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #12 (0x4176)
+    type = 24 (Locked Door)
+    x = 928
+    y = 144
+    width = 16
+    height = 24
+    xSpeed = 0
+    ySpeed = 1
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 5
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #13 (0x4195)
+    type = 15 (Trigger: Touch Trigger)
+    x = 896
+    y = 160
+    width = 16
+    height = 16
+    xSpeed = 0
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 4
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #14 (0x41B4)
+    type = 15 (Trigger: Touch Trigger)
+    x = 912
+    y = 160
+    width = 16
+    height = 16
+    xSpeed = 0
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 5
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #15 (0x41D3)
+    type = 12 (Trigger: Checkpoint)
+    x = 1168
+    y = 80
+    width = 16
+    height = 16
+    xSpeed = 0
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 7
+    flags = 0
+    info1 = 0
+    pointer = 1666711560 to '1.jn1'
+Object #16 (0x41F2)
+    type = 12 (Trigger: Checkpoint)
+    x = 1344
+    y = 208
+    width = 16
+    height = 16
+    xSpeed = 0
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 6
+    flags = 0
+    info1 = 0
+    pointer = 1666646024 to '4.jn1'
+Object #17 (0x4211)
+    type = 12 (Trigger: Checkpoint)
+    x = 912
+    y = 960
+    width = 16
+    height = 16
+    xSpeed = 0
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 8
+    flags = 0
+    info1 = 0
+    pointer = 1666580488 to '6.jn1'
+Object #18 (0x4230)
+    type = 61 (Lift arrow)
+    x = 816
+    y = 960
+    width = 16
+    height = 16
+    xSpeed = 0
+    ySpeed = 0
+    state = -1
+    subState = 0
+    stateCount = 0
+    counter = -1
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #19 (0x424F)
+    type = 49 (Epic text)
+    x = 96
+    y = 912
+    width = 32
+    height = 16
+    xSpeed = 0
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 0
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #20 (0x426E)
+    type = 12 (Trigger: Checkpoint)
+    x = 720
+    y = 832
+    width = 16
+    height = 16
+    xSpeed = 0
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 9
+    flags = 0
+    info1 = 0
+    pointer = 1666514952 to '6.jn1'
+Object #21 (0x428D)
+    type = 24 (Locked Door)
+    x = 736
+    y = 656
+    width = 16
+    height = 24
+    xSpeed = 0
+    ySpeed = 1
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 20
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #22 (0x42AC)
+    type = 15 (Trigger: Touch Trigger)
+    x = 752
+    y = 672
+    width = 16
+    height = 16
+    xSpeed = 0
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 20
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #23 (0x42CB)
+    type = 12 (Trigger: Checkpoint)
+    x = 912
+    y = 784
+    width = 16
+    height = 16
+    xSpeed = 0
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 10
+    flags = 0
+    info1 = 0
+    pointer = 1666449416 to '6.jn1'
+Object #24 (0x42EA)
+    type = 12 (Trigger: Checkpoint)
+    x = 592
+    y = 704
+    width = 16
+    height = 16
+    xSpeed = 0
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 11
+    flags = 0
+    info1 = 0
+    pointer = 1666383880 to '9.jn1'
+Object #25 (0x4309)
+    type = 12 (Trigger: Checkpoint)
+    x = 1648
+    y = 144
+    width = 16
+    height = 16
+    xSpeed = 0
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 20
+    flags = 0
+    info1 = 0
+    pointer = 1666318344 to '3.jn1'
+Object #26 (0x4328)
+    type = 12 (Trigger: Checkpoint)
+    x = 0
+    y = 576
+    width = 16
+    height = 16
+    xSpeed = 0
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 14
+    flags = 0
+    info1 = 0
+    pointer = 1666252808 to '2.jn1'
+Object #27 (0x4347)
+    type = 61 (Lift arrow)
+    x = 416
+    y = 704
+    width = 16
+    height = 16
+    xSpeed = 0
+    ySpeed = 0
+    state = -1
+    subState = 0
+    stateCount = 0
+    counter = -1
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #28 (0x4366)
+    type = 24 (Locked Door)
+    x = 128
+    y = 560
+    width = 16
+    height = 24
+    xSpeed = 0
+    ySpeed = 1
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 50
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #29 (0x4385)
+    type = 15 (Trigger: Touch Trigger)
+    x = 144
+    y = 576
+    width = 16
+    height = 16
+    xSpeed = 0
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 50
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #30 (0x43A4)
+    type = 24 (Locked Door)
+    x = 96
+    y = 560
+    width = 16
+    height = 24
+    xSpeed = 0
+    ySpeed = 1
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 51
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #31 (0x43C3)
+    type = 15 (Trigger: Touch Trigger)
+    x = 112
+    y = 576
+    width = 16
+    height = 16
+    xSpeed = 0
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 51
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #32 (0x43E2)
+    type = 12 (Trigger: Checkpoint)
+    x = 368
+    y = 800
+    width = 16
+    height = 16
+    xSpeed = 0
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 12
+    flags = 0
+    info1 = 0
+    pointer = 1666187272 to '9.jn1'
+Object #33 (0x4401)
+    type = 12 (Trigger: Checkpoint)
+    x = 464
+    y = 800
+    width = 16
+    height = 16
+    xSpeed = 0
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 13
+    flags = 0
+    info1 = 0
+    pointer = 1666121736 to '4.jn1'
+Object #34 (0x4420)
+    type = 15 (Trigger: Touch Trigger)
+    x = 960
+    y = 624
+    width = 16
+    height = 16
+    xSpeed = 0
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 70
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #35 (0x443F)
+    type = 24 (Locked Door)
+    x = 1008
+    y = 624
+    width = 16
+    height = 24
+    xSpeed = 0
+    ySpeed = 1
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 70
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #36 (0x445E)
+    type = 49 (Epic text)
+    x = 1152
+    y = 576
+    width = 32
+    height = 16
+    xSpeed = 0
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 0
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #37 (0x447D)
+    type = 20 (write text small)
+    x = 992
+    y = 580
+    width = 30
+    height = 7
+    xSpeed = 5
+    ySpeed = -1
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 0
+    flags = 0
+    info1 = 0
+    pointer = 1666056200 to 'BONUS'
+Object #38 (0x449C)
+    type = 25 (Misc: Collapsing ceiling)
+    x = 912
+    y = 928
+    width = 16
+    height = 16
+    xSpeed = 0
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 72
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #39 (0x44BB)
+    type = 15 (Trigger: Touch Trigger)
+    x = 832
+    y = 960
+    width = 16
+    height = 16
+    xSpeed = 0
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 72
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #40 (0x44DA)
+    type = 26 (Misc: Toggle Wall)
+    x = 336
+    y = 976
+    width = 0
+    height = 0
+    xSpeed = 0
+    ySpeed = 1
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 80
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #41 (0x44F9)
+    type = 20 (write text small)
+    x = 752
+    y = 996
+    width = 36
+    height = 7
+    xSpeed = 5
+    ySpeed = -1
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 0
+    flags = 0
+    info1 = 0
+    pointer = 1665990664 to ' BONUS'
+Object #42 (0x4518)
+    type = 26 (Misc: Toggle Wall)
+    x = 352
+    y = 976
+    width = 0
+    height = 0
+    xSpeed = 0
+    ySpeed = 1
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 80
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #43 (0x4537)
+    type = 26 (Misc: Toggle Wall)
+    x = 368
+    y = 976
+    width = 0
+    height = 0
+    xSpeed = 0
+    ySpeed = 1
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 80
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #44 (0x4556)
+    type = 26 (Misc: Toggle Wall)
+    x = 384
+    y = 976
+    width = 0
+    height = 0
+    xSpeed = 0
+    ySpeed = 1
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 80
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #45 (0x4575)
+    type = 26 (Misc: Toggle Wall)
+    x = 400
+    y = 976
+    width = 0
+    height = 0
+    xSpeed = 0
+    ySpeed = 1
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 80
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #46 (0x4594)
+    type = 26 (Misc: Toggle Wall)
+    x = 416
+    y = 976
+    width = 0
+    height = 0
+    xSpeed = 0
+    ySpeed = 1
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 80
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #47 (0x45B3)
+    type = 26 (Misc: Toggle Wall)
+    x = 432
+    y = 976
+    width = 0
+    height = 0
+    xSpeed = 0
+    ySpeed = 1
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 80
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #48 (0x45D2)
+    type = 26 (Misc: Toggle Wall)
+    x = 448
+    y = 976
+    width = 0
+    height = 0
+    xSpeed = 0
+    ySpeed = 1
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 80
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #49 (0x45F1)
+    type = 32 (Switch)
+    x = 720
+    y = 416
+    width = 16
+    height = 16
+    xSpeed = 0
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 80
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #50 (0x4610)
+    type = 21 (write text big)
+    x = 1632
+    y = 108
+    width = 40
+    height = 8
+    xSpeed = 7
+    ySpeed = -1
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 0
+    flags = 0
+    info1 = 0
+    pointer = 1665925128 to 'BONUS'
+Object #51 (0x462F)
+    type = 67 (Misc: "Demo"/"Map" sign)
+    x = 16
+    y = 4
+    width = 64
+    height = 16
+    xSpeed = 1
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 0
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #52 (0x464E)
+    type = 1 (Apple)
+    x = 416
+    y = 176
+    width = 12
+    height = 12
+    xSpeed = 0
+    ySpeed = 0
+    state = 10
+    subState = 0
+    stateCount = 0
+    counter = 0
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #53 (0x466D)
+    type = 1 (Apple)
+    x = 736
+    y = 32
+    width = 12
+    height = 12
+    xSpeed = 0
+    ySpeed = 0
+    state = 11
+    subState = 0
+    stateCount = 0
+    counter = 0
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #54 (0x468C)
+    type = 1 (Apple)
+    x = 1408
+    y = 160
+    width = 12
+    height = 12
+    xSpeed = 0
+    ySpeed = 0
+    state = 12
+    subState = 0
+    stateCount = 0
+    counter = 0
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #55 (0x46AB)
+    type = 1 (Apple)
+    x = 992
+    y = 768
+    width = 12
+    height = 12
+    xSpeed = 0
+    ySpeed = 0
+    state = 13
+    subState = 0
+    stateCount = 0
+    counter = 0
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #56 (0x46CA)
+    type = 1 (Apple)
+    x = 528
+    y = 664
+    width = 12
+    height = 12
+    xSpeed = 0
+    ySpeed = 0
+    state = 14
+    subState = 0
+    stateCount = 0
+    counter = 0
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #57 (0x46E9)
+    type = 28 (Bonus (Hight jump, knif...))
+    x = 1616
+    y = 136
+    width = 16
+    height = 16
+    xSpeed = 0
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 9
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #58 (0x4708)
+    type = 1 (Apple)
+    x = 896
+    y = 136
+    width = 12
+    height = 12
+    xSpeed = 0
+    ySpeed = 0
+    state = 4
+    subState = 0
+    stateCount = 0
+    counter = 0
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #59 (0x4727)
+    type = 24 (Locked Door)
+    x = 752
+    y = 656
+    width = 16
+    height = 24
+    xSpeed = 0
+    ySpeed = 1
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = -52
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #60 (0x4746)
+    type = 15 (Trigger: Touch Trigger)
+    x = 768
+    y = 688
+    width = 16
+    height = 16
+    xSpeed = 0
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = -52
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #61 (0x4765)
+    type = 1 (Apple)
+    x = 240
+    y = 16
+    width = 12
+    height = 12
+    xSpeed = 0
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 0
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #62 (0x4784)
+    type = 1 (Apple)
+    x = 240
+    y = 0
+    width = 12
+    height = 12
+    xSpeed = 0
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 0
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #63 (0x47A3)
+    type = 49 (Epic text)
+    x = 48
+    y = 896
+    width = 32
+    height = 16
+    xSpeed = 0
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 0
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #64 (0x47C2)
+    type = 49 (Epic text)
+    x = 176
+    y = 880
+    width = 32
+    height = 16
+    xSpeed = 0
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 0
+    flags = 0
+    info1 = 0
+    pointer = 0
+Object #65 (0x47E1)
+    type = 12 (Trigger: Checkpoint)
+    x = 0
+    y = 16
+    width = 16
+    height = 16
+    xSpeed = 0
+    ySpeed = 0
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 0
+    flags = 0
+    info1 = 0
+    pointer = 1665794056 to '*funky.ddt'
+Object #66 (0x4800)
+    type = 20 (write text small)
+    x = 80
+    y = 612
+    width = 42
+    height = 7
+    xSpeed = 7
+    ySpeed = -1
+    state = 0
+    subState = 0
+    stateCount = 0
+    counter = 0
+    flags = 0
+    info1 = 0
+    pointer = 2138374152 to ' FINISH'
+
+Save data layer : (0x481F)
+
+Level : 0
+Health : 6
+Score : 0
+Inventory (1)
+    #0 : 0
+
+String stack :
+
+    0x4865 : '1.jn1'
+    0x486D : '2.jn1'
+    0x4875 : '3.jn1'
+    0x487D : '1.jn1'
+    0x4885 : '4.jn1'
+    0x488D : '6.jn1'
+    0x4895 : '6.jn1'
+    0x489D : '6.jn1'
+    0x48A5 : '9.jn1'
+    0x48AD : '3.jn1'
+    0x48B5 : '2.jn1'
+    0x48BD : '9.jn1'
+    0x48C5 : '4.jn1'
+    0x48CD : 'BONUS'
+    0x48D5 : ' BONUS'
+    0x48DE : 'BONUS'
+    0x48E6 : '*funky.ddt'
+    0x48F3 : ' FINISH'
+
+Starting write background in piture
+Done
+Starting write object in piture
+WARNING : Object type 24 (Locked Door) is ignored at 192/192
+WARNING : Object type 15 (Trigger: Touch Trigger) is ignored at 176/208
+WARNING : Object type 12 (Trigger: Checkpoint) is ignored at 352/208
+WARNING : Object type 12 (Trigger: Checkpoint) is ignored at 496/176
+WARNING : Object type 24 (Locked Door) is ignored at 784/128
+WARNING : Object type 15 (Trigger: Touch Trigger) is ignored at 800/144
+WARNING : Object type 12 (Trigger: Checkpoint) is ignored at 736/144
+WARNING : Object type 24 (Locked Door) is ignored at 912/144
+WARNING : Object type 24 (Locked Door) is ignored at 928/144
+WARNING : Object type 15 (Trigger: Touch Trigger) is ignored at 896/160
+WARNING : Object type 15 (Trigger: Touch Trigger) is ignored at 912/160
+WARNING : Object type 12 (Trigger: Checkpoint) is ignored at 1168/80
+WARNING : Object type 12 (Trigger: Checkpoint) is ignored at 1344/208
+WARNING : Object type 12 (Trigger: Checkpoint) is ignored at 912/960
+WARNING : Object type 12 (Trigger: Checkpoint) is ignored at 720/832
+WARNING : Object type 24 (Locked Door) is ignored at 736/656
+WARNING : Object type 15 (Trigger: Touch Trigger) is ignored at 752/672
+WARNING : Object type 12 (Trigger: Checkpoint) is ignored at 912/784
+WARNING : Object type 12 (Trigger: Checkpoint) is ignored at 592/704
+WARNING : Object type 12 (Trigger: Checkpoint) is ignored at 1648/144
+WARNING : Object type 12 (Trigger: Checkpoint) is ignored at 0/576
+WARNING : Object type 24 (Locked Door) is ignored at 128/560
+WARNING : Object type 15 (Trigger: Touch Trigger) is ignored at 144/576
+WARNING : Object type 24 (Locked Door) is ignored at 96/560
+WARNING : Object type 15 (Trigger: Touch Trigger) is ignored at 112/576
+WARNING : Object type 12 (Trigger: Checkpoint) is ignored at 368/800
+WARNING : Object type 12 (Trigger: Checkpoint) is ignored at 464/800
+WARNING : Object type 15 (Trigger: Touch Trigger) is ignored at 960/624
+WARNING : Object type 24 (Locked Door) is ignored at 1008/624
+WARNING : Object type 15 (Trigger: Touch Trigger) is ignored at 832/960
+WARNING : Object type 26 (Misc: Toggle Wall) is ignored at 336/976
+WARNING : Object type 26 (Misc: Toggle Wall) is ignored at 352/976
+WARNING : Object type 26 (Misc: Toggle Wall) is ignored at 368/976
+WARNING : Object type 26 (Misc: Toggle Wall) is ignored at 384/976
+WARNING : Object type 26 (Misc: Toggle Wall) is ignored at 400/976
+WARNING : Object type 26 (Misc: Toggle Wall) is ignored at 416/976
+WARNING : Object type 26 (Misc: Toggle Wall) is ignored at 432/976
+WARNING : Object type 26 (Misc: Toggle Wall) is ignored at 448/976
+WARNING : Object type 67 (Misc: "Demo"/"Map" sign) is ignored at 16/4
+WARNING : Object type 24 (Locked Door) is ignored at 752/656
+WARNING : Object type 15 (Trigger: Touch Trigger) is ignored at 768/688
+WARNING : Object type 12 (Trigger: Checkpoint) is ignored at 0/16

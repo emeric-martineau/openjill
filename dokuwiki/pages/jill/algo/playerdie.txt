@@ -1,0 +1,59 @@
+====== How player die ? ======
+
+Two background kill player : water, lava (die1) and other SPIKE, STALACBR... (die2).\\
+Ennemy kill also player (die0).
+
+===== Die0 =====
+
+{{:jill:algo:die0.png?nolink|}}
+
+When ennemy kill player, //iState// set to 5, //iSubState// set to 0, //iYD// set to -12 and //iInfo1// set to 1.\\
+At each cycle, //iStateCount// increase to know picture to displayed.\\
+^iStateCount value^Picture^
+| 0 ->3 | 8/48 |
+| 4 ->7 | 8/49 |
+| 8 ->11 | 8/50 |
+| 12 ->15 | 8/51 |
+| 16 ->19 | 8/52 |
+| 20 | //restart game// |
+
+===== Die1 =====
+
+{{:jill:algo:die1.png?nolink|}}
+
+When player hit background, //iState// set to 5, //iSubState// set to 1, //iYD// set to -12.\\
+At each cycle, //iStateCount// increase to know picture to displayed.\\
+^iStateCount value^Picture^Comment^
+| 0     | 8/66 | //If background is laval, Hit fire object (37) is create//|
+| 1 ->3 | 8/64 ||
+| 4 ->7 | 8/65 ||
+| 8 ->11 | 8/66 ||
+| 12 ->15 | 8/67 ||
+| 16 ->19 | 8/68 ||
+| 20 | | //restart game// |
+
+===== Die2 =====
+
+{{:jill:algo:die2-1.png?nolink|}}
+
+When player hit background, //iState// set to 5, //iSubState// set to 2, //iYD// set to -10, //iInfo1// set to 1 and player bottom set to background kill bottom.
+
+{{:jill:algo:die2-2.png?nolink|}}
+
+At each cycle :
+if //iStateCount// < 14\\
+-> add //iYD// to //iY//, and add 2 to //iYD//.\\
+-> image displayed is 8/66.
+
+When //iYD// is 14 :\\
+-> align bottom player on bottom background under background that kill player.
+
+{{:jill:algo:die2-3.png?nolink|}}
+
+When //iYD// is greater or equal 14 :\\
+-> add 1 to //iStateCount//\\
+-> //iStateCount// < 15, displayer 8/72 (when //iStateCount// odd) 8/73\\
+{{:jill:algo:die2-4.png?nolink|}} {{:jill:algo:die2-5.png?nolink|}}\\
+-> //iStateCount// > 15 and < 20, displayer 8/74\\
+{{:jill:algo:die2-6.png?nolink|}}\\
+-> //iStateCount// is 20, restart game

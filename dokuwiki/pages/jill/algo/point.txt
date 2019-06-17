@@ -1,0 +1,74 @@
+====== Point object ======
+
+Point object is display after an object was take (GEM) or kill (Firebird).\\
+Is draw by using little number ([[jill:file_format:text_format|How to drawing text ?]]).
+
+//iState// represent number of point added.\\
+Color of text is get by using : (//iCounter// & 3) + 1.\\
+//iYD// always set to 3.\\
+At each cycle //iXd// and //iYd// decrease by 1. //iXd// stop at 0. //iY// and //iX// is update by adding //iYD// or //iXD//.\\
+//iCounter// is set to 16 at start and decrease by 1 at each cycle.
+
+<WRAP center round important>
+Point remove when is out of visible sreen !
+</WRAP>
+
+Example player touch GEM without move :
+^iCounter^iXD^iYD^iX^iY^comment^text color^
+| 16 | 0 | 3 | 10 | 70 | //iYD// always set to 3. //iXD// set to 0 (player no move)  | dark blue  | 
+| 15 | 0 | 2 | 10 | 73 |   | dark red  | 
+| 14 | 0 | 1 | 10 | 75 |   | blue  | 
+| 13 | 0 | 0 | 10 | 76 |   | green  | 
+| 12 | 0 | -1 | 10 | 76 |   | dark blue  | 
+| 11 | 0 | -2 | 10 | 75 |   | dark red  | 
+| 10 | 0 | -3 | 10 | 73 |   | blue  | 
+| 9 | 0 | -4 | 10 | 70 |   | green  | 
+| 8 | 0 | -5 | 10 | 66 |   | dark blue  | 
+| 7 | 0 | -6 | 10 | 61 |   | dark red  | 
+| 6 | 0 | -7 | 10 | 45 |   | blue  | 
+| 5 | 0 | -8 | 10 | 48 |   | green  | 
+| 4 | 0 | -9 | 10 | 40 |   | dark blue  | 
+| 3 | 0 | -10 | 10 | 31 |   | dark red  | 
+| 2 | 0 | -11 | 10 | 21 |   | blue  | 
+| 1 | 0 | -12 | 10 | 10 |   | green  | 
+| 0 | 0 | -13 | 10 | -2 | remove point object  | dark blue  | 
+ 
+Example knive kill firebird without move. Knive move to right :
+^iCounter^iXD^iYD^iX^iY^comment^text color^
+| 16 | 3 | 3 | 10 | 70 | //iYD// always set to 3. //iXD// set to 0 (player no move)  | dark blue  | 
+| 15 | 2 | 2 | 10 | 73 |   | dark red  | 
+| 14 | 1 | 1 | 10 | 75 |   | blue  | 
+| 13 | 0 | 0 | 10 | 76 |   | green  | 
+| 12 | 0 | -1 | 10 | 76 |   | dark blue  | 
+| 11 | 0 | -2 | 10 | 75 |   | dark red  | 
+| 10 | 0 | -3 | 10 | 73 |   | blue  | 
+| 9 | 0 | -4 | 10 | 70 |   | green  | 
+| 8 | 0 | -5 | 10 | 66 |   | dark blue  | 
+| 7 | 0 | -6 | 10 | 61 |   | dark red  | 
+| 6 | 0 | -7 | 10 | 45 |   | blue  | 
+| 5 | 0 | -8 | 10 | 48 |   | green  | 
+| 4 | 0 | -9 | 10 | 40 |   | dark blue  | 
+| 3 | 0 | -10 | 10 | 31 |   | dark red  | 
+| 2 | 0 | -11 | 10 | 21 |   | blue  | 
+| 1 | 0 | -12 | 10 | 10 |   | green  | 
+| 0 | 0 | -13 | 10 | -2 | remove point object  | dark blue  | 
+ 
+Example knive kill firebird without move. Knive move to left :
+^iCounter^iXD^iYD^iX^iY^comment^text color^
+| 16 | -3 | 3 | 10 | 70 | //iYD// always set to 3. //iXD// set to 0 (player no move)  | dark blue  | 
+| 15 | -2 | 2 | 10 | 73 |   | dark red  | 
+| 14 | -1 | 1 | 10 | 75 |   | blue  | 
+| 13 | 0 | 0 | 10 | 76 |   | green  | 
+| 12 | 0 | -1 | 10 | 76 |   | dark blue  | 
+| 11 | 0 | -2 | 10 | 75 |   | dark red  | 
+| 10 | 0 | -3 | 10 | 73 |   | blue  | 
+| 9 | 0 | -4 | 10 | 70 |   | green  | 
+| 8 | 0 | -5 | 10 | 66 |   | dark blue  | 
+| 7 | 0 | -6 | 10 | 61 |   | dark red  | 
+| 6 | 0 | -7 | 10 | 45 |   | blue  | 
+| 5 | 0 | -8 | 10 | 48 |   | green  | 
+| 4 | 0 | -9 | 10 | 40 |   | dark blue  | 
+| 3 | 0 | -10 | 10 | 31 |   | dark red  | 
+| 2 | 0 | -11 | 10 | 21 |   | blue  | 
+| 1 | 0 | -12 | 10 | 10 |   | green  | 
+| 0 | 0 | -13 | 10 | -2 | remove point object  | dark blue  | 

@@ -1,0 +1,12 @@
+====== Base background ======
+
+Base background is animate background (5 pictures).\\
+Background is update at each cycle.\\
+
+To draw border, you need check background next to, to draw right mask.
+
+When back is alone, you need apply mask tileset 42, tile 5.\\
+When back is right top corner, you need apply mask tileset 42, tile 1.\\
+When back is left top corner, you need apply mask tileset 42, tile 2.\\
+When back is right bottom corner, you need apply mask tileset 42, tile 3.\\
+When back is left bottom corner, you need apply mask tileset 42, tile 4.\\

@@ -1,0 +1,8 @@
+====== How original game give map in memory when level is loaded ? ======
+
+Original game need 512Kb of memory to play.\\
+In this case, how game give map in memory when level is loaded ?
+
+When you play to the game and leave map to level, a file ''TEMP'' are update (or appear) in the game directory.\\
+If you open it, you can same same data than a JN file. This is your map.\\
+When player leave level, file ''TEMP'' is reload.

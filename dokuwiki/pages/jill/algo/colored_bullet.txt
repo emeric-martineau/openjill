@@ -1,0 +1,40 @@
+====== Colored bullet ======
+
+
+Colored bullet display when :
+ * player die (10 bullets),
+ * player hit firebird (5 bullets),
+ * hive object die (10 bullets),
+ * epic object die (10 bullets).
+
+===== Create bullet =====
+
+
+An object create x bullet at same position that it (x=x, y=y).\\
+//iXD// set with random(0->7)-3 and //iYD// set with random(0->11)-8.\\
+//iCounter// set to 0.\\
+//iState// set with random(0->2).
+
+===== Update bullet =====
+
+
+At each cycle //iCounter// increase by 1.\\
+Bullet object kill when //iCounter// is 40.\\
+//iX// increase by //iXD//.\\
+//iY// increase by //iYD//.\\
+//iYD// increase by 1, limited to value 12.
+
+<WRAP center round important>
+Bullet remove when is out of visible sreen !
+</WRAP>
+
+
+===== Draw Bullet =====
+
+
+^ icounter ^ tileset ^ tile (state 0) ^ tile (state 1) ^ tile (state2) ^
+| 0 -> 7 | 46 | 12 | 13 | 14 |
+| 8 -> 15 | 46 | 9 | 10 | 11 |
+| 16 -> 23 | 46 | 6 | 7 | 8 |
+| 24 -> 31 | 46 | 3 | 4 | 5 |
+| 32 -> 40 | 46 | 0 | 1 | 2 |

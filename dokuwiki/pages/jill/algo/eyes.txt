@@ -1,0 +1,23 @@
+====== Eyes ======
+
+Eyes is object for animation.\\
+It's always on unpassthrough background.\\
+Background of this object is tilesset 62 and tile 0.\\
+Lens is tilesset 62 and tile 1 and fallow player.
+
+//iXD// is between -2 to 3.\\
+//iYD// is between -1 to 1.\\
+To compute //iXD// and //iYD//, use right-angle triangle, with hypotenuse equal to 4.
+
+{{ :jill:algo:triangle-right-angle.png |}}
+
+tan @ = ps / fs
+
+ps = Player.X - (Eye.X + Lens.OffsetX)\\
+fs = Player.Y - (Eye.Y + Lens.OffsetY)
+
+Lens.OffsetX = 5\\
+Lens.OffsetY = 4
+
+//iXD// = 4 * sin @\\
+//iYD// = 4 * cos @

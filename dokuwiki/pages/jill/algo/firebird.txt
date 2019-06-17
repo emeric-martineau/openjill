@@ -1,0 +1,22 @@
+====== Firebird ======
+
+Firebird move horizontaly. At runtime, check if block is front. If block find, firebord U turn.\\
+Speed and way of move is set by //iXD// (usually '2').\\
+A positive value means firebird goto right, negative value firebird goto left.
+
+//iCounter// is tile index display. Firebird has 4 pictures for right.\\
+
+^ iCounter ^ tileset ^ tile ^
+| 0 | 11 | 0 |
+| 1 | 11 | 1 |
+| 2 | 11 | 2 |
+| 3 | 11 | 3 |
+| 4 | 11 | 2 |
+| 5 | 11 | 1 |
+
+Firebird have picture when it turn.\\
+If //iCounter// = 6 that means firebird change way next time.\\
+Display the tile to change way (tile 8 or 9).\\
+//iXD// multiplied by -1 next time.
+
+If player hit firebird, object 37 (Fire hit player) is create and [[jill:algo:colored_bullet|Colored bullet]] also. Firebird is kill.

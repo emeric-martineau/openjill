@@ -1,0 +1,25 @@
+====== Giant Ant ======
+
+Giant Ant is ennemy like [[jill:algo:gator|Gator]] for movement.\\
+Size move of Giant Ant is give by //iXD// (//iXD// (usually '3'): movement speed).\\
+Giant Ant add 6 points to score.
+
+If Giant Ant can't move, //iState// set to 2 and //iXD// inverted.
+
+Image display for right:
+^iState^iCounter^tileset^tile^comment^
+|0|0|10|0|move|
+|0|1|10|1|move|
+|0|2|10|2|move|
+|0|3|10|3|move|
+|2|?|10|9|can't move, //iXD// = //iXD// * -1\\//iState// decrease|
+|1|?|10|9|//iState// decrease|
+
+Image display for left:
+^iState^iCounter^tileset^tile^comment^
+|0|0|10|5|move|
+|0|1|10|6|move|
+|0|2|10|7|move|
+|0|3|10|8|move|
+|2|?|10|4|can't move, //iXD// = //iXD// * -1\\//iState// decrease|
+|1|?|10|4|//iState// decrease|

@@ -1,0 +1,13 @@
+====== FallingSpike ======
+
+
+FallingSpike is spike that fall when player touch a TouchTrigger (//iCounter// is use to link TouchTrigger and FallinSpike).
+
+When player hit TouchTrigger, FallingSpike go down until hit block or stair.\\
+At each cyle, //iYD// increase by 2 upto 16.
+
+^iYD^Move^Comment^
+|0|No|Kill player (die 0) based on background under falling spike|
+|2->16|Yest| -4 of health when hit player|
+
+Locked door **remove** trigger object.

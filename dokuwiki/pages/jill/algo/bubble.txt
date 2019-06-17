@@ -1,0 +1,14 @@
+====== Bubble ======
+
+Bubbles are created by Underwatter rock.
+
+Bubble move X random between -1/0/1. Becarefull. Bubble move directly. //iXD// is not set.
+
+^ iCounter ^ tileset ^ tile ^ Move Y ^
+| 0 | 51 | 6 | -1 |
+| 1 | 51 | 7 | -2 |
+| 2 | 51 | 8 | -3 |
+
+Becarefull. Bubble move directly. //iYD// is not set.
+
+Randomly, when move X is 0, bubble change //iCounter// to increase +1.

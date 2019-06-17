@@ -1,0 +1,25 @@
+====== Install note ======
+
+OpenJill requied Java JRE 1.7 and original game file (Jill of the jungle/Jill goes underground/Jill save the prince).
+
+If you don't have original file, you can download shareware file in download section.
+
+Put original game file into in you folder choice. Then put OpenJill binary file (a simply Jar file) into this folder (with original EXE file).\\
+Under Windows, simply double-clisk on Jar file ''OpenJill-x.x.x.jar''.
+
+Under Unix, use ''java -jar OpenJill-x.x.x.jar'' in game folder.
+
+<WRAP round info>For Unix, java binaries path must in shell path.
+
+OpenJill is note case sensitive for filename. No change filename is required.</WRAP>
+
+<WRAP round  tip>**Override default file path configuration.**
+
+If you want change default path, you can override default properties on command line :\\
+java -jar ''OpenJill-x.x.x.jar jill.pathFile=/mypath''</WRAP>
+
+<WRAP round  tip>**Override default screen size configuration.**
+
+You cannot override screen configuration, but you can override zoom configuration :\\
+''java -jar OpenJill-x.x.x.jar game.zoom=1''\\
+The default value is ''2''</WRAP>

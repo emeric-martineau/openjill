@@ -1,0 +1,18 @@
+Skull is animation enable by trigger object.\\
+By default, shkull is not animated.
+
+^ iState ^ iStateCount ^ Skull (tileset/tile) ^ Eye left (tileset/tile) ^ Eye right (tileset/tile) ^ Comment ^
+| 0      | 0           | 47/0                 |                         |                          | Initial state |
+| 1      | 0           | 47/0                 | 47/3                    | 47/7                     | Animation start |
+| 1      | 1           | 47/0                 | 47/4                    | 47/6                     | |
+| 1      | 2           | 47/1                 | 47/5                    | 47/5                     | |
+| 1      | 3           | 47/1                 | 47/6                    | 47/4                     | |
+| 1      | 4           | 47/2                 | 47/7                    | 47/3                     | |
+| 1      | 5           | 47/2                 | 47/6                    | 47/4                     | |
+| 1      | 6           | 47/1                 | 47/5                    | 47/5                     | |
+| 1      | 7           | 47/1                 | 47/4                    | 47/6                     | |
+
+Left eye draw at x = 0, y = 5.\\
+Right eye draw at x = 10, y = 6.
+
+Locked door **remove** trigger object.

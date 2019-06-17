@@ -1,0 +1,23 @@
+====== Hive ======
+
+Hive is ennemy that create [[jill:algo:bees|Bees]].\\
+Width and Height is always set to 16.
+
+//iXD// and //iYD// is set 0 at start time. When Hive is updated, //iXD// and //iYD// (1 or -1) is set to know relative position of player.\\
+By example : //iXD// set to 1 if player is on right of hive. //iXD// is set to 1 if player is bellow to hive.
+
+//iCounter// is use to know state of Hive.
+
+===== Animation =====
+
+<WRAP round important>
+Algorithme may be wrong ! It's very hard, without source code to understand how hive works.
+</WRAP>
+
+^iCounter^iXD^Tileset^Tile^Comment^
+| 0 | 1 | 37 | 0 | genrerate random number between 0 and 20. If value is 0 then //iCounter// set to 1 |
+| 1 | 1 | 37 | 1 | Increase //iCounter// |
+| 2 | 1 | 37 | 3 | Create [[jill:algo:bees|Bees]]. //iCounter// set to 0. |
+| 2 | -1 | 37 | 2 | Create [[jill:algo:bees|Bees]]. //iCounter// set to 0. |
+
+<wrap round tip>//iCounter// is incremented by 3 cycle !!!</wrap>

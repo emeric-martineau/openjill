@@ -1,0 +1,152 @@
+====== Jill of the Jungle map format======
+
+(Originally from http://www.shikadi.net/moddingwiki/Jill_of_the_Jungle_Map_Format)
+
+
+The ''Jill of the Jungle map format'' is the format used to describe the levels played during the game.
+File have no header
+The maps contain four layers :
+  - a background layer, 
+  - an "object" layer,
+  - a savedata game layer,
+  - a string stack layer.
+
+{{ :jill:file_format:map_format.png |}}
+  
+The background layer is a grid of 16x16 pixel tiles, 128 tiles wide and 64 tiles high. 
+The object layer is made up of an arbitrary list of objects, with X and Y offsets in pixels.
+
+===== Background layer =====
+
+The background layer start at begin of file (file have no header).
+
+A map is 128 tiles width and 64 tiles height.
+Each tile is square 16x16 pixels.
+
+In file, map is store by row per row (first tile is [0,0], second tile is [0,1]...).
+Each 16-bit value is a map code.
+
+The background layer is an array of 8,192 16-bit values (128 tiles wide by 64 tiles high == 8192 tiles total).
+The formula **( (x * MAP_HEIGHT) + y) * 2** (where MAP_HEIGHT is 64) will provide the offset (in bytes) into the map file where that grid's 16-bit code is located.
+
+Once the code is found, its lower three nybbles are isolated (e.g. **code & 0xFFF**) which provides an ID that is listed in the tile mapping table (see [[jill:file_format:dma|DMA file format]])  The tile mapping table then provides an index into the graphics file for the image that should be displayed at that grid location.
+
+
+{{ :jill:file_format:link_between_sha_dma_jn.png |}}
+
+===== Object layer =====
+
+The object layer is drawn in front of the background layer, and contains all the interactive elements of the map, such as points and enemies.
+
+The object data starts straight after the background layer data, so that's at offset 16,384 bytes into the map file (8,192 tiles * two bytes per tile).
+The first two bytes in the object layer are a 16-bit integer ([[jill:file_format:data_type|UINT16LE]]) that stores the number of objects in the map, and this is followed by the data for each object, one after the other.
+
+Each object is 31 bytes long, and is stored in the following structure:
+
+^Data type^Description^
+|[[jill:file_format:data_type|UINT8]] iType - objkind|Object type (e.g. a "point item", or an enemy.) |
+|[[jill:file_format:data_type|UINT16LE]] iX|X-coordinate of object|
+|[[jill:file_format:data_type|UINT16LE]] iY|Y-coordinate of object|
+|[[jill:file_format:data_type|UINT16LE]] iXD| object horizontal speed|
+|[[jill:file_format:data_type|UINT16LE]] iYD| object vertical speed|
+|[[jill:file_format:data_type|UINT16LE]] iWidth|Width of object|
+|[[jill:file_format:data_type|UINT16LE]] iHeight|Height of object|
+|[[jill:file_format:data_type|UINT16LE]] iState|Object sub-type (e.g. what type of "point item"), or current "State" (running, jumping, etc)|
+|[[jill:file_format:data_type|UINT16LE]] iSubState|//object-specific semantic//|
+|[[jill:file_format:data_type|UINT16LE]] iStateCount|//object-specific semantic, typically a frame counter//|
+|[[jill:file_format:data_type|UINT16LE]] iCounter|Various uses. Often used to link doors or switches to obstacles.|
+|[[jill:file_format:data_type|UINT16LE]] iFlags| internally used for rendering. See [[jill:file_format:dma#tile_properties|Background flags]]|
+|[[jill:file_format:data_type|UINT32LE]] lPointer|Used internally as a pointer.  If this value is 0, there is no entry for this object in the string stack (see below.)  Any non-zero value means there is an entry for this object in the string stack.\\ The value have not real mean. In original game engine, it's memory adress of string (under MS-DOS) where load string |
+|[[jill:file_format:data_type|UINT16LE]] iInfo1|//Unknown//|
+|[[jill:file_format:data_type|UINT16LE]] iZapHold|Various usage. For ennemy, use to know if object already collision with player and not touch player again (see [[jill:algo:hitplayer|How ennemy hit player ?]]).|
+
+===== Save data game layer =====
+
+This section is 70 bytes long. See [[jill:file_format:save|Save file format]]
+
+===== String stack =====
+
+The Strings Stack is just a bunch of arbitrary strings (can be either text or file references).
+Each entry starts with an unsigned short integer defining the length of the incoming string.
+Note that the string is always followed by a null byte (so if "length of next entry" is 12, you only have the string size and should not forget to read an extra byte to reach the next entry).
+The string stack's entries are used for iType[20] ("write text"), iType[21] ("write text in big") and iType[12] ("checkpoints") and can contain music filenames, demo filenames, next level filenames or arbitrary text content.
+
+Strings is store as the same order of object need string.
+
+In the list of object, if object number 3 is the first object need string ''hello'', the first string in stack is ''hello''.
+
+^Data type^Description^
+|[[jill:file_format:data_type|UINT16LE]] |size|
+|[[jill:file_format:data_type|UINT8]] | array of byte |
+|[[jill:file_format:data_type|UINT8]] | null |
+==== Begin of string ====
+
+If the code is "*", it means "load and play this song from the beginning".\\ 
+If the code is "#", it means "keep on playing this song".\\ 
+If the code is "!", then there's no filename and it means "load previous map".\\ 
+If there's no code, then the filename is the next level to load.\\ 
+
+
+===== Object iTypes =====
+
+^Type^Description^Tileset^Tile^Other information^
+| 0 | Jill (normal) | 8 | 58 | //iState// = 0 -> stand, 1  -> still, 2-> jumpig, 3 -> climbing, 4 -> begin, 5 -> die|
+| 1 | Apple | 9 | 0 to 3 | If //iCounter// is 0/1, tile display is 3, 2/3 -> 2, 4/5 -> 1, 6/7 -> 0. Apple add 12 points to score. |
+| 2 | Knif | 13 | 0 | see [[jill:algo:knife|Knife movement]] |
+| 4 | Green bug | 59 | 0 to 14 | //iXD// (usually '2'): movement speed |
+| 7 | Devil | 43 | 0 to 9 | |
+| 8 | Bunny | 58 | 0 to 5 |  |
+| 9 | Worm | 22 | 0 to 4 | //iXD// (usually '2'): movement speed |
+| 11 | Giant Slug | 52\\ 53 | 0 to 6\\ 0 to 6 | //iXD// (usually '2'): movement speed |
+| 12 | Trigger: Checkpoint |  |  | //iCounter// (>= 0): checkpoint/level number\\ //iPointer// file to load\\ If the code is "*", it means "load and play this song from the beginning".\\ If the code is "#", it means "keep on playing this song".\\ If the code is "!", then there's no filename and it means "load previous map".\\ If there's no code, then the filename is the next level to load.\\ If //iState// is 1, player set to begin state but no map is loaded |
+| 13 | Prince | 57 | 0 to 10 | //iState// : object animation frame |
+| 14 | Old red key | 14 | 6 to 9 | If //iCounter// is 0/1, tile display is 6, 2/3 -> 7, 4/5 -> 8, 6/7 -> 9. Add 12 points to score |
+| 15 | Trigger: Touch Trigger |  |  | //iCounter// (>= 0): target tag\\ Exemple if iCounter = 4, search object type 24 (or 25) with iCounter = 4\\ Object is **NOT** remove it self after player touch |
+| 17 | Lizard Man | 44 | 0 to 6 | //iXD// (usually '2'): movement speed	 |
+| 19 | Cloud | 14 | 10  | //iXD// : movement speed |
+| 20 | Write text small | 2 | 0 to 127 | //iXD// = color of text\\ //iYD// = color of background\\ To get tile number, convert text letter to ascii value (A = 0x41) |
+| 21 | Write text big | 1 | 0 to 127 | //iXD// = color of text\\ //iYD// = color of background\\ To get tile number, convert text letter to ascii value (A = 0x41) |
+| 22 | Frog | 63 | 0 to 5 | See [[jill:algo:frog|Frog]]. add 15 points to score |
+| 23 | Playable: Jill (map overview in Jill3) | | | |
+| 24 | Locked Door | | | See [[jill:algo:lockeddoor|Locked door]] |
+| 25 | Collapsing ceiling | 14 | 16 | //iCounter// ('>= 0'): self tag\\ Replace non blocking map block below by map block above, at trigger message.\\ //iState// = 0, don't move. = 1 fall and close.\\ Speed fall is 4.\\ Remove trigger object after toggle. |
+| 26 | Toggle Wall |  |  | //iXD// (set to 1 for horizontal/floor)\\ //iYD// (set to 1 for vertical/wall)\\ //iCounter// (>= 0): tag target\\ If set as wall, must be placed on top of the wall, if set as floor, must be placed on the far left of the floor. By default, these walls are "off", use "ELEVBOT" tiles for wall and "BRIDGE" for floor. Walls and bridges cannot go through two different types of tiles.\\ Remove trigger object after toggle. |
+| 27 | Point object |  | | See [[jill:algo:point|Point object]] |
+| 28 | Bonus: Pickup Item & morphing icons |  |  | //iCounter// ('>= 0'): item type (can be anything from 0 to 9 and matches the inventory item number)\\ See [[jill:file_format:save|Save file format]] |
+| 29 | Giant Ant | 10 | 0 to 9 | [[jill:algo:giantant|Giant Ant]] |
+| 30 | Phoenix | 11 | 0 to 11 | See [[jill:algo:firebird|Firebird]]. Add 4 points to score |
+| 31 | Flame | 12 | 0 to 11 | See [[jill:algo:flame|Flame]] |
+| 32 | Switch | 60 | 0, 1 | //iState// (usually '0'): switch position, if target is off, set to '1'\\ //iCounter// (>= 0): target tag\\ Exemple if iCounter = 4, search object type 26 with iCounter = 4 |
+| 33 | Rock key (Gem) | 9 | 4 to 7| If //iCounter// is 0/1, tile display is 6, 2/3 -> 7, 4/5 -> 8, 6/7 -> 9. Add 23 points to score. |
+| 35 | Rolling Stone | 14 | 24 to 27 | See [[jill:algo:rollingrock|Rolling Rock]] |
+| 36 | Colored bullet | 46 | 0 to 14 | See [[jill:algo:colored_bullet|Colored bullet]] |
+| 37 | Fire hit player | 14 | 28 to 32 | When player hit fire (firebird...), create at same position that player.\\ Display picture 32, 31, 30, 29, 28, 29, 30, 31, 32.\\ //iCounter// index of current picture (0 to 8) |
+| 38 | Falling spike | 14 | 33 | See [[jill:algo:fallingspike|FallingSpike]] |
+| 39 | Invincible Snake | 15 | 0 to 13 | [[jill:algo:snake|Snake]] Add 35 points to score. |
+| 40 | Underwatter rock | 14 | 34 | air bubble tileset = 51, tile = 6 to 8|
+| 41 | Boucing Ball | 31 | 0 to 5 | //iCounter// (usually '4'): ball type (0-very small green, 1-small green, 2-small blue, 3-red, 4-green, 5-blue) |
+| 42 | Huge letter | 33 | 0 to 4 | //iXD// : letter type (0  = 'M', 1 = 'E', 2 = 'G', 3 = 'A', 4 = 'S') |
+| 43 | Giant Bat | 35 | 0 to 6 | |
+| 44 | Knight | 36 | 0 to 4 | //iState// (set to '1' for start on, '0' for start off): initial state\\ //iStateCount// (set to '6' for 'none shall pass')\\ //iCounter// ('>= 0'): self tag (toggle when triggered) |
+| 45 | Hive | 37 | 0 to 3 | See [[jill:algo:hive|Hive]] |
+| 46 | Bees | 37 | 4 to 9 | See [[jill:algo:bees|Bees]] |
+| 47 | Crab | 38 | 0 to 3 | See [[jill:algo:crab|Crab]] |
+| 48 | Gator | 39 | 0 to 15 | See [[jill:algo:gator|Gator]] |
+| 49 | Epic text | 40 | 0 to 7 | //iState// incrementer when jill hit object and add 2 points to score. //iState// == 11 remove Epic object. |
+| 50 | Blade | 45 | 0 to 3 | See [[jill:algo:blade|Blade]] |
+| 51 | Big Skull | 47 | 0 to 3 | See [[jill:algo:skull|Skull]] |
+| 52 | Press Button | 49 | 0 to 3 | //iXD// (set to '1' to face right, '-1' to face left): direction\\ //iState// (set to '1' if target is off)\\ //iCounter// ('>= 0'): target tag	|
+| 53 | Ghost | 50 | 0 to 3 | See [[jill:algo:ghost|Ghost]] |
+| 54 | Playable: Fish (never used in maps - if player dies, restart as Jill) | | | |
+| 56 | Playable: Firebird (never used in maps - if player dies, restart as Jill) | | | See [[jill:algo:firebirdplayer|Firebird player]] |
+| 57 | Playable: Frog (never used in maps - if player dies, restart as Jill) | | | |
+| 58 | Bubble | 51 | 6 to 8 | See [[jill:algo:bubble|Bubble]] |
+| 59 | Jellyfish | 51 | 9 to 14 | |
+| 60 | Eels | 51 | 15 to 20 | |
+| 61 | Lift arrow | 14 | 44 | //iCounter// (usually '0'): if set to '-1', do not return to initial state.\\ ELEVBOT background is use to know where stop lift at bottom. \\ When lift up (non blocking background), replace by ELEVMID.\\Player can take lift only when it's on Jill character. |
+| 64 | Eyes | 62 | 0 and 1 | See [[jill:algo:eyes|Eyes]] |
+| 65 | Sparks | 61 | 0 to 3 | //iYD// (usually '2'): movement speed\\ 'NOTE:' Sparks move along the same tile type (type VINE only). If //iCounter// is 0/1, tile display is 3, 2/3 -> 2, 4/5 -> 1, 6/7 -> 0. |
+| 66 | Flag | 5 | 0 to 3 | |
+| 67 | "Demo"/"Map" sign | 3  | 16 to 22 | //iXD// (sign type, >= 0): set to '1' for "map", '0' for "demo".\\ Final picture is create by picture concatenation. Final picture always display on screen. |
+===== See also =====
+[[jill:file_format:text_format|How to drawing text ?]]

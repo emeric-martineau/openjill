@@ -1,0 +1,3 @@
+====== Red platform background ======
+
+Red platform background use top picture to background and draw his picture on.

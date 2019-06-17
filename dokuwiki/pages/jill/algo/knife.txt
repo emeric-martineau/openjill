@@ -1,0 +1,38 @@
+====== Knife movement ======
+
+Knife is first weapon in Jill Trilogy, but his movement is a little bit complicated.
+
+//iStateCount// is state of object.\\
+//iXD// is the size of current move and way (>0 to right, 0> to left).\\
+//iYD// is the size of current move and way (only 0, -1, 1)
+
+===== No move =====
+
+//iStateCount// = 0 to no move.
+
+===== Fall =====
+
+//iStateCount// = 65535 to fall but no other verticaly move. iYd = -1
+
+===== Launch (fire key pressed) =====
+When player fire, knife is create at X = player.X and Y = player.Y+2.\\
+iStateCount set to 1.\\
+iXd = 8 or -8 (depend of iXd of player)
+
+===== State and action =====
+
+^iStatCount^iXd^iYd^Behavior^
+|0|0|0| no move, no fall, no hit ennemy. Player can catch it. |
+| 1 -> 14|8 or -8|0| hit enemeny. Player can't catch it.\\ Add iXd at each cycle |
+| 14 -> 64|8 -> -8|4 -> -4| hit enemeny. Knife follow player (see below). |
+| 65535 |0|-1| hit enemeny. Knife fall. Player can catch it |
+
+===== Knife follow player =====
+
+The goal is to goto player.X and player.Y.\\
+If player.X is greater than X and iXd < 8, increase iXd to 1.\\
+If player.X is smaller than X and iXd > -8, decrease iXd to 1.\\
+If player.Y is greater than Y and iYd < 4, increase iXd to 1.\\
+If player.Y is smaller than Y and iYd > -4, decrease iXd to 1.
+
+Atfer, just add to X iXd and to Y iYd.
